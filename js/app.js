@@ -141,12 +141,18 @@ function handleUserNotAuthenticated() {
 // Verificar si es usuario nuevo
 async function checkIfFirstTimeUser(user) {
     try {
-        // Aquí verificarías en Firestore si el usuario tiene datos completos
-        // Por ahora retornamos false para ir directo al dashboard
-        return false;
+        // Verificar si el usuario completó el onboarding usando la función de auth.js
+        if (typeof window.checkOnboardingStatus === 'function') {
+            const onboardingCompleted = await window.checkOnboardingStatus(user.uid);
+            return !onboardingCompleted; // Si no completó onboarding, es primera vez
+        } else {
+            // Fallback: verificar si hay datos guardados en localStorage
+            const savedData = localStorage.getItem('entrenoapp_onboarding');
+            return !savedData; // Si no hay datos guardados, es primera vez
+        }
     } catch (error) {
-        console.error('Error verificando usuario:', error);
-        return false;
+        console.error('❌ Error verificando usuario:', error);
+        return true; // En caso de error, asumir que es primera vez para estar seguros
     }
 }
 
@@ -280,21 +286,24 @@ async function loadAuthPage() {
 }
 
 async function loadOnboardingPage() {
-    return `
-        <div class="page">
-            <div class="onboarding-container">
-                <h1 class="page-title">¡Bienvenido!</h1>
-                <p class="page-subtitle">Configuremos tu perfil de entrenamiento</p>
-                
-                <div class="glass-card">
-                    <p>Cuestionario de onboarding aquí...</p>
-                    <button onclick="navigateToPage('dashboard')" class="glass-button glass-button-primary btn-full">
-                        Continuar
-                    </button>
-                </div>
+    const html = `
+        <div class="page onboarding-page">
+            <div id="onboarding-content">
+                <!-- El contenido se cargará dinámicamente -->
             </div>
         </div>
     `;
+    
+    // Inicializar el componente después de que se renderice
+    setTimeout(() => {
+        if (typeof window.initOnboardingPage === 'function') {
+            window.initOnboardingPage();
+        } else {
+            console.error('❌ Función initOnboardingPage no encontrada');
+        }
+    }, 100);
+    
+    return html;
 }
 
 async function loadDashboardPage() {

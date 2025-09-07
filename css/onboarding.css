@@ -1,0 +1,434 @@
+/* Estilos para el onboarding de EntrenoApp */
+
+/* Contenedor principal */
+.onboarding-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Barra de progreso */
+.progress-container {
+    margin-bottom: 2rem;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 4px;
+    transition: width 0.3s ease;
+    position: relative;
+}
+
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.progress-text {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    opacity: 0.8;
+}
+
+/* Header del paso */
+.step-header {
+    margin-bottom: 2rem;
+}
+
+.step-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: #667eea; /* Fallback */
+}
+
+.step-subtitle {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    opacity: 0.8;
+}
+
+/* Paso de bienvenida */
+.welcome-step {
+    padding: 2rem 0;
+}
+
+.welcome-icon {
+    margin-bottom: 2rem;
+}
+
+.welcome-features {
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+@media (max-width: 640px) {
+    .feature-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+
+.feature-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1rem;
+}
+
+.feature-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.feature-text {
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+.welcome-text {
+    font-size: 1.125rem;
+    line-height: 1.6;
+}
+
+/* Opciones de selección */
+.selection-options,
+.multiple-options {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.option-card {
+    display: flex;
+    align-items: center;
+    padding: 1.5rem;
+    border-radius: 16px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.option-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.option-card:hover::before {
+    opacity: 1;
+}
+
+.option-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+}
+
+.option-card.selected {
+    border-color: #667eea;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+}
+
+.option-card.selected::before {
+    opacity: 1;
+}
+
+.option-icon {
+    font-size: 2.5rem;
+    margin-right: 1rem;
+    flex-shrink: 0;
+}
+
+.option-content {
+    flex: 1;
+}
+
+.option-label {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.option-description {
+    font-size: 0.875rem;
+    line-height: 1.4;
+    opacity: 0.7;
+}
+
+.option-check {
+    font-size: 1.5rem;
+    color: #667eea;
+    font-weight: bold;
+    margin-left: 1rem;
+    min-width: 24px;
+    text-align: center;
+}
+
+/* Botones de navegación */
+.navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.navigation-buttons .glass-button {
+    min-width: 120px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+}
+
+.navigation-buttons .glass-button:last-child {
+    margin-left: auto;
+}
+
+.navigation-buttons .glass-button.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Página de éxito */
+.success-container {
+    padding: 3rem 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.success-icon {
+    margin-bottom: 2rem;
+}
+
+.success-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: #667eea; /* Fallback */
+}
+
+.success-text {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    opacity: 0.8;
+}
+
+.success-features {
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.feature-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.feature-list .feature-item {
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Indicador de carga */
+.loading-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    border-top: 3px solid #667eea;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .onboarding-container {
+        padding: 1rem;
+    }
+    
+    .step-title {
+        font-size: 1.75rem;
+    }
+    
+    .step-subtitle {
+        font-size: 1rem;
+    }
+    
+    .option-card {
+        padding: 1rem;
+    }
+    
+    .option-icon {
+        font-size: 2rem;
+        margin-right: 0.75rem;
+    }
+    
+    .option-label {
+        font-size: 1rem;
+    }
+    
+    .navigation-buttons {
+        flex-direction: column;
+    }
+    
+    .navigation-buttons .glass-button {
+        width: 100%;
+        margin-left: 0 !important;
+    }
+    
+    .success-title {
+        font-size: 2rem;
+    }
+    
+    .success-text {
+        font-size: 1.125rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .onboarding-container {
+        padding: 0.5rem;
+    }
+    
+    .step-header {
+        margin-bottom: 1.5rem;
+    }
+    
+    .step-title {
+        font-size: 1.5rem;
+    }
+    
+    .option-card {
+        padding: 0.75rem;
+    }
+    
+    .welcome-features {
+        padding: 1rem;
+    }
+    
+    .feature-grid {
+        gap: 0.75rem;
+    }
+}
+
+/* Animaciones */
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.glass-fade-in {
+    animation: slideInUp 0.6s ease-out;
+}
+
+/* Estados de hover y focus */
+.option-card:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
+}
+
+.glass-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
+}
+
+/* Mejoras de accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+    .option-card,
+    .glass-button,
+    .progress-fill,
+    .glass-fade-in {
+        transition: none;
+        animation: none;
+    }
+    
+    .loading-spinner {
+        animation: none;
+        border-top-color: rgba(255, 255, 255, 0.5);
+    }
+}
+
+/* Modo alto contraste */
+@media (prefers-contrast: high) {
+    .option-card {
+        border-color: rgba(255, 255, 255, 0.3);
+    }
+    
+    .option-card.selected {
+        border-color: #ffffff;
+        background: rgba(102, 126, 234, 0.3);
+    }
+    
+    .step-title {
+        color: #ffffff;
+    }
+}

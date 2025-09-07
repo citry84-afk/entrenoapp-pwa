@@ -49,3 +49,5 @@ pubspec.lock
 # Temporary files
 *.tmp
 *.temp
+# Local Netlify folder
+.netlify

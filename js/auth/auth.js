@@ -1,5 +1,5 @@
 // Sistema de autenticación para EntrenoApp
-import { auth } from '../config/firebase-config.js';
+import { auth, db } from '../config/firebase-config.js';
 import { 
     signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
@@ -10,6 +10,12 @@ import {
     sendPasswordResetEmail,
     sendEmailVerification
 } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+import { 
+    doc, 
+    setDoc, 
+    getDoc,
+    serverTimestamp 
+} from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
 // Providers de autenticación
 const googleProvider = new GoogleAuthProvider();
@@ -383,7 +389,14 @@ async function handleLogin(e) {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         console.log('✅ Login exitoso:', userCredential.user.email);
         
-        // El listener en app.js manejará la redirección
+        // Guardar datos del usuario en localStorage
+        await saveUserToLocalStorage(userCredential.user);
+        
+        // Mostrar éxito y redirigir
+        showSuccess('¡Bienvenido de vuelta!');
+        setTimeout(() => {
+            window.loadPage('dashboard');
+        }, 1500);
         
     } catch (error) {
         console.error('❌ Error en login:', error);
@@ -433,13 +446,22 @@ async function handleRegister(e) {
         // Actualizar perfil con el nombre
         await updateProfile(userCredential.user, { displayName: name });
         
+        // Crear perfil inicial en Firestore
+        await createUserProfile(userCredential.user, name);
+        
+        // Guardar datos del usuario en localStorage
+        await saveUserToLocalStorage(userCredential.user);
+        
         // Enviar verificación de email
         await sendEmailVerification(userCredential.user);
         
         console.log('✅ Cuenta creada exitosamente:', userCredential.user.email);
         
-        // Mostrar mensaje de verificación
-        showSuccess('Cuenta creada. Revisa tu email para verificar tu cuenta.');
+        // Mostrar mensaje y redirigir al onboarding
+        showSuccess('¡Cuenta creada exitosamente! Configuremos tu perfil.');
+        setTimeout(() => {
+            window.loadPage('onboarding');
+        }, 2000);
         
     } catch (error) {
         console.error('❌ Error creando cuenta:', error);
@@ -488,7 +510,29 @@ async function handleGoogleAuth() {
     try {
         console.log('🔍 Autenticación con Google...');
         const result = await signInWithPopup(auth, googleProvider);
-        console.log('✅ Login con Google exitoso:', result.user.email);
+        const user = result.user;
+        console.log('✅ Login con Google exitoso:', user.email);
+        
+        // Verificar si es un usuario nuevo
+        const isNewUser = result._tokenResponse?.isNewUser || false;
+        
+        if (isNewUser) {
+            // Crear perfil en Firestore para usuario nuevo
+            await createUserProfile(user, user.displayName || user.email.split('@')[0]);
+            
+            showSuccess('¡Bienvenido! Configuremos tu perfil.');
+            setTimeout(() => {
+                window.loadPage('onboarding');
+            }, 1500);
+        } else {
+            showSuccess('¡Bienvenido de vuelta!');
+            setTimeout(() => {
+                window.loadPage('dashboard');
+            }, 1500);
+        }
+        
+        // Guardar datos del usuario en localStorage
+        await saveUserToLocalStorage(user);
         
     } catch (error) {
         console.error('❌ Error con Google Auth:', error);
@@ -593,7 +637,165 @@ function setLoading(loading) {
     renderAuthContent();
 }
 
+// ===============================
+// FUNCIONES AUXILIARES
+// ===============================
+
+// Crear perfil de usuario en Firestore
+async function createUserProfile(user, displayName) {
+    try {
+        const userDoc = doc(db, 'users', user.uid);
+        
+        const userData = {
+            uid: user.uid,
+            email: user.email,
+            displayName: displayName || user.displayName || user.email.split('@')[0],
+            photoURL: user.photoURL || null,
+            username: generateUsername(displayName || user.email),
+            createdAt: serverTimestamp(),
+            updatedAt: serverTimestamp(),
+            
+            // Configuraciones iniciales
+            preferences: {
+                language: 'es',
+                units: 'metric', // metric, imperial
+                notifications: {
+                    workouts: true,
+                    challenges: true,
+                    social: true,
+                    achievements: true
+                },
+                privacy: {
+                    showProfile: true,
+                    showWorkouts: true,
+                    showAchievements: true
+                }
+            },
+            
+            // Estadísticas iniciales
+            stats: {
+                totalWorkouts: 0,
+                totalDistance: 0, // en km
+                totalTime: 0, // en minutos
+                challengesCompleted: 0,
+                currentStreak: 0,
+                longestStreak: 0,
+                level: 1,
+                experience: 0
+            },
+            
+            // Estado de onboarding
+            onboarding: {
+                completed: false,
+                currentStep: 0
+            }
+        };
+        
+        await setDoc(userDoc, userData);
+        console.log('✅ Perfil de usuario creado en Firestore');
+        
+        return userData;
+        
+    } catch (error) {
+        console.error('❌ Error creando perfil de usuario:', error);
+        throw error;
+    }
+}
+
+// Guardar datos del usuario en localStorage
+async function saveUserToLocalStorage(user) {
+    try {
+        const userData = {
+            uid: user.uid,
+            email: user.email,
+            displayName: user.displayName,
+            photoURL: user.photoURL,
+            emailVerified: user.emailVerified,
+            lastLoginAt: new Date().toISOString()
+        };
+        
+        localStorage.setItem('entrenoapp_user', JSON.stringify(userData));
+        localStorage.setItem('entrenoapp_auth_token', await user.getIdToken());
+        
+        console.log('✅ Datos de usuario guardados en localStorage');
+        
+    } catch (error) {
+        console.error('❌ Error guardando en localStorage:', error);
+    }
+}
+
+// Generar username único
+function generateUsername(name) {
+    if (!name) return `user_${Date.now()}`;
+    
+    // Limpiar el nombre
+    const cleanName = name
+        .toLowerCase()
+        .replace(/[^a-z0-9]/g, '')
+        .substring(0, 15);
+    
+    // Agregar números aleatorios para unicidad
+    const randomSuffix = Math.floor(Math.random() * 9999).toString().padStart(4, '0');
+    
+    return `${cleanName}_${randomSuffix}`;
+}
+
+// Cargar datos del usuario desde localStorage
+export function loadUserFromLocalStorage() {
+    try {
+        const userData = localStorage.getItem('entrenoapp_user');
+        return userData ? JSON.parse(userData) : null;
+    } catch (error) {
+        console.error('❌ Error cargando usuario desde localStorage:', error);
+        return null;
+    }
+}
+
+// Limpiar datos de localStorage
+export function clearUserFromLocalStorage() {
+    localStorage.removeItem('entrenoapp_user');
+    localStorage.removeItem('entrenoapp_auth_token');
+    localStorage.removeItem('entrenoapp_onboarding');
+    console.log('🧹 Datos de usuario eliminados de localStorage');
+}
+
+// Obtener datos del perfil desde Firestore
+export async function getUserProfile(uid) {
+    try {
+        if (!uid) return null;
+        
+        const userDoc = doc(db, 'users', uid);
+        const docSnap = await getDoc(userDoc);
+        
+        if (docSnap.exists()) {
+            return docSnap.data();
+        } else {
+            console.log('❌ No se encontró el perfil del usuario');
+            return null;
+        }
+        
+    } catch (error) {
+        console.error('❌ Error obteniendo perfil de usuario:', error);
+        return null;
+    }
+}
+
+// Verificar si el usuario completó el onboarding
+export async function checkOnboardingStatus(uid) {
+    try {
+        const profile = await getUserProfile(uid);
+        return profile?.onboarding?.completed || false;
+    } catch (error) {
+        console.error('❌ Error verificando onboarding:', error);
+        return false;
+    }
+}
+
 // Exportar funciones útiles
 window.logout = logout;
+window.loadUserFromLocalStorage = loadUserFromLocalStorage;
+window.clearUserFromLocalStorage = clearUserFromLocalStorage;
+window.getUserProfile = getUserProfile;
+window.checkOnboardingStatus = checkOnboardingStatus;
 
 console.log('🔐 Módulo de autenticación cargado');
