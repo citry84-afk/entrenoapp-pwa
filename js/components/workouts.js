@@ -1,30 +1,141 @@
-// Componente de entrenamientos de EntrenoApp
+// Sistema completo de entrenamientos para EntrenoApp
 import { auth, db } from '../config/firebase-config.js';
 import { exerciseDatabase, getExercisesByGroup, searchExercises } from '../data/exercises.js';
 import { crossfitWods, getWodsByType, searchWods } from '../data/crossfit-wods.js';
+import { 
+    doc, 
+    collection,
+    addDoc,
+    updateDoc,
+    getDoc,
+    query,
+    where,
+    orderBy,
+    limit,
+    getDocs,
+    serverTimestamp,
+    increment
+} from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
-// Estado del componente de entrenamientos
+// Estado global del sistema de entrenamientos
 let workoutState = {
-    currentMode: 'select', // 'select', 'gym', 'crossfit', 'active'
-    selectedWorkoutType: null,
-    currentWorkout: null,
+    // Navegación y modos
+    currentMode: 'select', // 'select', 'gym-plan', 'crossfit-plan', 'active-gym', 'active-crossfit', 'plan-management'
+    workoutType: null, // 'gym', 'crossfit'
+    
+    // Planes activos
+    activePlan: null,
+    currentSession: null,
+    sessionStartTime: null,
+    
+    // Ejercicio actual
     activeExercise: null,
+    currentSet: 0,
+    exerciseStartTime: null,
+    
+    // Timers
     workoutTimer: null,
-    workoutStartTime: null,
-    exerciseHistory: [],
     restTimer: null,
+    exerciseTimer: null,
+    intervalId: null,
+    
+    // Estados
+    isWorkoutActive: false,
     isResting: false,
-    wakeLock: null
+    isPaused: false,
+    
+    // Datos de la sesión
+    workoutData: {},
+    exerciseHistory: [],
+    totalVolume: 0,
+    totalTime: 0,
+    
+    // Configuración
+    restTime: 60, // segundos por defecto
+    autoRestStart: true,
+    keepScreenOn: true,
+    isVoiceEnabled: true,
+    
+    // UI
+    wakeLock: null,
+    
+    // Progresión automática
+    lastWorkoutData: null,
+    suggestedProgressions: {}
 };
 
-// Inicializar página de entrenamientos
+// Constantes para planificación
+const GYM_MUSCLE_GROUPS = [
+    { id: 'chest', name: 'Pecho', icon: '💪', color: '#ef4444' },
+    { id: 'back', name: 'Espalda', icon: '🦅', color: '#3b82f6' },
+    { id: 'shoulders', name: 'Hombros', icon: '🔥', color: '#f59e0b' },
+    { id: 'arms', name: 'Brazos', icon: '💪', color: '#8b5cf6' },
+    { id: 'legs', name: 'Piernas', icon: '🦵', color: '#22c55e' },
+    { id: 'core', name: 'Core', icon: '⚡', color: '#ef4444' }
+];
+
+const CROSSFIT_WOD_TYPES = [
+    { id: 'amrap', name: 'AMRAP', description: 'As Many Rounds As Possible', icon: '🔄' },
+    { id: 'emom', name: 'EMOM', description: 'Every Minute On the Minute', icon: '⏱️' },
+    { id: 'tabata', name: 'Tabata', description: '20s trabajo, 10s descanso', icon: '⚡' },
+    { id: 'for_time', name: 'For Time', description: 'Completar lo más rápido posible', icon: '🏃‍♂️' },
+    { id: 'hero', name: 'Hero WODs', description: 'WODs dedicados a héroes caídos', icon: '🎖️' },
+    { id: 'girls', name: 'Girl WODs', description: 'WODs clásicos con nombres femeninos', icon: '👩‍🎓' }
+];
+
+// Inicializar componente
 window.initWorkouts = function() {
-    console.log('💪 Inicializando entrenamientos');
+    console.log('💪 Inicializando sistema de entrenamientos');
+    loadUserWorkoutSettings();
     renderWorkoutsPage();
     setupWorkoutListeners();
 };
 
-// Renderizar página principal de entrenamientos
+// Cargar configuraciones del usuario
+async function loadUserWorkoutSettings() {
+    try {
+        const user = auth.currentUser;
+        if (user && window.getUserProfile) {
+            const profile = await window.getUserProfile(user.uid);
+            if (profile) {
+                workoutState.restTime = profile.preferences?.defaultRestTime || 60;
+                workoutState.autoRestStart = profile.preferences?.autoRestStart !== false;
+                workoutState.isVoiceEnabled = profile.preferences?.ttsEnabled !== false;
+                
+                // Cargar último entrenamiento para progresión
+                await loadLastWorkoutData();
+            }
+        }
+    } catch (error) {
+        console.error('❌ Error cargando configuraciones:', error);
+    }
+}
+
+// Cargar datos del último entrenamiento
+async function loadLastWorkoutData() {
+    try {
+        const user = auth.currentUser;
+        if (!user) return;
+        
+        const workoutsQuery = query(
+            collection(db, 'user-workouts'),
+            where('userId', '==', user.uid),
+            where('type', 'in', ['gym', 'crossfit']),
+            orderBy('date', 'desc'),
+            limit(1)
+        );
+        
+        const querySnapshot = await getDocs(workoutsQuery);
+        if (!querySnapshot.empty) {
+            workoutState.lastWorkoutData = querySnapshot.docs[0].data();
+        }
+        
+    } catch (error) {
+        console.error('❌ Error cargando último entrenamiento:', error);
+    }
+}
+
+// Renderizar página principal
 function renderWorkoutsPage() {
     const container = document.querySelector('.workouts-container');
     if (!container) return;
@@ -35,14 +146,20 @@ function renderWorkoutsPage() {
         case 'select':
             content = renderWorkoutSelection();
             break;
-        case 'gym':
-            content = renderGymWorkouts();
+        case 'gym-plan':
+            content = renderGymPlanning();
             break;
-        case 'crossfit':
-            content = renderCrossfitWorkouts();
+        case 'crossfit-plan':
+            content = renderCrossfitPlanning();
             break;
-        case 'active':
-            content = renderActiveWorkout();
+        case 'active-gym':
+            content = renderActiveGymWorkout();
+            break;
+        case 'active-crossfit':
+            content = renderActiveCrossfitWorkout();
+            break;
+        case 'plan-management':
+            content = renderPlanManagement();
             break;
         default:
             content = renderWorkoutSelection();
@@ -50,687 +167,1211 @@ function renderWorkoutsPage() {
     
     container.innerHTML = content;
     
-    // Añadir animaciones
-    const cards = container.querySelectorAll('.glass-card');
-    cards.forEach((card, index) => {
-        card.style.animationDelay = `${index * 0.1}s`;
-        card.classList.add('glass-fade-in');
+    // Inicializar componentes específicos
+    setTimeout(() => {
+        initializeModeSpecificComponents();
+    }, 100);
+}
+
+// Renderizar selección de tipo de entrenamiento
+function renderWorkoutSelection() {
+    return `
+        <div class="workout-selection glass-fade-in">
+            <div class="workout-header text-center mb-lg">
+                <h2 class="page-title">💪 Entrenamientos</h2>
+                <p class="page-subtitle text-secondary">Gym tradicional y entrenamiento funcional</p>
+            </div>
+            
+            <!-- Planes activos -->
+            ${renderActivePlansSection()}
+            
+            <!-- Tipos de entrenamiento -->
+            <div class="workout-types glass-card mb-lg">
+                <h3 class="section-title mb-md">🎯 Tipos de Entrenamiento</h3>
+                <div class="workout-type-grid">
+                    <div class="workout-type-card gym-card" data-type="gym">
+                        <div class="type-icon">🏋️‍♀️</div>
+                        <h4 class="type-title">Gym Tradicional</h4>
+                        <p class="type-description">Entrenamiento con pesas por grupos musculares</p>
+                        <div class="type-features">
+                            <span class="feature-tag">📊 Seguimiento de peso</span>
+                            <span class="feature-tag">🔄 Progresión automática</span>
+                            <span class="feature-tag">⏱️ Descansos inteligentes</span>
+                        </div>
+                    </div>
+                    
+                    <div class="workout-type-card crossfit-card" data-type="crossfit">
+                        <div class="type-icon">🤸‍♂️</div>
+                        <h4 class="type-title">CrossFit / Funcional</h4>
+                        <p class="type-description">WODs, AMRAP, EMOM y entrenamientos funcionales</p>
+                        <div class="type-features">
+                            <span class="feature-tag">⏰ Timers especializados</span>
+                            <span class="feature-tag">🔥 WODs famosos</span>
+                            <span class="feature-tag">📈 Puntuación por rendimiento</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Entrenamiento rápido -->
+            <div class="quick-workout glass-card mb-lg">
+                <h3 class="section-title mb-md">⚡ Entrenamiento Rápido</h3>
+                <div class="quick-options">
+                    <button class="quick-btn glass-button glass-button-primary" data-quick="upper">
+                        <span class="quick-icon">💪</span>
+                        <span class="quick-text">Tren Superior (20 min)</span>
+                    </button>
+                    <button class="quick-btn glass-button glass-button-secondary" data-quick="lower">
+                        <span class="quick-icon">🦵</span>
+                        <span class="quick-text">Tren Inferior (20 min)</span>
+                    </button>
+                    <button class="quick-btn glass-button glass-button-secondary" data-quick="hiit">
+                        <span class="quick-icon">🔥</span>
+                        <span class="quick-text">HIIT (15 min)</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Estadísticas rápidas -->
+            <div class="workout-stats glass-card">
+                <h3 class="section-title mb-md">📊 Esta Semana</h3>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value" id="weekly-workouts">0</div>
+                        <div class="stat-label">Entrenamientos</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="weekly-volume">0kg</div>
+                        <div class="stat-label">Volumen</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="weekly-time">0min</div>
+                        <div class="stat-label">Tiempo</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="weekly-streak">0</div>
+                        <div class="stat-label">Racha</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// Renderizar sección de planes activos
+function renderActivePlansSection() {
+    // TODO: Obtener planes activos del usuario
+    const hasActivePlans = false; // Placeholder
+    
+    if (!hasActivePlans) {
+        return '';
+    }
+    
+    return `
+        <div class="active-plans glass-card mb-lg">
+            <div class="section-header">
+                <h3 class="section-title">🎯 Planes Activos</h3>
+                <button id="manage-plans-btn" class="glass-button glass-button-outline btn-sm">
+                    Gestionar
+                </button>
+            </div>
+            <div class="active-plans-list">
+                <!-- Planes activos aquí -->
+            </div>
+        </div>
+    `;
+}
+
+// Renderizar planificación de gym
+function renderGymPlanning() {
+    return `
+        <div class="gym-planning glass-fade-in">
+            <div class="planning-header">
+                <button id="back-to-selection" class="glass-button glass-button-outline">
+                    ← Volver
+                </button>
+                <h2 class="page-title">🏋️‍♀️ Planificación Gym</h2>
+            </div>
+            
+            <!-- Grupos musculares -->
+            <div class="muscle-groups glass-card mb-lg">
+                <h3 class="section-title mb-md">🎯 Selecciona Grupos Musculares</h3>
+                <div class="muscle-group-grid">
+                    ${renderMuscleGroups()}
+                </div>
+            </div>
+            
+            <!-- Configuración del entrenamiento -->
+            <div class="workout-config glass-card mb-lg">
+                <h3 class="section-title mb-md">⚙️ Configuración</h3>
+                <div class="config-grid">
+                    <div class="config-item">
+                        <label class="config-label">Tiempo de descanso</label>
+                        <select id="rest-time-select" class="glass-input">
+                            <option value="30">30 segundos</option>
+                            <option value="60" selected>1 minuto</option>
+                            <option value="90">1.5 minutos</option>
+                            <option value="120">2 minutos</option>
+                            <option value="180">3 minutos</option>
+                        </select>
+                    </div>
+                    <div class="config-item">
+                        <label class="config-label">Progresión automática</label>
+                        <label class="toggle-container">
+                            <input type="checkbox" id="auto-progression" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="config-item">
+                        <label class="config-label">Audio coaching</label>
+                        <label class="toggle-container">
+                            <input type="checkbox" id="voice-coaching" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Ejercicios seleccionados -->
+            <div class="selected-exercises glass-card mb-lg" id="selected-exercises" style="display: none;">
+                <h3 class="section-title mb-md">📋 Ejercicios Seleccionados</h3>
+                <div class="exercises-list" id="exercises-list">
+                    <!-- Ejercicios se cargan dinámicamente -->
+                </div>
+            </div>
+            
+            <!-- Botón de inicio -->
+            <div class="start-workout-section">
+                <button id="start-gym-workout" class="glass-button glass-button-primary btn-full" disabled>
+                    🏋️‍♀️ Iniciar Entrenamiento
+                </button>
+            </div>
+        </div>
+    `;
+}
+
+// Renderizar grupos musculares
+function renderMuscleGroups() {
+    return GYM_MUSCLE_GROUPS.map(group => `
+        <div class="muscle-group-card" data-group="${group.id}" style="--group-color: ${group.color}">
+            <div class="group-icon">${group.icon}</div>
+            <div class="group-name">${group.name}</div>
+            <div class="group-exercises-count">${getExercisesByGroup(group.id).length} ejercicios</div>
+        </div>
+    `).join('');
+}
+
+// Renderizar planificación de CrossFit
+function renderCrossfitPlanning() {
+    return `
+        <div class="crossfit-planning glass-fade-in">
+            <div class="planning-header">
+                <button id="back-to-selection" class="glass-button glass-button-outline">
+                    ← Volver
+                </button>
+                <h2 class="page-title">🤸‍♂️ Entrenamiento Funcional</h2>
+            </div>
+            
+            <!-- Tipos de WOD -->
+            <div class="wod-types glass-card mb-lg">
+                <h3 class="section-title mb-md">🎯 Tipos de WOD</h3>
+                <div class="wod-type-grid">
+                    ${renderWodTypes()}
+                </div>
+            </div>
+            
+            <!-- WODs destacados -->
+            <div class="featured-wods glass-card mb-lg">
+                <h3 class="section-title mb-md">⭐ WODs Destacados</h3>
+                <div class="wods-list">
+                    ${renderFeaturedWods()}
+                </div>
+            </div>
+            
+            <!-- Crear WOD personalizado -->
+            <div class="custom-wod glass-card mb-lg">
+                <h3 class="section-title mb-md">🎨 Crear WOD Personalizado</h3>
+                <div class="custom-wod-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Nombre del WOD</label>
+                            <input type="text" id="wod-name" class="glass-input" placeholder="Mi WOD personalizado">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Tipo</label>
+                            <select id="wod-type" class="glass-input">
+                                <option value="amrap">AMRAP</option>
+                                <option value="emom">EMOM</option>
+                                <option value="for_time">For Time</option>
+                                <option value="tabata">Tabata</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Duración (minutos)</label>
+                        <input type="number" id="wod-duration" class="glass-input" value="20" min="1" max="60">
+                    </div>
+                    <button id="create-custom-wod" class="glass-button glass-button-secondary btn-full">
+                        🎨 Crear WOD
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Configuración del entrenamiento -->
+            <div class="crossfit-config glass-card">
+                <h3 class="section-title mb-md">⚙️ Configuración</h3>
+                <div class="config-grid">
+                    <div class="config-item">
+                        <label class="config-label">Audio coaching</label>
+                        <label class="toggle-container">
+                            <input type="checkbox" id="crossfit-voice-coaching" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="config-item">
+                        <label class="config-label">Mostrar form tips</label>
+                        <label class="toggle-container">
+                            <input type="checkbox" id="show-form-tips" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// Renderizar tipos de WOD
+function renderWodTypes() {
+    return CROSSFIT_WOD_TYPES.map(type => `
+        <div class="wod-type-card" data-type="${type.id}">
+            <div class="wod-type-icon">${type.icon}</div>
+            <div class="wod-type-content">
+                <h4 class="wod-type-name">${type.name}</h4>
+                <p class="wod-type-description">${type.description}</p>
+            </div>
+        </div>
+    `).join('');
+}
+
+// Renderizar WODs destacados
+function renderFeaturedWods() {
+    const featuredWods = crossfitWods.filter(wod => wod.featured).slice(0, 6);
+    
+    return featuredWods.map(wod => `
+        <div class="wod-card" data-wod-id="${wod.id}">
+            <div class="wod-header">
+                <h4 class="wod-name">${wod.name}</h4>
+                <span class="wod-type ${wod.type}">${wod.type.toUpperCase()}</span>
+            </div>
+            <p class="wod-description">${wod.description}</p>
+            <div class="wod-details">
+                <span class="wod-duration">⏱️ ${wod.duration || wod.timeLimit}min</span>
+                <span class="wod-difficulty ${wod.difficulty}">🔥 ${wod.difficulty}</span>
+            </div>
+            <div class="wod-exercises">
+                ${wod.exercises.slice(0, 3).map(ex => `<span class="exercise-tag">${ex.name}</span>`).join('')}
+                ${wod.exercises.length > 3 ? `<span class="more-exercises">+${wod.exercises.length - 3} más</span>` : ''}
+            </div>
+        </div>
+    `).join('');
+}
+
+// Renderizar entrenamiento de gym activo
+function renderActiveGymWorkout() {
+    if (!workoutState.currentSession) {
+        return '<div class="error">❌ No hay sesión activa</div>';
+    }
+    
+    const currentExercise = workoutState.activeExercise;
+    const exerciseData = workoutState.currentSession.exercises[workoutState.currentSession.currentExerciseIndex];
+    
+    return `
+        <div class="active-gym-workout glass-fade-in">
+            <!-- Header con controles -->
+            <div class="workout-header glass-card mb-md">
+                <div class="workout-controls">
+                    <button id="pause-workout" class="control-btn glass-button">
+                        <span class="control-icon">${workoutState.isPaused ? '▶️' : '⏸️'}</span>
+                    </button>
+                    <div class="workout-time">
+                        <span class="time-label">Tiempo</span>
+                        <span class="time-value" id="workout-time">${formatWorkoutTime(workoutState.totalTime)}</span>
+                    </div>
+                    <button id="finish-workout" class="control-btn glass-button glass-button-danger">
+                        <span class="control-icon">✅</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Progreso del entrenamiento -->
+            <div class="workout-progress glass-card mb-md">
+                <div class="progress-info">
+                    <span class="progress-text">
+                        Ejercicio ${workoutState.currentSession.currentExerciseIndex + 1} de ${workoutState.currentSession.exercises.length}
+                    </span>
+                    <span class="progress-percentage">
+                        ${Math.round(((workoutState.currentSession.currentExerciseIndex) / workoutState.currentSession.exercises.length) * 100)}%
+                    </span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: ${((workoutState.currentSession.currentExerciseIndex) / workoutState.currentSession.exercises.length) * 100}%"></div>
+                </div>
+            </div>
+            
+            <!-- Ejercicio actual -->
+            <div class="current-exercise glass-card mb-md">
+                <div class="exercise-header">
+                    <h3 class="exercise-name">${exerciseData.name}</h3>
+                    <button id="exercise-info" class="info-btn glass-button glass-button-outline btn-sm">
+                        📹 Ver video
+                    </button>
+                </div>
+                
+                <div class="exercise-details">
+                    <div class="target-info">
+                        <span class="target-sets">${exerciseData.sets} series</span>
+                        <span class="target-reps">${exerciseData.reps} repeticiones</span>
+                        ${exerciseData.weight ? `<span class="target-weight">${exerciseData.weight}kg</span>` : ''}
+                    </div>
+                </div>
+                
+                <!-- Sets completados -->
+                <div class="sets-tracker">
+                    <h4 class="sets-title">Series (${workoutState.currentSet + 1}/${exerciseData.sets})</h4>
+                    <div class="sets-grid">
+                        ${renderSetsTracker(exerciseData)}
+                    </div>
+                </div>
+                
+                <!-- Input de peso y reps actuales -->
+                <div class="current-set-input">
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label class="input-label">Peso (kg)</label>
+                            <input type="number" id="current-weight" class="glass-input" 
+                                   value="${exerciseData.weight || ''}" step="0.5" min="0">
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Repeticiones</label>
+                            <input type="number" id="current-reps" class="glass-input" 
+                                   value="${exerciseData.reps || ''}" min="1">
+                        </div>
+                    </div>
+                    <button id="complete-set" class="glass-button glass-button-primary btn-full">
+                        ✅ Completar Serie ${workoutState.currentSet + 1}
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Timer de descanso -->
+            ${workoutState.isResting ? renderRestTimer() : ''}
+            
+            <!-- Progresión sugerida -->
+            ${renderProgressionSuggestion(exerciseData)}
+            
+            <!-- Navegación de ejercicios -->
+            <div class="exercise-navigation">
+                <button id="prev-exercise" class="glass-button glass-button-outline" 
+                        ${workoutState.currentSession.currentExerciseIndex === 0 ? 'disabled' : ''}>
+                    ← Anterior
+                </button>
+                <button id="next-exercise" class="glass-button glass-button-outline"
+                        ${workoutState.currentSession.currentExerciseIndex === workoutState.currentSession.exercises.length - 1 ? 'disabled' : ''}>
+                    Siguiente →
+                </button>
+            </div>
+        </div>
+    `;
+}
+
+// Renderizar tracker de series
+function renderSetsTracker(exerciseData) {
+    const sets = [];
+    for (let i = 0; i < exerciseData.sets; i++) {
+        const setData = exerciseData.completedSets?.[i];
+        const isCompleted = setData != null;
+        const isCurrent = i === workoutState.currentSet;
+        
+        sets.push(`
+            <div class="set-item ${isCompleted ? 'completed' : ''} ${isCurrent ? 'current' : ''}">
+                <div class="set-number">${i + 1}</div>
+                ${isCompleted ? `
+                    <div class="set-data">
+                        <span class="set-weight">${setData.weight}kg</span>
+                        <span class="set-reps">${setData.reps}r</span>
+                    </div>
+                ` : `
+                    <div class="set-pending">-</div>
+                `}
+            </div>
+        `);
+    }
+    return sets.join('');
+}
+
+// Renderizar timer de descanso
+function renderRestTimer() {
+    return `
+        <div class="rest-timer glass-card mb-md">
+            <div class="rest-header">
+                <h4 class="rest-title">⏱️ Descanso</h4>
+                <button id="skip-rest" class="glass-button glass-button-outline btn-sm">
+                    Saltar
+                </button>
+            </div>
+            <div class="rest-display">
+                <div class="rest-time" id="rest-time-display">${workoutState.restTime}</div>
+                <div class="rest-progress">
+                    <div class="rest-progress-bar">
+                        <div class="rest-progress-fill" id="rest-progress-fill"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="rest-controls">
+                <button id="add-rest-time" class="glass-button glass-button-outline">+30s</button>
+                <button id="finish-rest" class="glass-button glass-button-primary">✅ Listo</button>
+            </div>
+        </div>
+    `;
+}
+
+// Renderizar sugerencia de progresión
+function renderProgressionSuggestion(exerciseData) {
+    if (!workoutState.suggestedProgressions[exerciseData.id]) {
+        return '';
+    }
+    
+    const suggestion = workoutState.suggestedProgressions[exerciseData.id];
+    
+    return `
+        <div class="progression-suggestion glass-card mb-md">
+            <div class="suggestion-header">
+                <h4 class="suggestion-title">💡 Progresión Sugerida</h4>
+            </div>
+            <div class="suggestion-content">
+                <p class="suggestion-text">
+                    ${suggestion.message}
+                </p>
+                <div class="suggestion-actions">
+                    <button id="accept-progression" class="glass-button glass-button-primary btn-sm">
+                        ✅ Aceptar
+                    </button>
+                    <button id="decline-progression" class="glass-button glass-button-outline btn-sm">
+                        ❌ Rechazar
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// ===================================
+// FUNCIONES DE CONTROL DE PLANES
+// ===================================
+
+// Renderizar gestión de planes
+function renderPlanManagement() {
+    return `
+        <div class="plan-management glass-fade-in">
+            <div class="management-header">
+                <button id="back-to-selection" class="glass-button glass-button-outline">
+                    ← Volver
+                </button>
+                <h2 class="page-title">📋 Gestión de Planes</h2>
+            </div>
+            
+            <!-- Planes activos -->
+            <div class="active-plans-management glass-card mb-lg">
+                <h3 class="section-title mb-md">🎯 Planes Activos</h3>
+                <div class="plans-list">
+                    ${renderActivePlansList()}
+                </div>
+            </div>
+            
+            <!-- Historial de planes -->
+            <div class="plans-history glass-card mb-lg">
+                <h3 class="section-title mb-md">📊 Historial de Planes</h3>
+                <div class="history-list">
+                    ${renderPlansHistory()}
+                </div>
+            </div>
+            
+            <!-- Crear nuevo plan -->
+            <div class="create-plan glass-card">
+                <h3 class="section-title mb-md">➕ Crear Nuevo Plan</h3>
+                <div class="create-plan-options">
+                    <button class="plan-option-btn" data-plan-type="gym-split">
+                        <span class="option-icon">🏋️‍♀️</span>
+                        <span class="option-text">Plan de Gym (Split)</span>
+                    </button>
+                    <button class="plan-option-btn" data-plan-type="crossfit-weekly">
+                        <span class="option-icon">🤸‍♂️</span>
+                        <span class="option-text">Plan CrossFit Semanal</span>
+                    </button>
+                    <button class="plan-option-btn" data-plan-type="hybrid">
+                        <span class="option-icon">⚡</span>
+                        <span class="option-text">Plan Híbrido</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// Renderizar lista de planes activos
+function renderActivePlansList() {
+    // TODO: Obtener de Firestore
+    const activePlans = []; // Placeholder
+    
+    if (activePlans.length === 0) {
+        return `
+            <div class="empty-state">
+                <p class="text-secondary">No tienes planes activos</p>
+                <p class="text-secondary text-sm">Crea tu primer plan personalizado</p>
+            </div>
+        `;
+    }
+    
+    return activePlans.map(plan => `
+        <div class="plan-item glass-card-inner">
+            <div class="plan-info">
+                <h4 class="plan-name">${plan.name}</h4>
+                <p class="plan-description">${plan.description}</p>
+                <div class="plan-progress">
+                    <span class="progress-text">Semana ${plan.currentWeek} de ${plan.totalWeeks}</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: ${(plan.currentWeek / plan.totalWeeks) * 100}%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="plan-actions">
+                <button class="plan-action-btn continue-btn" data-plan-id="${plan.id}">
+                    ▶️ Continuar
+                </button>
+                <button class="plan-action-btn restart-btn" data-plan-id="${plan.id}">
+                    🔄 Reiniciar
+                </button>
+                <button class="plan-action-btn close-btn" data-plan-id="${plan.id}">
+                    ❌ Cerrar
+                </button>
+            </div>
+        </div>
+    `).join('');
+}
+
+// Renderizar historial de planes
+function renderPlansHistory() {
+    // TODO: Obtener de Firestore
+    const completedPlans = []; // Placeholder
+    
+    if (completedPlans.length === 0) {
+        return `
+            <div class="empty-state">
+                <p class="text-secondary">No hay planes completados</p>
+            </div>
+        `;
+    }
+    
+    return completedPlans.map(plan => `
+        <div class="history-item">
+            <div class="history-info">
+                <h5 class="history-name">${plan.name}</h5>
+                <span class="history-date">${formatDate(plan.completedAt)}</span>
+            </div>
+            <div class="history-stats">
+                <span class="stat">${plan.totalWorkouts} entrenamientos</span>
+                <span class="stat">${plan.totalDuration} minutos</span>
+            </div>
+        </div>
+    `).join('');
+}
+
+// ===================================
+// CONFIGURAR LISTENERS
+// ===================================
+
+function setupWorkoutListeners() {
+    document.addEventListener('click', (e) => {
+        const target = e.target.closest('button, .workout-type-card, .muscle-group-card, .wod-card, .wod-type-card');
+        if (!target) return;
+        
+        // Navegación principal
+        if (target.classList.contains('workout-type-card')) {
+            e.preventDefault();
+            const workoutType = target.dataset.type;
+            startWorkoutPlanning(workoutType);
+        }
+        
+        // Botones de navegación
+        if (target.id === 'back-to-selection') {
+            e.preventDefault();
+            workoutState.currentMode = 'select';
+            renderWorkoutsPage();
+        }
+        
+        if (target.id === 'manage-plans-btn') {
+            e.preventDefault();
+            workoutState.currentMode = 'plan-management';
+            renderWorkoutsPage();
+        }
+        
+        // Planificación de gym
+        if (target.classList.contains('muscle-group-card')) {
+            e.preventDefault();
+            toggleMuscleGroup(target.dataset.group);
+        }
+        
+        if (target.id === 'start-gym-workout') {
+            e.preventDefault();
+            startGymWorkout();
+        }
+        
+        // Planificación de CrossFit
+        if (target.classList.contains('wod-type-card')) {
+            e.preventDefault();
+            selectWodType(target.dataset.type);
+        }
+        
+        if (target.classList.contains('wod-card')) {
+            e.preventDefault();
+            selectWod(target.dataset.wodId);
+        }
+        
+        // Controles de entrenamiento activo
+        if (target.id === 'pause-workout') {
+            e.preventDefault();
+            toggleWorkoutPause();
+        }
+        
+        if (target.id === 'finish-workout') {
+            e.preventDefault();
+            finishWorkout();
+        }
+        
+        if (target.id === 'complete-set') {
+            e.preventDefault();
+            completeSet();
+        }
+        
+        if (target.id === 'skip-rest' || target.id === 'finish-rest') {
+            e.preventDefault();
+            finishRest();
+        }
+        
+        // Gestión de planes
+        if (target.classList.contains('continue-btn')) {
+            e.preventDefault();
+            continuePlan(target.dataset.planId);
+        }
+        
+        if (target.classList.contains('restart-btn')) {
+            e.preventDefault();
+            restartPlan(target.dataset.planId);
+        }
+        
+        if (target.classList.contains('close-btn')) {
+            e.preventDefault();
+            closePlan(target.dataset.planId);
+        }
     });
 }
 
-// Selección principal de tipo de entrenamiento
-function renderWorkoutSelection() {
-    return `
-        <div class="workout-selection">
-            <div class="workout-types-grid">
-                <div class="workout-type-card glass-card glass-gradient-orange" onclick="selectWorkoutType('gym')">
-                    <div class="workout-type-icon">🏋️</div>
-                    <h3 class="workout-type-title">Gimnasio</h3>
-                    <p class="workout-type-description">
-                        Entrenamiento con pesas tradicional. Grupos musculares específicos.
-                    </p>
-                    <div class="workout-type-stats">
-                        <span class="stat-item">📊 20 ejercicios por grupo</span>
-                        <span class="stat-item">⏱️ 45-90 min</span>
-                        <span class="stat-item">💪 Fuerza & Masa</span>
-                    </div>
-                </div>
-                
-                <div class="workout-type-card glass-card glass-gradient-red" onclick="selectWorkoutType('crossfit')">
-                    <div class="workout-type-icon">⚡</div>
-                    <h3 class="workout-type-title">CrossFit</h3>
-                    <p class="workout-type-description">
-                        Entrenamientos funcionales de alta intensidad. WODs famosos.
-                    </p>
-                    <div class="workout-type-stats">
-                        <span class="stat-item">🏆 Heroes & Games</span>
-                        <span class="stat-item">⏱️ 5-45 min</span>
-                        <span class="stat-item">🔥 Intensidad máxima</span>
-                    </div>
-                </div>
-                
-                <div class="workout-type-card glass-card glass-gradient-green" onclick="selectWorkoutType('custom')">
-                    <div class="workout-type-icon">🎯</div>
-                    <h3 class="workout-type-title">Personalizado</h3>
-                    <p class="workout-type-description">
-                        Crea tu propio entrenamiento combinando ejercicios.
-                    </p>
-                    <div class="workout-type-stats">
-                        <span class="stat-item">⚙️ Totalmente flexible</span>
-                        <span class="stat-item">📝 Tu diseño</span>
-                        <span class="stat-item">🎨 Sin límites</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="quick-workouts glass-card mt-lg">
-                <div class="card-header">
-                    <h3 class="card-title">🚀 Entrenamientos Rápidos</h3>
-                </div>
-                
-                <div class="quick-workouts-grid">
-                    <button class="quick-workout-btn glass-button" onclick="startQuickWorkout('upper_body')">
-                        <span class="quick-workout-icon">💪</span>
-                        <span class="quick-workout-name">Tren Superior</span>
-                        <span class="quick-workout-time">30 min</span>
-                    </button>
-                    
-                    <button class="quick-workout-btn glass-button" onclick="startQuickWorkout('lower_body')">
-                        <span class="quick-workout-icon">🦵</span>
-                        <span class="quick-workout-name">Tren Inferior</span>
-                        <span class="quick-workout-time">35 min</span>
-                    </button>
-                    
-                    <button class="quick-workout-btn glass-button" onclick="startQuickWorkout('full_body')">
-                        <span class="quick-workout-icon">🏃</span>
-                        <span class="quick-workout-name">Cuerpo Completo</span>
-                        <span class="quick-workout-time">45 min</span>
-                    </button>
-                    
-                    <button class="quick-workout-btn glass-button" onclick="startQuickWorkout('hiit')">
-                        <span class="quick-workout-icon">🔥</span>
-                        <span class="quick-workout-name">HIIT</span>
-                        <span class="quick-workout-time">20 min</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    `;
-}
+// ===================================
+// FUNCIONES DE LÓGICA DE NEGOCIO
+// ===================================
 
-// Entrenamientos de gimnasio
-function renderGymWorkouts() {
-    const muscleGroups = [
-        { id: 'chest', name: 'Pecho', icon: '💪', color: 'orange' },
-        { id: 'back', name: 'Espalda', icon: '🦅', color: 'blue' },
-        { id: 'legs', name: 'Piernas', icon: '🦵', color: 'green' },
-        { id: 'shoulders', name: 'Hombros', icon: '🔺', color: 'purple' },
-        { id: 'arms', name: 'Brazos', icon: '💪', color: 'red' },
-        { id: 'core', name: 'Core', icon: '⭐', color: 'yellow' }
-    ];
+// Iniciar planificación de entrenamiento
+function startWorkoutPlanning(type) {
+    workoutState.workoutType = type;
     
-    return `
-        <div class="gym-workouts">
-            <div class="workout-header">
-                <button class="glass-button back-button" onclick="backToWorkoutSelection()">
-                    ← Volver
-                </button>
-                <h2 class="workout-title">🏋️ Entrenamiento de Gimnasio</h2>
-            </div>
-            
-            <div class="muscle-groups-grid">
-                ${muscleGroups.map(group => `
-                    <div class="muscle-group-card glass-card glass-gradient-${group.color}" onclick="selectMuscleGroup('${group.id}')">
-                        <div class="muscle-group-icon">${group.icon}</div>
-                        <h3 class="muscle-group-name">${group.name}</h3>
-                        <p class="muscle-group-count">${getExercisesByGroup(group.id).length} ejercicios</p>
-                        <div class="muscle-group-difficulty">
-                            <span class="difficulty-badge principiante">🟢 Principiante</span>
-                            <span class="difficulty-badge intermedio">🟡 Intermedio</span>
-                            <span class="difficulty-badge avanzado">🔴 Avanzado</span>
-                        </div>
-                    </div>
-                `).join('')}
-            </div>
-            
-            <div class="gym-programs glass-card mt-lg">
-                <div class="card-header">
-                    <h3 class="card-title">📋 Rutinas Predefinidas</h3>
-                </div>
-                
-                <div class="programs-grid">
-                    <div class="program-card glass-effect" onclick="selectProgram('push_pull_legs')">
-                        <h4 class="program-name">Push/Pull/Legs</h4>
-                        <p class="program-description">Rutina clásica de 3 días</p>
-                        <div class="program-details">
-                            <span>📅 3 días/semana</span>
-                            <span>⏱️ 60-90 min</span>
-                            <span>🎯 Intermedio</span>
-                        </div>
-                    </div>
-                    
-                    <div class="program-card glass-effect" onclick="selectProgram('upper_lower')">
-                        <h4 class="program-name">Upper/Lower</h4>
-                        <p class="program-description">Dividir tren superior e inferior</p>
-                        <div class="program-details">
-                            <span>📅 4 días/semana</span>
-                            <span>⏱️ 45-75 min</span>
-                            <span>🎯 Principiante</span>
-                        </div>
-                    </div>
-                    
-                    <div class="program-card glass-effect" onclick="selectProgram('full_body')">
-                        <h4 class="program-name">Full Body</h4>
-                        <p class="program-description">Cuerpo completo cada sesión</p>
-                        <div class="program-details">
-                            <span>📅 3 días/semana</span>
-                            <span>⏱️ 45-60 min</span>
-                            <span>🎯 Principiante</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    `;
-}
-
-// Entrenamientos de CrossFit
-function renderCrossfitWorkouts() {
-    const wodTypes = [
-        { id: 'heroes', name: 'Heroes', icon: '🏅', description: 'WODs en honor a héroes caídos' },
-        { id: 'games', name: 'CrossFit Games', icon: '🏆', description: 'WODs de competiciones oficiales' },
-        { id: 'open', name: 'CrossFit Open', icon: '🌍', description: 'WODs del Open mundial' },
-        { id: 'classics', name: 'Clásicos', icon: '⭐', description: 'WODs fundamentales' },
-        { id: 'emoms', name: 'EMOMs', icon: '⏰', description: 'Every Minute On the Minute' }
-    ];
-    
-    return `
-        <div class="crossfit-workouts">
-            <div class="workout-header">
-                <button class="glass-button back-button" onclick="backToWorkoutSelection()">
-                    ← Volver
-                </button>
-                <h2 class="workout-title">⚡ CrossFit WODs</h2>
-            </div>
-            
-            <div class="wod-types-grid">
-                ${wodTypes.map(type => `
-                    <div class="wod-type-card glass-card" onclick="selectWodType('${type.id}')">
-                        <div class="wod-type-icon">${type.icon}</div>
-                        <h3 class="wod-type-name">${type.name}</h3>
-                        <p class="wod-type-description">${type.description}</p>
-                        <p class="wod-type-count">${getWodsByType(type.id).length} WODs disponibles</p>
-                    </div>
-                `).join('')}
-            </div>
-            
-            <div class="featured-wods glass-card mt-lg">
-                <div class="card-header">
-                    <h3 class="card-title">🔥 WODs Destacados</h3>
-                </div>
-                
-                <div class="featured-wods-list">
-                    <div class="featured-wod glass-effect" onclick="startWod('hero_001')">
-                        <div class="wod-info">
-                            <h4 class="wod-name">Murph</h4>
-                            <p class="wod-description">El WOD Hero más famoso</p>
-                            <div class="wod-meta">
-                                <span class="wod-time">45-60 min</span>
-                                <span class="wod-difficulty avanzado">🔴 Avanzado</span>
-                            </div>
-                        </div>
-                        <div class="wod-preview">
-                            <span>1 milla + 100 dominadas + 200 flexiones + 300 sentadillas + 1 milla</span>
-                        </div>
-                    </div>
-                    
-                    <div class="featured-wod glass-effect" onclick="startWod('hero_002')">
-                        <div class="wod-info">
-                            <h4 class="wod-name">Fran</h4>
-                            <p class="wod-description">Benchmark clásico</p>
-                            <div class="wod-meta">
-                                <span class="wod-time">5-15 min</span>
-                                <span class="wod-difficulty intermedio">🟡 Intermedio</span>
-                            </div>
-                        </div>
-                        <div class="wod-preview">
-                            <span>21-15-9 Thrusters (95/65) + Pull-ups</span>
-                        </div>
-                    </div>
-                    
-                    <div class="featured-wod glass-effect" onclick="startWod('hero_005')">
-                        <div class="wod-info">
-                            <h4 class="wod-name">Cindy</h4>
-                            <p class="wod-description">Perfecto para principiantes</p>
-                            <div class="wod-meta">
-                                <span class="wod-time">20 min</span>
-                                <span class="wod-difficulty principiante">🟢 Principiante</span>
-                            </div>
-                        </div>
-                        <div class="wod-preview">
-                            <span>AMRAP 20 min: 5 Pull-ups + 10 Push-ups + 15 Squats</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    `;
-}
-
-// Entrenamiento activo
-function renderActiveWorkout() {
-    if (!workoutState.currentWorkout) {
-        return '<div class="error">No hay entrenamiento activo</div>';
+    if (type === 'gym') {
+        workoutState.currentMode = 'gym-plan';
+    } else if (type === 'crossfit') {
+        workoutState.currentMode = 'crossfit-plan';
     }
     
-    const workout = workoutState.currentWorkout;
-    const exercise = workoutState.activeExercise;
-    
-    return `
-        <div class="active-workout">
-            <div class="workout-header glass-header">
-                <div class="workout-info">
-                    <h2 class="workout-name">${workout.name}</h2>
-                    <div class="workout-timer" id="workout-timer">
-                        ${formatTime(getWorkoutElapsedTime())}
-                    </div>
-                </div>
-                <div class="workout-controls">
-                    <button class="glass-button control-btn" onclick="pauseWorkout()">
-                        ${workoutState.workoutTimer ? '⏸️' : '▶️'}
-                    </button>
-                    <button class="glass-button control-btn" onclick="stopWorkout()">
-                        ⏹️
-                    </button>
-                </div>
-            </div>
-            
-            ${exercise ? renderActiveExercise(exercise) : renderWorkoutOverview(workout)}
-            
-            <div class="workout-progress glass-card">
-                <div class="progress-header">
-                    <h3>📊 Progreso del Entrenamiento</h3>
-                    <span class="exercise-count">${workoutState.exerciseHistory.length}/${workout.exercises?.length || 'N/A'} ejercicios</span>
-                </div>
-                
-                <div class="exercise-list">
-                    ${workout.exercises?.map((ex, index) => `
-                        <div class="exercise-item ${index < workoutState.exerciseHistory.length ? 'completed' : index === workoutState.exerciseHistory.length ? 'active' : ''}">
-                            <span class="exercise-name">${ex.name}</span>
-                            <span class="exercise-sets">${ex.sets || ex.reps || ex.duration}</span>
-                            ${index < workoutState.exerciseHistory.length ? '<span class="exercise-status">✅</span>' : index === workoutState.exerciseHistory.length ? '<span class="exercise-status">🔄</span>' : '<span class="exercise-status">⏳</span>'}
-                        </div>
-                    `).join('') || ''}
-                </div>
-            </div>
-        </div>
-    `;
-}
-
-// Ejercicio activo
-function renderActiveExercise(exercise) {
-    return `
-        <div class="active-exercise glass-card glass-card-active">
-            <div class="exercise-header">
-                <h3 class="exercise-name">${exercise.name}</h3>
-                <span class="exercise-group">${exercise.muscleGroup}</span>
-            </div>
-            
-            <div class="exercise-description">
-                <p>${exercise.description}</p>
-            </div>
-            
-            <div class="exercise-instructions">
-                <h4>📝 Instrucciones:</h4>
-                <ol>
-                    ${exercise.instructions?.map(instruction => `<li>${instruction}</li>`).join('') || '<li>Sigue la técnica adecuada</li>'}
-                </ol>
-            </div>
-            
-            <div class="exercise-controls">
-                <div class="sets-reps-control">
-                    <div class="control-group">
-                        <label>Series</label>
-                        <div class="control-buttons">
-                            <button class="glass-button control-btn" onclick="adjustSets(-1)">-</button>
-                            <span class="control-value" id="current-sets">${exercise.currentSets || 1}</span>
-                            <button class="glass-button control-btn" onclick="adjustSets(1)">+</button>
-                        </div>
-                    </div>
-                    
-                    <div class="control-group">
-                        <label>Repeticiones</label>
-                        <div class="control-buttons">
-                            <button class="glass-button control-btn" onclick="adjustReps(-1)">-</button>
-                            <span class="control-value" id="current-reps">${exercise.currentReps || 10}</span>
-                            <button class="glass-button control-btn" onclick="adjustReps(1)">+</button>
-                        </div>
-                    </div>
-                    
-                    <div class="control-group">
-                        <label>Peso (kg)</label>
-                        <div class="control-buttons">
-                            <button class="glass-button control-btn" onclick="adjustWeight(-2.5)">-</button>
-                            <span class="control-value" id="current-weight">${exercise.currentWeight || 0}</span>
-                            <button class="glass-button control-btn" onclick="adjustWeight(2.5)">+</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="exercise-actions">
-                    <button class="glass-button glass-button-primary" onclick="completeSet()">
-                        ✅ Completar Serie
-                    </button>
-                    <button class="glass-button" onclick="startRestTimer()">
-                        ⏰ Descanso (${exercise.restTime || 60}s)
-                    </button>
-                    <button class="glass-button" onclick="nextExercise()">
-                        ⏭️ Siguiente Ejercicio
-                    </button>
-                </div>
-                
-                <div class="exercise-video">
-                    <button class="glass-button" onclick="showExerciseVideo('${exercise.youtubeSearch || exercise.name + ' gym'}')">
-                        📹 Ver Técnica
-                    </button>
-                </div>
-            </div>
-            
-            ${workoutState.isResting ? renderRestTimer() : ''}
-        </div>
-    `;
-}
-
-// Timer de descanso
-function renderRestTimer() {
-    return `
-        <div class="rest-timer glass-card glass-gradient-blue">
-            <div class="rest-timer-content">
-                <h3>💤 Descansando</h3>
-                <div class="rest-timer-display" id="rest-timer-display">
-                    01:00
-                </div>
-                <div class="rest-timer-controls">
-                    <button class="glass-button" onclick="addRestTime(30)">+30s</button>
-                    <button class="glass-button glass-button-primary" onclick="skipRest()">Saltar</button>
-                    <button class="glass-button" onclick="addRestTime(-30)">-30s</button>
-                </div>
-            </div>
-        </div>
-    `;
-}
-
-// Configurar listeners de entrenamientos
-function setupWorkoutListeners() {
-    // Mantener pantalla encendida durante entrenamientos
-    if (workoutState.currentMode === 'active') {
-        enableWakeLock();
-    }
-    
-    // Actualizar timer cada segundo
-    if (workoutState.currentMode === 'active') {
-        setInterval(updateWorkoutTimer, 1000);
-    }
-}
-
-// Funciones de navegación
-window.selectWorkoutType = function(type) {
-    workoutState.selectedWorkoutType = type;
-    workoutState.currentMode = type;
     renderWorkoutsPage();
-};
+}
 
-window.backToWorkoutSelection = function() {
-    workoutState.currentMode = 'select';
-    workoutState.selectedWorkoutType = null;
-    renderWorkoutsPage();
-};
+// Alternar selección de grupo muscular
+function toggleMuscleGroup(groupId) {
+    const card = document.querySelector(`[data-group="${groupId}"]`);
+    if (!card) return;
+    
+    card.classList.toggle('selected');
+    updateSelectedExercises();
+}
 
-window.selectMuscleGroup = function(muscleGroup) {
-    const exercises = getExercisesByGroup(muscleGroup);
+// Actualizar ejercicios seleccionados
+function updateSelectedExercises() {
+    const selectedGroups = Array.from(document.querySelectorAll('.muscle-group-card.selected'))
+        .map(card => card.dataset.group);
     
-    // Crear entrenamiento personalizado del grupo muscular
-    const workout = {
-        id: `${muscleGroup}_workout`,
-        name: `Entrenamiento de ${muscleGroup.charAt(0).toUpperCase() + muscleGroup.slice(1)}`,
-        type: 'gym',
-        muscleGroup: muscleGroup,
-        exercises: exercises.slice(0, 6), // Primeros 6 ejercicios
-        estimatedTime: 45
-    };
-    
-    startWorkout(workout);
-};
-
-window.startWorkout = function(workout) {
-    workoutState.currentWorkout = workout;
-    workoutState.currentMode = 'active';
-    workoutState.workoutStartTime = Date.now();
-    workoutState.exerciseHistory = [];
-    workoutState.activeExercise = workout.exercises?.[0] || null;
-    
-    // Inicializar valores del ejercicio
-    if (workoutState.activeExercise) {
-        workoutState.activeExercise.currentSets = 1;
-        workoutState.activeExercise.currentReps = 10;
-        workoutState.activeExercise.currentWeight = 0;
-        workoutState.activeExercise.restTime = 60;
-    }
-    
-    enableWakeLock();
-    renderWorkoutsPage();
-    
-    // Anuncio de inicio con TTS
-    if (window.EntrenoTTS) {
-        window.EntrenoTTS.announceWorkoutStart(workout.name);
-    }
-    
-    console.log('🏋️ Entrenamiento iniciado:', workout.name);
-};
-
-window.startWod = function(wodId) {
-    // Buscar el WOD por ID en todas las categorías
-    let wod = null;
-    for (const type in crossfitWods) {
-        wod = crossfitWods[type].find(w => w.id === wodId);
-        if (wod) break;
-    }
-    
-    if (!wod) {
-        console.error('WOD no encontrado:', wodId);
+    if (selectedGroups.length === 0) {
+        document.getElementById('selected-exercises').style.display = 'none';
+        document.getElementById('start-gym-workout').disabled = true;
         return;
     }
     
-    // Convertir WOD a formato de entrenamiento
-    const workout = {
-        id: wod.id,
-        name: wod.name,
-        type: 'crossfit',
-        description: wod.description,
-        structure: wod.workout.structure,
-        movements: wod.workout.movements,
-        exercises: wod.workout.movements || [],
-        estimatedTime: parseInt(wod.timeNeeded) || 20
-    };
+    let allExercises = [];
+    selectedGroups.forEach(groupId => {
+        const exercises = getExercisesByGroup(groupId);
+        allExercises = allExercises.concat(exercises.slice(0, 3)); // 3 ejercicios por grupo
+    });
     
-    startWorkout(workout);
-};
+    const exercisesList = document.getElementById('exercises-list');
+    exercisesList.innerHTML = allExercises.map(exercise => `
+        <div class="exercise-item">
+            <div class="exercise-info">
+                <h5 class="exercise-name">${exercise.name}</h5>
+                <span class="exercise-muscle">${exercise.muscleGroup}</span>
+            </div>
+            <div class="exercise-config">
+                <span class="exercise-sets">3 series</span>
+                <span class="exercise-reps">8-12 reps</span>
+            </div>
+        </div>
+    `).join('');
+    
+    document.getElementById('selected-exercises').style.display = 'block';
+    document.getElementById('start-gym-workout').disabled = false;
+}
 
-// Funciones de control de ejercicios
-window.adjustSets = function(delta) {
-    if (!workoutState.activeExercise) return;
-    
-    const newSets = Math.max(1, (workoutState.activeExercise.currentSets || 1) + delta);
-    workoutState.activeExercise.currentSets = newSets;
-    
-    document.getElementById('current-sets').textContent = newSets;
-};
-
-window.adjustReps = function(delta) {
-    if (!workoutState.activeExercise) return;
-    
-    const newReps = Math.max(1, (workoutState.activeExercise.currentReps || 10) + delta);
-    workoutState.activeExercise.currentReps = newReps;
-    
-    document.getElementById('current-reps').textContent = newReps;
-};
-
-window.adjustWeight = function(delta) {
-    if (!workoutState.activeExercise) return;
-    
-    const newWeight = Math.max(0, (workoutState.activeExercise.currentWeight || 0) + delta);
-    workoutState.activeExercise.currentWeight = newWeight;
-    
-    document.getElementById('current-weight').textContent = newWeight;
-};
-
-window.completeSet = function() {
-    if (!workoutState.activeExercise) return;
-    
-    const setData = {
-        exercise: workoutState.activeExercise.name,
-        sets: workoutState.activeExercise.currentSets,
-        reps: workoutState.activeExercise.currentReps,
-        weight: workoutState.activeExercise.currentWeight,
-        timestamp: Date.now()
-    };
-    
-    workoutState.exerciseHistory.push(setData);
-    
-    // Anuncio TTS de serie completada
-    if (window.EntrenoTTS) {
-        const currentSet = workoutState.activeExercise.currentSets;
-        const totalSets = 3; // Por defecto, podría ser configurable
-        window.EntrenoTTS.announceSetComplete(currentSet, totalSets);
-    }
-    
-    // Mostrar feedback
-    showToast('✅ Serie completada', 'success');
-    
-    console.log('✅ Serie completada:', setData);
-};
-
-window.nextExercise = function() {
-    if (!workoutState.currentWorkout?.exercises) return;
-    
-    const currentIndex = workoutState.currentWorkout.exercises.findIndex(
-        ex => ex.id === workoutState.activeExercise?.id
-    );
-    
-    const nextIndex = currentIndex + 1;
-    
-    if (nextIndex < workoutState.currentWorkout.exercises.length) {
-        workoutState.activeExercise = workoutState.currentWorkout.exercises[nextIndex];
-        workoutState.activeExercise.currentSets = 1;
-        workoutState.activeExercise.currentReps = 10;
-        workoutState.activeExercise.currentWeight = 0;
-        renderWorkoutsPage();
-    } else {
-        // Entrenamiento completado
-        completeWorkout();
-    }
-};
-
-window.completeWorkout = function() {
-    const workoutData = {
-        workout: workoutState.currentWorkout,
-        duration: getWorkoutElapsedTime(),
-        exerciseHistory: workoutState.exerciseHistory,
-        completedAt: Date.now()
-    };
-    
-    // Guardar en localStorage temporalmente
-    saveWorkoutData(workoutData);
-    
-    disableWakeLock();
-    
-    showToast('🎉 ¡Entrenamiento completado!', 'success');
-    
-    // Volver al dashboard
-    setTimeout(() => {
-        navigateToPage('dashboard');
-    }, 2000);
-    
-    console.log('🎉 Entrenamiento completado:', workoutData);
-};
-
-// Funciones de temporizadores
-window.startRestTimer = function(duration = 60) {
-    workoutState.isResting = true;
-    let timeLeft = duration;
-    
-    workoutState.restTimer = setInterval(() => {
-        timeLeft--;
+// Iniciar entrenamiento de gym
+async function startGymWorkout() {
+    try {
+        console.log('🏋️‍♀️ Iniciando entrenamiento de gym');
         
-        const display = document.getElementById('rest-timer-display');
-        if (display) {
-            display.textContent = formatTime(timeLeft);
+        const selectedGroups = Array.from(document.querySelectorAll('.muscle-group-card.selected'))
+            .map(card => card.dataset.group);
+        
+        if (selectedGroups.length === 0) {
+            showError('Selecciona al menos un grupo muscular');
+            return;
         }
         
-        if (timeLeft <= 0) {
-            clearInterval(workoutState.restTimer);
-            workoutState.isResting = false;
-            showToast('⏰ ¡Descanso terminado!', 'info');
-            renderWorkoutsPage();
+        // Preparar ejercicios
+        let exercises = [];
+        selectedGroups.forEach(groupId => {
+            const groupExercises = getExercisesByGroup(groupId);
+            exercises = exercises.concat(groupExercises.slice(0, 3).map(exercise => ({
+                ...exercise,
+                sets: 3,
+                reps: exercise.defaultReps || 10,
+                weight: exercise.defaultWeight || null,
+                completedSets: []
+            })));
+        });
+        
+        // Crear sesión de entrenamiento
+        workoutState.currentSession = {
+            type: 'gym',
+            exercises: exercises,
+            currentExerciseIndex: 0,
+            startTime: Date.now(),
+            muscleGroups: selectedGroups
+        };
+        
+        workoutState.activeExercise = exercises[0];
+        workoutState.currentSet = 0;
+        workoutState.isWorkoutActive = true;
+        workoutState.currentMode = 'active-gym';
+        
+        // Configuraciones
+        workoutState.restTime = parseInt(document.getElementById('rest-time-select').value);
+        workoutState.isVoiceEnabled = document.getElementById('voice-coaching').checked;
+        
+        // Habilitar wake lock
+        await enableWakeLock();
+        
+        // Iniciar timer del entrenamiento
+        startWorkoutTimer();
+        
+        renderWorkoutsPage();
+        
+        // Anuncio de inicio
+        if (workoutState.isVoiceEnabled && window.EntrenoTTS) {
+            window.EntrenoTTS.speak(`¡Entrenamiento iniciado! Empezamos con ${exercises[0].name}.`);
+        }
+        
+    } catch (error) {
+        console.error('❌ Error iniciando entrenamiento:', error);
+        showError('Error iniciando el entrenamiento');
+    }
+}
+
+// Completar serie
+function completeSet() {
+    if (!workoutState.currentSession || !workoutState.activeExercise) return;
+    
+    const weight = parseFloat(document.getElementById('current-weight').value) || 0;
+    const reps = parseInt(document.getElementById('current-reps').value) || 0;
+    
+    if (reps <= 0) {
+        showError('Ingresa el número de repeticiones');
+        return;
+    }
+    
+    const exerciseIndex = workoutState.currentSession.currentExerciseIndex;
+    const exercise = workoutState.currentSession.exercises[exerciseIndex];
+    
+    // Guardar datos de la serie
+    if (!exercise.completedSets) {
+        exercise.completedSets = [];
+    }
+    
+    exercise.completedSets.push({
+        set: workoutState.currentSet + 1,
+        weight: weight,
+        reps: reps,
+        timestamp: Date.now()
+    });
+    
+    // Calcular volumen
+    workoutState.totalVolume += weight * reps;
+    
+    // Anuncio de serie completada
+    if (workoutState.isVoiceEnabled && window.EntrenoTTS) {
+        window.EntrenoTTS.speak(`Serie ${workoutState.currentSet + 1} completada. ${reps} repeticiones con ${weight} kilos.`);
+    }
+    
+    workoutState.currentSet++;
+    
+    // Verificar si se completó el ejercicio
+    if (workoutState.currentSet >= exercise.sets) {
+        completeExercise();
+    } else {
+        // Iniciar descanso
+        startRest();
+    }
+}
+
+// Completar ejercicio
+function completeExercise() {
+    console.log('✅ Ejercicio completado');
+    
+    if (workoutState.isVoiceEnabled && window.EntrenoTTS) {
+        window.EntrenoTTS.speak(`¡Ejercicio completado! Excelente trabajo.`);
+    }
+    
+    // Mover al siguiente ejercicio
+    workoutState.currentSession.currentExerciseIndex++;
+    workoutState.currentSet = 0;
+    
+    if (workoutState.currentSession.currentExerciseIndex >= workoutState.currentSession.exercises.length) {
+        // Entrenamiento completado
+        finishWorkout();
+    } else {
+        // Siguiente ejercicio
+        workoutState.activeExercise = workoutState.currentSession.exercises[workoutState.currentSession.currentExerciseIndex];
+        
+        if (workoutState.isVoiceEnabled && window.EntrenoTTS) {
+            window.EntrenoTTS.speak(`Siguiente ejercicio: ${workoutState.activeExercise.name}`);
+        }
+        
+        renderWorkoutsPage();
+    }
+}
+
+// Iniciar descanso
+function startRest() {
+    workoutState.isResting = true;
+    workoutState.restTimer = workoutState.restTime;
+    
+    if (workoutState.isVoiceEnabled && window.EntrenoTTS) {
+        window.EntrenoTTS.speak(`Descanso de ${workoutState.restTime} segundos.`);
+    }
+    
+    renderWorkoutsPage();
+    
+    // Countdown del descanso
+    const restInterval = setInterval(() => {
+        workoutState.restTimer--;
+        
+        const restDisplay = document.getElementById('rest-time-display');
+        const progressFill = document.getElementById('rest-progress-fill');
+        
+        if (restDisplay) {
+            restDisplay.textContent = workoutState.restTimer;
+        }
+        
+        if (progressFill) {
+            const progress = ((workoutState.restTime - workoutState.restTimer) / workoutState.restTime) * 100;
+            progressFill.style.width = `${progress}%`;
+        }
+        
+        if (workoutState.restTimer <= 0) {
+            clearInterval(restInterval);
+            finishRest();
         }
     }, 1000);
-    
-    renderWorkoutsPage();
-};
+}
 
-window.skipRest = function() {
-    if (workoutState.restTimer) {
-        clearInterval(workoutState.restTimer);
-        workoutState.restTimer = null;
-    }
+// Finalizar descanso
+function finishRest() {
     workoutState.isResting = false;
+    workoutState.restTimer = null;
+    
+    if (workoutState.isVoiceEnabled && window.EntrenoTTS) {
+        window.EntrenoTTS.speak('¡Descanso terminado! Vamos con la siguiente serie.');
+    }
+    
     renderWorkoutsPage();
-};
-
-window.showExerciseVideo = function(searchTerm) {
-    const youtubeUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(searchTerm)}`;
-    window.open(youtubeUrl, '_blank');
-};
-
-// Funciones de utilidad
-function getWorkoutElapsedTime() {
-    if (!workoutState.workoutStartTime) return 0;
-    return Math.floor((Date.now() - workoutState.workoutStartTime) / 1000);
 }
 
-function formatTime(seconds) {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-}
+// ===================================
+// GESTIÓN DE PLANES
+// ===================================
 
-function updateWorkoutTimer() {
-    const timerElement = document.getElementById('workout-timer');
-    if (timerElement && workoutState.workoutStartTime) {
-        timerElement.textContent = formatTime(getWorkoutElapsedTime());
-    }
-}
-
-function enableWakeLock() {
-    if ('wakeLock' in navigator && window.keepScreenOn) {
-        window.keepScreenOn().then(wakeLock => {
-            workoutState.wakeLock = wakeLock;
-        });
-    }
-}
-
-function disableWakeLock() {
-    if (workoutState.wakeLock && window.releaseScreenLock) {
-        window.releaseScreenLock(workoutState.wakeLock);
-        workoutState.wakeLock = null;
-    }
-}
-
-function saveWorkoutData(workoutData) {
+// Continuar plan
+async function continuePlan(planId) {
     try {
-        const existingWorkouts = JSON.parse(localStorage.getItem('entrenoapp_workouts') || '[]');
-        existingWorkouts.push(workoutData);
-        localStorage.setItem('entrenoapp_workouts', JSON.stringify(existingWorkouts));
+        console.log('▶️ Continuando plan:', planId);
+        // TODO: Cargar plan desde Firestore y continuar
+        showSuccess('Plan continuado');
     } catch (error) {
-        console.error('Error guardando entrenamiento:', error);
+        console.error('❌ Error continuando plan:', error);
+        showError('Error continuando el plan');
     }
 }
 
-function showToast(message, type = 'info') {
-    const toast = document.createElement('div');
-    toast.className = `toast glass-effect ${type}`;
-    toast.textContent = message;
-    
-    document.body.appendChild(toast);
-    
-    setTimeout(() => {
-        toast.classList.add('show');
-    }, 100);
-    
-    setTimeout(() => {
-        toast.classList.remove('show');
-        setTimeout(() => toast.remove(), 300);
-    }, 3000);
+// Reiniciar plan
+async function restartPlan(planId) {
+    try {
+        const confirmed = confirm('¿Estás seguro de que quieres reiniciar este plan? Perderás todo el progreso actual.');
+        if (!confirmed) return;
+        
+        console.log('🔄 Reiniciando plan:', planId);
+        // TODO: Reiniciar plan en Firestore
+        showSuccess('Plan reiniciado');
+        
+        // Recargar la vista
+        renderWorkoutsPage();
+        
+    } catch (error) {
+        console.error('❌ Error reiniciando plan:', error);
+        showError('Error reiniciando el plan');
+    }
 }
 
-console.log('💪 Componente de entrenamientos cargado');
+// Cerrar plan
+async function closePlan(planId) {
+    try {
+        const confirmed = confirm('¿Estás seguro de que quieres cerrar este plan? Se moverá al historial.');
+        if (!confirmed) return;
+        
+        console.log('❌ Cerrando plan:', planId);
+        // TODO: Cerrar plan en Firestore
+        showSuccess('Plan cerrado');
+        
+        // Recargar la vista
+        renderWorkoutsPage();
+        
+    } catch (error) {
+        console.error('❌ Error cerrando plan:', error);
+        showError('Error cerrando el plan');
+    }
+}
+
+// ===================================
+// FUNCIONES AUXILIARES
+// ===================================
+
+// Habilitar wake lock
+async function enableWakeLock() {
+    try {
+        if ('wakeLock' in navigator && workoutState.keepScreenOn) {
+            workoutState.wakeLock = await navigator.wakeLock.request('screen');
+            console.log('🔒 Pantalla bloqueada para mantener encendida');
+        }
+    } catch (error) {
+        console.warn('⚠️ No se pudo habilitar wake lock:', error);
+    }
+}
+
+// Iniciar timer del entrenamiento
+function startWorkoutTimer() {
+    workoutState.sessionStartTime = Date.now();
+    
+    workoutState.intervalId = setInterval(() => {
+        if (!workoutState.isPaused) {
+            workoutState.totalTime = Date.now() - workoutState.sessionStartTime;
+            
+            const timeDisplay = document.getElementById('workout-time');
+            if (timeDisplay) {
+                timeDisplay.textContent = formatWorkoutTime(workoutState.totalTime);
+            }
+        }
+    }, 1000);
+}
+
+// Pausar/reanudar entrenamiento
+function toggleWorkoutPause() {
+    workoutState.isPaused = !workoutState.isPaused;
+    
+    const pauseBtn = document.getElementById('pause-workout');
+    if (pauseBtn) {
+        pauseBtn.querySelector('.control-icon').textContent = workoutState.isPaused ? '▶️' : '⏸️';
+    }
+    
+    if (workoutState.isVoiceEnabled && window.EntrenoTTS) {
+        window.EntrenoTTS.speak(workoutState.isPaused ? 'Entrenamiento pausado' : 'Entrenamiento reanudado');
+    }
+}
+
+// Finalizar entrenamiento
+async function finishWorkout() {
+    try {
+        console.log('✅ Finalizando entrenamiento');
+        
+        workoutState.isWorkoutActive = false;
+        
+        if (workoutState.intervalId) {
+            clearInterval(workoutState.intervalId);
+        }
+        
+        if (workoutState.wakeLock) {
+            workoutState.wakeLock.release();
+        }
+        
+        // Calcular estadísticas finales
+        const sessionData = {
+            type: workoutState.currentSession.type,
+            startTime: new Date(workoutState.currentSession.startTime),
+            endTime: new Date(),
+            duration: workoutState.totalTime,
+            exercises: workoutState.currentSession.exercises,
+            totalVolume: workoutState.totalVolume,
+            muscleGroups: workoutState.currentSession.muscleGroups || [],
+            completed: true
+        };
+        
+        // Guardar en Firestore
+        await saveWorkoutToFirestore(sessionData);
+        
+        // Anuncio de finalización
+        if (workoutState.isVoiceEnabled && window.EntrenoTTS) {
+            window.EntrenoTTS.speak(`¡Entrenamiento completado! Duración: ${formatWorkoutTime(workoutState.totalTime)}. Volumen total: ${Math.round(workoutState.totalVolume)} kilos.`);
+        }
+        
+        // Mostrar resumen y volver a selección
+        showWorkoutSummary(sessionData);
+        
+        // Reset del estado
+        resetWorkoutState();
+        
+    } catch (error) {
+        console.error('❌ Error finalizando entrenamiento:', error);
+        showError('Error guardando el entrenamiento');
+    }
+}
+
+// Guardar entrenamiento en Firestore
+async function saveWorkoutToFirestore(sessionData) {
+    try {
+        const user = auth.currentUser;
+        if (!user) throw new Error('Usuario no autenticado');
+        
+        const workoutDoc = {
+            userId: user.uid,
+            date: serverTimestamp(),
+            ...sessionData,
+            createdAt: serverTimestamp()
+        };
+        
+        const docRef = await addDoc(collection(db, 'user-workouts'), workoutDoc);
+        console.log('✅ Entrenamiento guardado con ID:', docRef.id);
+        
+        // Actualizar estadísticas del usuario
+        await updateUserWorkoutStats(sessionData);
+        
+    } catch (error) {
+        console.error('❌ Error guardando entrenamiento:', error);
+        throw error;
+    }
+}
+
+// Actualizar estadísticas del usuario
+async function updateUserWorkoutStats(sessionData) {
+    try {
+        const user = auth.currentUser;
+        if (!user) return;
+        
+        const userDoc = doc(db, 'users', user.uid);
+        
+        await updateDoc(userDoc, {
+            'stats.totalWorkouts': increment(1),
+            'stats.totalVolume': increment(sessionData.totalVolume),
+            'stats.totalTime': increment(sessionData.duration / 1000 / 60), // en minutos
+            'stats.lastWorkout': serverTimestamp(),
+            'updatedAt': serverTimestamp()
+        });
+        
+    } catch (error) {
+        console.error('❌ Error actualizando estadísticas:', error);
+    }
+}
+
+// Mostrar resumen del entrenamiento
+function showWorkoutSummary(sessionData) {
+    const summary = `
+        🏆 ¡Entrenamiento Completado!
+        
+        ⏱️ Duración: ${formatWorkoutTime(sessionData.duration)}
+        💪 Ejercicios: ${sessionData.exercises.length}
+        📊 Volumen: ${Math.round(sessionData.totalVolume)}kg
+        🎯 Grupos: ${sessionData.muscleGroups.join(', ')}
+    `;
+    
+    alert(summary); // TODO: Usar sistema de notificaciones
+}
+
+// Reset del estado del entrenamiento
+function resetWorkoutState() {
+    workoutState.currentSession = null;
+    workoutState.activeExercise = null;
+    workoutState.currentSet = 0;
+    workoutState.totalVolume = 0;
+    workoutState.totalTime = 0;
+    workoutState.isWorkoutActive = false;
+    workoutState.isResting = false;
+    workoutState.isPaused = false;
+    workoutState.currentMode = 'select';
+    
+    renderWorkoutsPage();
+}
+
+// Formatear tiempo del entrenamiento
+function formatWorkoutTime(milliseconds) {
+    const totalSeconds = Math.floor(milliseconds / 1000);
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    
+    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+}
+
+// Formatear fecha
+function formatDate(timestamp) {
+    return new Date(timestamp).toLocaleDateString('es-ES');
+}
+
+// Inicializar componentes específicos del modo
+function initializeModeSpecificComponents() {
+    // TODO: Inicializar componentes específicos según el modo actual
+}
+
+// Mostrar error
+function showError(message) {
+    console.error('❌', message);
+    alert(message); // TODO: Sistema de notificaciones
+}
+
+// Mostrar éxito
+function showSuccess(message) {
+    console.log('✅', message);
+    // TODO: Sistema de notificaciones
+}
+
+
+console.log('💪 Módulo de entrenamientos cargado');
