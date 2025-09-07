@@ -1,251 +1,254 @@
-// Componente de retos diarios de EntrenoApp
+// Sistema completo de retos diarios para EntrenoApp
 import { auth, db } from '../config/firebase-config.js';
+import { 
+    doc, 
+    collection,
+    addDoc,
+    updateDoc,
+    getDoc,
+    setDoc,
+    query,
+    where,
+    orderBy,
+    limit,
+    getDocs,
+    serverTimestamp,
+    increment
+} from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
-// Estado del componente de retos
+// Estado global del sistema de retos
 let challengesState = {
-    currentMode: 'daily', // 'daily', 'weekly', 'achievements', 'leaderboard'
+    currentMode: 'daily',
     todayChallenge: null,
-    weeklyChallenge: null,
-    userProgress: null,
-    completedChallenges: [],
-    userLevel: 'principiante',
+    userLevel: 'beginner',
+    userGender: null,
     userStats: {
         totalChallenges: 0,
+        challengesCompleted: 0,
         currentStreak: 0,
         longestStreak: 0,
-        points: 0
+        totalPoints: 0,
+        level: 1
     },
-    leaderboard: []
+    isActive: false,
+    isPaused: false,
+    currentProgress: 0,
+    targetValue: 0,
+    challengeTimer: 0,
+    intervalId: null,
+    isVoiceEnabled: true,
+    completedChallenges: []
 };
 
 // Base de datos de retos diarios
-const challengeDatabase = {
-    // Retos de cardio
+const DAILY_CHALLENGES = {
     cardio: [
         {
-            id: 'cardio_001',
-            name: 'Caminata Energética',
-            description: 'Camina a paso rápido durante el tiempo indicado',
-            type: 'time',
-            icon: '🚶',
-            category: 'cardio',
-            levels: {
-                principiante: { target: 15, unit: 'minutos' },
-                intermedio: { target: 25, unit: 'minutos' },
-                avanzado: { target: 40, unit: 'minutos' }
-            },
-            points: {
-                principiante: 10,
-                intermedio: 15,
-                avanzado: 25
-            },
-            instructions: [
-                'Mantén un ritmo constante y enérgico',
-                'Puedes hacerlo en exterior o cinta',
-                'Respira profundamente durante toda la actividad'
-            ]
-        },
-        {
-            id: 'cardio_002',
-            name: 'Carrera Continua',
-            description: 'Corre sin parar durante el tiempo o distancia indicada',
-            type: 'distance',
-            icon: '🏃',
-            category: 'cardio',
-            levels: {
-                principiante: { target: 1, unit: 'km' },
-                intermedio: { target: 3, unit: 'km' },
-                avanzado: { target: 5, unit: 'km' }
-            },
-            points: {
-                principiante: 15,
-                intermedio: 25,
-                avanzado: 40
-            },
-            instructions: [
-                'Mantén un ritmo que te permita respirar cómodamente',
-                'Si necesitas parar, camina pero no te detengas',
-                'Hidratate antes y después'
-            ]
-        },
-        {
-            id: 'cardio_003',
-            name: 'Escaleras o Steps',
-            description: 'Sube y baja escaleras o realiza steps',
+            id: 'jumping_jacks',
+            name: 'Jumping Jacks',
+            description: 'Salta abriendo y cerrando brazos y piernas',
             type: 'reps',
-            icon: '🪜',
+            icon: '🤸‍♂️',
             category: 'cardio',
-            levels: {
-                principiante: { target: 50, unit: 'steps' },
-                intermedio: { target: 100, unit: 'steps' },
-                avanzado: { target: 200, unit: 'steps' }
+            difficulty: {
+                beginner: { target: 30, points: 10 },
+                intermediate: { target: 50, points: 15 },
+                advanced: { target: 80, points: 20 }
             },
-            points: {
-                principiante: 12,
-                intermedio: 20,
-                avanzado: 35
-            }
+            instructions: [
+                'Comienza de pie con los pies juntos',
+                'Salta separando las piernas y levantando los brazos',
+                'Vuelve a la posición inicial',
+                'Mantén un ritmo constante'
+            ],
+            tips: 'Aterriza suavemente para proteger las articulaciones'
+        },
+        {
+            id: 'burpees',
+            name: 'Burpees',
+            description: 'Ejercicio completo de cuerpo',
+            type: 'reps',
+            icon: '🤸',
+            category: 'cardio',
+            difficulty: {
+                beginner: { target: 5, points: 15 },
+                intermediate: { target: 10, points: 25 },
+                advanced: { target: 15, points: 35 }
+            },
+            instructions: [
+                'Comienza de pie',
+                'Baja en cuclillas y apoya las manos',
+                'Salta hacia atrás en plancha',
+                'Salta hacia adelante y salta arriba'
+            ],
+            tips: 'Mantén el core activado durante todo el movimiento'
         }
     ],
-
-    // Retos de fuerza
     strength: [
         {
-            id: 'strength_001',
-            name: 'Flexiones de Pecho',
-            description: 'Realiza flexiones manteniendo buena forma',
+            id: 'push_ups',
+            name: 'Flexiones',
+            description: 'Flexiones de pecho tradicionales',
             type: 'reps',
             icon: '💪',
             category: 'strength',
-            levels: {
-                principiante: { target: 10, unit: 'flexiones' },
-                intermedio: { target: 25, unit: 'flexiones' },
-                avanzado: { target: 50, unit: 'flexiones' }
-            },
-            points: {
-                principiante: 10,
-                intermedio: 18,
-                avanzado: 30
+            difficulty: {
+                beginner: { target: 8, points: 12 },
+                intermediate: { target: 15, points: 20 },
+                advanced: { target: 25, points: 30 }
             },
             instructions: [
-                'Mantén el cuerpo recto como una tabla',
-                'Baja hasta que el pecho casi toque el suelo',
-                'Si es muy difícil, apoya las rodillas'
+                'Comienza en posición de plancha',
+                'Baja el pecho hacia el suelo',
+                'Empuja hacia arriba manteniendo el cuerpo recto',
+                'Mantén el core activado'
             ],
-            modifications: {
-                principiante: 'Puedes hacer flexiones con rodillas apoyadas',
-                intermedio: 'Flexiones estándar completas',
-                avanzado: 'Puedes intentar flexiones diamante o con palmada'
-            }
+            tips: 'Si es muy difícil, apoya las rodillas en el suelo'
         },
         {
-            id: 'strength_002',
+            id: 'squats',
             name: 'Sentadillas',
-            description: 'Realiza sentadillas con técnica perfecta',
+            description: 'Sentadillas con peso corporal',
             type: 'reps',
             icon: '🦵',
             category: 'strength',
-            levels: {
-                principiante: { target: 15, unit: 'sentadillas' },
-                intermedio: { target: 40, unit: 'sentadillas' },
-                avanzado: { target: 80, unit: 'sentadillas' }
-            },
-            points: {
-                principiante: 8,
-                intermedio: 15,
-                avanzado: 25
+            difficulty: {
+                beginner: { target: 15, points: 10 },
+                intermediate: { target: 25, points: 15 },
+                advanced: { target: 40, points: 25 }
             },
             instructions: [
-                'Pies a ancho de hombros',
-                'Baja como si fueras a sentarte',
-                'Mantén el pecho erguido y peso en los talones'
-            ]
+                'Pies separados al ancho de hombros',
+                'Baja como si te fueras a sentar',
+                'Mantén la espalda recta',
+                'Sube empujando con los talones'
+            ],
+            tips: 'Las rodillas deben seguir la dirección de los pies'
         },
         {
-            id: 'strength_003',
+            id: 'plank',
             name: 'Plancha',
             description: 'Mantén la posición de plancha',
             type: 'time',
-            icon: '⭐',
+            icon: '⚡',
             category: 'strength',
-            levels: {
-                principiante: { target: 30, unit: 'segundos' },
-                intermedio: { target: 90, unit: 'segundos' },
-                avanzado: { target: 180, unit: 'segundos' }
-            },
-            points: {
-                principiante: 12,
-                intermedio: 20,
-                avanzado: 35
+            difficulty: {
+                beginner: { target: 20, points: 10 },
+                intermediate: { target: 45, points: 18 },
+                advanced: { target: 75, points: 30 }
             },
             instructions: [
-                'Cuerpo recto desde cabeza hasta pies',
-                'Activa el core y mantén la respiración',
-                'No hundas ni subas las caderas'
-            ]
-        },
-        {
-            id: 'strength_004',
-            name: 'Burpees',
-            description: 'El ejercicio completo más desafiante',
-            type: 'reps',
-            icon: '🔥',
-            category: 'strength',
-            levels: {
-                principiante: { target: 5, unit: 'burpees' },
-                intermedio: { target: 15, unit: 'burpees' },
-                avanzado: { target: 30, unit: 'burpees' }
-            },
-            points: {
-                principiante: 15,
-                intermedio: 25,
-                avanzado: 40
-            },
-            instructions: [
-                'Posición de pie → Sentadilla → Plancha → Flexión → Salto',
-                'Movimiento fluido y controlado',
-                'Respira profundamente entre repeticiones'
-            ]
+                'Apoya antebrazos y puntas de pies',
+                'Mantén el cuerpo en línea recta',
+                'Activa el core y glúteos',
+                'Respira normalmente'
+            ],
+            tips: 'No dejes que las caderas suban o bajen'
         }
     ],
-
-    // Retos de flexibilidad
-    flexibility: [
+    endurance: [
         {
-            id: 'flexibility_001',
-            name: 'Estiramientos Matutinos',
-            description: 'Rutina de estiramientos para despertar el cuerpo',
-            type: 'time',
-            icon: '🧘',
-            category: 'flexibility',
-            levels: {
-                principiante: { target: 5, unit: 'minutos' },
-                intermedio: { target: 10, unit: 'minutos' },
-                avanzado: { target: 15, unit: 'minutos' }
-            },
-            points: {
-                principiante: 8,
-                intermedio: 12,
-                avanzado: 18
+            id: 'mountain_climbers',
+            name: 'Escaladores',
+            description: 'Simula escalar una montaña',
+            type: 'reps',
+            icon: '🏔️',
+            category: 'endurance',
+            difficulty: {
+                beginner: { target: 20, points: 12 },
+                intermediate: { target: 35, points: 20 },
+                advanced: { target: 50, points: 28 }
             },
             instructions: [
-                'Estira suavemente sin forzar',
-                'Mantén cada posición 20-30 segundos',
-                'Respira profundo durante cada estiramiento'
-            ]
+                'Comienza en posición de plancha',
+                'Alterna llevando las rodillas al pecho',
+                'Mantén las caderas estables',
+                'Ritmo rápido y controlado'
+            ],
+            tips: 'Mantén el peso en las manos, no en los pies'
         }
     ]
 };
 
-// Inicializar componente de retos
+// Inicializar componente
 window.initChallenges = function() {
-    console.log('🏆 Inicializando retos diarios');
-    loadChallengesData();
+    console.log('🎯 Inicializando sistema de retos diarios');
+    loadUserChallengeData();
+    generateTodayChallenge();
     renderChallengesPage();
-    setupChallengesListeners();
+    setupChallengeListeners();
 };
 
-// Cargar datos de retos
-async function loadChallengesData() {
+// Cargar datos del usuario
+async function loadUserChallengeData() {
     try {
-        // Generar reto del día
-        generateTodayChallenge();
+        const user = auth.currentUser;
+        if (!user) return;
         
-        // Cargar progreso del usuario
-        loadUserProgress();
+        if (window.getUserProfile) {
+            const profile = await window.getUserProfile(user.uid);
+            if (profile) {
+                challengesState.userLevel = profile.preferences?.experience || 'beginner';
+                challengesState.userGender = profile.preferences?.gender || null;
+                challengesState.isVoiceEnabled = profile.preferences?.ttsEnabled !== false;
+                challengesState.userStats = {
+                    ...challengesState.userStats,
+                    ...profile.stats
+                };
+            }
+        }
         
-        // Cargar estadísticas
-        loadUserStats();
-        
-        // Cargar leaderboard
-        loadLeaderboard();
+        await loadTodayProgress();
         
     } catch (error) {
         console.error('❌ Error cargando datos de retos:', error);
     }
 }
 
-// Renderizar página de retos
+// Cargar progreso de hoy
+async function loadTodayProgress() {
+    try {
+        const user = auth.currentUser;
+        if (!user) return;
+        
+        const today = new Date().toISOString().split('T')[0];
+        const progressDoc = doc(db, 'daily-challenges', `${user.uid}_${today}`);
+        const progressSnap = await getDoc(progressDoc);
+        
+        if (progressSnap.exists()) {
+            const data = progressSnap.data();
+            challengesState.completedChallenges = data.completed || [];
+        }
+        
+    } catch (error) {
+        console.error('❌ Error cargando progreso del día:', error);
+    }
+}
+
+// Generar reto del día
+function generateTodayChallenge() {
+    const today = new Date();
+    const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
+    
+    const categories = Object.keys(DAILY_CHALLENGES);
+    const selectedCategory = categories[dayOfYear % categories.length];
+    const categoryExercises = DAILY_CHALLENGES[selectedCategory];
+    const selectedExercise = categoryExercises[dayOfYear % categoryExercises.length];
+    
+    const userDifficulty = selectedExercise.difficulty[challengesState.userLevel];
+    
+    challengesState.todayChallenge = {
+        ...selectedExercise,
+        target: userDifficulty.target,
+        points: userDifficulty.points,
+        date: today.toISOString().split('T')[0],
+        completed: challengesState.completedChallenges.includes(selectedExercise.id)
+    };
+    
+    console.log('🎯 Reto del día generado:', challengesState.todayChallenge);
+}
+
+// Renderizar página principal
 function renderChallengesPage() {
     const container = document.querySelector('.challenges-container');
     if (!container) return;
@@ -254,613 +257,603 @@ function renderChallengesPage() {
     
     switch (challengesState.currentMode) {
         case 'daily':
-            content = renderDailyChallenges();
+            content = renderDailyChallenge();
             break;
         case 'weekly':
-            content = renderWeeklyChallenges();
+            content = renderWeeklyProgress();
             break;
-        case 'achievements':
-            content = renderAchievements();
+        case 'ranking':
+            content = renderRanking();
             break;
-        case 'leaderboard':
-            content = renderLeaderboard();
+        case 'history':
+            content = renderHistory();
             break;
         default:
-            content = renderDailyChallenges();
+            content = renderDailyChallenge();
     }
     
     container.innerHTML = content;
-    
-    // Añadir animaciones
-    const cards = container.querySelectorAll('.glass-card');
-    cards.forEach((card, index) => {
-        card.style.animationDelay = `${index * 0.1}s`;
-        card.classList.add('glass-fade-in');
-    });
 }
 
-// Retos diarios
-function renderDailyChallenges() {
+// Renderizar reto diario
+function renderDailyChallenge() {
+    const challenge = challengesState.todayChallenge;
+    if (!challenge) {
+        return '<div class="error">❌ No se pudo cargar el reto del día</div>';
+    }
+    
     return `
-        <div class="challenges-daily">
-            <div class="challenges-header">
-                <h2 class="challenges-title">🏆 Retos Diarios</h2>
-                <div class="challenges-nav">
-                    <button class="glass-button nav-btn active" data-mode="daily">Diario</button>
-                    <button class="glass-button nav-btn" data-mode="weekly">Semanal</button>
-                    <button class="glass-button nav-btn" data-mode="achievements">Logros</button>
-                    <button class="glass-button nav-btn" data-mode="leaderboard">Ranking</button>
+        <div class="daily-challenge glass-fade-in">
+            <div class="challenge-header text-center mb-lg">
+                <h2 class="page-title">🎯 Reto Diario</h2>
+                <p class="page-subtitle text-secondary">${new Date().toLocaleDateString('es-ES', { 
+                    weekday: 'long', 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                })}</p>
+            </div>
+            
+            <div class="challenge-tabs glass-card mb-lg">
+                <div class="tabs-nav">
+                    <button class="tab-btn active" data-tab="daily">
+                        <span class="tab-icon">🎯</span>
+                        <span class="tab-text">Hoy</span>
+                    </button>
+                    <button class="tab-btn" data-tab="weekly">
+                        <span class="tab-icon">📊</span>
+                        <span class="tab-text">Semana</span>
+                    </button>
+                    <button class="tab-btn" data-tab="ranking">
+                        <span class="tab-icon">🏆</span>
+                        <span class="tab-text">Ranking</span>
+                    </button>
+                    <button class="tab-btn" data-tab="history">
+                        <span class="tab-icon">📝</span>
+                        <span class="tab-text">Historial</span>
+                    </button>
                 </div>
             </div>
             
-            ${renderTodayChallenge()}
-            ${renderUserStats()}
-            ${renderChallengeCategories()}
-            ${renderRecentChallenges()}
+            ${challenge.completed ? renderCompletedChallenge() : renderActiveChallenge()}
+            
+            <div class="user-stats glass-card mb-lg">
+                <h3 class="section-title mb-md">📊 Tus Estadísticas</h3>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value">${challengesState.userStats.currentStreak}</div>
+                        <div class="stat-label">Racha Actual</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">${challengesState.userStats.challengesCompleted}</div>
+                        <div class="stat-label">Completados</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">${challengesState.userStats.totalPoints}</div>
+                        <div class="stat-label">Puntos</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">${challengesState.userStats.level}</div>
+                        <div class="stat-label">Nivel</div>
+                    </div>
+                </div>
+            </div>
+            
+            ${renderDifficultySelector()}
+            ${renderUpcomingChallenges()}
         </div>
     `;
 }
 
-// Reto de hoy
-function renderTodayChallenge() {
-    if (!challengesState.todayChallenge) return '';
-    
+// Renderizar reto completado
+function renderCompletedChallenge() {
     const challenge = challengesState.todayChallenge;
-    const isCompleted = isChallengeCompleted(challenge.id);
-    const userLevel = challengesState.userLevel;
-    const levelData = challenge.levels[userLevel];
     
     return `
-        <div class="today-challenge glass-card glass-gradient-orange">
-            <div class="challenge-header">
-                <div class="challenge-icon">${challenge.icon}</div>
-                <div class="challenge-info">
-                    <h3 class="challenge-name">${challenge.name}</h3>
-                    <p class="challenge-description">${challenge.description}</p>
-                </div>
-                <div class="challenge-level">
-                    <span class="level-badge ${userLevel}">${getUserLevelIcon(userLevel)} ${userLevel}</span>
+        <div class="completed-challenge glass-card mb-lg">
+            <div class="completion-header text-center mb-lg">
+                <div class="completion-icon mb-md">🏆</div>
+                <h3 class="completion-title">¡Reto Completado!</h3>
+                <p class="completion-subtitle text-secondary">¡Excelente trabajo hoy!</p>
+            </div>
+            
+            <div class="challenge-summary">
+                <div class="challenge-card completed">
+                    <div class="challenge-icon">${challenge.icon}</div>
+                    <div class="challenge-info">
+                        <h4 class="challenge-name">${challenge.name}</h4>
+                        <p class="challenge-description">${challenge.description}</p>
+                        <div class="challenge-target">
+                            ${challenge.type === 'reps' ? 
+                                `✅ ${challenge.target} repeticiones` : 
+                                `✅ ${formatTime(challenge.target)}`
+                            }
+                        </div>
+                    </div>
+                    <div class="challenge-points">
+                        <span class="points-value">+${challenge.points}</span>
+                        <span class="points-label">puntos</span>
+                    </div>
                 </div>
             </div>
             
-            <div class="challenge-target">
-                <div class="target-value">${levelData.target}</div>
-                <div class="target-unit">${levelData.unit}</div>
+            <div class="next-challenge-info text-center">
+                <p class="text-secondary">Tu próximo reto estará disponible mañana</p>
+                <div class="countdown-timer">
+                    ${getTimeUntilNextChallenge()}
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// Renderizar reto activo
+function renderActiveChallenge() {
+    const challenge = challengesState.todayChallenge;
+    
+    return `
+        <div class="active-challenge glass-card mb-lg">
+            <div class="challenge-info-card">
+                <div class="challenge-header-info">
+                    <div class="challenge-icon-large">${challenge.icon}</div>
+                    <div class="challenge-details">
+                        <h3 class="challenge-name">${challenge.name}</h3>
+                        <p class="challenge-description">${challenge.description}</p>
+                        <div class="challenge-category">
+                            <span class="category-tag ${challenge.category}">${challenge.category}</span>
+                            <span class="difficulty-tag ${challengesState.userLevel}">${challengesState.userLevel}</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="challenge-target-info">
+                    <div class="target-display">
+                        <span class="target-label">Objetivo:</span>
+                        <span class="target-value">
+                            ${challenge.type === 'reps' ? 
+                                `${challenge.target} repeticiones` : 
+                                `${formatTime(challenge.target)}`
+                            }
+                        </span>
+                    </div>
+                    <div class="points-display">
+                        <span class="points-icon">⭐</span>
+                        <span class="points-text">${challenge.points} puntos</span>
+                    </div>
+                </div>
             </div>
             
-            <div class="challenge-progress">
-                <div class="progress-info">
-                    <span class="progress-label">Progreso de hoy</span>
-                    <span class="progress-points">+${challenge.points[userLevel]} puntos</span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: ${isCompleted ? 100 : 0}%"></div>
-                </div>
-            </div>
+            ${challengesState.isActive ? renderChallengeProgress() : ''}
             
             <div class="challenge-instructions">
-                <h4>📝 Instrucciones:</h4>
-                <ul>
-                    ${challenge.instructions?.map(instruction => `<li>${instruction}</li>`).join('') || ''}
-                </ul>
-                ${challenge.modifications?.[userLevel] ? `
-                    <div class="challenge-modification">
-                        <strong>Para tu nivel:</strong> ${challenge.modifications[userLevel]}
+                <h4 class="instructions-title">📋 Instrucciones</h4>
+                <ol class="instructions-list">
+                    ${challenge.instructions.map(instruction => 
+                        `<li class="instruction-item">${instruction}</li>`
+                    ).join('')}
+                </ol>
+                ${challenge.tips ? `
+                    <div class="challenge-tip">
+                        <span class="tip-icon">💡</span>
+                        <span class="tip-text">${challenge.tips}</span>
                     </div>
                 ` : ''}
             </div>
             
-            <div class="challenge-actions">
-                ${!isCompleted ? `
-                    <button class="glass-button glass-button-primary btn-full" onclick="startChallenge('${challenge.id}')">
-                        🚀 Comenzar Reto
+            <div class="challenge-controls">
+                ${!challengesState.isActive ? `
+                    <button id="start-challenge" class="glass-button glass-button-primary btn-full">
+                        🚀 Iniciar Reto
                     </button>
                 ` : `
-                    <div class="challenge-completed">
-                        <span class="completed-icon">✅</span>
-                        <span class="completed-text">¡Reto completado!</span>
-                        <span class="completed-points">+${challenge.points[userLevel]} puntos</span>
+                    <div class="active-controls">
+                        <button id="pause-challenge" class="glass-button glass-button-secondary">
+                            ${challengesState.isPaused ? '▶️ Reanudar' : '⏸️ Pausar'}
+                        </button>
+                        <button id="complete-challenge" class="glass-button glass-button-primary">
+                            ✅ Completar
+                        </button>
+                        <button id="stop-challenge" class="glass-button glass-button-danger">
+                            ❌ Parar
+                        </button>
                     </div>
                 `}
-                
-                <div class="challenge-secondary-actions">
-                    <button class="glass-button" onclick="shareChallenge('${challenge.id}')">
-                        📤 Compartir
-                    </button>
-                    <button class="glass-button" onclick="skipChallenge('${challenge.id}')">
-                        ⏭️ Cambiar Reto
-                    </button>
-                </div>
             </div>
         </div>
     `;
 }
 
-// Estadísticas del usuario
-function renderUserStats() {
-    const stats = challengesState.userStats;
+// Renderizar progreso del reto
+function renderChallengeProgress() {
+    const challenge = challengesState.todayChallenge;
+    const progressPercentage = (challengesState.currentProgress / challengesState.targetValue) * 100;
     
     return `
-        <div class="user-stats glass-card">
-            <div class="card-header">
-                <h3 class="card-title">📊 Tus Estadísticas</h3>
+        <div class="challenge-progress">
+            <div class="progress-header">
+                <h4 class="progress-title">📊 Progreso en Tiempo Real</h4>
+                <div class="progress-timer" id="challenge-timer">
+                    ${formatTime(challengesState.challengeTimer)}
+                </div>
             </div>
             
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <div class="stat-icon">🏆</div>
-                    <div class="stat-value">${stats.totalChallenges}</div>
-                    <div class="stat-label">Retos Completados</div>
+            <div class="progress-display">
+                <div class="progress-bar-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: ${Math.min(progressPercentage, 100)}%"></div>
+                    </div>
+                    <div class="progress-text">
+                        ${challenge.type === 'reps' ? 
+                            `${challengesState.currentProgress} / ${challengesState.targetValue}` :
+                            `${formatTime(challengesState.currentProgress)} / ${formatTime(challengesState.targetValue)}`
+                        }
+                    </div>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-icon">🔥</div>
-                    <div class="stat-value">${stats.currentStreak}</div>
-                    <div class="stat-label">Racha Actual</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-icon">⭐</div>
-                    <div class="stat-value">${stats.longestStreak}</div>
-                    <div class="stat-label">Mejor Racha</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-icon">💎</div>
-                    <div class="stat-value">${stats.points}</div>
-                    <div class="stat-label">Puntos Totales</div>
-                </div>
+                
+                ${challenge.type === 'reps' ? `
+                    <div class="rep-counter">
+                        <button id="add-rep" class="rep-btn glass-button">+1</button>
+                        <div class="current-reps">${challengesState.currentProgress}</div>
+                        <button id="subtract-rep" class="rep-btn glass-button">-1</button>
+                    </div>
+                ` : ''}
             </div>
         </div>
     `;
 }
 
-// Categorías de retos
-function renderChallengeCategories() {
-    return `
-        <div class="challenge-categories glass-card">
-            <div class="card-header">
-                <h3 class="card-title">🎯 Categorías de Retos</h3>
-            </div>
-            
-            <div class="categories-grid">
-                <div class="category-card" onclick="exploreCategory('cardio')">
-                    <div class="category-icon">🏃</div>
-                    <h4 class="category-name">Cardio</h4>
-                    <p class="category-description">Mejora tu resistencia cardiovascular</p>
-                    <div class="category-count">${challengeDatabase.cardio.length} retos</div>
-                </div>
-                
-                <div class="category-card" onclick="exploreCategory('strength')">
-                    <div class="category-icon">💪</div>
-                    <h4 class="category-name">Fuerza</h4>
-                    <p class="category-description">Desarrolla fuerza y músculo</p>
-                    <div class="category-count">${challengeDatabase.strength.length} retos</div>
-                </div>
-                
-                <div class="category-card" onclick="exploreCategory('flexibility')">
-                    <div class="category-icon">🧘</div>
-                    <h4 class="category-name">Flexibilidad</h4>
-                    <p class="category-description">Mejora movilidad y bienestar</p>
-                    <div class="category-count">${challengeDatabase.flexibility.length} retos</div>
-                </div>
-            </div>
-        </div>
-    `;
-}
-
-// Retos recientes
-function renderRecentChallenges() {
-    const recentChallenges = getRecentCompletedChallenges();
+// Renderizar selector de dificultad
+function renderDifficultySelector() {
+    const challenge = challengesState.todayChallenge;
     
     return `
-        <div class="recent-challenges glass-card">
-            <div class="card-header">
-                <h3 class="card-title">📅 Retos Recientes</h3>
-                <button class="glass-button glass-button-sm" onclick="viewAllChallenges()">
-                    Ver Todos
-                </button>
-            </div>
-            
-            <div class="recent-challenges-list">
-                ${recentChallenges.length > 0 ? 
-                    recentChallenges.map(challenge => `
-                        <div class="recent-challenge-item">
-                            <div class="challenge-date">${formatDate(challenge.completedAt)}</div>
-                            <div class="challenge-details">
-                                <span class="challenge-icon">${challenge.icon}</span>
-                                <span class="challenge-name">${challenge.name}</span>
-                                <span class="challenge-points">+${challenge.points} pts</span>
-                            </div>
+        <div class="difficulty-selector glass-card mb-lg">
+            <h3 class="section-title mb-md">⚙️ Niveles Disponibles</h3>
+            <div class="difficulty-options">
+                ${Object.entries(challenge.difficulty).map(([level, data]) => `
+                    <div class="difficulty-option ${level === challengesState.userLevel ? 'selected' : ''}" 
+                         data-level="${level}">
+                        <div class="difficulty-header">
+                            <span class="difficulty-name">${level}</span>
+                            <span class="difficulty-points">+${data.points} pts</span>
                         </div>
-                    `).join('') :
-                    `<div class="no-recent-challenges">
-                        <p>Aún no has completado ningún reto</p>
-                        <p class="encouragement">¡Empieza con el reto de hoy! 💪</p>
-                    </div>`
-                }
+                        <div class="difficulty-target">
+                            ${challenge.type === 'reps' ? 
+                                `${data.target} reps` : 
+                                `${formatTime(data.target)}`
+                            }
+                        </div>
+                    </div>
+                `).join('')}
             </div>
         </div>
     `;
 }
+
+// Renderizar próximos retos
+function renderUpcomingChallenges() {
+    const upcomingChallenges = generateUpcomingChallenges(3);
+    
+    return `
+        <div class="upcoming-challenges glass-card">
+            <h3 class="section-title mb-md">🔮 Próximos Retos</h3>
+            <div class="upcoming-list">
+                ${upcomingChallenges.map((challenge, index) => `
+                    <div class="upcoming-item">
+                        <div class="upcoming-date">
+                            ${new Date(Date.now() + (index + 1) * 24 * 60 * 60 * 1000).toLocaleDateString('es-ES', { 
+                                weekday: 'short', 
+                                month: 'short', 
+                                day: 'numeric' 
+                            })}
+                        </div>
+                        <div class="upcoming-challenge">
+                            <span class="upcoming-icon">${challenge.icon}</span>
+                            <span class="upcoming-name">${challenge.name}</span>
+                        </div>
+                        <div class="upcoming-category">
+                            <span class="category-tag ${challenge.category}">${challenge.category}</span>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+    `;
+}
+
+// ===================================
+// FUNCIONES DE CONTROL DEL RETO
+// ===================================
+
+// Iniciar reto
+async function startChallenge() {
+    try {
+        console.log('🚀 Iniciando reto del día');
+        
+        const challenge = challengesState.todayChallenge;
+        if (!challenge) throw new Error('No hay reto disponible');
+        
+        challengesState.isActive = true;
+        challengesState.isPaused = false;
+        challengesState.challengeStartTime = Date.now();
+        challengesState.currentProgress = 0;
+        challengesState.targetValue = challenge.target;
+        challengesState.challengeTimer = 0;
+        
+        if (challenge.type === 'time') {
+            startChallengeTimer();
+        }
+        
+        if (challengesState.isVoiceEnabled && window.EntrenoTTS) {
+            window.EntrenoTTS.speak(`¡Reto iniciado! ${challenge.name}.`);
+        }
+        
+        renderChallengesPage();
+        
+    } catch (error) {
+        console.error('❌ Error iniciando reto:', error);
+        showError('Error iniciando el reto');
+    }
+}
+
+// Completar reto
+async function completeChallenge() {
+    try {
+        console.log('✅ Completando reto del día');
+        
+        const challenge = challengesState.todayChallenge;
+        if (!challenge) return;
+        
+        challengesState.isActive = false;
+        challengesState.challengeEndTime = Date.now();
+        
+        const completionData = {
+            challengeId: challenge.id,
+            completed: true,
+            points: challenge.points,
+            level: challengesState.userLevel,
+            date: new Date().toISOString().split('T')[0]
+        };
+        
+        await saveChallengeCompletion(completionData);
+        
+        challenge.completed = true;
+        challengesState.completedChallenges.push(challenge.id);
+        challengesState.userStats.challengesCompleted++;
+        challengesState.userStats.totalPoints += challenge.points;
+        challengesState.userStats.currentStreak++;
+        
+        if (challengesState.isVoiceEnabled && window.EntrenoTTS) {
+            window.EntrenoTTS.speak(`¡Reto completado! Has ganado ${challenge.points} puntos.`);
+        }
+        
+        if (challengesState.intervalId) {
+            clearInterval(challengesState.intervalId);
+            challengesState.intervalId = null;
+        }
+        
+        renderChallengesPage();
+        
+    } catch (error) {
+        console.error('❌ Error completando reto:', error);
+        showError('Error guardando el reto completado');
+    }
+}
+
+// Guardar completación del reto
+async function saveChallengeCompletion(completionData) {
+    try {
+        const user = auth.currentUser;
+        if (!user) throw new Error('Usuario no autenticado');
+        
+        const today = new Date().toISOString().split('T')[0];
+        const dailyDoc = doc(db, 'daily-challenges', `${user.uid}_${today}`);
+        
+        await setDoc(dailyDoc, {
+            userId: user.uid,
+            date: today,
+            challenge: completionData,
+            completed: [completionData.challengeId],
+            totalPoints: completionData.points,
+            createdAt: serverTimestamp()
+        }, { merge: true });
+        
+        const userDoc = doc(db, 'users', user.uid);
+        await updateDoc(userDoc, {
+            'stats.challengesCompleted': increment(1),
+            'stats.totalPoints': increment(completionData.points),
+            'stats.currentStreak': increment(1),
+            'updatedAt': serverTimestamp()
+        });
+        
+        console.log('✅ Reto guardado en Firestore');
+        
+    } catch (error) {
+        console.error('❌ Error guardando reto:', error);
+        throw error;
+    }
+}
+
+// ===================================
+// FUNCIONES AUXILIARES
+// ===================================
 
 // Configurar listeners
-function setupChallengesListeners() {
-    // Navegación entre secciones
+function setupChallengeListeners() {
     document.addEventListener('click', (e) => {
-        if (e.target.classList.contains('nav-btn')) {
-            const mode = e.target.dataset.mode;
-            switchChallengesMode(mode);
+        const target = e.target.closest('button, .tab-btn, .difficulty-option');
+        if (!target) return;
+        
+        if (target.classList.contains('tab-btn')) {
+            e.preventDefault();
+            switchTab(target.dataset.tab);
+        }
+        
+        if (target.id === 'start-challenge') {
+            e.preventDefault();
+            startChallenge();
+        } else if (target.id === 'complete-challenge') {
+            e.preventDefault();
+            completeChallenge();
+        } else if (target.id === 'add-rep') {
+            e.preventDefault();
+            addRep();
+        } else if (target.id === 'subtract-rep') {
+            e.preventDefault();
+            subtractRep();
+        }
+        
+        if (target.classList.contains('difficulty-option')) {
+            e.preventDefault();
+            selectDifficulty(target.dataset.level);
         }
     });
 }
 
-// Funciones de navegación
-function switchChallengesMode(mode) {
-    challengesState.currentMode = mode;
-    
-    // Actualizar botones activos
-    document.querySelectorAll('.nav-btn').forEach(btn => {
-        btn.classList.remove('active');
-    });
-    document.querySelector(`[data-mode="${mode}"]`).classList.add('active');
-    
+function switchTab(tab) {
+    challengesState.currentMode = tab;
     renderChallengesPage();
 }
 
-// Generar reto del día
-function generateTodayChallenge() {
-    const today = new Date().toDateString();
-    const savedChallenge = localStorage.getItem(`challenge_${today}`);
-    
-    if (savedChallenge) {
-        challengesState.todayChallenge = JSON.parse(savedChallenge);
-        return;
-    }
-    
-    // Generar nuevo reto aleatorio
-    const allChallenges = [
-        ...challengeDatabase.cardio,
-        ...challengeDatabase.strength,
-        ...challengeDatabase.flexibility
-    ];
-    
-    const randomIndex = Math.floor(Math.random() * allChallenges.length);
-    const selectedChallenge = { ...allChallenges[randomIndex] };
-    
-    challengesState.todayChallenge = selectedChallenge;
-    
-    // Guardar para que sea consistente durante el día
-    localStorage.setItem(`challenge_${today}`, JSON.stringify(selectedChallenge));
-}
-
-// Funciones de control de retos
-window.startChallenge = function(challengeId) {
-    console.log('🚀 Iniciando reto:', challengeId);
-    
-    const challenge = challengesState.todayChallenge;
-    if (!challenge || challenge.id !== challengeId) return;
-    
-    // Anuncio TTS de inicio de reto
-    if (window.EntrenoTTS) {
-        const userLevel = challengesState.userLevel;
-        const levelData = challenge.levels[userLevel];
-        window.EntrenoTTS.announceChallengeStart(
-            challenge.name,
-            levelData.target,
-            levelData.unit
-        );
-    }
-    
-    // Abrir modal de reto activo
-    showChallengeModal(challenge);
-};
-
-function showChallengeModal(challenge) {
-    const userLevel = challengesState.userLevel;
-    const levelData = challenge.levels[userLevel];
-    
-    const modal = document.createElement('div');
-    modal.className = 'challenge-modal';
-    modal.innerHTML = `
-        <div class="challenge-modal-content glass-card">
-            <div class="challenge-modal-header">
-                <h3>${challenge.icon} ${challenge.name}</h3>
-                <button class="close-modal" onclick="closeChallengeModal()">&times;</button>
-            </div>
-            
-            <div class="challenge-modal-body">
-                <div class="challenge-target-display">
-                    <div class="target-number">${levelData.target}</div>
-                    <div class="target-unit">${levelData.unit}</div>
-                </div>
-                
-                <div class="challenge-timer" id="challenge-timer">
-                    <div class="timer-display">00:00</div>
-                    <button class="glass-button timer-btn" onclick="toggleChallengeTimer()">
-                        ▶️ Comenzar
-                    </button>
-                </div>
-                
-                <div class="challenge-counter" id="challenge-counter" style="display: none;">
-                    <div class="counter-display">
-                        <span class="counter-value" id="counter-value">0</span>
-                        <span class="counter-target">/ ${levelData.target}</span>
-                    </div>
-                    <div class="counter-controls">
-                        <button class="glass-button counter-btn" onclick="decrementCounter()">-</button>
-                        <button class="glass-button counter-btn primary" onclick="incrementCounter()">+</button>
-                    </div>
-                </div>
-                
-                <div class="challenge-actions">
-                    <button class="glass-button glass-button-primary" onclick="completeChallengeFromModal('${challenge.id}')">
-                        ✅ Completar Reto
-                    </button>
-                    <button class="glass-button" onclick="closeChallengeModal()">
-                        ❌ Cancelar
-                    </button>
-                </div>
-            </div>
-        </div>
-    `;
-    
-    document.body.appendChild(modal);
-    
-    // Mostrar contador o timer según el tipo
-    if (challenge.type === 'reps') {
-        document.getElementById('challenge-timer').style.display = 'none';
-        document.getElementById('challenge-counter').style.display = 'block';
-    }
-    
-    // Animación de entrada
-    setTimeout(() => {
-        modal.classList.add('show');
-    }, 100);
-}
-
-window.closeChallengeModal = function() {
-    const modal = document.querySelector('.challenge-modal');
-    if (modal) {
-        modal.classList.remove('show');
-        setTimeout(() => {
-            modal.remove();
-        }, 300);
-    }
-};
-
-// Control de timer y contador
-let challengeTimer = null;
-let challengeStartTime = null;
-let challengeCounter = 0;
-
-window.toggleChallengeTimer = function() {
-    const timerBtn = document.querySelector('.timer-btn');
-    const timerDisplay = document.querySelector('.timer-display');
-    
-    if (!challengeTimer) {
-        // Iniciar timer
-        challengeStartTime = Date.now();
-        challengeTimer = setInterval(() => {
-            const elapsed = Math.floor((Date.now() - challengeStartTime) / 1000);
-            const minutes = Math.floor(elapsed / 60);
-            const seconds = elapsed % 60;
-            timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-        }, 1000);
-        timerBtn.innerHTML = '⏸️ Pausar';
-    } else {
-        // Pausar timer
-        clearInterval(challengeTimer);
-        challengeTimer = null;
-        timerBtn.innerHTML = '▶️ Continuar';
-    }
-};
-
-window.incrementCounter = function() {
-    challengeCounter++;
-    document.getElementById('counter-value').textContent = challengeCounter;
-};
-
-window.decrementCounter = function() {
-    if (challengeCounter > 0) {
-        challengeCounter--;
-        document.getElementById('counter-value').textContent = challengeCounter;
-    }
-};
-
-window.completeChallengeFromModal = function(challengeId) {
-    completeChallenge(challengeId);
-    closeChallengeModal();
-};
-
-// Completar reto
-function completeChallenge(challengeId) {
-    const challenge = challengesState.todayChallenge;
-    if (!challenge || challenge.id !== challengeId) return;
-    
-    const userLevel = challengesState.userLevel;
-    const points = challenge.points[userLevel];
-    
-    // Guardar en completados
-    const completedChallenge = {
-        ...challenge,
-        completedAt: Date.now(),
-        level: userLevel,
-        points: points
-    };
-    
-    saveChallengeCompletion(completedChallenge);
-    updateUserStats(points);
-    
-    // Anuncio TTS de reto completado
-    if (window.EntrenoTTS) {
-        window.EntrenoTTS.announceChallengeComplete(challenge.name, points);
-    }
-    
-    // Mostrar celebración
-    showChallengeCompletionCelebration(completedChallenge);
-    
-    // Actualizar UI
-    renderChallengesPage();
-    
-    console.log('✅ Reto completado:', completedChallenge);
-}
-
-function saveChallengeCompletion(completedChallenge) {
-    try {
-        const completedChallenges = JSON.parse(localStorage.getItem('entrenoapp_completed_challenges') || '[]');
-        completedChallenges.push(completedChallenge);
-        localStorage.setItem('entrenoapp_completed_challenges', JSON.stringify(completedChallenges));
-        
-        // Marcar el reto de hoy como completado
-        const today = new Date().toDateString();
-        localStorage.setItem(`challenge_completed_${today}`, 'true');
-        
-    } catch (error) {
-        console.error('Error guardando reto completado:', error);
-    }
-}
-
-function updateUserStats(points) {
-    challengesState.userStats.totalChallenges++;
-    challengesState.userStats.points += points;
-    challengesState.userStats.currentStreak++;
-    
-    if (challengesState.userStats.currentStreak > challengesState.userStats.longestStreak) {
-        challengesState.userStats.longestStreak = challengesState.userStats.currentStreak;
-    }
-    
-    // Guardar estadísticas
-    localStorage.setItem('entrenoapp_user_stats', JSON.stringify(challengesState.userStats));
-}
-
-function showChallengeCompletionCelebration(challenge) {
-    const celebration = document.createElement('div');
-    celebration.className = 'challenge-celebration';
-    celebration.innerHTML = `
-        <div class="celebration-content glass-card glass-gradient-green">
-            <div class="celebration-icon">🎉</div>
-            <h3 class="celebration-title">¡Reto Completado!</h3>
-            <p class="celebration-challenge">${challenge.icon} ${challenge.name}</p>
-            <div class="celebration-points">+${challenge.points} puntos</div>
-            <div class="celebration-streak">Racha: ${challengesState.userStats.currentStreak} días</div>
-        </div>
-    `;
-    
-    document.body.appendChild(celebration);
-    
-    setTimeout(() => {
-        celebration.classList.add('show');
-    }, 100);
-    
-    setTimeout(() => {
-        celebration.classList.remove('show');
-        setTimeout(() => {
-            celebration.remove();
-        }, 300);
-    }, 3000);
-}
-
-// Funciones de utilidad
-function isChallengeCompleted(challengeId) {
-    const today = new Date().toDateString();
-    return localStorage.getItem(`challenge_completed_${today}`) === 'true';
-}
-
-function getUserLevelIcon(level) {
-    const icons = {
-        'principiante': '🟢',
-        'intermedio': '🟡',
-        'avanzado': '🔴'
-    };
-    return icons[level] || '⚪';
-}
-
-function loadUserProgress() {
-    // Cargar desde localStorage
-    const progress = localStorage.getItem('entrenoapp_user_progress');
-    if (progress) {
-        challengesState.userProgress = JSON.parse(progress);
-    }
-}
-
-function loadUserStats() {
-    // Cargar estadísticas desde localStorage
-    const stats = localStorage.getItem('entrenoapp_user_stats');
-    if (stats) {
-        challengesState.userStats = { ...challengesState.userStats, ...JSON.parse(stats) };
-    }
-}
-
-function loadLeaderboard() {
-    // Simular leaderboard
-    challengesState.leaderboard = [
-        { name: 'Ana García', points: 1250, streak: 15 },
-        { name: 'Carlos López', points: 980, streak: 8 },
-        { name: 'María Rodríguez', points: 875, streak: 12 },
-        { name: 'Tú', points: challengesState.userStats.points, streak: challengesState.userStats.currentStreak }
-    ].sort((a, b) => b.points - a.points);
-}
-
-function getRecentCompletedChallenges() {
-    try {
-        const completed = JSON.parse(localStorage.getItem('entrenoapp_completed_challenges') || '[]');
-        return completed.slice(-5).reverse(); // Últimos 5
-    } catch (error) {
-        console.error('Error cargando retos completados:', error);
-        return [];
-    }
-}
-
-function formatDate(timestamp) {
-    const date = new Date(timestamp);
-    return date.toLocaleDateString('es-ES', {
-        day: 'numeric',
-        month: 'short'
-    });
-}
-
-// Funciones adicionales
-window.shareChallenge = function(challengeId) {
-    const challenge = challengesState.todayChallenge;
-    if (!challenge) return;
-    
-    const userLevel = challengesState.userLevel;
-    const levelData = challenge.levels[userLevel];
-    
-    const text = `🏆 Mi reto de hoy en EntrenoApp:\n${challenge.icon} ${challenge.name}\nObjetivo: ${levelData.target} ${levelData.unit}\n\n¿Te animas a intentarlo? #EntrenoApp #RetosDiarios`;
-    
-    if (navigator.share) {
-        navigator.share({
-            title: 'Reto Diario - EntrenoApp',
-            text: text
-        });
-    } else {
-        navigator.clipboard.writeText(text).then(() => {
-            showToast('Reto copiado al portapapeles', 'success');
-        });
-    }
-};
-
-window.skipChallenge = function(challengeId) {
-    // Generar nuevo reto
+function selectDifficulty(level) {
+    if (challengesState.isActive) return;
+    challengesState.userLevel = level;
     generateTodayChallenge();
     renderChallengesPage();
-    showToast('Nuevo reto generado', 'info');
-};
-
-function showToast(message, type = 'info') {
-    const toast = document.createElement('div');
-    toast.className = `toast glass-effect ${type}`;
-    toast.textContent = message;
-    
-    document.body.appendChild(toast);
-    
-    setTimeout(() => {
-        toast.classList.add('show');
-    }, 100);
-    
-    setTimeout(() => {
-        toast.classList.remove('show');
-        setTimeout(() => toast.remove(), 300);
-    }, 3000);
 }
 
-console.log('🏆 Componente de retos diarios cargado');
+function addRep() {
+    if (!challengesState.isActive) return;
+    challengesState.currentProgress++;
+    
+    if (challengesState.currentProgress >= challengesState.targetValue) {
+        completeChallenge();
+    } else {
+        updateProgressDisplay();
+    }
+}
+
+function subtractRep() {
+    if (!challengesState.isActive || challengesState.currentProgress <= 0) return;
+    challengesState.currentProgress--;
+    updateProgressDisplay();
+}
+
+function startChallengeTimer() {
+    challengesState.intervalId = setInterval(() => {
+        if (!challengesState.isPaused) {
+            challengesState.challengeTimer++;
+            challengesState.currentProgress = challengesState.challengeTimer;
+            
+            if (challengesState.currentProgress >= challengesState.targetValue) {
+                completeChallenge();
+                return;
+            }
+            
+            updateProgressDisplay();
+        }
+    }, 1000);
+}
+
+function updateProgressDisplay() {
+    const progressFill = document.querySelector('.progress-fill');
+    const progressText = document.querySelector('.progress-text');
+    const currentReps = document.querySelector('.current-reps');
+    
+    const challenge = challengesState.todayChallenge;
+    const progressPercentage = (challengesState.currentProgress / challengesState.targetValue) * 100;
+    
+    if (progressFill) {
+        progressFill.style.width = `${Math.min(progressPercentage, 100)}%`;
+    }
+    
+    if (progressText) {
+        progressText.textContent = challenge.type === 'reps' ? 
+            `${challengesState.currentProgress} / ${challengesState.targetValue}` :
+            `${formatTime(challengesState.currentProgress)} / ${formatTime(challengesState.targetValue)}`;
+    }
+    
+    if (currentReps) {
+        currentReps.textContent = challengesState.currentProgress;
+    }
+}
+
+function generateUpcomingChallenges(days) {
+    const upcoming = [];
+    const categories = Object.keys(DAILY_CHALLENGES);
+    
+    for (let i = 1; i <= days; i++) {
+        const futureDate = new Date(Date.now() + i * 24 * 60 * 60 * 1000);
+        const dayOfYear = Math.floor((futureDate - new Date(futureDate.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
+        
+        const selectedCategory = categories[dayOfYear % categories.length];
+        const categoryExercises = DAILY_CHALLENGES[selectedCategory];
+        const selectedExercise = categoryExercises[dayOfYear % categoryExercises.length];
+        
+        upcoming.push(selectedExercise);
+    }
+    
+    return upcoming;
+}
+
+function formatTime(seconds) {
+    if (seconds < 60) {
+        return `${seconds}s`;
+    } else {
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = seconds % 60;
+        return remainingSeconds > 0 ? `${minutes}m ${remainingSeconds}s` : `${minutes}m`;
+    }
+}
+
+function getTimeUntilNextChallenge() {
+    const now = new Date();
+    const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+    const timeDiff = tomorrow - now;
+    
+    const hours = Math.floor(timeDiff / (1000 * 60 * 60));
+    const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+    
+    return `${hours}h ${minutes}m`;
+}
+
+// Funciones placeholder para otras vistas
+function renderWeeklyProgress() {
+    return `
+        <div class="weekly-progress glass-fade-in">
+            <div class="placeholder-content">
+                <h2 class="page-title">📊 Progreso Semanal</h2>
+                <p class="text-secondary">Próximamente: análisis semanal detallado</p>
+            </div>
+        </div>
+    `;
+}
+
+function renderRanking() {
+    return `
+        <div class="ranking-view glass-fade-in">
+            <div class="placeholder-content">
+                <h2 class="page-title">🏆 Ranking Global</h2>
+                <p class="text-secondary">Próximamente: ranking en tiempo real</p>
+            </div>
+        </div>
+    `;
+}
+
+function renderHistory() {
+    return `
+        <div class="history-view glass-fade-in">
+            <div class="placeholder-content">
+                <h2 class="page-title">📝 Historial</h2>
+                <p class="text-secondary">Próximamente: historial completo de retos</p>
+            </div>
+        </div>
+    `;
+}
+
+function showError(message) {
+    console.error('❌', message);
+    alert(message);
+}
+
+console.log('🎯 Módulo de retos diarios cargado');
