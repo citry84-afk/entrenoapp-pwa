@@ -1,0 +1,531 @@
+/* ===========================================
+   ESTILOS DEL DASHBOARD
+   =========================================== */
+
+.dashboard-container {
+    padding: var(--spacing-md) 0;
+}
+
+/* Sección de bienvenida */
+.welcome-section {
+    margin-bottom: var(--spacing-lg);
+}
+
+.welcome-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.welcome-text h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+    color: var(--text-primary);
+}
+
+.welcome-message {
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+.welcome-avatar {
+    flex-shrink: 0;
+}
+
+.avatar-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Plan activo */
+.current-plan .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.plan-badge {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: capitalize;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.plan-badge.running {
+    background: rgba(0, 122, 255, 0.3);
+    border: 1px solid rgba(0, 122, 255, 0.5);
+}
+
+.plan-badge.gym {
+    background: rgba(255, 149, 0, 0.3);
+    border: 1px solid rgba(255, 149, 0, 0.5);
+}
+
+.plan-badge.crossfit {
+    background: rgba(255, 69, 58, 0.3);
+    border: 1px solid rgba(255, 69, 58, 0.5);
+}
+
+.plan-info h4 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+    color: var(--text-primary);
+}
+
+.plan-progress-text {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: var(--spacing-md);
+}
+
+/* Barras de progreso */
+.progress-bar-container {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+}
+
+.progress-bar {
+    flex: 1;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-bar.small {
+    height: 6px;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-blue), var(--secondary-blue));
+    border-radius: 4px;
+    transition: width 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+}
+
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: shimmer 2s infinite;
+}
+
+.progress-text {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    min-width: 35px;
+}
+
+/* Próximo entrenamiento */
+.next-workout {
+    background: rgba(255, 255, 255, 0.05);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-md);
+    margin-bottom: var(--spacing-md);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.next-workout-label {
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: var(--spacing-xs);
+}
+
+.next-workout-description {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* Acciones del plan */
+.plan-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+    flex-wrap: wrap;
+}
+
+.plan-actions .glass-button {
+    flex: 1;
+    min-width: 120px;
+}
+
+/* Reto del día */
+.today-challenge .challenge-difficulty {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: capitalize;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.challenge-difficulty.principiante {
+    background: rgba(52, 199, 89, 0.3);
+    border: 1px solid rgba(52, 199, 89, 0.5);
+}
+
+.challenge-difficulty.intermedio {
+    background: rgba(255, 149, 0, 0.3);
+    border: 1px solid rgba(255, 149, 0, 0.5);
+}
+
+.challenge-difficulty.avanzado {
+    background: rgba(255, 69, 58, 0.3);
+    border: 1px solid rgba(255, 69, 58, 0.5);
+}
+
+.challenge-content h4 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+    color: var(--text-primary);
+}
+
+.challenge-description {
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-md);
+}
+
+.challenge-completed {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    color: var(--success-green);
+    font-weight: 600;
+}
+
+.completed-icon {
+    font-size: 1.2rem;
+}
+
+/* Logros */
+.achievements-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.achievement-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    background: rgba(255, 255, 255, 0.05);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-md);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: var(--transition-fast);
+}
+
+.achievement-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.achievement-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+}
+
+.achievement-info {
+    flex: 1;
+}
+
+.achievement-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-xs);
+    color: var(--text-primary);
+}
+
+.achievement-description {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.achievement-progress {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+/* Ranking */
+.ranking-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-md);
+}
+
+.ranking-item {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.05);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-md);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: var(--transition-fast);
+}
+
+.ranking-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.ranking-period {
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: var(--spacing-xs);
+}
+
+.ranking-position {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-xs);
+}
+
+.ranking-total {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+/* Planes disponibles */
+.plans-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.plan-item {
+    padding: var(--spacing-md);
+    cursor: pointer;
+    transition: var(--transition-normal);
+    border-radius: var(--border-radius-md);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.plan-item:hover {
+    transform: translateY(-4px);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.plan-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+}
+
+.plan-info h5 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-xs);
+    color: var(--text-primary);
+}
+
+.plan-duration {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-xs);
+}
+
+.plan-description {
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.plan-difficulty {
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-weight: 600;
+    text-transform: capitalize;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Acciones rápidas */
+.actions-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+}
+
+.action-button {
+    background: none;
+    border: none;
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    transition: var(--transition-fast);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+    text-decoration: none;
+    color: var(--text-primary);
+}
+
+.action-button:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.action-icon {
+    font-size: 2rem;
+}
+
+.action-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+/* Botón pequeño */
+.glass-button-sm {
+    padding: 8px 16px;
+    font-size: 0.8rem;
+    min-height: auto;
+}
+
+/* Toast notifications */
+.toast {
+    position: fixed;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--border-radius-lg);
+    color: white;
+    font-weight: 600;
+    z-index: 10000;
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    max-width: 300px;
+    text-align: center;
+}
+
+.toast.show {
+    transform: translateX(-50%) translateY(0);
+}
+
+.toast.success {
+    background: rgba(52, 199, 89, 0.9);
+    border: 1px solid rgba(52, 199, 89, 1);
+}
+
+.toast.error {
+    background: rgba(255, 59, 48, 0.9);
+    border: 1px solid rgba(255, 59, 48, 1);
+}
+
+.toast.info {
+    background: rgba(0, 122, 255, 0.9);
+    border: 1px solid rgba(0, 122, 255, 1);
+}
+
+/* Animaciones */
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .welcome-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-md);
+    }
+    
+    .plan-actions {
+        flex-direction: column;
+    }
+    
+    .plan-actions .glass-button {
+        flex: none;
+    }
+    
+    .ranking-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-sm);
+    }
+    
+    .ranking-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+    
+    .ranking-period,
+    .ranking-position,
+    .ranking-total {
+        margin: 0;
+    }
+    
+    .plans-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .plan-item {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .actions-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-sm);
+    }
+    
+    .action-button {
+        padding: var(--spacing-md);
+    }
+}
+
+@media (max-width: 480px) {
+    .achievement-item {
+        flex-direction: column;
+        text-align: center;
+        gap: var(--spacing-sm);
+    }
+    
+    .achievement-progress {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .actions-grid {
+        grid-template-columns: 1fr;
+    }
+}

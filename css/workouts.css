@@ -1,0 +1,695 @@
+/* ===========================================
+   ESTILOS DEL COMPONENTE ENTRENAMIENTOS
+   =========================================== */
+
+.workouts-container {
+    padding: var(--spacing-md) 0;
+}
+
+/* ===========================================
+   SELECCIÓN DE TIPO DE ENTRENAMIENTO
+   =========================================== */
+
+.workout-selection {
+    max-width: 100%;
+}
+
+.workout-types-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+.workout-type-card {
+    padding: var(--spacing-xl);
+    cursor: pointer;
+    transition: var(--transition-normal);
+    text-align: center;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.workout-type-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.workout-type-icon {
+    font-size: 4rem;
+    margin-bottom: var(--spacing-lg);
+}
+
+.workout-type-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-md);
+    color: var(--text-primary);
+}
+
+.workout-type-description {
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: var(--spacing-lg);
+    flex-grow: 1;
+}
+
+.workout-type-stats {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.stat-item {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    padding: var(--spacing-xs) 0;
+}
+
+/* Quick Workouts */
+.quick-workouts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.quick-workout-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-lg);
+    text-decoration: none;
+    color: var(--text-primary);
+    min-height: 120px;
+}
+
+.quick-workout-icon {
+    font-size: 2rem;
+}
+
+.quick-workout-name {
+    font-weight: 600;
+    text-align: center;
+}
+
+.quick-workout-time {
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+}
+
+/* ===========================================
+   ENTRENAMIENTOS DE GIMNASIO
+   =========================================== */
+
+.gym-workouts {
+    max-width: 100%;
+}
+
+.workout-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+}
+
+.back-button {
+    min-width: auto;
+    padding: var(--spacing-sm) var(--spacing-md);
+}
+
+.workout-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.muscle-groups-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+.muscle-group-card {
+    padding: var(--spacing-xl);
+    cursor: pointer;
+    transition: var(--transition-normal);
+    text-align: center;
+    min-height: 240px;
+}
+
+.muscle-group-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.25);
+}
+
+.muscle-group-icon {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-md);
+}
+
+.muscle-group-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-sm);
+    color: var(--text-primary);
+}
+
+.muscle-group-count {
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-lg);
+}
+
+.muscle-group-difficulty {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-xs);
+    flex-wrap: wrap;
+}
+
+.difficulty-badge {
+    font-size: 0.7rem;
+    padding: 2px 6px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.difficulty-badge.principiante {
+    background: rgba(52, 199, 89, 0.3);
+    border-color: rgba(52, 199, 89, 0.5);
+}
+
+.difficulty-badge.intermedio {
+    background: rgba(255, 149, 0, 0.3);
+    border-color: rgba(255, 149, 0, 0.5);
+}
+
+.difficulty-badge.avanzado {
+    background: rgba(255, 69, 58, 0.3);
+    border-color: rgba(255, 69, 58, 0.5);
+}
+
+/* Rutinas predefinidas */
+.programs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.program-card {
+    padding: var(--spacing-lg);
+    cursor: pointer;
+    transition: var(--transition-fast);
+    border-radius: var(--border-radius-md);
+}
+
+.program-card:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+.program-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+    color: var(--text-primary);
+}
+
+.program-description {
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-md);
+    font-size: 0.9rem;
+}
+
+.program-details {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.program-details span {
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+}
+
+/* ===========================================
+   CROSSFIT WODS
+   =========================================== */
+
+.crossfit-workouts {
+    max-width: 100%;
+}
+
+.wod-types-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+.wod-type-card {
+    padding: var(--spacing-xl);
+    cursor: pointer;
+    transition: var(--transition-normal);
+    text-align: center;
+    min-height: 200px;
+}
+
+.wod-type-card:hover {
+    transform: translateY(-4px);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.wod-type-icon {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-md);
+}
+
+.wod-type-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-sm);
+    color: var(--text-primary);
+}
+
+.wod-type-description {
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-sm);
+    font-size: 0.9rem;
+}
+
+.wod-type-count {
+    color: var(--text-tertiary);
+    font-size: 0.8rem;
+}
+
+/* WODs destacados */
+.featured-wods-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.featured-wod {
+    padding: var(--spacing-lg);
+    cursor: pointer;
+    transition: var(--transition-fast);
+    border-radius: var(--border-radius-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.featured-wod:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+.wod-info h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-xs);
+    color: var(--text-primary);
+}
+
+.wod-description {
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-sm);
+    font-size: 0.9rem;
+}
+
+.wod-meta {
+    display: flex;
+    gap: var(--spacing-sm);
+    align-items: center;
+}
+
+.wod-time {
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+}
+
+.wod-difficulty {
+    font-size: 0.7rem;
+    padding: 2px 6px;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.wod-preview {
+    flex: 1;
+    text-align: right;
+    margin-left: var(--spacing-md);
+}
+
+.wod-preview span {
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+    font-style: italic;
+}
+
+/* ===========================================
+   ENTRENAMIENTO ACTIVO
+   =========================================== */
+
+.active-workout {
+    max-width: 100%;
+}
+
+.workout-info {
+    flex: 1;
+}
+
+.workout-name {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+    color: var(--text-primary);
+}
+
+.workout-timer {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary-blue);
+    font-family: 'Courier New', monospace;
+}
+
+.workout-controls {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.control-btn {
+    min-width: auto;
+    padding: var(--spacing-sm);
+    font-size: 1.2rem;
+}
+
+/* Ejercicio activo */
+.active-exercise {
+    margin-bottom: var(--spacing-lg);
+}
+
+.exercise-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.exercise-name {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.exercise-group {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    text-transform: capitalize;
+}
+
+.exercise-description {
+    margin-bottom: var(--spacing-md);
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.exercise-instructions {
+    margin-bottom: var(--spacing-lg);
+}
+
+.exercise-instructions h4 {
+    font-size: 1rem;
+    margin-bottom: var(--spacing-sm);
+    color: var(--text-primary);
+}
+
+.exercise-instructions ol {
+    color: var(--text-secondary);
+    padding-left: var(--spacing-lg);
+}
+
+.exercise-instructions li {
+    margin-bottom: var(--spacing-xs);
+    line-height: 1.4;
+}
+
+/* Controles de ejercicio */
+.exercise-controls {
+    background: rgba(255, 255, 255, 0.05);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius-md);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sets-reps-control {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.control-group {
+    text-align: center;
+}
+
+.control-group label {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+}
+
+.control-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+}
+
+.control-buttons .control-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.control-value {
+    min-width: 50px;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.1);
+    padding: var(--spacing-sm);
+    border-radius: var(--border-radius-sm);
+}
+
+.exercise-actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+}
+
+.exercise-video {
+    text-align: center;
+}
+
+/* Timer de descanso */
+.rest-timer {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10000;
+    min-width: 300px;
+    text-align: center;
+    animation: glassScaleIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.rest-timer-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-md);
+    color: var(--text-primary);
+}
+
+.rest-timer-display {
+    font-size: 3rem;
+    font-weight: 700;
+    font-family: 'Courier New', monospace;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-lg);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.rest-timer-controls {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-sm);
+}
+
+/* Progreso del entrenamiento */
+.workout-progress .progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.exercise-count {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.exercise-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.exercise-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--border-radius-sm);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: var(--transition-fast);
+}
+
+.exercise-item.completed {
+    background: rgba(52, 199, 89, 0.2);
+    border-color: rgba(52, 199, 89, 0.4);
+}
+
+.exercise-item.active {
+    background: rgba(0, 122, 255, 0.2);
+    border-color: rgba(0, 122, 255, 0.4);
+    box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.2);
+}
+
+.exercise-name {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.exercise-sets {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.exercise-status {
+    font-size: 1.2rem;
+}
+
+/* ===========================================
+   RESPONSIVE
+   =========================================== */
+
+@media (max-width: 768px) {
+    .workout-types-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+    
+    .workout-type-card {
+        min-height: 250px;
+        padding: var(--spacing-lg);
+    }
+    
+    .muscle-groups-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .wod-types-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .quick-workouts-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .sets-reps-control {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+    }
+    
+    .exercise-actions {
+        grid-template-columns: 1fr;
+    }
+    
+    .featured-wod {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-md);
+    }
+    
+    .wod-preview {
+        text-align: left;
+        margin-left: 0;
+    }
+    
+    .rest-timer {
+        min-width: 280px;
+        margin: 0 var(--spacing-md);
+    }
+    
+    .rest-timer-display {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .workout-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
+    }
+    
+    .workout-title {
+        font-size: 1.3rem;
+    }
+    
+    .quick-workouts-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .control-buttons .control-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+    
+    .control-value {
+        min-width: 40px;
+        font-size: 1rem;
+    }
+    
+    .rest-timer {
+        min-width: 260px;
+    }
+    
+    .rest-timer-display {
+        font-size: 2rem;
+    }
+    
+    .rest-timer-controls {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+}
