@@ -401,6 +401,61 @@
     box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
 }
 
+/* Plan personalizado generado */
+.generated-plan {
+    text-align: left;
+    background: rgba(102, 126, 234, 0.1);
+    border: 2px solid rgba(102, 126, 234, 0.3);
+}
+
+.plan-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #667eea;
+    text-align: center;
+}
+
+.plan-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0.5rem;
+}
+
+.plan-description {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+.plan-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+.plan-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    text-align: center;
+}
+
+.stat-label {
+    font-size: 0.875rem;
+    opacity: 0.8;
+    margin-bottom: 0.25rem;
+}
+
+.stat-value {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #667eea;
+}
+
 /* Mejoras de accesibilidad */
 @media (prefers-reduced-motion: reduce) {
     .option-card,

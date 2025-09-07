@@ -1,531 +1,762 @@
-/* ===========================================
-   ESTILOS DEL DASHBOARD
-   =========================================== */
+/* Dashboard personalizado centrado en planificación */
 
 .dashboard-container {
-    padding: var(--spacing-md) 0;
+    padding: 1rem;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
-/* Sección de bienvenida */
-.welcome-section {
-    margin-bottom: var(--spacing-lg);
-}
+/* ===================================
+   ESTADO DE CARGA
+   =================================== */
 
-.welcome-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.welcome-text h2 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: var(--spacing-xs);
-    color: var(--text-primary);
-}
-
-.welcome-message {
-    color: var(--text-secondary);
-    font-size: 1rem;
-}
-
-.welcome-avatar {
-    flex-shrink: 0;
-}
-
-.avatar-circle {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    border: 2px solid rgba(255, 255, 255, 0.3);
-}
-
-/* Plan activo */
-.current-plan .card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: var(--spacing-md);
-}
-
-.plan-badge {
-    background: rgba(255, 255, 255, 0.2);
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    text-transform: capitalize;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-}
-
-.plan-badge.running {
-    background: rgba(0, 122, 255, 0.3);
-    border: 1px solid rgba(0, 122, 255, 0.5);
-}
-
-.plan-badge.gym {
-    background: rgba(255, 149, 0, 0.3);
-    border: 1px solid rgba(255, 149, 0, 0.5);
-}
-
-.plan-badge.crossfit {
-    background: rgba(255, 69, 58, 0.3);
-    border: 1px solid rgba(255, 69, 58, 0.5);
-}
-
-.plan-info h4 {
-    font-size: 1.25rem;
-    font-weight: 700;
-    margin-bottom: var(--spacing-xs);
-    color: var(--text-primary);
-}
-
-.plan-progress-text {
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-    margin-bottom: var(--spacing-md);
-}
-
-/* Barras de progreso */
-.progress-bar-container {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-    margin-bottom: var(--spacing-md);
-}
-
-.progress-bar {
-    flex: 1;
-    height: 8px;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 4px;
-    overflow: hidden;
-}
-
-.progress-bar.small {
-    height: 6px;
-}
-
-.progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--primary-blue), var(--secondary-blue));
-    border-radius: 4px;
-    transition: width 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    position: relative;
-}
-
-.progress-fill::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    animation: shimmer 2s infinite;
-}
-
-.progress-text {
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--text-secondary);
-    min-width: 35px;
-}
-
-/* Próximo entrenamiento */
-.next-workout {
-    background: rgba(255, 255, 255, 0.05);
-    padding: var(--spacing-md);
-    border-radius: var(--border-radius-md);
-    margin-bottom: var(--spacing-md);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.next-workout-label {
-    font-size: 0.8rem;
-    color: var(--text-tertiary);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: var(--spacing-xs);
-}
-
-.next-workout-description {
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--text-primary);
-}
-
-/* Acciones del plan */
-.plan-actions {
-    display: flex;
-    gap: var(--spacing-sm);
-    flex-wrap: wrap;
-}
-
-.plan-actions .glass-button {
-    flex: 1;
-    min-width: 120px;
-}
-
-/* Reto del día */
-.today-challenge .challenge-difficulty {
-    background: rgba(255, 255, 255, 0.2);
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    text-transform: capitalize;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-}
-
-.challenge-difficulty.principiante {
-    background: rgba(52, 199, 89, 0.3);
-    border: 1px solid rgba(52, 199, 89, 0.5);
-}
-
-.challenge-difficulty.intermedio {
-    background: rgba(255, 149, 0, 0.3);
-    border: 1px solid rgba(255, 149, 0, 0.5);
-}
-
-.challenge-difficulty.avanzado {
-    background: rgba(255, 69, 58, 0.3);
-    border: 1px solid rgba(255, 69, 58, 0.5);
-}
-
-.challenge-content h4 {
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin-bottom: var(--spacing-xs);
-    color: var(--text-primary);
-}
-
-.challenge-description {
-    color: var(--text-secondary);
-    margin-bottom: var(--spacing-md);
-}
-
-.challenge-completed {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-    color: var(--success-green);
-    font-weight: 600;
-}
-
-.completed-icon {
-    font-size: 1.2rem;
-}
-
-/* Logros */
-.achievements-list {
+.loading-dashboard {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-md);
-}
-
-.achievement-item {
-    display: flex;
     align-items: center;
-    gap: var(--spacing-md);
-    background: rgba(255, 255, 255, 0.05);
-    padding: var(--spacing-md);
-    border-radius: var(--border-radius-md);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: var(--transition-fast);
+    justify-content: center;
+    min-height: 50vh;
+    text-align: center;
 }
 
-.achievement-item:hover {
-    background: rgba(255, 255, 255, 0.1);
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    border-top: 4px solid #667eea;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
 }
 
-.achievement-icon {
-    font-size: 2rem;
-    flex-shrink: 0;
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
-.achievement-info {
+/* ===================================
+   HEADER PERSONALIZADO
+   =================================== */
+
+.personalized-header {
+    padding: 2rem 1.5rem;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-welcome {
     flex: 1;
 }
 
-.achievement-title {
-    font-size: 1rem;
-    font-weight: 600;
-    margin-bottom: var(--spacing-xs);
-    color: var(--text-primary);
-}
-
-.achievement-description {
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-    margin-bottom: var(--spacing-sm);
-}
-
-.achievement-progress {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-}
-
-/* Ranking */
-.ranking-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--spacing-md);
-}
-
-.ranking-item {
-    text-align: center;
-    background: rgba(255, 255, 255, 0.05);
-    padding: var(--spacing-md);
-    border-radius: var(--border-radius-md);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: var(--transition-fast);
-}
-
-.ranking-item:hover {
-    background: rgba(255, 255, 255, 0.1);
-    transform: translateY(-2px);
-}
-
-.ranking-period {
-    font-size: 0.8rem;
-    color: var(--text-tertiary);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: var(--spacing-xs);
-}
-
-.ranking-position {
-    font-size: 1.5rem;
+.welcome-title {
+    font-size: 2rem;
     font-weight: 700;
-    color: var(--text-primary);
-    margin-bottom: var(--spacing-xs);
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: #667eea; /* Fallback */
 }
 
-.ranking-total {
-    font-size: 0.8rem;
-    color: var(--text-secondary);
+.motivational-message {
+    font-size: 1.125rem;
+    opacity: 0.8;
+    margin-bottom: 0;
 }
 
-/* Planes disponibles */
-.plans-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: var(--spacing-md);
-}
-
-.plan-item {
-    padding: var(--spacing-md);
-    cursor: pointer;
-    transition: var(--transition-normal);
-    border-radius: var(--border-radius-md);
+.plan-info {
     display: flex;
     align-items: center;
-    gap: var(--spacing-md);
 }
 
-.plan-item:hover {
-    transform: translateY(-4px);
-    background: rgba(255, 255, 255, 0.2);
+.active-plan-badge {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background: rgba(102, 126, 234, 0.1);
+    border: 2px solid rgba(102, 126, 234, 0.3);
+    border-radius: 16px;
 }
 
 .plan-icon {
     font-size: 2rem;
-    flex-shrink: 0;
+    margin-right: 1rem;
 }
 
-.plan-info h5 {
+.plan-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.plan-name {
     font-size: 1rem;
     font-weight: 600;
-    margin-bottom: var(--spacing-xs);
-    color: var(--text-primary);
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0.25rem;
 }
 
-.plan-duration {
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-    margin-bottom: var(--spacing-xs);
+.plan-progress {
+    font-size: 0.875rem;
+    opacity: 0.7;
+}
+
+/* ===================================
+   TARJETA DEL PLAN ACTIVO
+   =================================== */
+
+.active-plan-card {
+    padding: 2rem 1.5rem;
+}
+
+.plan-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.plan-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+}
+
+.plan-menu-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+}
+
+.plan-overview {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: start;
+}
+
+.plan-main-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.plan-type-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    width: fit-content;
+}
+
+.plan-type-badge.running {
+    background: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+}
+
+.plan-type-badge.functional {
+    background: rgba(59, 130, 246, 0.2);
+    color: #3b82f6;
+}
+
+.plan-type-badge.gym {
+    background: rgba(34, 197, 94, 0.2);
+    color: #22c55e;
+}
+
+.plan-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0.75rem;
 }
 
 .plan-description {
-    font-size: 0.8rem;
-    color: var(--text-tertiary);
-    margin-bottom: var(--spacing-sm);
+    font-size: 1rem;
+    line-height: 1.5;
+    opacity: 0.8;
+    margin-bottom: 0;
 }
 
-.plan-difficulty {
-    font-size: 0.75rem;
-    padding: 2px 8px;
+.plan-progress-section {
+    min-width: 250px;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
     border-radius: 12px;
-    font-weight: 600;
-    text-transform: capitalize;
-    display: inline-flex;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 4px;
+    margin-bottom: 0.75rem;
 }
 
-/* Acciones rápidas */
-.actions-grid {
+.progress-label {
+    font-size: 0.875rem;
+    opacity: 0.8;
+}
+
+.progress-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #667eea;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.plan-stats-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-md);
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
 }
 
-.action-button {
-    background: none;
-    border: none;
-    padding: var(--spacing-lg);
-    border-radius: var(--border-radius-md);
-    cursor: pointer;
-    transition: var(--transition-fast);
+.plan-stat {
+    text-align: center;
+    padding: 0.75rem 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+}
+
+.plan-stat .stat-value {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #667eea;
+    margin-bottom: 0.25rem;
+    display: block;
+}
+
+.plan-stat .stat-label {
+    font-size: 0.75rem;
+    opacity: 0.8;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ===================================
+   ENTRENAMIENTO DE HOY
+   =================================== */
+
+.todays-workout {
+    padding: 1.5rem;
+}
+
+.workout-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.workout-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+}
+
+.workout-date {
+    font-size: 0.875rem;
+    opacity: 0.7;
+    text-transform: capitalize;
+}
+
+/* Día de descanso */
+.rest-day-card {
+    text-align: center;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.rest-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.rest-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0.75rem;
+}
+
+.rest-description {
+    font-size: 1rem;
+    line-height: 1.5;
+    opacity: 0.8;
+    margin-bottom: 1.5rem;
+}
+
+.next-training {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    background: rgba(102, 126, 234, 0.1);
+    border-radius: 8px;
+}
+
+.next-label {
+    font-size: 0.875rem;
+    opacity: 0.8;
+}
+
+.next-day {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #667eea;
+}
+
+/* Entrenamiento activo */
+.active-workout-card {
     display: flex;
     flex-direction: column;
+    gap: 1.5rem;
+}
+
+.workout-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+}
+
+.workout-icon {
+    font-size: 3rem;
+    flex-shrink: 0;
+}
+
+.workout-details {
+    flex: 1;
+}
+
+.workout-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0.5rem;
+}
+
+.workout-description {
+    font-size: 1rem;
+    line-height: 1.5;
+    opacity: 0.8;
+    margin-bottom: 1rem;
+}
+
+.workout-specs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.spec-item {
+    display: flex;
     align-items: center;
-    gap: var(--spacing-sm);
-    text-decoration: none;
-    color: var(--text-primary);
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    font-size: 0.875rem;
 }
 
-.action-button:hover {
-    transform: translateY(-2px);
-    background: rgba(255, 255, 255, 0.1);
+.spec-icon {
+    font-size: 1rem;
 }
 
-.action-icon {
-    font-size: 2rem;
+.spec-text {
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
 }
 
-.action-label {
-    font-size: 0.9rem;
-    font-weight: 600;
+.workout-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
 }
 
-/* Botón pequeño */
-.glass-button-sm {
-    padding: 8px 16px;
-    font-size: 0.8rem;
-    min-height: auto;
-}
+/* ===================================
+   PROGRESO SEMANAL
+   =================================== */
 
-/* Toast notifications */
-.toast {
-    position: fixed;
-    bottom: 100px;
-    left: 50%;
-    transform: translateX(-50%) translateY(100px);
-    padding: var(--spacing-md) var(--spacing-lg);
-    border-radius: var(--border-radius-lg);
-    color: white;
-    font-weight: 600;
-    z-index: 10000;
-    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    max-width: 300px;
+.weekly-progress {
+    padding: 1.5rem;
     text-align: center;
 }
 
-.toast.show {
-    transform: translateX(-50%) translateY(0);
+.progress-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 1rem;
 }
 
-.toast.success {
-    background: rgba(52, 199, 89, 0.9);
-    border: 1px solid rgba(52, 199, 89, 1);
+.week-progress-bar {
+    width: 100%;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 0.75rem;
 }
 
-.toast.error {
-    background: rgba(255, 59, 48, 0.9);
-    border: 1px solid rgba(255, 59, 48, 1);
+.week-progress-fill {
+    height: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 6px;
+    transition: width 0.3s ease;
 }
 
-.toast.info {
-    background: rgba(0, 122, 255, 0.9);
-    border: 1px solid rgba(0, 122, 255, 1);
+.progress-text {
+    font-size: 0.875rem;
+    opacity: 0.8;
 }
 
-/* Animaciones */
-@keyframes shimmer {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
+/* ===================================
+   GRID DE DASHBOARD
+   =================================== */
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
 }
 
-/* Responsive */
+/* Reto diario */
+.today-challenge {
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.challenge-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 1rem;
+}
+
+.challenge-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.challenge-name {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.challenge-target {
+    font-size: 1rem;
+    opacity: 0.8;
+}
+
+.challenge-points {
+    font-size: 0.875rem;
+    color: #667eea;
+    font-weight: 600;
+}
+
+/* Estadísticas rápidas */
+.quick-stats {
+    padding: 1.5rem;
+}
+
+.stats-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #667eea;
+    margin-bottom: 0.25rem;
+    display: block;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    opacity: 0.8;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ===================================
+   ACCIONES RÁPIDAS
+   =================================== */
+
+.quick-actions {
+    padding: 1.5rem;
+}
+
+.actions-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.actions-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+.action-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.action-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #667eea;
+}
+
+.action-icon {
+    font-size: 1.5rem;
+}
+
+.action-text {
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+/* ===================================
+   ESTADO SIN PLAN
+   =================================== */
+
+.no-plan-state {
+    padding: 4rem 2rem;
+}
+
+.no-plan-icon {
+    font-size: 5rem;
+    margin-bottom: 2rem;
+}
+
+.no-plan-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.no-plan-description {
+    font-size: 1.125rem;
+    line-height: 1.5;
+    margin-bottom: 2rem;
+}
+
+/* ===================================
+   RESPONSIVE
+   =================================== */
+
 @media (max-width: 768px) {
-    .welcome-content {
+    .dashboard-container {
+        padding: 0.5rem;
+    }
+    
+    .header-content {
         flex-direction: column;
-        align-items: flex-start;
-        gap: var(--spacing-md);
-    }
-    
-    .plan-actions {
-        flex-direction: column;
-    }
-    
-    .plan-actions .glass-button {
-        flex: none;
-    }
-    
-    .ranking-grid {
-        grid-template-columns: 1fr;
-        gap: var(--spacing-sm);
-    }
-    
-    .ranking-item {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: var(--spacing-sm) var(--spacing-md);
-    }
-    
-    .ranking-period,
-    .ranking-position,
-    .ranking-total {
-        margin: 0;
-    }
-    
-    .plans-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .plan-item {
-        flex-direction: column;
+        gap: 1rem;
         text-align: center;
     }
     
-    .actions-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: var(--spacing-sm);
-    }
-    
-    .action-button {
-        padding: var(--spacing-md);
-    }
-}
-
-@media (max-width: 480px) {
-    .achievement-item {
-        flex-direction: column;
-        text-align: center;
-        gap: var(--spacing-sm);
-    }
-    
-    .achievement-progress {
+    .plan-info {
         width: 100%;
         justify-content: center;
     }
     
+    .welcome-title {
+        font-size: 1.75rem;
+    }
+    
+    .plan-overview {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .plan-progress-section {
+        min-width: unset;
+    }
+    
+    .plan-stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+    }
+    
+    .workout-info {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .workout-icon {
+        margin-bottom: 1rem;
+    }
+    
+    .workout-actions {
+        flex-direction: column;
+    }
+    
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .actions-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .personalized-header {
+        padding: 1.5rem 1rem;
+    }
+    
+    .welcome-title {
+        font-size: 1.5rem;
+    }
+    
+    .motivational-message {
+        font-size: 1rem;
+    }
+    
+    .active-plan-badge {
+        padding: 0.75rem 1rem;
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .plan-icon {
+        margin-right: 0;
+        margin-bottom: 0.5rem;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
     .actions-grid {
         grid-template-columns: 1fr;
+    }
+    
+    .no-plan-icon {
+        font-size: 4rem;
+    }
+    
+    .no-plan-title {
+        font-size: 1.75rem;
+    }
+}
+
+/* ===================================
+   ANIMACIONES
+   =================================== */
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.glass-fade-in {
+    animation: slideInUp 0.6s ease-out;
+}
+
+@keyframes pulse {
+    0%, 100% { 
+        transform: scale(1); 
+    }
+    50% { 
+        transform: scale(1.02); 
+    }
+}
+
+.active-plan-badge {
+    animation: pulse 3s ease-in-out infinite;
+}
+
+/* Mejoras de accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+    .action-btn,
+    .glass-fade-in,
+    .active-plan-badge {
+        transition: none;
+        animation: none;
+    }
+    
+    .loading-spinner {
+        animation: none;
+        border-top-color: rgba(255, 255, 255, 0.5);
+    }
+}
+
+/* Alto contraste */
+@media (prefers-contrast: high) {
+    .active-plan-badge,
+    .rest-day-card,
+    .stat-item,
+    .action-btn {
+        border-color: rgba(255, 255, 255, 0.3);
+    }
+    
+    .welcome-title,
+    .plan-title,
+    .workout-title {
+        color: #ffffff;
     }
 }

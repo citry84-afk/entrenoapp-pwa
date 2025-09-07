@@ -1,108 +1,291 @@
-// Dashboard principal de EntrenoApp
+// Dashboard centrado en planificación personalizada para EntrenoApp
 import { auth, db } from '../config/firebase-config.js';
-import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+import { 
+    doc, 
+    getDoc,
+    updateDoc,
+    serverTimestamp,
+    increment
+} from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
-// Estado del dashboard
+// Estado del dashboard personalizado
 let dashboardState = {
     user: null,
-    currentPlan: null,
-    weeklyProgress: 0,
+    userProfile: null,
+    activePlan: null,
+    todaysWorkout: null,
+    weekProgress: 0,
     todayChallenge: null,
-    achievements: [],
-    ranking: {
-        daily: null,
-        weekly: null,
-        monthly: null
+    recentActivity: [],
+    quickStats: {
+        completedWorkouts: 0,
+        currentStreak: 0,
+        totalPoints: 0,
+        nextMilestone: null
     },
-    availablePlans: []
+    motivationalMessage: '',
+    isLoading: true
 };
 
 // Inicializar dashboard
 window.initDashboard = function() {
-    console.log('🏠 Inicializando dashboard');
-    loadDashboardData();
+    console.log('🏠 Inicializando dashboard personalizado');
+    loadUserPlan();
     renderDashboard();
     setupDashboardListeners();
 };
 
-// Cargar datos del dashboard
-async function loadDashboardData() {
+// Cargar plan activo del usuario
+async function loadUserPlan() {
     try {
+        dashboardState.isLoading = true;
         const user = auth.currentUser;
         if (!user) return;
         
         dashboardState.user = user;
         
-        // Simular datos (más tarde conectaremos con Firestore)
-        dashboardState.currentPlan = {
-            type: 'running',
-            name: 'Plan 5K para Principiantes',
-            week: 3,
-            totalWeeks: 8,
-            day: 2,
-            totalDays: 5,
-            nextWorkout: 'Correr 20 minutos'
-        };
+        // Cargar perfil y plan activo desde Firestore
+        const userDoc = doc(db, 'users', user.uid);
+        const userSnap = await getDoc(userDoc);
         
-        dashboardState.weeklyProgress = 65;
+        if (userSnap.exists()) {
+            const userData = userSnap.data();
+            dashboardState.userProfile = userData;
+            dashboardState.activePlan = userData.activePlan;
+            dashboardState.quickStats = {
+                completedWorkouts: userData.stats?.totalWorkouts || 0,
+                currentStreak: userData.stats?.currentStreak || 0,
+                totalPoints: userData.stats?.totalPoints || 0,
+                nextMilestone: calculateNextMilestone(userData.stats?.totalPoints || 0)
+            };
+        }
         
-        dashboardState.todayChallenge = {
-            type: 'strength',
-            title: 'Reto de Flexiones',
-            description: '30 flexiones en tu nivel',
-            completed: false,
-            difficulty: 'intermedio'
-        };
-        
-        dashboardState.achievements = [
-            {
-                id: 'first_week',
-                title: 'Primera Semana',
-                description: 'Completa tu primera semana de entrenamiento',
-                progress: 85,
-                unlocked: false,
-                icon: '🏁'
-            },
-            {
-                id: 'consistency',
-                title: 'Consistencia',
-                description: 'Entrena 5 días seguidos',
-                progress: 60,
-                unlocked: false,
-                icon: '📅'
+        // Si no hay plan activo, intentar cargar desde localStorage
+        if (!dashboardState.activePlan) {
+            const savedPlan = localStorage.getItem('entrenoapp_active_plan');
+            if (savedPlan) {
+                dashboardState.activePlan = JSON.parse(savedPlan);
             }
-        ];
+        }
         
-        dashboardState.ranking = {
-            daily: { position: 12, total: 156 },
-            weekly: { position: 8, total: 156 },
-            monthly: { position: 15, total: 156 }
-        };
+        // Generar entrenamiento de hoy
+        if (dashboardState.activePlan) {
+            dashboardState.todaysWorkout = generateTodaysWorkout(dashboardState.activePlan);
+            dashboardState.weekProgress = calculateWeekProgress(dashboardState.activePlan);
+        }
         
-        dashboardState.availablePlans = [
-            {
-                id: 'gym_beginner',
-                type: 'gym',
-                name: 'Gym para Principiantes',
-                duration: '6 semanas',
-                description: 'Aprende lo básico del gimnasio',
-                difficulty: 'principiante',
-                icon: '🏋️'
-            },
-            {
-                id: 'crossfit_intro',
-                type: 'crossfit',
-                name: 'Introducción a CrossFit',
-                duration: '4 semanas',
-                description: 'Movimientos funcionales básicos',
-                difficulty: 'principiante',
-                icon: '⚡'
-            }
-        ];
+        // Cargar reto diario (si está disponible)
+        await loadTodayChallenge();
+        
+        // Generar mensaje motivacional
+        dashboardState.motivationalMessage = generateMotivationalMessage();
+        
+        console.log('✅ Datos del dashboard cargados:', dashboardState);
         
     } catch (error) {
         console.error('❌ Error cargando datos del dashboard:', error);
+    } finally {
+        dashboardState.isLoading = false;
+        renderDashboard();
     }
+}
+
+// Generar entrenamiento de hoy
+function generateTodaysWorkout(plan) {
+    if (!plan) return null;
+    
+    const today = new Date();
+    const dayOfWeek = today.getDay(); // 0 = Domingo, 1 = Lunes, etc.
+    const currentWeek = plan.currentWeek || 1;
+    
+    // Mapear días de entrenamiento según frecuencia
+    const trainingDays = getTrainingDays(plan.frequency);
+    const isTrainingDay = trainingDays.includes(dayOfWeek);
+    
+    if (!isTrainingDay) {
+        return {
+            type: 'rest',
+            title: 'Día de Descanso',
+            description: 'Aprovecha para recuperarte y prepararte para el próximo entrenamiento',
+            icon: '😴',
+            duration: null,
+            nextTrainingDay: getNextTrainingDay(dayOfWeek, trainingDays)
+        };
+    }
+    
+    // Generar entrenamiento específico según tipo de plan
+    switch (plan.type) {
+        case 'running':
+            return generateRunningWorkout(plan, currentWeek);
+        case 'functional':
+            return generateFunctionalWorkout(plan, currentWeek);
+        case 'gym':
+        default:
+            return generateGymWorkout(plan, currentWeek);
+    }
+}
+
+// Generar entrenamiento de running
+function generateRunningWorkout(plan, week) {
+    const baseDistance = plan.targetDistance || 5;
+    const progression = Math.min(week / plan.duration, 1);
+    const todayDistance = Math.round((baseDistance * 0.3 + baseDistance * 0.7 * progression) * 10) / 10;
+    
+    return {
+        type: 'running',
+        title: `Sesión de Running - ${todayDistance}km`,
+        description: `Corre ${todayDistance}km a ritmo cómodo. Semana ${week} de ${plan.duration}`,
+        icon: '🏃‍♂️',
+        duration: Math.round(todayDistance * 6), // Estimación 6 min/km
+        distance: todayDistance,
+        intensity: plan.focus === 'speed' ? 'high' : 'moderate',
+        instructions: [
+            'Calentamiento: 5 minutos caminando',
+            `Correr ${todayDistance}km a ritmo constante`,
+            'Enfriamiento: 5 minutos caminando',
+            'Estiramientos: 10 minutos'
+        ]
+    };
+}
+
+// Generar entrenamiento funcional
+function generateFunctionalWorkout(plan, week) {
+    const workouts = [
+        {
+            title: 'Circuito de Fuerza',
+            exercises: ['Burpees', 'Sentadillas', 'Flexiones', 'Mountain Climbers'],
+            sets: 4,
+            reps: '45s trabajo / 15s descanso'
+        },
+        {
+            title: 'HIIT Metabólico',
+            exercises: ['Jumping Jacks', 'High Knees', 'Plancha', 'Squat Jumps'],
+            sets: 5,
+            reps: '30s trabajo / 30s descanso'
+        },
+        {
+            title: 'Fuerza Funcional',
+            exercises: ['Lunges', 'Push-ups', 'Dead Bug', 'Russian Twists'],
+            sets: 3,
+            reps: '12-15 repeticiones'
+        }
+    ];
+    
+    const todayWorkout = workouts[week % workouts.length];
+    
+    return {
+        type: 'functional',
+        title: todayWorkout.title,
+        description: `Entrenamiento funcional - Semana ${week} de ${plan.duration}`,
+        icon: '💪',
+        duration: 45,
+        exercises: todayWorkout.exercises,
+        sets: todayWorkout.sets,
+        reps: todayWorkout.reps,
+        intensity: plan.intensity || 'moderate'
+    };
+}
+
+// Generar entrenamiento de gimnasio
+function generateGymWorkout(plan, week) {
+    const splits = {
+        'full_body': ['Cuerpo Completo'],
+        'upper_lower': ['Tren Superior', 'Tren Inferior'],
+        'push_pull_legs': ['Empuje', 'Tirón', 'Piernas'],
+        'body_parts': ['Pecho', 'Espalda', 'Piernas', 'Hombros', 'Brazos']
+    };
+    
+    const currentSplit = splits[plan.split] || splits['full_body'];
+    const today = new Date().getDay();
+    const workoutIndex = today % currentSplit.length;
+    const todayMuscleGroup = currentSplit[workoutIndex];
+    
+    return {
+        type: 'gym',
+        title: `Entrenamiento de ${todayMuscleGroup}`,
+        description: `Rutina ${plan.split.replace('_', ' ')} - Semana ${week} de ${plan.duration}`,
+        icon: '🏋️‍♂️',
+        duration: 60,
+        muscleGroup: todayMuscleGroup,
+        sets: plan.focus === 'strength' ? '4-6 series' : '3-4 series',
+        reps: plan.focus === 'strength' ? '4-6 reps' : '8-12 reps',
+        intensity: plan.focus === 'strength' ? 'high' : 'moderate'
+    };
+}
+
+// Obtener días de entrenamiento según frecuencia
+function getTrainingDays(frequency) {
+    const schedules = {
+        3: [1, 3, 5], // Lunes, Miércoles, Viernes
+        4: [1, 2, 4, 5], // Lunes, Martes, Jueves, Viernes
+        5: [1, 2, 3, 4, 5], // Lunes a Viernes
+        6: [1, 2, 3, 4, 5, 6] // Lunes a Sábado
+    };
+    return schedules[frequency] || schedules[3];
+}
+
+// Obtener próximo día de entrenamiento
+function getNextTrainingDay(currentDay, trainingDays) {
+    for (let i = 1; i <= 7; i++) {
+        const nextDay = (currentDay + i) % 7;
+        if (trainingDays.includes(nextDay)) {
+            const dayNames = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+            return dayNames[nextDay];
+        }
+    }
+    return 'Próximamente';
+}
+
+// Calcular progreso de la semana
+function calculateWeekProgress(plan) {
+    if (!plan) return 0;
+    
+    const today = new Date();
+    const startOfWeek = new Date(today.setDate(today.getDate() - today.getDay() + 1));
+    const currentDay = new Date().getDay();
+    
+    const trainingDays = getTrainingDays(plan.frequency);
+    const completedDays = trainingDays.filter(day => day < currentDay).length;
+    
+    return Math.round((completedDays / trainingDays.length) * 100);
+}
+
+// Cargar reto diario
+async function loadTodayChallenge() {
+    try {
+        // Esto se integrará con el sistema de challenges
+        dashboardState.todayChallenge = {
+            name: 'Flexiones',
+            target: 20,
+            points: 15,
+            completed: false,
+            type: 'reps'
+        };
+    } catch (error) {
+        console.error('❌ Error cargando reto diario:', error);
+    }
+}
+
+// Generar mensaje motivacional
+function generateMotivationalMessage() {
+    const messages = [
+        '¡Es hora de superar tus límites! 💪',
+        '¡Cada entrenamiento te acerca a tu objetivo! 🎯',
+        '¡Tu única competencia es quien fuiste ayer! 🚀',
+        '¡La constancia es la clave del éxito! ⭐',
+        '¡Hoy es el día perfecto para entrenar! 🔥',
+        '¡Tu futuro yo te lo agradecerá! 💯'
+    ];
+    
+    const today = new Date().getDate();
+    return messages[today % messages.length];
+}
+
+// Calcular próximo hito
+function calculateNextMilestone(currentPoints) {
+    const milestones = [100, 250, 500, 1000, 2500, 5000, 10000];
+    const nextMilestone = milestones.find(milestone => milestone > currentPoints);
+    return nextMilestone || null;
 }
 
 // Renderizar dashboard
@@ -110,58 +293,70 @@ function renderDashboard() {
     const container = document.querySelector('.dashboard-container');
     if (!container) return;
     
-    const user = dashboardState.user;
-    const firstName = user?.displayName?.split(' ')[0] || user?.email?.split('@')[0] || 'Usuario';
-    
-    container.innerHTML = `
-        ${renderWelcomeSection(firstName)}
-        ${renderCurrentPlan()}
-        ${renderTodayChallenge()}
-        ${renderAchievements()}
-        ${renderRanking()}
-        ${renderAvailablePlans()}
-        ${renderQuickActions()}
-    `;
-    
-    // Añadir animaciones escalonadas
-    const cards = container.querySelectorAll('.glass-card');
-    cards.forEach((card, index) => {
-        card.style.animationDelay = `${index * 0.1}s`;
-        card.classList.add('glass-fade-in');
-    });
-}
-
-// Sección de bienvenida
-function renderWelcomeSection(firstName) {
-    const currentHour = new Date().getHours();
-    let greeting = 'Buenas tardes';
-    let icon = '☀️';
-    
-    if (currentHour < 12) {
-        greeting = 'Buenos días';
-        icon = '🌅';
-    } else if (currentHour < 18) {
-        greeting = 'Buenas tardes';
-        icon = '☀️';
-    } else {
-        greeting = 'Buenas noches';
-        icon = '🌙';
+    if (dashboardState.isLoading) {
+        container.innerHTML = `
+            <div class="loading-dashboard">
+                <div class="loading-spinner"></div>
+                <p>Cargando tu plan personalizado...</p>
+            </div>
+        `;
+        return;
     }
     
+    if (!dashboardState.activePlan) {
+        container.innerHTML = renderNoPlan();
+        return;
+    }
+    
+    container.innerHTML = `
+        <div class="personalized-dashboard glass-fade-in">
+            <!-- Header personalizado -->
+            ${renderPersonalizedHeader()}
+            
+            <!-- Plan activo central -->
+            ${renderActivePlan()}
+            
+            <!-- Entrenamiento de hoy -->
+            ${renderTodaysWorkout()}
+            
+            <!-- Progreso semanal -->
+            ${renderWeeklyProgress()}
+            
+            <!-- Reto diario y estadísticas -->
+            <div class="dashboard-grid">
+                ${renderTodayChallenge()}
+                ${renderQuickStats()}
+            </div>
+            
+            <!-- Acciones rápidas -->
+            ${renderQuickActions()}
+        </div>
+    `;
+}
+
+// Renderizar header personalizado
+function renderPersonalizedHeader() {
+    const user = dashboardState.userProfile;
+    const plan = dashboardState.activePlan;
+    
     return `
-        <div class="welcome-section glass-card glass-gradient-blue mb-lg">
-            <div class="welcome-content">
-                <div class="welcome-text">
-                    <h2 class="welcome-greeting">
-                        ${icon} ${greeting}, ${firstName}
-                    </h2>
-                    <p class="welcome-message">
-                        ¡Listo para entrenar hoy? 💪
-                    </p>
+        <div class="personalized-header glass-card mb-lg">
+            <div class="header-content">
+                <div class="user-welcome">
+                    <h1 class="welcome-title">
+                        ¡Hola, ${user?.displayName || 'Atleta'}! 👋
+                    </h1>
+                    <p class="motivational-message">${dashboardState.motivationalMessage}</p>
                 </div>
-                <div class="welcome-avatar">
-                    <div class="avatar-circle">
-                        ${firstName.charAt(0).toUpperCase()}
+                <div class="plan-info">
+                    <div class="active-plan-badge">
+                        <span class="plan-icon">${getPlanIcon(plan.type)}</span>
+                        <div class="plan-details">
+                            <div class="plan-name">${plan.name}</div>
+                            <div class="plan-progress">
+                                Semana ${plan.currentWeek || 1} de ${plan.duration}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -169,337 +364,309 @@ function renderWelcomeSection(firstName) {
     `;
 }
 
-// Plan activo actual
-function renderCurrentPlan() {
-    const plan = dashboardState.currentPlan;
-    if (!plan) return '';
-    
-    const progressPercentage = ((plan.week - 1) / plan.totalWeeks) * 100;
+// Renderizar plan activo
+function renderActivePlan() {
+    const plan = dashboardState.activePlan;
+    const progressPercentage = ((plan.currentWeek || 1) / plan.duration) * 100;
     
     return `
-        <div class="current-plan glass-card glass-card-active mb-lg">
-            <div class="card-header">
-                <h3 class="card-title">📋 Plan Activo</h3>
-                <span class="plan-badge ${plan.type}">${getPlanTypeIcon(plan.type)} ${plan.type}</span>
+        <div class="active-plan-card glass-card mb-lg">
+            <div class="plan-header">
+                <h2 class="plan-title">📋 Tu Plan Activo</h2>
+                <button class="plan-menu-btn glass-button glass-button-secondary btn-sm" onclick="window.showPlanMenu()">
+                    ⚙️ Gestionar
+                </button>
             </div>
             
-            <div class="plan-info">
-                <h4 class="plan-name">${plan.name}</h4>
-                <p class="plan-progress-text">
-                    Semana ${plan.week} de ${plan.totalWeeks} • Día ${plan.day} de ${plan.totalDays}
-                </p>
+            <div class="plan-overview">
+                <div class="plan-main-info">
+                    <div class="plan-type-badge ${plan.type}">
+                        ${getPlanIcon(plan.type)} ${getActivityLabel(plan.type)}
+                    </div>
+                    <h3 class="plan-name">${plan.name}</h3>
+                    <p class="plan-description">${plan.description}</p>
+                </div>
                 
-                <div class="progress-bar-container">
+                <div class="plan-progress-section">
+                    <div class="progress-info">
+                        <span class="progress-label">Progreso del Plan</span>
+                        <span class="progress-value">${Math.round(progressPercentage)}%</span>
+                    </div>
                     <div class="progress-bar">
                         <div class="progress-fill" style="width: ${progressPercentage}%"></div>
                     </div>
-                    <span class="progress-text">${Math.round(progressPercentage)}%</span>
-                </div>
-                
-                <div class="next-workout">
-                    <p class="next-workout-label">Próximo entrenamiento:</p>
-                    <p class="next-workout-description">${plan.nextWorkout}</p>
-                </div>
-                
-                <div class="plan-actions">
-                    <button class="glass-button glass-button-primary" onclick="startWorkout()">
-                        ▶️ Comenzar Ahora
-                    </button>
-                    <button class="glass-button" onclick="viewPlan()">
-                        👁️ Ver Plan Completo
-                    </button>
+                    <div class="plan-stats-grid">
+                        <div class="plan-stat">
+                            <span class="stat-value">${plan.frequency}x</span>
+                            <span class="stat-label">por semana</span>
+                        </div>
+                        <div class="plan-stat">
+                            <span class="stat-value">${plan.duration}</span>
+                            <span class="stat-label">semanas</span>
+                        </div>
+                        <div class="plan-stat">
+                            <span class="stat-value">${plan.currentWeek || 1}</span>
+                            <span class="stat-label">semana actual</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     `;
 }
 
-// Reto del día
+// Renderizar entrenamiento de hoy
+function renderTodaysWorkout() {
+    const workout = dashboardState.todaysWorkout;
+    if (!workout) return '';
+    
+    return `
+        <div class="todays-workout glass-card mb-lg">
+            <div class="workout-header">
+                <h2 class="workout-title">🎯 Entrenamiento de Hoy</h2>
+                <div class="workout-date">${new Date().toLocaleDateString('es-ES', { 
+                    weekday: 'long', 
+                    day: 'numeric', 
+                    month: 'long' 
+                })}</div>
+            </div>
+            
+            ${workout.type === 'rest' ? renderRestDay(workout) : renderActiveWorkout(workout)}
+        </div>
+    `;
+}
+
+// Renderizar día de descanso
+function renderRestDay(workout) {
+    return `
+        <div class="rest-day-card">
+            <div class="rest-icon">${workout.icon}</div>
+            <h3 class="rest-title">${workout.title}</h3>
+            <p class="rest-description">${workout.description}</p>
+            <div class="next-training">
+                <span class="next-label">Próximo entrenamiento:</span>
+                <span class="next-day">${workout.nextTrainingDay}</span>
+            </div>
+        </div>
+    `;
+}
+
+// Renderizar entrenamiento activo
+function renderActiveWorkout(workout) {
+    return `
+        <div class="active-workout-card">
+            <div class="workout-info">
+                <div class="workout-icon">${workout.icon}</div>
+                <div class="workout-details">
+                    <h3 class="workout-name">${workout.title}</h3>
+                    <p class="workout-description">${workout.description}</p>
+                    
+                    <div class="workout-specs">
+                        ${workout.duration ? `
+                            <div class="spec-item">
+                                <span class="spec-icon">⏱️</span>
+                                <span class="spec-text">${workout.duration} min</span>
+                            </div>
+                        ` : ''}
+                        
+                        ${workout.distance ? `
+                            <div class="spec-item">
+                                <span class="spec-icon">📏</span>
+                                <span class="spec-text">${workout.distance} km</span>
+                            </div>
+                        ` : ''}
+                        
+                        ${workout.sets ? `
+                            <div class="spec-item">
+                                <span class="spec-icon">🔢</span>
+                                <span class="spec-text">${workout.sets} ${workout.reps || 'series'}</span>
+                            </div>
+                        ` : ''}
+                    </div>
+                </div>
+            </div>
+            
+            <div class="workout-actions">
+                <button class="glass-button glass-button-primary" onclick="window.startTodaysWorkout()">
+                    🚀 Empezar Entrenamiento
+                </button>
+                <button class="glass-button glass-button-secondary" onclick="window.viewWorkoutDetails()">
+                    📋 Ver Detalles
+                </button>
+            </div>
+        </div>
+    `;
+}
+
+// Renderizar progreso semanal
+function renderWeeklyProgress() {
+    return `
+        <div class="weekly-progress glass-card mb-lg">
+            <h3 class="progress-title">📊 Progreso de esta Semana</h3>
+            <div class="week-progress-bar">
+                <div class="week-progress-fill" style="width: ${dashboardState.weekProgress}%"></div>
+            </div>
+            <div class="progress-text">
+                ${dashboardState.weekProgress}% completado esta semana
+            </div>
+        </div>
+    `;
+}
+
+// Renderizar reto diario
 function renderTodayChallenge() {
     const challenge = dashboardState.todayChallenge;
     if (!challenge) return '';
     
     return `
-        <div class="today-challenge glass-card glass-gradient-orange mb-lg">
-            <div class="card-header">
-                <h3 class="card-title">🏆 Reto de Hoy</h3>
-                <span class="challenge-difficulty ${challenge.difficulty}">
-                    ${getDifficultyIcon(challenge.difficulty)} ${challenge.difficulty}
-                </span>
-            </div>
-            
+        <div class="today-challenge glass-card">
+            <h3 class="challenge-title">🎯 Reto Diario</h3>
             <div class="challenge-content">
-                <h4 class="challenge-title">${challenge.title}</h4>
-                <p class="challenge-description">${challenge.description}</p>
-                
-                <div class="challenge-actions">
-                    ${challenge.completed ? `
-                        <div class="challenge-completed">
-                            <span class="completed-icon">✅</span>
-                            <span>¡Reto completado!</span>
-                        </div>
-                    ` : `
-                        <button class="glass-button glass-button-primary" onclick="startChallenge()">
-                            🚀 Aceptar Reto
-                        </button>
-                    `}
+                <div class="challenge-name">${challenge.name}</div>
+                <div class="challenge-target">
+                    ${challenge.type === 'reps' ? 
+                        `${challenge.target} repeticiones` : 
+                        `${challenge.target} segundos`
+                    }
                 </div>
+                <div class="challenge-points">+${challenge.points} puntos</div>
+                <button class="glass-button glass-button-primary btn-sm" onclick="window.navigateToPage('challenges')">
+                    ${challenge.completed ? '✅ Completado' : '🎯 Hacer Reto'}
+                </button>
             </div>
         </div>
     `;
 }
 
-// Logros en progreso
-function renderAchievements() {
-    const achievements = dashboardState.achievements;
-    if (!achievements.length) return '';
+// Renderizar estadísticas rápidas
+function renderQuickStats() {
+    const stats = dashboardState.quickStats;
     
     return `
-        <div class="achievements glass-card glass-gradient-purple mb-lg">
-            <div class="card-header">
-                <h3 class="card-title">🎯 Logros en Progreso</h3>
-                <button class="glass-button glass-button-sm" onclick="viewAllAchievements()">
-                    Ver Todos
-                </button>
-            </div>
-            
-            <div class="achievements-list">
-                ${achievements.map(achievement => `
-                    <div class="achievement-item">
-                        <div class="achievement-icon">${achievement.icon}</div>
-                        <div class="achievement-info">
-                            <h5 class="achievement-title">${achievement.title}</h5>
-                            <p class="achievement-description">${achievement.description}</p>
-                            <div class="achievement-progress">
-                                <div class="progress-bar small">
-                                    <div class="progress-fill" style="width: ${achievement.progress}%"></div>
-                                </div>
-                                <span class="progress-text">${achievement.progress}%</span>
-                            </div>
-                        </div>
+        <div class="quick-stats glass-card">
+            <h3 class="stats-title">📈 Tus Estadísticas</h3>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-value">${stats.completedWorkouts}</div>
+                    <div class="stat-label">Entrenamientos</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">${stats.currentStreak}</div>
+                    <div class="stat-label">Racha</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">${stats.totalPoints}</div>
+                    <div class="stat-label">Puntos</div>
+                </div>
+                ${stats.nextMilestone ? `
+                    <div class="stat-item">
+                        <div class="stat-value">${stats.nextMilestone}</div>
+                        <div class="stat-label">Próximo hito</div>
                     </div>
-                `).join('')}
+                ` : ''}
             </div>
         </div>
     `;
 }
 
-// Ranking
-function renderRanking() {
-    const ranking = dashboardState.ranking;
-    
-    return `
-        <div class="ranking glass-card glass-gradient-green mb-lg">
-            <div class="card-header">
-                <h3 class="card-title">📊 Tu Posición</h3>
-                <button class="glass-button glass-button-sm" onclick="viewLeaderboard()">
-                    Ver Ranking
-                </button>
-            </div>
-            
-            <div class="ranking-grid">
-                <div class="ranking-item">
-                    <div class="ranking-period">Diario</div>
-                    <div class="ranking-position">#${ranking.daily.position}</div>
-                    <div class="ranking-total">de ${ranking.daily.total}</div>
-                </div>
-                <div class="ranking-item">
-                    <div class="ranking-period">Semanal</div>
-                    <div class="ranking-position">#${ranking.weekly.position}</div>
-                    <div class="ranking-total">de ${ranking.weekly.total}</div>
-                </div>
-                <div class="ranking-item">
-                    <div class="ranking-period">Mensual</div>
-                    <div class="ranking-position">#${ranking.monthly.position}</div>
-                    <div class="ranking-total">de ${ranking.monthly.total}</div>
-                </div>
-            </div>
-        </div>
-    `;
-}
-
-// Planes disponibles
-function renderAvailablePlans() {
-    const plans = dashboardState.availablePlans;
-    if (!plans.length) return '';
-    
-    return `
-        <div class="available-plans glass-card mb-lg">
-            <div class="card-header">
-                <h3 class="card-title">📚 Planes Disponibles</h3>
-                <button class="glass-button glass-button-sm" onclick="viewAllPlans()">
-                    Ver Todos
-                </button>
-            </div>
-            
-            <div class="plans-grid">
-                ${plans.map(plan => `
-                    <div class="plan-item glass-effect" onclick="selectPlan('${plan.id}')">
-                        <div class="plan-icon">${plan.icon}</div>
-                        <div class="plan-info">
-                            <h5 class="plan-name">${plan.name}</h5>
-                            <p class="plan-duration">${plan.duration}</p>
-                            <p class="plan-description">${plan.description}</p>
-                            <span class="plan-difficulty ${plan.difficulty}">
-                                ${getDifficultyIcon(plan.difficulty)} ${plan.difficulty}
-                            </span>
-                        </div>
-                    </div>
-                `).join('')}
-            </div>
-        </div>
-    `;
-}
-
-// Acciones rápidas
+// Renderizar acciones rápidas
 function renderQuickActions() {
     return `
         <div class="quick-actions glass-card">
-            <div class="card-header">
-                <h3 class="card-title">⚡ Acciones Rápidas</h3>
-            </div>
-            
+            <h3 class="actions-title">⚡ Acciones Rápidas</h3>
             <div class="actions-grid">
-                <button class="action-button glass-effect" onclick="navigateToPage('workouts')">
-                    <div class="action-icon">💪</div>
-                    <div class="action-label">Entrenar</div>
+                <button class="action-btn glass-button" onclick="window.navigateToPage('running')">
+                    <span class="action-icon">🏃‍♂️</span>
+                    <span class="action-text">Empezar Running</span>
                 </button>
-                <button class="action-button glass-effect" onclick="navigateToPage('running')">
-                    <div class="action-icon">🏃</div>
-                    <div class="action-label">Correr</div>
+                <button class="action-btn glass-button" onclick="window.navigateToPage('workouts')">
+                    <span class="action-icon">💪</span>
+                    <span class="action-text">Ir al Gym</span>
                 </button>
-                <button class="action-button glass-effect" onclick="navigateToPage('challenges')">
-                    <div class="action-icon">🏆</div>
-                    <div class="action-label">Retos</div>
+                <button class="action-btn glass-button" onclick="window.navigateToPage('challenges')">
+                    <span class="action-icon">🎯</span>
+                    <span class="action-text">Ver Retos</span>
                 </button>
-                <button class="action-button glass-effect" onclick="viewProgress()">
-                    <div class="action-icon">📈</div>
-                    <div class="action-label">Progreso</div>
+                <button class="action-btn glass-button" onclick="window.navigateToPage('profile')">
+                    <span class="action-icon">📊</span>
+                    <span class="action-text">Mi Perfil</span>
                 </button>
             </div>
         </div>
     `;
 }
 
-// Configurar listeners del dashboard
+// Renderizar cuando no hay plan
+function renderNoPlan() {
+    return `
+        <div class="no-plan-state glass-card text-center">
+            <div class="no-plan-icon mb-lg">📋</div>
+            <h2 class="no-plan-title">No tienes un plan activo</h2>
+            <p class="no-plan-description text-secondary">
+                Completa el cuestionario para generar tu plan personalizado
+            </p>
+            <button class="glass-button glass-button-primary" onclick="window.restartOnboarding()">
+                🎯 Crear Mi Plan
+            </button>
+        </div>
+    `;
+}
+
+// Funciones auxiliares
+function getPlanIcon(type) {
+    const icons = {
+        'running': '🏃‍♂️',
+        'functional': '💪',
+        'gym': '🏋️‍♂️'
+    };
+    return icons[type] || '🎯';
+}
+
+function getActivityLabel(type) {
+    const labels = {
+        'running': 'Running',
+        'functional': 'Funcional',
+        'gym': 'Gimnasio'
+    };
+    return labels[type] || 'Entrenamiento';
+}
+
+// Configurar listeners
 function setupDashboardListeners() {
-    // Refresh de datos cada 5 minutos
-    setInterval(loadDashboardData, 5 * 60 * 1000);
-    
-    // Pull to refresh (para móviles)
-    let isRefreshing = false;
-    let startY = 0;
-    
-    document.addEventListener('touchstart', (e) => {
-        startY = e.touches[0].clientY;
-    });
-    
-    document.addEventListener('touchmove', (e) => {
-        const currentY = e.touches[0].clientY;
-        const pullDistance = currentY - startY;
-        
-        if (pullDistance > 100 && window.scrollY === 0 && !isRefreshing) {
-            isRefreshing = true;
-            refreshDashboard();
-        }
-    });
+    // Los listeners se configurarán cuando se implementen las funciones
 }
 
-// Refresh del dashboard
-async function refreshDashboard() {
-    console.log('🔄 Actualizando dashboard...');
+// Funciones globales para interacción
+window.showPlanMenu = function() {
+    console.log('Mostrando menú del plan');
+    // TODO: Implementar menú de gestión del plan
+};
+
+window.startTodaysWorkout = function() {
+    const workout = dashboardState.todaysWorkout;
+    if (!workout) return;
     
-    try {
-        await loadDashboardData();
-        renderDashboard();
-        
-        // Mostrar feedback
-        showToast('Dashboard actualizado', 'success');
-        
-    } catch (error) {
-        console.error('❌ Error actualizando dashboard:', error);
-        showToast('Error actualizando datos', 'error');
-    } finally {
-        isRefreshing = false;
+    switch (workout.type) {
+        case 'running':
+            window.navigateToPage('running');
+            break;
+        case 'functional':
+        case 'gym':
+            window.navigateToPage('workouts');
+            break;
     }
-}
-
-// Funciones de utilidad
-function getPlanTypeIcon(type) {
-    const icons = {
-        'running': '🏃',
-        'gym': '🏋️',
-        'crossfit': '⚡',
-        'functional': '💪'
-    };
-    return icons[type] || '📋';
-}
-
-function getDifficultyIcon(difficulty) {
-    const icons = {
-        'principiante': '🟢',
-        'intermedio': '🟡',
-        'avanzado': '🔴'
-    };
-    return icons[difficulty] || '⚪';
-}
-
-function showToast(message, type = 'info') {
-    const toast = document.createElement('div');
-    toast.className = `toast glass-effect ${type}`;
-    toast.textContent = message;
-    
-    document.body.appendChild(toast);
-    
-    setTimeout(() => {
-        toast.classList.add('show');
-    }, 100);
-    
-    setTimeout(() => {
-        toast.classList.remove('show');
-        setTimeout(() => toast.remove(), 300);
-    }, 3000);
-}
-
-// Funciones de navegación (placeholders)
-window.startWorkout = function() {
-    console.log('🏋️ Iniciando entrenamiento...');
-    navigateToPage('workouts');
 };
 
-window.viewPlan = function() {
-    console.log('👁️ Viendo plan completo...');
-    // Implementar vista detallada del plan
+window.viewWorkoutDetails = function() {
+    console.log('Viendo detalles del entrenamiento:', dashboardState.todaysWorkout);
+    // TODO: Implementar vista de detalles
 };
 
-window.startChallenge = function() {
-    console.log('🏆 Iniciando reto...');
-    navigateToPage('challenges');
+window.restartOnboarding = function() {
+    if (confirm('¿Quieres crear un nuevo plan personalizado? Esto reemplazará tu plan actual.')) {
+        localStorage.removeItem('entrenoapp_active_plan');
+        window.navigateToPage('onboarding');
+    }
 };
 
-window.viewAllAchievements = function() {
-    console.log('🎯 Viendo todos los logros...');
-    // Implementar vista de logros
-};
-
-window.viewLeaderboard = function() {
-    console.log('📊 Viendo ranking...');
-    // Implementar leaderboard
-};
-
-window.viewAllPlans = function() {
-    console.log('📚 Viendo todos los planes...');
-    navigateToPage('workouts');
-};
-
-window.selectPlan = function(planId) {
-    console.log('📋 Seleccionando plan:', planId);
-    // Implementar selección de plan
-};
-
-window.viewProgress = function() {
-    console.log('📈 Viendo progreso...');
-    // Implementar vista de progreso
-};
-
-console.log('🏠 Módulo Dashboard cargado');
+console.log('🏠 Dashboard personalizado cargado');

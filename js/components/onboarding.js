@@ -417,6 +417,9 @@ async function finishOnboarding() {
             throw new Error('Usuario no autenticado');
         }
         
+        // Generar plan personalizado automáticamente
+        const personalizedPlan = await generatePersonalizedPlan(onboardingState.userData);
+        
         // Actualizar perfil en Firestore
         const userDoc = doc(db, 'users', user.uid);
         await updateDoc(userDoc, {
@@ -430,21 +433,25 @@ async function finishOnboarding() {
                 language: 'es',
                 units: 'metric'
             },
+            activePlan: personalizedPlan,
             updatedAt: serverTimestamp()
         });
+        
+        // Guardar plan en localStorage para acceso rápido
+        localStorage.setItem('entrenoapp_active_plan', JSON.stringify(personalizedPlan));
         
         // Limpiar datos de onboarding de localStorage
         localStorage.removeItem('entrenoapp_onboarding');
         
-        console.log('✅ Onboarding completado exitosamente');
+        console.log('✅ Onboarding completado con plan personalizado:', personalizedPlan);
         
-        // Mostrar mensaje de éxito
-        showSuccess();
+        // Mostrar mensaje de éxito con el plan generado
+        showSuccess(personalizedPlan);
         
         // Redirigir al dashboard después de un momento
         setTimeout(() => {
             window.loadPage('dashboard');
-        }, 3000);
+        }, 4000);
         
     } catch (error) {
         console.error('❌ Error finalizando onboarding:', error);
@@ -477,34 +484,264 @@ function getPreferencesFromOnboarding(responses) {
     };
 }
 
+// Generar plan personalizado basado en las respuestas del onboarding
+async function generatePersonalizedPlan(userData) {
+    try {
+        console.log('🎯 Generando plan personalizado...', userData);
+        
+        const primaryActivity = userData.activities[0] || 'gym';
+        const experience = userData.experience || 'beginner';
+        const availability = userData.availability || 'medium';
+        const goals = userData.goals || [];
+        
+        // Determinar duración del plan basado en disponibilidad
+        const planDuration = {
+            'low': 4,      // 4 semanas
+            'medium': 8,   // 8 semanas 
+            'high': 12     // 12 semanas
+        }[availability] || 8;
+        
+        // Determinar frecuencia semanal
+        const weeklyFrequency = {
+            'low': 3,      // 3 días por semana
+            'medium': 4,   // 4 días por semana
+            'high': 5      // 5 días por semana
+        }[availability] || 4;
+        
+        let plan = {};
+        
+        // Generar plan según actividad principal
+        switch (primaryActivity) {
+            case 'running':
+                plan = generateRunningPlan(experience, planDuration, weeklyFrequency, goals);
+                break;
+            case 'functional':
+                plan = generateFunctionalPlan(experience, planDuration, weeklyFrequency, goals, userData.equipment);
+                break;
+            case 'gym':
+            default:
+                plan = generateGymPlan(experience, planDuration, weeklyFrequency, goals, userData.equipment);
+                break;
+        }
+        
+        // Agregar metadatos del plan
+        plan.metadata = {
+            generatedAt: new Date().toISOString(),
+            basedOnOnboarding: true,
+            primaryActivity: primaryActivity,
+            experience: experience,
+            availability: availability,
+            goals: goals,
+            planDuration: planDuration,
+            weeklyFrequency: weeklyFrequency
+        };
+        
+        console.log('✅ Plan personalizado generado:', plan);
+        return plan;
+        
+    } catch (error) {
+        console.error('❌ Error generando plan personalizado:', error);
+        // Plan por defecto si hay error
+        return generateDefaultPlan();
+    }
+}
+
+// Generar plan de running personalizado
+function generateRunningPlan(experience, duration, frequency, goals) {
+    const isWeightLoss = goals.includes('lose_weight');
+    const isEndurance = goals.includes('improve_endurance');
+    const isSpeed = goals.includes('get_stronger'); // Adaptamos fuerza a velocidad para running
+    
+    let targetDistance = {
+        'beginner': isEndurance ? 10 : 5,    // 5-10km objetivo
+        'intermediate': isEndurance ? 21 : 10, // 10-21km objetivo  
+        'advanced': isEndurance ? 42 : 21     // 21-42km objetivo
+    }[experience] || 5;
+    
+    return {
+        type: 'running',
+        name: `Plan de Running ${experience} - ${targetDistance}km`,
+        description: `Plan personalizado de ${duration} semanas para alcanzar ${targetDistance}km`,
+        targetDistance: targetDistance,
+        duration: duration,
+        frequency: frequency,
+        currentWeek: 1,
+        currentSession: 1,
+        status: 'active',
+        startDate: new Date().toISOString(),
+        focus: isWeightLoss ? 'weight_loss' : isSpeed ? 'speed' : 'endurance',
+        progressTracking: {
+            totalSessions: 0,
+            completedSessions: 0,
+            totalDistance: 0,
+            averagePace: 0,
+            bestDistance: 0
+        }
+    };
+}
+
+// Generar plan de entrenamiento funcional
+function generateFunctionalPlan(experience, duration, frequency, goals, equipment) {
+    const isStrength = goals.includes('get_stronger');
+    const isWeightLoss = goals.includes('lose_weight');
+    const isEndurance = goals.includes('improve_endurance');
+    
+    let intensity = {
+        'beginner': 'moderate',
+        'intermediate': 'high',
+        'advanced': 'very_high'
+    }[experience] || 'moderate';
+    
+    const hasEquipment = equipment.some(eq => eq !== 'bodyweight');
+    
+    return {
+        type: 'functional',
+        name: `Plan Funcional ${experience} - ${duration} semanas`,
+        description: `Entrenamiento funcional personalizado con ${hasEquipment ? 'equipamiento' : 'peso corporal'}`,
+        duration: duration,
+        frequency: frequency,
+        intensity: intensity,
+        currentWeek: 1,
+        currentSession: 1,
+        status: 'active',
+        startDate: new Date().toISOString(),
+        focus: isStrength ? 'strength' : isWeightLoss ? 'weight_loss' : 'general_fitness',
+        equipment: equipment,
+        progressTracking: {
+            totalWorkouts: 0,
+            completedWorkouts: 0,
+            totalExercises: 0,
+            averageIntensity: 0,
+            personalRecords: {}
+        }
+    };
+}
+
+// Generar plan de gimnasio
+function generateGymPlan(experience, duration, frequency, goals, equipment) {
+    const isStrength = goals.includes('get_stronger');
+    const isMuscle = goals.includes('build_muscle');
+    const isWeightLoss = goals.includes('lose_weight');
+    
+    let split = 'full_body'; // Por defecto cuerpo completo
+    
+    if (frequency >= 4) {
+        split = isStrength || isMuscle ? 'upper_lower' : 'push_pull_legs';
+    }
+    if (frequency >= 5) {
+        split = 'body_parts';
+    }
+    
+    return {
+        type: 'gym',
+        name: `Plan de Gimnasio ${experience} - ${split.replace('_', ' ')}`,
+        description: `Plan de ${duration} semanas con rutina ${split.replace('_', ' ')}`,
+        split: split,
+        duration: duration,
+        frequency: frequency,
+        currentWeek: 1,
+        currentSession: 1,
+        status: 'active',
+        startDate: new Date().toISOString(),
+        focus: isStrength ? 'strength' : isMuscle ? 'muscle_building' : 'general_fitness',
+        equipment: equipment,
+        progressTracking: {
+            totalWorkouts: 0,
+            completedWorkouts: 0,
+            totalSets: 0,
+            totalReps: 0,
+            volumeLifted: 0,
+            personalRecords: {}
+        }
+    };
+}
+
+// Plan por defecto en caso de error
+function generateDefaultPlan() {
+    return {
+        type: 'gym',
+        name: 'Plan Básico de Inicio',
+        description: 'Plan general para comenzar tu entrenamiento',
+        duration: 6,
+        frequency: 3,
+        currentWeek: 1,
+        currentSession: 1,
+        status: 'active',
+        startDate: new Date().toISOString(),
+        focus: 'general_fitness',
+        equipment: ['bodyweight'],
+        progressTracking: {
+            totalWorkouts: 0,
+            completedWorkouts: 0
+        }
+    };
+}
+
 // Mostrar mensaje de éxito
-function showSuccess() {
+function showSuccess(personalizedPlan = null) {
     const onboardingContent = document.getElementById('onboarding-content');
+    
+    const planInfo = personalizedPlan ? `
+        <div class="generated-plan glass-card p-lg mb-lg">
+            <h3 class="plan-title mb-md">🎯 Tu Plan Personalizado</h3>
+            <div class="plan-details">
+                <div class="plan-name">${personalizedPlan.name}</div>
+                <p class="plan-description text-secondary">${personalizedPlan.description}</p>
+                <div class="plan-stats">
+                    <div class="plan-stat">
+                        <span class="stat-label">Duración:</span>
+                        <span class="stat-value">${personalizedPlan.duration} semanas</span>
+                    </div>
+                    <div class="plan-stat">
+                        <span class="stat-label">Frecuencia:</span>
+                        <span class="stat-value">${personalizedPlan.frequency}x por semana</span>
+                    </div>
+                    <div class="plan-stat">
+                        <span class="stat-label">Tipo:</span>
+                        <span class="stat-value">${getActivityLabel(personalizedPlan.type)}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    ` : '';
     
     onboardingContent.innerHTML = `
         <div class="success-container text-center glass-fade-in">
             <div class="success-icon mb-lg">
                 <span style="font-size: 4rem;">🎉</span>
             </div>
-            <h2 class="success-title mb-md">¡Perfil configurado!</h2>
+            <h2 class="success-title mb-md">¡Todo listo!</h2>
             <p class="success-text text-secondary mb-lg">
-                Tu EntrenoApp está personalizada y lista para usar
+                Hemos creado tu plan personalizado basado en tus preferencias
             </p>
+            
+            ${planInfo}
+            
             <div class="success-features glass-card p-lg">
-                <p class="text-secondary mb-md">Ahora puedes disfrutar de:</p>
+                <p class="text-secondary mb-md">Tu EntrenoApp incluye:</p>
                 <div class="feature-list">
-                    <div class="feature-item">✅ Entrenamientos personalizados</div>
-                    <div class="feature-item">✅ Retos adaptados a tu nivel</div>
-                    <div class="feature-item">✅ Seguimiento de progreso</div>
-                    <div class="feature-item">✅ Planes de running</div>
+                    <div class="feature-item">✅ Plan personalizado automático</div>
+                    <div class="feature-item">✅ Retos diarios adaptativos</div>
+                    <div class="feature-item">✅ Seguimiento GPS profesional</div>
+                    <div class="feature-item">✅ Sistema social y rankings</div>
                 </div>
             </div>
             <div class="loading-indicator mt-lg">
                 <div class="loading-spinner"></div>
-                <p class="text-secondary">Preparando tu dashboard...</p>
+                <p class="text-secondary">Preparando tu dashboard personalizado...</p>
             </div>
         </div>
     `;
+}
+
+// Obtener etiqueta de actividad
+function getActivityLabel(type) {
+    const labels = {
+        'running': 'Running',
+        'functional': 'Entrenamiento Funcional',
+        'gym': 'Gimnasio'
+    };
+    return labels[type] || 'Entrenamiento';
 }
 
 console.log('🎯 Módulo de onboarding cargado');
