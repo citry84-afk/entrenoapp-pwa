@@ -1,504 +1,330 @@
-/* ===========================================
-   ESTILOS DEL COMPONENTE PERFIL
-   =========================================== */
+/* Estilos para el sistema social y perfil */
 
 .profile-container {
-    padding: var(--spacing-md) 0;
+    padding: 1rem;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
-/* ===========================================
-   HEADER Y NAVEGACIÓN
-   =========================================== */
+/* ===================================
+   HEADER DE PERFIL
+   =================================== */
 
 .profile-header {
-    margin-bottom: var(--spacing-xl);
+    padding: 2rem 1.5rem;
 }
 
-.profile-nav {
+.profile-info {
     display: flex;
-    gap: var(--spacing-xs);
-    overflow-x: auto;
-    padding-bottom: var(--spacing-xs);
+    align-items: center;
+    margin-bottom: 1.5rem;
 }
 
-.profile-nav .nav-btn {
-    padding: var(--spacing-sm) var(--spacing-md);
-    font-size: 0.9rem;
-    min-height: auto;
-    transition: var(--transition-fast);
-    flex-shrink: 0;
-}
-
-.profile-nav .nav-btn.active {
-    background: var(--primary-blue);
-    color: white;
-}
-
-/* ===========================================
-   TARJETA DEL USUARIO
-   =========================================== */
-
-.user-card {
-    margin-bottom: var(--spacing-xl);
-    padding: var(--spacing-xl);
-}
-
-.user-info {
-    display: flex;
-    align-items: flex-start;
-    gap: var(--spacing-lg);
-    margin-bottom: var(--spacing-xl);
-}
-
-.user-avatar {
+.profile-avatar {
     position: relative;
-    flex-shrink: 0;
+    margin-right: 1.5rem;
 }
 
-.avatar-image,
-.avatar-placeholder {
+.avatar-image {
     width: 80px;
     height: 80px;
     border-radius: 50%;
-    border: 3px solid rgba(255, 255, 255, 0.3);
     object-fit: cover;
+    border: 3px solid rgba(102, 126, 234, 0.3);
 }
 
-.avatar-placeholder {
-    background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    font-weight: 700;
-    color: white;
-}
-
-.edit-avatar-btn {
+.level-badge {
     position: absolute;
     bottom: -5px;
     right: -5px;
     width: 30px;
     height: 30px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     border-radius: 50%;
-    background: var(--primary-blue);
-    border: 2px solid white;
-    color: white;
-    font-size: 0.8rem;
-    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: var(--transition-fast);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
-.edit-avatar-btn:hover {
-    background: var(--primary-blue-dark);
-    transform: scale(1.1);
-}
-
-.user-details {
+.profile-details {
     flex: 1;
 }
 
-.user-name {
-    font-size: 1.5rem;
+.profile-name {
+    font-size: 1.75rem;
     font-weight: 700;
-    margin-bottom: var(--spacing-xs);
-    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+    color: rgba(255, 255, 255, 0.9);
 }
 
-.user-username {
-    color: var(--text-secondary);
+.profile-username {
     font-size: 1rem;
-    margin-bottom: var(--spacing-xs);
+    opacity: 0.7;
+    margin-bottom: 0.75rem;
 }
 
-.user-join-date {
-    color: var(--text-tertiary);
-    font-size: 0.9rem;
-}
-
-.user-actions {
-    flex-shrink: 0;
-}
-
-.edit-profile-btn {
-    padding: var(--spacing-sm) var(--spacing-md);
-    min-height: auto;
-}
-
-/* Nivel del usuario */
-.user-level {
-    background: rgba(255, 255, 255, 0.05);
-    padding: var(--spacing-lg);
-    border-radius: var(--border-radius-md);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.level-info {
+.profile-stats-quick {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: var(--spacing-md);
+    gap: 0.5rem;
+    font-size: 0.875rem;
 }
 
-.level-label {
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+.stat-item {
+    color: rgba(255, 255, 255, 0.8);
 }
 
-.level-value {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    background: linear-gradient(45deg, var(--primary-blue), var(--secondary-blue));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+.stat-divider {
+    opacity: 0.5;
 }
 
-.level-progress {
+.profile-actions {
+    display: flex;
+    gap: 0.75rem;
+}
+
+/* ===================================
+   PESTAÑAS DE NAVEGACIÓN
+   =================================== */
+
+.profile-tabs {
+    padding: 1rem;
+}
+
+.tabs-nav {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.5rem;
+}
+
+.tab-btn {
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-sm);
+    align-items: center;
+    padding: 0.75rem 0.5rem;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.7);
 }
 
-.level-bar {
-    height: 8px;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 4px;
-    overflow: hidden;
+.tab-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #667eea;
+    color: rgba(255, 255, 255, 0.9);
 }
 
-.level-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--primary-blue), var(--secondary-blue));
-    border-radius: 4px;
-    transition: width 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    position: relative;
+.tab-btn.active {
+    background: rgba(102, 126, 234, 0.2);
+    border-color: #667eea;
+    color: #667eea;
 }
 
-.level-fill::after {
-    content: '';
+.tab-icon {
+    font-size: 1.25rem;
+    margin-bottom: 0.25rem;
+}
+
+.tab-text {
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.notification-badge {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    animation: shimmer 2s infinite;
+    top: -5px;
+    right: -5px;
+    background: #ef4444;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 0.625rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
-.level-next {
-    color: var(--text-tertiary);
-    font-size: 0.8rem;
-    text-align: center;
+/* ===================================
+   ESTADÍSTICAS DETALLADAS
+   =================================== */
+
+.detailed-stats {
+    padding: 1.5rem;
 }
 
-/* ===========================================
-   ESTADÍSTICAS DEL USUARIO
-   =========================================== */
-
-.user-stats {
-    margin-bottom: var(--spacing-xl);
+.section-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .stats-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--spacing-md);
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
 }
 
-.stat-item {
-    text-align: center;
-    padding: var(--spacing-lg);
+.stat-card {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
     background: rgba(255, 255, 255, 0.05);
-    border-radius: var(--border-radius-md);
+    border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: var(--transition-fast);
-}
-
-.stat-item:hover {
-    background: rgba(255, 255, 255, 0.1);
-    transform: translateY(-2px);
 }
 
 .stat-icon {
     font-size: 2rem;
-    margin-bottom: var(--spacing-sm);
+    margin-right: 1rem;
+    flex-shrink: 0;
+}
+
+.stat-info {
+    flex: 1;
 }
 
 .stat-value {
-    font-size: 1.8rem;
+    font-size: 1.25rem;
     font-weight: 700;
-    color: var(--text-primary);
-    margin-bottom: var(--spacing-xs);
-    font-family: 'Courier New', monospace;
+    color: #667eea;
+    margin-bottom: 0.25rem;
 }
 
 .stat-label {
-    font-size: 0.8rem;
-    color: var(--text-secondary);
+    font-size: 0.75rem;
+    opacity: 0.8;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
-/* ===========================================
-   ACTIVIDAD RECIENTE
-   =========================================== */
+/* ===================================
+   SOLICITUDES DE AMISTAD
+   =================================== */
 
-.recent-activity {
-    margin-bottom: var(--spacing-xl);
+.friend-requests {
+    padding: 1.5rem;
 }
 
-.activity-list {
+.requests-count {
+    color: #667eea;
+    font-weight: 600;
+}
+
+.requests-list {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-sm);
+    gap: 1rem;
 }
 
-.activity-item {
+.request-item {
     display: flex;
     align-items: center;
-    gap: var(--spacing-md);
-    padding: var(--spacing-md);
+    justify-content: space-between;
+    padding: 1rem;
     background: rgba(255, 255, 255, 0.05);
-    border-radius: var(--border-radius-md);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: var(--transition-fast);
-}
-
-.activity-item:hover {
-    background: rgba(255, 255, 255, 0.1);
-}
-
-.activity-icon {
-    font-size: 1.5rem;
-    flex-shrink: 0;
-}
-
-.activity-details {
-    flex: 1;
-}
-
-.activity-description {
-    color: var(--text-primary);
-    font-weight: 600;
-    margin-bottom: var(--spacing-xs);
-}
-
-.activity-date {
-    color: var(--text-tertiary);
-    font-size: 0.8rem;
-}
-
-.activity-badge {
-    background: rgba(255, 255, 255, 0.2);
-    padding: 4px 8px;
     border-radius: 12px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    flex-shrink: 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.activity-badge.workout {
-    background: rgba(255, 149, 0, 0.3);
-    color: #FFE0B3;
-}
-
-.activity-badge.run {
-    background: rgba(0, 122, 255, 0.3);
-    color: #B3D9FF;
-}
-
-.activity-badge.challenge {
-    background: rgba(52, 199, 89, 0.3);
-    color: #B3FFB3;
-}
-
-.no-activity {
-    text-align: center;
-    padding: var(--spacing-xl);
-}
-
-.no-activity p {
-    color: var(--text-secondary);
-    margin-bottom: var(--spacing-sm);
-}
-
-.encouragement {
-    color: var(--text-tertiary);
-    font-style: italic;
-}
-
-/* ===========================================
-   ACCIONES RÁPIDAS
-   =========================================== */
-
-.quick-actions {
-    margin-bottom: var(--spacing-xl);
-}
-
-.actions-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-md);
-}
-
-.action-button {
-    background: none;
-    border: none;
-    padding: var(--spacing-lg);
-    border-radius: var(--border-radius-md);
-    cursor: pointer;
-    transition: var(--transition-fast);
+.request-user {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: var(--spacing-sm);
-    text-decoration: none;
-    color: var(--text-primary);
-}
-
-.action-button:hover {
-    transform: translateY(-2px);
-    background: rgba(255, 255, 255, 0.1);
-}
-
-.action-icon {
-    font-size: 2rem;
-}
-
-.action-label {
-    font-size: 0.9rem;
-    font-weight: 600;
-    text-align: center;
-}
-
-/* ===========================================
-   SECCIÓN DE AMIGOS
-   =========================================== */
-
-.friends-section {
-    max-width: 100%;
-}
-
-/* Búsqueda de amigos */
-.friends-search {
-    margin-bottom: var(--spacing-xl);
-}
-
-.search-form {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-lg);
-}
-
-.search-input-group {
-    display: flex;
-    gap: var(--spacing-sm);
-}
-
-.search-input-group .glass-input {
     flex: 1;
 }
 
-.search-btn {
-    min-width: auto;
-    padding: var(--spacing-md);
-    font-size: 1.2rem;
+.user-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 1rem;
+    border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
-.search-methods {
+.user-info {
+    flex: 1;
+}
+
+.user-name {
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0.25rem;
+}
+
+.user-username {
+    font-size: 0.875rem;
+    opacity: 0.7;
+    margin-bottom: 0.25rem;
+}
+
+.request-time {
+    font-size: 0.75rem;
+    opacity: 0.6;
+}
+
+.request-actions {
     display: flex;
-    gap: var(--spacing-sm);
-    flex-wrap: wrap;
+    gap: 0.5rem;
 }
 
-.method-btn {
-    padding: var(--spacing-sm) var(--spacing-md);
-    font-size: 0.9rem;
-    min-height: auto;
+.btn-sm {
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
 }
 
-.search-results {
-    margin-top: var(--spacing-lg);
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-sm);
-}
+/* ===================================
+   LISTA DE AMIGOS
+   =================================== */
 
-/* Lista de amigos */
 .friends-list {
-    margin-bottom: var(--spacing-xl);
+    padding: 1.5rem;
+}
+
+.friends-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
 }
 
 .friends-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: var(--spacing-md);
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
 }
 
 .friend-card {
     display: flex;
     align-items: center;
-    gap: var(--spacing-md);
-    padding: var(--spacing-md);
+    padding: 1rem;
     background: rgba(255, 255, 255, 0.05);
-    border-radius: var(--border-radius-md);
+    border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    cursor: pointer;
-    transition: var(--transition-fast);
+    transition: all 0.3s ease;
 }
 
 .friend-card:hover {
     background: rgba(255, 255, 255, 0.1);
-    transform: translateY(-2px);
+    border-color: #667eea;
 }
 
 .friend-avatar {
-    position: relative;
-    flex-shrink: 0;
-}
-
-.friend-avatar img,
-.friend-avatar .avatar-placeholder {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    border: 2px solid rgba(255, 255, 255, 0.3);
     object-fit: cover;
-}
-
-.friend-avatar .avatar-placeholder {
-    background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: white;
-}
-
-.friend-status {
-    position: absolute;
-    bottom: 2px;
-    right: 2px;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    border: 2px solid white;
-}
-
-.friend-status.online {
-    background: var(--success-green);
-}
-
-.friend-status.offline {
-    background: var(--text-tertiary);
+    margin-right: 1rem;
+    border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 .friend-info {
@@ -507,234 +333,479 @@
 
 .friend-name {
     font-weight: 600;
-    color: var(--text-primary);
-    margin-bottom: var(--spacing-xs);
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0.25rem;
 }
 
 .friend-username {
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-    margin-bottom: var(--spacing-xs);
+    font-size: 0.875rem;
+    opacity: 0.7;
+    margin-bottom: 0.5rem;
 }
 
-.friend-activity {
-    color: var(--text-tertiary);
-    font-size: 0.8rem;
+.friend-stats {
+    display: flex;
+    gap: 0.75rem;
+    font-size: 0.75rem;
 }
 
-.no-friends {
-    text-align: center;
-    padding: var(--spacing-xl);
-    grid-column: 1 / -1;
+.friend-level {
+    background: rgba(102, 126, 234, 0.2);
+    color: #667eea;
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+    font-weight: 600;
 }
 
-/* Actividad de amigos */
-.friends-activity {
-    margin-bottom: var(--spacing-xl);
+.friend-points {
+    background: rgba(245, 158, 11, 0.2);
+    color: #f59e0b;
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+    font-weight: 600;
 }
 
-.activity-feed {
+.friend-actions {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-md);
+    gap: 0.5rem;
+    margin-left: 1rem;
 }
 
-.activity-feed .activity-item {
-    padding: var(--spacing-lg);
+/* ===================================
+   ESTADO VACÍO
+   =================================== */
+
+.friends-empty,
+.empty-ranking,
+.search-placeholder,
+.settings-placeholder {
+    padding: 3rem 2rem;
+}
+
+.empty-icon,
+.placeholder-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.empty-title,
+.placeholder-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.empty-description,
+.placeholder-description {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+    opacity: 0.7;
+}
+
+/* ===================================
+   RANKINGS
+   =================================== */
+
+.ranking-selector {
+    padding: 1rem;
+}
+
+.selector-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+}
+
+.selector-btn {
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 600;
+}
+
+.selector-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #667eea;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.selector-btn.active {
+    background: rgba(102, 126, 234, 0.2);
+    border-color: #667eea;
+    color: #667eea;
+}
+
+.ranking-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.ranking-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.ranking-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.ranking-item.current-user {
+    background: rgba(102, 126, 234, 0.1);
+    border-color: #667eea;
+}
+
+.ranking-position {
+    position: relative;
+    min-width: 60px;
+    text-align: center;
+    margin-right: 1rem;
+}
+
+.position-number {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #667eea;
+}
+
+.medal-icon {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    font-size: 1.5rem;
+}
+
+.ranking-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 1rem;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.ranking-info {
+    flex: 1;
+}
+
+.ranking-name {
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0.25rem;
+}
+
+.ranking-username {
+    font-size: 0.875rem;
+    opacity: 0.7;
+}
+
+.ranking-stats {
+    text-align: right;
+}
+
+.ranking-points {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #667eea;
+    margin-bottom: 0.25rem;
+}
+
+.ranking-level,
+.ranking-completed {
+    font-size: 0.75rem;
+    opacity: 0.8;
+}
+
+/* ===================================
+   POSICIÓN DEL USUARIO
+   =================================== */
+
+.user-ranking {
+    padding: 1.5rem;
+}
+
+.position-display {
+    text-align: center;
+    padding: 2rem;
+    background: rgba(102, 126, 234, 0.1);
+    border-radius: 12px;
+    border: 2px solid rgba(102, 126, 234, 0.3);
+}
+
+.position-number {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #667eea;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.position-text {
+    font-size: 1rem;
+    opacity: 0.8;
+}
+
+/* ===================================
+   ACTIVIDAD RECIENTE
+   =================================== */
+
+.recent-activity,
+.friend-activity {
+    padding: 1.5rem;
+}
+
+.activity-placeholder {
+    text-align: center;
+    padding: 2rem;
+    opacity: 0.6;
+}
+
+.activity-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.activity-item {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
 }
 
 .activity-avatar {
-    flex-shrink: 0;
-}
-
-.activity-avatar img,
-.activity-avatar .avatar-placeholder {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    border: 2px solid rgba(255, 255, 255, 0.3);
     object-fit: cover;
-}
-
-.activity-avatar .avatar-placeholder {
-    background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1rem;
-    font-weight: 700;
-    color: white;
+    margin-right: 1rem;
+    border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 .activity-content {
     flex: 1;
-}
-
-.activity-text {
-    color: var(--text-primary);
-    margin-bottom: var(--spacing-xs);
-    line-height: 1.4;
-}
-
-.activity-meta {
     display: flex;
-    gap: var(--spacing-md);
-    align-items: center;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.activity-user {
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.activity-description {
+    font-size: 0.875rem;
+    opacity: 0.8;
 }
 
 .activity-time {
-    color: var(--text-tertiary);
-    font-size: 0.8rem;
+    font-size: 0.75rem;
+    opacity: 0.6;
 }
 
-.activity-stats {
-    background: rgba(0, 122, 255, 0.3);
-    color: #B3D9FF;
-    padding: 2px 6px;
-    border-radius: 8px;
-    font-size: 0.7rem;
-    font-weight: 600;
-}
-
-.activity-actions {
-    flex-shrink: 0;
-}
-
-.like-btn {
-    background: none;
-    border: none;
-    color: var(--text-tertiary);
-    cursor: pointer;
-    padding: var(--spacing-xs);
-    border-radius: var(--border-radius-sm);
-    font-size: 0.8rem;
-    transition: var(--transition-fast);
-}
-
-.like-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
-}
-
-.like-btn.liked {
-    color: var(--error-red);
-}
-
-/* ===========================================
+/* ===================================
    RESPONSIVE
-   =========================================== */
+   =================================== */
 
 @media (max-width: 768px) {
-    .profile-nav {
-        gap: var(--spacing-xs);
+    .profile-container {
+        padding: 0.5rem;
     }
     
-    .user-info {
+    .tabs-nav {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.25rem;
+    }
+    
+    .tab-btn {
+        padding: 0.5rem 0.25rem;
+    }
+    
+    .tab-text {
+        font-size: 0.625rem;
+    }
+    
+    .profile-info {
         flex-direction: column;
         text-align: center;
-        gap: var(--spacing-md);
+    }
+    
+    .profile-avatar {
+        margin-right: 0;
+        margin-bottom: 1rem;
     }
     
     .stats-grid {
         grid-template-columns: repeat(2, 1fr);
     }
     
-    .actions-grid {
-        grid-template-columns: 1fr;
-    }
-    
     .friends-grid {
         grid-template-columns: 1fr;
     }
     
-    .search-methods {
+    .friend-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .friend-avatar {
+        margin-right: 0;
+        margin-bottom: 0.5rem;
+    }
+    
+    .friend-actions {
+        flex-direction: row;
+        margin-left: 0;
+    }
+    
+    .request-item {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    .request-user {
         flex-direction: column;
     }
     
-    .activity-feed .activity-item {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: var(--spacing-sm);
+    .user-avatar {
+        margin-right: 0;
+        margin-bottom: 0.5rem;
     }
     
-    .activity-meta {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: var(--spacing-xs);
+    .ranking-item {
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+    
+    .ranking-position {
+        margin-right: 0;
+    }
+    
+    .ranking-stats {
+        text-align: left;
+        width: 100%;
     }
 }
 
 @media (max-width: 480px) {
-    .user-card {
-        padding: var(--spacing-lg);
+    .profile-name {
+        font-size: 1.5rem;
     }
     
-    .user-name {
-        font-size: 1.3rem;
-    }
-    
-    .avatar-image,
-    .avatar-placeholder {
+    .avatar-image {
         width: 60px;
         height: 60px;
+    }
+    
+    .level-badge {
+        width: 25px;
+        height: 25px;
+        font-size: 0.625rem;
     }
     
     .stats-grid {
         grid-template-columns: 1fr;
     }
     
-    .stat-item {
-        padding: var(--spacing-md);
+    .selector-buttons {
+        grid-template-columns: 1fr;
     }
     
-    .stat-value {
-        font-size: 1.5rem;
+    .tabs-nav {
+        grid-template-columns: repeat(2, 1fr);
     }
     
-    .friend-card {
-        flex-direction: column;
-        text-align: center;
-        gap: var(--spacing-sm);
-    }
-    
-    .activity-item {
-        padding: var(--spacing-md);
+    .position-number {
+        font-size: 2rem;
     }
 }
 
-/* ===========================================
-   ANIMACIONES ESPECÍFICAS
-   =========================================== */
+/* ===================================
+   ANIMACIONES
+   =================================== */
 
-@keyframes shimmer {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.stat-item.highlight {
-    animation: pulse 2s infinite;
+.glass-fade-in {
+    animation: slideInUp 0.6s ease-out;
 }
 
-@keyframes pulse {
-    0%, 100% {
+@keyframes bounce {
+    0%, 20%, 53%, 80%, 100% {
         transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(0, 122, 255, 0.4);
     }
-    50% {
+    40%, 43% {
+        transform: scale(1.1);
+    }
+    70% {
         transform: scale(1.05);
-        box-shadow: 0 0 0 10px rgba(0, 122, 255, 0);
+    }
+    90% {
+        transform: scale(1.02);
     }
 }
 
-/* Estados especiales */
-.user-level.level-up {
-    animation: levelUpGlow 3s ease-in-out;
+.notification-badge {
+    animation: bounce 2s infinite;
 }
 
-@keyframes levelUpGlow {
-    0%, 100% {
-        box-shadow: 0 0 0 0 rgba(52, 199, 89, 0);
+/* Mejoras de accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+    .tab-btn,
+    .selector-btn,
+    .friend-card,
+    .ranking-item,
+    .glass-fade-in,
+    .notification-badge {
+        transition: none;
+        animation: none;
     }
-    50% {
-        box-shadow: 0 0 20px 5px rgba(52, 199, 89, 0.4);
+}
+
+/* Alto contraste */
+@media (prefers-contrast: high) {
+    .tab-btn,
+    .selector-btn,
+    .friend-card,
+    .ranking-item,
+    .request-item,
+    .stat-card {
+        border-color: rgba(255, 255, 255, 0.3);
+    }
+    
+    .tab-btn:hover,
+    .selector-btn:hover,
+    .friend-card:hover,
+    .ranking-item:hover {
+        border-color: #ffffff;
+    }
+    
+    .profile-name,
+    .section-title {
+        color: #ffffff;
     }
 }
