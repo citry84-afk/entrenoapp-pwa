@@ -1,36 +1,79 @@
-// Componente de running de EntrenoApp
+// Componente de running con GPS real para EntrenoApp
 import { auth, db } from '../config/firebase-config.js';
-import { runningPlans, getPlanById, calculatePace, calculateTime } from '../data/running-plans.js';
+import { runningPlans, getPlanById } from '../data/running-plans.js';
 
-// Estado del componente de running
+// Estado global del running
 let runningState = {
-    currentMode: 'select', // 'select', 'plan', 'active', 'finished'
-    selectedPlan: null,
-    currentRun: null,
+    currentMode: 'select', // 'select', 'active', 'finished'
+    
+    // Tracking GPS
     isTracking: false,
     startTime: null,
+    endTime: null,
     watchId: null,
     route: [],
-    distance: 0,
-    pace: 0,
+    lastPosition: null,
+    
+    // Métricas
+    distance: 0, // metros
+    duration: 0, // milisegundos
+    pace: 0, // min/km actual
+    avgPace: 0, // min/km promedio
     calories: 0,
+    speed: 0, // km/h
+    splits: [],
+    
+    // UI y mapa
     map: null,
     userMarker: null,
     routePolyline: null,
     intervalId: null,
     wakeLock: null,
+    
+    // Configuración
+    targetDistance: null,
+    targetTime: null,
     isVoiceEnabled: true,
-    lastVoiceAnnouncement: 0
+    userWeight: 70,
+    gpsAccuracy: 15,
+    minDistanceUpdate: 5,
+    
+    // Estados
+    isPaused: false,
+    pausedTime: 0,
+    pauseStart: null
 };
 
-// Inicializar componente de running
+// Constantes
+const EARTH_RADIUS = 6371000;
+const CALORIES_PER_KM_PER_KG = 1.036;
+
+// Inicializar componente
 window.initRunning = function() {
-    console.log('🏃 Inicializando running');
+    console.log('🏃‍♂️ Inicializando running GPS');
+    loadUserSettings();
     renderRunningPage();
     setupRunningListeners();
+    initializeGeolocation();
 };
 
-// Renderizar página principal de running
+// Cargar configuraciones del usuario
+async function loadUserSettings() {
+    try {
+        const user = auth.currentUser;
+        if (user && window.getUserProfile) {
+            const profile = await window.getUserProfile(user.uid);
+            if (profile) {
+                runningState.userWeight = profile.stats?.weight || 70;
+                runningState.isVoiceEnabled = profile.preferences?.ttsEnabled !== false;
+            }
+        }
+    } catch (error) {
+        console.error('❌ Error cargando configuraciones:', error);
+    }
+}
+
+// Renderizar página principal
 function renderRunningPage() {
     const container = document.querySelector('.running-container');
     if (!container) return;
@@ -41,14 +84,11 @@ function renderRunningPage() {
         case 'select':
             content = renderRunningSelection();
             break;
-        case 'plan':
-            content = renderPlanView();
-            break;
         case 'active':
             content = renderActiveRun();
             break;
         case 'finished':
-            content = renderRunSummary();
+            content = renderFinishedRun();
             break;
         default:
             content = renderRunningSelection();
@@ -56,517 +96,490 @@ function renderRunningPage() {
     
     container.innerHTML = content;
     
-    // Inicializar mapa si estamos en modo activo
-    if (runningState.currentMode === 'active') {
-        setTimeout(initializeMap, 100);
-    }
-    
-    // Añadir animaciones
-    const cards = container.querySelectorAll('.glass-card');
-    cards.forEach((card, index) => {
-        card.style.animationDelay = `${index * 0.1}s`;
-        card.classList.add('glass-fade-in');
-    });
+    // Inicializar mapa si es necesario
+    setTimeout(() => {
+        if (runningState.currentMode === 'active') {
+            initializeMap();
+        } else if (runningState.currentMode === 'finished') {
+            initializeResultsMap();
+        }
+    }, 100);
 }
 
-// Selección principal de running
+// Renderizar selección de running
 function renderRunningSelection() {
     return `
-        <div class="running-selection">
-            <div class="run-types-grid">
-                <div class="run-type-card glass-card glass-gradient-blue" onclick="startFreeRun()">
-                    <div class="run-type-icon">🏃</div>
-                    <h3 class="run-type-title">Carrera Libre</h3>
-                    <p class="run-type-description">
-                        Sal a correr sin plan específico. Rastrea tu ruta y métricas.
-                    </p>
-                    <div class="run-type-features">
-                        <span class="feature-item">🗺️ GPS Tracking</span>
-                        <span class="feature-item">📊 Métricas en tiempo real</span>
-                        <span class="feature-item">🎵 Audio coaching</span>
-                    </div>
-                </div>
-                
-                <div class="run-type-card glass-card glass-gradient-green" onclick="selectRunningPlans()">
-                    <div class="run-type-icon">📋</div>
-                    <h3 class="run-type-title">Planes de Entrenamiento</h3>
-                    <p class="run-type-description">
-                        Sigue un plan estructurado desde 0 hasta maratón.
-                    </p>
-                    <div class="run-type-features">
-                        <span class="feature-item">🎯 Objetivos claros</span>
-                        <span class="feature-item">📈 Progresión gradual</span>
-                        <span class="feature-item">🏁 Desde 0 a maratón</span>
-                    </div>
-                </div>
-                
-                <div class="run-type-card glass-card glass-gradient-orange" onclick="selectIntervalTraining()">
-                    <div class="run-type-icon">⚡</div>
-                    <h3 class="run-type-title">Entrenamientos por Intervalos</h3>
-                    <p class="run-type-description">
-                        Mejora velocidad y resistencia con intervalos estructurados.
-                    </p>
-                    <div class="run-type-features">
-                        <span class="feature-item">🔥 Alta intensidad</span>
-                        <span class="feature-item">⏱️ Intervalos guiados</span>
-                        <span class="feature-item">🚀 Mejora rápida</span>
-                    </div>
-                </div>
+        <div class="running-selection glass-fade-in">
+            <div class="running-header text-center mb-lg">
+                <h2 class="page-title">🏃‍♂️ Running GPS</h2>
+                <p class="page-subtitle text-secondary">Tracking profesional con OpenStreetMap</p>
             </div>
             
-            <div class="recent-runs glass-card mt-lg">
-                <div class="card-header">
-                    <h3 class="card-title">🏃 Carreras Recientes</h3>
-                    <button class="glass-button glass-button-sm" onclick="viewAllRuns()">
-                        Ver Todas
+            <!-- Carrera libre -->
+            <div class="quick-start glass-card mb-lg">
+                <h3 class="section-title mb-md">🎯 Carrera Libre</h3>
+                <div class="quick-options">
+                    <button class="option-btn glass-button glass-button-primary" data-type="free">
+                        <span class="option-icon">🏃</span>
+                        <span class="option-text">Carrera libre</span>
                     </button>
-                </div>
-                
-                <div class="recent-runs-list">
-                    ${renderRecentRuns()}
-                </div>
-            </div>
-            
-            <div class="running-stats glass-card mt-lg">
-                <div class="card-header">
-                    <h3 class="card-title">📊 Estadísticas del Mes</h3>
-                </div>
-                
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <div class="stat-value">24.8</div>
-                        <div class="stat-label">km totales</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">8</div>
-                        <div class="stat-label">carreras</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">5:32</div>
-                        <div class="stat-label">pace promedio</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">1,240</div>
-                        <div class="stat-label">calorías</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    `;
-}
-
-// Vista de carrera activa
-function renderActiveRun() {
-    return `
-        <div class="active-run">
-            <div class="run-header glass-header">
-                <div class="run-info">
-                    <h2 class="run-title">${runningState.currentRun?.name || 'Carrera Libre'}</h2>
-                    <div class="run-status">
-                        ${runningState.isTracking ? '🔴 Grabando' : '⏸️ Pausado'}
-                    </div>
-                </div>
-                <div class="run-controls">
-                    <button class="glass-button control-btn" onclick="toggleRunning()">
-                        ${runningState.isTracking ? '⏸️' : '▶️'}
+                    <button class="option-btn glass-button glass-button-secondary" data-type="distance" data-target="5000">
+                        <span class="option-icon">📍</span>
+                        <span class="option-text">5K objetivo</span>
                     </button>
-                    <button class="glass-button control-btn" onclick="stopRun()">
-                        ⏹️
+                    <button class="option-btn glass-button glass-button-secondary" data-type="time" data-target="1800000">
+                        <span class="option-icon">⏱️</span>
+                        <span class="option-text">30 min</span>
                     </button>
                 </div>
             </div>
             
-            <div class="run-metrics glass-card">
-                <div class="metrics-grid">
-                    <div class="metric-item">
-                        <div class="metric-value" id="distance-value">${(runningState.distance / 1000).toFixed(2)}</div>
-                        <div class="metric-label">km</div>
-                    </div>
-                    <div class="metric-item">
-                        <div class="metric-value" id="time-value">${formatRunTime(getElapsedTime())}</div>
-                        <div class="metric-label">tiempo</div>
-                    </div>
-                    <div class="metric-item">
-                        <div class="metric-value" id="pace-value">${formatPace(runningState.pace)}</div>
-                        <div class="metric-label">pace</div>
-                    </div>
-                    <div class="metric-item">
-                        <div class="metric-value" id="calories-value">${runningState.calories}</div>
-                        <div class="metric-label">cal</div>
-                    </div>
+            <!-- Planes de entrenamiento -->
+            <div class="running-plans glass-card mb-lg">
+                <h3 class="section-title mb-md">📚 Planes de Entrenamiento</h3>
+                <div class="plans-grid">
+                    ${renderPlansList()}
                 </div>
             </div>
             
-            <div class="run-map glass-card">
-                <div id="running-map" style="height: 300px; border-radius: 12px; overflow: hidden;"></div>
-            </div>
-            
-            <div class="run-controls-extended glass-card">
-                <div class="controls-grid">
-                    <button class="glass-button" onclick="toggleVoiceCoaching()">
-                        ${runningState.isVoiceEnabled ? '🔊' : '🔇'} Audio
-                    </button>
-                    <button class="glass-button" onclick="addWaypoint()">
-                        📍 Waypoint
-                    </button>
-                    <button class="glass-button" onclick="shareRun()">
-                        📤 Compartir
-                    </button>
-                    <button class="glass-button" onclick="emergencyStop()">
-                        🚨 Emergencia
-                    </button>
+            <!-- GPS Status -->
+            <div class="gps-status glass-card">
+                <h4 class="section-title mb-sm">📡 Estado GPS</h4>
+                <div class="gps-info">
+                    <div class="gps-indicator ${getGPSStatusClass()}" id="gps-indicator"></div>
+                    <span class="gps-text" id="gps-text">${getGPSStatusText()}</span>
                 </div>
-            </div>
-        </div>
-    `;
-}
-
-// Resumen de carrera
-function renderRunSummary() {
-    if (!runningState.currentRun) return '';
-    
-    const run = runningState.currentRun;
-    const avgPace = formatPace(run.avgPace || 0);
-    const totalTime = formatRunTime(run.duration || 0);
-    
-    return `
-        <div class="run-summary">
-            <div class="summary-header glass-card glass-gradient-green">
-                <div class="summary-icon">🏃</div>
-                <h2 class="summary-title">¡Carrera Completada!</h2>
-                <p class="summary-subtitle">Gran trabajo, sigue así 💪</p>
-            </div>
-            
-            <div class="summary-stats glass-card">
-                <div class="summary-stats-grid">
-                    <div class="summary-stat">
-                        <div class="summary-stat-value">${(run.distance / 1000).toFixed(2)}</div>
-                        <div class="summary-stat-label">Kilómetros</div>
-                    </div>
-                    <div class="summary-stat">
-                        <div class="summary-stat-value">${totalTime}</div>
-                        <div class="summary-stat-label">Tiempo Total</div>
-                    </div>
-                    <div class="summary-stat">
-                        <div class="summary-stat-value">${avgPace}</div>
-                        <div class="summary-stat-label">Pace Promedio</div>
-                    </div>
-                    <div class="summary-stat">
-                        <div class="summary-stat-value">${run.calories || 0}</div>
-                        <div class="summary-stat-label">Calorías</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="summary-map glass-card">
-                <h3 class="card-title">🗺️ Tu Ruta</h3>
-                <div id="summary-map" style="height: 250px; border-radius: 12px; overflow: hidden;"></div>
-            </div>
-            
-            <div class="summary-achievements glass-card">
-                <h3 class="card-title">🏆 Logros de Esta Carrera</h3>
-                <div class="achievements-list">
-                    <div class="achievement-item">
-                        <span class="achievement-icon">⭐</span>
-                        <span class="achievement-text">Carrera completada</span>
-                    </div>
-                    ${run.distance > 5000 ? '<div class="achievement-item"><span class="achievement-icon">🎯</span><span class="achievement-text">Más de 5K corridos</span></div>' : ''}
-                    ${run.duration > 1800 ? '<div class="achievement-item"><span class="achievement-icon">⏰</span><span class="achievement-text">Más de 30 minutos activo</span></div>' : ''}
-                </div>
-            </div>
-            
-            <div class="summary-actions glass-card">
-                <div class="actions-grid">
-                    <button class="glass-button glass-button-primary" onclick="saveRun()">
-                        💾 Guardar Carrera
-                    </button>
-                    <button class="glass-button" onclick="shareRunResults()">
-                        📤 Compartir Resultados
-                    </button>
-                    <button class="glass-button" onclick="startNewRun()">
-                        🏃 Nueva Carrera
-                    </button>
-                    <button class="glass-button" onclick="backToRunningHome()">
-                        🏠 Volver al Inicio
-                    </button>
-                </div>
-            </div>
-        </div>
-    `;
-}
-
-// Renderizar carreras recientes
-function renderRecentRuns() {
-    const recentRuns = getRecentRuns();
-    
-    if (recentRuns.length === 0) {
-        return `
-            <div class="no-runs">
-                <p class="no-runs-text">Aún no has registrado ninguna carrera</p>
-                <button class="glass-button glass-button-primary" onclick="startFreeRun()">
-                    🏃 ¡Empezar Primera Carrera!
+                <button id="test-gps-btn" class="glass-button glass-button-outline btn-sm mt-sm">
+                    Probar GPS
                 </button>
             </div>
-        `;
-    }
-    
-    return recentRuns.map(run => `
-        <div class="recent-run-item" onclick="viewRun('${run.id}')">
-            <div class="run-date">${formatDate(run.date)}</div>
-            <div class="run-details">
-                <span class="run-distance">${(run.distance / 1000).toFixed(1)} km</span>
-                <span class="run-time">${formatRunTime(run.duration)}</span>
-                <span class="run-pace">${formatPace(run.avgPace)}</span>
+        </div>
+    `;
+}
+
+// Renderizar lista de planes
+function renderPlansList() {
+    return runningPlans.slice(0, 4).map(plan => `
+        <div class="plan-card glass-card-inner" data-plan-id="${plan.id}">
+            <div class="plan-header">
+                <h4 class="plan-title">${plan.name}</h4>
+                <span class="plan-level ${plan.level}">${plan.level}</span>
+            </div>
+            <p class="plan-description">${plan.description}</p>
+            <div class="plan-stats">
+                <span class="stat">⏱️ ${plan.duration}</span>
+                <span class="stat">📅 ${plan.frequency}</span>
             </div>
         </div>
     `).join('');
 }
 
-// Configurar listeners del running
-function setupRunningListeners() {
-    // Verificar permisos de geolocalización
-    checkGeolocationPermission();
-    
-    // Actualizar métricas cada segundo
-    if (runningState.currentMode === 'active') {
-        runningState.intervalId = setInterval(updateRunMetrics, 1000);
-    }
+// Renderizar carrera activa
+function renderActiveRun() {
+    return `
+        <div class="active-run glass-fade-in">
+            <!-- Controles -->
+            <div class="run-header glass-card mb-md">
+                <div class="run-controls">
+                    <button id="pause-btn" class="control-btn glass-button">
+                        <span class="control-icon">${runningState.isPaused ? '▶️' : '⏸️'}</span>
+                    </button>
+                    <button id="stop-btn" class="control-btn glass-button glass-button-danger">
+                        <span class="control-icon">⏹️</span>
+                    </button>
+                    <button id="voice-btn" class="control-btn glass-button ${runningState.isVoiceEnabled ? 'active' : ''}">
+                        <span class="control-icon">${runningState.isVoiceEnabled ? '🔊' : '🔇'}</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Métricas principales -->
+            <div class="main-metrics glass-card mb-md">
+                <div class="metric-grid">
+                    <div class="metric-item main-metric">
+                        <div class="metric-label">Distancia</div>
+                        <div class="metric-value" id="distance-value">${formatDistance(runningState.distance)}</div>
+                    </div>
+                    <div class="metric-item main-metric">
+                        <div class="metric-label">Tiempo</div>
+                        <div class="metric-value" id="time-value">${formatDuration(runningState.duration)}</div>
+                    </div>
+                </div>
+                <div class="pace-display">
+                    <div class="pace-label">Ritmo Actual</div>
+                    <div class="pace-value" id="pace-value">${formatPace(runningState.pace)}</div>
+                </div>
+            </div>
+            
+            <!-- Métricas secundarias -->
+            <div class="secondary-metrics glass-card mb-md">
+                <div class="metric-grid-2">
+                    <div class="metric-item">
+                        <div class="metric-label">Ritmo Medio</div>
+                        <div class="metric-value" id="avg-pace-value">${formatPace(runningState.avgPace)}</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-label">Velocidad</div>
+                        <div class="metric-value" id="speed-value">${formatSpeed(runningState.speed)}</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-label">Calorías</div>
+                        <div class="metric-value" id="calories-value">${Math.round(runningState.calories)}</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-label">GPS</div>
+                        <div class="metric-value gps-status" id="gps-status">
+                            <span class="gps-indicator ${getGPSStatusClass()}"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Mapa -->
+            <div class="map-container glass-card mb-md">
+                <div id="run-map" class="run-map"></div>
+                <div class="map-overlay">
+                    <div class="map-stats">
+                        <span class="map-stat">📍 ${runningState.route.length} puntos</span>
+                        ${runningState.targetDistance ? `
+                            <span class="map-stat">🎯 ${formatDistance(runningState.targetDistance - runningState.distance)} restantes</span>
+                        ` : ''}
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Splits -->
+            ${runningState.splits.length > 0 ? `
+                <div class="splits-container glass-card">
+                    <h4 class="splits-title">📊 Splits por KM</h4>
+                    <div class="splits-list">
+                        ${renderSplits()}
+                    </div>
+                </div>
+            ` : ''}
+        </div>
+    `;
 }
 
-// Funciones de navegación
-window.startFreeRun = function() {
-    console.log('🏃 Iniciando carrera libre');
-    
-    runningState.currentRun = {
-        id: 'free_run_' + Date.now(),
-        name: 'Carrera Libre',
-        type: 'free',
-        startTime: Date.now(),
-        distance: 0,
-        duration: 0,
-        calories: 0,
-        route: []
-    };
-    
-    runningState.currentMode = 'active';
-    runningState.distance = 0;
-    runningState.pace = 0;
-    runningState.calories = 0;
-    runningState.route = [];
-    
-    renderRunningPage();
-    startGPSTracking();
-    
-    // Anuncio de inicio con TTS
-    if (window.EntrenoTTS && runningState.isVoiceEnabled) {
-        window.EntrenoTTS.announceRunStart();
-    }
-};
+// Renderizar splits
+function renderSplits() {
+    return runningState.splits.map((split, index) => `
+        <div class="split-item">
+            <span class="split-km">KM ${index + 1}</span>
+            <span class="split-time">${formatPace(split.pace)}</span>
+            <span class="split-duration">${formatDuration(split.duration)}</span>
+        </div>
+    `).join('');
+}
 
-window.selectRunningPlans = function() {
-    console.log('📋 Seleccionando planes de running');
-    // Implementar navegación a planes
-    showToast('Planes de running próximamente', 'info');
-};
+// Renderizar carrera finalizada
+function renderFinishedRun() {
+    const avgPace = runningState.distance > 0 ? (runningState.duration / 1000 / 60) / (runningState.distance / 1000) : 0;
+    
+    return `
+        <div class="finished-run glass-fade-in">
+            <div class="finish-header text-center mb-lg">
+                <div class="finish-icon mb-md">🏆</div>
+                <h2 class="finish-title">¡Carrera Completada!</h2>
+                <p class="finish-subtitle text-secondary">Excelente trabajo</p>
+            </div>
+            
+            <!-- Resumen -->
+            <div class="run-summary glass-card mb-lg">
+                <div class="summary-grid">
+                    <div class="summary-stat">
+                        <div class="stat-label">Distancia Total</div>
+                        <div class="stat-value large">${formatDistance(runningState.distance)}</div>
+                    </div>
+                    <div class="summary-stat">
+                        <div class="stat-label">Tiempo Total</div>
+                        <div class="stat-value large">${formatDuration(runningState.duration)}</div>
+                    </div>
+                    <div class="summary-stat">
+                        <div class="stat-label">Ritmo Promedio</div>
+                        <div class="stat-value large">${formatPace(avgPace)}</div>
+                    </div>
+                    <div class="summary-stat">
+                        <div class="stat-label">Calorías</div>
+                        <div class="stat-value large">${Math.round(runningState.calories)}</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Mapa de resultados -->
+            <div class="results-map glass-card mb-lg">
+                <div id="results-map" class="results-map"></div>
+            </div>
+            
+            <!-- Acciones -->
+            <div class="finish-actions">
+                <button id="save-run-btn" class="glass-button glass-button-primary btn-full mb-sm">
+                    💾 Guardar Carrera
+                </button>
+                <button id="share-run-btn" class="glass-button glass-button-secondary btn-full mb-sm">
+                    📤 Compartir
+                </button>
+                <button id="new-run-btn" class="glass-button glass-button-outline btn-full">
+                    🏃‍♂️ Nueva Carrera
+                </button>
+            </div>
+        </div>
+    `;
+}
 
-window.selectIntervalTraining = function() {
-    console.log('⚡ Seleccionando entrenamientos por intervalos');
-    // Implementar entrenamientos por intervalos
-    showToast('Entrenamientos por intervalos próximamente', 'info');
-};
+// ===================================
+// FUNCIONES DE GPS Y TRACKING
+// ===================================
 
-// Funciones de GPS
-function checkGeolocationPermission() {
+// Inicializar geolocalización
+function initializeGeolocation() {
     if (!navigator.geolocation) {
-        showToast('Geolocalización no disponible en este dispositivo', 'error');
-        return false;
+        console.error('❌ Geolocalización no soportada');
+        return;
     }
-    return true;
+    
+    navigator.permissions.query({name: 'geolocation'}).then(result => {
+        console.log('📍 Estado GPS:', result.state);
+        updateGPSStatus(result.state);
+    });
 }
 
-function startGPSTracking() {
-    if (!checkGeolocationPermission()) return;
+// Solicitar permisos de ubicación
+async function requestLocationPermission() {
+    return new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                runningState.lastPosition = position;
+                resolve(position);
+            },
+            (error) => {
+                console.error('❌ Error GPS:', error);
+                reject(error);
+            },
+            {
+                enableHighAccuracy: true,
+                timeout: 10000,
+                maximumAge: 0
+            }
+        );
+    });
+}
+
+// Iniciar tracking GPS
+async function startTracking() {
+    if (runningState.isTracking) return;
+    
+    console.log('📍 Iniciando tracking GPS');
+    
+    runningState.isTracking = true;
+    runningState.startTime = Date.now();
+    runningState.route = [];
+    runningState.distance = 0;
+    runningState.splits = [];
+    runningState.pausedTime = 0;
     
     const options = {
         enableHighAccuracy: true,
         timeout: 5000,
-        maximumAge: 0
+        maximumAge: 1000
     };
     
     runningState.watchId = navigator.geolocation.watchPosition(
-        handleLocationUpdate,
-        handleLocationError,
+        handlePositionUpdate,
+        handlePositionError,
         options
     );
     
-    runningState.isTracking = true;
-    runningState.startTime = Date.now();
+    runningState.intervalId = setInterval(updateMetrics, 1000);
     
-    // Mantener pantalla encendida
-    enableWakeLock();
-    
-    showToast('GPS activado - Rastreando posición', 'success');
+    // Habilitar wake lock
+    if ('wakeLock' in navigator) {
+        try {
+            runningState.wakeLock = await navigator.wakeLock.request('screen');
+        } catch (error) {
+            console.warn('⚠️ Wake lock no disponible:', error);
+        }
+    }
 }
 
-function handleLocationUpdate(position) {
+// Manejar actualización de posición
+function handlePositionUpdate(position) {
     const { latitude, longitude, accuracy } = position.coords;
     
-    // Filtrar coordenadas con poca precisión
-    if (accuracy > 50) return;
+    if (accuracy > runningState.gpsAccuracy) {
+        console.warn(`⚠️ GPS poco preciso: ${accuracy}m`);
+        return;
+    }
     
     const newPoint = {
         lat: latitude,
         lng: longitude,
-        timestamp: Date.now(),
-        accuracy: accuracy
+        accuracy,
+        timestamp: position.timestamp,
+        altitude: position.coords.altitude || 0
     };
     
-    // Calcular distancia si no es el primer punto
     if (runningState.route.length > 0) {
         const lastPoint = runningState.route[runningState.route.length - 1];
-        const distance = calculateDistance(lastPoint, newPoint);
+        const segmentDistance = calculateDistance(lastPoint, newPoint);
         
-        // Filtrar puntos muy cercanos (menos de 5 metros)
-        if (distance < 5) return;
-        
-        runningState.distance += distance;
+        if (segmentDistance >= runningState.minDistanceUpdate) {
+            runningState.distance += segmentDistance;
+            runningState.route.push(newPoint);
+            
+            updateMapPosition(newPoint);
+            updateRoutePolyline();
+            checkKilometerSplit();
+            checkDistanceTarget();
+        }
+    } else {
+        runningState.route.push(newPoint);
+        updateMapPosition(newPoint);
     }
     
-    runningState.route.push(newPoint);
-    
-    // Actualizar mapa
-    updateMapPosition(newPoint);
-    updateRouteOnMap();
-    
-    // Calcular pace
-    const elapsedTime = getElapsedTime();
-    if (elapsedTime > 0 && runningState.distance > 0) {
-        runningState.pace = (elapsedTime / 60) / (runningState.distance / 1000); // min/km
-    }
-    
-    // Calcular calorías (estimación simple)
-    runningState.calories = Math.floor((runningState.distance / 1000) * 70); // aprox 70 cal/km
-    
-    // Audio coaching cada kilómetro
-    const currentKm = Math.floor(runningState.distance / 1000);
-    if (currentKm > runningState.lastVoiceAnnouncement && runningState.isVoiceEnabled) {
-        announceProgress(currentKm);
-        runningState.lastVoiceAnnouncement = currentKm;
-    }
+    runningState.lastPosition = position;
+    updateGPSStatus('granted');
 }
 
-function handleLocationError(error) {
-    console.error('Error GPS:', error);
+// Manejar errores de posición
+function handlePositionError(error) {
+    console.error('❌ Error GPS:', error);
+    updateGPSStatus('error');
     
-    let message = 'Error de GPS';
     switch (error.code) {
         case error.PERMISSION_DENIED:
-            message = 'Permiso de GPS denegado';
+            showError('Permisos GPS denegados');
             break;
         case error.POSITION_UNAVAILABLE:
-            message = 'Posición GPS no disponible';
+            showError('Ubicación no disponible');
             break;
         case error.TIMEOUT:
-            message = 'Timeout de GPS';
+            console.warn('⚠️ Timeout GPS');
             break;
     }
-    
-    showToast(message, 'error');
 }
 
-// Funciones de mapa
-function initializeMap() {
-    if (!window.L) {
-        console.error('Leaflet no está cargado');
-        return;
-    }
+// Actualizar métricas
+function updateMetrics() {
+    if (!runningState.isTracking || runningState.isPaused) return;
     
-    // Obtener posición actual para centrar el mapa
-    navigator.geolocation.getCurrentPosition(
-        (position) => {
-            const lat = position.coords.latitude;
-            const lng = position.coords.longitude;
-            
-            runningState.map = L.map('running-map').setView([lat, lng], 16);
-            
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '© OpenStreetMap contributors'
-            }).addTo(runningState.map);
-            
-            // Marcador del usuario
-            runningState.userMarker = L.marker([lat, lng], {
-                icon: L.divIcon({
-                    className: 'user-location-marker',
-                    html: '🏃',
-                    iconSize: [30, 30]
-                })
-            }).addTo(runningState.map);
-            
-            // Inicializar polyline para la ruta
-            runningState.routePolyline = L.polyline([], {
-                color: '#007AFF',
-                weight: 4,
-                opacity: 0.8
-            }).addTo(runningState.map);
-            
-        },
-        (error) => {
-            console.error('Error obteniendo posición inicial:', error);
-            // Mapa por defecto en Madrid
-            runningState.map = L.map('running-map').setView([40.4168, -3.7038], 13);
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(runningState.map);
+    const now = Date.now();
+    runningState.duration = now - runningState.startTime - runningState.pausedTime;
+    
+    if (runningState.distance > 0 && runningState.duration > 0) {
+        const durationMinutes = runningState.duration / 1000 / 60;
+        const distanceKm = runningState.distance / 1000;
+        
+        runningState.avgPace = durationMinutes / distanceKm;
+        runningState.speed = (distanceKm / durationMinutes) * 60;
+        runningState.calories = distanceKm * runningState.userWeight * CALORIES_PER_KM_PER_KG;
+        
+        // Ritmo actual (últimos 30 segundos)
+        const recentPoints = runningState.route.slice(-10);
+        if (recentPoints.length >= 2) {
+            const recentDistance = calculateTotalDistance(recentPoints);
+            const recentTimeMs = recentPoints[recentPoints.length - 1].timestamp - recentPoints[0].timestamp;
+            const recentTimeMin = recentTimeMs / 1000 / 60;
+            if (recentTimeMin > 0 && recentDistance > 0) {
+                runningState.pace = recentTimeMin / (recentDistance / 1000);
+            }
         }
-    );
+    }
+    
+    if (runningState.currentMode === 'active') {
+        updateActiveRunUI();
+    }
+    
+    checkTimeTarget();
 }
 
-function updateMapPosition(position) {
-    if (!runningState.map || !runningState.userMarker) return;
+// ===================================
+// FUNCIONES DE CONTROL
+// ===================================
+
+// Iniciar carrera libre
+async function startFreeRun() {
+    console.log('🏃‍♂️ Iniciando carrera libre');
     
-    const latLng = [position.lat, position.lng];
-    
-    // Actualizar marcador del usuario
-    runningState.userMarker.setLatLng(latLng);
-    
-    // Centrar mapa en la nueva posición
-    runningState.map.setView(latLng, runningState.map.getZoom());
+    try {
+        await requestLocationPermission();
+        
+        runningState.currentMode = 'active';
+        runningState.targetDistance = null;
+        runningState.targetTime = null;
+        
+        await startTracking();
+        renderRunningPage();
+        
+        if (runningState.isVoiceEnabled && window.EntrenoTTS) {
+            window.EntrenoTTS.speak('¡Carrera iniciada! GPS activado.');
+        }
+        
+    } catch (error) {
+        console.error('❌ Error iniciando carrera:', error);
+        showError('No se pudo iniciar el GPS. Verifica los permisos.');
+    }
 }
 
-function updateRouteOnMap() {
-    if (!runningState.routePolyline || runningState.route.length < 2) return;
+// Iniciar carrera con objetivo
+async function startTargetRun(type, target) {
+    console.log(`🎯 Iniciando carrera ${type}:`, target);
     
-    const routePoints = runningState.route.map(point => [point.lat, point.lng]);
-    runningState.routePolyline.setLatLngs(routePoints);
+    try {
+        await requestLocationPermission();
+        
+        runningState.currentMode = 'active';
+        
+        if (type === 'distance') {
+            runningState.targetDistance = target;
+        } else if (type === 'time') {
+            runningState.targetTime = target;
+        }
+        
+        await startTracking();
+        renderRunningPage();
+        
+        if (runningState.isVoiceEnabled && window.EntrenoTTS) {
+            const targetText = type === 'distance' 
+                ? formatDistance(target)
+                : formatDuration(target);
+            window.EntrenoTTS.speak(`¡Carrera iniciada! Objetivo: ${targetText}`);
+        }
+        
+    } catch (error) {
+        console.error('❌ Error:', error);
+        showError('No se pudo iniciar el GPS.');
+    }
 }
 
-// Funciones de control
-window.toggleRunning = function() {
-    if (runningState.isTracking) {
-        pauseRun();
+// Pausar/reanudar
+function togglePause() {
+    if (runningState.isPaused) {
+        runningState.isPaused = false;
+        runningState.pausedTime += Date.now() - runningState.pauseStart;
+        
+        if (runningState.isVoiceEnabled && window.EntrenoTTS) {
+            window.EntrenoTTS.speak('Carrera reanudada');
+        }
     } else {
-        resumeRun();
-    }
-};
-
-function pauseRun() {
-    if (runningState.watchId) {
-        navigator.geolocation.clearWatch(runningState.watchId);
-        runningState.watchId = null;
+        runningState.isPaused = true;
+        runningState.pauseStart = Date.now();
+        
+        if (runningState.isVoiceEnabled && window.EntrenoTTS) {
+            window.EntrenoTTS.speak('Carrera pausada');
+        }
     }
     
-    runningState.isTracking = false;
-    disableWakeLock();
+    const pauseBtn = document.getElementById('pause-btn');
+    if (pauseBtn) {
+        pauseBtn.querySelector('.control-icon').textContent = runningState.isPaused ? '▶️' : '⏸️';
+    }
+}
+
+// Detener carrera
+function stopRun() {
+    console.log('⏹️ Deteniendo carrera');
     
-    showToast('Carrera pausada', 'info');
-    renderRunningPage();
-}
-
-function resumeRun() {
-    startGPSTracking();
-    showToast('Carrera reanudada', 'success');
-    renderRunningPage();
-}
-
-window.stopRun = function() {
     if (runningState.watchId) {
         navigator.geolocation.clearWatch(runningState.watchId);
         runningState.watchId = null;
@@ -577,228 +590,556 @@ window.stopRun = function() {
         runningState.intervalId = null;
     }
     
-    runningState.isTracking = false;
-    
-    // Finalizar datos de la carrera
-    if (runningState.currentRun) {
-        runningState.currentRun.distance = runningState.distance;
-        runningState.currentRun.duration = getElapsedTime();
-        runningState.currentRun.avgPace = runningState.pace;
-        runningState.currentRun.calories = runningState.calories;
-        runningState.currentRun.route = [...runningState.route];
-        runningState.currentRun.endTime = Date.now();
+    if (runningState.wakeLock) {
+        runningState.wakeLock.release();
+        runningState.wakeLock = null;
     }
     
-    disableWakeLock();
+    runningState.isTracking = false;
+    runningState.endTime = Date.now();
     
-    // Anuncio de finalización con TTS
-    if (window.EntrenoTTS && runningState.isVoiceEnabled && runningState.currentRun) {
-        window.EntrenoTTS.announceRunComplete(
-            runningState.currentRun.distance,
-            runningState.currentRun.duration,
-            runningState.currentRun.avgPace
-        );
+    if (runningState.isVoiceEnabled && window.EntrenoTTS) {
+        const announcement = `¡Carrera finalizada! Distancia: ${formatDistance(runningState.distance)}. Tiempo: ${formatDuration(runningState.duration)}`;
+        window.EntrenoTTS.speak(announcement);
     }
     
     runningState.currentMode = 'finished';
     renderRunningPage();
-};
-
-// Audio coaching
-function announceProgress(km) {
-    if (!runningState.isVoiceEnabled) return;
-    
-    // Usar el sistema TTS integrado
-    if (window.EntrenoTTS) {
-        window.EntrenoTTS.announceDistance(km * 1000, runningState.pace, true);
-    }
 }
 
-// Función de compatibilidad
-function speak(text) {
-    if (window.EntrenoTTS) {
-        window.EntrenoTTS.speak(text);
-    } else if ('speechSynthesis' in window) {
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = 'es-ES';
-        utterance.rate = 0.9;
-        utterance.pitch = 1.0;
-        utterance.volume = 0.8;
-        
-        speechSynthesis.speak(utterance);
-    }
-}
-
-window.toggleVoiceCoaching = function() {
+// Alternar audio
+function toggleVoice() {
     runningState.isVoiceEnabled = !runningState.isVoiceEnabled;
     
-    const message = runningState.isVoiceEnabled ? 
-        'Audio coaching activado' : 'Audio coaching desactivado';
-    
-    showToast(message, 'info');
-    renderRunningPage();
-};
-
-// Funciones de utilidad
-function calculateDistance(point1, point2) {
-    const R = 6371e3; // Radio de la Tierra en metros
-    const φ1 = point1.lat * Math.PI/180;
-    const φ2 = point2.lat * Math.PI/180;
-    const Δφ = (point2.lat - point1.lat) * Math.PI/180;
-    const Δλ = (point2.lng - point1.lng) * Math.PI/180;
-    
-    const a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
-              Math.cos(φ1) * Math.cos(φ2) *
-              Math.sin(Δλ/2) * Math.sin(Δλ/2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-    
-    return R * c; // Distancia en metros
-}
-
-function getElapsedTime() {
-    if (!runningState.startTime) return 0;
-    return Math.floor((Date.now() - runningState.startTime) / 1000);
-}
-
-function formatRunTime(seconds) {
-    const hours = Math.floor(seconds / 3600);
-    const minutes = Math.floor((seconds % 3600) / 60);
-    const secs = seconds % 60;
-    
-    if (hours > 0) {
-        return `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-    } else {
-        return `${minutes}:${secs.toString().padStart(2, '0')}`;
+    const voiceBtn = document.getElementById('voice-btn');
+    if (voiceBtn) {
+        voiceBtn.classList.toggle('active', runningState.isVoiceEnabled);
+        voiceBtn.querySelector('.control-icon').textContent = runningState.isVoiceEnabled ? '🔊' : '🔇';
     }
 }
 
-function formatPace(pace) {
-    if (!pace || pace === 0) return '--:--';
+// ===================================
+// FUNCIONES AUXILIARES
+// ===================================
+
+// Configurar listeners
+function setupRunningListeners() {
+    document.addEventListener('click', (e) => {
+        const target = e.target.closest('button');
+        if (!target) return;
+        
+        if (target.classList.contains('option-btn')) {
+            e.preventDefault();
+            const type = target.dataset.type;
+            const targetValue = target.dataset.target;
+            
+            switch (type) {
+                case 'free':
+                    startFreeRun();
+                    break;
+                case 'distance':
+                    startTargetRun('distance', parseInt(targetValue));
+                    break;
+                case 'time':
+                    startTargetRun('time', parseInt(targetValue));
+                    break;
+            }
+        }
+        
+        if (target.id === 'pause-btn') {
+            e.preventDefault();
+            togglePause();
+        } else if (target.id === 'stop-btn') {
+            e.preventDefault();
+            stopRun();
+        } else if (target.id === 'voice-btn') {
+            e.preventDefault();
+            toggleVoice();
+        } else if (target.id === 'new-run-btn') {
+            e.preventDefault();
+            newRun();
+        } else if (target.id === 'test-gps-btn') {
+            e.preventDefault();
+            testGPS();
+        }
+    });
+}
+
+// Calcular distancia entre dos puntos (Haversine)
+function calculateDistance(point1, point2) {
+    const lat1 = point1.lat * Math.PI / 180;
+    const lon1 = point1.lng * Math.PI / 180;
+    const lat2 = point2.lat * Math.PI / 180;
+    const lon2 = point2.lng * Math.PI / 180;
     
-    const minutes = Math.floor(pace);
-    const seconds = Math.floor((pace - minutes) * 60);
+    const dlat = lat2 - lat1;
+    const dlon = lon2 - lon1;
+    
+    const a = Math.sin(dlat/2) * Math.sin(dlat/2) +
+              Math.cos(lat1) * Math.cos(lat2) *
+              Math.sin(dlon/2) * Math.sin(dlon/2);
+    
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    
+    return EARTH_RADIUS * c;
+}
+
+// Calcular distancia total
+function calculateTotalDistance(points) {
+    if (points.length < 2) return 0;
+    
+    let total = 0;
+    for (let i = 1; i < points.length; i++) {
+        total += calculateDistance(points[i-1], points[i]);
+    }
+    return total;
+}
+
+// Formatear distancia
+function formatDistance(meters) {
+    if (meters < 1000) {
+        return `${Math.round(meters)}m`;
+    } else {
+        return `${(meters / 1000).toFixed(2)}km`;
+    }
+}
+
+// Formatear duración
+function formatDuration(milliseconds) {
+    const totalSeconds = Math.floor(milliseconds / 1000);
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+    
+    if (hours > 0) {
+        return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    } else {
+        return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    }
+}
+
+// Formatear ritmo
+function formatPace(minutesPerKm) {
+    if (!minutesPerKm || minutesPerKm === Infinity || isNaN(minutesPerKm)) {
+        return '--:--';
+    }
+    
+    const minutes = Math.floor(minutesPerKm);
+    const seconds = Math.round((minutesPerKm - minutes) * 60);
     
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
 }
 
-function formatDate(timestamp) {
-    const date = new Date(timestamp);
-    return date.toLocaleDateString('es-ES', {
-        day: 'numeric',
-        month: 'short'
-    });
+// Formatear velocidad
+function formatSpeed(kmh) {
+    if (!kmh || isNaN(kmh)) return '0.0 km/h';
+    return `${kmh.toFixed(1)} km/h`;
 }
 
-function updateRunMetrics() {
-    // Actualizar elementos del DOM
-    const distanceEl = document.getElementById('distance-value');
-    const timeEl = document.getElementById('time-value');
-    const paceEl = document.getElementById('pace-value');
-    const caloriesEl = document.getElementById('calories-value');
+// Obtener clase GPS
+function getGPSStatusClass() {
+    if (!runningState.lastPosition) return 'gps-searching';
     
-    if (distanceEl) distanceEl.textContent = (runningState.distance / 1000).toFixed(2);
-    if (timeEl) timeEl.textContent = formatRunTime(getElapsedTime());
-    if (paceEl) paceEl.textContent = formatPace(runningState.pace);
-    if (caloriesEl) caloriesEl.textContent = runningState.calories;
+    const accuracy = runningState.lastPosition.coords.accuracy;
+    if (accuracy <= 5) return 'gps-excellent';
+    if (accuracy <= 10) return 'gps-good';
+    if (accuracy <= 20) return 'gps-fair';
+    return 'gps-poor';
 }
 
-function getRecentRuns() {
-    try {
-        const runs = JSON.parse(localStorage.getItem('entrenoapp_runs') || '[]');
-        return runs.slice(-5).reverse(); // Últimas 5 carreras
-    } catch (error) {
-        console.error('Error cargando carreras:', error);
-        return [];
+// Obtener texto GPS
+function getGPSStatusText() {
+    if (!runningState.lastPosition) return 'Buscando GPS...';
+    
+    const accuracy = runningState.lastPosition.coords.accuracy;
+    if (accuracy <= 5) return 'GPS Excelente';
+    if (accuracy <= 10) return 'GPS Bueno';
+    if (accuracy <= 20) return 'GPS Regular';
+    return 'GPS Pobre';
+}
+
+// Actualizar estado GPS
+function updateGPSStatus(status) {
+    const indicator = document.getElementById('gps-indicator');
+    const text = document.getElementById('gps-text');
+    
+    if (indicator) {
+        indicator.className = `gps-indicator ${getGPSStatusClass()}`;
+    }
+    
+    if (text) {
+        text.textContent = getGPSStatusText();
     }
 }
 
-function enableWakeLock() {
-    if ('wakeLock' in navigator && window.keepScreenOn) {
-        window.keepScreenOn().then(wakeLock => {
-            runningState.wakeLock = wakeLock;
-        });
-    }
-}
-
-function disableWakeLock() {
-    if (runningState.wakeLock && window.releaseScreenLock) {
-        window.releaseScreenLock(runningState.wakeLock);
-        runningState.wakeLock = null;
-    }
-}
-
-// Funciones de guardado y compartir
-window.saveRun = function() {
-    if (!runningState.currentRun) return;
+// Probar GPS
+async function testGPS() {
+    console.log('🧪 Probando GPS...');
     
     try {
-        const runs = JSON.parse(localStorage.getItem('entrenoapp_runs') || '[]');
-        runs.push(runningState.currentRun);
-        localStorage.setItem('entrenoapp_runs', JSON.stringify(runs));
-        
-        showToast('Carrera guardada exitosamente', 'success');
-        
-        // Volver al inicio
-        setTimeout(() => {
-            backToRunningHome();
-        }, 1500);
-        
+        const position = await requestLocationPermission();
+        console.log('✅ GPS funcional:', position);
+        updateGPSStatus('granted');
+        showSuccess('GPS funcionando correctamente');
     } catch (error) {
-        console.error('Error guardando carrera:', error);
-        showToast('Error guardando la carrera', 'error');
+        console.error('❌ GPS no funcional:', error);
+        updateGPSStatus('error');
+        showError('GPS no disponible');
     }
-};
-
-window.shareRunResults = function() {
-    if (!runningState.currentRun) return;
-    
-    const run = runningState.currentRun;
-    const distance = (run.distance / 1000).toFixed(2);
-    const time = formatRunTime(run.duration);
-    const pace = formatPace(run.avgPace);
-    
-    const text = `¡Acabo de correr ${distance} km en ${time}! 🏃\nPace promedio: ${pace}\nCalorías quemadas: ${run.calories}\n\n#EntrenoApp #Running`;
-    
-    if (navigator.share) {
-        navigator.share({
-            title: 'Mi carrera en EntrenoApp',
-            text: text
-        });
-    } else {
-        // Fallback para copiar al portapapeles
-        navigator.clipboard.writeText(text).then(() => {
-            showToast('Resultado copiado al portapapeles', 'success');
-        });
-    }
-};
-
-window.startNewRun = function() {
-    runningState.currentMode = 'select';
-    runningState.currentRun = null;
-    renderRunningPage();
-};
-
-window.backToRunningHome = function() {
-    runningState.currentMode = 'select';
-    runningState.currentRun = null;
-    renderRunningPage();
-};
-
-function showToast(message, type = 'info') {
-    const toast = document.createElement('div');
-    toast.className = `toast glass-effect ${type}`;
-    toast.textContent = message;
-    
-    document.body.appendChild(toast);
-    
-    setTimeout(() => {
-        toast.classList.add('show');
-    }, 100);
-    
-    setTimeout(() => {
-        toast.classList.remove('show');
-        setTimeout(() => toast.remove(), 300);
-    }, 3000);
 }
 
-console.log('🏃 Componente Running cargado');
+// ===================================
+// FUNCIONES DE MAPA
+// ===================================
+
+// Inicializar mapa
+function initializeMap() {
+    try {
+        const mapContainer = document.getElementById('run-map');
+        if (!mapContainer) return;
+        
+        console.log('🗺️ Inicializando mapa con Leaflet...');
+        
+        // Crear mapa
+        runningState.map = L.map('run-map', {
+            zoomControl: false,
+            attributionControl: false
+        }).setView([40.4168, -3.7038], 15); // Madrid por defecto
+        
+        // Agregar tiles de OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(runningState.map);
+        
+        // Controles personalizados
+        L.control.zoom({
+            position: 'bottomright'
+        }).addTo(runningState.map);
+        
+        // Centrar en ubicación actual si está disponible
+        if (runningState.lastPosition) {
+            const { latitude, longitude } = runningState.lastPosition.coords;
+            runningState.map.setView([latitude, longitude], 16);
+            addUserMarker(latitude, longitude);
+        }
+        
+        console.log('✅ Mapa inicializado correctamente');
+        
+    } catch (error) {
+        console.error('❌ Error inicializando mapa:', error);
+        // Mostrar mensaje de error en el contenedor del mapa
+        const mapContainer = document.getElementById('run-map');
+        if (mapContainer) {
+            mapContainer.innerHTML = `
+                <div class="map-error">
+                    <p>❌ No se pudo cargar el mapa</p>
+                    <p class="text-secondary">Verifica tu conexión a internet</p>
+                </div>
+            `;
+        }
+    }
+}
+
+// Actualizar posición en mapa
+function updateMapPosition(point) {
+    if (!runningState.map) return;
+    
+    try {
+        const { lat, lng } = point;
+        
+        // Actualizar o crear marcador del usuario
+        if (runningState.userMarker) {
+            runningState.userMarker.setLatLng([lat, lng]);
+        } else {
+            addUserMarker(lat, lng);
+        }
+        
+        // Centrar mapa en la nueva posición (suavemente)
+        runningState.map.panTo([lat, lng]);
+        
+    } catch (error) {
+        console.error('❌ Error actualizando posición en mapa:', error);
+    }
+}
+
+// Agregar marcador de usuario
+function addUserMarker(lat, lng) {
+    try {
+        runningState.userMarker = L.marker([lat, lng], {
+            icon: L.divIcon({
+                className: 'user-marker',
+                html: '<div class="user-dot"></div>',
+                iconSize: [20, 20],
+                iconAnchor: [10, 10]
+            }),
+            zIndexOffset: 1000
+        }).addTo(runningState.map);
+        
+    } catch (error) {
+        console.error('❌ Error agregando marcador:', error);
+    }
+}
+
+// Actualizar ruta en mapa
+function updateRoutePolyline() {
+    if (!runningState.map || runningState.route.length < 2) return;
+    
+    try {
+        const coordinates = runningState.route.map(point => [point.lat, point.lng]);
+        
+        if (runningState.routePolyline) {
+            // Actualizar línea existente
+            runningState.routePolyline.setLatLngs(coordinates);
+        } else {
+            // Crear nueva línea de ruta
+            runningState.routePolyline = L.polyline(coordinates, {
+                color: '#667eea',
+                weight: 4,
+                opacity: 0.8,
+                smoothFactor: 1,
+                lineCap: 'round',
+                lineJoin: 'round'
+            }).addTo(runningState.map);
+        }
+        
+    } catch (error) {
+        console.error('❌ Error actualizando ruta:', error);
+    }
+}
+
+// Inicializar mapa de resultados
+function initializeResultsMap() {
+    try {
+        const mapContainer = document.getElementById('results-map');
+        if (!mapContainer || runningState.route.length === 0) {
+            console.log('⚠️ No hay datos para el mapa de resultados');
+            return;
+        }
+        
+        console.log('🗺️ Inicializando mapa de resultados...');
+        
+        // Crear mapa de resultados
+        const resultsMap = L.map('results-map', {
+            zoomControl: true,
+            attributionControl: false
+        });
+        
+        // Agregar tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(resultsMap);
+        
+        // Agregar ruta completa
+        const coordinates = runningState.route.map(point => [point.lat, point.lng]);
+        
+        if (coordinates.length > 1) {
+            const routeLine = L.polyline(coordinates, {
+                color: '#667eea',
+                weight: 4,
+                opacity: 0.8,
+                smoothFactor: 1
+            }).addTo(resultsMap);
+            
+            // Marcador de inicio
+            L.marker(coordinates[0], {
+                icon: L.divIcon({
+                    className: 'start-marker',
+                    html: '<div class="marker-inner">🏁</div>',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 15]
+                })
+            }).addTo(resultsMap).bindPopup('Inicio');
+            
+            // Marcador de fin
+            L.marker(coordinates[coordinates.length - 1], {
+                icon: L.divIcon({
+                    className: 'end-marker',
+                    html: '<div class="marker-inner">🏆</div>',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 15]
+                })
+            }).addTo(resultsMap).bindPopup('Fin');
+            
+            // Ajustar vista a la ruta completa
+            resultsMap.fitBounds(routeLine.getBounds(), { 
+                padding: [20, 20],
+                maxZoom: 16
+            });
+            
+            // Agregar marcadores de splits cada kilómetro
+            addSplitMarkers(resultsMap, coordinates);
+        }
+        
+        console.log('✅ Mapa de resultados inicializado');
+        
+    } catch (error) {
+        console.error('❌ Error inicializando mapa de resultados:', error);
+        const mapContainer = document.getElementById('results-map');
+        if (mapContainer) {
+            mapContainer.innerHTML = `
+                <div class="map-error">
+                    <p>❌ No se pudo cargar el mapa de resultados</p>
+                </div>
+            `;
+        }
+    }
+}
+
+// Agregar marcadores de splits
+function addSplitMarkers(map, coordinates) {
+    try {
+        let accumulatedDistance = 0;
+        let lastSplitPoint = null;
+        
+        for (let i = 1; i < coordinates.length; i++) {
+            const prevCoord = coordinates[i - 1];
+            const currentCoord = coordinates[i];
+            
+            // Calcular distancia del segmento
+            const segmentDistance = calculateDistance(
+                { lat: prevCoord[0], lng: prevCoord[1] },
+                { lat: currentCoord[0], lng: currentCoord[1] }
+            );
+            
+            accumulatedDistance += segmentDistance;
+            
+            // Si hemos pasado un kilómetro, agregar marcador
+            const currentKm = Math.floor(accumulatedDistance / 1000);
+            const lastKm = lastSplitPoint ? Math.floor((accumulatedDistance - segmentDistance) / 1000) : 0;
+            
+            if (currentKm > lastKm && currentKm <= runningState.splits.length) {
+                const split = runningState.splits[currentKm - 1];
+                if (split) {
+                    L.marker(currentCoord, {
+                        icon: L.divIcon({
+                            className: 'split-marker',
+                            html: `<div class="split-marker-inner">${currentKm}</div>`,
+                            iconSize: [24, 24],
+                            iconAnchor: [12, 12]
+                        })
+                    }).addTo(map).bindPopup(`
+                        <div class="split-popup">
+                            <strong>Kilómetro ${currentKm}</strong><br>
+                            Ritmo: ${formatPace(split.pace)}<br>
+                            Tiempo: ${formatDuration(split.duration)}
+                        </div>
+                    `);
+                }
+                
+                lastSplitPoint = currentCoord;
+            }
+        }
+        
+    } catch (error) {
+        console.error('❌ Error agregando marcadores de splits:', error);
+    }
+}
+
+// ===================================
+// FUNCIONES DE UI Y UTILIDADES
+// ===================================
+
+// Actualizar UI activa
+function updateActiveRunUI() {
+    const elements = {
+        distance: document.getElementById('distance-value'),
+        time: document.getElementById('time-value'),
+        pace: document.getElementById('pace-value'),
+        avgPace: document.getElementById('avg-pace-value'),
+        speed: document.getElementById('speed-value'),
+        calories: document.getElementById('calories-value')
+    };
+    
+    if (elements.distance) elements.distance.textContent = formatDistance(runningState.distance);
+    if (elements.time) elements.time.textContent = formatDuration(runningState.duration);
+    if (elements.pace) elements.pace.textContent = formatPace(runningState.pace);
+    if (elements.avgPace) elements.avgPace.textContent = formatPace(runningState.avgPace);
+    if (elements.speed) elements.speed.textContent = formatSpeed(runningState.speed);
+    if (elements.calories) elements.calories.textContent = Math.round(runningState.calories);
+}
+
+// Verificar split por kilómetro
+function checkKilometerSplit() {
+    const currentKm = Math.floor(runningState.distance / 1000);
+    const completedSplits = runningState.splits.length;
+    
+    if (currentKm > completedSplits) {
+        const splitTime = runningState.duration;
+        const previousSplitTime = completedSplits > 0 ? runningState.splits[completedSplits - 1].totalTime : 0;
+        const segmentTime = splitTime - previousSplitTime;
+        const segmentPace = (segmentTime / 1000 / 60);
+        
+        const split = {
+            km: currentKm,
+            duration: segmentTime,
+            pace: segmentPace,
+            totalTime: splitTime
+        };
+        
+        runningState.splits.push(split);
+        
+        if (runningState.isVoiceEnabled && window.EntrenoTTS) {
+            window.EntrenoTTS.speak(`Kilómetro ${currentKm} completado. Ritmo: ${formatPace(segmentPace)}`);
+        }
+    }
+}
+
+// Verificar objetivo de distancia
+function checkDistanceTarget() {
+    if (runningState.targetDistance && runningState.distance >= runningState.targetDistance) {
+        if (runningState.isVoiceEnabled && window.EntrenoTTS) {
+            window.EntrenoTTS.speak('¡Objetivo de distancia alcanzado!');
+        }
+        stopRun();
+    }
+}
+
+// Verificar objetivo de tiempo
+function checkTimeTarget() {
+    if (runningState.targetTime && runningState.duration >= runningState.targetTime) {
+        if (runningState.isVoiceEnabled && window.EntrenoTTS) {
+            window.EntrenoTTS.speak('¡Objetivo de tiempo alcanzado!');
+        }
+        stopRun();
+    }
+}
+
+// Nueva carrera
+function newRun() {
+    runningState = {
+        ...runningState,
+        currentMode: 'select',
+        isTracking: false,
+        startTime: null,
+        endTime: null,
+        route: [],
+        distance: 0,
+        duration: 0,
+        pace: 0,
+        avgPace: 0,
+        calories: 0,
+        splits: [],
+        targetDistance: null,
+        targetTime: null,
+        isPaused: false,
+        pausedTime: 0
+    };
+    
+    renderRunningPage();
+}
+
+// Mostrar error
+function showError(message) {
+    console.error('❌', message);
+    // TODO: Sistema de notificaciones
+}
+
+// Mostrar éxito
+function showSuccess(message) {
+    console.log('✅', message);
+    // TODO: Sistema de notificaciones
+}
+
+console.log('🏃‍♂️ Módulo de running GPS cargado');
