@@ -76,6 +76,8 @@ export class DebugLogger {
         // Guardar en localStorage si es debug mode
         if (this.isDebugMode) {
             this.saveToStorage();
+            // Actualizar panel si está visible
+            setTimeout(() => this.updateDebugPanel(), 100);
         }
     }
 
@@ -172,46 +174,114 @@ export class DebugLogger {
             position: fixed;
             top: 10px;
             right: 10px;
-            width: 300px;
-            max-height: 400px;
-            background: rgba(0,0,0,0.9);
+            width: 350px;
+            max-height: 500px;
+            background: rgba(0,0,0,0.95);
             color: white;
             padding: 15px;
             border-radius: 10px;
             font-family: monospace;
-            font-size: 12px;
+            font-size: 11px;
             z-index: 10000;
             overflow-y: auto;
             border: 2px solid #00D4FF;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
         `;
 
-        const lastLogs = this.logs.slice(-10);
+        const lastLogs = this.logs.slice(-15);
         panel.innerHTML = `
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                 <strong>🔍 Debug Panel</strong>
                 <button onclick="window.debugLogger.hideDebugPanel()" style="background: #ff4444; border: none; color: white; padding: 2px 6px; border-radius: 3px; cursor: pointer;">×</button>
             </div>
-            <div style="max-height: 300px; overflow-y: auto;">
+            <div style="max-height: 350px; overflow-y: auto;" id="debug-logs-container">
                 ${lastLogs.map(log => `
-                    <div style="margin-bottom: 5px; padding: 5px; background: rgba(255,255,255,0.1); border-radius: 3px;">
-                        <div style="color: #00D4FF;">[${log.category}] ${log.message}</div>
-                        <div style="color: #ccc; font-size: 10px;">${new Date(log.timestamp).toLocaleTimeString()}</div>
+                    <div style="margin-bottom: 5px; padding: 5px; background: rgba(255,255,255,0.1); border-radius: 3px; border-left: 3px solid ${this.getColorForLevel(log.level)};">
+                        <div style="color: #00D4FF; font-weight: bold;">[${log.category}] ${log.message}</div>
+                        ${log.data ? `<div style="color: #ffff88; font-size: 10px;">Data: ${JSON.stringify(log.data, null, 2)}</div>` : ''}
+                        <div style="color: #ccc; font-size: 9px;">${new Date(log.timestamp).toLocaleTimeString()}</div>
                     </div>
                 `).join('')}
             </div>
             <div style="margin-top: 10px; text-align: center;">
-                <button onclick="window.debugLogger.clearLogs()" style="background: #ff6600; border: none; color: white; padding: 5px 10px; border-radius: 3px; cursor: pointer; margin-right: 5px;">Limpiar</button>
-                <button onclick="console.log(window.debugLogger.exportLogs())" style="background: #00aa00; border: none; color: white; padding: 5px 10px; border-radius: 3px; cursor: pointer;">Exportar</button>
+                <button onclick="window.debugLogger.clearLogs()" style="background: #ff6600; border: none; color: white; padding: 5px 8px; border-radius: 3px; cursor: pointer; margin: 2px; font-size: 10px;">🧹 Limpiar</button>
+                <button onclick="window.debugLogger.copyLogsToClipboard()" style="background: #00aa00; border: none; color: white; padding: 5px 8px; border-radius: 3px; cursor: pointer; margin: 2px; font-size: 10px;">📋 Copiar</button>
+                <button onclick="window.debugLogger.downloadLogs()" style="background: #0066cc; border: none; color: white; padding: 5px 8px; border-radius: 3px; cursor: pointer; margin: 2px; font-size: 10px;">📥 Descargar</button>
             </div>
         `;
 
         document.body.appendChild(panel);
+        
+        // Auto-scroll al final
+        const container = document.getElementById('debug-logs-container');
+        if (container) {
+            container.scrollTop = container.scrollHeight;
+        }
     }
 
     hideDebugPanel() {
         const panel = document.getElementById('debug-panel');
         if (panel) {
             panel.remove();
+        }
+    }
+
+    // Copiar logs al portapapeles
+    async copyLogsToClipboard() {
+        const logText = this.formatLogsForExport();
+        try {
+            await navigator.clipboard.writeText(logText);
+            alert('📋 Logs copiados al portapapeles!\nPégalos en tu respuesta para que pueda ayudarte.');
+        } catch (err) {
+            console.error('Error copiando al portapapeles:', err);
+            this.downloadLogs();
+        }
+    }
+
+    // Descargar logs como archivo
+    downloadLogs() {
+        const logText = this.formatLogsForExport();
+        const blob = new Blob([logText], { type: 'text/plain' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `entrenoapp-debug-${new Date().toISOString().slice(0,19).replace(/:/g, '-')}.txt`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+    }
+
+    // Formatear logs para exportar
+    formatLogsForExport() {
+        const header = `
+=== ENTRENOAPP DEBUG LOGS ===
+Timestamp: ${new Date().toISOString()}
+URL: ${window.location.href}
+User Agent: ${navigator.userAgent}
+Debug Mode: ${this.isDebugMode}
+Total Logs: ${this.logs.length}
+
+=== LOGS ===
+`;
+        
+        const formattedLogs = this.logs.map(log => {
+            let formatted = `[${log.timestamp}] ${log.level} - ${log.category}: ${log.message}`;
+            if (log.data) {
+                formatted += `\nData: ${JSON.stringify(log.data, null, 2)}`;
+            }
+            return formatted;
+        }).join('\n\n');
+
+        return header + formattedLogs;
+    }
+
+    // Actualizar panel de debug
+    updateDebugPanel() {
+        const panel = document.getElementById('debug-panel');
+        if (panel && this.isDebugMode) {
+            this.hideDebugPanel();
+            this.showDebugPanel();
         }
     }
 }
