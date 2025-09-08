@@ -6,6 +6,14 @@ import {
     serverTimestamp 
 } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
+// Helper para logging
+function debugLog(category, message, data = null) {
+    if (window.debugLogger) {
+        window.debugLogger.logInfo('ONBOARDING_' + category, message, data);
+    }
+    console.log(`[ONBOARDING_${category}] ${message}`, data || '');
+}
+
 // Estado del onboarding
 let onboardingState = {
     currentStep: 0,
@@ -92,13 +100,20 @@ const onboardingSteps = [
 
 // Inicializar página de onboarding
 window.initOnboardingPage = function() {
-    console.log('🎯 Inicializando onboarding');
+    debugLog('INIT', 'Inicializando onboarding');
     
     // Cargar datos guardados si existen
     loadSavedProgress();
     
     renderOnboardingContent();
     setupOnboardingListeners();
+    
+    // Mostrar panel de debug si está habilitado
+    if (window.debugLogger && window.debugLogger.isDebugMode) {
+        setTimeout(() => {
+            window.debugLogger.showDebugPanel();
+        }, 1000);
+    }
 };
 
 // Cargar progreso guardado
@@ -356,6 +371,8 @@ function handleOptionClick(e) {
     const value = card.dataset.value;
     const isMultiple = card.dataset.multiple === 'true';
     
+    debugLog('OPTION_CLICK', `Opción seleccionada: ${value}`, { stepId, isMultiple });
+    
     if (isMultiple) {
         // Selección múltiple
         if (!onboardingState.userData[stepId]) {
@@ -367,34 +384,54 @@ function handleOptionClick(e) {
         
         if (index > -1) {
             selectedValues.splice(index, 1);
+            debugLog('OPTION_DESELECT', `Opción deseleccionada: ${value}`);
         } else {
             selectedValues.push(value);
+            debugLog('OPTION_SELECT', `Opción añadida: ${value}`);
         }
+        
+        // Para selección múltiple, solo actualizar visual
+        saveProgress();
+        renderOnboardingContent();
     } else {
-        // Selección única
+        // Selección única - avanzar automáticamente
         onboardingState.userData[stepId] = value;
+        debugLog('SINGLE_SELECT', `Selección única: ${value}, avanzando automáticamente...`);
+        
+        saveProgress();
+        renderOnboardingContent();
+        
+        // Avanzar automáticamente después de un breve delay
+        setTimeout(() => {
+            if (canProceedToNext()) {
+                debugLog('AUTO_ADVANCE', 'Avanzando al siguiente paso automáticamente');
+                handleNext();
+            }
+        }, 800); // 800ms para que el usuario vea la selección
     }
-    
-    saveProgress();
-    renderOnboardingContent();
 }
 
 // Manejar siguiente paso
 function handleNext() {
-    console.log('🔄 handleNext ejecutado - Paso actual:', onboardingState.currentStep);
+    debugLog('HANDLE_NEXT', `Ejecutado - Paso actual: ${onboardingState.currentStep}/${onboardingState.totalSteps - 1}`);
     
     if (!canProceedToNext()) {
-        console.log('❌ No se puede proceder al siguiente paso');
+        debugLog('CANNOT_PROCEED', 'No se puede proceder al siguiente paso', {
+            currentStep: onboardingState.currentStep,
+            userData: onboardingState.userData,
+            currentStepData: onboardingSteps[onboardingState.currentStep]
+        });
         return;
     }
     
     if (onboardingState.currentStep === onboardingState.totalSteps - 1) {
         // Finalizar onboarding
-        console.log('🎯 Ejecutando finishOnboarding...');
+        debugLog('FINISH_START', 'Ejecutando finishOnboarding...');
         finishOnboarding();
     } else {
         // Siguiente paso
         onboardingState.currentStep++;
+        debugLog('NEXT_STEP', `Avanzando al paso ${onboardingState.currentStep}`);
         saveProgress();
         renderOnboardingContent();
     }
@@ -412,31 +449,30 @@ function handlePrevious() {
 // Finalizar onboarding
 async function finishOnboarding() {
     if (onboardingState.isLoading) {
-        console.log('⚠️ Onboarding ya está procesándose...');
+        debugLog('ALREADY_LOADING', 'Onboarding ya está procesándose...');
         return;
     }
     
     onboardingState.isLoading = true;
-    console.log('🎯 Iniciando finalización del onboarding...');
+    debugLog('FINISH_INIT', 'Iniciando finalización del onboarding...', onboardingState.userData);
     
     try {
-        console.log('🎯 Finalizando onboarding...', onboardingState.userData);
-        
         // Verificar autenticación
         if (!auth) {
             throw new Error('Firebase auth no está disponible');
         }
+        debugLog('AUTH_CHECK', 'Firebase auth disponible');
         
         const user = auth.currentUser;
         if (!user) {
             throw new Error('Usuario no autenticado');
         }
-        console.log('✅ Usuario autenticado:', user.email);
+        debugLog('USER_AUTH', `Usuario autenticado: ${user.email}`);
         
         // Generar plan personalizado automáticamente
-        console.log('📋 Generando plan personalizado...');
+        debugLog('PLAN_GENERATION_START', 'Generando plan personalizado...');
         const personalizedPlan = await generatePersonalizedPlan(onboardingState.userData);
-        console.log('✅ Plan generado:', personalizedPlan);
+        debugLog('PLAN_GENERATION_SUCCESS', 'Plan generado exitosamente', personalizedPlan);
         
         // Actualizar perfil en Firestore
         console.log('💾 Guardando datos en Firestore...');
@@ -479,11 +515,25 @@ async function finishOnboarding() {
         }, 4000);
         
     } catch (error) {
-        console.error('❌ Error finalizando onboarding:', error);
+        debugLog('FINISH_ERROR', 'Error finalizando onboarding', {
+            error: error.message,
+            stack: error.stack,
+            userData: onboardingState.userData
+        });
+        
+        if (window.debugLogger) {
+            window.debugLogger.logError('ONBOARDING_FINISH', error.message, {
+                stack: error.stack,
+                userData: onboardingState.userData,
+                currentStep: onboardingState.currentStep
+            });
+        }
+        
         onboardingState.error = 'Error guardando tu perfil. Intenta de nuevo.';
         renderOnboardingContent();
     } finally {
         onboardingState.isLoading = false;
+        debugLog('FINISH_COMPLETE', 'Finalización completada (con éxito o error)');
     }
 }
 
