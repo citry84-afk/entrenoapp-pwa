@@ -114,12 +114,15 @@ async function handleUserAuthenticated(user) {
         
         // Verificar si es la primera vez
         const isFirstTime = await checkIfFirstTimeUser(user);
+        console.log('🔍 Es primera vez?', isFirstTime);
         
         if (isFirstTime) {
             // Mostrar onboarding
+            console.log('📋 Navegando a onboarding...');
             navigateToPage('onboarding');
         } else {
             // Ir al dashboard
+            console.log('🏠 Navegando a dashboard...');
             navigateToPage('dashboard');
         }
         
@@ -307,6 +310,7 @@ async function loadOnboardingPage() {
 }
 
 async function loadDashboardPage() {
+    console.log('📄 Cargando página de dashboard...');
     return `
         <div class="page">
             <div class="dashboard-container">
@@ -362,12 +366,21 @@ async function loadProfilePage() {
 
 // Ejecutar scripts específicos de página
 function executePageScripts(page) {
+    console.log(`🔧 Ejecutando scripts para página: ${page}`);
+    
     switch (page) {
         case 'auth':
+            console.log('🔐 Inicializando auth...');
             if (window.initAuthPage) window.initAuthPage();
             break;
         case 'dashboard':
-            if (window.initDashboard) window.initDashboard();
+            console.log('🏠 Inicializando dashboard...');
+            if (window.initDashboard) {
+                window.initDashboard();
+                console.log('✅ Dashboard inicializado');
+            } else {
+                console.error('❌ window.initDashboard no está disponible');
+            }
             break;
         case 'workouts':
             if (window.initWorkouts) window.initWorkouts();
@@ -380,6 +393,15 @@ function executePageScripts(page) {
             break;
         case 'profile':
             if (window.initProfile) window.initProfile();
+            break;
+        case 'onboarding':
+            console.log('📋 Inicializando onboarding...');
+            if (window.initOnboardingPage) {
+                window.initOnboardingPage();
+                console.log('✅ Onboarding inicializado');
+            } else {
+                console.error('❌ window.initOnboardingPage no está disponible');
+            }
             break;
     }
 }
