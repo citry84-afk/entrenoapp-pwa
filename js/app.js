@@ -435,7 +435,29 @@ function executePageScripts(page) {
             if (window.initWorkouts) window.initWorkouts();
             break;
         case 'running':
-            if (window.initRunning) window.initRunning();
+            console.log('🏃‍♂️ Inicializando running...');
+            if (window.debugLogger) {
+                window.debugLogger.logInfo('APP_INIT_RUNNING', 'Inicializando componente running', { 
+                    initRunningExists: !!window.initRunning 
+                });
+            }
+            if (window.initRunning) {
+                try {
+                    console.log('✅ Ejecutando initRunning...');
+                    window.initRunning();
+                    console.log('✅ Running inicializado correctamente');
+                } catch (error) {
+                    console.error('❌ Error en initRunning:', error);
+                    if (window.debugLogger) {
+                        window.debugLogger.logError('APP_INIT_RUNNING_ERROR', 'Error inicializando running', { error });
+                    }
+                }
+            } else {
+                console.error('❌ window.initRunning no está disponible');
+                if (window.debugLogger) {
+                    window.debugLogger.logError('APP_INIT_RUNNING_NOT_FOUND', 'initRunning no encontrado');
+                }
+            }
             break;
         case 'challenges':
             if (window.initChallenges) window.initChallenges();

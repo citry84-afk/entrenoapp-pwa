@@ -51,10 +51,34 @@ const CALORIES_PER_KM_PER_KG = 1.036;
 // Inicializar componente
 window.initRunning = function() {
     console.log('🏃‍♂️ Inicializando running GPS');
-    loadUserSettings();
-    renderRunningPage();
-    setupRunningListeners();
-    initializeGeolocation();
+    if (window.debugLogger) {
+        window.debugLogger.logInfo('RUNNING_INIT', 'Iniciando componente running');
+    }
+    
+    try {
+        console.log('📋 Cargando configuraciones...');
+        loadUserSettings();
+        
+        console.log('🎨 Renderizando página...');
+        renderRunningPage();
+        
+        console.log('👂 Configurando listeners...');
+        setupRunningListeners();
+        
+        console.log('📍 Inicializando GPS...');
+        initializeGeolocation();
+        
+        console.log('✅ Running inicializado completamente');
+        if (window.debugLogger) {
+            window.debugLogger.logInfo('RUNNING_INIT_SUCCESS', 'Running inicializado correctamente');
+        }
+    } catch (error) {
+        console.error('❌ Error inicializando running:', error);
+        if (window.debugLogger) {
+            window.debugLogger.logError('RUNNING_INIT_ERROR', 'Error en inicialización', { error });
+        }
+        throw error; // Re-throw para que se propague
+    }
 };
 
 // Cargar configuraciones del usuario
