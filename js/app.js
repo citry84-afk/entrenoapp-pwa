@@ -376,10 +376,20 @@ function executePageScripts(page) {
         case 'dashboard':
             console.log('🏠 Inicializando dashboard...');
             if (window.initDashboard) {
-                window.initDashboard();
-                console.log('✅ Dashboard inicializado');
+                // Pequeño delay para asegurar que el DOM esté listo
+                setTimeout(() => {
+                    window.initDashboard();
+                    console.log('✅ Dashboard inicializado');
+                }, 100);
             } else {
                 console.error('❌ window.initDashboard no está disponible');
+                // Intentar recargar después de un segundo
+                setTimeout(() => {
+                    if (window.initDashboard) {
+                        console.log('🔄 Reintentando inicialización del dashboard...');
+                        window.initDashboard();
+                    }
+                }, 1000);
             }
             break;
         case 'workouts':

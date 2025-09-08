@@ -30,17 +30,44 @@ let dashboardState = {
 // Inicializar dashboard
 window.initDashboard = function() {
     console.log('🏠 Inicializando dashboard personalizado');
-    loadUserPlan();
-    renderDashboard();
-    setupDashboardListeners();
+    try {
+        loadUserPlan();
+        renderDashboard();
+        setupDashboardListeners();
+    } catch (error) {
+        console.error('❌ Error en initDashboard:', error);
+        // Renderizar dashboard de error
+        const container = document.querySelector('.dashboard-container');
+        if (container) {
+            container.innerHTML = `
+                <div class="glass-card text-center">
+                    <h2>Error cargando dashboard</h2>
+                    <p>Reintentando en unos segundos...</p>
+                    <button onclick="window.initDashboard()" class="glass-button glass-button-primary">
+                        Reintentar
+                    </button>
+                </div>
+            `;
+        }
+    }
 };
 
 // Cargar plan activo del usuario
 async function loadUserPlan() {
     try {
         dashboardState.isLoading = true;
+        
+        // Verificar que auth esté disponible
+        if (!auth) {
+            console.error('❌ Firebase auth no está disponible');
+            return;
+        }
+        
         const user = auth.currentUser;
-        if (!user) return;
+        if (!user) {
+            console.log('⚠️ No hay usuario autenticado');
+            return;
+        }
         
         dashboardState.user = user;
         
