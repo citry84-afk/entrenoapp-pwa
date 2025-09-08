@@ -273,29 +273,38 @@ function renderWelcomeStep(stepData) {
 function renderSelectionStep(stepData) {
     const selectedValue = onboardingState.userData[stepData.id];
     
+    debugLog('RENDER_SELECTION', `Renderizando selección para ${stepData.id}`, {
+        selectedValue,
+        optionsCount: stepData.options.length
+    });
+    
     return `
         <div class="selection-step">
             <h2 class="step-title">${stepData.title}</h2>
             <p class="step-subtitle">${stepData.subtitle}</p>
             
             <div class="options-grid">
-                ${stepData.options.map(option => `
-                    <div class="option-card ${selectedValue === option.id ? 'selected' : ''}" 
-                         data-step="${stepData.id}" 
-                         data-value="${option.id}"
-                         data-multiple="false">
-                        <div class="option-icon">${option.icon}</div>
-                        <div class="option-content">
-                            <h3 class="option-label">${option.label}</h3>
-                            <p class="option-description">${option.description}</p>
-                            ${option.features ? `
-                                <div class="option-features">
-                                    ${option.features.map(feature => `<span class="feature-tag">${feature}</span>`).join('')}
-                                </div>
-                            ` : ''}
+                ${stepData.options.map(option => {
+                    debugLog('RENDER_OPTION', `Renderizando opción ${option.id}`);
+                    return `
+                        <div class="option-card ${selectedValue === option.id ? 'selected' : ''}" 
+                             data-step="${stepData.id}" 
+                             data-value="${option.id}"
+                             data-multiple="false"
+                             style="cursor: pointer;">
+                            <div class="option-icon">${option.icon}</div>
+                            <div class="option-content">
+                                <h3 class="option-label">${option.label}</h3>
+                                <p class="option-description">${option.description}</p>
+                                ${option.features ? `
+                                    <div class="option-features">
+                                        ${option.features.map(feature => `<span class="feature-tag">${feature}</span>`).join('')}
+                                    </div>
+                                ` : ''}
+                            </div>
                         </div>
-                    </div>
-                `).join('')}
+                    `;
+                }).join('')}
             </div>
         </div>
     `;
@@ -304,6 +313,11 @@ function renderSelectionStep(stepData) {
 // Renderizar paso de selección múltiple
 function renderMultipleStep(stepData) {
     const selectedValues = onboardingState.userData[stepData.id] || [];
+    
+    debugLog('RENDER_MULTIPLE', `Renderizando selección múltiple para ${stepData.id}`, {
+        selectedValues,
+        optionsCount: stepData.options.length
+    });
     
     return `
         <div class="multiple-step">
@@ -315,7 +329,8 @@ function renderMultipleStep(stepData) {
                     <div class="option-card ${selectedValues.includes(option.id) ? 'selected' : ''}" 
                          data-step="${stepData.id}" 
                          data-value="${option.id}"
-                         data-multiple="true">
+                         data-multiple="true"
+                         style="cursor: pointer;">
                         <div class="option-icon">${option.icon}</div>
                         <div class="option-content">
                             <h3 class="option-label">${option.label}</h3>
@@ -351,63 +366,126 @@ function canProceedToNext() {
 
 // Configurar listeners del onboarding
 function setupOnboardingListeners() {
-    document.addEventListener('click', (e) => {
-        if (e.target.closest('.option-card')) {
+    debugLog('SETUP_LISTENERS', 'Configurando listeners del onboarding');
+    
+    // Remover listeners previos para evitar duplicados
+    const container = document.querySelector('.dashboard-container');
+    if (!container) {
+        debugLog('SETUP_ERROR', 'Container no encontrado para listeners');
+        return;
+    }
+    
+    // Usar event delegation en el container
+    container.addEventListener('click', (e) => {
+        debugLog('CLICK_EVENT', 'Click detectado', { 
+            target: e.target.tagName,
+            className: e.target.className,
+            id: e.target.id
+        });
+        
+        // Verificar si es una option-card o está dentro de una
+        const optionCard = e.target.closest('.option-card');
+        if (optionCard) {
+            debugLog('OPTION_CLICK_DETECTED', 'Click en option-card');
+            e.preventDefault();
+            e.stopPropagation();
             handleOptionClick(e);
-        } else if (e.target.id === 'next-btn') {
+            return;
+        }
+        
+        // Verificar botones
+        if (e.target.id === 'next-btn') {
+            debugLog('NEXT_BTN_CLICK', 'Click en botón siguiente');
+            e.preventDefault();
             handleNext();
-        } else if (e.target.id === 'prev-btn') {
+            return;
+        }
+        
+        if (e.target.id === 'prev-btn') {
+            debugLog('PREV_BTN_CLICK', 'Click en botón anterior');
+            e.preventDefault();
             handlePrevious();
+            return;
         }
     });
+    
+    debugLog('LISTENERS_OK', 'Listeners configurados exitosamente');
 }
 
 // Manejar click en opción
 function handleOptionClick(e) {
-    const card = e.currentTarget.closest('.option-card');
-    const stepId = card.dataset.step;
-    const value = card.dataset.value;
-    const isMultiple = card.dataset.multiple === 'true';
-    
-    debugLog('OPTION_CLICK', `Opción seleccionada: ${value}`, { stepId, isMultiple });
-    
-    if (isMultiple) {
-        // Selección múltiple
-        if (!onboardingState.userData[stepId]) {
-            onboardingState.userData[stepId] = [];
+    try {
+        // Buscar la card desde el elemento clickeado
+        const card = e.target.closest('.option-card');
+        if (!card) {
+            debugLog('CLICK_ERROR', 'No se encontró option-card');
+            return;
         }
         
-        const selectedValues = onboardingState.userData[stepId];
-        const index = selectedValues.indexOf(value);
+        const stepId = card.dataset.step;
+        const value = card.dataset.value;
+        const isMultiple = card.dataset.multiple === 'true';
         
-        if (index > -1) {
-            selectedValues.splice(index, 1);
-            debugLog('OPTION_DESELECT', `Opción deseleccionada: ${value}`);
-        } else {
-            selectedValues.push(value);
-            debugLog('OPTION_SELECT', `Opción añadida: ${value}`);
+        debugLog('OPTION_CLICK', `Opción seleccionada: ${value}`, { 
+            stepId, 
+            isMultiple, 
+            currentUserData: onboardingState.userData 
+        });
+        
+        if (!stepId || !value) {
+            debugLog('CLICK_ERROR', 'Datos de la card incompletos', { stepId, value });
+            return;
         }
         
-        // Para selección múltiple, solo actualizar visual
-        saveProgress();
-        renderOnboardingContent();
-        setupOnboardingListeners();
-    } else {
-        // Selección única - avanzar automáticamente
-        onboardingState.userData[stepId] = value;
-        debugLog('SINGLE_SELECT', `Selección única: ${value}, avanzando automáticamente...`);
-        
-        saveProgress();
-        renderOnboardingContent();
-        setupOnboardingListeners();
-        
-        // Avanzar automáticamente después de un breve delay
-        setTimeout(() => {
-            if (canProceedToNext()) {
-                debugLog('AUTO_ADVANCE', 'Avanzando al siguiente paso automáticamente');
-                handleNext();
+        if (isMultiple) {
+            // Selección múltiple
+            if (!onboardingState.userData[stepId]) {
+                onboardingState.userData[stepId] = [];
             }
-        }, 800); // 800ms para que el usuario vea la selección
+            
+            const selectedValues = onboardingState.userData[stepId];
+            const index = selectedValues.indexOf(value);
+            
+            if (index > -1) {
+                selectedValues.splice(index, 1);
+                debugLog('OPTION_DESELECT', `Opción deseleccionada: ${value}`);
+            } else {
+                selectedValues.push(value);
+                debugLog('OPTION_SELECT', `Opción añadida: ${value}`);
+            }
+            
+            // Para selección múltiple, solo actualizar visual
+            saveProgress();
+            renderOnboardingContent();
+            setupOnboardingListeners();
+        } else {
+            // Selección única - avanzar automáticamente
+            onboardingState.userData[stepId] = value;
+            debugLog('SINGLE_SELECT', `Selección única: ${value}`, {
+                stepId,
+                newUserData: onboardingState.userData
+            });
+            
+            saveProgress();
+            renderOnboardingContent();
+            setupOnboardingListeners();
+            
+            // Avanzar automáticamente después de un breve delay
+            setTimeout(() => {
+                if (canProceedToNext()) {
+                    debugLog('AUTO_ADVANCE', 'Avanzando al siguiente paso automáticamente');
+                    handleNext();
+                } else {
+                    debugLog('AUTO_ADVANCE_BLOCKED', 'No se puede avanzar automáticamente');
+                }
+            }, 800); // 800ms para que el usuario vea la selección
+        }
+        
+    } catch (error) {
+        debugLog('OPTION_CLICK_ERROR', 'Error en handleOptionClick', {
+            error: error.message,
+            stack: error.stack
+        });
     }
 }
 
