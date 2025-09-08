@@ -57,16 +57,55 @@ window.initRunning = async function() {
     
     try {
         console.log('📋 Cargando configuraciones...');
-        await loadUserSettings();
+        try {
+            await loadUserSettings();
+            console.log('✅ Configuraciones cargadas exitosamente');
+        } catch (loadError) {
+            console.error('❌ Error específico en loadUserSettings:', loadError);
+            console.error('❌ Stack trace:', loadError.stack);
+            if (window.debugLogger) {
+                window.debugLogger.logError('RUNNING_LOAD_USER_ERROR', 'Error en loadUserSettings', { 
+                    error: loadError,
+                    message: loadError.message,
+                    stack: loadError.stack 
+                });
+            }
+            // Continuar con valores por defecto
+            console.log('🔄 Continuando con valores por defecto...');
+        }
         
         console.log('🎨 Renderizando página...');
-        renderRunningPage();
+        try {
+            renderRunningPage();
+            console.log('✅ Página renderizada exitosamente');
+        } catch (renderError) {
+            console.error('❌ Error en renderRunningPage:', renderError);
+            if (window.debugLogger) {
+                window.debugLogger.logError('RUNNING_RENDER_ERROR', 'Error renderizando', { error: renderError });
+            }
+        }
         
         console.log('👂 Configurando listeners...');
-        setupRunningListeners();
+        try {
+            setupRunningListeners();
+            console.log('✅ Listeners configurados exitosamente');
+        } catch (listenerError) {
+            console.error('❌ Error en setupRunningListeners:', listenerError);
+            if (window.debugLogger) {
+                window.debugLogger.logError('RUNNING_LISTENER_ERROR', 'Error en listeners', { error: listenerError });
+            }
+        }
         
         console.log('📍 Inicializando GPS...');
-        initializeGeolocation();
+        try {
+            initializeGeolocation();
+            console.log('✅ GPS inicializado exitosamente');
+        } catch (gpsError) {
+            console.error('❌ Error en initializeGeolocation:', gpsError);
+            if (window.debugLogger) {
+                window.debugLogger.logError('RUNNING_GPS_ERROR', 'Error en GPS', { error: gpsError });
+            }
+        }
         
         console.log('✅ Running inicializado completamente');
         if (window.debugLogger) {
