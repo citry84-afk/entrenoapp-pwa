@@ -405,10 +405,11 @@ function executePageScripts(page) {
             if (window.initProfile) window.initProfile();
             break;
         case 'onboarding':
-            console.log('📋 Inicializando onboarding...');
+            console.log('📋 Inicializando onboarding v2...');
+            // Usar el nuevo onboarding rediseñado
             if (window.initOnboardingPage) {
                 window.initOnboardingPage();
-                console.log('✅ Onboarding inicializado');
+                console.log('✅ Onboarding v2 inicializado');
             } else {
                 console.error('❌ window.initOnboardingPage no está disponible');
             }
