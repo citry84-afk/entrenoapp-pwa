@@ -2,6 +2,8 @@
 import { auth, db } from '../config/firebase-config.js';
 import { 
     doc, 
+    setDoc,
+    getDoc,
     updateDoc, 
     serverTimestamp 
 } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
@@ -474,10 +476,15 @@ async function finishOnboarding() {
         const personalizedPlan = await generatePersonalizedPlan(onboardingState.userData);
         debugLog('PLAN_GENERATION_SUCCESS', 'Plan generado exitosamente', personalizedPlan);
         
-        // Actualizar perfil en Firestore
-        console.log('💾 Guardando datos en Firestore...');
+        // Crear/actualizar perfil en Firestore
+        debugLog('FIRESTORE_START', 'Guardando datos en Firestore...');
         const userDoc = doc(db, 'users', user.uid);
-        await updateDoc(userDoc, {
+        
+        // Verificar si el documento existe
+        const userSnap = await getDoc(userDoc);
+        debugLog('USER_DOC_CHECK', `Documento existe: ${userSnap.exists()}`);
+        
+        const userData = {
             onboarding: {
                 completed: true,
                 completedAt: serverTimestamp(),
@@ -490,8 +497,31 @@ async function finishOnboarding() {
             },
             activePlan: personalizedPlan,
             updatedAt: serverTimestamp()
-        });
-        console.log('✅ Datos guardados en Firestore');
+        };
+        
+        if (userSnap.exists()) {
+            // Documento existe, actualizar
+            debugLog('FIRESTORE_UPDATE', 'Actualizando documento existente');
+            await updateDoc(userDoc, userData);
+        } else {
+            // Documento no existe, crear
+            debugLog('FIRESTORE_CREATE', 'Creando nuevo documento de usuario');
+            userData.createdAt = serverTimestamp();
+            userData.profile = {
+                displayName: user.displayName || user.email.split('@')[0],
+                email: user.email,
+                photoURL: user.photoURL || null
+            };
+            userData.stats = {
+                totalWorkouts: 0,
+                currentStreak: 0,
+                totalPoints: 0,
+                completedChallenges: 0
+            };
+            await setDoc(userDoc, userData);
+        }
+        
+        debugLog('FIRESTORE_SUCCESS', 'Datos guardados exitosamente en Firestore');
         
         // Guardar plan en localStorage para acceso rápido
         localStorage.setItem('entrenoapp_active_plan', JSON.stringify(personalizedPlan));
