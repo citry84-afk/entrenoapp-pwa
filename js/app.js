@@ -263,12 +263,12 @@ async function loadPageContent(page) {
         
         // Insertar contenido con animación
         mainContent.style.opacity = '0';
-        setTimeout(() => {
+        setTimeout(async () => {
             mainContent.innerHTML = content;
             mainContent.style.opacity = '1';
             
             // Ejecutar scripts específicos de la página
-            executePageScripts(page);
+            await executePageScripts(page);
         }, 150);
         
     } catch (error) {
@@ -404,7 +404,7 @@ async function loadProfilePage() {
 }
 
 // Ejecutar scripts específicos de página
-function executePageScripts(page) {
+async function executePageScripts(page) {
     console.log(`🔧 Ejecutando scripts para página: ${page}`);
     
     switch (page) {
@@ -444,7 +444,7 @@ function executePageScripts(page) {
             if (window.initRunning) {
                 try {
                     console.log('✅ Ejecutando initRunning...');
-                    window.initRunning();
+                    await window.initRunning();
                     console.log('✅ Running inicializado correctamente');
                 } catch (error) {
                     console.error('❌ Error en initRunning:', error);

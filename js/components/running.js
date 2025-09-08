@@ -49,7 +49,7 @@ const EARTH_RADIUS = 6371000;
 const CALORIES_PER_KM_PER_KG = 1.036;
 
 // Inicializar componente
-window.initRunning = function() {
+window.initRunning = async function() {
     console.log('🏃‍♂️ Inicializando running GPS');
     if (window.debugLogger) {
         window.debugLogger.logInfo('RUNNING_INIT', 'Iniciando componente running');
@@ -57,7 +57,7 @@ window.initRunning = function() {
     
     try {
         console.log('📋 Cargando configuraciones...');
-        loadUserSettings();
+        await loadUserSettings();
         
         console.log('🎨 Renderizando página...');
         renderRunningPage();
