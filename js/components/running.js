@@ -83,10 +83,21 @@ window.initRunning = function() {
 
 // Cargar configuraciones del usuario
 async function loadUserSettings() {
+    console.log('📋 Iniciando loadUserSettings...');
     try {
+        console.log('👤 Verificando usuario autenticado...');
+        if (!auth) {
+            console.error('❌ Auth no disponible');
+            return;
+        }
+        
         const user = auth.currentUser;
+        console.log('👤 Usuario actual:', user ? user.email : 'No autenticado');
+        
         if (user && window.getUserProfile) {
+            console.log('📄 Cargando perfil de usuario...');
             const profile = await window.getUserProfile(user.uid);
+            console.log('📄 Perfil obtenido:', profile ? 'Sí' : 'No');
             if (profile) {
                 runningState.userWeight = profile.stats?.weight || 70;
                 runningState.isVoiceEnabled = profile.preferences?.ttsEnabled !== false;
@@ -99,9 +110,15 @@ async function loadUserSettings() {
 
 // Renderizar página principal
 function renderRunningPage() {
+    console.log('🎨 Iniciando renderRunningPage...');
     const container = document.querySelector('.running-container');
-    if (!container) return;
     
+    if (!container) {
+        console.error('❌ Container .running-container no encontrado');
+        return;
+    }
+    
+    console.log('✅ Container encontrado, generando contenido...');
     let content = '';
     
     switch (runningState.currentMode) {
@@ -357,10 +374,12 @@ function renderFinishedRun() {
 
 // Inicializar geolocalización
 function initializeGeolocation() {
+    console.log('📍 Inicializando geolocalización...');
     if (!navigator.geolocation) {
         console.error('❌ Geolocalización no soportada');
         return;
     }
+    console.log('✅ Geolocalización disponible');
     
     navigator.permissions.query({name: 'geolocation'}).then(result => {
         console.log('📍 Estado GPS:', result.state);
@@ -648,7 +667,9 @@ function toggleVoice() {
 
 // Configurar listeners
 function setupRunningListeners() {
-    document.addEventListener('click', (e) => {
+    console.log('👂 Configurando listeners para running...');
+    try {
+        document.addEventListener('click', (e) => {
         const target = e.target.closest('button');
         if (!target) return;
         
@@ -687,6 +708,10 @@ function setupRunningListeners() {
             testGPS();
         }
     });
+        console.log('✅ Listeners configurados correctamente');
+    } catch (error) {
+        console.error('❌ Error configurando listeners:', error);
+    }
 }
 
 // Calcular distancia entre dos puntos (Haversine)
