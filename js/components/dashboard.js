@@ -60,11 +60,26 @@ async function loadUserPlan() {
             };
         }
         
-        // Si no hay plan activo, intentar cargar desde localStorage
+        // Si no hay plan activo, verificar localStorage (solo si viene del onboarding)
         if (!dashboardState.activePlan) {
             const savedPlan = localStorage.getItem('entrenoapp_active_plan');
-            if (savedPlan) {
-                dashboardState.activePlan = JSON.parse(savedPlan);
+            const onboardingData = localStorage.getItem('entrenoapp_onboarding');
+            
+            // Solo cargar plan guardado si viene de un onboarding completado recientemente
+            if (savedPlan && !onboardingData) {
+                try {
+                    const plan = JSON.parse(savedPlan);
+                    // Verificar que el plan tenga metadatos válidos
+                    if (plan.metadata && plan.metadata.basedOnOnboarding) {
+                        dashboardState.activePlan = plan;
+                    } else {
+                        // Limpiar plan inválido
+                        localStorage.removeItem('entrenoapp_active_plan');
+                    }
+                } catch (error) {
+                    console.error('❌ Error parsing plan guardado:', error);
+                    localStorage.removeItem('entrenoapp_active_plan');
+                }
             }
         }
         
@@ -638,8 +653,37 @@ function setupDashboardListeners() {
 
 // Funciones globales para interacción
 window.showPlanMenu = function() {
-    console.log('Mostrando menú del plan');
-    // TODO: Implementar menú de gestión del plan
+    const plan = dashboardState.activePlan;
+    if (!plan) return;
+    
+    const options = [
+        { text: '📊 Ver detalles del plan', action: 'details' },
+        { text: '🔄 Reiniciar plan', action: 'restart' },
+        { text: '⏸️ Pausar plan', action: 'pause' },
+        { text: '🗑️ Eliminar plan', action: 'delete', danger: true },
+        { text: '🎯 Crear nuevo plan', action: 'new' }
+    ];
+    
+    const menuHTML = `
+        <div class="plan-menu-overlay" onclick="closePlanMenu()">
+            <div class="plan-menu glass-card" onclick="event.stopPropagation()">
+                <div class="plan-menu-header">
+                    <h3>Gestionar Plan</h3>
+                    <button class="close-btn" onclick="closePlanMenu()">✕</button>
+                </div>
+                <div class="plan-menu-options">
+                    ${options.map(option => `
+                        <button class="plan-menu-option ${option.danger ? 'danger' : ''}" 
+                                onclick="handlePlanAction('${option.action}')">
+                            ${option.text}
+                        </button>
+                    `).join('')}
+                </div>
+            </div>
+        </div>
+    `;
+    
+    document.body.insertAdjacentHTML('beforeend', menuHTML);
 };
 
 window.startTodaysWorkout = function() {
@@ -668,5 +712,130 @@ window.restartOnboarding = function() {
         window.navigateToPage('onboarding');
     }
 };
+
+// Cerrar menú del plan
+window.closePlanMenu = function() {
+    const overlay = document.querySelector('.plan-menu-overlay');
+    if (overlay) {
+        overlay.remove();
+    }
+};
+
+// Manejar acciones del plan
+window.handlePlanAction = function(action) {
+    switch (action) {
+        case 'details':
+            showPlanDetails();
+            break;
+        case 'restart':
+            restartCurrentPlan();
+            break;
+        case 'pause':
+            pauseCurrentPlan();
+            break;
+        case 'delete':
+            deleteCurrentPlan();
+            break;
+        case 'new':
+            createNewPlan();
+            break;
+    }
+    closePlanMenu();
+};
+
+// Mostrar detalles del plan
+function showPlanDetails() {
+    const plan = dashboardState.activePlan;
+    alert(`Plan: ${plan.name}\nDuración: ${plan.duration} semanas\nFrecuencia: ${plan.frequency}x por semana\nTipo: ${getActivityLabel(plan.type)}`);
+}
+
+// Reiniciar plan actual
+function restartCurrentPlan() {
+    if (confirm('¿Estás seguro de que quieres reiniciar tu plan? Perderás todo el progreso actual.')) {
+        const plan = dashboardState.activePlan;
+        plan.currentWeek = 1;
+        plan.currentSession = 1;
+        plan.startDate = new Date().toISOString();
+        
+        // Guardar en Firebase y localStorage
+        savePlanToStorage(plan);
+        
+        // Recargar dashboard
+        loadUserPlan();
+        
+        alert('Plan reiniciado exitosamente');
+    }
+}
+
+// Pausar plan actual
+function pauseCurrentPlan() {
+    const plan = dashboardState.activePlan;
+    plan.status = plan.status === 'paused' ? 'active' : 'paused';
+    
+    savePlanToStorage(plan);
+    loadUserPlan();
+    
+    alert(plan.status === 'paused' ? 'Plan pausado' : 'Plan reanudado');
+}
+
+// Eliminar plan actual
+function deleteCurrentPlan() {
+    if (confirm('¿Estás seguro de que quieres eliminar tu plan? Esta acción no se puede deshacer.')) {
+        // Limpiar de Firebase y localStorage
+        deletePlanFromStorage();
+        
+        // Limpiar estado
+        dashboardState.activePlan = null;
+        dashboardState.todaysWorkout = null;
+        
+        // Recargar dashboard
+        renderDashboard();
+        
+        alert('Plan eliminado exitosamente');
+    }
+}
+
+// Crear nuevo plan
+function createNewPlan() {
+    if (confirm('¿Quieres crear un nuevo plan? Esto reemplazará tu plan actual.')) {
+        window.navigateToPage('onboarding');
+    }
+}
+
+// Guardar plan en storage
+async function savePlanToStorage(plan) {
+    try {
+        const user = auth.currentUser;
+        if (user) {
+            const userDoc = doc(db, 'users', user.uid);
+            await updateDoc(userDoc, {
+                activePlan: plan,
+                updatedAt: serverTimestamp()
+            });
+        }
+        
+        localStorage.setItem('entrenoapp_active_plan', JSON.stringify(plan));
+    } catch (error) {
+        console.error('❌ Error guardando plan:', error);
+    }
+}
+
+// Eliminar plan de storage
+async function deletePlanFromStorage() {
+    try {
+        const user = auth.currentUser;
+        if (user) {
+            const userDoc = doc(db, 'users', user.uid);
+            await updateDoc(userDoc, {
+                activePlan: null,
+                updatedAt: serverTimestamp()
+            });
+        }
+        
+        localStorage.removeItem('entrenoapp_active_plan');
+    } catch (error) {
+        console.error('❌ Error eliminando plan:', error);
+    }
+}
 
 console.log('🏠 Dashboard personalizado cargado');

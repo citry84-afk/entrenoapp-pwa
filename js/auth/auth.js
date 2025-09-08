@@ -19,6 +19,8 @@ import {
 
 // Providers de autenticación
 const googleProvider = new GoogleAuthProvider();
+googleProvider.addScope('email');
+googleProvider.addScope('profile');
 
 // Estado de autenticación
 let authState = {
@@ -60,7 +62,31 @@ function renderAuthContent() {
     }
     
     authContent.innerHTML = content;
+    
+    // Cargar credenciales guardadas si es la vista de login
+    if (authState.currentView === 'login') {
+        loadSavedCredentials();
+    }
+    
     setupFormListeners();
+}
+
+// Cargar credenciales guardadas
+function loadSavedCredentials() {
+    const savedEmail = localStorage.getItem('entrenoapp_remember_email');
+    const savedPassword = localStorage.getItem('entrenoapp_remember_password');
+    
+    if (savedEmail && savedPassword) {
+        setTimeout(() => {
+            const emailInput = document.getElementById('login-email');
+            const passwordInput = document.getElementById('login-password');
+            const rememberCheckbox = document.getElementById('remember-me');
+            
+            if (emailInput) emailInput.value = savedEmail;
+            if (passwordInput) passwordInput.value = atob(savedPassword);
+            if (rememberCheckbox) rememberCheckbox.checked = true;
+        }, 100);
+    }
 }
 
 // Formulario de login
@@ -98,6 +124,14 @@ function renderLoginForm() {
                         required
                         autocomplete="current-password"
                     >
+                </div>
+                
+                <div class="form-group-checkbox mb-md">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="remember-me" class="checkbox-input">
+                        <span class="checkbox-custom"></span>
+                        <span class="checkbox-text">Recordar contraseña</span>
+                    </label>
                 </div>
                 
                 <button 
@@ -376,6 +410,7 @@ async function handleLogin(e) {
     
     const email = document.getElementById('login-email').value.trim();
     const password = document.getElementById('login-password').value;
+    const rememberMe = document.getElementById('remember-me')?.checked || false;
     
     if (!email || !password) {
         showError('Por favor completa todos los campos');
@@ -388,6 +423,15 @@ async function handleLogin(e) {
         console.log('🔐 Intentando login con email...');
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         console.log('✅ Login exitoso:', userCredential.user.email);
+        
+        // Guardar credenciales si se marca recordar
+        if (rememberMe) {
+            localStorage.setItem('entrenoapp_remember_email', email);
+            localStorage.setItem('entrenoapp_remember_password', btoa(password)); // Encoding básico
+        } else {
+            localStorage.removeItem('entrenoapp_remember_email');
+            localStorage.removeItem('entrenoapp_remember_password');
+        }
         
         // Guardar datos del usuario en localStorage
         await saveUserToLocalStorage(userCredential.user);
