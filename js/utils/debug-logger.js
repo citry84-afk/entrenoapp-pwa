@@ -1,5 +1,5 @@
 // Sistema de logging avanzado para debugging de EntrenoApp
-export class DebugLogger {
+class DebugLogger {
     constructor() {
         this.logs = [];
         this.maxLogs = 100;
@@ -299,3 +299,11 @@ window.showDebugPanel = () => window.debugLogger.showDebugPanel();
 window.exportDebugLogs = () => console.log(window.debugLogger.exportLogs());
 
 console.log('🔍 Debug Logger cargado. Usa enableDebug() para activar.');
+
+// Auto-mostrar panel si estamos en debug mode
+setTimeout(() => {
+    if (window.debugLogger && window.debugLogger.isDebugMode) {
+        console.log('🔍 Auto-mostrando panel de debug...');
+        window.debugLogger.showDebugPanel();
+    }
+}, 2000);
