@@ -291,18 +291,37 @@ async function loadAuthPage() {
 async function loadOnboardingPage() {
     const html = `
         <div class="page onboarding-page">
-            <div id="onboarding-content">
-                <!-- El contenido se cargará dinámicamente -->
+            <div class="dashboard-container">
+                <!-- El contenido se carga desde onboarding-v2.js -->
+                <div class="loading-message text-center" style="padding: 2rem;">
+                    <div style="font-size: 2rem;">⏳</div>
+                    <p>Cargando onboarding...</p>
+                </div>
             </div>
         </div>
     `;
     
     // Inicializar el componente después de que se renderice
     setTimeout(() => {
+        console.log('🔍 Verificando disponibilidad de initOnboardingPage...');
+        if (window.debugLogger) {
+            window.debugLogger.logInfo('APP_ONBOARDING', 'Verificando initOnboardingPage');
+        }
+        
         if (typeof window.initOnboardingPage === 'function') {
+            console.log('✅ initOnboardingPage encontrada, ejecutando...');
+            if (window.debugLogger) {
+                window.debugLogger.logInfo('APP_ONBOARDING', 'Ejecutando initOnboardingPage');
+            }
             window.initOnboardingPage();
         } else {
             console.error('❌ Función initOnboardingPage no encontrada');
+            if (window.debugLogger) {
+                window.debugLogger.logError('APP_ONBOARDING', 'initOnboardingPage no disponible', {
+                    windowKeys: Object.keys(window).filter(key => key.includes('init')),
+                    available: typeof window.initOnboardingPage
+                });
+            }
         }
     }, 100);
     

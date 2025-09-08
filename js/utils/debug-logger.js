@@ -15,9 +15,12 @@ export class DebugLogger {
     }
 
     checkDebugMode() {
-        // Activar debug si hay ?debug en la URL o está en localStorage
-        return window.location.search.includes('debug') || 
-               localStorage.getItem('entrenoapp_debug') === 'true';
+        // MANTENER DEBUG ACTIVO MIENTRAS DESARROLLAMOS
+        return true; // Siempre activo hasta que terminemos de pulir
+        
+        // Código original (desactivado temporalmente):
+        // return window.location.search.includes('debug') || 
+        //        localStorage.getItem('entrenoapp_debug') === 'true';
     }
 
     setupErrorCatching() {

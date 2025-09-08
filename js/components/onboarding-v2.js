@@ -112,21 +112,51 @@ const onboardingSteps = [
     }
 ];
 
-// Inicializar página de onboarding
+// Inicializar página de onboarding v2
 window.initOnboardingPage = function() {
-    debugLog('INIT', 'Inicializando onboarding rediseñado');
+    debugLog('INIT_V2', 'Inicializando onboarding v2 rediseñado');
+    console.log('🎯 Onboarding v2 iniciado correctamente');
     
-    // Cargar datos guardados si existen
-    loadSavedProgress();
-    
-    renderOnboardingContent();
-    setupOnboardingListeners();
-    
-    // Mostrar panel de debug si está habilitado
-    if (window.debugLogger && window.debugLogger.isDebugMode) {
-        setTimeout(() => {
-            window.debugLogger.showDebugPanel();
-        }, 1000);
+    try {
+        // Verificar contenedor
+        const container = document.querySelector('.dashboard-container');
+        if (!container) {
+            throw new Error('Container .dashboard-container no encontrado');
+        }
+        debugLog('CONTAINER_OK', 'Container encontrado');
+        
+        // Cargar datos guardados si existen
+        loadSavedProgress();
+        
+        renderOnboardingContent();
+        setupOnboardingListeners();
+        
+        // Mostrar panel de debug si está habilitado
+        if (window.debugLogger && window.debugLogger.isDebugMode) {
+            setTimeout(() => {
+                window.debugLogger.showDebugPanel();
+            }, 1000);
+        }
+        
+        debugLog('INIT_SUCCESS', 'Onboarding v2 inicializado exitosamente');
+        
+    } catch (error) {
+        console.error('❌ Error inicializando onboarding v2:', error);
+        debugLog('INIT_ERROR', 'Error en inicialización', { error: error.message, stack: error.stack });
+        
+        // Fallback: mostrar mensaje de error
+        const container = document.querySelector('.dashboard-container');
+        if (container) {
+            container.innerHTML = `
+                <div class="glass-card text-center" style="padding: 2rem; margin: 2rem;">
+                    <h2>❌ Error cargando onboarding</h2>
+                    <p>Error: ${error.message}</p>
+                    <button onclick="window.location.reload()" class="glass-button glass-button-primary">
+                        Recargar página
+                    </button>
+                </div>
+            `;
+        }
     }
 };
 
