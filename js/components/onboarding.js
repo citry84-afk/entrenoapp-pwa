@@ -381,10 +381,16 @@ function handleOptionClick(e) {
 
 // Manejar siguiente paso
 function handleNext() {
-    if (!canProceedToNext()) return;
+    console.log('🔄 handleNext ejecutado - Paso actual:', onboardingState.currentStep);
+    
+    if (!canProceedToNext()) {
+        console.log('❌ No se puede proceder al siguiente paso');
+        return;
+    }
     
     if (onboardingState.currentStep === onboardingState.totalSteps - 1) {
         // Finalizar onboarding
+        console.log('🎯 Ejecutando finishOnboarding...');
         finishOnboarding();
     } else {
         // Siguiente paso
@@ -405,22 +411,35 @@ function handlePrevious() {
 
 // Finalizar onboarding
 async function finishOnboarding() {
-    if (onboardingState.isLoading) return;
+    if (onboardingState.isLoading) {
+        console.log('⚠️ Onboarding ya está procesándose...');
+        return;
+    }
     
     onboardingState.isLoading = true;
+    console.log('🎯 Iniciando finalización del onboarding...');
     
     try {
-        console.log('🎯 Finalizando onboarding...');
+        console.log('🎯 Finalizando onboarding...', onboardingState.userData);
+        
+        // Verificar autenticación
+        if (!auth) {
+            throw new Error('Firebase auth no está disponible');
+        }
         
         const user = auth.currentUser;
         if (!user) {
             throw new Error('Usuario no autenticado');
         }
+        console.log('✅ Usuario autenticado:', user.email);
         
         // Generar plan personalizado automáticamente
+        console.log('📋 Generando plan personalizado...');
         const personalizedPlan = await generatePersonalizedPlan(onboardingState.userData);
+        console.log('✅ Plan generado:', personalizedPlan);
         
         // Actualizar perfil en Firestore
+        console.log('💾 Guardando datos en Firestore...');
         const userDoc = doc(db, 'users', user.uid);
         await updateDoc(userDoc, {
             onboarding: {
@@ -436,6 +455,7 @@ async function finishOnboarding() {
             activePlan: personalizedPlan,
             updatedAt: serverTimestamp()
         });
+        console.log('✅ Datos guardados en Firestore');
         
         // Guardar plan en localStorage para acceso rápido
         localStorage.setItem('entrenoapp_active_plan', JSON.stringify(personalizedPlan));
@@ -450,7 +470,12 @@ async function finishOnboarding() {
         
         // Redirigir al dashboard después de un momento
         setTimeout(() => {
-            window.loadPage('dashboard');
+            if (window.navigateToPage) {
+                window.navigateToPage('dashboard');
+            } else {
+                console.error('❌ window.navigateToPage no está disponible');
+                window.location.href = '#/dashboard';
+            }
         }, 4000);
         
     } catch (error) {
