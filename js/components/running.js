@@ -188,7 +188,9 @@ function renderRunningPage() {
 
 // Renderizar selección de running
 function renderRunningSelection() {
-    return `
+    console.log('🎯 Generando contenido de selección de running...');
+    try {
+        return `
         <div class="running-selection glass-fade-in">
             <div class="running-header text-center mb-lg">
                 <h2 class="page-title">🏃‍♂️ Running GPS</h2>
@@ -226,8 +228,8 @@ function renderRunningSelection() {
             <div class="gps-status glass-card">
                 <h4 class="section-title mb-sm">📡 Estado GPS</h4>
                 <div class="gps-info">
-                    <div class="gps-indicator ${getGPSStatusClass()}" id="gps-indicator"></div>
-                    <span class="gps-text" id="gps-text">${getGPSStatusText()}</span>
+                    <div class="gps-indicator checking" id="gps-indicator"></div>
+                    <span class="gps-text" id="gps-text">Verificando GPS...</span>
                 </div>
                 <button id="test-gps-btn" class="glass-button glass-button-outline btn-sm mt-sm">
                     Probar GPS
@@ -235,6 +237,10 @@ function renderRunningSelection() {
             </div>
         </div>
     `;
+    } catch (error) {
+        console.error('❌ Error en renderRunningSelection:', error);
+        return '<div class="error-message glass-card">Error cargando interfaz de running</div>';
+    }
 }
 
 // Renderizar lista de planes
