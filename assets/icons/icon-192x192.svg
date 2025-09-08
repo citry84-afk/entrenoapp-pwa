@@ -1,10 +1,61 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192">
-    <defs>
-        <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
-            <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
-        </linearGradient>
-    </defs>
-    <rect width="192" height="192" rx="40" fill="url(#grad)"/>
-    <text x="96" y="130" font-family="Arial" font-size="80" text-anchor="middle" fill="white">💪</text>
+<svg width="192" height="192" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fondo con gradiente -->
+  <rect width="192" height="192" rx="30" fill="url(#gradient)" />
+  
+  <!-- Definiciones de gradientes -->
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00D4FF;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#0099FF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0066CC;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="runner-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:0.95" />
+      <stop offset="50%" style="stop-color:#E6F7FF;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#CCE7FF;stop-opacity:0.85" />
+    </linearGradient>
+    
+    <linearGradient id="speed-lines" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" style="stop-color:#00FFFF;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#00FFFF;stop-opacity:0" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Líneas de velocidad -->
+  <rect x="30" y="75" width="22" height="2" rx="1" fill="url(#speed-lines)" />
+  <rect x="26" y="82" width="30" height="2" rx="1" fill="url(#speed-lines)" />
+  <rect x="22" y="90" width="38" height="2" rx="1" fill="url(#speed-lines)" />
+  <rect x="26" y="98" width="30" height="2" rx="1" fill="url(#speed-lines)" />
+  <rect x="30" y="105" width="22" height="2" rx="1" fill="url(#speed-lines)" />
+  
+  <!-- Figura del runner -->
+  <g transform="translate(75,37)" fill="url(#runner-gradient)">
+    <!-- Cabeza -->
+    <ellipse cx="19" cy="15" rx="13" ry="14" />
+    
+    <!-- Torso -->
+    <path d="M 6 28 Q 6 26 7 26 L 30 26 Q 32 26 32 28 L 32 67 Q 32 71 30 71 L 7 71 Q 6 71 6 67 Z" />
+    
+    <!-- Brazo izquierdo -->
+    <path d="M 7 34 Q 2 32 -4 36 L -6 45 Q -7 49 -6 50 Q -4 52 -2 50 L 4 41 Q 6 37 7 36 Z" />
+    
+    <!-- Brazo derecho -->
+    <path d="M 30 32 Q 36 30 42 34 L 47 43 Q 49 47 47 49 Q 45 50 43 49 L 34 39 Q 32 36 30 34 Z" />
+    
+    <!-- Pierna izquierda -->
+    <path d="M 11 69 Q 9 75 13 82 L 17 97 Q 19 103 21 103 Q 23 103 21 97 L 17 82 Q 15 75 13 69 Z" />
+    
+    <!-- Pierna derecha -->
+    <path d="M 24 69 Q 26 79 32 90 L 39 105 Q 41 111 43 111 Q 45 111 43 105 L 36 90 Q 30 79 26 69 Z" />
+    
+    <!-- Pie izquierdo -->
+    <ellipse cx="21" cy="107" rx="6" ry="3" />
+    
+    <!-- Pie derecho -->
+    <ellipse cx="43" cy="114" rx="7" ry="4" />
+  </g>
+  
+  <!-- Efecto de sombra -->
+  <ellipse cx="112" cy="157" rx="30" ry="6" fill="rgba(0,0,0,0.2)" />
 </svg>
