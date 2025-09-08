@@ -1,5 +1,5 @@
-// Base de datos de WODs de CrossFit
-// Heroes WODs, CrossFit Games, Open, etc.
+// Base de datos de WODs de Entrenamiento Funcional
+// Heroes WODs, competiciones, Open, etc.
 
 export const crossfitWods = {
     // HERO WODS - Entrenamientos en honor a héroes caídos
@@ -44,7 +44,7 @@ export const crossfitWods = {
             id: 'hero_002',
             name: 'Fran',
             type: 'benchmark',
-            description: 'Uno de los benchmarks más famosos de CrossFit',
+            description: 'Uno de los benchmarks más famosos del entrenamiento funcional',
             difficulty: 'intermedio',
             timeNeeded: '5-15 min',
             equipment: ['barra', 'barra_dominadas'],
@@ -184,7 +184,7 @@ export const crossfitWods = {
                 notes: [
                     'Sin descanso entre las dos Grace',
                     'Test definitivo de resistencia muscular',
-                    'Usado en CrossFit Games 2019'
+                    'Usado en competiciones funcionales 2019'
                 ]
             },
             youtubeSearch: 'double grace crossfit games'
@@ -443,7 +443,7 @@ export const difficultyLevels = [
     'avanzado'
 ];
 
-// Equipamiento común en CrossFit
+// Equipamiento común en entrenamiento funcional
 export const crossfitEquipment = [
     'barra',
     'mancuernas',
@@ -457,4 +457,4 @@ export const crossfitEquipment = [
     'remo'
 ];
 
-console.log('⚡ Base de datos de WODs de CrossFit cargada');
+console.log('⚡ Base de datos de WODs Funcionales cargada');

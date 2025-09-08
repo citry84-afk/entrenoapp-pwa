@@ -56,7 +56,7 @@ const onboardingSteps = [
         options: [
             { id: 'running', label: 'Running/Cardio', icon: '🏃‍♂️' },
             { id: 'weightlifting', label: 'Pesas/Gym', icon: '🏋️‍♀️' },
-            { id: 'crossfit', label: 'CrossFit/Funcional', icon: '🤸‍♂️' },
+            { id: 'functional', label: 'Entrenamiento Funcional', icon: '🤸‍♂️' },
             { id: 'yoga', label: 'Yoga/Pilates', icon: '🧘‍♀️' },
             { id: 'martial_arts', label: 'Artes marciales', icon: '🥋' },
             { id: 'sports', label: 'Deportes', icon: '⚽' }

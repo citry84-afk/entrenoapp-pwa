@@ -599,6 +599,7 @@ async function startChallenge() {
 // Completar reto
 async function completeChallenge() {
     try {
+        console.log('✅ Función completeChallenge llamada');
         console.log('✅ Completando reto del día');
         
         const challenge = challengesState.todayChallenge;
@@ -694,6 +695,7 @@ function setupChallengeListeners() {
             startChallenge();
         } else if (target.id === 'complete-challenge') {
             e.preventDefault();
+            console.log('🎯 Botón completar reto presionado');
             completeChallenge();
         } else if (target.id === 'add-rep') {
             e.preventDefault();

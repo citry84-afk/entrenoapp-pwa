@@ -202,7 +202,7 @@ function renderWorkoutSelection() {
                     
                     <div class="workout-type-card crossfit-card" data-type="crossfit">
                         <div class="type-icon">🤸‍♂️</div>
-                        <h4 class="type-title">CrossFit / Funcional</h4>
+                        <h4 class="type-title">Entrenamiento Funcional</h4>
                         <p class="type-description">WODs, AMRAP, EMOM y entrenamientos funcionales</p>
                         <div class="type-features">
                             <span class="feature-tag">⏰ Timers especializados</span>
@@ -361,7 +361,7 @@ function renderMuscleGroups() {
     `).join('');
 }
 
-// Renderizar planificación de CrossFit
+// Renderizar planificación Funcional
 function renderCrossfitPlanning() {
     return `
         <div class="crossfit-planning glass-fade-in">
@@ -707,7 +707,7 @@ function renderPlanManagement() {
                     </button>
                     <button class="plan-option-btn" data-plan-type="crossfit-weekly">
                         <span class="option-icon">🤸‍♂️</span>
-                        <span class="option-text">Plan CrossFit Semanal</span>
+                        <span class="option-text">Plan Funcional Semanal</span>
                     </button>
                     <button class="plan-option-btn" data-plan-type="hybrid">
                         <span class="option-icon">⚡</span>
@@ -827,7 +827,7 @@ function setupWorkoutListeners() {
             startGymWorkout();
         }
         
-        // Planificación de CrossFit
+        // Planificación Funcional
         if (target.classList.contains('wod-type-card')) {
             e.preventDefault();
             selectWodType(target.dataset.type);

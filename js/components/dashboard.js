@@ -586,25 +586,109 @@ function renderQuickStats() {
 
 // Renderizar acciones rápidas
 function renderQuickActions() {
+    const plan = dashboardState.activePlan;
+    
+    // Acciones específicas para running
+    if (plan?.type === 'running') {
+        return `
+            <div class="quick-actions glass-card">
+                <h3 class="actions-title">⚡ Acciones de Running</h3>
+                <div class="actions-grid">
+                    <button class="action-btn glass-button" onclick="window.startFreeRun()">
+                        <span class="action-icon">🏃‍♂️</span>
+                        <span class="action-text">Carrera Libre</span>
+                    </button>
+                    <button class="action-btn glass-button" onclick="window.startIntervalTraining()">
+                        <span class="action-icon">⏱️</span>
+                        <span class="action-text">Intervalos</span>
+                    </button>
+                    <button class="action-btn glass-button" onclick="window.viewRunningPlans()">
+                        <span class="action-icon">📋</span>
+                        <span class="action-text">Planes Running</span>
+                    </button>
+                    <button class="action-btn glass-button" onclick="window.viewRunningHistory()">
+                        <span class="action-icon">📈</span>
+                        <span class="action-text">Historial</span>
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+    
+    // Acciones específicas para funcional
+    if (plan?.type === 'functional') {
+        return `
+            <div class="quick-actions glass-card">
+                <h3 class="actions-title">⚡ Acciones Funcionales</h3>
+                <div class="actions-grid">
+                    <button class="action-btn glass-button" onclick="window.startFunctionalWOD()">
+                        <span class="action-icon">🔥</span>
+                        <span class="action-text">WOD del Día</span>
+                    </button>
+                    <button class="action-btn glass-button" onclick="window.browseWODs()">
+                        <span class="action-icon">📋</span>
+                        <span class="action-text">Explorar WODs</span>
+                    </button>
+                    <button class="action-btn glass-button" onclick="window.customWorkout()">
+                        <span class="action-icon">⚙️</span>
+                        <span class="action-text">Crear WOD</span>
+                    </button>
+                    <button class="action-btn glass-button" onclick="window.viewPRs()">
+                        <span class="action-icon">🏆</span>
+                        <span class="action-text">Mis Records</span>
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+    
+    // Acciones específicas para gym
+    if (plan?.type === 'gym') {
+        return `
+            <div class="quick-actions glass-card">
+                <h3 class="actions-title">⚡ Acciones de Gym</h3>
+                <div class="actions-grid">
+                    <button class="action-btn glass-button" onclick="window.startGymSession()">
+                        <span class="action-icon">🏋️‍♂️</span>
+                        <span class="action-text">Sesión de Hoy</span>
+                    </button>
+                    <button class="action-btn glass-button" onclick="window.browsePlans()">
+                        <span class="action-icon">📋</span>
+                        <span class="action-text">Planes Gym</span>
+                    </button>
+                    <button class="action-btn glass-button" onclick="window.exerciseLibrary()">
+                        <span class="action-icon">📚</span>
+                        <span class="action-text">Ejercicios</span>
+                    </button>
+                    <button class="action-btn glass-button" onclick="window.viewProgress()">
+                        <span class="action-icon">📈</span>
+                        <span class="action-text">Progreso</span>
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+    
+    // Acciones generales si no hay plan
     return `
         <div class="quick-actions glass-card">
             <h3 class="actions-title">⚡ Acciones Rápidas</h3>
             <div class="actions-grid">
-                <button class="action-btn glass-button" onclick="window.navigateToPage('running')">
-                    <span class="action-icon">🏃‍♂️</span>
-                    <span class="action-text">Empezar Running</span>
-                </button>
-                <button class="action-btn glass-button" onclick="window.navigateToPage('workouts')">
-                    <span class="action-icon">💪</span>
-                    <span class="action-text">Ir al Gym</span>
-                </button>
-                <button class="action-btn glass-button" onclick="window.navigateToPage('challenges')">
+                <button class="action-btn glass-button" onclick="window.createNewPlan()">
                     <span class="action-icon">🎯</span>
-                    <span class="action-text">Ver Retos</span>
+                    <span class="action-text">Crear Plan</span>
                 </button>
-                <button class="action-btn glass-button" onclick="window.navigateToPage('profile')">
+                <button class="action-btn glass-button" onclick="window.browsePlans()">
+                    <span class="action-icon">📋</span>
+                    <span class="action-text">Explorar Planes</span>
+                </button>
+                <button class="action-btn glass-button" onclick="window.quickWorkout()">
+                    <span class="action-icon">⚡</span>
+                    <span class="action-text">Entreno Rápido</span>
+                </button>
+                <button class="action-btn glass-button" onclick="window.viewStats()">
                     <span class="action-icon">📊</span>
-                    <span class="action-text">Mi Perfil</span>
+                    <span class="action-text">Estadísticas</span>
                 </button>
             </div>
         </div>
@@ -837,5 +921,97 @@ async function deletePlanFromStorage() {
         console.error('❌ Error eliminando plan:', error);
     }
 }
+
+// ===================================
+// FUNCIONES DE ACCIONES RÁPIDAS
+// ===================================
+
+// Funciones de Running
+window.startFreeRun = function() {
+    // Ir a running con modo libre
+    localStorage.setItem('entrenoapp_running_mode', 'free');
+    window.navigateToPage('running');
+};
+
+window.startIntervalTraining = function() {
+    // Ir a running con modo intervalos
+    localStorage.setItem('entrenoapp_running_mode', 'intervals');
+    window.navigateToPage('running');
+};
+
+window.viewRunningPlans = function() {
+    // Ir a running con vista de planes
+    localStorage.setItem('entrenoapp_running_mode', 'plans');
+    window.navigateToPage('running');
+};
+
+window.viewRunningHistory = function() {
+    // Ir a perfil con vista de historial
+    localStorage.setItem('entrenoapp_profile_mode', 'history');
+    window.navigateToPage('profile');
+};
+
+// Funciones de Funcional
+window.startFunctionalWOD = function() {
+    localStorage.setItem('entrenoapp_workout_mode', 'functional');
+    localStorage.setItem('entrenoapp_functional_mode', 'wod');
+    window.navigateToPage('workouts');
+};
+
+window.browseWODs = function() {
+    localStorage.setItem('entrenoapp_workout_mode', 'functional');
+    localStorage.setItem('entrenoapp_functional_mode', 'browse');
+    window.navigateToPage('workouts');
+};
+
+window.customWorkout = function() {
+    localStorage.setItem('entrenoapp_workout_mode', 'functional');
+    localStorage.setItem('entrenoapp_functional_mode', 'custom');
+    window.navigateToPage('workouts');
+};
+
+window.viewPRs = function() {
+    localStorage.setItem('entrenoapp_profile_mode', 'records');
+    window.navigateToPage('profile');
+};
+
+// Funciones de Gym
+window.startGymSession = function() {
+    localStorage.setItem('entrenoapp_workout_mode', 'gym');
+    localStorage.setItem('entrenoapp_gym_mode', 'session');
+    window.navigateToPage('workouts');
+};
+
+window.browsePlans = function() {
+    localStorage.setItem('entrenoapp_workout_mode', 'gym');
+    localStorage.setItem('entrenoapp_gym_mode', 'plans');
+    window.navigateToPage('workouts');
+};
+
+window.exerciseLibrary = function() {
+    localStorage.setItem('entrenoapp_workout_mode', 'gym');
+    localStorage.setItem('entrenoapp_gym_mode', 'library');
+    window.navigateToPage('workouts');
+};
+
+window.viewProgress = function() {
+    localStorage.setItem('entrenoapp_profile_mode', 'progress');
+    window.navigateToPage('profile');
+};
+
+// Funciones generales
+window.createNewPlan = function() {
+    window.navigateToPage('onboarding');
+};
+
+window.quickWorkout = function() {
+    localStorage.setItem('entrenoapp_workout_mode', 'quick');
+    window.navigateToPage('workouts');
+};
+
+window.viewStats = function() {
+    localStorage.setItem('entrenoapp_profile_mode', 'stats');
+    window.navigateToPage('profile');
+};
 
 console.log('🏠 Dashboard personalizado cargado');
