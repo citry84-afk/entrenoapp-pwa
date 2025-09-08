@@ -134,11 +134,21 @@ async function loadUserPlan() {
 
 // Generar entrenamiento de hoy
 function generateTodaysWorkout(plan) {
-    if (!plan) return null;
+    console.log('📅 Generando workout de hoy...', { plan: plan });
+    if (window.debugLogger) {
+        window.debugLogger.logInfo('DASHBOARD_GENERATE_WORKOUT', 'Generando workout de hoy', { plan: plan });
+    }
+    
+    if (!plan) {
+        console.log('❌ No hay plan para generar workout');
+        return null;
+    }
     
     const today = new Date();
     const dayOfWeek = today.getDay(); // 0 = Domingo, 1 = Lunes, etc.
     const currentWeek = plan.currentWeek || 1;
+    
+    console.log('📅 Info del día:', { dayOfWeek, currentWeek, planType: plan.type });
     
     // Mapear días de entrenamiento según frecuencia
     const trainingDays = getTrainingDays(plan.frequency);
@@ -798,9 +808,48 @@ window.showPlanMenu = function() {
 };
 
 window.startTodaysWorkout = function() {
-    const workout = dashboardState.todaysWorkout;
-    if (!workout) return;
+    console.log('🎯 startTodaysWorkout ejecutado');
+    if (window.debugLogger) {
+        window.debugLogger.logInfo('DASHBOARD_START_WORKOUT', 'Función startTodaysWorkout ejecutada', {
+            dashboardState: dashboardState,
+            todaysWorkout: dashboardState.todaysWorkout
+        });
+    }
     
+    const workout = dashboardState.todaysWorkout;
+    
+    if (!workout) {
+        console.log('❌ No hay workout definido');
+        if (window.debugLogger) {
+            window.debugLogger.logError('DASHBOARD_NO_WORKOUT', 'todaysWorkout es null o undefined', {
+                dashboardState: dashboardState,
+                activePlan: dashboardState.activePlan
+            });
+        }
+        
+        // Fallback: ir directamente a workouts basado en el plan activo
+        if (dashboardState.activePlan) {
+            const planType = dashboardState.activePlan.type;
+            console.log(`🔄 Fallback: navegando a ${planType} basado en activePlan`);
+            switch (planType) {
+                case 'running':
+                    window.navigateToPage('running');
+                    break;
+                case 'functional':
+                case 'gym':
+                default:
+                    window.navigateToPage('workouts');
+                    break;
+            }
+        } else {
+            console.log('❌ No hay plan activo tampoco');
+            // Último fallback: ir a workouts genérico
+            window.navigateToPage('workouts');
+        }
+        return;
+    }
+    
+    console.log('✅ Workout encontrado, navegando...', workout);
     switch (workout.type) {
         case 'running':
             window.navigateToPage('running');
