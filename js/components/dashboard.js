@@ -850,14 +850,40 @@ window.startTodaysWorkout = function() {
     }
     
     console.log('✅ Workout encontrado, navegando...', workout);
-    switch (workout.type) {
-        case 'running':
-            window.navigateToPage('running');
-            break;
-        case 'functional':
-        case 'gym':
-            window.navigateToPage('workouts');
-            break;
+    
+    try {
+        switch (workout.type) {
+            case 'running':
+                console.log('🏃‍♂️ Navegando a página de running...');
+                if (window.debugLogger) {
+                    window.debugLogger.logInfo('DASHBOARD_NAVIGATE', 'Navegando a running', { workout });
+                }
+                window.navigateToPage('running');
+                break;
+            case 'functional':
+            case 'gym':
+                console.log('💪 Navegando a página de workouts...');
+                if (window.debugLogger) {
+                    window.debugLogger.logInfo('DASHBOARD_NAVIGATE', 'Navegando a workouts', { workout });
+                }
+                window.navigateToPage('workouts');
+                break;
+            default:
+                console.log('❓ Tipo de workout desconocido:', workout.type);
+                if (window.debugLogger) {
+                    window.debugLogger.logWarn('DASHBOARD_UNKNOWN_WORKOUT', 'Tipo desconocido', { workout });
+                }
+                // Fallback to workouts
+                window.navigateToPage('workouts');
+                break;
+        }
+    } catch (error) {
+        console.error('❌ Error navegando:', error);
+        if (window.debugLogger) {
+            window.debugLogger.logError('DASHBOARD_NAVIGATION_ERROR', 'Error en navegación', { error, workout });
+        }
+        // Último fallback
+        window.navigateToPage('workouts');
     }
 };
 

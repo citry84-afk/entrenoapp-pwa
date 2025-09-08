@@ -176,14 +176,28 @@ function setupNavigationListeners() {
 function navigateToPage(page) {
     console.log(`📄 Navegando a: ${page}`);
     
-    // Actualizar estado
-    appState.currentPage = page;
-    
-    // Actualizar navegación activa
-    updateActiveNavItem(page);
-    
-    // Cargar contenido de la página
-    loadPageContent(page);
+    try {
+        if (window.debugLogger) {
+            window.debugLogger.logInfo('APP_NAVIGATE', `Navegando a ${page}`, { page });
+        }
+        
+        // Actualizar estado
+        appState.currentPage = page;
+        
+        // Actualizar navegación activa
+        updateActiveNavItem(page);
+        
+        // Cargar contenido de la página
+        loadPageContent(page);
+        
+        console.log(`✅ Navegación a ${page} completada`);
+        
+    } catch (error) {
+        console.error(`❌ Error navegando a ${page}:`, error);
+        if (window.debugLogger) {
+            window.debugLogger.logError('APP_NAVIGATE_ERROR', `Error navegando a ${page}`, { page, error });
+        }
+    }
     
     // Registrar en analytics si está disponible
     if (window.gtag) {
@@ -208,7 +222,13 @@ function updateActiveNavItem(page) {
 
 // Cargar contenido de la página
 async function loadPageContent(page) {
+    console.log(`📋 Cargando contenido para: ${page}`);
+    
     try {
+        if (window.debugLogger) {
+            window.debugLogger.logInfo('APP_LOAD_CONTENT', `Cargando contenido para ${page}`, { page });
+        }
+        
         let content = '';
         
         switch (page) {
