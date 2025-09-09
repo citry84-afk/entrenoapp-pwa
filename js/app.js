@@ -247,6 +247,12 @@ async function loadPageContent(page) {
             case 'running':
                 content = await loadRunningPage();
                 break;
+            case 'functional-workout':
+                content = await loadFunctionalWorkoutPage();
+                break;
+            case 'gym-workout':
+                content = await loadGymWorkoutPage();
+                break;
             case 'challenges':
                 content = await loadChallengesPage();
                 break;
@@ -381,6 +387,28 @@ async function loadRunningPage() {
     `;
 }
 
+async function loadFunctionalWorkoutPage() {
+    return `
+        <div class="page">
+            <h1 class="page-title">WOD Funcional</h1>
+            <div class="dashboard-container">
+                <!-- El contenido se carga desde functional-workout.js -->
+            </div>
+        </div>
+    `;
+}
+
+async function loadGymWorkoutPage() {
+    return `
+        <div class="page">
+            <h1 class="page-title">Gimnasio</h1>
+            <div class="dashboard-container">
+                <!-- El contenido se carga desde gym-workout.js -->
+            </div>
+        </div>
+    `;
+}
+
 async function loadChallengesPage() {
     return `
         <div class="page">
@@ -457,6 +485,34 @@ async function executePageScripts(page) {
                 if (window.debugLogger) {
                     window.debugLogger.logError('APP_INIT_RUNNING_NOT_FOUND', 'initRunning no encontrado');
                 }
+            }
+            break;
+        case 'functional-workout':
+            console.log('⚡ Inicializando workout funcional...');
+            if (window.initFunctionalWorkout) {
+                try {
+                    console.log('✅ Ejecutando initFunctionalWorkout...');
+                    await window.initFunctionalWorkout();
+                    console.log('✅ Workout funcional inicializado correctamente');
+                } catch (error) {
+                    console.error('❌ Error en initFunctionalWorkout:', error);
+                }
+            } else {
+                console.error('❌ window.initFunctionalWorkout no está disponible');
+            }
+            break;
+        case 'gym-workout':
+            console.log('🏋️‍♂️ Inicializando workout de gimnasio...');
+            if (window.initGymWorkout) {
+                try {
+                    console.log('✅ Ejecutando initGymWorkout...');
+                    await window.initGymWorkout();
+                    console.log('✅ Workout de gimnasio inicializado correctamente');
+                } catch (error) {
+                    console.error('❌ Error en initGymWorkout:', error);
+                }
+            } else {
+                console.error('❌ window.initGymWorkout no está disponible');
             }
             break;
         case 'challenges':

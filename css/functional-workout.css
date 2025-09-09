@@ -1,0 +1,370 @@
+/* Estilos para el sistema de WOD funcional */
+
+.functional-workout-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Header del WOD */
+.wod-header {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+}
+
+.wod-title-section h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0 0 10px 0;
+    background: linear-gradient(135deg, #ff6b6b, #ffa500);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.wod-description {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0 0 20px 0;
+}
+
+.wod-meta {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.wod-difficulty, .wod-time {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.difficulty-label, .time-label {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.difficulty-value, .time-value {
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.difficulty-value.principiante {
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+}
+
+.difficulty-value.intermediate {
+    background: linear-gradient(135deg, #ff9800, #f57c00);
+}
+
+.difficulty-value.avanzado {
+    background: linear-gradient(135deg, #f44336, #d32f2f);
+}
+
+.difficulty-value.elite {
+    background: linear-gradient(135deg, #9c27b0, #7b1fa2);
+}
+
+/* Estructura del WOD */
+.wod-structure {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 25px;
+    backdrop-filter: blur(10px);
+}
+
+.wod-structure h3 {
+    font-size: 1.5rem;
+    margin: 0 0 20px 0;
+    color: #fff;
+    text-align: center;
+}
+
+.movements-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.movement-item {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.movement-exercise {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.movement-reps {
+    font-size: 1.1rem;
+    color: #ffa500;
+    font-weight: 500;
+}
+
+.movement-weight {
+    font-size: 1rem;
+    color: #4CAF50;
+    font-weight: 500;
+}
+
+.movement-notes {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-style: italic;
+}
+
+/* Controles del workout */
+.workout-controls {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 25px;
+    backdrop-filter: blur(10px);
+    text-align: center;
+}
+
+.timer-section {
+    margin-bottom: 25px;
+}
+
+.timer-display {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    margin-bottom: 10px;
+    font-family: 'Courier New', monospace;
+}
+
+.round-info, .exercise-info {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+}
+
+.control-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+/* Progreso del workout */
+.workout-progress {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 25px;
+    backdrop-filter: blur(10px);
+}
+
+.workout-progress h3 {
+    font-size: 1.5rem;
+    margin: 0 0 20px 0;
+    color: #fff;
+    text-align: center;
+}
+
+.progress-rounds, .progress-exercises {
+    margin-bottom: 20px;
+}
+
+.rounds-completed, .exercises-completed {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.rounds-label, .exercises-label {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.rounds-value, .exercises-value {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #4CAF50;
+}
+
+.round-progress-bar, .exercise-progress-bar {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.round-progress-fill, .exercise-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4CAF50, #45a049);
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.current-movement {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+}
+
+.current-movement h4 {
+    font-size: 1.2rem;
+    margin: 0 0 10px 0;
+    color: #fff;
+}
+
+.movement-current {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #ffa500;
+    margin-bottom: 5px;
+}
+
+.movement-reps-current {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Finalización del workout */
+.workout-completion {
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.2), rgba(69, 160, 73, 0.1));
+    border: 1px solid rgba(76, 175, 80, 0.3);
+    border-radius: 20px;
+    padding: 30px;
+    backdrop-filter: blur(10px);
+    text-align: center;
+}
+
+.workout-completion h3 {
+    font-size: 2rem;
+    margin: 0 0 20px 0;
+    color: #4CAF50;
+}
+
+.completion-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.completion-notes {
+    margin-bottom: 25px;
+}
+
+.completion-notes label {
+    display: block;
+    font-size: 1.1rem;
+    color: #fff;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.completion-notes textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 1rem;
+    resize: vertical;
+    backdrop-filter: blur(10px);
+}
+
+.completion-notes textarea::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.completion-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .functional-workout-container {
+        padding: 15px;
+        gap: 15px;
+    }
+    
+    .wod-header {
+        padding: 20px;
+    }
+    
+    .wod-title-section h1 {
+        font-size: 2rem;
+    }
+    
+    .wod-meta {
+        gap: 20px;
+    }
+    
+    .timer-display {
+        font-size: 2.5rem;
+    }
+    
+    .control-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .completion-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .completion-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+}

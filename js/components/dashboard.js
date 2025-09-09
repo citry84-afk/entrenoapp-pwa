@@ -1226,12 +1226,22 @@ window.startTodaysWorkout = function() {
                 window.navigateToPage('running');
                 break;
             case 'functional':
-            case 'gym':
-                console.log('💪 Navegando a página de workouts...');
+                console.log('⚡ Navegando a página de WOD funcional...');
                 if (window.debugLogger) {
-                    window.debugLogger.logInfo('DASHBOARD_NAVIGATE', 'Navegando a workouts', { workout });
+                    window.debugLogger.logInfo('DASHBOARD_NAVIGATE', 'Navegando a functional-workout', { workout });
                 }
-                window.navigateToPage('workouts');
+                // Guardar WOD en localStorage
+                localStorage.setItem('currentFunctionalWod', JSON.stringify(workout));
+                window.navigateToPage('functional-workout');
+                break;
+            case 'gym':
+                console.log('🏋️‍♂️ Navegando a página de gimnasio...');
+                if (window.debugLogger) {
+                    window.debugLogger.logInfo('DASHBOARD_NAVIGATE', 'Navegando a gym-workout', { workout });
+                }
+                // Guardar workout en localStorage
+                localStorage.setItem('currentGymWorkout', JSON.stringify(workout));
+                window.navigateToPage('gym-workout');
                 break;
             default:
                 console.log('❓ Tipo de workout desconocido:', workout.type);
