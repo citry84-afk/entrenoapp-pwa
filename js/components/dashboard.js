@@ -240,9 +240,23 @@ function generateFunctionalWorkout(plan, week) {
 
 // Generar entrenamiento de gimnasio
 function generateGymWorkout(plan, week) {
+    // Usar el generador avanzado si está disponible
+    if (window.generateTodaysGymWorkout && plan.routine) {
+        try {
+            const advancedWorkout = window.generateTodaysGymWorkout(plan);
+            if (advancedWorkout) {
+                console.log('✅ Workout avanzado generado:', advancedWorkout);
+                return advancedWorkout;
+            }
+        } catch (error) {
+            console.error('❌ Error generando workout avanzado:', error);
+        }
+    }
+    
+    // Fallback: generador básico mejorado
     const splits = {
         'full_body': ['Cuerpo Completo'],
-        'upper_lower': ['Tren Superior', 'Tren Inferior'],
+        'upper_lower': ['Tren Superior', 'Tren Inferior'], 
         'push_pull_legs': ['Empuje', 'Tirón', 'Piernas'],
         'body_parts': ['Pecho', 'Espalda', 'Piernas', 'Hombros', 'Brazos']
     };
@@ -255,14 +269,54 @@ function generateGymWorkout(plan, week) {
     return {
         type: 'gym',
         title: `Entrenamiento de ${todayMuscleGroup}`,
-        description: `Rutina ${plan.split.replace('_', ' ')} - Semana ${week} de ${plan.duration}`,
+        description: `Rutina ${plan.split?.replace('_', ' ') || 'Gimnasio'} - Semana ${week} de ${plan.duration}`,
         icon: '🏋️‍♂️',
         duration: 60,
         muscleGroup: todayMuscleGroup,
         sets: plan.focus === 'strength' ? '4-6 series' : '3-4 series',
         reps: plan.focus === 'strength' ? '4-6 reps' : '8-12 reps',
-        intensity: plan.focus === 'strength' ? 'high' : 'moderate'
+        intensity: plan.focus === 'strength' ? 'high' : 'moderate',
+        // Agregar información para el resumen mejorado
+        exercises: generateBasicExerciseList(todayMuscleGroup)
     };
+}
+
+// Generar lista básica de ejercicios para fallback
+function generateBasicExerciseList(muscleGroup) {
+    const exercisesByGroup = {
+        'Cuerpo Completo': [
+            { name: 'Sentadillas', sets: 3, reps: '8-12' },
+            { name: 'Press de Banca', sets: 3, reps: '8-12' },
+            { name: 'Peso Muerto', sets: 3, reps: '6-10' }
+        ],
+        'Pecho': [
+            { name: 'Press de Banca', sets: 4, reps: '8-12' },
+            { name: 'Press Inclinado', sets: 3, reps: '8-12' },
+            { name: 'Aperturas', sets: 3, reps: '10-15' }
+        ],
+        'Espalda': [
+            { name: 'Dominadas', sets: 4, reps: '6-12' },
+            { name: 'Remo con Barra', sets: 3, reps: '8-12' },
+            { name: 'Jalón al Pecho', sets: 3, reps: '10-15' }
+        ],
+        'Piernas': [
+            { name: 'Sentadillas', sets: 4, reps: '8-12' },
+            { name: 'Prensa', sets: 3, reps: '12-15' },
+            { name: 'Curl Femoral', sets: 3, reps: '10-15' }
+        ],
+        'Hombros': [
+            { name: 'Press Militar', sets: 4, reps: '8-12' },
+            { name: 'Elevaciones Laterales', sets: 3, reps: '12-15' },
+            { name: 'Aperturas Posteriores', sets: 3, reps: '12-15' }
+        ],
+        'Brazos': [
+            { name: 'Curl con Barra', sets: 3, reps: '10-12' },
+            { name: 'Press Cerrado', sets: 3, reps: '8-12' },
+            { name: 'Fondos', sets: 3, reps: '8-15' }
+        ]
+    };
+    
+    return exercisesByGroup[muscleGroup] || exercisesByGroup['Cuerpo Completo'];
 }
 
 // Obtener días de entrenamiento según frecuencia
@@ -692,25 +746,26 @@ function renderWorkoutSummaryByType(workout) {
                     <div class="summary-item primary">
                         <div class="summary-icon">💪</div>
                         <div class="summary-content">
-                            <div class="summary-value">${workout.muscleGroup || 'Múltiples'}</div>
+                            <div class="summary-value">${workout.muscleGroup || workout.session?.name || 'Múltiples'}</div>
                             <div class="summary-label">Grupo muscular</div>
                         </div>
                     </div>
                     <div class="summary-item">
                         <div class="summary-icon">🔢</div>
                         <div class="summary-content">
-                            <div class="summary-value">${workout.sets || 4} series</div>
+                            <div class="summary-value">${calculateTotalSets(workout)}</div>
                             <div class="summary-label">Series totales</div>
                         </div>
                     </div>
                     <div class="summary-item">
-                        <div class="summary-icon">🔁</div>
+                        <div class="summary-icon">🏋️‍♂️</div>
                         <div class="summary-content">
-                            <div class="summary-value">${workout.reps || '8-12'} reps</div>
-                            <div class="summary-label">Repeticiones</div>
+                            <div class="summary-value">${getExerciseCount(workout)} ejercicios</div>
+                            <div class="summary-label">Ejercicios</div>
                         </div>
                     </div>
                 </div>
+                ${renderGymExerciseList(workout)}
             `;
         
         case 'functional':
@@ -777,6 +832,57 @@ function getIntensityLabel(intensity) {
         case 'very_high': return 'Muy intensa';
         default: return 'Moderada';
     }
+}
+
+// Calcular total de series para workout de gimnasio
+function calculateTotalSets(workout) {
+    if (workout.session && workout.session.exercises) {
+        return workout.session.exercises.reduce((total, exercise) => total + (exercise.sets || 0), 0);
+    }
+    if (workout.exercises) {
+        return workout.exercises.reduce((total, exercise) => total + (exercise.sets || 0), 0);
+    }
+    return workout.sets || '12-16 series';
+}
+
+// Obtener número de ejercicios
+function getExerciseCount(workout) {
+    if (workout.session && workout.session.exercises) {
+        return workout.session.exercises.length;
+    }
+    if (workout.exercises) {
+        return workout.exercises.length;
+    }
+    return '5-7';
+}
+
+// Renderizar lista de ejercicios para gimnasio
+function renderGymExerciseList(workout) {
+    let exercisesList = [];
+    
+    if (workout.session && workout.session.exercises) {
+        exercisesList = workout.session.exercises;
+    } else if (workout.exercises) {
+        exercisesList = workout.exercises;
+    }
+    
+    if (exercisesList.length === 0) return '';
+    
+    return `
+        <div class="instructions-preview">
+            <h4 class="instructions-title">🏋️‍♂️ Ejercicios de hoy:</h4>
+            <ul class="instructions-list">
+                ${exercisesList.slice(0, 3).map(exercise => {
+                    const exerciseName = exercise.exerciseData?.name || exercise.name || `Ejercicio ${exercise.exerciseId}`;
+                    const sets = exercise.sets || 3;
+                    const reps = exercise.reps || '8-12';
+                    return `<li class="instruction-item">${exerciseName} - ${sets} x ${reps}</li>`;
+                }).join('')}
+                ${exercisesList.length > 3 ? 
+                    `<li class="instruction-more">+${exercisesList.length - 3} ejercicios más...</li>` : ''}
+            </ul>
+        </div>
+    `;
 }
 
 // Renderizar progreso semanal

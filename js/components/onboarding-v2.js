@@ -770,8 +770,27 @@ function generateFunctionalPlan(config) {
     };
 }
 
-// Generar plan de gym
+// Generar plan de gym inteligente
 function generateGymPlan(config) {
+    // Importar el generador avanzado dinámicamente
+    if (window.generateGymPlanAdvanced) {
+        try {
+            const advancedPlan = window.generateGymPlanAdvanced({
+                experience: config.experience,
+                frequency: mapFrequencyToLevel(config.weeklyFrequency),
+                session_time: getSessionTime(config.sessionTime),
+                equipment: config.equipment || [],
+                goals: ['hypertrophy'] // Por defecto hipertrofia
+            });
+            
+            debugLog('GYM_PLAN_GENERATED', 'Plan avanzado generado', advancedPlan);
+            return advancedPlan;
+        } catch (error) {
+            debugLog('GYM_PLAN_ERROR', 'Error generando plan avanzado, usando fallback', error);
+        }
+    }
+    
+    // Fallback: plan básico mejorado
     return {
         type: 'gym',
         name: `Plan de Gimnasio ${getExperienceLabel(config.experience)}`,
@@ -784,12 +803,36 @@ function generateGymPlan(config) {
         startDate: new Date().toISOString(),
         focus: 'strength',
         equipment: config.equipment,
+        metadata: {
+            planType: 'gym',
+            experience: config.experience,
+            sessionTime: config.sessionTime,
+            frequency: mapFrequencyToLevel(config.weeklyFrequency),
+            equipment: config.equipment || [],
+            generatedAt: new Date().toISOString(),
+            basedOnOnboarding: true
+        },
         progressTracking: {
             totalWorkouts: 0,
             totalVolume: 0,
-            personalRecords: {}
+            totalTime: 0,
+            personalRecords: {},
+            strengthProgression: {}
         }
     };
+}
+
+// Mapear frecuencia numérica a nivel
+function mapFrequencyToLevel(weeklyFreq) {
+    if (weeklyFreq <= 2) return 'low';
+    if (weeklyFreq <= 4) return 'medium';
+    return 'high';
+}
+
+// Obtener tiempo de sesión 
+function getSessionTime(sessionTime) {
+    // sessionTime del onboarding puede ser diferente
+    return sessionTime || 'medium';
 }
 
 // Plan por defecto
