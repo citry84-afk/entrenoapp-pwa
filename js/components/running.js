@@ -220,7 +220,28 @@ function renderRunningSelection() {
             <div class="running-plans glass-card mb-lg">
                 <h3 class="section-title mb-md">📚 Planes de Entrenamiento</h3>
                 <div class="plans-grid">
-                    ${renderPlansList()}
+                    <div class="plan-card glass-card-inner">
+                        <div class="plan-header">
+                            <h4 class="plan-title">5K Para Principiantes</h4>
+                            <span class="plan-level beginner">Principiante</span>
+                        </div>
+                        <p class="plan-description">Programa de 8 semanas para tu primer 5K</p>
+                        <div class="plan-stats">
+                            <span class="stat">⏱️ 8 semanas</span>
+                            <span class="stat">📅 3x semana</span>
+                        </div>
+                    </div>
+                    <div class="plan-card glass-card-inner">
+                        <div class="plan-header">
+                            <h4 class="plan-title">10K Intermedio</h4>
+                            <span class="plan-level intermediate">Intermedio</span>
+                        </div>
+                        <p class="plan-description">Mejora tu resistencia para 10K</p>
+                        <div class="plan-stats">
+                            <span class="stat">⏱️ 12 semanas</span>
+                            <span class="stat">📅 4x semana</span>
+                        </div>
+                    </div>
                 </div>
             </div>
             
