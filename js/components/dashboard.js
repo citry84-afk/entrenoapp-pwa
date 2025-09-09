@@ -150,12 +150,12 @@ function generateTodaysWorkout(plan) {
     
     console.log('📅 Info del día:', { dayOfWeek, currentWeek, planType: plan.type });
     
-    // Para planes personalizados (gym, functional), ser más flexible con los días
-    if (plan.type === 'gym' || plan.type === 'functional') {
-        // Siempre mostrar el entrenamiento correspondiente del plan
+    // Para planes personalizados generados por onboarding, ser más flexible
+    if (plan.metadata && plan.metadata.basedOnOnboarding) {
+        // Siempre mostrar el entrenamiento correspondiente del plan personalizado
         console.log('📋 Plan personalizado: mostrando entrenamiento correspondiente');
     } else {
-        // Para running, usar lógica de días fijos
+        // Para planes predefinidos, usar lógica de días fijos
         const trainingDays = getTrainingDays(plan.frequency);
         const isTrainingDay = trainingDays.includes(dayOfWeek);
         
