@@ -113,10 +113,10 @@ function renderGymWorkout() {
                     ${workout.exercises.map((exercise, index) => `
                         <div class="exercise-item ${index === 0 ? 'current' : ''}" data-exercise-index="${index}">
                             <div class="exercise-header">
-                                <div class="exercise-name">${exercise.name}</div>
+                                <div class="exercise-name">${exercise.exerciseData?.name || exercise.name || 'Ejercicio'}</div>
                                 <div class="exercise-sets-reps">${exercise.sets} series • ${exercise.reps} reps</div>
                             </div>
-                            <div class="exercise-notes">${exercise.notes || ''}</div>
+                            <div class="exercise-notes">${exercise.exerciseData?.description || exercise.notes || ''}</div>
                         </div>
                     `).join('')}
                 </div>
@@ -335,7 +335,7 @@ function showCurrentExercise() {
     const exerciseSets = document.getElementById('recording-exercise-sets');
     
     if (exerciseName && exerciseSets) {
-        exerciseName.textContent = currentExercise.name;
+        exerciseName.textContent = currentExercise.exerciseData?.name || currentExercise.name || 'Ejercicio';
         exerciseSets.textContent = `${currentExercise.sets} series • ${currentExercise.reps} reps`;
     }
     
