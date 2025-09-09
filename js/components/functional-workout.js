@@ -27,6 +27,16 @@ window.initFunctionalWorkout = async function() {
     console.log('⚡ Inicializando workout funcional');
     
     try {
+        // Verificar si ya se completó el WOD de hoy
+        const todayKey = `functional_wod_completed_${new Date().toDateString()}`;
+        const completedToday = localStorage.getItem(todayKey);
+        
+        if (completedToday) {
+            console.log('✅ WOD funcional ya completado hoy');
+            renderFunctionalWorkoutCompleted();
+            return;
+        }
+        
         // Cargar WOD desde localStorage o generar uno
         const wodData = localStorage.getItem('currentFunctionalWod');
         if (wodData) {
@@ -194,6 +204,30 @@ function renderFunctionalWorkout() {
     `;
 }
 
+// Renderizar pantalla de WOD completado
+function renderFunctionalWorkoutCompleted() {
+    const container = document.querySelector('.dashboard-container');
+    if (!container) return;
+    
+    container.innerHTML = `
+        <div class="functional-workout-container">
+            <div class="workout-completed glass-card">
+                <div class="completed-icon">⚡</div>
+                <h1>¡WOD Completado!</h1>
+                <p>Has completado tu entrenamiento funcional de hoy. ¡Excelente trabajo! 💪</p>
+                <p class="completed-message">Vuelve mañana para tu próximo WOD.</p>
+                
+                <div class="completed-actions">
+                    <button class="glass-button glass-button-primary" onclick="window.navigateToPage('dashboard')">
+                        <span class="btn-icon">🏠</span>
+                        <span class="btn-text">Volver al Dashboard</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
 // ===================================
 // CONTROL DEL TIMER
 // ===================================
@@ -320,6 +354,14 @@ function saveFunctionalWorkout() {
     const notes = document.getElementById('workout-notes').value;
     functionalWorkoutState.workoutData.notes = notes;
     functionalWorkoutState.workoutData.rounds = functionalWorkoutState.completedMovements;
+    
+    // Marcar como completado para hoy
+    const todayKey = `functional_wod_completed_${new Date().toDateString()}`;
+    localStorage.setItem(todayKey, JSON.stringify({
+        completed: true,
+        completedAt: new Date().toISOString(),
+        workoutData: functionalWorkoutState.workoutData
+    }));
     
     // Aquí guardarías en Firebase
     // Por ahora solo mostrar mensaje
