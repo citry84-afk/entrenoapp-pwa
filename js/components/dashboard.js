@@ -150,19 +150,25 @@ function generateTodaysWorkout(plan) {
     
     console.log('📅 Info del día:', { dayOfWeek, currentWeek, planType: plan.type });
     
-    // Mapear días de entrenamiento según frecuencia
-    const trainingDays = getTrainingDays(plan.frequency);
-    const isTrainingDay = trainingDays.includes(dayOfWeek);
-    
-    if (!isTrainingDay) {
-        return {
-            type: 'rest',
-            title: 'Día de Descanso',
-            description: 'Aprovecha para recuperarte y prepararte para el próximo entrenamiento',
-            icon: '😴',
-            duration: null,
-            nextTrainingDay: getNextTrainingDay(dayOfWeek, trainingDays)
-        };
+    // Para planes personalizados (gym, functional), ser más flexible con los días
+    if (plan.type === 'gym' || plan.type === 'functional') {
+        // Siempre mostrar el entrenamiento correspondiente del plan
+        console.log('📋 Plan personalizado: mostrando entrenamiento correspondiente');
+    } else {
+        // Para running, usar lógica de días fijos
+        const trainingDays = getTrainingDays(plan.frequency);
+        const isTrainingDay = trainingDays.includes(dayOfWeek);
+        
+        if (!isTrainingDay) {
+            return {
+                type: 'rest',
+                title: 'Día de Descanso',
+                description: 'Aprovecha para recuperarte y prepararte para el próximo entrenamiento',
+                icon: '😴',
+                duration: null,
+                nextTrainingDay: getNextTrainingDay(dayOfWeek, trainingDays)
+            };
+        }
     }
     
     // Generar entrenamiento específico según tipo de plan

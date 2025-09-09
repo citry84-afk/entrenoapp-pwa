@@ -428,14 +428,26 @@ export function generateTodaysGymWorkout(plan) {
     if (!plan || plan.type !== 'gym') return null;
     
     const currentWeek = plan.currentWeek || 1;
-    const currentSession = plan.currentSession || 1;
     const routine = plan.routine;
     
     if (!routine || !routine.sessions) return null;
     
-    // Encontrar la sesión actual
-    const sessionIndex = (currentSession - 1) % routine.sessions.length;
+    // Calcular qué sesión corresponde hoy basado en días transcurridos
+    const startDate = new Date(plan.startDate);
+    const today = new Date();
+    const daysSinceStart = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
+    
+    // Para planes de gimnasio, rotar entre sesiones automáticamente
+    // Cada día de entrenamiento es una sesión diferente
+    const sessionIndex = daysSinceStart % routine.sessions.length;
     const todaysSession = routine.sessions[sessionIndex];
+    
+    console.log('🏋️‍♂️ Calculando sesión de hoy:', {
+        daysSinceStart,
+        sessionIndex,
+        sessionName: todaysSession?.name,
+        totalSessions: routine.sessions.length
+    });
     
     if (!todaysSession) return null;
     
