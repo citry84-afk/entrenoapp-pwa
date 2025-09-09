@@ -761,6 +761,24 @@ function generateRunningPlan(config) {
 
 // Generar plan funcional
 function generateFunctionalPlan(config) {
+    // Usar el generador avanzado si está disponible
+    if (window.generateFunctionalPlan) {
+        try {
+            const advancedPlan = window.generateFunctionalPlan({
+                experience: config.experience,
+                frequency: mapFrequencyToLevel(config.weeklyFrequency),
+                sessionTime: getSessionTime(config.sessionTime),
+                equipment: config.equipment || []
+            });
+            
+            debugLog('FUNCTIONAL_PLAN_GENERATED', 'Plan avanzado generado', advancedPlan);
+            return advancedPlan;
+        } catch (error) {
+            debugLog('FUNCTIONAL_PLAN_ERROR', 'Error generando plan avanzado, usando fallback', error);
+        }
+    }
+    
+    // Fallback: plan básico mejorado
     return {
         type: 'functional',
         name: `Plan Funcional ${getExperienceLabel(config.experience)}`,
@@ -773,10 +791,22 @@ function generateFunctionalPlan(config) {
         startDate: new Date().toISOString(),
         focus: 'conditioning',
         equipment: config.equipment,
+        difficulty: config.experience,
+        metadata: {
+            planType: 'functional',
+            experience: config.experience,
+            sessionTime: config.sessionTime,
+            frequency: mapFrequencyToLevel(config.weeklyFrequency),
+            equipment: config.equipment || [],
+            generatedAt: new Date().toISOString(),
+            basedOnOnboarding: true
+        },
         progressTracking: {
             totalWods: 0,
             totalTime: 0,
-            personalRecords: {}
+            personalRecords: {},
+            wodsCompleted: [],
+            averageScore: 0
         }
     };
 }

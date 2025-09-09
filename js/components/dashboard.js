@@ -208,6 +208,20 @@ function generateRunningWorkout(plan, week) {
 
 // Generar entrenamiento funcional
 function generateFunctionalWorkout(plan, week) {
+    // Usar el generador avanzado si está disponible
+    if (window.generateFunctionalWod) {
+        try {
+            const advancedWorkout = window.generateFunctionalWod(plan, week);
+            if (advancedWorkout) {
+                console.log('✅ Workout funcional avanzado generado:', advancedWorkout);
+                return advancedWorkout;
+            }
+        } catch (error) {
+            console.error('❌ Error generando workout funcional avanzado:', error);
+        }
+    }
+    
+    // Fallback: generador básico mejorado
     const workouts = [
         {
             title: 'Circuito de Fuerza',
@@ -235,12 +249,19 @@ function generateFunctionalWorkout(plan, week) {
         type: 'functional',
         title: todayWorkout.title,
         description: `Entrenamiento funcional - Semana ${week} de ${plan.duration}`,
-        icon: '💪',
+        icon: '⚡',
         duration: 45,
         exercises: todayWorkout.exercises,
         sets: todayWorkout.sets,
         reps: todayWorkout.reps,
-        intensity: plan.intensity || 'moderate'
+        intensity: plan.intensity || 'moderate',
+        structure: 'Circuito',
+        movements: todayWorkout.exercises.map(exercise => ({
+            exercise: exercise,
+            reps: todayWorkout.reps,
+            notes: 'Mantén técnica correcta'
+        })),
+        notes: ['Calienta bien antes de empezar', 'Mantén el ritmo constante']
     };
 }
 
