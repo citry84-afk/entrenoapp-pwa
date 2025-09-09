@@ -25,6 +25,16 @@ window.initGymWorkout = async function() {
     console.log('🏋️‍♂️ Inicializando workout de gimnasio');
     
     try {
+        // Verificar si ya se completó el entrenamiento de hoy
+        const todayKey = `gym_workout_completed_${new Date().toDateString()}`;
+        const completedToday = localStorage.getItem(todayKey);
+        
+        if (completedToday) {
+            console.log('✅ Entrenamiento de gimnasio ya completado hoy');
+            renderGymWorkoutCompleted();
+            return;
+        }
+        
         // Cargar workout desde localStorage o generar uno
         const workoutData = localStorage.getItem('currentGymWorkout');
         if (workoutData) {
@@ -213,6 +223,30 @@ function renderGymWorkout() {
     `;
 }
 
+// Renderizar pantalla de entrenamiento completado
+function renderGymWorkoutCompleted() {
+    const container = document.querySelector('.dashboard-container');
+    if (!container) return;
+    
+    container.innerHTML = `
+        <div class="gym-workout-container">
+            <div class="workout-completed glass-card">
+                <div class="completed-icon">✅</div>
+                <h1>¡Entrenamiento Completado!</h1>
+                <p>Has completado tu sesión de gimnasio de hoy. ¡Excelente trabajo! 💪</p>
+                <p class="completed-message">Vuelve mañana para tu próxima sesión de entrenamiento.</p>
+                
+                <div class="completed-actions">
+                    <button class="glass-button glass-button-primary" onclick="window.navigateToPage('dashboard')">
+                        <span class="btn-icon">🏠</span>
+                        <span class="btn-text">Volver al Dashboard</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
 // ===================================
 // CONTROL DEL TIMER
 // ===================================
@@ -324,6 +358,12 @@ function createSeriesRecordingForm(exercise) {
     
     const sets = parseInt(exercise.sets) || 1;
     
+    // Generar opciones de peso (0-200kg en incrementos de 2.5kg)
+    const weightOptions = Array.from({ length: 81 }, (_, i) => (i * 2.5).toFixed(1));
+    
+    // Generar opciones de reps (1-50)
+    const repsOptions = Array.from({ length: 50 }, (_, i) => i + 1);
+    
     container.innerHTML = `
         <div class="series-form">
             ${Array.from({ length: sets }, (_, index) => `
@@ -332,27 +372,42 @@ function createSeriesRecordingForm(exercise) {
                     <div class="series-inputs">
                         <div class="input-group">
                             <label>Peso (kg)</label>
-                            <input type="number" class="weight-input" data-series="${index}" placeholder="0" step="0.5">
+                            <div class="scroll-select-container">
+                                <select class="weight-input scroll-select" data-series="${index}">
+                                    <option value="0">0 kg</option>
+                                    ${weightOptions.map(weight => 
+                                        `<option value="${weight}">${weight} kg</option>`
+                                    ).join('')}
+                                </select>
+                            </div>
                         </div>
                         <div class="input-group">
                             <label>Reps</label>
-                            <input type="number" class="reps-input" data-series="${index}" placeholder="${exercise.reps}" step="1">
+                            <div class="scroll-select-container">
+                                <select class="reps-input scroll-select" data-series="${index}">
+                                    ${repsOptions.map(rep => 
+                                        `<option value="${rep}" ${rep == exercise.reps ? 'selected' : ''}>${rep}</option>`
+                                    ).join('')}
+                                </select>
+                            </div>
                         </div>
                         <div class="input-group">
                             <label>RPE</label>
-                            <select class="rpe-input" data-series="${index}">
-                                <option value="">-</option>
-                                <option value="1">1 - Muy fácil</option>
-                                <option value="2">2 - Fácil</option>
-                                <option value="3">3 - Muy fácil</option>
-                                <option value="4">4 - Fácil</option>
-                                <option value="5">5 - Moderado</option>
-                                <option value="6">6 - Moderado</option>
-                                <option value="7">7 - Difícil</option>
-                                <option value="8">8 - Muy difícil</option>
-                                <option value="9">9 - Casi máximo</option>
-                                <option value="10">10 - Máximo</option>
-                            </select>
+                            <div class="scroll-select-container">
+                                <select class="rpe-input scroll-select" data-series="${index}">
+                                    <option value="">-</option>
+                                    <option value="1">1 - Muy fácil</option>
+                                    <option value="2">2 - Fácil</option>
+                                    <option value="3">3 - Muy fácil</option>
+                                    <option value="4">4 - Fácil</option>
+                                    <option value="5">5 - Moderado</option>
+                                    <option value="6">6 - Moderado</option>
+                                    <option value="7">7 - Difícil</option>
+                                    <option value="8">8 - Muy difícil</option>
+                                    <option value="9">9 - Casi máximo</option>
+                                    <option value="10">10 - Máximo</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -478,6 +533,14 @@ function saveGymWorkout() {
     const notes = document.getElementById('gym-workout-notes').value;
     gymWorkoutState.workoutData.notes = notes;
     gymWorkoutState.workoutData.exercises = gymWorkoutState.completedExercises;
+    
+    // Marcar como completado para hoy
+    const todayKey = `gym_workout_completed_${new Date().toDateString()}`;
+    localStorage.setItem(todayKey, JSON.stringify({
+        completed: true,
+        completedAt: new Date().toISOString(),
+        workoutData: gymWorkoutState.workoutData
+    }));
     
     // Aquí guardarías en Firebase
     // Por ahora solo mostrar mensaje

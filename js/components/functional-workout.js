@@ -158,12 +158,6 @@ function renderFunctionalWorkout() {
                         <div class="round-progress-fill" id="round-progress-fill" style="width: 0%"></div>
                     </div>
                 </div>
-                
-                <div class="current-movement" id="current-movement-display">
-                    <h4>Movimiento actual:</h4>
-                    <div class="movement-current" id="current-movement-name">-</div>
-                    <div class="movement-reps-current" id="current-movement-reps">-</div>
-                </div>
             </div>
             
             <!-- Registro de datos finales -->
@@ -218,9 +212,6 @@ function startFunctionalWorkout() {
     
     // Iniciar timer
     startTimer();
-    
-    // Actualizar movimiento actual
-    updateCurrentMovement();
 }
 
 function pauseFunctionalWorkout() {
@@ -278,10 +269,9 @@ function updateTimerDisplay(elapsed) {
 // PROGRESO DEL WORKOUT
 // ===================================
 
-function updateCurrentMovement() {
-    const currentRound = functionalWorkoutState.currentRound + 1;
+function updateRoundProgress() {
+    const currentRound = functionalWorkoutState.currentRound;
     const totalRounds = functionalWorkoutState.totalRounds;
-    const currentMovement = functionalWorkoutState.movements[functionalWorkoutState.currentMovement];
     
     // Actualizar información de ronda
     const roundDisplay = document.getElementById('current-round');
@@ -289,62 +279,17 @@ function updateCurrentMovement() {
         roundDisplay.textContent = `Ronda ${currentRound} de ${totalRounds}`;
     }
     
-    // Actualizar movimiento actual
-    const movementName = document.getElementById('current-movement-name');
-    const movementReps = document.getElementById('current-movement-reps');
-    
-    if (movementName && movementReps && currentMovement) {
-        movementName.textContent = currentMovement.exercise;
-        movementReps.textContent = currentMovement.reps;
-    }
-    
     // Actualizar barra de progreso
     const progressFill = document.getElementById('round-progress-fill');
     if (progressFill) {
-        const progress = (functionalWorkoutState.currentRound / totalRounds) * 100;
+        const progress = (currentRound / totalRounds) * 100;
         progressFill.style.width = `${progress}%`;
     }
-}
-
-function completeMovement() {
-    console.log('✅ Movimiento completado');
-    
-    // Marcar movimiento como completado
-    functionalWorkoutState.completedMovements.push({
-        movement: functionalWorkoutState.movements[functionalWorkoutState.currentMovement],
-        completedAt: Date.now()
-    });
-    
-    // Avanzar al siguiente movimiento
-    functionalWorkoutState.currentMovement++;
-    
-    if (functionalWorkoutState.currentMovement >= functionalWorkoutState.movements.length) {
-        // Ronda completada
-        completeRound();
-    } else {
-        // Siguiente movimiento de la misma ronda
-        updateCurrentMovement();
-    }
-}
-
-function completeRound() {
-    console.log('🎉 Ronda completada');
-    
-    functionalWorkoutState.currentRound++;
-    functionalWorkoutState.currentMovement = 0;
     
     // Actualizar rondas completadas
     const roundsCompleted = document.getElementById('rounds-completed');
     if (roundsCompleted) {
-        roundsCompleted.textContent = `${functionalWorkoutState.currentRound} / ${functionalWorkoutState.totalRounds}`;
-    }
-    
-    if (functionalWorkoutState.currentRound >= functionalWorkoutState.totalRounds) {
-        // WOD completado
-        stopFunctionalWorkout();
-    } else {
-        // Siguiente ronda
-        updateCurrentMovement();
+        roundsCompleted.textContent = `${currentRound} / ${totalRounds}`;
     }
 }
 
@@ -425,7 +370,6 @@ function showError(message) {
 window.startFunctionalWorkout = startFunctionalWorkout;
 window.pauseFunctionalWorkout = pauseFunctionalWorkout;
 window.stopFunctionalWorkout = stopFunctionalWorkout;
-window.completeMovement = completeMovement;
 window.saveFunctionalWorkout = saveFunctionalWorkout;
 
 console.log('⚡ Sistema de WOD funcional cargado');

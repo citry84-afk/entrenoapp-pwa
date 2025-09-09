@@ -469,10 +469,14 @@ export function generateTodaysGymWorkout(plan) {
         session: todaysSession,
         muscleGroups: getMuscleGroupsFromSession(todaysSession),
         estimatedDuration: estimateWorkoutDuration(todaysSession),
-        exercises: todaysSession.exercises.map(ex => ({
-            ...ex,
-            exerciseData: findExerciseById(ex.exerciseId)
-        }))
+        exercises: todaysSession.exercises.map(ex => {
+            const exerciseData = findExerciseById(ex.exerciseId);
+            return {
+                ...ex,
+                name: exerciseData?.name || ex.exerciseId,
+                exerciseData: exerciseData
+            };
+        })
     };
     
     // Guardar el workout para hoy
