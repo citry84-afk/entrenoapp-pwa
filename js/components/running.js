@@ -4,7 +4,7 @@ import { runningPlans, getPlanById } from '../data/running-plans.js';
 
 // Estado global del running
 let runningState = {
-    currentMode: 'select', // 'select', 'active', 'finished'
+    currentMode: 'select', // 'select', 'plannedWorkout', 'active', 'finished'
     
     // Tracking GPS
     isTracking: false,
@@ -76,6 +76,19 @@ window.initRunning = async function() {
         
         console.log('🎨 Renderizando página...');
         try {
+            // Verificar si venimos del dashboard con workout planificado
+            const runningMode = localStorage.getItem('runningMode');
+            const todaysWorkout = localStorage.getItem('todaysWorkout');
+            
+            if (runningMode === 'plannedWorkout' && todaysWorkout) {
+                console.log('📋 Modo entrenamiento planificado detectado');
+                runningState.currentMode = 'plannedWorkout';
+                runningState.plannedWorkout = JSON.parse(todaysWorkout);
+                // Limpiar después de usar
+                localStorage.removeItem('runningMode');
+                localStorage.removeItem('todaysWorkout');
+            }
+            
             renderRunningPage();
             console.log('✅ Página renderizada exitosamente');
         } catch (renderError) {
@@ -163,6 +176,9 @@ function renderRunningPage() {
     switch (runningState.currentMode) {
         case 'select':
             content = renderRunningSelection();
+            break;
+        case 'plannedWorkout':
+            content = renderPlannedWorkout();
             break;
         case 'active':
             content = renderActiveRun();
@@ -279,6 +295,90 @@ function renderPlansList() {
             </div>
         </div>
     `).join('');
+}
+
+// Renderizar entrenamiento planificado específico
+function renderPlannedWorkout() {
+    console.log('📋 Generando vista de entrenamiento planificado...');
+    const workout = runningState.plannedWorkout;
+    
+    if (!workout) {
+        console.error('❌ No hay workout planificado');
+        return '<div class="error-message glass-card">No se encontró entrenamiento planificado</div>';
+    }
+
+    return `
+        <div class="planned-workout glass-fade-in">
+            <div class="workout-header glass-card mb-lg">
+                <div class="back-button" onclick="window.navigateToPage('dashboard')">
+                    <span class="back-icon">←</span>
+                    <span>Volver al Dashboard</span>
+                </div>
+                <h2 class="workout-title">${workout.icon} ${workout.title}</h2>
+                <p class="workout-description">${workout.description}</p>
+            </div>
+
+            <!-- Resumen del entrenamiento -->
+            <div class="workout-summary glass-card mb-lg">
+                <h3 class="section-title mb-md">📊 Resumen de Hoy</h3>
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <div class="summary-icon">📏</div>
+                        <div class="summary-info">
+                            <div class="summary-label">Distancia</div>
+                            <div class="summary-value">${workout.distance}km</div>
+                        </div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-icon">⏱️</div>
+                        <div class="summary-info">
+                            <div class="summary-label">Duración estimada</div>
+                            <div class="summary-value">${workout.duration} min</div>
+                        </div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-icon">💪</div>
+                        <div class="summary-info">
+                            <div class="summary-label">Intensidad</div>
+                            <div class="summary-value">${workout.intensity === 'moderate' ? 'Moderada' : workout.intensity}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Instrucciones -->
+            <div class="workout-instructions glass-card mb-lg">
+                <h3 class="section-title mb-md">📝 Instrucciones</h3>
+                <div class="instructions-list">
+                    ${workout.instructions.map((instruction, index) => `
+                        <div class="instruction-item">
+                            <div class="instruction-number">${index + 1}</div>
+                            <div class="instruction-text">${instruction}</div>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+
+            <!-- Botones de acción -->
+            <div class="workout-actions glass-card">
+                <button class="glass-button glass-button-primary btn-lg" onclick="startPlannedWorkout()">
+                    🚀 Comenzar Entrenamiento
+                </button>
+                <button class="glass-button glass-button-outline btn-lg" onclick="showRunningSelection()">
+                    📚 Ver Otros Planes
+                </button>
+            </div>
+
+            <!-- GPS Status -->
+            <div class="gps-status glass-card mt-lg">
+                <h4 class="section-title mb-sm">📡 Estado GPS</h4>
+                <div class="gps-info">
+                    <div class="gps-indicator checking" id="gps-indicator"></div>
+                    <span class="gps-text" id="gps-text">Verificando GPS...</span>
+                </div>
+            </div>
+        </div>
+    `;
 }
 
 // Renderizar carrera activa
@@ -730,6 +830,19 @@ function toggleVoice() {
 // ===================================
 // FUNCIONES AUXILIARES
 // ===================================
+
+// Funciones para navegación y acciones
+window.startPlannedWorkout = function() {
+    console.log('🚀 Iniciando entrenamiento planificado');
+    runningState.currentMode = 'active';
+    startFreeRun(); // Usar la lógica existente de carrera libre
+};
+
+window.showRunningSelection = function() {
+    console.log('📚 Mostrando selección de planes');
+    runningState.currentMode = 'select';
+    renderRunningPage();
+};
 
 // Configurar listeners
 function setupRunningListeners() {

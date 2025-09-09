@@ -858,6 +858,9 @@ window.startTodaysWorkout = function() {
                 if (window.debugLogger) {
                     window.debugLogger.logInfo('DASHBOARD_NAVIGATE', 'Navegando a running', { workout });
                 }
+                // Marcar que venimos del dashboard con el workout específico
+                localStorage.setItem('runningMode', 'plannedWorkout');
+                localStorage.setItem('todaysWorkout', JSON.stringify(workout));
                 window.navigateToPage('running');
                 break;
             case 'functional':
