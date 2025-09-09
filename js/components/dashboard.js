@@ -305,7 +305,22 @@ function calculateWeekProgress(plan) {
 // Cargar reto diario
 async function loadTodayChallenge() {
     try {
-        // Esto se integrará con el sistema de challenges
+        // Usar la misma lógica que challenges.js para generar el reto
+        const todayChallenge = generateDailyChallenge();
+        dashboardState.todayChallenge = {
+            name: todayChallenge.name,
+            target: todayChallenge.target,
+            points: todayChallenge.points,
+            completed: todayChallenge.completed || false,
+            type: todayChallenge.type,
+            id: todayChallenge.id,
+            description: todayChallenge.description
+        };
+        
+        console.log('🎯 Reto diario cargado en dashboard:', dashboardState.todayChallenge);
+    } catch (error) {
+        console.error('❌ Error cargando reto diario:', error);
+        // Fallback si falla
         dashboardState.todayChallenge = {
             name: 'Flexiones',
             target: 20,
@@ -313,9 +328,82 @@ async function loadTodayChallenge() {
             completed: false,
             type: 'reps'
         };
-    } catch (error) {
-        console.error('❌ Error cargando reto diario:', error);
     }
+}
+
+// Generar reto diario (misma lógica que challenges.js)
+function generateDailyChallenge() {
+    // Base de datos de retos (copiada de challenges.js)
+    const DAILY_CHALLENGES = {
+        cardio: [
+            {
+                id: 'jumping_jacks',
+                name: 'Jumping Jacks',
+                description: 'Salta abriendo y cerrando brazos y piernas',
+                type: 'reps',
+                difficulty: {
+                    beginner: { target: 20, points: 10 },
+                    intermediate: { target: 30, points: 15 },
+                    advanced: { target: 50, points: 20 }
+                }
+            },
+            {
+                id: 'mountain_climbers',
+                name: 'Escaladores',
+                description: 'Alterna rodillas al pecho en posición de plancha',
+                type: 'reps',
+                difficulty: {
+                    beginner: { target: 15, points: 10 },
+                    intermediate: { target: 25, points: 15 },
+                    advanced: { target: 40, points: 20 }
+                }
+            }
+        ],
+        strength: [
+            {
+                id: 'push_ups',
+                name: 'Flexiones',
+                description: 'Flexiones de pecho tradicionales',
+                type: 'reps',
+                difficulty: {
+                    beginner: { target: 10, points: 15 },
+                    intermediate: { target: 20, points: 20 },
+                    advanced: { target: 30, points: 25 }
+                }
+            },
+            {
+                id: 'squats',
+                name: 'Sentadillas',
+                description: 'Sentadillas con peso corporal',
+                type: 'reps',
+                difficulty: {
+                    beginner: { target: 15, points: 10 },
+                    intermediate: { target: 25, points: 15 },
+                    advanced: { target: 40, points: 20 }
+                }
+            }
+        ]
+    };
+
+    const today = new Date();
+    const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
+    
+    const categories = Object.keys(DAILY_CHALLENGES);
+    const selectedCategory = categories[dayOfYear % categories.length];
+    const categoryExercises = DAILY_CHALLENGES[selectedCategory];
+    const selectedExercise = categoryExercises[dayOfYear % categoryExercises.length];
+    
+    // Asumir nivel intermedio por defecto
+    const userLevel = 'intermediate';
+    const userDifficulty = selectedExercise.difficulty[userLevel];
+    
+    return {
+        ...selectedExercise,
+        target: userDifficulty.target,
+        points: userDifficulty.points,
+        date: today.toISOString().split('T')[0],
+        completed: false
+    };
 }
 
 // Generar mensaje motivacional
