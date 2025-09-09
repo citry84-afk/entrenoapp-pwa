@@ -862,3 +862,281 @@
         border-color: #ffffff;
     }
 }
+
+/* ===================================
+   DASHBOARD MEJORADO - NUEVOS ESTILOS
+   =================================== */
+
+/* Sección mejorada del entrenamiento */
+.enhanced-workout-section {
+    margin-bottom: 2rem;
+}
+
+/* Header motivacional */
+.motivational-header {
+    text-align: center;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.plan-title-enhanced {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 0.5rem 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.motivational-message-enhanced {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+    font-style: italic;
+}
+
+/* Barra de progreso mejorada */
+.plan-progress-enhanced {
+    padding: 1.5rem;
+}
+
+.progress-info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.current-position {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.day-week-display {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #ffffff;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    display: inline-block;
+}
+
+.plan-duration {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.progress-percentage {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #667eea;
+}
+
+.progress-bar-enhanced {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-fill-enhanced {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    border-radius: 4px;
+    transition: width 0.3s ease;
+    position: relative;
+}
+
+.progress-fill-enhanced::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* Tarjeta del entrenamiento de hoy */
+.todays-workout-card {
+    padding: 1.5rem;
+}
+
+.workout-header-enhanced {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.workout-title-enhanced {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0 0 0.5rem 0;
+}
+
+.workout-description-enhanced {
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+/* Resumen del entrenamiento */
+.workout-summary-enhanced {
+    margin-bottom: 1.5rem;
+}
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.summary-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.summary-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
+}
+
+.summary-item.primary {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
+    border-color: rgba(102, 126, 234, 0.3);
+}
+
+.summary-icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.summary-content {
+    text-align: center;
+}
+
+.summary-value {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 0.25rem;
+}
+
+.summary-label {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Preview de instrucciones */
+.instructions-preview {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.instructions-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0 0 0.75rem 0;
+}
+
+.instructions-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.instruction-item {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.85rem;
+    padding: 0.25rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.instruction-item:last-child {
+    border-bottom: none;
+}
+
+.instruction-more {
+    color: rgba(255, 255, 255, 0.6);
+    font-style: italic;
+    padding: 0.25rem 0;
+}
+
+/* Botón mejorado */
+.workout-action-primary {
+    text-align: center;
+}
+
+.enhanced-start-btn {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 60px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.enhanced-start-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
+.enhanced-start-btn .btn-icon {
+    font-size: 1.2rem;
+}
+
+.enhanced-start-btn .btn-text {
+    flex: 1;
+}
+
+/* Responsive para dashboard mejorado */
+@media (max-width: 768px) {
+    .enhanced-workout-section .summary-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .enhanced-workout-section .progress-info-row {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+    }
+    
+    .enhanced-workout-section .day-week-display {
+        font-size: 1rem;
+        padding: 0.4rem 0.8rem;
+    }
+    
+    .enhanced-workout-section .plan-title-enhanced {
+        font-size: 1.3rem;
+    }
+    
+    .enhanced-workout-section .enhanced-start-btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+    }
+}

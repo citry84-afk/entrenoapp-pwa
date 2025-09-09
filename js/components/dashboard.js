@@ -593,49 +593,190 @@ function renderRestDay(workout) {
 
 // Renderizar entrenamiento activo
 function renderActiveWorkout(workout) {
+    const plan = dashboardState.activePlan;
+    const currentDay = getCurrentTrainingDay();
+    const trainingDays = getTrainingDays(plan.frequency);
+    const dayInWeek = trainingDays.indexOf(new Date().getDay()) + 1;
+
     return `
-        <div class="active-workout-card">
-            <div class="workout-info">
-                <div class="workout-icon">${workout.icon}</div>
-                <div class="workout-details">
-                    <h3 class="workout-name">${workout.title}</h3>
-                    <p class="workout-description">${workout.description}</p>
-                    
-                    <div class="workout-specs">
-                        ${workout.duration ? `
-                            <div class="spec-item">
-                                <span class="spec-icon">⏱️</span>
-                                <span class="spec-text">${workout.duration} min</span>
-                            </div>
-                        ` : ''}
-                        
-                        ${workout.distance ? `
-                            <div class="spec-item">
-                                <span class="spec-icon">📏</span>
-                                <span class="spec-text">${workout.distance} km</span>
-                            </div>
-                        ` : ''}
-                        
-                        ${workout.sets ? `
-                            <div class="spec-item">
-                                <span class="spec-icon">🔢</span>
-                                <span class="spec-text">${workout.sets} ${workout.reps || 'series'}</span>
-                            </div>
-                        ` : ''}
+        <div class="enhanced-workout-section">
+            <!-- Frase motivacional del plan -->
+            <div class="motivational-header glass-card mb-md">
+                <h2 class="plan-title-enhanced">${plan.name}</h2>
+                <p class="motivational-message-enhanced">${dashboardState.motivationalMessage}</p>
+            </div>
+            
+            <!-- Barra de progreso del plan -->
+            <div class="plan-progress-enhanced glass-card mb-md">
+                <div class="progress-info-row">
+                    <div class="current-position">
+                        <span class="day-week-display">Día ${dayInWeek || 1} • Semana ${plan.currentWeek || 1}</span>
+                        <span class="plan-duration">de ${plan.duration} semanas</span>
                     </div>
+                    <div class="progress-percentage">
+                        ${Math.round(((plan.currentWeek || 1) / plan.duration) * 100)}%
+                    </div>
+                </div>
+                <div class="progress-bar-enhanced">
+                    <div class="progress-fill-enhanced" style="width: ${((plan.currentWeek || 1) / plan.duration) * 100}%"></div>
                 </div>
             </div>
             
-            <div class="workout-actions">
-                <button class="glass-button glass-button-primary" onclick="window.startTodaysWorkout()">
-                    🚀 Empezar Entrenamiento
-                </button>
-                <button class="glass-button glass-button-secondary" onclick="window.viewWorkoutDetails()">
-                    📋 Ver Detalles
-                </button>
+            <!-- Entrenamiento de hoy -->
+            <div class="todays-workout-card glass-card">
+                <div class="workout-header-enhanced">
+                    <h3 class="workout-title-enhanced">${workout.icon} ${workout.title}</h3>
+                    <p class="workout-description-enhanced">${workout.description}</p>
+                </div>
+                
+                <!-- Resumen específico por tipo de entrenamiento -->
+                <div class="workout-summary-enhanced">
+                    ${renderWorkoutSummaryByType(workout)}
+                </div>
+                
+                <!-- Botón de acción principal -->
+                <div class="workout-action-primary">
+                    <button class="glass-button glass-button-primary btn-lg enhanced-start-btn" onclick="window.startTodaysWorkout()">
+                        <span class="btn-icon">🚀</span>
+                        <span class="btn-text">Comenzar Entrenamiento</span>
+                    </button>
+                </div>
             </div>
         </div>
     `;
+}
+
+// Renderizar resumen específico por tipo de entrenamiento
+function renderWorkoutSummaryByType(workout) {
+    switch (workout.type) {
+        case 'running':
+            return `
+                <div class="summary-grid running-summary">
+                    <div class="summary-item primary">
+                        <div class="summary-icon">📏</div>
+                        <div class="summary-content">
+                            <div class="summary-value">${workout.distance} km</div>
+                            <div class="summary-label">Distancia</div>
+                        </div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-icon">⏱️</div>
+                        <div class="summary-content">
+                            <div class="summary-value">${workout.duration} min</div>
+                            <div class="summary-label">Tiempo estimado</div>
+                        </div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-icon">💨</div>
+                        <div class="summary-content">
+                            <div class="summary-value">${getIntensityLabel(workout.intensity)}</div>
+                            <div class="summary-label">Intensidad</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="instructions-preview">
+                    <h4 class="instructions-title">📝 Plan de hoy:</h4>
+                    <ul class="instructions-list">
+                        ${workout.instructions ? workout.instructions.slice(0, 2).map(instruction => 
+                            `<li class="instruction-item">${instruction}</li>`
+                        ).join('') : ''}
+                        ${workout.instructions && workout.instructions.length > 2 ? 
+                            `<li class="instruction-more">+${workout.instructions.length - 2} pasos más...</li>` : ''}
+                    </ul>
+                </div>
+            `;
+        
+        case 'gym':
+            return `
+                <div class="summary-grid gym-summary">
+                    <div class="summary-item primary">
+                        <div class="summary-icon">💪</div>
+                        <div class="summary-content">
+                            <div class="summary-value">${workout.muscleGroup || 'Múltiples'}</div>
+                            <div class="summary-label">Grupo muscular</div>
+                        </div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-icon">🔢</div>
+                        <div class="summary-content">
+                            <div class="summary-value">${workout.sets || 4} series</div>
+                            <div class="summary-label">Series totales</div>
+                        </div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-icon">🔁</div>
+                        <div class="summary-content">
+                            <div class="summary-value">${workout.reps || '8-12'} reps</div>
+                            <div class="summary-label">Repeticiones</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        
+        case 'functional':
+            return `
+                <div class="summary-grid functional-summary">
+                    <div class="summary-item primary">
+                        <div class="summary-icon">🔥</div>
+                        <div class="summary-content">
+                            <div class="summary-value">${workout.name || 'WOD'}</div>
+                            <div class="summary-label">Entrenamiento</div>
+                        </div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-icon">⏱️</div>
+                        <div class="summary-content">
+                            <div class="summary-value">${workout.duration || '15-20'} min</div>
+                            <div class="summary-label">Duración</div>
+                        </div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-icon">🎯</div>
+                        <div class="summary-content">
+                            <div class="summary-value">${workout.rounds || 3} rondas</div>
+                            <div class="summary-label">Rondas</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        
+        default:
+            return `
+                <div class="summary-grid default-summary">
+                    <div class="summary-item">
+                        <div class="summary-icon">⏱️</div>
+                        <div class="summary-content">
+                            <div class="summary-value">${workout.duration || 30} min</div>
+                            <div class="summary-label">Duración</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+    }
+}
+
+// Obtener día de entrenamiento actual
+function getCurrentTrainingDay() {
+    const plan = dashboardState.activePlan;
+    if (!plan) return 1;
+    
+    const startDate = new Date(plan.startDate);
+    const today = new Date();
+    const diffTime = Math.abs(today - startDate);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    
+    return diffDays + 1;
+}
+
+// Obtener etiqueta de intensidad
+function getIntensityLabel(intensity) {
+    switch (intensity) {
+        case 'low': return 'Suave';
+        case 'moderate': return 'Moderada';
+        case 'high': return 'Intensa';
+        case 'very_high': return 'Muy intensa';
+        default: return 'Moderada';
+    }
 }
 
 // Renderizar progreso semanal
@@ -1208,3 +1349,4 @@ window.viewStats = function() {
 };
 
 console.log('🏠 Dashboard personalizado cargado');
+
