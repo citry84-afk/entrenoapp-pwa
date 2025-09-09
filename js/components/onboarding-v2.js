@@ -364,19 +364,27 @@ function canProceedToNext() {
     return false;
 }
 
+// Variable para almacenar la función del listener
+let onboardingClickHandler = null;
+
 // Configurar listeners del onboarding
 function setupOnboardingListeners() {
     debugLog('SETUP_LISTENERS', 'Configurando listeners del onboarding');
     
-    // Remover listeners previos para evitar duplicados
     const container = document.querySelector('.dashboard-container');
     if (!container) {
         debugLog('SETUP_ERROR', 'Container no encontrado para listeners');
         return;
     }
     
-    // Usar event delegation en el container
-    container.addEventListener('click', (e) => {
+    // Remover listener anterior si existe
+    if (onboardingClickHandler) {
+        container.removeEventListener('click', onboardingClickHandler);
+        debugLog('LISTENER_REMOVED', 'Listener anterior removido');
+    }
+    
+    // Crear nuevo listener
+    onboardingClickHandler = (e) => {
         debugLog('CLICK_EVENT', 'Click detectado', { 
             target: e.target.tagName,
             className: e.target.className,
@@ -407,7 +415,10 @@ function setupOnboardingListeners() {
             handlePrevious();
             return;
         }
-    });
+    };
+    
+    // Agregar el nuevo listener
+    container.addEventListener('click', onboardingClickHandler);
     
     debugLog('LISTENERS_OK', 'Listeners configurados exitosamente');
 }

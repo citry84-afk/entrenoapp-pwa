@@ -195,20 +195,54 @@ function filterByEquipment(routine, availableEquipment) {
         return routine; // Sin restricciones
     }
     
+    // Mapear equipo del onboarding a equipos específicos
+    const equipmentMap = {
+        'gym_access': ['barbell', 'bench', 'dumbbells', 'incline_bench', 'parallel_bars', 'pull_up_bar', 
+                      'cable_machine', 'leg_press_machine', 'leg_curl_machine', 'calf_raise_machine'],
+        'home_gym': ['dumbbells', 'bench', 'pull_up_bar'],
+        'basic_equipment': ['dumbbells'],
+        'bodyweight_only': ['bodyweight'],
+        'outdoor_space': ['bodyweight']
+    };
+    
+    // Expandir equipos disponibles
+    let expandedEquipment = [];
+    availableEquipment.forEach(equip => {
+        if (equipmentMap[equip]) {
+            expandedEquipment.push(...equipmentMap[equip]);
+        } else {
+            expandedEquipment.push(equip);
+        }
+    });
+    
+    // Siempre incluir bodyweight
+    expandedEquipment.push('bodyweight');
+    
+    console.log('🏋️‍♂️ Filtrado por equipo:', { 
+        original: availableEquipment, 
+        expanded: expandedEquipment 
+    });
+    
     routine.sessions.forEach(session => {
+        const originalCount = session.exercises.length;
+        
         session.exercises = session.exercises.filter(exercise => {
             const exerciseData = findExerciseById(exercise.exerciseId);
             if (!exerciseData) return false;
             
             // Verificar si el equipo del ejercicio está disponible
-            return exerciseData.equipment.some(equip => 
-                availableEquipment.includes(equip) || equip === 'bodyweight'
+            const isAvailable = exerciseData.equipment.some(equip => 
+                expandedEquipment.includes(equip)
             );
+            
+            return isAvailable;
         });
+        
+        console.log(`📋 Sesión ${session.name}: ${originalCount} → ${session.exercises.length} ejercicios`);
         
         // Si quedan muy pocos ejercicios, agregar alternativos
         if (session.exercises.length < 3) {
-            const alternatives = findAlternativeExercises(session, availableEquipment);
+            const alternatives = findAlternativeExercises(session, expandedEquipment);
             session.exercises.push(...alternatives);
         }
     });
@@ -249,8 +283,52 @@ function generateAdditionalExercises(session, count) {
 }
 
 function findAlternativeExercises(session, availableEquipment) {
-    // Implementar lógica para encontrar ejercicios alternativos
-    return [];
+    console.log(`🔄 Buscando ejercicios alternativos para ${session.name}`);
+    
+    const alternatives = [];
+    
+    // Obtener ejercicios básicos que funcionen con el equipo disponible
+    const basicExercises = [
+        { exerciseId: 'push_ups', sets: 3, reps: '8-15', rest: 90 },
+        { exerciseId: 'squats', sets: 3, reps: '10-15', rest: 120 },
+        { exerciseId: 'lunges', sets: 3, reps: '10-15', rest: 120 }
+    ];
+    
+    // Agregar ejercicios específicos según el tipo de sesión
+    if (session.name.includes('Push') || session.name.includes('Pecho')) {
+        if (availableEquipment.includes('barbell') && availableEquipment.includes('bench')) {
+            alternatives.push({ exerciseId: 'bench_press', sets: 4, reps: '8-12', rest: 180 });
+        }
+        if (availableEquipment.includes('dumbbells')) {
+            alternatives.push({ exerciseId: 'incline_dumbbell_press', sets: 3, reps: '8-12', rest: 150 });
+        }
+        alternatives.push({ exerciseId: 'push_ups', sets: 3, reps: '8-15', rest: 90 });
+    }
+    
+    if (session.name.includes('Pull') || session.name.includes('Espalda')) {
+        if (availableEquipment.includes('barbell')) {
+            alternatives.push({ exerciseId: 'deadlift', sets: 4, reps: '5-8', rest: 180 });
+            alternatives.push({ exerciseId: 'barbell_row', sets: 3, reps: '8-12', rest: 150 });
+        }
+        if (availableEquipment.includes('pull_up_bar')) {
+            alternatives.push({ exerciseId: 'pull_ups', sets: 4, reps: '6-12', rest: 150 });
+        }
+    }
+    
+    if (session.name.includes('Legs') || session.name.includes('Piernas')) {
+        if (availableEquipment.includes('barbell')) {
+            alternatives.push({ exerciseId: 'squats', sets: 4, reps: '8-12', rest: 180 });
+        }
+        alternatives.push({ exerciseId: 'lunges', sets: 3, reps: '10-15', rest: 120 });
+    }
+    
+    // Agregar ejercicios básicos si no hay específicos
+    if (alternatives.length === 0) {
+        alternatives.push(...basicExercises);
+    }
+    
+    console.log(`✅ Agregados ${alternatives.length} ejercicios alternativos`);
+    return alternatives.slice(0, 5); // Máximo 5 ejercicios
 }
 
 function generatePlanName(frequency, experience, goal) {
