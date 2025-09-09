@@ -432,6 +432,15 @@ export function generateTodaysGymWorkout(plan) {
     
     if (!routine || !routine.sessions) return null;
     
+    // Verificar si ya hay un workout para hoy
+    const todayKey = `gym_workout_${plan.type}_${new Date().toDateString()}`;
+    const storedWorkout = localStorage.getItem(todayKey);
+    
+    if (storedWorkout) {
+        console.log('📅 Workout de gimnasio del día ya existe, usando el guardado:', JSON.parse(storedWorkout).title);
+        return JSON.parse(storedWorkout);
+    }
+    
     // Calcular qué sesión corresponde hoy basado en días transcurridos
     const startDate = new Date(plan.startDate);
     const today = new Date();
@@ -465,6 +474,10 @@ export function generateTodaysGymWorkout(plan) {
             exerciseData: findExerciseById(ex.exerciseId)
         }))
     };
+    
+    // Guardar el workout para hoy
+    localStorage.setItem(todayKey, JSON.stringify(workout));
+    console.log('💾 Workout de gimnasio del día guardado:', workout.title);
     
     return workout;
 }

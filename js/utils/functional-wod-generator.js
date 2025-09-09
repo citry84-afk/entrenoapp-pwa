@@ -19,6 +19,15 @@ export function generateFunctionalWod(plan, week, userLevel = 'intermedio') {
         planType: plan.type 
     });
     
+    // Verificar si ya hay un WOD para hoy
+    const todayKey = `functional_wod_${plan.type}_${new Date().toDateString()}`;
+    const storedWorkout = localStorage.getItem(todayKey);
+    
+    if (storedWorkout) {
+        console.log('📅 WOD del día ya existe, usando el guardado:', JSON.parse(storedWorkout).title);
+        return JSON.parse(storedWorkout);
+    }
+    
     // Seleccionar tipo de WOD basado en la semana
     const wodType = selectWodType(currentWeek, plan.frequency);
     const selectedWod = selectWodByType(wodType, difficulty);
@@ -48,6 +57,10 @@ export function generateFunctionalWod(plan, week, userLevel = 'intermedio') {
         week: currentWeek,
         totalWeeks: plan.duration || 12
     };
+    
+    // Guardar el workout para hoy
+    localStorage.setItem(todayKey, JSON.stringify(workout));
+    console.log('💾 WOD del día guardado:', workout.title);
     
     console.log('✅ WOD funcional generado:', workout.title);
     return workout;
