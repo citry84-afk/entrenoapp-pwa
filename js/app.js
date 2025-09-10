@@ -176,6 +176,9 @@ function setupNavigationListeners() {
 function navigateToPage(page) {
     console.log(`📄 Navegando a: ${page}`);
     
+    // Llevar página arriba del todo
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    
     try {
         if (window.debugLogger) {
             window.debugLogger.logInfo('APP_NAVIGATE', `Navegando a ${page}`, { page });

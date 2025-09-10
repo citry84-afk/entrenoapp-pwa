@@ -364,8 +364,9 @@
 .workout-description {
     font-size: 1rem;
     line-height: 1.5;
-    opacity: 0.8;
+    opacity: 0.9;
     margin-bottom: 1rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .workout-specs {
@@ -984,9 +985,10 @@
 }
 
 .workout-description-enhanced {
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.9);
     margin: 0;
     font-size: 0.95rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 /* Resumen del entrenamiento */
@@ -996,8 +998,8 @@
 
 .summary-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 0.75rem;
     margin-bottom: 1rem;
 }
 
@@ -1005,10 +1007,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 1rem;
+    padding: 0.5rem;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
+    border-radius: 8px;
     transition: all 0.3s ease;
 }
 
@@ -1023,8 +1025,8 @@
 }
 
 .summary-icon {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    margin-bottom: 0.25rem;
 }
 
 .summary-content {
@@ -1032,14 +1034,14 @@
 }
 
 .summary-value {
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     font-weight: 600;
     color: #ffffff;
     margin-bottom: 0.25rem;
 }
 
 .summary-label {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     color: rgba(255, 255, 255, 0.7);
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -1085,6 +1087,10 @@
 /* Botón mejorado */
 .workout-action-primary {
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 
 .enhanced-start-btn {
@@ -1094,6 +1100,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 0 auto;
     gap: 0.5rem;
     min-height: 60px;
     background: linear-gradient(135deg, #667eea, #764ba2);
@@ -1104,6 +1111,32 @@
 .enhanced-start-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
+/* Centrado para múltiples botones */
+.workout-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.workout-actions .glass-button {
+    flex: 0 0 auto;
+    min-width: 200px;
+}
+
+/* Para un solo botón */
+.workout-actions:has(.glass-button:only-child) {
+    justify-content: center;
+}
+
+/* Para dos botones */
+.workout-actions:has(.glass-button:nth-child(2):last-child) {
+    justify-content: center;
+    gap: 1.5rem;
 }
 
 .enhanced-start-btn .btn-icon {

@@ -1178,6 +1178,19 @@ window.startTodaysWorkout = function() {
         });
     }
     
+    // Verificar si ya se completó el entrenamiento de hoy
+    const plan = dashboardState.activePlan;
+    if (plan) {
+        const todayKey = `${plan.type}_workout_completed_${new Date().toDateString()}`;
+        const completedToday = localStorage.getItem(todayKey);
+        
+        if (completedToday) {
+            console.log('✅ Entrenamiento ya completado hoy');
+            alert('¡Ya completaste tu entrenamiento de hoy! Vuelve mañana para tu próximo entrenamiento. 💪');
+            return;
+        }
+    }
+    
     const workout = dashboardState.todaysWorkout;
     
     if (!workout) {
