@@ -776,7 +776,113 @@ function setupSocialListeners() {
             e.preventDefault();
             switchRanking(target.dataset.ranking);
         }
+        // Búsqueda: lanzar búsqueda
+        if (target.id === 'search-btn') {
+            const input = document.getElementById('search-query');
+            if (input) {
+                const queryText = input.value.trim();
+                socialState.searchQuery = queryText;
+                runUserSearch(queryText);
+            }
+            return;
+        }
+
+        // Búsqueda: enviar solicitud de amistad
+        if (target.dataset && target.dataset.action === 'send-request' && target.dataset.userId) {
+            sendFriendRequest(target.dataset.userId);
+            return;
+        }
     });
+}
+
+// Ejecutar búsqueda por email o nick (@usuario)
+async function runUserSearch(queryText) {
+    try {
+        const user = auth.currentUser;
+        if (!user) return;
+
+        const results = [];
+
+        // Si empieza por @, buscar por username exacto
+        if (queryText.startsWith('@')) {
+            const username = queryText.toLowerCase();
+            const qByUsername = query(
+                collection(db, 'users'),
+                where('username', '==', username),
+                limit(10)
+            );
+            const snap = await getDocs(qByUsername);
+            snap.forEach(d => results.push({ uid: d.id, ...d.data() }));
+        } else if (queryText.includes('@')) {
+            // Tiene pinta de email → búsqueda exacta por email
+            const qByEmail = query(
+                collection(db, 'users'),
+                where('email', '==', queryText.toLowerCase()),
+                limit(10)
+            );
+            const snap = await getDocs(qByEmail);
+            snap.forEach(d => results.push({ uid: d.id, ...d.data() }));
+        } else {
+            // Si no, intentar por displayName (prefijo)
+            const qByName = query(
+                collection(db, 'users'),
+                where('displayName', '>=', queryText),
+                where('displayName', '<=', queryText + '\uf8ff'),
+                limit(10)
+            );
+            const snap = await getDocs(qByName);
+            snap.forEach(d => results.push({ uid: d.id, ...d.data() }));
+        }
+
+        // Marcar usuario actual y limpiar duplicados por uid
+        const map = new Map();
+        results.forEach(r => {
+            map.set(r.uid, {
+                ...r,
+                isCurrentUser: r.uid === user.uid
+            });
+        });
+        socialState.searchResults = Array.from(map.values());
+
+        // Actualizar UI
+        const container = document.getElementById('search-results');
+        if (container) {
+            container.innerHTML = renderSearchResults();
+        } else {
+            renderProfilePage();
+        }
+    } catch (error) {
+        console.error('❌ Error en búsqueda de usuarios:', error);
+        alert('No se pudo realizar la búsqueda');
+    }
+}
+
+// Enviar solicitud de amistad
+async function sendFriendRequest(targetUserId) {
+    try {
+        const user = auth.currentUser;
+        if (!user) return;
+        if (user.uid === targetUserId) return alert('No puedes enviarte una solicitud a ti mismo');
+
+        const myDocRef = doc(db, 'users', user.uid);
+        const targetDocRef = doc(db, 'users', targetUserId);
+
+        // Registrar solicitud en ambos perfiles
+        await updateDoc(myDocRef, {
+            sentRequests: arrayUnion(targetUserId),
+            updatedAt: serverTimestamp()
+        });
+        await updateDoc(targetDocRef, {
+            friendRequests: arrayUnion(user.uid),
+            updatedAt: serverTimestamp()
+        });
+
+        alert('✅ Solicitud enviada');
+
+    } catch (error) {
+        console.error('❌ Error enviando solicitud:', error);
+        alert('No se pudo enviar la solicitud');
+    }
 }
 
 // Cambiar pestaña social
@@ -1349,7 +1455,7 @@ function renderSearchSection() {
         <div class="search-section glass-fade-in">
             <div class="search-header text-center mb-lg">
                 <h2 class="page-title">🔍 Buscar Usuarios</h2>
-                <p class="page-subtitle text-secondary">Encuentra y conecta con otros usuarios</p>
+                <p class="page-subtitle text-secondary">Busca por email o por nick (@usuario)</p>
             </div>
             
             <!-- Navegación de pestañas -->
@@ -1380,13 +1486,49 @@ function renderSearchSection() {
                 </div>
             </div>
             
-            <div class="search-placeholder glass-card text-center">
-                <div class="placeholder-icon mb-md">🔍</div>
-                <h3 class="placeholder-title">Búsqueda de Usuarios</h3>
-                <p class="placeholder-description text-secondary">
-                    Próximamente: busca usuarios por nombre de usuario o nombre real
-                </p>
+            <div class="glass-card mb-lg">
+                <div class="search-bar">
+                    <input id="search-query" class="glass-input" type="text" placeholder="Escribe un email o @usuario" value="${socialState.searchQuery || ''}">
+                    <button id="search-btn" class="glass-button glass-button-primary">Buscar</button>
+                </div>
+                <div class="helper-text text-secondary mt-sm">Ejemplos: usuario@correo.com o @pepito</div>
             </div>
+            
+            <div id="search-results" class="glass-card">
+                ${renderSearchResults()}
+            </div>
+        </div>
+    `;
+}
+
+function renderSearchResults() {
+    const results = socialState.searchResults || [];
+    if (!results.length) {
+        return `
+            <div class="search-placeholder text-center">
+                <div class="placeholder-icon mb-md">🙋‍♂️</div>
+                <h3 class="placeholder-title">Sin resultados</h3>
+                <p class="placeholder-description text-secondary">Prueba con el email exacto o el nick con @</p>
+            </div>
+        `;
+    }
+    return `
+        <div class="results-list">
+            ${results.map(u => `
+                <div class="result-item">
+                    <div class="result-left">
+                        <img src="${u.photoURL || '/assets/default-avatar.png'}" alt="${u.displayName || u.username}" class="result-avatar">
+                        <div class="result-info">
+                            <div class="result-name">${u.displayName || 'Usuario'}</div>
+                            <div class="result-username text-secondary">${u.username || ''}</div>
+                            <div class="result-email text-tertiary">${u.email || ''}</div>
+                        </div>
+                    </div>
+                    <div class="result-actions">
+                        ${u.isCurrentUser ? '<span class="badge">Tú</span>' : `<button class="glass-button glass-button-secondary" data-action="send-request" data-user-id="${u.uid}">Añadir</button>`}
+                    </div>
+                </div>
+            `).join('')}
         </div>
     `;
 }
