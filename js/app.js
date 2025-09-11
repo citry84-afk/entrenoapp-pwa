@@ -179,6 +179,11 @@ function navigateToPage(page) {
     // Llevar página arriba del todo
     window.scrollTo({ top: 0, behavior: 'smooth' });
     
+    // Guardar página anterior para botón atrás
+    if (appState.currentPage && appState.currentPage !== page) {
+        appState.previousPage = appState.currentPage;
+    }
+    
     try {
         if (window.debugLogger) {
             window.debugLogger.logInfo('APP_NAVIGATE', `Navegando a ${page}`, { page });
@@ -608,8 +613,20 @@ function setupAdBanner() {
     }
 }
 
+// Navegar hacia atrás
+function navigateBack() {
+    if (appState.previousPage) {
+        console.log(`⬅️ Navegando hacia atrás a: ${appState.previousPage}`);
+        navigateToPage(appState.previousPage);
+    } else {
+        console.log('🏠 No hay página anterior, navegando al dashboard');
+        navigateToPage('dashboard');
+    }
+}
+
 // Funciones globales
 window.navigateToPage = navigateToPage;
+window.navigateBack = navigateBack;
 window.appState = appState;
 
 // Función para mantener la pantalla encendida durante entrenamientos

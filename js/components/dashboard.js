@@ -414,6 +414,10 @@ async function loadTodayChallenge() {
 
 // Generar reto diario (misma lógica que challenges.js)
 function generateDailyChallenge() {
+    // Usar la misma lógica que challenges.js
+    const today = new Date();
+    const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
+    
     // Base de datos de retos (copiada de challenges.js)
     const DAILY_CHALLENGES = {
         cardio: [
@@ -530,6 +534,9 @@ function renderDashboard() {
     }
     
     container.innerHTML = `
+        <button class="back-button" onclick="window.navigateBack()" title="Atrás">
+            ←
+        </button>
         <div class="personalized-dashboard glass-fade-in">
             <!-- Header personalizado -->
             ${renderPersonalizedHeader()}
@@ -905,8 +912,6 @@ function renderGymExerciseList(workout) {
                     const reps = exercise.reps || '8-12';
                     return `<li class="instruction-item">${exerciseName} - ${sets} x ${reps}</li>`;
                 }).join('')}
-                ${exercisesList.length > 3 ? 
-                    `<li class="instruction-more">+${exercisesList.length - 3} ejercicios más...</li>` : ''}
             </ul>
         </div>
     `;
@@ -983,115 +988,27 @@ function renderQuickStats() {
     `;
 }
 
-// Renderizar acciones rápidas
+// Renderizar acciones rápidas (simplificadas)
 function renderQuickActions() {
     const plan = dashboardState.activePlan;
     
-    // Acciones específicas para running
-    if (plan?.type === 'running') {
+    // Solo mostrar estadísticas si hay un plan activo
+    if (plan) {
         return `
             <div class="quick-actions glass-card">
-                <h3 class="actions-title">⚡ Acciones de Running</h3>
+                <h3 class="actions-title">📊 Tu Progreso</h3>
                 <div class="actions-grid">
-                    <button class="action-btn glass-button" onclick="window.startFreeRun()">
-                        <span class="action-icon">🏃‍♂️</span>
-                        <span class="action-text">Carrera Libre</span>
-                    </button>
-                    <button class="action-btn glass-button" onclick="window.startIntervalTraining()">
-                        <span class="action-icon">⏱️</span>
-                        <span class="action-text">Intervalos</span>
-                    </button>
-                    <button class="action-btn glass-button" onclick="window.viewRunningPlans()">
-                        <span class="action-icon">📋</span>
-                        <span class="action-text">Planes Running</span>
-                    </button>
-                    <button class="action-btn glass-button" onclick="window.viewRunningHistory()">
+                    <button class="action-btn glass-button" onclick="window.viewProgressStats()">
                         <span class="action-icon">📈</span>
-                        <span class="action-text">Historial</span>
+                        <span class="action-text">Ver Estadísticas</span>
                     </button>
                 </div>
             </div>
         `;
     }
     
-    // Acciones específicas para funcional
-    if (plan?.type === 'functional') {
-        return `
-            <div class="quick-actions glass-card">
-                <h3 class="actions-title">⚡ Acciones Funcionales</h3>
-                <div class="actions-grid">
-                    <button class="action-btn glass-button" onclick="window.startFunctionalWOD()">
-                        <span class="action-icon">🔥</span>
-                        <span class="action-text">WOD del Día</span>
-                    </button>
-                    <button class="action-btn glass-button" onclick="window.browseWODs()">
-                        <span class="action-icon">📋</span>
-                        <span class="action-text">Explorar WODs</span>
-                    </button>
-                    <button class="action-btn glass-button" onclick="window.customWorkout()">
-                        <span class="action-icon">⚙️</span>
-                        <span class="action-text">Crear WOD</span>
-                    </button>
-                    <button class="action-btn glass-button" onclick="window.viewPRs()">
-                        <span class="action-icon">🏆</span>
-                        <span class="action-text">Mis Records</span>
-                    </button>
-                </div>
-            </div>
-        `;
-    }
-    
-    // Acciones específicas para gym
-    if (plan?.type === 'gym') {
-        return `
-            <div class="quick-actions glass-card">
-                <h3 class="actions-title">⚡ Acciones de Gym</h3>
-                <div class="actions-grid">
-                    <button class="action-btn glass-button" onclick="window.startGymSession()">
-                        <span class="action-icon">🏋️‍♂️</span>
-                        <span class="action-text">Sesión de Hoy</span>
-                    </button>
-                    <button class="action-btn glass-button" onclick="window.browsePlans()">
-                        <span class="action-icon">📋</span>
-                        <span class="action-text">Planes Gym</span>
-                    </button>
-                    <button class="action-btn glass-button" onclick="window.exerciseLibrary()">
-                        <span class="action-icon">📚</span>
-                        <span class="action-text">Ejercicios</span>
-                    </button>
-                    <button class="action-btn glass-button" onclick="window.viewProgress()">
-                        <span class="action-icon">📈</span>
-                        <span class="action-text">Progreso</span>
-                    </button>
-                </div>
-            </div>
-        `;
-    }
-    
-    // Acciones generales si no hay plan
-    return `
-        <div class="quick-actions glass-card">
-            <h3 class="actions-title">⚡ Acciones Rápidas</h3>
-            <div class="actions-grid">
-                <button class="action-btn glass-button" onclick="window.createNewPlan()">
-                    <span class="action-icon">🎯</span>
-                    <span class="action-text">Crear Plan</span>
-                </button>
-                <button class="action-btn glass-button" onclick="window.browsePlans()">
-                    <span class="action-icon">📋</span>
-                    <span class="action-text">Explorar Planes</span>
-                </button>
-                <button class="action-btn glass-button" onclick="window.quickWorkout()">
-                    <span class="action-icon">⚡</span>
-                    <span class="action-text">Entreno Rápido</span>
-                </button>
-                <button class="action-btn glass-button" onclick="window.viewStats()">
-                    <span class="action-icon">📊</span>
-                    <span class="action-text">Estadísticas</span>
-                </button>
-            </div>
-        </div>
-    `;
+    // Si no hay plan, no mostrar acciones
+    return '';
 }
 
 // Renderizar cuando no hay plan
