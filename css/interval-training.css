@@ -1,0 +1,256 @@
+/* Estilos para entrenamiento por intervalos */
+
+.interval-training-container {
+    padding: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.interval-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.interval-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 1rem;
+}
+
+.interval-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+}
+
+.info-item {
+    text-align: center;
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.info-label {
+    display: block;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 0.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.info-value {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.timer-section {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 2rem;
+}
+
+.timer-display {
+    font-size: 4rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    font-family: 'Courier New', monospace;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.phase-indicator {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    padding: 0.75rem 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 25px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    display: inline-block;
+}
+
+.interval-progress {
+    margin-top: 1.5rem;
+}
+
+.progress-text {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 0.5rem;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.controls-section {
+    margin-bottom: 2rem;
+}
+
+.control-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.control-buttons .glass-button {
+    flex: 1;
+    min-width: 120px;
+    padding: 1rem;
+}
+
+.workout-info {
+    margin-bottom: 2rem;
+}
+
+.workout-info h3 {
+    color: #ffffff;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.workout-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 1rem;
+}
+
+.detail-item {
+    text-align: center;
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.detail-label {
+    display: block;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 0.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.detail-value {
+    display: block;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.workout-completed {
+    text-align: center;
+    padding: 3rem 2rem;
+}
+
+.completed-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    animation: bounce 1s ease-in-out;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+.workout-completed h1 {
+    color: #ffffff;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.workout-completed p {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 0.5rem;
+}
+
+.completed-message {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #4ade80 !important;
+    margin-bottom: 2rem !important;
+}
+
+.completed-actions {
+    margin-top: 2rem;
+}
+
+/* Estados de fase */
+.phase-indicator.work {
+    background: rgba(239, 68, 68, 0.2);
+    border-color: rgba(239, 68, 68, 0.5);
+    color: #fca5a5;
+}
+
+.phase-indicator.rest {
+    background: rgba(34, 197, 94, 0.2);
+    border-color: rgba(34, 197, 94, 0.5);
+    color: #86efac;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .interval-training-container {
+        padding: 0.5rem;
+    }
+    
+    .timer-display {
+        font-size: 3rem;
+    }
+    
+    .control-buttons {
+        flex-direction: column;
+    }
+    
+    .control-buttons .glass-button {
+        min-width: auto;
+    }
+    
+    .interval-info {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .workout-details {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .timer-display {
+        font-size: 2.5rem;
+    }
+    
+    .interval-info {
+        grid-template-columns: 1fr;
+    }
+    
+    .workout-details {
+        grid-template-columns: 1fr;
+    }
+}

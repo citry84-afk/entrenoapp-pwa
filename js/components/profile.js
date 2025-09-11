@@ -590,6 +590,9 @@ function renderFriendsSection() {
             <!-- Solicitudes de amistad -->
             ${socialState.friendRequests.length > 0 ? renderFriendRequests() : ''}
             
+            <!-- Solicitudes enviadas -->
+            ${socialState.sentRequests.length > 0 ? renderSentFriendRequests() : ''}
+            
             <!-- Lista de amigos -->
             ${renderFriendsList()}
             
@@ -628,6 +631,40 @@ function renderFriendRequests() {
                             <button class="glass-button glass-button-danger btn-sm" 
                                     onclick="window.rejectFriendRequest('${request.id}')">
                                 ❌ Rechazar
+                            </button>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+    `;
+}
+
+// Renderizar solicitudes enviadas
+function renderSentFriendRequests() {
+    return `
+        <div class="friend-requests glass-card mb-lg">
+            <h3 class="section-title mb-md">
+                📤 Solicitudes Enviadas 
+                <span class="requests-count">(${socialState.sentRequests.length})</span>
+            </h3>
+            <div class="requests-list">
+                ${socialState.sentRequests.map(request => `
+                    <div class="request-item">
+                        <div class="request-user">
+                            <img src="${request.receiver.photoURL || '/assets/default-avatar.png'}" 
+                                 alt="${request.receiver.displayName}" 
+                                 class="user-avatar">
+                            <div class="user-info">
+                                <div class="user-name">${request.receiver.displayName}</div>
+                                <div class="user-username">@${request.receiver.username}</div>
+                                <div class="request-time">${getTimeAgo(request.sentAt)}</div>
+                            </div>
+                        </div>
+                        <div class="request-actions">
+                            <button class="glass-button glass-button-secondary btn-sm" 
+                                    onclick="window.cancelSentRequest('${request.id}')">
+                                🚫 Cancelar
                             </button>
                         </div>
                     </div>
@@ -1059,6 +1096,10 @@ window.removeFriend = function(friendId) {
     handleRemoveFriend(friendId);
 };
 
+window.cancelSentRequest = function(requestId) {
+    handleCancelSentRequest(requestId);
+};
+
 // Aceptar solicitud: actualizar documento de friendship a accepted
 async function handleAcceptRequest(requestId) {
     try {
@@ -1124,6 +1165,23 @@ async function handleRemoveFriend(friendId) {
     }
 }
 
+// Cancelar solicitud enviada por el usuario actual
+async function handleCancelSentRequest(requestId) {
+    try {
+        const user = auth.currentUser;
+        if (!user) return;
+        const friendshipRef = doc(db, 'friendships', requestId);
+        await updateDoc(friendshipRef, {
+            status: 'canceled',
+            updatedAt: serverTimestamp()
+        });
+        await loadFriends();
+        renderProfilePage();
+    } catch (error) {
+        console.error('❌ Error cancelando solicitud enviada:', error);
+        alert('No se pudo cancelar la solicitud');
+    }
+}
 window.viewFriendProfile = function(friendId) {
     console.log('Viendo perfil de amigo:', friendId);
     // TODO: Implementar vista de perfil de amigo
@@ -1290,9 +1348,12 @@ window.closeEditProfileModal = function() {
 
 // Guardar cambios del perfil
 window.saveProfileChanges = async function() {
+    console.log('💾 Iniciando guardado de perfil...');
     try {
         const user = auth.currentUser;
         if (!user) throw new Error('Usuario no autenticado');
+        
+        console.log('👤 Usuario autenticado:', user.uid);
         
         // Obtener datos del formulario
         const displayName = document.getElementById('display-name').value.trim();
@@ -1302,6 +1363,8 @@ window.saveProfileChanges = async function() {
         const notifications = document.getElementById('notifications').checked;
         const friendRequests = document.getElementById('friend-requests').checked;
         const activityNotifications = document.getElementById('activity-notifications').checked;
+        
+        console.log('📝 Datos del formulario:', { displayName, username, bio, privacy, notifications });
         
         // Validaciones
         if (!displayName) {
@@ -1327,12 +1390,14 @@ window.saveProfileChanges = async function() {
         }
         
         // Actualizar perfil en Firebase Auth
+        console.log('🔄 Actualizando perfil en Firebase Auth...');
         await updateProfile(user, {
             displayName: displayName,
             photoURL: photoURL
         });
         
         // Actualizar datos en Firestore
+        console.log('🔄 Actualizando datos en Firestore...');
         const userDoc = doc(db, 'users', user.uid);
         await updateDoc(userDoc, {
             displayName: displayName,
@@ -1369,6 +1434,7 @@ window.saveProfileChanges = async function() {
         };
         
         // Cerrar modal y actualizar UI
+        console.log('✅ Perfil actualizado exitosamente');
         closeEditProfileModal();
         renderProfilePage();
         

@@ -386,17 +386,34 @@ function calculateWeekProgress(plan) {
 // Cargar reto diario
 async function loadTodayChallenge() {
     try {
-        // Usar la misma lógica que challenges.js para generar el reto
-        const todayChallenge = generateDailyChallenge();
-        dashboardState.todayChallenge = {
-            name: todayChallenge.name,
-            target: todayChallenge.target,
-            points: todayChallenge.points,
-            completed: todayChallenge.completed || false,
-            type: todayChallenge.type,
-            id: todayChallenge.id,
-            description: todayChallenge.description
-        };
+        // Usar la misma función que challenges.js
+        if (window.generateTodayChallenge && window.challengesState) {
+            window.generateTodayChallenge();
+            const challenge = window.challengesState.todayChallenge;
+            if (challenge) {
+                dashboardState.todayChallenge = {
+                    name: challenge.name,
+                    target: challenge.target,
+                    points: challenge.points,
+                    completed: challenge.completed || false,
+                    type: challenge.type,
+                    id: challenge.id,
+                    description: challenge.description
+                };
+            }
+        } else {
+            // Fallback si challenges.js no está cargado
+            const todayChallenge = generateDailyChallenge();
+            dashboardState.todayChallenge = {
+                name: todayChallenge.name,
+                target: todayChallenge.target,
+                points: todayChallenge.points,
+                completed: todayChallenge.completed || false,
+                type: todayChallenge.type,
+                id: todayChallenge.id,
+                description: todayChallenge.description
+            };
+        }
         
         console.log('🎯 Reto diario cargado en dashboard:', dashboardState.todayChallenge);
     } catch (error) {
@@ -902,7 +919,7 @@ function renderGymExerciseList(workout) {
         <div class="instructions-preview">
             <h4 class="instructions-title">🏋️‍♂️ Ejercicios de hoy:</h4>
             <ul class="instructions-list">
-                ${exercisesList.slice(0, 3).map(exercise => {
+                ${exercisesList.map(exercise => {
                     const exerciseName = exercise.exerciseData?.name || exercise.name || `Ejercicio ${exercise.exerciseId}`;
                     const sets = exercise.sets || 3;
                     const reps = exercise.reps || '8-12';
@@ -1414,7 +1431,7 @@ window.viewStats = function() {
 
 // Ver estadísticas de progreso
 window.viewProgressStats = function() {
-    window.navigateToPage('profile');
+    window.navigateToPage('progress-stats');
 };
 
 // Mostrar opciones de running
@@ -1527,9 +1544,9 @@ window.startIntervalWorkout = function() {
     localStorage.setItem('runningMode', 'intervalTraining');
     localStorage.setItem('intervalWorkout', JSON.stringify(intervalWorkout));
     
-    // Cerrar modal y navegar
+    // Cerrar modal y navegar directamente a intervalos
     document.querySelector('.modal-overlay').remove();
-    window.navigateToPage('running');
+    window.navigateToPage('interval-training');
 };
 
 // Mostrar reto del día

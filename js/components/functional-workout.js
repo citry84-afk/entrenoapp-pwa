@@ -44,6 +44,7 @@ window.initFunctionalWorkout = async function() {
         if (completedToday) {
             console.log('✅ WOD funcional ya completado hoy');
             renderFunctionalWorkoutCompleted();
+            setupSwipeNavigation();
             return;
         }
         
@@ -61,6 +62,9 @@ window.initFunctionalWorkout = async function() {
         
         // Renderizar interfaz
         renderFunctionalWorkout();
+        
+        // Configurar swipe para volver atrás
+        setupSwipeNavigation();
         
         console.log('✅ Workout funcional inicializado:', functionalWorkoutState.currentWod);
         
@@ -83,10 +87,14 @@ function setupWorkoutState() {
     functionalWorkoutState.currentMovement = 0;
     functionalWorkoutState.completedMovements = [];
     functionalWorkoutState.workoutData = {
+        title: wod.title,
+        description: wod.description,
+        wodType: wod.wodType || wod.structure,
         totalTime: 0,
         rounds: [],
         notes: '',
-        difficulty: wod.difficulty || 'intermediate'
+        difficulty: wod.difficulty || 'intermediate',
+        movements: wod.movements || []
     };
 }
 
@@ -108,6 +116,14 @@ function renderFunctionalWorkout() {
     
     container.innerHTML = `
         <div class="functional-workout-container">
+            <!-- Botón atrás -->
+            <div class="back-button-container">
+                <button class="back-button glass-button" onclick="window.navigateBack()">
+                    <span class="back-icon">←</span>
+                    <span class="back-text">Atrás</span>
+                </button>
+            </div>
+            
             <!-- Header del WOD -->
             <div class="wod-header glass-card">
                 <div class="wod-title-section">
@@ -221,6 +237,14 @@ function renderFunctionalWorkoutCompleted() {
     
     container.innerHTML = `
         <div class="functional-workout-container">
+            <!-- Botón atrás -->
+            <div class="back-button-container">
+                <button class="back-button glass-button" onclick="window.navigateBack()">
+                    <span class="back-icon">←</span>
+                    <span class="back-text">Atrás</span>
+                </button>
+            </div>
+            
             <div class="workout-completed glass-card">
                 <div class="completed-icon">⚡</div>
                 <h1>¡WOD Completado!</h1>
@@ -395,7 +419,7 @@ async function saveFunctionalWorkoutToFirestore(workoutData) {
         const user = auth.currentUser;
         if (!user) throw new Error('Usuario no autenticado');
         
-        const duration = functionalWorkoutState.workoutData.duration || 0;
+        const duration = workoutData.totalTime || 0;
         
         const workoutDoc = {
             userId: user.uid,
@@ -477,6 +501,37 @@ function getDifficultyLabel(difficulty) {
 function showError(message) {
     console.error('❌ Error:', message);
     // Aquí podrías mostrar un toast o modal de error
+}
+
+// Configurar navegación por swipe
+function setupSwipeNavigation() {
+    let startX = 0;
+    let startY = 0;
+    
+    document.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+    });
+    
+    document.addEventListener('touchend', (e) => {
+        if (!startX || !startY) return;
+        
+        const endX = e.changedTouches[0].clientX;
+        const endY = e.changedTouches[0].clientY;
+        
+        const diffX = startX - endX;
+        const diffY = startY - endY;
+        
+        // Swipe horizontal de derecha a izquierda (volver atrás)
+        if (Math.abs(diffX) > Math.abs(diffY) && diffX > 50) {
+            if (window.navigateBack) {
+                window.navigateBack();
+            }
+        }
+        
+        startX = 0;
+        startY = 0;
+    });
 }
 
 // ===================================

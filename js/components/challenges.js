@@ -272,7 +272,17 @@ function renderChallengesPage() {
             content = renderDailyChallenge();
     }
     
-    container.innerHTML = content;
+    container.innerHTML = `
+        <!-- Botón atrás -->
+        <div class="back-button-container">
+            <button class="back-button glass-button" onclick="window.navigateBack()">
+                <span class="back-icon">←</span>
+                <span class="back-text">Atrás</span>
+            </button>
+        </div>
+        
+        ${content}
+    `;
 }
 
 // Renderizar reto diario
@@ -857,5 +867,9 @@ function showError(message) {
     console.error('❌', message);
     alert(message);
 }
+
+// Exponer funciones globalmente para uso en dashboard
+window.generateTodayChallenge = generateTodayChallenge;
+window.challengesState = challengesState;
 
 console.log('🎯 Módulo de retos diarios cargado');

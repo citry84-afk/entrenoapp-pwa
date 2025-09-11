@@ -267,6 +267,12 @@ async function loadPageContent(page) {
             case 'profile':
                 content = await loadProfilePage();
                 break;
+            case 'progress-stats':
+                content = '<div class="challenges-container"></div>';
+                break;
+            case 'interval-training':
+                content = '<div class="dashboard-container"></div>';
+                break;
             default:
                 content = '<div class="page"><h1>Página no encontrada</h1></div>';
         }
@@ -528,6 +534,12 @@ async function executePageScripts(page) {
             break;
         case 'profile':
             if (window.initProfile) window.initProfile();
+            break;
+        case 'progress-stats':
+            if (window.renderProgressStats) window.renderProgressStats();
+            break;
+        case 'interval-training':
+            if (window.renderIntervalTraining) window.renderIntervalTraining();
             break;
         case 'onboarding':
             console.log('📋 Inicializando onboarding v2...');

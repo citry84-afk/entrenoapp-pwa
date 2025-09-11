@@ -42,6 +42,7 @@ window.initGymWorkout = async function() {
         if (completedToday) {
             console.log('✅ Entrenamiento de gimnasio ya completado hoy');
             renderGymWorkoutCompleted();
+            setupSwipeNavigation();
             return;
         }
         
@@ -59,6 +60,9 @@ window.initGymWorkout = async function() {
         
         // Renderizar interfaz
         renderGymWorkout();
+        
+        // Configurar swipe para volver atrás
+        setupSwipeNavigation();
         
         console.log('✅ Workout de gimnasio inicializado:', gymWorkoutState.currentWorkout);
         
@@ -79,6 +83,9 @@ function setupGymWorkoutState() {
     gymWorkoutState.currentExercise = 0;
     gymWorkoutState.completedExercises = [];
     gymWorkoutState.workoutData = {
+        title: workout.title,
+        description: workout.description,
+        muscleGroup: workout.muscleGroup,
         totalTime: 0,
         exercises: [],
         notes: '',
@@ -98,6 +105,14 @@ function renderGymWorkout() {
     
     container.innerHTML = `
         <div class="gym-workout-container">
+            <!-- Botón atrás -->
+            <div class="back-button-container">
+                <button class="back-button glass-button" onclick="window.navigateBack()">
+                    <span class="back-icon">←</span>
+                    <span class="back-text">Atrás</span>
+                </button>
+            </div>
+            
             <!-- Header del workout -->
             <div class="workout-header glass-card">
                 <div class="workout-title-section">
@@ -240,6 +255,14 @@ function renderGymWorkoutCompleted() {
     
     container.innerHTML = `
         <div class="gym-workout-container">
+            <!-- Botón atrás -->
+            <div class="back-button-container">
+                <button class="back-button glass-button" onclick="window.navigateBack()">
+                    <span class="back-icon">←</span>
+                    <span class="back-text">Atrás</span>
+                </button>
+            </div>
+            
             <div class="workout-completed glass-card">
                 <div class="completed-icon">✅</div>
                 <h1>¡Entrenamiento Completado!</h1>
@@ -576,7 +599,7 @@ async function saveGymWorkoutToFirestore(workoutData) {
         
         // Calcular estadísticas del entrenamiento
         const totalVolume = calculateTotalVolume(workoutData.exercises);
-        const duration = gymWorkoutState.workoutData.duration || 0;
+        const duration = workoutData.totalTime || 0;
         
         const workoutDoc = {
             userId: user.uid,
@@ -691,6 +714,37 @@ function getDifficultyLabel(difficulty) {
 function showError(message) {
     console.error('❌ Error:', message);
     // Aquí podrías mostrar un toast o modal de error
+}
+
+// Configurar navegación por swipe
+function setupSwipeNavigation() {
+    let startX = 0;
+    let startY = 0;
+    
+    document.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+    });
+    
+    document.addEventListener('touchend', (e) => {
+        if (!startX || !startY) return;
+        
+        const endX = e.changedTouches[0].clientX;
+        const endY = e.changedTouches[0].clientY;
+        
+        const diffX = startX - endX;
+        const diffY = startY - endY;
+        
+        // Swipe horizontal de derecha a izquierda (volver atrás)
+        if (Math.abs(diffX) > Math.abs(diffY) && diffX > 50) {
+            if (window.navigateBack) {
+                window.navigateBack();
+            }
+        }
+        
+        startX = 0;
+        startY = 0;
+    });
 }
 
 // ===================================
