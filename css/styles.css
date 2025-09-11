@@ -926,3 +926,217 @@ body.has-ad-banner #main-content {
         background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
     }
 }
+
+/* ===========================================
+   MODAL DE EDICIÓN DE PERFIL
+   =========================================== */
+
+.profile-edit-modal {
+    max-width: 500px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.profile-edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-label {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+}
+
+.glass-input {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--border-radius-md);
+    padding: 0.75rem 1rem;
+    color: var(--text-primary);
+    font-size: 1rem;
+    backdrop-filter: blur(10px);
+    transition: all var(--transition-fast);
+}
+
+.glass-input:focus {
+    outline: none;
+    border-color: var(--primary-blue);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.2);
+}
+
+.glass-input::placeholder {
+    color: var(--text-tertiary);
+}
+
+/* Foto de perfil */
+.photo-upload-container {
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0;
+}
+
+.current-photo {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    border: 3px solid rgba(255, 255, 255, 0.2);
+}
+
+.current-photo:hover {
+    border-color: var(--primary-blue);
+    transform: scale(1.05);
+}
+
+.profile-photo-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.photo-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+}
+
+.current-photo:hover .photo-overlay {
+    opacity: 1;
+}
+
+.photo-text {
+    color: white;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+/* Opciones de privacidad */
+.privacy-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.radio-option {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.radio-option:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.radio-option input[type="radio"] {
+    margin: 0;
+    accent-color: var(--primary-blue);
+}
+
+.radio-text {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+}
+
+.radio-desc {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+}
+
+/* Opciones de notificaciones */
+.checkbox-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.checkbox-option {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.checkbox-option:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.checkbox-option input[type="checkbox"] {
+    margin: 0;
+    accent-color: var(--primary-blue);
+}
+
+.checkbox-text {
+    color: var(--text-primary);
+    font-size: 0.9rem;
+}
+
+/* Modal footer */
+.modal-footer {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-footer .glass-button {
+    min-width: 120px;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .profile-edit-modal {
+        width: 95%;
+        margin: 1rem;
+    }
+    
+    .current-photo {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .modal-footer {
+        flex-direction: column;
+    }
+    
+    .modal-footer .glass-button {
+        width: 100%;
+    }
+}

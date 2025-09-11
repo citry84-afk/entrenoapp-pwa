@@ -1,5 +1,5 @@
 // Sistema social completo para EntrenoApp
-import { auth, db } from '../config/firebase-config.js';
+import { auth, db, storage } from '../config/firebase-config.js';
 import { logout } from '../auth/auth.js';
 import { 
     doc, 
@@ -19,6 +19,14 @@ import {
     arrayRemove,
     onSnapshot
 } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+import { 
+    updateProfile 
+} from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+import { 
+    ref, 
+    uploadBytes, 
+    getDownloadURL 
+} from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js';
 
 // Estado global del sistema social
 let socialState = {
@@ -959,7 +967,273 @@ window.switchToSearch = function() {
 
 window.editProfile = function() {
     console.log('Editando perfil');
-    // TODO: Implementar edición de perfil
+    showEditProfileModal();
+};
+
+// Mostrar modal de edición de perfil
+function showEditProfileModal() {
+    const profile = socialState.userProfile;
+    const stats = socialState.userStats;
+    
+    const modal = document.createElement('div');
+    modal.className = 'modal-overlay';
+    modal.innerHTML = `
+        <div class="modal-content profile-edit-modal">
+            <div class="modal-header">
+                <h2>✏️ Editar Perfil</h2>
+                <button class="modal-close" onclick="closeEditProfileModal()">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <form id="edit-profile-form" class="profile-edit-form">
+                    <!-- Foto de perfil -->
+                    <div class="form-group">
+                        <label class="form-label">📸 Foto de Perfil</label>
+                        <div class="photo-upload-container">
+                            <div class="current-photo">
+                                <img id="current-photo" src="${profile?.photoURL || '/assets/default-avatar.png'}" 
+                                     alt="Foto actual" class="profile-photo-preview">
+                                <div class="photo-overlay">
+                                    <span class="photo-text">Cambiar</span>
+                                </div>
+                            </div>
+                            <input type="file" id="photo-input" accept="image/*" style="display: none;">
+                        </div>
+                    </div>
+                    
+                    <!-- Información básica -->
+                    <div class="form-group">
+                        <label for="display-name" class="form-label">👤 Nombre Completo</label>
+                        <input type="text" id="display-name" class="glass-input" 
+                               value="${profile?.displayName || ''}" 
+                               placeholder="Tu nombre completo">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="username" class="form-label">🏷️ Nombre de Usuario</label>
+                        <input type="text" id="username" class="glass-input" 
+                               value="${profile?.username || ''}" 
+                               placeholder="@tu_usuario">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="bio" class="form-label">📝 Biografía</label>
+                        <textarea id="bio" class="glass-input" rows="3" 
+                                  placeholder="Cuéntanos sobre ti...">${profile?.bio || ''}</textarea>
+                    </div>
+                    
+                    <!-- Configuración de privacidad -->
+                    <div class="form-group">
+                        <label class="form-label">🔒 Privacidad</label>
+                        <div class="privacy-options">
+                            <label class="radio-option">
+                                <input type="radio" name="privacy" value="public" 
+                                       ${socialState.settings.privacy === 'public' ? 'checked' : ''}>
+                                <span class="radio-text">🌐 Público</span>
+                                <span class="radio-desc">Cualquiera puede ver tu perfil</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="privacy" value="friends" 
+                                       ${socialState.settings.privacy === 'friends' ? 'checked' : ''}>
+                                <span class="radio-text">👥 Solo Amigos</span>
+                                <span class="radio-desc">Solo tus amigos pueden ver tu perfil</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="privacy" value="private" 
+                                       ${socialState.settings.privacy === 'private' ? 'checked' : ''}>
+                                <span class="radio-text">🔒 Privado</span>
+                                <span class="radio-desc">Solo tú puedes ver tu perfil</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Notificaciones -->
+                    <div class="form-group">
+                        <label class="form-label">🔔 Notificaciones</label>
+                        <div class="checkbox-options">
+                            <label class="checkbox-option">
+                                <input type="checkbox" id="notifications" 
+                                       ${socialState.settings.notifications ? 'checked' : ''}>
+                                <span class="checkbox-text">Notificaciones generales</span>
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" id="friend-requests" 
+                                       ${socialState.settings.friendRequestNotifications ? 'checked' : ''}>
+                                <span class="checkbox-text">Solicitudes de amistad</span>
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" id="activity-notifications" 
+                                       ${socialState.settings.activityNotifications ? 'checked' : ''}>
+                                <span class="checkbox-text">Actividad de amigos</span>
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="glass-button glass-button-secondary" 
+                        onclick="closeEditProfileModal()">
+                    Cancelar
+                </button>
+                <button type="button" class="glass-button glass-button-primary" 
+                        onclick="saveProfileChanges()">
+                    💾 Guardar Cambios
+                </button>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    setupPhotoUpload();
+}
+
+// Configurar subida de foto
+function setupPhotoUpload() {
+    const photoInput = document.getElementById('photo-input');
+    const currentPhoto = document.getElementById('current-photo');
+    const photoContainer = document.querySelector('.photo-upload-container');
+    
+    // Click en el contenedor de foto
+    photoContainer.addEventListener('click', () => {
+        photoInput.click();
+    });
+    
+    // Cambio de archivo
+    photoInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                currentPhoto.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+}
+
+// Cerrar modal de edición
+window.closeEditProfileModal = function() {
+    const modal = document.querySelector('.modal-overlay');
+    if (modal) {
+        modal.remove();
+    }
+};
+
+// Guardar cambios del perfil
+window.saveProfileChanges = async function() {
+    try {
+        const user = auth.currentUser;
+        if (!user) throw new Error('Usuario no autenticado');
+        
+        // Obtener datos del formulario
+        const displayName = document.getElementById('display-name').value.trim();
+        const username = document.getElementById('username').value.trim();
+        const bio = document.getElementById('bio').value.trim();
+        const privacy = document.querySelector('input[name="privacy"]:checked').value;
+        const notifications = document.getElementById('notifications').checked;
+        const friendRequests = document.getElementById('friend-requests').checked;
+        const activityNotifications = document.getElementById('activity-notifications').checked;
+        
+        // Validaciones
+        if (!displayName) {
+            alert('El nombre completo es obligatorio');
+            return;
+        }
+        
+        if (!username) {
+            alert('El nombre de usuario es obligatorio');
+            return;
+        }
+        
+        if (!username.startsWith('@')) {
+            alert('El nombre de usuario debe empezar con @');
+            return;
+        }
+        
+        // Procesar foto si se seleccionó una nueva
+        let photoURL = socialState.userProfile?.photoURL;
+        const photoInput = document.getElementById('photo-input');
+        if (photoInput.files[0]) {
+            photoURL = await uploadProfilePhoto(photoInput.files[0]);
+        }
+        
+        // Actualizar perfil en Firebase Auth
+        await updateProfile(user, {
+            displayName: displayName,
+            photoURL: photoURL
+        });
+        
+        // Actualizar datos en Firestore
+        const userDoc = doc(db, 'users', user.uid);
+        await updateDoc(userDoc, {
+            displayName: displayName,
+            username: username,
+            bio: bio,
+            photoURL: photoURL,
+            settings: {
+                privacy: privacy,
+                notifications: notifications,
+                friendRequestNotifications: friendRequests,
+                activityNotifications: activityNotifications,
+                showInRanking: socialState.settings.showInRanking,
+                units: socialState.settings.units,
+                language: socialState.settings.language
+            },
+            updatedAt: serverTimestamp()
+        });
+        
+        // Actualizar estado local
+        socialState.userProfile = {
+            ...socialState.userProfile,
+            displayName: displayName,
+            username: username,
+            bio: bio,
+            photoURL: photoURL
+        };
+        
+        socialState.settings = {
+            ...socialState.settings,
+            privacy: privacy,
+            notifications: notifications,
+            friendRequestNotifications: friendRequests,
+            activityNotifications: activityNotifications
+        };
+        
+        // Cerrar modal y actualizar UI
+        closeEditProfileModal();
+        renderProfilePage();
+        
+        alert('✅ Perfil actualizado exitosamente!');
+        
+    } catch (error) {
+        console.error('❌ Error actualizando perfil:', error);
+        alert('Error actualizando el perfil. Inténtalo de nuevo.');
+    }
+};
+
+// Subir foto de perfil
+async function uploadProfilePhoto(file) {
+    try {
+        const user = auth.currentUser;
+        if (!user) throw new Error('Usuario no autenticado');
+        
+        // Crear referencia de almacenamiento
+        const storageRef = ref(storage, `profile-photos/${user.uid}/${Date.now()}_${file.name}`);
+        
+        // Subir archivo
+        const snapshot = await uploadBytes(storageRef, file);
+        
+        // Obtener URL de descarga
+        const downloadURL = await getDownloadURL(snapshot.ref);
+        
+        console.log('✅ Foto de perfil subida:', downloadURL);
+        return downloadURL;
+        
+    } catch (error) {
+        console.error('❌ Error subiendo foto:', error);
+        throw error;
+    }
 };
 
 function switchRanking(type) {
