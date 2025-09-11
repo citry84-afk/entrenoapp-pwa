@@ -414,10 +414,6 @@ async function loadTodayChallenge() {
 
 // Generar reto diario (misma lógica que challenges.js)
 function generateDailyChallenge() {
-    // Usar la misma lógica que challenges.js
-    const today = new Date();
-    const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
-    
     // Base de datos de retos (copiada de challenges.js)
     const DAILY_CHALLENGES = {
         cardio: [
