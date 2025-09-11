@@ -1048,19 +1048,81 @@ function getActivityDescription(activity) {
 
 // Funciones del sistema social (placeholder para implementación completa)
 window.acceptFriendRequest = function(requestId) {
-    console.log('Aceptando solicitud:', requestId);
-    // TODO: Implementar aceptación de solicitud
+    handleAcceptRequest(requestId);
 };
 
 window.rejectFriendRequest = function(requestId) {
-    console.log('Rechazando solicitud:', requestId);
-    // TODO: Implementar rechazo de solicitud
+    handleRejectRequest(requestId);
 };
 
 window.removeFriend = function(friendId) {
-    console.log('Eliminando amigo:', friendId);
-    // TODO: Implementar eliminación de amigo
+    handleRemoveFriend(friendId);
 };
+
+// Aceptar solicitud: actualizar documento de friendship a accepted
+async function handleAcceptRequest(requestId) {
+    try {
+        const user = auth.currentUser;
+        if (!user) return;
+        const friendshipRef = doc(db, 'friendships', requestId);
+        await updateDoc(friendshipRef, {
+            status: 'accepted',
+            acceptedAt: serverTimestamp()
+        });
+        await loadFriends();
+        renderProfilePage();
+    } catch (error) {
+        console.error('❌ Error aceptando solicitud:', error);
+        alert('No se pudo aceptar la solicitud');
+    }
+}
+
+// Rechazar solicitud: marcar como rejected o eliminar
+async function handleRejectRequest(requestId) {
+    try {
+        const friendshipRef = doc(db, 'friendships', requestId);
+        await updateDoc(friendshipRef, {
+            status: 'rejected',
+            updatedAt: serverTimestamp()
+        });
+        await loadFriends();
+        renderProfilePage();
+    } catch (error) {
+        console.error('❌ Error rechazando solicitud:', error);
+        alert('No se pudo rechazar la solicitud');
+    }
+}
+
+// Eliminar amigo: buscar relación y marcarla como removed
+async function handleRemoveFriend(friendId) {
+    try {
+        const user = auth.currentUser;
+        if (!user) return;
+        // Buscar documentos de amistad accepted entre ambos
+        const q = query(
+            collection(db, 'friendships'),
+            where('users', 'array-contains', user.uid),
+            where('status', '==', 'accepted')
+        );
+        const snap = await getDocs(q);
+        const updates = [];
+        snap.forEach(d => {
+            const data = d.data();
+            if (Array.isArray(data.users) && data.users.includes(friendId)) {
+                updates.push(updateDoc(doc(db, 'friendships', d.id), {
+                    status: 'removed',
+                    updatedAt: serverTimestamp()
+                }));
+            }
+        });
+        await Promise.all(updates);
+        await loadFriends();
+        renderProfilePage();
+    } catch (error) {
+        console.error('❌ Error eliminando amigo:', error);
+        alert('No se pudo eliminar al amigo');
+    }
+}
 
 window.viewFriendProfile = function(friendId) {
     console.log('Viendo perfil de amigo:', friendId);
