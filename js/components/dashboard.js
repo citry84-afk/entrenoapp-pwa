@@ -1421,5 +1421,120 @@ window.viewStats = function() {
     window.navigateToPage('profile');
 };
 
+// Mostrar opciones de running
+window.showRunningOptions = function() {
+    const modal = document.createElement('div');
+    modal.className = 'modal-overlay';
+    modal.innerHTML = `
+        <div class="modal-content glass-card">
+            <h2>🏃‍♂️ Opciones de Running</h2>
+            <div class="running-options">
+                <button class="glass-button glass-button-primary" onclick="window.startFreeRun()">
+                    <span class="btn-icon">🏃‍♂️</span>
+                    <span class="btn-text">Carrera Libre</span>
+                </button>
+                <button class="glass-button glass-button-primary" onclick="window.startIntervalTraining()">
+                    <span class="btn-icon">⏱️</span>
+                    <span class="btn-text">Entrenamiento por Intervalos</span>
+                </button>
+            </div>
+            <button class="glass-button glass-button-secondary" onclick="this.closest('.modal-overlay').remove()">
+                Cancelar
+            </button>
+        </div>
+    `;
+    document.body.appendChild(modal);
+};
+
+// Iniciar entrenamiento por intervalos
+window.startIntervalTraining = function() {
+    const modal = document.createElement('div');
+    modal.className = 'modal-overlay';
+    modal.innerHTML = `
+        <div class="modal-content glass-card">
+            <h2>⏱️ Entrenamiento por Intervalos</h2>
+            <div class="interval-options">
+                <div class="option-group">
+                    <label>Tiempo total:</label>
+                    <select id="totalTime" class="glass-input">
+                        <option value="15">15 minutos</option>
+                        <option value="20" selected>20 minutos</option>
+                        <option value="30">30 minutos</option>
+                        <option value="45">45 minutos</option>
+                        <option value="60">60 minutos</option>
+                    </select>
+                </div>
+                <div class="option-group">
+                    <label>Intensidad:</label>
+                    <select id="intensity" class="glass-input">
+                        <option value="easy">Fácil (2:1)</option>
+                        <option value="medium" selected>Medio (1:1)</option>
+                        <option value="hard">Intenso (1:2)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="glass-button glass-button-primary" onclick="window.startIntervalWorkout()">
+                    <span class="btn-icon">🚀</span>
+                    <span class="btn-text">Comenzar</span>
+                </button>
+                <button class="glass-button glass-button-secondary" onclick="this.closest('.modal-overlay').remove()">
+                    Cancelar
+                </button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+};
+
+// Iniciar el workout de intervalos
+window.startIntervalWorkout = function() {
+    const totalTime = parseInt(document.getElementById('totalTime').value);
+    const intensity = document.getElementById('intensity').value;
+    
+    // Calcular intervalos basado en intensidad
+    let workTime, restTime;
+    switch(intensity) {
+        case 'easy':
+            workTime = 2; // 2 minutos trabajo
+            restTime = 1; // 1 minuto descanso
+            break;
+        case 'medium':
+            workTime = 1.5; // 1.5 minutos trabajo
+            restTime = 1.5; // 1.5 minutos descanso
+            break;
+        case 'hard':
+            workTime = 1; // 1 minuto trabajo
+            restTime = 2; // 2 minutos descanso
+            break;
+    }
+    
+    // Calcular número de intervalos
+    const intervalDuration = workTime + restTime;
+    const numIntervals = Math.floor(totalTime / intervalDuration);
+    
+    // Crear workout de intervalos
+    const intervalWorkout = {
+        type: 'interval',
+        totalTime: totalTime,
+        intensity: intensity,
+        workTime: workTime,
+        restTime: restTime,
+        numIntervals: numIntervals,
+        currentInterval: 0,
+        isWorkPhase: true,
+        timeRemaining: workTime * 60, // en segundos
+        isRunning: false
+    };
+    
+    // Guardar en localStorage y navegar
+    localStorage.setItem('runningMode', 'intervalTraining');
+    localStorage.setItem('intervalWorkout', JSON.stringify(intervalWorkout));
+    
+    // Cerrar modal y navegar
+    document.querySelector('.modal-overlay').remove();
+    window.navigateToPage('running');
+};
+
 console.log('🏠 Dashboard personalizado cargado');
 
