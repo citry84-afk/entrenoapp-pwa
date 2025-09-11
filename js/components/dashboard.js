@@ -1340,11 +1340,6 @@ window.startFreeRun = function() {
     window.navigateToPage('running');
 };
 
-window.startIntervalTraining = function() {
-    // Ir a running con modo intervalos
-    localStorage.setItem('entrenoapp_running_mode', 'intervals');
-    window.navigateToPage('running');
-};
 
 window.viewRunningPlans = function() {
     // Ir a running con vista de planes
@@ -1418,6 +1413,11 @@ window.quickWorkout = function() {
 
 window.viewStats = function() {
     localStorage.setItem('entrenoapp_profile_mode', 'stats');
+    window.navigateToPage('profile');
+};
+
+// Ver estadísticas de progreso
+window.viewProgressStats = function() {
     window.navigateToPage('profile');
 };
 
@@ -1675,7 +1675,7 @@ window.showAchievements = function() {
 };
 
 // Cargar logros
-function loadAchievements() {
+window.loadAchievements = function() {
     const achievements = [
         {
             id: 'first_workout',
@@ -1743,7 +1743,7 @@ function loadAchievements() {
 }
 
 // Mostrar categoría de logros
-function showAchievementCategory(category, achievements = null) {
+window.showAchievementCategory = function(category, achievements = null) {
     if (!achievements) {
         // Recargar logros si no se pasan
         loadAchievements();

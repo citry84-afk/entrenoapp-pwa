@@ -26,7 +26,7 @@ class DebugLogger {
     setupErrorCatching() {
         // Capturar errores de JavaScript
         window.addEventListener('error', (event) => {
-            this.logError('JS_ERROR', {
+            this.logError('JS_ERROR', `Error: ${event.message}`, {
                 message: event.message,
                 filename: event.filename,
                 lineno: event.lineno,
@@ -37,8 +37,10 @@ class DebugLogger {
 
         // Capturar promesas rechazadas
         window.addEventListener('unhandledrejection', (event) => {
-            this.logError('PROMISE_REJECTION', {
-                reason: event.reason,
+            const reason = event.reason?.message || event.reason;
+            this.logError('PROMISE_REJECTION', `Promise rejected: ${reason}`, {
+                reason: reason,
+                stack: event.reason?.stack,
                 promise: event.promise
             });
         });
