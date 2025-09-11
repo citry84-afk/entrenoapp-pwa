@@ -666,4 +666,36 @@ function releaseScreenLock(wakeLock) {
 window.keepScreenOn = keepScreenOn;
 window.releaseScreenLock = releaseScreenLock;
 
+// Función para verificar el estado de la PWA
+window.checkPWAStatus = function() {
+    console.log('🔍 Verificando estado de PWA...');
+    
+    const checks = {
+        manifest: !!document.querySelector('link[rel="manifest"]'),
+        serviceWorker: 'serviceWorker' in navigator,
+        icons: {
+            icon192: !!document.querySelector('link[href*="icon-192x192.png"]'),
+            icon512: !!document.querySelector('link[href*="icon-512x512.png"]'),
+            appleTouch: !!document.querySelector('link[rel="apple-touch-icon"]')
+        },
+        metaTags: {
+            appName: !!document.querySelector('meta[name="application-name"]'),
+            appleWebApp: !!document.querySelector('meta[name="apple-mobile-web-app-capable"]'),
+            mobileWebApp: !!document.querySelector('meta[name="mobile-web-app-capable"]')
+        },
+        https: location.protocol === 'https:' || location.hostname === 'localhost'
+    };
+    
+    console.log('📊 Estado PWA:', checks);
+    
+    // Verificar si se puede instalar
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.ready.then(registration => {
+            console.log('✅ Service Worker registrado:', registration);
+        });
+    }
+    
+    return checks;
+};
+
 console.log('📱 EntrenoApp cargada y lista');

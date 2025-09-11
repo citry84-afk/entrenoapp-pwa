@@ -1,4 +1,4 @@
-const CACHE_NAME = 'entrenoapp-v1.0.0';
+const CACHE_NAME = 'entrenoapp-v1.0.1';
 const ASSETS_TO_CACHE = [
     '/',
     '/index.html',
@@ -18,6 +18,10 @@ const ASSETS_TO_CACHE = [
     '/js/utils/tts.js',
     '/js/utils/offline.js',
     '/manifest.json',
+    '/assets/icons/icon-192x192.png',
+    '/assets/icons/icon-512x512.png',
+    '/assets/icons/icon-144x144.png',
+    '/assets/icons/apple-touch-icon.png',
     'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css',
     'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'
 ];
