@@ -5,6 +5,7 @@ import {
     createUserWithEmailAndPassword,
     signInWithPopup,
     GoogleAuthProvider,
+    OAuthProvider,
     signOut,
     updateProfile,
     sendPasswordResetEmail,
@@ -21,6 +22,11 @@ import {
 const googleProvider = new GoogleAuthProvider();
 googleProvider.addScope('email');
 googleProvider.addScope('profile');
+
+// Apple Sign-In provider
+const appleProvider = new OAuthProvider('apple.com');
+appleProvider.addScope('email');
+appleProvider.addScope('name');
 
 // Estado de autenticación
 let authState = {
@@ -553,12 +559,16 @@ async function handleGoogleAuth() {
     
     try {
         console.log('🔍 Autenticación con Google...');
+        console.log('🔧 Google Provider configurado:', googleProvider);
+        
         const result = await signInWithPopup(auth, googleProvider);
         const user = result.user;
         console.log('✅ Login con Google exitoso:', user.email);
+        console.log('📊 Result data:', result);
         
         // Verificar si es un usuario nuevo
         const isNewUser = result._tokenResponse?.isNewUser || false;
+        console.log('🆕 Es usuario nuevo:', isNewUser);
         
         if (isNewUser) {
             // Crear perfil en Firestore para usuario nuevo
@@ -580,6 +590,11 @@ async function handleGoogleAuth() {
         
     } catch (error) {
         console.error('❌ Error con Google Auth:', error);
+        console.error('❌ Error details:', {
+            code: error.code,
+            message: error.message,
+            stack: error.stack
+        });
         
         if (error.code !== 'auth/popup-closed-by-user') {
             handleAuthError(error);
@@ -589,23 +604,89 @@ async function handleGoogleAuth() {
     }
 }
 
-// Manejar autenticación con Apple (placeholder)
+// Manejar autenticación con Apple
 async function handleAppleAuth() {
-    showError('Apple Sign-In estará disponible próximamente');
+    setLoading(true);
     
-    // TODO: Implementar Apple Sign-In cuando se configure
-    // const provider = new OAuthProvider('apple.com');
-    // const result = await signInWithPopup(auth, provider);
+    try {
+        console.log('🍎 Autenticación con Apple...');
+        console.log('🔧 Apple Provider configurado:', appleProvider);
+        
+        const result = await signInWithPopup(auth, appleProvider);
+        const user = result.user;
+        console.log('✅ Login con Apple exitoso:', user.email);
+        console.log('📊 Result data:', result);
+        
+        // Verificar si es un usuario nuevo
+        const isNewUser = result._tokenResponse?.isNewUser || false;
+        console.log('🆕 Es usuario nuevo:', isNewUser);
+        
+        if (isNewUser) {
+            // Crear perfil en Firestore para usuario nuevo
+            const displayName = user.displayName || 
+                               (result._tokenResponse?.fullName ? 
+                                `${result._tokenResponse.fullName.givenName || ''} ${result._tokenResponse.fullName.familyName || ''}`.trim() : 
+                                user.email.split('@')[0]);
+            
+            await createUserProfile(user, displayName);
+            
+            showSuccess('¡Bienvenido! Configuremos tu perfil.');
+            setTimeout(() => {
+                window.loadPage('onboarding');
+            }, 1500);
+        } else {
+            showSuccess('¡Bienvenido de vuelta!');
+            setTimeout(() => {
+                window.loadPage('dashboard');
+            }, 1500);
+        }
+        
+        // Guardar datos del usuario en localStorage
+        await saveUserToLocalStorage(user);
+        
+    } catch (error) {
+        console.error('❌ Error con Apple Auth:', error);
+        console.error('❌ Error details:', {
+            code: error.code,
+            message: error.message,
+            stack: error.stack
+        });
+        
+        if (error.code !== 'auth/popup-closed-by-user') {
+            handleAuthError(error);
+        }
+    } finally {
+        setLoading(false);
+    }
 }
 
 // Cerrar sesión
 export async function logout() {
     try {
         console.log('🚪 Cerrando sesión...');
+        
+        // Cerrar sesión en Firebase
         await signOut(auth);
-        console.log('✅ Sesión cerrada');
+        
+        // Limpiar localStorage
+        clearUserFromLocalStorage();
+        
+        // Limpiar estado de la aplicación
+        localStorage.removeItem('entrenoapp_active_plan');
+        localStorage.removeItem('entrenoapp_onboarding');
+        localStorage.removeItem('entrenoapp_remember_email');
+        localStorage.removeItem('entrenoapp_remember_password');
+        
+        console.log('✅ Sesión cerrada completamente');
+        
+        // Redirigir a la página de login
+        window.loadPage('auth');
+        
     } catch (error) {
         console.error('❌ Error cerrando sesión:', error);
+        // Aún así, limpiar datos locales
+        clearUserFromLocalStorage();
+        window.loadPage('auth');
     }
 }
 
@@ -634,6 +715,27 @@ function handleAuthError(error) {
             break;
         case 'auth/network-request-failed':
             message = 'Error de conexión. Verifica tu internet';
+            break;
+        case 'auth/popup-closed-by-user':
+            message = 'Autenticación cancelada';
+            break;
+        case 'auth/popup-blocked':
+            message = 'El popup fue bloqueado. Permite popups para este sitio';
+            break;
+        case 'auth/operation-not-allowed':
+            message = 'Este método de autenticación no está habilitado';
+            break;
+        case 'auth/account-exists-with-different-credential':
+            message = 'Ya existe una cuenta con este email usando otro método';
+            break;
+        case 'auth/invalid-credential':
+            message = 'Credenciales inválidas';
+            break;
+        case 'auth/user-disabled':
+            message = 'Esta cuenta ha sido deshabilitada';
+            break;
+        case 'auth/requires-recent-login':
+            message = 'Por seguridad, inicia sesión nuevamente';
             break;
         default:
             console.error('Error code:', error.code);
@@ -834,6 +936,28 @@ export async function checkOnboardingStatus(uid) {
         return false;
     }
 }
+
+// Verificar configuración de providers
+window.checkAuthProviders = function() {
+    console.log('🔍 Verificando configuración de autenticación...');
+    console.log('🔧 Google Provider:', googleProvider);
+    console.log('🍎 Apple Provider:', appleProvider);
+    console.log('🔥 Auth instance:', auth);
+    console.log('🌐 Current domain:', window.location.hostname);
+    console.log('🔗 Current URL:', window.location.href);
+    
+    // Verificar si estamos en HTTPS (requerido para Apple Sign-In)
+    if (window.location.protocol !== 'https:' && window.location.hostname !== 'localhost') {
+        console.warn('⚠️ Apple Sign-In requiere HTTPS en producción');
+    }
+    
+    return {
+        google: !!googleProvider,
+        apple: !!appleProvider,
+        auth: !!auth,
+        https: window.location.protocol === 'https:' || window.location.hostname === 'localhost'
+    };
+};
 
 // Exportar funciones útiles
 window.logout = logout;
