@@ -1,61 +1,44 @@
-<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Fondo con gradiente -->
-  <rect width="512" height="512" rx="80" fill="url(#gradient)" />
-  
-  <!-- Definiciones de gradientes -->
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#00D4FF;stop-opacity:1" />
-      <stop offset="50%" style="stop-color:#0099FF;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#0066CC;stop-opacity:1" />
-    </linearGradient>
-    
-    <linearGradient id="runner-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:0.95" />
-      <stop offset="50%" style="stop-color:#E6F7FF;stop-opacity:0.9" />
-      <stop offset="100%" style="stop-color:#CCE7FF;stop-opacity:0.85" />
-    </linearGradient>
-    
-    <linearGradient id="speed-lines" x1="0%" y1="50%" x2="100%" y2="50%">
-      <stop offset="0%" style="stop-color:#00FFFF;stop-opacity:0.8" />
-      <stop offset="100%" style="stop-color:#00FFFF;stop-opacity:0" />
+    <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4FC3F7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1976D2;stop-opacity:1" />
     </linearGradient>
   </defs>
   
-  <!-- Líneas de velocidad -->
-  <rect x="80" y="200" width="60" height="6" rx="3" fill="url(#speed-lines)" />
-  <rect x="70" y="220" width="80" height="6" rx="3" fill="url(#speed-lines)" />
-  <rect x="60" y="240" width="100" height="6" rx="3" fill="url(#speed-lines)" />
-  <rect x="70" y="260" width="80" height="6" rx="3" fill="url(#speed-lines)" />
-  <rect x="80" y="280" width="60" height="6" rx="3" fill="url(#speed-lines)" />
+  <!-- Background -->
+  <rect width="512" height="512" fill="#0D1421" rx="80"/>
   
-  <!-- Figura del runner -->
-  <g transform="translate(200,100)" fill="url(#runner-gradient)">
-    <!-- Cabeza -->
-    <ellipse cx="50" cy="40" rx="35" ry="38" />
-    
-    <!-- Torso -->
-    <path d="M 15 75 Q 15 70 20 70 L 80 70 Q 85 70 85 75 L 85 180 Q 85 190 80 190 L 20 190 Q 15 190 15 180 Z" />
-    
-    <!-- Brazo izquierdo (hacia atrás) -->
-    <path d="M 20 90 Q 5 85 -10 95 L -15 120 Q -20 130 -15 135 Q -10 140 -5 135 L 10 110 Q 15 100 20 95 Z" />
-    
-    <!-- Brazo derecho (hacia adelante) -->
-    <path d="M 80 85 Q 95 80 110 90 L 125 115 Q 130 125 125 130 Q 120 135 115 130 L 90 105 Q 85 95 80 90 Z" />
-    
-    <!-- Pierna izquierda (elevada) -->
-    <path d="M 30 185 Q 25 200 35 220 L 45 260 Q 50 275 55 275 Q 60 275 55 260 L 45 220 Q 40 200 35 185 Z" />
-    
-    <!-- Pierna derecha (extendida) -->
-    <path d="M 65 185 Q 70 210 85 240 L 105 280 Q 110 295 115 295 Q 120 295 115 280 L 95 240 Q 80 210 70 185 Z" />
-    
-    <!-- Pie izquierdo -->
-    <ellipse cx="55" cy="285" rx="15" ry="8" />
-    
-    <!-- Pie derecho -->
-    <ellipse cx="115" cy="305" rx="18" ry="10" />
-  </g>
+  <!-- Speed lines -->
+  <rect x="80" y="200" width="60" height="8" fill="url(#blueGradient)" rx="4"/>
+  <rect x="80" y="220" width="80" height="8" fill="url(#blueGradient)" rx="4"/>
+  <rect x="80" y="240" width="100" height="8" fill="url(#blueGradient)" rx="4"/>
   
-  <!-- Efecto de sombra/movimiento -->
-  <ellipse cx="300" cy="420" rx="80" ry="15" fill="rgba(0,0,0,0.2)" />
+  <!-- Running figure with kettlebell -->
+  <!-- Kettlebell handle (head and shoulders) -->
+  <path d="M280 120 C 280 100, 300 80, 320 80 C 340 80, 360 100, 360 120 C 360 140, 340 160, 320 160 C 300 160, 280 140, 280 120 Z" fill="url(#blueGradient)"/>
+  
+  <!-- Kettlebell ball (head) -->
+  <circle cx="320" cy="120" r="40" fill="url(#blueGradient)"/>
+  
+  <!-- Body (torso) -->
+  <ellipse cx="320" cy="200" rx="25" ry="60" fill="url(#blueGradient)"/>
+  
+  <!-- Left arm (forward) -->
+  <ellipse cx="280" cy="180" rx="15" ry="40" fill="url(#blueGradient)" transform="rotate(-20 280 180)"/>
+  
+  <!-- Right arm (back) -->
+  <ellipse cx="360" cy="190" rx="15" ry="40" fill="url(#blueGradient)" transform="rotate(20 360 190)"/>
+  
+  <!-- Left leg (forward) -->
+  <ellipse cx="300" cy="280" rx="20" ry="60" fill="url(#blueGradient)" transform="rotate(-15 300 280)"/>
+  
+  <!-- Right leg (back) -->
+  <ellipse cx="340" cy="290" rx="20" ry="60" fill="url(#blueGradient)" transform="rotate(15 340 290)"/>
+  
+  <!-- Left foot -->
+  <ellipse cx="280" cy="340" rx="25" ry="15" fill="url(#blueGradient)"/>
+  
+  <!-- Right foot -->
+  <ellipse cx="360" cy="350" rx="25" ry="15" fill="url(#blueGradient)"/>
 </svg>
