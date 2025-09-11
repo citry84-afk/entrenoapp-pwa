@@ -84,11 +84,14 @@ const CROSSFIT_WOD_TYPES = [
 ];
 
 // Inicializar componente
-window.initWorkouts = function() {
+window.initWorkouts = async function() {
     console.log('💪 Inicializando sistema de entrenamientos');
-    loadUserWorkoutSettings();
+    await loadUserWorkoutSettings();
     renderWorkoutsPage();
     setupWorkoutListeners();
+    
+    // Cargar estadísticas semanales
+    await loadWeeklyStats();
 };
 
 // Cargar configuraciones del usuario
@@ -132,6 +135,148 @@ async function loadLastWorkoutData() {
         
     } catch (error) {
         console.error('❌ Error cargando último entrenamiento:', error);
+    }
+}
+
+// Cargar estadísticas semanales
+async function loadWeeklyStats() {
+    try {
+        const user = auth.currentUser;
+        if (!user) return;
+        
+        // Calcular inicio de la semana (lunes)
+        const today = new Date();
+        const startOfWeek = new Date(today);
+        startOfWeek.setDate(today.getDate() - today.getDay() + 1);
+        startOfWeek.setHours(0, 0, 0, 0);
+        
+        // Calcular fin de la semana (domingo)
+        const endOfWeek = new Date(startOfWeek);
+        endOfWeek.setDate(startOfWeek.getDate() + 6);
+        endOfWeek.setHours(23, 59, 59, 999);
+        
+        console.log('📊 Cargando estadísticas semanales:', {
+            startOfWeek: startOfWeek.toISOString(),
+            endOfWeek: endOfWeek.toISOString()
+        });
+        
+        // Consultar entrenamientos de esta semana
+        const workoutsQuery = query(
+            collection(db, 'user-workouts'),
+            where('userId', '==', user.uid),
+            where('date', '>=', startOfWeek),
+            where('date', '<=', endOfWeek),
+            orderBy('date', 'desc')
+        );
+        
+        const querySnapshot = await getDocs(workoutsQuery);
+        
+        let weeklyStats = {
+            workouts: 0,
+            volume: 0,
+            time: 0,
+            streak: 0
+        };
+        
+        // Procesar entrenamientos de la semana
+        querySnapshot.forEach(doc => {
+            const workout = doc.data();
+            weeklyStats.workouts++;
+            
+            if (workout.totalVolume) {
+                weeklyStats.volume += workout.totalVolume;
+            }
+            
+            if (workout.duration) {
+                weeklyStats.time += Math.round(workout.duration / 1000 / 60); // convertir a minutos
+            }
+        });
+        
+        // Calcular racha actual
+        weeklyStats.streak = await calculateCurrentStreak();
+        
+        console.log('✅ Estadísticas semanales cargadas:', weeklyStats);
+        
+        // Actualizar UI
+        updateWeeklyStatsUI(weeklyStats);
+        
+    } catch (error) {
+        console.error('❌ Error cargando estadísticas semanales:', error);
+    }
+}
+
+// Calcular racha actual
+async function calculateCurrentStreak() {
+    try {
+        const user = auth.currentUser;
+        if (!user) return 0;
+        
+        // Consultar todos los entrenamientos ordenados por fecha
+        const workoutsQuery = query(
+            collection(db, 'user-workouts'),
+            where('userId', '==', user.uid),
+            orderBy('date', 'desc')
+        );
+        
+        const querySnapshot = await getDocs(workoutsQuery);
+        let streak = 0;
+        let currentDate = new Date();
+        currentDate.setHours(0, 0, 0, 0);
+        
+        // Agrupar entrenamientos por día
+        const workoutsByDay = {};
+        querySnapshot.forEach(doc => {
+            const workout = doc.data();
+            const workoutDate = workout.date.toDate();
+            const dayKey = workoutDate.toISOString().split('T')[0];
+            
+            if (!workoutsByDay[dayKey]) {
+                workoutsByDay[dayKey] = [];
+            }
+            workoutsByDay[dayKey].push(workout);
+        });
+        
+        // Calcular racha hacia atrás
+        while (true) {
+            const dayKey = currentDate.toISOString().split('T')[0];
+            
+            if (workoutsByDay[dayKey] && workoutsByDay[dayKey].length > 0) {
+                streak++;
+                currentDate.setDate(currentDate.getDate() - 1);
+            } else {
+                break;
+            }
+        }
+        
+        return streak;
+        
+    } catch (error) {
+        console.error('❌ Error calculando racha:', error);
+        return 0;
+    }
+}
+
+// Actualizar UI de estadísticas semanales
+function updateWeeklyStatsUI(stats) {
+    const weeklyWorkoutsEl = document.getElementById('weekly-workouts');
+    const weeklyVolumeEl = document.getElementById('weekly-volume');
+    const weeklyTimeEl = document.getElementById('weekly-time');
+    const weeklyStreakEl = document.getElementById('weekly-streak');
+    
+    if (weeklyWorkoutsEl) {
+        weeklyWorkoutsEl.textContent = stats.workouts;
+    }
+    
+    if (weeklyVolumeEl) {
+        weeklyVolumeEl.textContent = `${stats.volume}kg`;
+    }
+    
+    if (weeklyTimeEl) {
+        weeklyTimeEl.textContent = `${stats.time}min`;
+    }
+    
+    if (weeklyStreakEl) {
+        weeklyStreakEl.textContent = stats.streak;
     }
 }
 
@@ -1307,6 +1452,9 @@ async function updateUserWorkoutStats(sessionData) {
             'stats.lastWorkout': serverTimestamp(),
             'updatedAt': serverTimestamp()
         });
+        
+        // Actualizar estadísticas semanales en la UI
+        await loadWeeklyStats();
         
     } catch (error) {
         console.error('❌ Error actualizando estadísticas:', error);

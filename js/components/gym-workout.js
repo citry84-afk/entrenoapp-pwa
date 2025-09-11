@@ -1,6 +1,16 @@
 // Sistema de ejecución de entrenamientos de gimnasio
 // Registro de pesos, reps, series y seguimiento de progreso
 
+import { auth, db } from '../config/firebase-config.js';
+import { 
+    doc, 
+    addDoc,
+    collection,
+    updateDoc,
+    serverTimestamp,
+    increment
+} from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+
 let gymWorkoutState = {
     currentWorkout: null,
     isRunning: false,
@@ -527,27 +537,112 @@ function showGymWorkoutCompletion() {
     }
 }
 
-function saveGymWorkout() {
+async function saveGymWorkout() {
     console.log('💾 Guardando resultado del entrenamiento');
     
     const notes = document.getElementById('gym-workout-notes').value;
     gymWorkoutState.workoutData.notes = notes;
     gymWorkoutState.workoutData.exercises = gymWorkoutState.completedExercises;
     
-    // Marcar como completado para hoy
-    const todayKey = `gym_workout_completed_${new Date().toDateString()}`;
-    localStorage.setItem(todayKey, JSON.stringify({
-        completed: true,
-        completedAt: new Date().toISOString(),
-        workoutData: gymWorkoutState.workoutData
-    }));
+    try {
+        // Guardar en Firestore
+        await saveGymWorkoutToFirestore(gymWorkoutState.workoutData);
+        
+        // Marcar como completado para hoy
+        const todayKey = `gym_workout_completed_${new Date().toDateString()}`;
+        localStorage.setItem(todayKey, JSON.stringify({
+            completed: true,
+            completedAt: new Date().toISOString(),
+            workoutData: gymWorkoutState.workoutData
+        }));
+        
+        // Mostrar mensaje de éxito
+        alert('¡Entrenamiento guardado exitosamente! 🎉');
+        
+        // Volver al dashboard
+        window.navigateToPage('dashboard');
+        
+    } catch (error) {
+        console.error('❌ Error guardando entrenamiento:', error);
+        alert('Error guardando el entrenamiento. Inténtalo de nuevo.');
+    }
+}
+
+// Guardar entrenamiento de gimnasio en Firestore
+async function saveGymWorkoutToFirestore(workoutData) {
+    try {
+        const user = auth.currentUser;
+        if (!user) throw new Error('Usuario no autenticado');
+        
+        // Calcular estadísticas del entrenamiento
+        const totalVolume = calculateTotalVolume(workoutData.exercises);
+        const duration = gymWorkoutState.workoutData.duration || 0;
+        
+        const workoutDoc = {
+            userId: user.uid,
+            type: 'gym',
+            date: serverTimestamp(),
+            title: workoutData.title,
+            description: workoutData.description,
+            muscleGroup: workoutData.muscleGroup,
+            difficulty: workoutData.difficulty,
+            exercises: workoutData.exercises,
+            totalVolume: totalVolume,
+            duration: duration,
+            notes: workoutData.notes,
+            createdAt: serverTimestamp()
+        };
+        
+        const docRef = await addDoc(collection(db, 'user-workouts'), workoutDoc);
+        console.log('✅ Entrenamiento de gimnasio guardado con ID:', docRef.id);
+        
+        // Actualizar estadísticas del usuario
+        await updateUserGymStats(totalVolume, duration);
+        
+    } catch (error) {
+        console.error('❌ Error guardando entrenamiento de gimnasio:', error);
+        throw error;
+    }
+}
+
+// Calcular volumen total del entrenamiento
+function calculateTotalVolume(exercises) {
+    let totalVolume = 0;
     
-    // Aquí guardarías en Firebase
-    // Por ahora solo mostrar mensaje
-    alert('¡Entrenamiento guardado exitosamente! 🎉');
+    exercises.forEach(exercise => {
+        if (exercise.sets) {
+            exercise.sets.forEach(set => {
+                if (set.weight && set.reps) {
+                    totalVolume += set.weight * set.reps;
+                }
+            });
+        }
+    });
     
-    // Volver al dashboard
-    window.navigateToPage('dashboard');
+    return totalVolume;
+}
+
+// Actualizar estadísticas del usuario
+async function updateUserGymStats(totalVolume, duration) {
+    try {
+        const user = auth.currentUser;
+        if (!user) return;
+        
+        const userDoc = doc(db, 'users', user.uid);
+        
+        await updateDoc(userDoc, {
+            'stats.totalWorkouts': increment(1),
+            'stats.totalVolume': increment(totalVolume),
+            'stats.totalTime': increment(Math.round(duration / 1000 / 60)), // en minutos
+            'stats.lastWorkout': serverTimestamp(),
+            'updatedAt': serverTimestamp()
+        });
+        
+        console.log('✅ Estadísticas de gimnasio actualizadas');
+        
+    } catch (error) {
+        console.error('❌ Error actualizando estadísticas de gimnasio:', error);
+    }
 }
 
 // ===================================

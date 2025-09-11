@@ -1,6 +1,16 @@
 // Sistema de ejecución de WODs funcionales
 // Timer, registro de datos y seguimiento de progreso
 
+import { auth, db } from '../config/firebase-config.js';
+import { 
+    doc, 
+    addDoc,
+    collection,
+    updateDoc,
+    serverTimestamp,
+    increment
+} from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+
 let functionalWorkoutState = {
     currentWod: null,
     isRunning: false,
@@ -348,27 +358,92 @@ function showWorkoutCompletion() {
     }
 }
 
-function saveFunctionalWorkout() {
+async function saveFunctionalWorkout() {
     console.log('💾 Guardando resultado del WOD');
     
     const notes = document.getElementById('workout-notes').value;
     functionalWorkoutState.workoutData.notes = notes;
     functionalWorkoutState.workoutData.rounds = functionalWorkoutState.completedMovements;
     
-    // Marcar como completado para hoy
-    const todayKey = `functional_wod_completed_${new Date().toDateString()}`;
-    localStorage.setItem(todayKey, JSON.stringify({
-        completed: true,
-        completedAt: new Date().toISOString(),
-        workoutData: functionalWorkoutState.workoutData
-    }));
-    
-    // Aquí guardarías en Firebase
-    // Por ahora solo mostrar mensaje
-    alert('¡WOD guardado exitosamente! 🎉');
-    
-    // Volver al dashboard
-    window.navigateToPage('dashboard');
+    try {
+        // Guardar en Firestore
+        await saveFunctionalWorkoutToFirestore(functionalWorkoutState.workoutData);
+        
+        // Marcar como completado para hoy
+        const todayKey = `functional_wod_completed_${new Date().toDateString()}`;
+        localStorage.setItem(todayKey, JSON.stringify({
+            completed: true,
+            completedAt: new Date().toISOString(),
+            workoutData: functionalWorkoutState.workoutData
+        }));
+        
+        // Mostrar mensaje de éxito
+        alert('¡WOD guardado exitosamente! 🎉');
+        
+        // Volver al dashboard
+        window.navigateToPage('dashboard');
+        
+    } catch (error) {
+        console.error('❌ Error guardando WOD:', error);
+        alert('Error guardando el WOD. Inténtalo de nuevo.');
+    }
+}
+
+// Guardar WOD funcional en Firestore
+async function saveFunctionalWorkoutToFirestore(workoutData) {
+    try {
+        const user = auth.currentUser;
+        if (!user) throw new Error('Usuario no autenticado');
+        
+        const duration = functionalWorkoutState.workoutData.duration || 0;
+        
+        const workoutDoc = {
+            userId: user.uid,
+            type: 'functional',
+            date: serverTimestamp(),
+            title: workoutData.title,
+            description: workoutData.description,
+            wodType: workoutData.wodType,
+            difficulty: workoutData.difficulty,
+            movements: workoutData.movements,
+            rounds: workoutData.rounds,
+            duration: duration,
+            notes: workoutData.notes,
+            createdAt: serverTimestamp()
+        };
+        
+        const docRef = await addDoc(collection(db, 'user-workouts'), workoutDoc);
+        console.log('✅ WOD funcional guardado con ID:', docRef.id);
+        
+        // Actualizar estadísticas del usuario
+        await updateUserFunctionalStats(duration);
+        
+    } catch (error) {
+        console.error('❌ Error guardando WOD funcional:', error);
+        throw error;
+    }
+}
+
+// Actualizar estadísticas del usuario
+async function updateUserFunctionalStats(duration) {
+    try {
+        const user = auth.currentUser;
+        if (!user) return;
+        
+        const userDoc = doc(db, 'users', user.uid);
+        
+        await updateDoc(userDoc, {
+            'stats.totalWorkouts': increment(1),
+            'stats.totalTime': increment(Math.round(duration / 1000 / 60)), // en minutos
+            'stats.lastWorkout': serverTimestamp(),
+            'updatedAt': serverTimestamp()
+        });
+        
+        console.log('✅ Estadísticas funcionales actualizadas');
+        
+    } catch (error) {
+        console.error('❌ Error actualizando estadísticas funcionales:', error);
+    }
 }
 
 // ===================================
