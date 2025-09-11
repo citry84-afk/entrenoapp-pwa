@@ -547,6 +547,55 @@
     gap: 1rem;
 }
 
+.progress-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.progress-stats .stat-item {
+    text-align: center;
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.progress-stats .stat-icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.progress-stats .stat-value {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0.25rem;
+}
+
+.progress-stats .stat-label {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.next-milestone {
+    text-align: center;
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.milestone-text {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+}
+
 .action-btn {
     display: flex;
     flex-direction: column;

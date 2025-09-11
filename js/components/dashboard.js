@@ -119,6 +119,9 @@ async function loadUserPlan() {
         // Cargar reto diario (si está disponible)
         await loadTodayChallenge();
         
+        // Cargar estadísticas del usuario
+        await loadUserStats();
+        
         // Generar mensaje motivacional
         dashboardState.motivationalMessage = generateMotivationalMessage();
         
@@ -427,6 +430,35 @@ async function loadTodayChallenge() {
             type: 'reps'
         };
     }
+}
+
+// Cargar estadísticas del usuario
+async function loadUserStats() {
+    try {
+        const user = auth.currentUser;
+        if (!user) return;
+        
+        const userDoc = await getDoc(doc(db, 'users', user.uid));
+        if (userDoc.exists()) {
+            const userData = userDoc.data();
+            dashboardState.userStats = {
+                totalWorkouts: userData.totalWorkouts || 0,
+                totalPoints: userData.totalPoints || 0,
+                currentStreak: userData.currentStreak || 0,
+                level: userData.level || 1,
+                joinDate: userData.joinDate?.toDate() || new Date()
+            };
+        }
+    } catch (error) {
+        console.error('❌ Error cargando estadísticas del usuario:', error);
+    }
+}
+
+// Calcular próximo hito
+function getNextMilestone(currentWorkouts) {
+    const milestones = [5, 10, 25, 50, 100, 250, 500, 1000];
+    const nextMilestone = milestones.find(milestone => milestone > currentWorkouts);
+    return nextMilestone || '¡Eres una leyenda!';
 }
 
 // Generar reto diario (misma lógica que challenges.js)
@@ -1007,13 +1039,34 @@ function renderQuickActions() {
     
     // Solo mostrar estadísticas si hay un plan activo
     if (plan) {
+        const stats = dashboardState.userStats || {};
         return `
             <div class="quick-actions glass-card">
                 <h3 class="actions-title">📊 Tu Progreso</h3>
+                <div class="progress-stats">
+                    <div class="stat-item">
+                        <div class="stat-icon">🏋️‍♂️</div>
+                        <div class="stat-value">${stats.totalWorkouts || 0}</div>
+                        <div class="stat-label">Entrenamientos</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">🔥</div>
+                        <div class="stat-value">${stats.currentStreak || 0}</div>
+                        <div class="stat-label">Racha</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">⭐</div>
+                        <div class="stat-value">${stats.totalPoints || 0}</div>
+                        <div class="stat-label">Puntos</div>
+                    </div>
+                </div>
+                <div class="next-milestone">
+                    <div class="milestone-text">Próximo hito: ${getNextMilestone(stats.totalWorkouts || 0)} entrenamientos</div>
+                </div>
                 <div class="actions-grid">
                     <button class="action-btn glass-button" onclick="window.viewProgressStats()">
                         <span class="action-icon">📈</span>
-                        <span class="action-text">Ver Estadísticas</span>
+                        <span class="action-text">Ver Gráficas</span>
                     </button>
                 </div>
             </div>
@@ -1138,18 +1191,32 @@ window.startTodaysWorkout = function() {
             console.log(`🔄 Fallback: navegando a ${planType} basado en activePlan`);
             switch (planType) {
                 case 'running':
+                    // Generar workout de running básico
+                    const runningWorkout = generateRunningWorkout(dashboardState.activePlan, 1);
+                    localStorage.setItem('runningMode', 'plannedWorkout');
+                    localStorage.setItem('todaysWorkout', JSON.stringify(runningWorkout));
                     window.navigateToPage('running');
                     break;
                 case 'functional':
+                    // Generar WOD funcional básico
+                    const functionalWorkout = generateFunctionalWorkout(dashboardState.activePlan, 1);
+                    localStorage.setItem('currentFunctionalWod', JSON.stringify(functionalWorkout));
+                    window.navigateToPage('functional-workout');
+                    break;
                 case 'gym':
+                    // Generar workout de gimnasio básico
+                    const gymWorkout = generateGymWorkout(dashboardState.activePlan, 1);
+                    localStorage.setItem('currentGymWorkout', JSON.stringify(gymWorkout));
+                    window.navigateToPage('gym-workout');
+                    break;
                 default:
-                    window.navigateToPage('workouts');
+                    window.navigateToPage('dashboard');
                     break;
             }
         } else {
             console.log('❌ No hay plan activo tampoco');
-            // Último fallback: ir a workouts genérico
-            window.navigateToPage('workouts');
+            // Último fallback: volver al dashboard
+            window.navigateToPage('dashboard');
         }
         return;
     }
@@ -1442,11 +1509,11 @@ window.showRunningOptions = function() {
         <div class="modal-content glass-card">
             <h2>🏃‍♂️ Opciones de Running</h2>
             <div class="running-options">
-                <button class="glass-button glass-button-primary" onclick="window.startFreeRun()">
+                <button class="glass-button glass-button-primary" onclick="window.startFreeRun(); this.closest('.modal-overlay').remove();">
                     <span class="btn-icon">🏃‍♂️</span>
                     <span class="btn-text">Carrera Libre</span>
                 </button>
-                <button class="glass-button glass-button-primary" onclick="window.startIntervalTraining()">
+                <button class="glass-button glass-button-primary" onclick="window.startIntervalTraining(); this.closest('.modal-overlay').remove();">
                     <span class="btn-icon">⏱️</span>
                     <span class="btn-text">Entrenamiento por Intervalos</span>
                 </button>
@@ -1576,7 +1643,7 @@ window.showDailyChallenge = function() {
                         <span class="btn-icon">🚀</span>
                         <span class="btn-text">Comenzar Reto</span>
                     </button>
-                    <button class="glass-button glass-button-secondary" onclick="this.closest('.modal-overlay').remove()">
+                    <button class="glass-button glass-button-secondary" onclick="this.closest('.modal-overlay').remove(); window.navigateToPage('dashboard');">
                         Cerrar
                     </button>
                 </div>
@@ -1676,7 +1743,7 @@ window.showAchievements = function() {
                     <p>Cargando logros...</p>
                 </div>
             </div>
-            <button class="glass-button glass-button-secondary" onclick="this.closest('.modal-overlay').remove()">
+            <button class="glass-button glass-button-secondary" onclick="this.closest('.modal-overlay').remove(); window.navigateToPage('dashboard');">
                 Cerrar
             </button>
         </div>

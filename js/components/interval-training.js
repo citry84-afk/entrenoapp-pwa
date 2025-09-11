@@ -5,7 +5,20 @@ let intervalTrainingState = {
     timer: null,
     currentInterval: 0,
     isWorkPhase: true,
-    timeRemaining: 0
+    timeRemaining: 0,
+    gps: {
+        isTracking: false,
+        watchId: null,
+        currentPosition: null,
+        distance: 0,
+        pace: 0,
+        lastPosition: null
+    },
+    audio: {
+        workSound: null,
+        restSound: null,
+        isEnabled: true
+    }
 };
 
 // ===================================
@@ -34,6 +47,10 @@ window.renderIntervalTraining = async function() {
         
         // Configurar swipe para volver atrás
         setupSwipeNavigation();
+        
+        // Inicializar audio y GPS
+        initializeAudio();
+        initializeGPS();
         
     } catch (error) {
         console.error('❌ Error cargando entrenamiento por intervalos:', error);
@@ -116,6 +133,28 @@ function renderIntervalPage() {
                 </div>
             </div>
             
+            <!-- Métricas GPS -->
+            <div class="gps-metrics glass-card">
+                <h3>📍 Métricas GPS</h3>
+                <div class="metrics-grid">
+                    <div class="metric-item">
+                        <div class="metric-icon">📏</div>
+                        <div class="metric-value" id="distance">0.0 km</div>
+                        <div class="metric-label">Distancia</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-icon">⚡</div>
+                        <div class="metric-value" id="pace">--:-- /km</div>
+                        <div class="metric-label">Ritmo</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-icon">📍</div>
+                        <div class="metric-value" id="gps-status">🔴</div>
+                        <div class="metric-label">GPS</div>
+                    </div>
+                </div>
+            </div>
+            
             <!-- Información del workout -->
             <div class="workout-info glass-card">
                 <h3>📋 Detalles del Entrenamiento</h3>
@@ -154,6 +193,9 @@ function startIntervalTimer() {
     intervalTrainingState.isRunning = true;
     intervalTrainingState.timer = setInterval(updateIntervalTimer, 1000);
     
+    // Iniciar tracking GPS
+    startGPSTracking();
+    
     document.getElementById('start-pause-btn').innerHTML = `
         <span class="btn-icon">⏸️</span>
         <span class="btn-text">Pausar</span>
@@ -165,6 +207,9 @@ function startIntervalTimer() {
 function pauseIntervalTimer() {
     intervalTrainingState.isRunning = false;
     clearInterval(intervalTrainingState.timer);
+    
+    // Detener tracking GPS
+    stopGPSTracking();
     
     document.getElementById('start-pause-btn').innerHTML = `
         <span class="btn-icon">▶️</span>
@@ -221,12 +266,18 @@ function nextIntervalPhase() {
         intervalTrainingState.isWorkPhase = false;
         intervalTrainingState.timeRemaining = workout.restTime * 60;
         document.getElementById('phase-indicator').innerHTML = '😴 DESCANSO';
+        
+        // Reproducir sonido de descanso
+        playPhaseSound();
     } else {
         // Cambiar a trabajo y siguiente intervalo
         intervalTrainingState.isWorkPhase = true;
         intervalTrainingState.currentInterval++;
         intervalTrainingState.timeRemaining = workout.workTime * 60;
         document.getElementById('phase-indicator').innerHTML = '🏃‍♂️ TRABAJO';
+        
+        // Reproducir sonido de trabajo
+        playPhaseSound();
         
         // Verificar si se completaron todos los intervalos
         if (intervalTrainingState.currentInterval >= workout.numIntervals) {
@@ -341,6 +392,199 @@ function setupSwipeNavigation() {
         startX = 0;
         startY = 0;
     });
+}
+
+// ===================================
+// AUDIO Y GPS
+// ===================================
+
+// Inicializar sistema de audio
+function initializeAudio() {
+    try {
+        // Crear sonidos usando Web Audio API
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        
+        // Sonido para trabajo (tono alto)
+        intervalTrainingState.audio.workSound = createTone(audioContext, 800, 0.3);
+        
+        // Sonido para descanso (tono bajo)
+        intervalTrainingState.audio.restSound = createTone(audioContext, 400, 0.3);
+        
+        console.log('🔊 Sistema de audio inicializado');
+    } catch (error) {
+        console.error('❌ Error inicializando audio:', error);
+        intervalTrainingState.audio.isEnabled = false;
+    }
+}
+
+// Crear tono usando Web Audio API
+function createTone(audioContext, frequency, duration) {
+    return function() {
+        if (!intervalTrainingState.audio.isEnabled) return;
+        
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
+        oscillator.type = 'sine';
+        
+        gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
+        
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + duration);
+    };
+}
+
+// Inicializar GPS
+function initializeGPS() {
+    if (!navigator.geolocation) {
+        console.warn('⚠️ GPS no disponible');
+        updateGPSStatus('❌', 'GPS no disponible');
+        return;
+    }
+    
+    console.log('📍 Inicializando GPS...');
+    updateGPSStatus('🟡', 'Obteniendo ubicación...');
+    
+    // Obtener posición inicial
+    navigator.geolocation.getCurrentPosition(
+        (position) => {
+            intervalTrainingState.gps.currentPosition = position;
+            intervalTrainingState.gps.lastPosition = position;
+            updateGPSStatus('🟢', 'GPS activo');
+            console.log('✅ GPS inicializado correctamente');
+        },
+        (error) => {
+            console.error('❌ Error GPS:', error);
+            updateGPSStatus('🔴', 'Error GPS');
+        },
+        {
+            enableHighAccuracy: true,
+            timeout: 10000,
+            maximumAge: 0
+        }
+    );
+}
+
+// Iniciar tracking GPS
+function startGPSTracking() {
+    if (!navigator.geolocation) return;
+    
+    intervalTrainingState.gps.isTracking = true;
+    intervalTrainingState.gps.watchId = navigator.geolocation.watchPosition(
+        (position) => {
+            updateGPSPosition(position);
+        },
+        (error) => {
+            console.error('❌ Error tracking GPS:', error);
+            updateGPSStatus('🔴', 'Error tracking');
+        },
+        {
+            enableHighAccuracy: true,
+            timeout: 5000,
+            maximumAge: 1000
+        }
+    );
+}
+
+// Detener tracking GPS
+function stopGPSTracking() {
+    if (intervalTrainingState.gps.watchId) {
+        navigator.geolocation.clearWatch(intervalTrainingState.gps.watchId);
+        intervalTrainingState.gps.watchId = null;
+    }
+    intervalTrainingState.gps.isTracking = false;
+}
+
+// Actualizar posición GPS
+function updateGPSPosition(position) {
+    const lastPos = intervalTrainingState.gps.lastPosition;
+    const currentPos = position;
+    
+    if (lastPos) {
+        // Calcular distancia
+        const distance = calculateDistance(
+            lastPos.coords.latitude,
+            lastPos.coords.longitude,
+            currentPos.coords.latitude,
+            currentPos.coords.longitude
+        );
+        
+        intervalTrainingState.gps.distance += distance;
+        
+        // Calcular ritmo (km/h)
+        const timeDiff = (currentPos.timestamp - lastPos.timestamp) / 1000; // segundos
+        if (timeDiff > 0) {
+            const speed = (distance / 1000) / (timeDiff / 3600); // km/h
+            intervalTrainingState.gps.pace = speed > 0 ? 60 / speed : 0; // min/km
+        }
+    }
+    
+    intervalTrainingState.gps.lastPosition = currentPos;
+    intervalTrainingState.gps.currentPosition = currentPos;
+    
+    // Actualizar UI
+    updateGPSMetrics();
+}
+
+// Calcular distancia entre dos puntos (fórmula de Haversine)
+function calculateDistance(lat1, lon1, lat2, lon2) {
+    const R = 6371000; // Radio de la Tierra en metros
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+              Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+              Math.sin(dLon/2) * Math.sin(dLon/2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    return R * c; // Distancia en metros
+}
+
+// Actualizar métricas GPS en la UI
+function updateGPSMetrics() {
+    const distanceEl = document.getElementById('distance');
+    const paceEl = document.getElementById('pace');
+    
+    if (distanceEl) {
+        distanceEl.textContent = `${(intervalTrainingState.gps.distance / 1000).toFixed(2)} km`;
+    }
+    
+    if (paceEl) {
+        if (intervalTrainingState.gps.pace > 0) {
+            const minutes = Math.floor(intervalTrainingState.gps.pace);
+            const seconds = Math.floor((intervalTrainingState.gps.pace - minutes) * 60);
+            paceEl.textContent = `${minutes}:${seconds.toString().padStart(2, '0')} /km`;
+        } else {
+            paceEl.textContent = '--:-- /km';
+        }
+    }
+}
+
+// Actualizar estado GPS en la UI
+function updateGPSStatus(icon, text) {
+    const statusEl = document.getElementById('gps-status');
+    if (statusEl) {
+        statusEl.textContent = icon;
+        statusEl.title = text;
+    }
+}
+
+// Reproducir sonido según la fase
+function playPhaseSound() {
+    if (!intervalTrainingState.audio.isEnabled) return;
+    
+    if (intervalTrainingState.isWorkPhase) {
+        if (intervalTrainingState.audio.workSound) {
+            intervalTrainingState.audio.workSound();
+        }
+    } else {
+        if (intervalTrainingState.audio.restSound) {
+            intervalTrainingState.audio.restSound();
+        }
+    }
 }
 
 function showError(message) {

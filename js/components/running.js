@@ -200,6 +200,9 @@ function renderRunningPage() {
             initializeResultsMap();
         }
     }, 100);
+    
+    // Configurar swipe para volver atrás
+    setupSwipeNavigation();
 }
 
 // Renderizar selección de running
@@ -208,57 +211,31 @@ function renderRunningSelection() {
     try {
         return `
         <div class="running-selection glass-fade-in">
+            <!-- Botón atrás -->
+            <div class="back-button-container">
+                <button class="back-button glass-button" onclick="window.navigateBack()">
+                    <span class="back-icon">←</span>
+                    <span class="back-text">Atrás</span>
+                </button>
+            </div>
+            
             <div class="running-header text-center mb-lg">
                 <h2 class="page-title">🏃‍♂️ Running GPS</h2>
                 <p class="page-subtitle text-secondary">Tracking profesional con OpenStreetMap</p>
             </div>
             
-            <!-- Carrera libre -->
-            <div class="quick-start glass-card mb-lg">
-                <h3 class="section-title mb-md">🎯 Carrera Libre</h3>
-                <div class="quick-options">
-                    <button class="option-btn glass-button glass-button-primary" data-type="free">
-                        <span class="option-icon">🏃</span>
-                        <span class="option-text">Carrera libre</span>
-                    </button>
-                    <button class="option-btn glass-button glass-button-secondary" data-type="distance" data-target="5000">
-                        <span class="option-icon">📍</span>
-                        <span class="option-text">5K objetivo</span>
-                    </button>
-                    <button class="option-btn glass-button glass-button-secondary" data-type="time" data-target="1800000">
-                        <span class="option-icon">⏱️</span>
-                        <span class="option-text">30 min</span>
-                    </button>
-                </div>
-            </div>
-            
-            <!-- Planes de entrenamiento -->
-            <div class="running-plans glass-card mb-lg">
-                <h3 class="section-title mb-md">📚 Planes de Entrenamiento</h3>
-                <div class="plans-grid">
-                    <div class="plan-card glass-card-inner">
-                        <div class="plan-header">
-                            <h4 class="plan-title">5K Para Principiantes</h4>
-                            <span class="plan-level beginner">Principiante</span>
-                        </div>
-                        <p class="plan-description">Programa de 8 semanas para tu primer 5K</p>
-                        <div class="plan-stats">
-                            <span class="stat">⏱️ 8 semanas</span>
-                            <span class="stat">📅 3x semana</span>
-                        </div>
-                    </div>
-                    <div class="plan-card glass-card-inner">
-                        <div class="plan-header">
-                            <h4 class="plan-title">10K Intermedio</h4>
-                            <span class="plan-level intermediate">Intermedio</span>
-                        </div>
-                        <p class="plan-description">Mejora tu resistencia para 10K</p>
-                        <div class="plan-stats">
-                            <span class="stat">⏱️ 12 semanas</span>
-                            <span class="stat">📅 4x semana</span>
-                        </div>
-                    </div>
-                </div>
+            <!-- Opciones principales -->
+            <div class="running-options glass-card mb-lg">
+                <button class="glass-button glass-button-primary btn-lg" onclick="window.startFreeRun()">
+                    <span class="btn-icon">🏃</span>
+                    <span class="btn-text">Carrera Libre</span>
+                    <span class="btn-desc">Corre a tu ritmo</span>
+                </button>
+                <button class="glass-button glass-button-primary btn-lg" onclick="window.startIntervalTraining()">
+                    <span class="btn-icon">⏱️</span>
+                    <span class="btn-text">Entrenamiento por Intervalos</span>
+                    <span class="btn-desc">Trabajo/Descanso</span>
+                </button>
             </div>
             
             <!-- GPS Status -->
@@ -1368,6 +1345,37 @@ function showError(message) {
 function showSuccess(message) {
     console.log('✅', message);
     // TODO: Sistema de notificaciones
+}
+
+// Configurar navegación por swipe
+function setupSwipeNavigation() {
+    let startX = 0;
+    let startY = 0;
+    
+    document.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+    });
+    
+    document.addEventListener('touchend', (e) => {
+        if (!startX || !startY) return;
+        
+        const endX = e.changedTouches[0].clientX;
+        const endY = e.changedTouches[0].clientY;
+        
+        const diffX = startX - endX;
+        const diffY = startY - endY;
+        
+        // Swipe horizontal de derecha a izquierda (volver atrás)
+        if (Math.abs(diffX) > Math.abs(diffY) && diffX > 50) {
+            if (window.navigateBack) {
+                window.navigateBack();
+            }
+        }
+        
+        startX = 0;
+        startY = 0;
+    });
 }
 
 console.log('🏃‍♂️ Módulo de running GPS cargado');

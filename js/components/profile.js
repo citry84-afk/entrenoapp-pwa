@@ -17,7 +17,8 @@ import {
     increment,
     arrayUnion,
     arrayRemove,
-    onSnapshot
+    onSnapshot,
+    deleteDoc
 } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 import { 
     updateProfile 
@@ -492,60 +493,11 @@ function renderUserProfile() {
                 </div>
             </div>
             
-            <!-- Estadísticas detalladas -->
-            <div class="detailed-stats glass-card mb-lg">
-                <h3 class="section-title mb-md">📊 Estadísticas</h3>
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-icon">🏃‍♂️</div>
-                        <div class="stat-info">
-                            <div class="stat-value">${stats.totalWorkouts}</div>
-                            <div class="stat-label">Entrenamientos</div>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">📏</div>
-                        <div class="stat-info">
-                            <div class="stat-value">${(stats.totalDistance || 0).toFixed(1)} km</div>
-                            <div class="stat-label">Distancia</div>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">🎯</div>
-                        <div class="stat-info">
-                            <div class="stat-value">${stats.challengesCompleted}</div>
-                            <div class="stat-label">Retos</div>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">🔥</div>
-                        <div class="stat-info">
-                            <div class="stat-value">${stats.currentStreak}</div>
-                            <div class="stat-label">Racha</div>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">⭐</div>
-                        <div class="stat-info">
-                            <div class="stat-value">${stats.totalPoints}</div>
-                            <div class="stat-label">Puntos</div>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">📅</div>
-                        <div class="stat-info">
-                            <div class="stat-value">${getDaysAsMember(stats.joinDate)}</div>
-                            <div class="stat-label">Días activo</div>
-                        </div>
-                    </div>
-                </div>
+            <!-- Información básica del perfil -->
+            <div class="profile-bio glass-card mb-lg">
+                <h3 class="section-title mb-md">📝 Sobre mí</h3>
+                <p class="bio-text">${profile.bio || 'No hay biografía disponible'}</p>
             </div>
-            
-            <!-- Actividad reciente -->
-            ${renderRecentActivity()}
-            
-            <!-- Posición en rankings -->
-            ${renderUserRankingPosition()}
         </div>
     `;
 }
@@ -1377,9 +1329,31 @@ window.saveProfileChanges = async function() {
             return;
         }
         
-        if (!username.startsWith('@')) {
-            alert('El nombre de usuario debe empezar con @');
+        // Validar formato de username (debe empezar con @ y tener al menos 3 caracteres)
+        if (!username.startsWith('@') || username.length < 4) {
+            alert('El nombre de usuario debe empezar con @ y tener al menos 3 caracteres');
             return;
+        }
+        
+        // Validar que solo contenga caracteres válidos
+        const usernamePattern = /^@[a-zA-Z0-9_]+$/;
+        if (!usernamePattern.test(username)) {
+            alert('El nombre de usuario solo puede contener letras, números y guiones bajos');
+            return;
+        }
+        
+        // Verificar si el username ya está en uso (solo si cambió)
+        if (username !== socialState.userProfile?.username) {
+            console.log('🔍 Verificando disponibilidad del username...');
+            const usernameQuery = query(
+                collection(db, 'users'),
+                where('username', '==', username)
+            );
+            const usernameSnap = await getDocs(usernameQuery);
+            if (!usernameSnap.empty) {
+                alert('Este nombre de usuario ya está en uso. Elige otro.');
+                return;
+            }
         }
         
         // Procesar foto si se seleccionó una nueva
