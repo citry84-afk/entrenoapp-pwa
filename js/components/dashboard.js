@@ -1633,5 +1633,155 @@ window.startChallenge = function() {
     window.navigateToPage('challenges');
 };
 
+// Mostrar logros
+window.showAchievements = function() {
+    const modal = document.createElement('div');
+    modal.className = 'modal-overlay';
+    modal.innerHTML = `
+        <div class="modal-content glass-card achievements-modal">
+            <h2>🏅 Mis Logros</h2>
+            <div class="achievements-content">
+                <div class="achievements-stats">
+                    <div class="stat-item">
+                        <span class="stat-icon">🏆</span>
+                        <span class="stat-value" id="totalAchievements">0</span>
+                        <span class="stat-label">Logros Desbloqueados</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">⭐</span>
+                        <span class="stat-value" id="totalPoints">0</span>
+                        <span class="stat-label">Puntos Totales</span>
+                    </div>
+                </div>
+                <div class="achievements-tabs">
+                    <button class="tab-button active" onclick="showAchievementCategory('all')">Todos</button>
+                    <button class="tab-button" onclick="showAchievementCategory('running')">Running</button>
+                    <button class="tab-button" onclick="showAchievementCategory('gym')">Gym</button>
+                    <button class="tab-button" onclick="showAchievementCategory('functional')">Funcional</button>
+                </div>
+                <div class="achievements-list" id="achievementsList">
+                    <p>Cargando logros...</p>
+                </div>
+            </div>
+            <button class="glass-button glass-button-secondary" onclick="this.closest('.modal-overlay').remove()">
+                Cerrar
+            </button>
+        </div>
+    `;
+    document.body.appendChild(modal);
+    
+    // Cargar logros
+    loadAchievements();
+};
+
+// Cargar logros
+function loadAchievements() {
+    const achievements = [
+        {
+            id: 'first_workout',
+            name: 'Primer Entrenamiento',
+            description: 'Completa tu primer entrenamiento',
+            icon: '🎯',
+            category: 'all',
+            unlocked: true,
+            points: 10,
+            date: '2024-01-15'
+        },
+        {
+            id: 'week_streak',
+            name: 'Racha Semanal',
+            description: 'Entrena 7 días seguidos',
+            icon: '🔥',
+            category: 'all',
+            unlocked: false,
+            points: 50,
+            progress: 3,
+            target: 7
+        },
+        {
+            id: 'running_5k',
+            name: 'Corredor 5K',
+            description: 'Completa una carrera de 5K',
+            icon: '🏃‍♂️',
+            category: 'running',
+            unlocked: false,
+            points: 25,
+            progress: 0,
+            target: 1
+        },
+        {
+            id: 'gym_100kg',
+            name: 'Centurión',
+            description: 'Levanta 100kg en press banca',
+            icon: '💪',
+            category: 'gym',
+            unlocked: false,
+            points: 100,
+            progress: 0,
+            target: 100
+        },
+        {
+            id: 'wod_hero',
+            name: 'Héroe Funcional',
+            description: 'Completa 10 WODs diferentes',
+            icon: '⚡',
+            category: 'functional',
+            unlocked: false,
+            points: 75,
+            progress: 2,
+            target: 10
+        }
+    ];
+    
+    // Actualizar estadísticas
+    const unlocked = achievements.filter(a => a.unlocked);
+    document.getElementById('totalAchievements').textContent = unlocked.length;
+    document.getElementById('totalPoints').textContent = unlocked.reduce((sum, a) => sum + a.points, 0);
+    
+    // Mostrar logros
+    showAchievementCategory('all', achievements);
+}
+
+// Mostrar categoría de logros
+function showAchievementCategory(category, achievements = null) {
+    if (!achievements) {
+        // Recargar logros si no se pasan
+        loadAchievements();
+        return;
+    }
+    
+    // Actualizar tabs
+    document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+    
+    // Filtrar logros
+    const filtered = category === 'all' ? achievements : achievements.filter(a => a.category === category);
+    
+    // Renderizar logros
+    const container = document.getElementById('achievementsList');
+    container.innerHTML = filtered.map(achievement => `
+        <div class="achievement-item ${achievement.unlocked ? 'unlocked' : 'locked'}">
+            <div class="achievement-icon">${achievement.icon}</div>
+            <div class="achievement-info">
+                <h4 class="achievement-name">${achievement.name}</h4>
+                <p class="achievement-description">${achievement.description}</p>
+                ${achievement.unlocked ? 
+                    `<span class="achievement-date">Desbloqueado: ${achievement.date}</span>` :
+                    `<div class="achievement-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${(achievement.progress / achievement.target) * 100}%"></div>
+                        </div>
+                        <span class="progress-text">${achievement.progress} / ${achievement.target}</span>
+                    </div>`
+                }
+            </div>
+            <div class="achievement-points">
+                <span class="points-value">${achievement.points}</span>
+                <span class="points-label">pts</span>
+            </div>
+        </div>
+    `).join('');
+}
+
 console.log('🏠 Dashboard personalizado cargado');
 
