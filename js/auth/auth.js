@@ -560,6 +560,20 @@ async function handleGoogleAuth() {
     try {
         console.log('🔍 Autenticación con Google...');
         console.log('🔧 Google Provider configurado:', googleProvider);
+        console.log('🌐 Dominio actual:', window.location.hostname);
+        console.log('🔗 URL completa:', window.location.href);
+        
+        // Verificar si el dominio está autorizado
+        const authorizedDomains = [
+            'entrenoapp.netlify.app',
+            'localhost',
+            '127.0.0.1'
+        ];
+        
+        const currentDomain = window.location.hostname;
+        if (!authorizedDomains.some(domain => currentDomain.includes(domain))) {
+            throw new Error(`Dominio no autorizado: ${currentDomain}. Contacta al administrador.`);
+        }
         
         const result = await signInWithPopup(auth, googleProvider);
         const user = result.user;
@@ -593,10 +607,18 @@ async function handleGoogleAuth() {
         console.error('❌ Error details:', {
             code: error.code,
             message: error.message,
-            stack: error.stack
+            stack: error.stack,
+            domain: window.location.hostname
         });
         
-        if (error.code !== 'auth/popup-closed-by-user') {
+        // Manejo específico de errores comunes
+        if (error.code === 'auth/operation-not-allowed') {
+            showError('Google Sign-In no está habilitado. Contacta al administrador.');
+        } else if (error.code === 'auth/popup-blocked') {
+            showError('El popup fue bloqueado. Permite popups para este sitio e intenta de nuevo.');
+        } else if (error.code === 'auth/unauthorized-domain') {
+            showError('Este dominio no está autorizado para Google Sign-In.');
+        } else if (error.code !== 'auth/popup-closed-by-user') {
             handleAuthError(error);
         }
     } finally {
@@ -611,6 +633,25 @@ async function handleAppleAuth() {
     try {
         console.log('🍎 Autenticación con Apple...');
         console.log('🔧 Apple Provider configurado:', appleProvider);
+        console.log('🌐 Dominio actual:', window.location.hostname);
+        console.log('🔗 URL completa:', window.location.href);
+        
+        // Verificar si el dominio está autorizado
+        const authorizedDomains = [
+            'entrenoapp.netlify.app',
+            'localhost',
+            '127.0.0.1'
+        ];
+        
+        const currentDomain = window.location.hostname;
+        if (!authorizedDomains.some(domain => currentDomain.includes(domain))) {
+            throw new Error(`Dominio no autorizado: ${currentDomain}. Contacta al administrador.`);
+        }
+        
+        // Verificar HTTPS (requerido para Apple Sign-In)
+        if (window.location.protocol !== 'https:' && window.location.hostname !== 'localhost') {
+            throw new Error('Apple Sign-In requiere HTTPS en producción.');
+        }
         
         const result = await signInWithPopup(auth, appleProvider);
         const user = result.user;
@@ -649,10 +690,21 @@ async function handleAppleAuth() {
         console.error('❌ Error details:', {
             code: error.code,
             message: error.message,
-            stack: error.stack
+            stack: error.stack,
+            domain: window.location.hostname,
+            protocol: window.location.protocol
         });
         
-        if (error.code !== 'auth/popup-closed-by-user') {
+        // Manejo específico de errores comunes
+        if (error.code === 'auth/operation-not-allowed') {
+            showError('Apple Sign-In no está habilitado. Contacta al administrador.');
+        } else if (error.code === 'auth/popup-blocked') {
+            showError('El popup fue bloqueado. Permite popups para este sitio e intenta de nuevo.');
+        } else if (error.code === 'auth/unauthorized-domain') {
+            showError('Este dominio no está autorizado para Apple Sign-In.');
+        } else if (error.message.includes('HTTPS')) {
+            showError('Apple Sign-In requiere HTTPS en producción.');
+        } else if (error.code !== 'auth/popup-closed-by-user') {
             handleAuthError(error);
         }
     } finally {
@@ -951,12 +1003,44 @@ window.checkAuthProviders = function() {
         console.warn('⚠️ Apple Sign-In requiere HTTPS en producción');
     }
     
+    // Verificar dominios autorizados
+    const authorizedDomains = [
+        'entrenoapp.netlify.app',
+        'localhost',
+        '127.0.0.1'
+    ];
+    
+    const currentDomain = window.location.hostname;
+    const isDomainAuthorized = authorizedDomains.some(domain => currentDomain.includes(domain));
+    
+    console.log('✅ Dominio autorizado:', isDomainAuthorized);
+    console.log('🔒 HTTPS:', window.location.protocol === 'https:');
+    
     return {
         google: !!googleProvider,
         apple: !!appleProvider,
         auth: !!auth,
-        https: window.location.protocol === 'https:' || window.location.hostname === 'localhost'
+        https: window.location.protocol === 'https:' || window.location.hostname === 'localhost',
+        domainAuthorized: isDomainAuthorized,
+        currentDomain: currentDomain
     };
+};
+
+// Función para probar autenticación
+window.testAuth = async function(provider = 'google') {
+    console.log(`🧪 Probando autenticación con ${provider}...`);
+    
+    try {
+        if (provider === 'google') {
+            await handleGoogleAuth();
+        } else if (provider === 'apple') {
+            await handleAppleAuth();
+        } else {
+            console.error('❌ Provider no válido. Usa "google" o "apple"');
+        }
+    } catch (error) {
+        console.error(`❌ Error probando ${provider}:`, error);
+    }
 };
 
 // Exportar funciones útiles

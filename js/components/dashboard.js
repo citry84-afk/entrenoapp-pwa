@@ -1174,7 +1174,14 @@ window.startTodaysWorkout = function() {
         }
     }
     
-    const workout = dashboardState.todaysWorkout;
+    let workout = dashboardState.todaysWorkout;
+    
+    // Si no hay workout, intentar generarlo
+    if (!workout && dashboardState.activePlan) {
+        console.log('🔄 Generando workout sobre la marcha...');
+        workout = generateTodaysWorkout(dashboardState.activePlan);
+        dashboardState.todaysWorkout = workout;
+    }
     
     if (!workout) {
         console.log('❌ No hay workout definido');

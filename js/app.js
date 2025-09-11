@@ -435,9 +435,13 @@ async function loadChallengesPage() {
 }
 
 async function loadProfilePage() {
+    // Inicializar el perfil inmediatamente
+    if (window.initProfile) {
+        window.initProfile();
+    }
+    
     return `
         <div class="page">
-            <h1 class="page-title">Perfil</h1>
             <div class="profile-container">
                 <!-- El contenido se carga desde profile.js -->
             </div>

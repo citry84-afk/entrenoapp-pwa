@@ -462,6 +462,9 @@ function renderUserProfile() {
                     <button class="glass-button glass-button-secondary" onclick="window.editProfile()">
                         ✏️ Editar
                     </button>
+                    <button class="glass-button glass-button-danger" onclick="window.handleLogout()">
+                        🚪 Cerrar Sesión
+                    </button>
                 </div>
             </div>
             
