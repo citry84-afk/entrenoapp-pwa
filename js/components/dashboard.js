@@ -1536,5 +1536,102 @@ window.startIntervalWorkout = function() {
     window.navigateToPage('running');
 };
 
+// Mostrar reto del día
+window.showDailyChallenge = function() {
+    const modal = document.createElement('div');
+    modal.className = 'modal-overlay';
+    modal.innerHTML = `
+        <div class="modal-content glass-card challenge-modal">
+            <h2>🏆 Reto del Día</h2>
+            <div class="challenge-content">
+                <div class="challenge-info">
+                    <h3 id="challengeName">Cargando...</h3>
+                    <p id="challengeDescription">Cargando descripción...</p>
+                    <div class="challenge-target">
+                        <span class="target-label">Objetivo:</span>
+                        <span class="target-value" id="challengeTarget">-</span>
+                    </div>
+                    <div class="challenge-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="challengeProgress" style="width: 0%"></div>
+                        </div>
+                        <span class="progress-text" id="challengeProgressText">0 / 0</span>
+                    </div>
+                </div>
+                <div class="challenge-actions">
+                    <button class="glass-button glass-button-primary" onclick="window.startChallenge()" id="startChallengeBtn">
+                        <span class="btn-icon">🚀</span>
+                        <span class="btn-text">Comenzar Reto</span>
+                    </button>
+                    <button class="glass-button glass-button-secondary" onclick="this.closest('.modal-overlay').remove()">
+                        Cerrar
+                    </button>
+                </div>
+            </div>
+            <div class="upcoming-challenges">
+                <h4>📅 Próximos Retos</h4>
+                <div class="challenges-list" id="upcomingChallenges">
+                    <p>Cargando próximos retos...</p>
+                </div>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+    
+    // Cargar datos del reto
+    loadChallengeData();
+};
+
+// Cargar datos del reto
+function loadChallengeData() {
+    const challenge = dashboardState.todayChallenge;
+    if (challenge) {
+        document.getElementById('challengeName').textContent = challenge.name;
+        document.getElementById('challengeDescription').textContent = challenge.description;
+        document.getElementById('challengeTarget').textContent = challenge.target;
+        
+        // Actualizar progreso
+        const progress = challenge.completed ? 100 : 0;
+        document.getElementById('challengeProgress').style.width = progress + '%';
+        document.getElementById('challengeProgressText').textContent = 
+            challenge.completed ? `${challenge.target} / ${challenge.target}` : `0 / ${challenge.target}`;
+        
+        // Actualizar botón
+        const startBtn = document.getElementById('startChallengeBtn');
+        if (challenge.completed) {
+            startBtn.innerHTML = '<span class="btn-icon">✅</span><span class="btn-text">Completado</span>';
+            startBtn.disabled = true;
+        }
+    }
+    
+    // Cargar próximos retos
+    loadUpcomingChallenges();
+}
+
+// Cargar próximos retos
+function loadUpcomingChallenges() {
+    const upcomingContainer = document.getElementById('upcomingChallenges');
+    const challenges = [
+        { name: 'Flexiones', target: 25, day: 'Mañana' },
+        { name: 'Sentadillas', target: 30, day: 'Pasado mañana' },
+        { name: 'Plancha', target: 60, day: 'En 3 días' }
+    ];
+    
+    upcomingContainer.innerHTML = challenges.map(challenge => `
+        <div class="upcoming-challenge">
+            <span class="challenge-name">${challenge.name}</span>
+            <span class="challenge-target">${challenge.target}</span>
+            <span class="challenge-day">${challenge.day}</span>
+        </div>
+    `).join('');
+}
+
+// Iniciar reto
+window.startChallenge = function() {
+    // Cerrar modal y navegar a challenges
+    document.querySelector('.modal-overlay').remove();
+    window.navigateToPage('challenges');
+};
+
 console.log('🏠 Dashboard personalizado cargado');
 
