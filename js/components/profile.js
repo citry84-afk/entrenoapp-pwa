@@ -1363,12 +1363,31 @@ window.saveProfileChanges = async function() {
         let photoURL = user.photoURL || '';
         const photoInput = document.getElementById('photo-input');
         if (photoInput && photoInput.files && photoInput.files[0]) {
+            if (window.debugLogger) {
+                window.debugLogger.logInfo('PROFILE_SAVE', 'Foto seleccionada, iniciando subida', {
+                    fileName: photoInput.files[0].name,
+                    fileSize: photoInput.files[0].size
+                });
+            }
             try {
                 photoURL = await uploadProfilePhoto(photoInput.files[0]);
+                if (window.debugLogger) {
+                    window.debugLogger.logSuccess('PROFILE_SAVE', 'Foto subida exitosamente', { photoURL });
+                }
             } catch (photoError) {
+                if (window.debugLogger) {
+                    window.debugLogger.logError('PROFILE_SAVE', 'Error subiendo foto', {
+                        error: photoError.message,
+                        code: photoError.code
+                    });
+                }
                 console.error('Error subiendo foto:', photoError);
-                alert('Error subiendo la foto. Se guardará sin foto.');
+                alert('Error subiendo la foto: ' + photoError.message + '. Se guardará sin foto.');
                 photoURL = user.photoURL || '';
+            }
+        } else {
+            if (window.debugLogger) {
+                window.debugLogger.logInfo('PROFILE_SAVE', 'No se seleccionó nueva foto, usando foto actual', { photoURL });
             }
         }
         
@@ -1449,23 +1468,65 @@ window.saveProfileChanges = async function() {
 
 // Subir foto de perfil
 async function uploadProfilePhoto(file) {
+    if (window.debugLogger) {
+        window.debugLogger.logInfo('PHOTO_UPLOAD', 'Iniciando subida de foto', { 
+            fileName: file.name, 
+            fileSize: file.size, 
+            fileType: file.type 
+        });
+    }
+    
     try {
         const user = auth.currentUser;
-        if (!user) throw new Error('Usuario no autenticado');
+        if (!user) {
+            if (window.debugLogger) {
+                window.debugLogger.logError('PHOTO_UPLOAD', 'Usuario no autenticado');
+            }
+            throw new Error('Usuario no autenticado');
+        }
         
         // Crear referencia de almacenamiento
-        const storageRef = ref(storage, `profile-photos/${user.uid}/${Date.now()}_${file.name}`);
+        const fileName = `${Date.now()}_${file.name}`;
+        const storageRef = ref(storage, `profile-photos/${user.uid}/${fileName}`);
+        
+        if (window.debugLogger) {
+            window.debugLogger.logInfo('PHOTO_UPLOAD', 'Referencia de almacenamiento creada', { 
+                path: `profile-photos/${user.uid}/${fileName}` 
+            });
+        }
         
         // Subir archivo
+        if (window.debugLogger) {
+            window.debugLogger.logInfo('PHOTO_UPLOAD', 'Subiendo archivo a Firebase Storage...');
+        }
         const snapshot = await uploadBytes(storageRef, file);
         
+        if (window.debugLogger) {
+            window.debugLogger.logSuccess('PHOTO_UPLOAD', 'Archivo subido exitosamente', { 
+                bytesTransferred: snapshot.metadata.size 
+            });
+        }
+        
         // Obtener URL de descarga
+        if (window.debugLogger) {
+            window.debugLogger.logInfo('PHOTO_UPLOAD', 'Obteniendo URL de descarga...');
+        }
         const downloadURL = await getDownloadURL(snapshot.ref);
         
-        console.log('✅ Foto de perfil subida:', downloadURL);
+        if (window.debugLogger) {
+            window.debugLogger.logSuccess('PHOTO_UPLOAD', 'URL de descarga obtenida', { downloadURL });
+        }
+        
         return downloadURL;
         
     } catch (error) {
+        if (window.debugLogger) {
+            window.debugLogger.logError('PHOTO_UPLOAD', 'Error subiendo foto', {
+                error: error.message,
+                code: error.code,
+                stack: error.stack
+            });
+        }
         console.error('❌ Error subiendo foto:', error);
         throw error;
     }
