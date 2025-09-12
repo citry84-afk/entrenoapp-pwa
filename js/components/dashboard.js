@@ -1153,14 +1153,6 @@ window.showPlanMenu = function() {
 };
 
 window.startTodaysWorkout = function() {
-    console.log('🎯 startTodaysWorkout ejecutado');
-    if (window.debugLogger) {
-        window.debugLogger.logInfo('DASHBOARD_START_WORKOUT', 'Función startTodaysWorkout ejecutada', {
-            dashboardState: dashboardState,
-            todaysWorkout: dashboardState.todaysWorkout
-        });
-    }
-    
     // Verificar si ya se completó el entrenamiento de hoy
     const plan = dashboardState.activePlan;
     if (plan) {
@@ -1168,7 +1160,6 @@ window.startTodaysWorkout = function() {
         const completedToday = localStorage.getItem(todayKey);
         
         if (completedToday) {
-            console.log('✅ Entrenamiento ya completado hoy');
             alert('¡Ya completaste tu entrenamiento de hoy! Vuelve mañana para tu próximo entrenamiento. 💪');
             return;
         }
@@ -1178,40 +1169,27 @@ window.startTodaysWorkout = function() {
     
     // Si no hay workout, intentar generarlo
     if (!workout && dashboardState.activePlan) {
-        console.log('🔄 Generando workout sobre la marcha...');
         workout = generateTodaysWorkout(dashboardState.activePlan);
         dashboardState.todaysWorkout = workout;
     }
     
     if (!workout) {
-        console.log('❌ No hay workout definido');
-        if (window.debugLogger) {
-            window.debugLogger.logError('DASHBOARD_NO_WORKOUT', 'todaysWorkout es null o undefined', {
-                dashboardState: dashboardState,
-                activePlan: dashboardState.activePlan
-            });
-        }
-        
         // Fallback: ir directamente a workouts basado en el plan activo
         if (dashboardState.activePlan) {
             const planType = dashboardState.activePlan.type;
-            console.log(`🔄 Fallback: navegando a ${planType} basado en activePlan`);
             switch (planType) {
                 case 'running':
-                    // Generar workout de running básico
                     const runningWorkout = generateRunningWorkout(dashboardState.activePlan, 1);
                     localStorage.setItem('runningMode', 'plannedWorkout');
                     localStorage.setItem('todaysWorkout', JSON.stringify(runningWorkout));
                     window.navigateToPage('running');
                     break;
                 case 'functional':
-                    // Generar WOD funcional básico
                     const functionalWorkout = generateFunctionalWorkout(dashboardState.activePlan, 1);
                     localStorage.setItem('currentFunctionalWod', JSON.stringify(functionalWorkout));
                     window.navigateToPage('functional-workout');
                     break;
                 case 'gym':
-                    // Generar workout de gimnasio básico
                     const gymWorkout = generateGymWorkout(dashboardState.activePlan, 1);
                     localStorage.setItem('currentGymWorkout', JSON.stringify(gymWorkout));
                     window.navigateToPage('gym-workout');
@@ -1221,60 +1199,31 @@ window.startTodaysWorkout = function() {
                     break;
             }
         } else {
-            console.log('❌ No hay plan activo tampoco');
-            // Último fallback: volver al dashboard
             window.navigateToPage('dashboard');
         }
         return;
     }
     
-    console.log('✅ Workout encontrado, navegando...', workout);
-    
     try {
         switch (workout.type) {
             case 'running':
-                console.log('🏃‍♂️ Navegando a página de running...');
-                if (window.debugLogger) {
-                    window.debugLogger.logInfo('DASHBOARD_NAVIGATE', 'Navegando a running', { workout });
-                }
-                // Marcar que venimos del dashboard con el workout específico
                 localStorage.setItem('runningMode', 'plannedWorkout');
                 localStorage.setItem('todaysWorkout', JSON.stringify(workout));
                 window.navigateToPage('running');
                 break;
             case 'functional':
-                console.log('⚡ Navegando a página de WOD funcional...');
-                if (window.debugLogger) {
-                    window.debugLogger.logInfo('DASHBOARD_NAVIGATE', 'Navegando a functional-workout', { workout });
-                }
-                // Guardar WOD en localStorage
                 localStorage.setItem('currentFunctionalWod', JSON.stringify(workout));
                 window.navigateToPage('functional-workout');
                 break;
             case 'gym':
-                console.log('🏋️‍♂️ Navegando a página de gimnasio...');
-                if (window.debugLogger) {
-                    window.debugLogger.logInfo('DASHBOARD_NAVIGATE', 'Navegando a gym-workout', { workout });
-                }
-                // Guardar workout en localStorage
                 localStorage.setItem('currentGymWorkout', JSON.stringify(workout));
                 window.navigateToPage('gym-workout');
                 break;
             default:
-                console.log('❓ Tipo de workout desconocido:', workout.type);
-                if (window.debugLogger) {
-                    window.debugLogger.logWarn('DASHBOARD_UNKNOWN_WORKOUT', 'Tipo desconocido', { workout });
-                }
-                // Fallback to workouts
                 window.navigateToPage('workouts');
                 break;
         }
     } catch (error) {
-        console.error('❌ Error navegando:', error);
-        if (window.debugLogger) {
-            window.debugLogger.logError('DASHBOARD_NAVIGATION_ERROR', 'Error en navegación', { error, workout });
-        }
-        // Último fallback
         window.navigateToPage('workouts');
     }
 };

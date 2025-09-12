@@ -1303,12 +1303,9 @@ window.closeEditProfileModal = function() {
 
 // Guardar cambios del perfil
 window.saveProfileChanges = async function() {
-    console.log('💾 Iniciando guardado de perfil...');
     try {
         const user = auth.currentUser;
         if (!user) throw new Error('Usuario no autenticado');
-        
-        console.log('👤 Usuario autenticado:', user.uid);
         
         // Obtener datos del formulario
         const displayName = document.getElementById('display-name').value.trim();
@@ -1318,8 +1315,6 @@ window.saveProfileChanges = async function() {
         const notifications = document.getElementById('notifications').checked;
         const friendRequests = document.getElementById('friend-requests').checked;
         const activityNotifications = document.getElementById('activity-notifications').checked;
-        
-        console.log('📝 Datos del formulario:', { displayName, username, bio, privacy, notifications });
         
         // Validaciones
         if (!displayName) {
@@ -1347,7 +1342,6 @@ window.saveProfileChanges = async function() {
         
         // Verificar si el username ya está en uso (solo si cambió)
         if (username !== socialState.userProfile?.username) {
-            console.log('🔍 Verificando disponibilidad del username...');
             const usernameQuery = query(
                 collection(db, 'users'),
                 where('username', '==', username)
@@ -1367,14 +1361,12 @@ window.saveProfileChanges = async function() {
         }
         
         // Actualizar perfil en Firebase Auth
-        console.log('🔄 Actualizando perfil en Firebase Auth...');
         await updateProfile(user, {
             displayName: displayName,
             photoURL: photoURL
         });
         
         // Actualizar datos en Firestore
-        console.log('🔄 Actualizando datos en Firestore...');
         const userDoc = doc(db, 'users', user.uid);
         await updateDoc(userDoc, {
             displayName: displayName,
@@ -1411,14 +1403,12 @@ window.saveProfileChanges = async function() {
         };
         
         // Cerrar modal y actualizar UI
-        console.log('✅ Perfil actualizado exitosamente');
         closeEditProfileModal();
         renderProfilePage();
         
         alert('✅ Perfil actualizado exitosamente!');
         
     } catch (error) {
-        console.error('❌ Error actualizando perfil:', error);
         alert('Error actualizando el perfil. Inténtalo de nuevo.');
     }
 };
