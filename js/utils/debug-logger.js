@@ -300,7 +300,21 @@ window.disableDebug = () => window.debugLogger.disableDebugMode();
 window.showDebugPanel = () => window.debugLogger.showDebugPanel();
 window.exportDebugLogs = () => console.log(window.debugLogger.exportLogs());
 
+// Función para mostrar panel manualmente
+window.showDebug = () => {
+    if (window.debugLogger) {
+        window.debugLogger.enableDebugMode();
+        window.debugLogger.showDebugPanel();
+        console.log('🔍 Debug panel activado manualmente');
+    }
+};
+
 console.log('🔍 Debug Logger cargado. Usa enableDebug() para activar.');
 
-// Debug panel desactivado para producción
-// Para activar: localStorage.setItem('entrenoapp_debug', 'true') y recargar
+// Auto-mostrar panel si estamos en debug mode
+setTimeout(() => {
+    if (window.debugLogger && window.debugLogger.isDebugMode) {
+        console.log('🔍 Auto-mostrando panel de debug...');
+        window.debugLogger.showDebugPanel();
+    }
+}, 2000);
