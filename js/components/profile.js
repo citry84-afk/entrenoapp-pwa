@@ -438,7 +438,7 @@ function renderUserProfile() {
             <div class="profile-header glass-card mb-lg">
                 <div class="profile-info">
                     <div class="profile-avatar">
-                        <img src="${profile.photoURL || '/assets/default-avatar.png'}" 
+                        <img src="${profile.photoURL || profile.photoBase64 || '/assets/default-avatar.png'}" 
                              alt="${profile.displayName}" 
                              class="avatar-image">
                         <div class="level-badge">${stats.level}</div>
@@ -1370,18 +1370,28 @@ window.saveProfileChanges = async function() {
                 });
             }
             try {
-                photoURL = await uploadProfilePhoto(photoInput.files[0]);
+                const photoResult = await uploadProfilePhoto(photoInput.files[0]);
                 if (window.debugLogger) {
-                    window.debugLogger.logSuccess('PROFILE_SAVE', 'Foto subida exitosamente', { photoURL });
+                    window.debugLogger.logSuccess('PROFILE_SAVE', 'Foto procesada exitosamente', { 
+                        isBase64: photoResult.startsWith('data:'),
+                        isUrl: photoResult.startsWith('http')
+                    });
+                }
+                
+                // Guardar como URL o base64 según el resultado
+                if (photoResult.startsWith('data:')) {
+                    profileData.photoBase64 = photoResult; // Base64
+                } else {
+                    profileData.photoURL = photoResult; // URL
                 }
             } catch (photoError) {
                 if (window.debugLogger) {
-                    window.debugLogger.logError('PROFILE_SAVE', 'Error subiendo foto', {
+                    window.debugLogger.logError('PROFILE_SAVE', 'Error procesando foto', {
                         error: photoError.message,
                         code: photoError.code
                     });
                 }
-                console.error('Error subiendo foto:', photoError);
+                console.error('Error procesando foto:', photoError);
                 alert('Error subiendo la foto: ' + photoError.message + '. Se guardará sin foto.');
                 photoURL = user.photoURL || '';
             }
@@ -1466,6 +1476,16 @@ window.saveProfileChanges = async function() {
     }
 };
 
+// Convertir archivo a base64
+function convertFileToBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+        reader.readAsDataURL(file);
+    });
+}
+
 // Subir foto de perfil
 async function uploadProfilePhoto(file) {
     if (window.debugLogger) {
@@ -1474,6 +1494,15 @@ async function uploadProfilePhoto(file) {
             fileSize: file.size, 
             fileType: file.type 
         });
+    }
+    
+    // Verificar configuración de Firebase Storage
+    if (!storage) {
+        throw new Error('Firebase Storage no está configurado');
+    }
+    
+    if (window.debugLogger) {
+        window.debugLogger.logInfo('PHOTO_UPLOAD', 'Firebase Storage configurado correctamente');
     }
     
     try {
@@ -1495,11 +1524,50 @@ async function uploadProfilePhoto(file) {
             });
         }
         
-        // Subir archivo
+        // Subir archivo con timeout
         if (window.debugLogger) {
             window.debugLogger.logInfo('PHOTO_UPLOAD', 'Subiendo archivo a Firebase Storage...');
         }
-        const snapshot = await uploadBytes(storageRef, file);
+        
+        // Intentar subida con timeout
+        let snapshot;
+        try {
+            const uploadWithTimeout = new Promise((resolve, reject) => {
+                const uploadTask = uploadBytes(storageRef, file);
+                
+                // Timeout de 15 segundos
+                const timeout = setTimeout(() => {
+                    reject(new Error('Timeout: La subida de archivo tardó demasiado'));
+                }, 15000);
+                
+                uploadTask
+                    .then((snapshot) => {
+                        clearTimeout(timeout);
+                        resolve(snapshot);
+                    })
+                    .catch((error) => {
+                        clearTimeout(timeout);
+                        reject(error);
+                    });
+            });
+            
+            snapshot = await uploadWithTimeout;
+        } catch (uploadError) {
+            if (window.debugLogger) {
+                window.debugLogger.logError('PHOTO_UPLOAD', 'Error en subida de archivo', {
+                    error: uploadError.message,
+                    code: uploadError.code
+                });
+            }
+            
+            // Fallback: convertir a base64 y guardar en Firestore
+            if (window.debugLogger) {
+                window.debugLogger.logInfo('PHOTO_UPLOAD', 'Usando fallback: convertir a base64');
+            }
+            
+            const base64 = await convertFileToBase64(file);
+            return base64; // Retornar base64 en lugar de URL
+        }
         
         if (window.debugLogger) {
             window.debugLogger.logSuccess('PHOTO_UPLOAD', 'Archivo subido exitosamente', { 
