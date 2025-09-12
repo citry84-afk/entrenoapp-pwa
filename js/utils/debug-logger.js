@@ -15,8 +15,8 @@ class DebugLogger {
     }
 
     checkDebugMode() {
-        // Debug desactivado para producción
-        return false;
+        // Debug activado temporalmente para diagnosticar perfil
+        return true;
         
         // Para activar debug, usar: localStorage.setItem('entrenoapp_debug', 'true')
         // return window.location.search.includes('debug') || 

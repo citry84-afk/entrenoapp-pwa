@@ -1303,11 +1303,22 @@ window.closeEditProfileModal = function() {
 
 // Guardar cambios del perfil
 window.saveProfileChanges = async function() {
+    if (window.debugLogger) {
+        window.debugLogger.logInfo('PROFILE_SAVE', 'Iniciando guardado de perfil');
+    }
+    
     try {
         const user = auth.currentUser;
         if (!user) {
+            if (window.debugLogger) {
+                window.debugLogger.logError('PROFILE_SAVE', 'Usuario no autenticado');
+            }
             alert('No estás autenticado. Por favor, inicia sesión de nuevo.');
             return;
+        }
+        
+        if (window.debugLogger) {
+            window.debugLogger.logInfo('PROFILE_SAVE', 'Usuario autenticado', { uid: user.uid, email: user.email });
         }
         
         // Obtener datos del formulario
@@ -1318,6 +1329,12 @@ window.saveProfileChanges = async function() {
         const notifications = document.getElementById('notifications')?.checked || false;
         const friendRequests = document.getElementById('friend-requests')?.checked || false;
         const activityNotifications = document.getElementById('activity-notifications')?.checked || false;
+        
+        if (window.debugLogger) {
+            window.debugLogger.logInfo('PROFILE_SAVE', 'Datos del formulario obtenidos', {
+                displayName, username, bio, privacy, notifications, friendRequests, activityNotifications
+            });
+        }
         
         // Validaciones básicas
         if (!displayName) {
@@ -1377,22 +1394,54 @@ window.saveProfileChanges = async function() {
             updatedAt: serverTimestamp()
         };
         
+        if (window.debugLogger) {
+            window.debugLogger.logInfo('PROFILE_SAVE', 'Datos preparados para Firestore', userData);
+        }
+        
         // Usar setDoc en lugar de updateDoc para crear o actualizar
+        if (window.debugLogger) {
+            window.debugLogger.logInfo('PROFILE_SAVE', 'Guardando en Firestore...');
+        }
         await setDoc(userDoc, userData, { merge: true });
         
+        if (window.debugLogger) {
+            window.debugLogger.logSuccess('PROFILE_SAVE', 'Datos guardados en Firestore exitosamente');
+        }
+        
         // Actualizar perfil en Firebase Auth
+        if (window.debugLogger) {
+            window.debugLogger.logInfo('PROFILE_SAVE', 'Actualizando perfil en Firebase Auth...');
+        }
         await updateProfile(user, {
             displayName: displayName,
             photoURL: photoURL
         });
         
+        if (window.debugLogger) {
+            window.debugLogger.logSuccess('PROFILE_SAVE', 'Perfil actualizado en Firebase Auth exitosamente');
+        }
+        
         // Cerrar modal y actualizar UI
+        if (window.debugLogger) {
+            window.debugLogger.logInfo('PROFILE_SAVE', 'Cerrando modal y actualizando UI...');
+        }
         closeEditProfileModal();
         renderProfilePage();
+        
+        if (window.debugLogger) {
+            window.debugLogger.logSuccess('PROFILE_SAVE', 'Proceso de guardado completado exitosamente');
+        }
         
         alert('✅ Perfil actualizado exitosamente!');
         
     } catch (error) {
+        if (window.debugLogger) {
+            window.debugLogger.logError('PROFILE_SAVE', 'Error en el proceso de guardado', {
+                error: error.message,
+                stack: error.stack,
+                name: error.name
+            });
+        }
         console.error('Error actualizando perfil:', error);
         alert('Error actualizando el perfil: ' + error.message);
     }
