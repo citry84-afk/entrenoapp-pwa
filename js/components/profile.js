@@ -1341,7 +1341,7 @@ window.saveProfileChanges = async function() {
         }
         
         // Verificar si el username ya está en uso (solo si cambió)
-        if (username !== socialState.userProfile?.username) {
+        if (username !== socialState?.userProfile?.username) {
             const usernameQuery = query(
                 collection(db, 'users'),
                 where('username', '==', username)
@@ -1354,7 +1354,7 @@ window.saveProfileChanges = async function() {
         }
         
         // Procesar foto si se seleccionó una nueva
-        let photoURL = socialState.userProfile?.photoURL;
+        let photoURL = socialState?.userProfile?.photoURL;
         const photoInput = document.getElementById('photo-input');
         if (photoInput.files[0]) {
             photoURL = await uploadProfilePhoto(photoInput.files[0]);
@@ -1378,29 +1378,31 @@ window.saveProfileChanges = async function() {
                 notifications: notifications,
                 friendRequestNotifications: friendRequests,
                 activityNotifications: activityNotifications,
-                showInRanking: socialState.settings.showInRanking,
-                units: socialState.settings.units,
-                language: socialState.settings.language
+                showInRanking: socialState?.settings?.showInRanking || true,
+                units: socialState?.settings?.units || 'metric',
+                language: socialState?.settings?.language || 'es'
             },
             updatedAt: serverTimestamp()
         });
         
-        // Actualizar estado local
-        socialState.userProfile = {
-            ...socialState.userProfile,
-            displayName: displayName,
-            username: username,
-            bio: bio,
-            photoURL: photoURL
-        };
-        
-        socialState.settings = {
-            ...socialState.settings,
-            privacy: privacy,
-            notifications: notifications,
-            friendRequestNotifications: friendRequests,
-            activityNotifications: activityNotifications
-        };
+        // Actualizar estado local si existe
+        if (typeof socialState !== 'undefined') {
+            socialState.userProfile = {
+                ...socialState.userProfile,
+                displayName: displayName,
+                username: username,
+                bio: bio,
+                photoURL: photoURL
+            };
+            
+            socialState.settings = {
+                ...socialState.settings,
+                privacy: privacy,
+                notifications: notifications,
+                friendRequestNotifications: friendRequests,
+                activityNotifications: activityNotifications
+            };
+        }
         
         // Cerrar modal y actualizar UI
         closeEditProfileModal();
