@@ -163,6 +163,8 @@ function renderLoginForm() {
                     Continuar con Google
                 </button>
                 
+                <!-- Apple Sign-In temporalmente deshabilitado hasta configuración completa -->
+                <!--
                 <button 
                     id="apple-login" 
                     class="glass-button social-button apple-button btn-full"
@@ -171,6 +173,7 @@ function renderLoginForm() {
                     <span class="social-icon">🍎</span>
                     Continuar con Apple
                 </button>
+                -->
             </div>
             
             <div class="auth-links text-center">
@@ -286,6 +289,8 @@ function renderRegisterForm() {
                     Continuar con Google
                 </button>
                 
+                <!-- Apple Sign-In temporalmente deshabilitado hasta configuración completa -->
+                <!--
                 <button 
                     id="apple-register" 
                     class="glass-button social-button apple-button btn-full"
@@ -294,6 +299,7 @@ function renderRegisterForm() {
                     <span class="social-icon">🍎</span>
                     Continuar con Apple
                 </button>
+                -->
             </div>
             
             <div class="auth-links text-center">
