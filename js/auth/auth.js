@@ -49,20 +49,35 @@ window.initAuthPage = async function() {
             const user = result.user;
             const isNewUser = result._tokenResponse?.isNewUser || false;
             
+            console.log('👤 Usuario:', user.email);
+            console.log('🆕 Es usuario nuevo:', isNewUser);
+            
             if (isNewUser) {
                 const displayName = user.displayName || user.email.split('@')[0];
                 await createUserProfile(user, displayName);
                 showSuccess('¡Bienvenido! Configuremos tu perfil.');
-                setTimeout(() => { window.loadPage('onboarding'); }, 1500);
+                // Forzar navegación inmediata
+                window.location.href = '#onboarding';
+                return;
             } else {
                 showSuccess('¡Bienvenido de vuelta!');
-                setTimeout(() => { window.loadPage('dashboard'); }, 1500);
+                // Forzar navegación inmediata
+                window.location.href = '#dashboard';
+                return;
             }
-            await saveUserToLocalStorage(user);
-            return;
         }
     } catch (error) {
         console.error('❌ Error procesando redirect result:', error);
+        // Si hay error, continuar con el flujo normal
+    }
+    
+    // Verificar si ya hay un usuario autenticado
+    const currentUser = auth.currentUser;
+    if (currentUser) {
+        console.log('👤 Usuario ya autenticado:', currentUser.email);
+        showSuccess('¡Bienvenido de vuelta!');
+        window.location.href = '#dashboard';
+        return;
     }
     
     renderAuthContent();
@@ -620,7 +635,8 @@ async function handleGoogleAuth() {
         if (isMobile) {
             console.log('📱 Usando redirect para móvil');
             await signInWithRedirect(auth, googleProvider);
-            return; // El redirect manejará el resto
+            // El redirect redirigirá a la página y se procesará en initAuthPage
+            return;
         } else {
             console.log('🖥️ Usando popup para desktop');
             result = await signInWithPopup(auth, googleProvider);
