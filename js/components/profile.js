@@ -1380,9 +1380,9 @@ window.saveProfileChanges = async function() {
                 
                 // Guardar como URL o base64 según el resultado
                 if (photoResult.startsWith('data:')) {
-                    profileData.photoBase64 = photoResult; // Base64
+                    photoURL = photoResult; // Base64
                 } else {
-                    profileData.photoURL = photoResult; // URL
+                    photoURL = photoResult; // URL
                 }
             } catch (photoError) {
                 if (window.debugLogger) {
@@ -1409,7 +1409,6 @@ window.saveProfileChanges = async function() {
             displayName: displayName,
             username: username,
             bio: bio || '',
-            photoURL: photoURL,
             settings: {
                 privacy: privacy,
                 notifications: notifications,
@@ -1422,6 +1421,13 @@ window.saveProfileChanges = async function() {
             createdAt: serverTimestamp(),
             updatedAt: serverTimestamp()
         };
+        
+        // Añadir foto según el tipo
+        if (photoURL.startsWith('data:')) {
+            userData.photoBase64 = photoURL; // Base64
+        } else {
+            userData.photoURL = photoURL; // URL
+        }
         
         if (window.debugLogger) {
             window.debugLogger.logInfo('PROFILE_SAVE', 'Datos preparados para Firestore', userData);
