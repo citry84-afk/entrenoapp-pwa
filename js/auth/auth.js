@@ -39,42 +39,32 @@ let authState = {
 
 // Inicializar página de autenticación
 window.initAuthPage = async function() {
-    console.log('🔐 Inicializando página de autenticación');
-    
     // Verificar si hay un redirect result (para móviles)
     try {
         const result = await getRedirectResult(auth);
         if (result) {
-            console.log('📱 Redirect result encontrado:', result);
             const user = result.user;
             const isNewUser = result._tokenResponse?.isNewUser || false;
-            
-            console.log('👤 Usuario:', user.email);
-            console.log('🆕 Es usuario nuevo:', isNewUser);
             
             if (isNewUser) {
                 const displayName = user.displayName || user.email.split('@')[0];
                 await createUserProfile(user, displayName);
                 showSuccess('¡Bienvenido! Configuremos tu perfil.');
-                // Forzar navegación inmediata
                 window.location.href = '#onboarding';
                 return;
             } else {
                 showSuccess('¡Bienvenido de vuelta!');
-                // Forzar navegación inmediata
                 window.location.href = '#dashboard';
                 return;
             }
         }
     } catch (error) {
-        console.error('❌ Error procesando redirect result:', error);
         // Si hay error, continuar con el flujo normal
     }
     
     // Verificar si ya hay un usuario autenticado
     const currentUser = auth.currentUser;
     if (currentUser) {
-        console.log('👤 Usuario ya autenticado:', currentUser.email);
         showSuccess('¡Bienvenido de vuelta!');
         window.location.href = '#dashboard';
         return;
@@ -474,9 +464,7 @@ async function handleLogin(e) {
     setLoading(true);
     
     try {
-        console.log('🔐 Intentando login con email...');
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        console.log('✅ Login exitoso:', userCredential.user.email);
         
         // Guardar credenciales si se marca recordar
         if (rememberMe) {
@@ -538,7 +526,6 @@ async function handleRegister(e) {
     setLoading(true);
     
     try {
-        console.log('🔐 Creando cuenta...');
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         
         // Actualizar perfil con el nombre
@@ -553,7 +540,6 @@ async function handleRegister(e) {
         // Enviar verificación de email
         await sendEmailVerification(userCredential.user);
         
-        console.log('✅ Cuenta creada exitosamente:', userCredential.user.email);
         
         // Mostrar mensaje y redirigir al onboarding
         showSuccess('¡Cuenta creada exitosamente! Configuremos tu perfil.');
@@ -583,7 +569,6 @@ async function handleForgotPassword(e) {
     setLoading(true);
     
     try {
-        console.log('📧 Enviando email de recuperación...');
         await sendPasswordResetEmail(auth, email);
         
         showSuccess('Se ha enviado un enlace de recuperación a tu email');
@@ -606,11 +591,6 @@ async function handleGoogleAuth() {
     setLoading(true);
     
     try {
-        console.log('🔍 Autenticación con Google...');
-        console.log('🔧 Google Provider configurado:', googleProvider);
-        console.log('🌐 Dominio actual:', window.location.hostname);
-        console.log('🔗 URL completa:', window.location.href);
-        
         // Verificar si el dominio está autorizado
         const authorizedDomains = [
             'entrenoapp.netlify.app',
@@ -620,11 +600,8 @@ async function handleGoogleAuth() {
         ];
         
         const currentDomain = window.location.hostname;
-        console.log('🌐 Verificando dominio:', currentDomain);
-        console.log('✅ Dominios autorizados:', authorizedDomains);
         
         if (!authorizedDomains.some(domain => currentDomain.includes(domain))) {
-            console.warn('⚠️ Dominio no autorizado, pero continuando...');
             // No lanzar error, solo advertir
         }
         
@@ -633,21 +610,16 @@ async function handleGoogleAuth() {
         
         let result;
         if (isMobile) {
-            console.log('📱 Usando redirect para móvil');
             await signInWithRedirect(auth, googleProvider);
             // El redirect redirigirá a la página y se procesará en initAuthPage
             return;
         } else {
-            console.log('🖥️ Usando popup para desktop');
             result = await signInWithPopup(auth, googleProvider);
         }
         const user = result.user;
-        console.log('✅ Login con Google exitoso:', user.email);
-        console.log('📊 Result data:', result);
         
         // Verificar si es un usuario nuevo
         const isNewUser = result._tokenResponse?.isNewUser || false;
-        console.log('🆕 Es usuario nuevo:', isNewUser);
         
         if (isNewUser) {
             // Crear perfil en Firestore para usuario nuevo
@@ -668,14 +640,6 @@ async function handleGoogleAuth() {
         await saveUserToLocalStorage(user);
         
     } catch (error) {
-        console.error('❌ Error con Google Auth:', error);
-        console.error('❌ Error details:', {
-            code: error.code,
-            message: error.message,
-            stack: error.stack,
-            domain: window.location.hostname
-        });
-        
         // Manejo específico de errores comunes
         if (error.code === 'auth/operation-not-allowed') {
             showError('Google Sign-In no está habilitado. Contacta al administrador.');
@@ -696,11 +660,6 @@ async function handleAppleAuth() {
     setLoading(true);
     
     try {
-        console.log('🍎 Autenticación con Apple...');
-        console.log('🔧 Apple Provider configurado:', appleProvider);
-        console.log('🌐 Dominio actual:', window.location.hostname);
-        console.log('🔗 URL completa:', window.location.href);
-        
         // Verificar si el dominio está autorizado
         const authorizedDomains = [
             'entrenoapp.netlify.app',
@@ -710,11 +669,8 @@ async function handleAppleAuth() {
         ];
         
         const currentDomain = window.location.hostname;
-        console.log('🌐 Verificando dominio:', currentDomain);
-        console.log('✅ Dominios autorizados:', authorizedDomains);
         
         if (!authorizedDomains.some(domain => currentDomain.includes(domain))) {
-            console.warn('⚠️ Dominio no autorizado, pero continuando...');
             // No lanzar error, solo advertir
         }
         
@@ -725,12 +681,9 @@ async function handleAppleAuth() {
         
         const result = await signInWithPopup(auth, appleProvider);
         const user = result.user;
-        console.log('✅ Login con Apple exitoso:', user.email);
-        console.log('📊 Result data:', result);
         
         // Verificar si es un usuario nuevo
         const isNewUser = result._tokenResponse?.isNewUser || false;
-        console.log('🆕 Es usuario nuevo:', isNewUser);
         
         if (isNewUser) {
             // Crear perfil en Firestore para usuario nuevo
@@ -756,15 +709,6 @@ async function handleAppleAuth() {
         await saveUserToLocalStorage(user);
         
     } catch (error) {
-        console.error('❌ Error con Apple Auth:', error);
-        console.error('❌ Error details:', {
-            code: error.code,
-            message: error.message,
-            stack: error.stack,
-            domain: window.location.hostname,
-            protocol: window.location.protocol
-        });
-        
         // Manejo específico de errores comunes
         if (error.code === 'auth/operation-not-allowed') {
             showError('Apple Sign-In no está habilitado. Contacta al administrador.');
@@ -785,7 +729,6 @@ async function handleAppleAuth() {
 // Cerrar sesión
 export async function logout() {
     try {
-        console.log('🚪 Cerrando sesión...');
         
         // Cerrar sesión en Firebase
         await signOut(auth);
@@ -799,7 +742,6 @@ export async function logout() {
         localStorage.removeItem('entrenoapp_remember_email');
         localStorage.removeItem('entrenoapp_remember_password');
         
-        console.log('✅ Sesión cerrada completamente');
         
         // Redirigir a la página de login
         window.loadPage('auth');
@@ -960,7 +902,6 @@ async function createUserProfile(user, displayName) {
         };
         
         await setDoc(userDoc, userData);
-        console.log('✅ Perfil de usuario creado en Firestore');
         
         return userData;
         
@@ -985,7 +926,6 @@ async function saveUserToLocalStorage(user) {
         localStorage.setItem('entrenoapp_user', JSON.stringify(userData));
         localStorage.setItem('entrenoapp_auth_token', await user.getIdToken());
         
-        console.log('✅ Datos de usuario guardados en localStorage');
         
     } catch (error) {
         console.error('❌ Error guardando en localStorage:', error);
@@ -1024,7 +964,6 @@ export function clearUserFromLocalStorage() {
     localStorage.removeItem('entrenoapp_user');
     localStorage.removeItem('entrenoapp_auth_token');
     localStorage.removeItem('entrenoapp_onboarding');
-    console.log('🧹 Datos de usuario eliminados de localStorage');
 }
 
 // Obtener datos del perfil desde Firestore
@@ -1038,7 +977,6 @@ export async function getUserProfile(uid) {
         if (docSnap.exists()) {
             return docSnap.data();
         } else {
-            console.log('❌ No se encontró el perfil del usuario');
             return null;
         }
         
@@ -1061,18 +999,6 @@ export async function checkOnboardingStatus(uid) {
 
 // Verificar configuración de providers
 window.checkAuthProviders = function() {
-    console.log('🔍 Verificando configuración de autenticación...');
-    console.log('🔧 Google Provider:', googleProvider);
-    console.log('🍎 Apple Provider:', appleProvider);
-    console.log('🔥 Auth instance:', auth);
-    console.log('🌐 Current domain:', window.location.hostname);
-    console.log('🔗 Current URL:', window.location.href);
-    
-    // Verificar si estamos en HTTPS (requerido para Apple Sign-In)
-    if (window.location.protocol !== 'https:' && window.location.hostname !== 'localhost') {
-        console.warn('⚠️ Apple Sign-In requiere HTTPS en producción');
-    }
-    
     // Verificar dominios autorizados
     const authorizedDomains = [
         'entrenoapp.netlify.app',
@@ -1082,9 +1008,6 @@ window.checkAuthProviders = function() {
     
     const currentDomain = window.location.hostname;
     const isDomainAuthorized = authorizedDomains.some(domain => currentDomain.includes(domain));
-    
-    console.log('✅ Dominio autorizado:', isDomainAuthorized);
-    console.log('🔒 HTTPS:', window.location.protocol === 'https:');
     
     return {
         google: !!googleProvider,
@@ -1098,18 +1021,14 @@ window.checkAuthProviders = function() {
 
 // Función para probar autenticación
 window.testAuth = async function(provider = 'google') {
-    console.log(`🧪 Probando autenticación con ${provider}...`);
-    
     try {
         if (provider === 'google') {
             await handleGoogleAuth();
         } else if (provider === 'apple') {
             await handleAppleAuth();
-        } else {
-            console.error('❌ Provider no válido. Usa "google" o "apple"');
         }
     } catch (error) {
-        console.error(`❌ Error probando ${provider}:`, error);
+        // Error silencioso para testing
     }
 };
 
@@ -1120,4 +1039,3 @@ window.clearUserFromLocalStorage = clearUserFromLocalStorage;
 window.getUserProfile = getUserProfile;
 window.checkOnboardingStatus = checkOnboardingStatus;
 
-console.log('🔐 Módulo de autenticación cargado');
