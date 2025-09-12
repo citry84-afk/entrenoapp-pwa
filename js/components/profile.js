@@ -1350,19 +1350,16 @@ window.saveProfileChanges = async function() {
                 photoURL = await uploadProfilePhoto(photoInput.files[0]);
             } catch (photoError) {
                 console.error('Error subiendo foto:', photoError);
-                // Continuar sin foto si hay error
+                alert('Error subiendo la foto. Se guardará sin foto.');
+                photoURL = user.photoURL || '';
             }
         }
         
-        // Actualizar perfil en Firebase Auth
-        await updateProfile(user, {
-            displayName: displayName,
-            photoURL: photoURL
-        });
-        
-        // Actualizar datos en Firestore
+        // Crear documento de usuario si no existe
         const userDoc = doc(db, 'users', user.uid);
-        await updateDoc(userDoc, {
+        const userData = {
+            uid: user.uid,
+            email: user.email,
             displayName: displayName,
             username: username,
             bio: bio || '',
@@ -1376,7 +1373,17 @@ window.saveProfileChanges = async function() {
                 units: 'metric',
                 language: 'es'
             },
+            createdAt: serverTimestamp(),
             updatedAt: serverTimestamp()
+        };
+        
+        // Usar setDoc en lugar de updateDoc para crear o actualizar
+        await setDoc(userDoc, userData, { merge: true });
+        
+        // Actualizar perfil en Firebase Auth
+        await updateProfile(user, {
+            displayName: displayName,
+            photoURL: photoURL
         });
         
         // Cerrar modal y actualizar UI
