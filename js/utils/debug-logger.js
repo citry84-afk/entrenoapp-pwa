@@ -15,10 +15,10 @@ class DebugLogger {
     }
 
     checkDebugMode() {
-        // MANTENER DEBUG ACTIVO MIENTRAS DESARROLLAMOS
-        return true; // Siempre activo hasta que terminemos de pulir
+        // Debug desactivado para producción
+        return false;
         
-        // Código original (desactivado temporalmente):
+        // Para activar debug, usar: localStorage.setItem('entrenoapp_debug', 'true')
         // return window.location.search.includes('debug') || 
         //        localStorage.getItem('entrenoapp_debug') === 'true';
     }
@@ -302,10 +302,5 @@ window.exportDebugLogs = () => console.log(window.debugLogger.exportLogs());
 
 console.log('🔍 Debug Logger cargado. Usa enableDebug() para activar.');
 
-// Auto-mostrar panel si estamos en debug mode
-setTimeout(() => {
-    if (window.debugLogger && window.debugLogger.isDebugMode) {
-        console.log('🔍 Auto-mostrando panel de debug...');
-        window.debugLogger.showDebugPanel();
-    }
-}, 2000);
+// Debug panel desactivado para producción
+// Para activar: localStorage.setItem('entrenoapp_debug', 'true') y recargar
