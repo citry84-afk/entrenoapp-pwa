@@ -1305,18 +1305,21 @@ window.closeEditProfileModal = function() {
 window.saveProfileChanges = async function() {
     try {
         const user = auth.currentUser;
-        if (!user) throw new Error('Usuario no autenticado');
+        if (!user) {
+            alert('No estás autenticado. Por favor, inicia sesión de nuevo.');
+            return;
+        }
         
         // Obtener datos del formulario
-        const displayName = document.getElementById('display-name').value.trim();
-        const username = document.getElementById('username').value.trim();
-        const bio = document.getElementById('bio').value.trim();
-        const privacy = document.querySelector('input[name="privacy"]:checked').value;
-        const notifications = document.getElementById('notifications').checked;
-        const friendRequests = document.getElementById('friend-requests').checked;
-        const activityNotifications = document.getElementById('activity-notifications').checked;
+        const displayName = document.getElementById('display-name')?.value?.trim();
+        const username = document.getElementById('username')?.value?.trim();
+        const bio = document.getElementById('bio')?.value?.trim();
+        const privacy = document.querySelector('input[name="privacy"]:checked')?.value || 'public';
+        const notifications = document.getElementById('notifications')?.checked || false;
+        const friendRequests = document.getElementById('friend-requests')?.checked || false;
+        const activityNotifications = document.getElementById('activity-notifications')?.checked || false;
         
-        // Validaciones
+        // Validaciones básicas
         if (!displayName) {
             alert('El nombre completo es obligatorio');
             return;
@@ -1327,37 +1330,28 @@ window.saveProfileChanges = async function() {
             return;
         }
         
-        // Validar formato de username (debe empezar con @ y tener al menos 3 caracteres)
+        // Validar formato de username
         if (!username.startsWith('@') || username.length < 4) {
             alert('El nombre de usuario debe empezar con @ y tener al menos 3 caracteres');
             return;
         }
         
-        // Validar que solo contenga caracteres válidos
         const usernamePattern = /^@[a-zA-Z0-9_]+$/;
         if (!usernamePattern.test(username)) {
             alert('El nombre de usuario solo puede contener letras, números y guiones bajos');
             return;
         }
         
-        // Verificar si el username ya está en uso (solo si cambió)
-        if (username !== socialState?.userProfile?.username) {
-            const usernameQuery = query(
-                collection(db, 'users'),
-                where('username', '==', username)
-            );
-            const usernameSnap = await getDocs(usernameQuery);
-            if (!usernameSnap.empty) {
-                alert('Este nombre de usuario ya está en uso. Elige otro.');
-                return;
-            }
-        }
-        
         // Procesar foto si se seleccionó una nueva
-        let photoURL = socialState?.userProfile?.photoURL;
+        let photoURL = user.photoURL || '';
         const photoInput = document.getElementById('photo-input');
-        if (photoInput.files[0]) {
-            photoURL = await uploadProfilePhoto(photoInput.files[0]);
+        if (photoInput && photoInput.files && photoInput.files[0]) {
+            try {
+                photoURL = await uploadProfilePhoto(photoInput.files[0]);
+            } catch (photoError) {
+                console.error('Error subiendo foto:', photoError);
+                // Continuar sin foto si hay error
+            }
         }
         
         // Actualizar perfil en Firebase Auth
@@ -1371,38 +1365,19 @@ window.saveProfileChanges = async function() {
         await updateDoc(userDoc, {
             displayName: displayName,
             username: username,
-            bio: bio,
+            bio: bio || '',
             photoURL: photoURL,
             settings: {
                 privacy: privacy,
                 notifications: notifications,
                 friendRequestNotifications: friendRequests,
                 activityNotifications: activityNotifications,
-                showInRanking: socialState?.settings?.showInRanking || true,
-                units: socialState?.settings?.units || 'metric',
-                language: socialState?.settings?.language || 'es'
+                showInRanking: true,
+                units: 'metric',
+                language: 'es'
             },
             updatedAt: serverTimestamp()
         });
-        
-        // Actualizar estado local si existe
-        if (typeof socialState !== 'undefined') {
-            socialState.userProfile = {
-                ...socialState.userProfile,
-                displayName: displayName,
-                username: username,
-                bio: bio,
-                photoURL: photoURL
-            };
-            
-            socialState.settings = {
-                ...socialState.settings,
-                privacy: privacy,
-                notifications: notifications,
-                friendRequestNotifications: friendRequests,
-                activityNotifications: activityNotifications
-            };
-        }
         
         // Cerrar modal y actualizar UI
         closeEditProfileModal();
@@ -1411,7 +1386,8 @@ window.saveProfileChanges = async function() {
         alert('✅ Perfil actualizado exitosamente!');
         
     } catch (error) {
-        alert('Error actualizando el perfil. Inténtalo de nuevo.');
+        console.error('Error actualizando perfil:', error);
+        alert('Error actualizando el perfil: ' + error.message);
     }
 };
 
