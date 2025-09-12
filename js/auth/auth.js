@@ -4,6 +4,8 @@ import {
     signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
     signInWithPopup,
+    signInWithRedirect,
+    getRedirectResult,
     GoogleAuthProvider,
     OAuthProvider,
     signOut,
@@ -36,8 +38,33 @@ let authState = {
 };
 
 // Inicializar página de autenticación
-window.initAuthPage = function() {
+window.initAuthPage = async function() {
     console.log('🔐 Inicializando página de autenticación');
+    
+    // Verificar si hay un redirect result (para móviles)
+    try {
+        const result = await getRedirectResult(auth);
+        if (result) {
+            console.log('📱 Redirect result encontrado:', result);
+            const user = result.user;
+            const isNewUser = result._tokenResponse?.isNewUser || false;
+            
+            if (isNewUser) {
+                const displayName = user.displayName || user.email.split('@')[0];
+                await createUserProfile(user, displayName);
+                showSuccess('¡Bienvenido! Configuremos tu perfil.');
+                setTimeout(() => { window.loadPage('onboarding'); }, 1500);
+            } else {
+                showSuccess('¡Bienvenido de vuelta!');
+                setTimeout(() => { window.loadPage('dashboard'); }, 1500);
+            }
+            await saveUserToLocalStorage(user);
+            return;
+        }
+    } catch (error) {
+        console.error('❌ Error procesando redirect result:', error);
+    }
+    
     renderAuthContent();
     setupAuthListeners();
 };
@@ -586,7 +613,18 @@ async function handleGoogleAuth() {
             // No lanzar error, solo advertir
         }
         
-        const result = await signInWithPopup(auth, googleProvider);
+        // Usar redirect en móviles, popup en desktop
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        
+        let result;
+        if (isMobile) {
+            console.log('📱 Usando redirect para móvil');
+            await signInWithRedirect(auth, googleProvider);
+            return; // El redirect manejará el resto
+        } else {
+            console.log('🖥️ Usando popup para desktop');
+            result = await signInWithPopup(auth, googleProvider);
+        }
         const user = result.user;
         console.log('✅ Login con Google exitoso:', user.email);
         console.log('📊 Result data:', result);
