@@ -1361,6 +1361,8 @@ window.saveProfileChanges = async function() {
         
         // Procesar foto si se seleccionó una nueva
         let photoURL = user.photoURL || '';
+        let photoBase64 = null;
+        
         const photoInput = document.getElementById('photo-input');
         if (photoInput && photoInput.files && photoInput.files[0]) {
             if (window.debugLogger) {
@@ -1369,6 +1371,7 @@ window.saveProfileChanges = async function() {
                     fileSize: photoInput.files[0].size
                 });
             }
+            
             try {
                 const photoResult = await uploadProfilePhoto(photoInput.files[0]);
                 if (window.debugLogger) {
@@ -1378,11 +1381,13 @@ window.saveProfileChanges = async function() {
                     });
                 }
                 
-                // Guardar como URL o base64 según el resultado
+                // Asignar según el tipo de resultado
                 if (photoResult.startsWith('data:')) {
-                    photoURL = photoResult; // Base64
+                    photoBase64 = photoResult; // Base64
+                    photoURL = ''; // Limpiar URL si usamos base64
                 } else {
                     photoURL = photoResult; // URL
+                    photoBase64 = null; // Limpiar base64 si usamos URL
                 }
             } catch (photoError) {
                 if (window.debugLogger) {
@@ -1393,12 +1398,19 @@ window.saveProfileChanges = async function() {
                 }
                 console.error('Error procesando foto:', photoError);
                 alert('Error subiendo la foto: ' + photoError.message + '. Se guardará sin foto.');
+                // Mantener foto actual
                 photoURL = user.photoURL || '';
+                photoBase64 = user.photoBase64 || null;
             }
         } else {
             if (window.debugLogger) {
-                window.debugLogger.logInfo('PROFILE_SAVE', 'No se seleccionó nueva foto, usando foto actual', { photoURL });
+                window.debugLogger.logInfo('PROFILE_SAVE', 'No se seleccionó nueva foto, usando foto actual', { 
+                    photoURL: photoURL || 'ninguna',
+                    photoBase64: user.photoBase64 ? 'presente' : 'ninguna'
+                });
             }
+            // Mantener foto actual
+            photoBase64 = user.photoBase64 || null;
         }
         
         // Crear documento de usuario si no existe
@@ -1423,9 +1435,10 @@ window.saveProfileChanges = async function() {
         };
         
         // Añadir foto según el tipo
-        if (photoURL.startsWith('data:')) {
-            userData.photoBase64 = photoURL; // Base64
-        } else {
+        if (photoBase64) {
+            userData.photoBase64 = photoBase64; // Base64
+        }
+        if (photoURL) {
             userData.photoURL = photoURL; // URL
         }
         
