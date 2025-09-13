@@ -1373,6 +1373,13 @@ window.saveProfileChanges = async function() {
             }
             
             try {
+                // Mostrar indicador de progreso
+                const saveButton = document.querySelector('button[onclick="saveProfileChanges()"]');
+                if (saveButton) {
+                    saveButton.disabled = true;
+                    saveButton.textContent = '📸 Subiendo foto...';
+                }
+                
                 const photoResult = await uploadProfilePhoto(photoInput.files[0]);
                 if (window.debugLogger) {
                     window.debugLogger.logSuccess('PROFILE_SAVE', 'Foto procesada exitosamente', { 
@@ -1389,6 +1396,12 @@ window.saveProfileChanges = async function() {
                     photoURL = photoResult; // URL
                     photoBase64 = null; // Limpiar base64 si usamos URL
                 }
+                
+                // Restaurar botón
+                if (saveButton) {
+                    saveButton.disabled = false;
+                    saveButton.textContent = '💾 Guardar Cambios';
+                }
             } catch (photoError) {
                 if (window.debugLogger) {
                     window.debugLogger.logError('PROFILE_SAVE', 'Error procesando foto', {
@@ -1397,6 +1410,14 @@ window.saveProfileChanges = async function() {
                     });
                 }
                 console.error('Error procesando foto:', photoError);
+                
+                // Restaurar botón
+                const saveButton = document.querySelector('button[onclick="saveProfileChanges()"]');
+                if (saveButton) {
+                    saveButton.disabled = false;
+                    saveButton.textContent = '💾 Guardar Cambios';
+                }
+                
                 alert('Error subiendo la foto: ' + photoError.message + '. Se guardará sin foto.');
                 // Mantener foto actual
                 photoURL = user.photoURL || '';
@@ -1477,7 +1498,16 @@ window.saveProfileChanges = async function() {
         renderProfilePage();
         
         if (window.debugLogger) {
-            window.debugLogger.logSuccess('PROFILE_SAVE', 'Proceso de guardado completado exitosamente');
+            window.debugLogger.logSuccess('PROFILE_SAVE', 'Proceso de guardado completado exitosamente', {
+                photoURL: photoURL || 'ninguna',
+                photoBase64: photoBase64 ? 'presente' : 'ninguna',
+                finalData: {
+                    displayName,
+                    username,
+                    bio,
+                    hasPhoto: !!(photoURL || photoBase64)
+                }
+            });
         }
         
         alert('✅ Perfil actualizado exitosamente!');
@@ -1583,12 +1613,22 @@ async function uploadProfilePhoto(file) {
                     reject(new Error('Timeout: La subida de archivo tardó demasiado'));
                 }, 10000);
                 
+                // Log de progreso cada 2 segundos
+                const progressInterval = setInterval(() => {
+                    if (window.debugLogger) {
+                        window.debugLogger.logInfo('PHOTO_UPLOAD', 'Subida en progreso...', { 
+                            elapsed: Date.now() - Date.now() + 10000 
+                        });
+                    }
+                }, 2000);
+                
                 uploadTask
                     .then((snapshot) => {
                         if (window.debugLogger) {
                             window.debugLogger.logInfo('PHOTO_UPLOAD', 'Subida completada antes del timeout');
                         }
                         clearTimeout(timeout);
+                        clearInterval(progressInterval);
                         resolve(snapshot);
                     })
                     .catch((error) => {
@@ -1596,6 +1636,7 @@ async function uploadProfilePhoto(file) {
                             window.debugLogger.logError('PHOTO_UPLOAD', 'Error en uploadTask', { error: error.message });
                         }
                         clearTimeout(timeout);
+                        clearInterval(progressInterval);
                         reject(error);
                     });
             });
