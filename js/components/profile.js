@@ -1498,9 +1498,30 @@ window.saveProfileChanges = async function() {
 // Convertir archivo a base64
 function convertFileToBase64(file) {
     return new Promise((resolve, reject) => {
+        if (window.debugLogger) {
+            window.debugLogger.logInfo('PHOTO_UPLOAD', 'Iniciando conversión a base64', {
+                fileName: file.name,
+                fileSize: file.size,
+                fileType: file.type
+            });
+        }
+        
         const reader = new FileReader();
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = error => reject(error);
+        reader.onload = () => {
+            if (window.debugLogger) {
+                window.debugLogger.logSuccess('PHOTO_UPLOAD', 'FileReader completado', {
+                    resultLength: reader.result.length,
+                    resultType: typeof reader.result
+                });
+            }
+            resolve(reader.result);
+        };
+        reader.onerror = error => {
+            if (window.debugLogger) {
+                window.debugLogger.logError('PHOTO_UPLOAD', 'Error en FileReader', { error: error.message });
+            }
+            reject(error);
+        };
         reader.readAsDataURL(file);
     });
 }
@@ -1554,17 +1575,26 @@ async function uploadProfilePhoto(file) {
             const uploadWithTimeout = new Promise((resolve, reject) => {
                 const uploadTask = uploadBytes(storageRef, file);
                 
-                // Timeout de 15 segundos
+                // Timeout de 10 segundos (reducido para fallback más rápido)
                 const timeout = setTimeout(() => {
+                    if (window.debugLogger) {
+                        window.debugLogger.logError('PHOTO_UPLOAD', 'Timeout alcanzado, cancelando subida');
+                    }
                     reject(new Error('Timeout: La subida de archivo tardó demasiado'));
-                }, 15000);
+                }, 10000);
                 
                 uploadTask
                     .then((snapshot) => {
+                        if (window.debugLogger) {
+                            window.debugLogger.logInfo('PHOTO_UPLOAD', 'Subida completada antes del timeout');
+                        }
                         clearTimeout(timeout);
                         resolve(snapshot);
                     })
                     .catch((error) => {
+                        if (window.debugLogger) {
+                            window.debugLogger.logError('PHOTO_UPLOAD', 'Error en uploadTask', { error: error.message });
+                        }
                         clearTimeout(timeout);
                         reject(error);
                     });
@@ -1585,6 +1615,14 @@ async function uploadProfilePhoto(file) {
             }
             
             const base64 = await convertFileToBase64(file);
+            
+            if (window.debugLogger) {
+                window.debugLogger.logSuccess('PHOTO_UPLOAD', 'Conversión a base64 completada', {
+                    base64Length: base64.length,
+                    startsWithData: base64.startsWith('data:')
+                });
+            }
+            
             return base64; // Retornar base64 en lugar de URL
         }
         
