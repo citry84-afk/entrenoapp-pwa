@@ -1,4 +1,4 @@
-const CACHE_NAME = 'entrenoapp-v1.0.1';
+const CACHE_NAME = 'entrenoapp-v1.0.2';
 const ASSETS_TO_CACHE = [
     '/',
     '/index.html',
@@ -18,6 +18,7 @@ const ASSETS_TO_CACHE = [
     '/js/utils/tts.js',
     '/js/utils/offline.js',
     '/manifest.json',
+    '/assets/icons/logo-custom.svg',
     '/assets/icons/icon-192x192.png',
     '/assets/icons/icon-512x512.png',
     '/assets/icons/icon-144x144.png',

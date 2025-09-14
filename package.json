@@ -1,0 +1,12 @@
+{
+  "name": "entrenoapp-icon-generator",
+  "version": "1.0.0",
+  "description": "Generador de iconos para EntrenoApp",
+  "main": "generate-icons-node.js",
+  "scripts": {
+    "generate": "node generate-icons-node.js"
+  },
+  "dependencies": {
+    "canvas": "^2.11.2"
+  }
+}
