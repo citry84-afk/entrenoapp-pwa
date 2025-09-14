@@ -404,6 +404,11 @@ async function saveFunctionalWorkout() {
         // Mostrar mensaje de éxito
         alert('¡WOD guardado exitosamente! 🎉');
         
+        // Mostrar anuncio intersticial
+        if (window.adsManager) {
+            window.adsManager.showInterstitialAd();
+        }
+        
         // Volver al dashboard
         window.navigateToPage('dashboard');
         

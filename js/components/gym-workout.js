@@ -582,6 +582,11 @@ async function saveGymWorkout() {
         // Mostrar mensaje de éxito
         alert('¡Entrenamiento guardado exitosamente! 🎉');
         
+        // Mostrar anuncio intersticial
+        if (window.adsManager) {
+            window.adsManager.showInterstitialAd();
+        }
+        
         // Volver al dashboard
         window.navigateToPage('dashboard');
         

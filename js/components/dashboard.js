@@ -125,6 +125,13 @@ async function loadUserPlan() {
         // Generar mensaje motivacional
         dashboardState.motivationalMessage = generateMotivationalMessage();
         
+        // Mostrar anuncio nativo en el dashboard
+        if (window.adsManager) {
+            setTimeout(() => {
+                window.adsManager.createNativeAd('quick-actions');
+            }, 2000);
+        }
+        
         console.log('✅ Datos del dashboard cargados:', dashboardState);
         
     } catch (error) {
