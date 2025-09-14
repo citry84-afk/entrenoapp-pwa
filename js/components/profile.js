@@ -1510,6 +1510,16 @@ window.saveProfileChanges = async function() {
             });
         }
         
+        // Log final muy visible
+        console.log('🎉 PERFIL GUARDADO EXITOSAMENTE - TODOS LOS DATOS PERSISTIDOS');
+        console.log('📊 Datos finales:', {
+            displayName,
+            username,
+            bio,
+            photoURL: photoURL || 'ninguna',
+            photoBase64: photoBase64 ? 'presente' : 'ninguna'
+        });
+        
         alert('✅ Perfil actualizado exitosamente!');
         
     } catch (error) {

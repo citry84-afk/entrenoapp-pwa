@@ -2,7 +2,7 @@
 class DebugLogger {
     constructor() {
         this.logs = [];
-        this.maxLogs = 100;
+        this.maxLogs = 500; // Aumentado para capturar más logs
         this.isDebugMode = this.checkDebugMode();
         this.init();
     }
