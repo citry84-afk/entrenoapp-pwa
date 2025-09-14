@@ -438,7 +438,7 @@ function renderUserProfile() {
             <div class="profile-header glass-card mb-lg">
                 <div class="profile-info">
                     <div class="profile-avatar">
-                        <img src="${profile.photoURL || profile.photoBase64 || '/assets/default-avatar.png'}" 
+                        <img src="/assets/default-avatar.png" 
                              alt="${profile.displayName}" 
                              class="avatar-image">
                         <div class="level-badge">${stats.level}</div>
@@ -569,7 +569,7 @@ function renderFriendRequests() {
                 ${socialState.friendRequests.map(request => `
                     <div class="request-item">
                         <div class="request-user">
-                            <img src="${request.sender.photoURL || '/assets/default-avatar.png'}" 
+                            <img src="/assets/default-avatar.png" 
                                  alt="${request.sender.displayName}" 
                                  class="user-avatar">
                             <div class="user-info">
@@ -607,7 +607,7 @@ function renderSentFriendRequests() {
                 ${socialState.sentRequests.map(request => `
                     <div class="request-item">
                         <div class="request-user">
-                            <img src="${request.receiver.photoURL || '/assets/default-avatar.png'}" 
+                            <img src="/assets/default-avatar.png" 
                                  alt="${request.receiver.displayName}" 
                                  class="user-avatar">
                             <div class="user-info">
@@ -659,7 +659,7 @@ function renderFriendsList() {
             <div class="friends-grid">
                 ${socialState.friends.map(friend => `
                     <div class="friend-card">
-                        <img src="${friend.photoURL || '/assets/default-avatar.png'}" 
+                        <img src="/assets/default-avatar.png" 
                              alt="${friend.displayName}" 
                              class="friend-avatar">
                         <div class="friend-info">
@@ -976,7 +976,7 @@ function renderFriendActivity() {
             <div class="activity-list">
                 ${socialState.friendActivity.slice(0, 5).map(activity => `
                     <div class="activity-item">
-                        <img src="${activity.user.photoURL || '/assets/default-avatar.png'}" 
+                        <img src="/assets/default-avatar.png" 
                              alt="${activity.user.displayName}" 
                              class="activity-avatar">
                         <div class="activity-content">
@@ -1002,7 +1002,7 @@ function renderGlobalRanking() {
                             <span class="position-number">${user.position}</span>
                             ${user.position <= 3 ? getMedalIcon(user.position) : ''}
                         </div>
-                        <img src="${user.photoURL || '/assets/default-avatar.png'}" 
+                        <img src="/assets/default-avatar.png" 
                              alt="${user.displayName}" 
                              class="ranking-avatar">
                         <div class="ranking-info">
@@ -1167,18 +1167,19 @@ function showEditProfileModal() {
             
             <div class="modal-body">
                 <form id="edit-profile-form" class="profile-edit-form">
-                    <!-- Foto de perfil -->
+                    <!-- Avatar por defecto -->
                     <div class="form-group">
-                        <label class="form-label">📸 Foto de Perfil</label>
-                        <div class="photo-upload-container">
-                            <div class="current-photo">
-                                <img id="current-photo" src="${profile?.photoURL || '/assets/default-avatar.png'}" 
-                                     alt="Foto actual" class="profile-photo-preview">
-                                <div class="photo-overlay">
-                                    <span class="photo-text">Cambiar</span>
+                        <label class="form-label">👤 Avatar</label>
+                        <div class="avatar-preview-container">
+                            <div class="default-avatar-preview">
+                                <img src="/assets/default-avatar.png" 
+                                     alt="Avatar por defecto" 
+                                     class="profile-photo-preview">
+                                <div class="avatar-info">
+                                    <span class="avatar-text">Avatar por defecto</span>
+                                    <small class="avatar-note">Se usará un avatar genérico</small>
                                 </div>
                             </div>
-                            <input type="file" id="photo-input" accept="image/*" style="display: none;">
                         </div>
                     </div>
                     
@@ -1266,32 +1267,8 @@ function showEditProfileModal() {
     `;
     
     document.body.appendChild(modal);
-    setupPhotoUpload();
 }
 
-// Configurar subida de foto
-function setupPhotoUpload() {
-    const photoInput = document.getElementById('photo-input');
-    const currentPhoto = document.getElementById('current-photo');
-    const photoContainer = document.querySelector('.photo-upload-container');
-    
-    // Click en el contenedor de foto
-    photoContainer.addEventListener('click', () => {
-        photoInput.click();
-    });
-    
-    // Cambio de archivo
-    photoInput.addEventListener('change', (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                currentPhoto.src = e.target.result;
-            };
-            reader.readAsDataURL(file);
-        }
-    });
-}
 
 // Cerrar modal de edición
 window.closeEditProfileModal = function() {
@@ -1359,79 +1336,12 @@ window.saveProfileChanges = async function() {
             return;
         }
         
-        // Procesar foto si se seleccionó una nueva
-        let photoURL = user.photoURL || '';
-        let photoBase64 = null;
+        // Usar avatar por defecto (sin subida de fotos)
+        const photoURL = '/assets/default-avatar.png';
+        const photoBase64 = null;
         
-        const photoInput = document.getElementById('photo-input');
-        if (photoInput && photoInput.files && photoInput.files[0]) {
-            if (window.debugLogger) {
-                window.debugLogger.logInfo('PROFILE_SAVE', 'Foto seleccionada, iniciando subida', {
-                    fileName: photoInput.files[0].name,
-                    fileSize: photoInput.files[0].size
-                });
-            }
-            
-            try {
-                // Mostrar indicador de progreso
-                const saveButton = document.querySelector('button[onclick="saveProfileChanges()"]');
-                if (saveButton) {
-                    saveButton.disabled = true;
-                    saveButton.textContent = '📸 Subiendo foto...';
-                }
-                
-                const photoResult = await uploadProfilePhoto(photoInput.files[0]);
-                if (window.debugLogger) {
-                    window.debugLogger.logSuccess('PROFILE_SAVE', 'Foto procesada exitosamente', { 
-                        isBase64: photoResult.startsWith('data:'),
-                        isUrl: photoResult.startsWith('http')
-                    });
-                }
-                
-                // Asignar según el tipo de resultado
-                if (photoResult.startsWith('data:')) {
-                    photoBase64 = photoResult; // Base64
-                    photoURL = ''; // Limpiar URL si usamos base64
-                } else {
-                    photoURL = photoResult; // URL
-                    photoBase64 = null; // Limpiar base64 si usamos URL
-                }
-                
-                // Restaurar botón
-                if (saveButton) {
-                    saveButton.disabled = false;
-                    saveButton.textContent = '💾 Guardar Cambios';
-                }
-            } catch (photoError) {
-                if (window.debugLogger) {
-                    window.debugLogger.logError('PROFILE_SAVE', 'Error procesando foto', {
-                        error: photoError.message,
-                        code: photoError.code
-                    });
-                }
-                console.error('Error procesando foto:', photoError);
-                
-                // Restaurar botón
-                const saveButton = document.querySelector('button[onclick="saveProfileChanges()"]');
-                if (saveButton) {
-                    saveButton.disabled = false;
-                    saveButton.textContent = '💾 Guardar Cambios';
-                }
-                
-                alert('Error subiendo la foto: ' + photoError.message + '. Se guardará sin foto.');
-                // Mantener foto actual
-                photoURL = user.photoURL || '';
-                photoBase64 = user.photoBase64 || null;
-            }
-        } else {
-            if (window.debugLogger) {
-                window.debugLogger.logInfo('PROFILE_SAVE', 'No se seleccionó nueva foto, usando foto actual', { 
-                    photoURL: photoURL || 'ninguna',
-                    photoBase64: user.photoBase64 ? 'presente' : 'ninguna'
-                });
-            }
-            // Mantener foto actual
-            photoBase64 = user.photoBase64 || null;
+        if (window.debugLogger) {
+            window.debugLogger.logInfo('PROFILE_SAVE', 'Usando avatar por defecto (sin subida de fotos)');
         }
         
         // Crear documento de usuario si no existe
@@ -1455,13 +1365,8 @@ window.saveProfileChanges = async function() {
             updatedAt: serverTimestamp()
         };
         
-        // Añadir foto según el tipo
-        if (photoBase64) {
-            userData.photoBase64 = photoBase64; // Base64
-        }
-        if (photoURL) {
-            userData.photoURL = photoURL; // URL
-        }
+        // Usar avatar por defecto
+        userData.photoURL = photoURL;
         
         if (window.debugLogger) {
             window.debugLogger.logInfo('PROFILE_SAVE', 'Datos preparados para Firestore', userData);
@@ -1499,13 +1404,11 @@ window.saveProfileChanges = async function() {
         
         if (window.debugLogger) {
             window.debugLogger.logSuccess('PROFILE_SAVE', 'Proceso de guardado completado exitosamente', {
-                photoURL: photoURL || 'ninguna',
-                photoBase64: photoBase64 ? 'presente' : 'ninguna',
                 finalData: {
                     displayName,
                     username,
                     bio,
-                    hasPhoto: !!(photoURL || photoBase64)
+                    avatar: 'por defecto'
                 }
             });
         }
@@ -1516,8 +1419,7 @@ window.saveProfileChanges = async function() {
             displayName,
             username,
             bio,
-            photoURL: photoURL || 'ninguna',
-            photoBase64: photoBase64 ? 'presente' : 'ninguna'
+            avatar: 'por defecto'
         });
         
         alert('✅ Perfil actualizado exitosamente!');
@@ -1535,178 +1437,6 @@ window.saveProfileChanges = async function() {
     }
 };
 
-// Convertir archivo a base64
-function convertFileToBase64(file) {
-    return new Promise((resolve, reject) => {
-        if (window.debugLogger) {
-            window.debugLogger.logInfo('PHOTO_UPLOAD', 'Iniciando conversión a base64', {
-                fileName: file.name,
-                fileSize: file.size,
-                fileType: file.type
-            });
-        }
-        
-        const reader = new FileReader();
-        reader.onload = () => {
-            if (window.debugLogger) {
-                window.debugLogger.logSuccess('PHOTO_UPLOAD', 'FileReader completado', {
-                    resultLength: reader.result.length,
-                    resultType: typeof reader.result
-                });
-            }
-            resolve(reader.result);
-        };
-        reader.onerror = error => {
-            if (window.debugLogger) {
-                window.debugLogger.logError('PHOTO_UPLOAD', 'Error en FileReader', { error: error.message });
-            }
-            reject(error);
-        };
-        reader.readAsDataURL(file);
-    });
-}
-
-// Subir foto de perfil
-async function uploadProfilePhoto(file) {
-    if (window.debugLogger) {
-        window.debugLogger.logInfo('PHOTO_UPLOAD', 'Iniciando subida de foto', { 
-            fileName: file.name, 
-            fileSize: file.size, 
-            fileType: file.type 
-        });
-    }
-    
-    // Verificar configuración de Firebase Storage
-    if (!storage) {
-        throw new Error('Firebase Storage no está configurado');
-    }
-    
-    if (window.debugLogger) {
-        window.debugLogger.logInfo('PHOTO_UPLOAD', 'Firebase Storage configurado correctamente');
-    }
-    
-    try {
-        const user = auth.currentUser;
-        if (!user) {
-            if (window.debugLogger) {
-                window.debugLogger.logError('PHOTO_UPLOAD', 'Usuario no autenticado');
-            }
-            throw new Error('Usuario no autenticado');
-        }
-        
-        // Crear referencia de almacenamiento
-        const fileName = `${Date.now()}_${file.name}`;
-        const storageRef = ref(storage, `profile-photos/${user.uid}/${fileName}`);
-        
-        if (window.debugLogger) {
-            window.debugLogger.logInfo('PHOTO_UPLOAD', 'Referencia de almacenamiento creada', { 
-                path: `profile-photos/${user.uid}/${fileName}` 
-            });
-        }
-        
-        // Subir archivo con timeout
-        if (window.debugLogger) {
-            window.debugLogger.logInfo('PHOTO_UPLOAD', 'Subiendo archivo a Firebase Storage...');
-        }
-        
-        // Intentar subida con timeout
-        let snapshot;
-        try {
-            const uploadWithTimeout = new Promise((resolve, reject) => {
-                const uploadTask = uploadBytes(storageRef, file);
-                
-                // Timeout de 10 segundos (reducido para fallback más rápido)
-                const timeout = setTimeout(() => {
-                    if (window.debugLogger) {
-                        window.debugLogger.logError('PHOTO_UPLOAD', 'Timeout alcanzado, cancelando subida');
-                    }
-                    reject(new Error('Timeout: La subida de archivo tardó demasiado'));
-                }, 10000);
-                
-                // Log de progreso cada 2 segundos
-                const progressInterval = setInterval(() => {
-                    if (window.debugLogger) {
-                        window.debugLogger.logInfo('PHOTO_UPLOAD', 'Subida en progreso...', { 
-                            elapsed: Date.now() - Date.now() + 10000 
-                        });
-                    }
-                }, 2000);
-                
-                uploadTask
-                    .then((snapshot) => {
-                        if (window.debugLogger) {
-                            window.debugLogger.logInfo('PHOTO_UPLOAD', 'Subida completada antes del timeout');
-                        }
-                        clearTimeout(timeout);
-                        clearInterval(progressInterval);
-                        resolve(snapshot);
-                    })
-                    .catch((error) => {
-                        if (window.debugLogger) {
-                            window.debugLogger.logError('PHOTO_UPLOAD', 'Error en uploadTask', { error: error.message });
-                        }
-                        clearTimeout(timeout);
-                        clearInterval(progressInterval);
-                        reject(error);
-                    });
-            });
-            
-            snapshot = await uploadWithTimeout;
-        } catch (uploadError) {
-            if (window.debugLogger) {
-                window.debugLogger.logError('PHOTO_UPLOAD', 'Error en subida de archivo', {
-                    error: uploadError.message,
-                    code: uploadError.code
-                });
-            }
-            
-            // Fallback: convertir a base64 y guardar en Firestore
-            if (window.debugLogger) {
-                window.debugLogger.logInfo('PHOTO_UPLOAD', 'Usando fallback: convertir a base64');
-            }
-            
-            const base64 = await convertFileToBase64(file);
-            
-            if (window.debugLogger) {
-                window.debugLogger.logSuccess('PHOTO_UPLOAD', 'Conversión a base64 completada', {
-                    base64Length: base64.length,
-                    startsWithData: base64.startsWith('data:')
-                });
-            }
-            
-            return base64; // Retornar base64 en lugar de URL
-        }
-        
-        if (window.debugLogger) {
-            window.debugLogger.logSuccess('PHOTO_UPLOAD', 'Archivo subido exitosamente', { 
-                bytesTransferred: snapshot.metadata.size 
-            });
-        }
-        
-        // Obtener URL de descarga
-        if (window.debugLogger) {
-            window.debugLogger.logInfo('PHOTO_UPLOAD', 'Obteniendo URL de descarga...');
-        }
-        const downloadURL = await getDownloadURL(snapshot.ref);
-        
-        if (window.debugLogger) {
-            window.debugLogger.logSuccess('PHOTO_UPLOAD', 'URL de descarga obtenida', { downloadURL });
-        }
-        
-        return downloadURL;
-        
-    } catch (error) {
-        if (window.debugLogger) {
-            window.debugLogger.logError('PHOTO_UPLOAD', 'Error subiendo foto', {
-                error: error.message,
-                code: error.code,
-                stack: error.stack
-            });
-        }
-        console.error('❌ Error subiendo foto:', error);
-        throw error;
-    }
-};
 
 function switchRanking(type) {
     const content = document.getElementById('ranking-content');
@@ -1757,7 +1487,7 @@ function renderFriendsRanking() {
                             <span class="position-number">${friend.position}</span>
                             ${friend.position <= 3 ? getMedalIcon(friend.position) : ''}
                         </div>
-                        <img src="${friend.photoURL || '/assets/default-avatar.png'}" 
+                        <img src="/assets/default-avatar.png" 
                              alt="${friend.displayName}" 
                              class="ranking-avatar">
                         <div class="ranking-info">
@@ -1798,7 +1528,7 @@ function renderDailyRanking() {
                             <span class="position-number">${entry.position}</span>
                             ${entry.position <= 3 ? getMedalIcon(entry.position) : ''}
                         </div>
-                        <img src="${entry.user.photoURL || '/assets/default-avatar.png'}" 
+                        <img src="/assets/default-avatar.png" 
                              alt="${entry.user.displayName}" 
                              class="ranking-avatar">
                         <div class="ranking-info">
@@ -1883,7 +1613,7 @@ function renderSearchResults() {
             ${results.map(u => `
                 <div class="result-item">
                     <div class="result-left">
-                        <img src="${u.photoURL || '/assets/default-avatar.png'}" alt="${u.displayName || u.username}" class="result-avatar">
+                        <img src="/assets/default-avatar.png" alt="${u.displayName || u.username}" class="result-avatar">
                         <div class="result-info">
                             <div class="result-name">${u.displayName || 'Usuario'}</div>
                             <div class="result-username text-secondary">${u.username || ''}</div>
