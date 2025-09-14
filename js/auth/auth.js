@@ -42,6 +42,7 @@ window.initAuthPage = async function() {
     // Verificar si ya hay un usuario autenticado
     const currentUser = auth.currentUser;
     if (currentUser) {
+        console.log('Usuario ya autenticado:', currentUser.email);
         showSuccess('¡Bienvenido de vuelta!');
         window.location.href = '#dashboard';
         return;
@@ -54,22 +55,45 @@ window.initAuthPage = async function() {
             const user = result.user;
             const isNewUser = result._tokenResponse?.isNewUser || false;
             
+            // Debug logging
+            console.log('Redirect result encontrado:', {
+                user: user ? user.email : 'No user',
+                isNewUser,
+                provider: result.providerId
+            });
+            
             // Mostrar mensaje de carga
             showSuccess('Procesando autenticación...');
             
-            if (isNewUser) {
-                const displayName = user.displayName || user.email.split('@')[0];
-                await createUserProfile(user, displayName);
-                showSuccess('¡Bienvenido! Configuremos tu perfil.');
-                window.location.href = '#onboarding';
-                return;
+            // Guardar datos del usuario primero
+            await saveUserToLocalStorage(user);
+            
+            // Verificar que el usuario esté realmente autenticado
+            if (auth.currentUser && auth.currentUser.uid === user.uid) {
+                if (isNewUser) {
+                    const displayName = user.displayName || user.email.split('@')[0];
+                    await createUserProfile(user, displayName);
+                    showSuccess('¡Bienvenido! Configuremos tu perfil.');
+                    setTimeout(() => {
+                        window.location.href = '#onboarding';
+                    }, 1000);
+                    return;
+                } else {
+                    showSuccess('¡Bienvenido de vuelta!');
+                    setTimeout(() => {
+                        window.location.href = '#dashboard';
+                    }, 1000);
+                    return;
+                }
             } else {
-                showSuccess('¡Bienvenido de vuelta!');
-                window.location.href = '#dashboard';
-                return;
+                console.error('Usuario no autenticado después del redirect');
+                showError('Error en la autenticación. Intenta de nuevo.');
             }
+        } else {
+            console.log('No hay redirect result');
         }
     } catch (error) {
+        console.error('Error en getRedirectResult:', error);
         // Manejar errores de redirect
         if (error.code === 'auth/network-request-failed') {
             showError('Error de conexión. Verifica tu conexión a internet e intenta de nuevo.');
@@ -1190,6 +1214,27 @@ window.debugMobileAuth = function() {
         protocol: window.location.protocol,
         isHTTPS: window.location.protocol === 'https:'
     };
+};
+
+// Función de debug para redirect
+window.debugRedirectAuth = async function() {
+    try {
+        const result = await getRedirectResult(auth);
+        console.log('=== DEBUG REDIRECT AUTH ===');
+        console.log('Redirect result:', result);
+        if (result) {
+            console.log('User:', result.user);
+            console.log('Provider:', result.providerId);
+            console.log('Is New User:', result._tokenResponse?.isNewUser);
+        } else {
+            console.log('No redirect result found');
+        }
+        console.log('========================');
+        return result;
+    } catch (error) {
+        console.error('Error en debug redirect:', error);
+        return null;
+    }
 };
 
 // Exportar funciones útiles
