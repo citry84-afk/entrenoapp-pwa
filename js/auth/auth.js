@@ -39,12 +39,23 @@ let authState = {
 
 // Inicializar página de autenticación
 window.initAuthPage = async function() {
+    // Verificar si ya hay un usuario autenticado
+    const currentUser = auth.currentUser;
+    if (currentUser) {
+        showSuccess('¡Bienvenido de vuelta!');
+        window.location.href = '#dashboard';
+        return;
+    }
+    
     // Verificar si hay un redirect result (para móviles)
     try {
         const result = await getRedirectResult(auth);
         if (result) {
             const user = result.user;
             const isNewUser = result._tokenResponse?.isNewUser || false;
+            
+            // Mostrar mensaje de carga
+            showSuccess('Procesando autenticación...');
             
             if (isNewUser) {
                 const displayName = user.displayName || user.email.split('@')[0];
@@ -59,15 +70,14 @@ window.initAuthPage = async function() {
             }
         }
     } catch (error) {
-        // Si hay error, continuar con el flujo normal
-    }
-    
-    // Verificar si ya hay un usuario autenticado
-    const currentUser = auth.currentUser;
-    if (currentUser) {
-        showSuccess('¡Bienvenido de vuelta!');
-        window.location.href = '#dashboard';
-        return;
+        // Manejar errores de redirect
+        if (error.code === 'auth/network-request-failed') {
+            showError('Error de conexión. Verifica tu conexión a internet e intenta de nuevo.');
+        } else if (error.code === 'auth/too-many-requests') {
+            showError('Demasiados intentos. Espera un momento e intenta de nuevo.');
+        } else if (error.code !== 'auth/popup-closed-by-user') {
+            showError('Error en la autenticación. Intenta de nuevo.');
+        }
     }
     
     renderAuthContent();
@@ -207,6 +217,15 @@ function renderLoginForm() {
                 </button>
                 -->
             </div>
+            
+            ${isIOSSafari() ? `
+                <div class="ios-fallback text-center mt-md">
+                    <p class="text-secondary mb-sm">¿Problemas con Google en Safari?</p>
+                    <button id="show-email-login" class="link-button">
+                        Usar email y contraseña
+                    </button>
+                </div>
+            ` : ''}
             
             <div class="auth-links text-center">
                 <button 
@@ -421,6 +440,15 @@ function setupFormListeners() {
     if (appleLogin) {
         appleLogin.addEventListener('click', handleAppleAuth);
     }
+    
+    // Botón de fallback para iOS
+    const showEmailLogin = document.getElementById('show-email-login');
+    if (showEmailLogin) {
+        showEmailLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            showView('login');
+        });
+    }
 }
 
 // Configurar listeners de navegación
@@ -587,6 +615,19 @@ async function handleForgotPassword(e) {
 }
 
 // Manejar autenticación con Google
+// Detectar si es iOS Safari
+function isIOSSafari() {
+    const ua = navigator.userAgent;
+    const isIOS = /iPad|iPhone|iPod/.test(ua);
+    const isSafari = /Safari/.test(ua) && !/Chrome|CriOS|FxiOS|OPiOS|mercury/.test(ua);
+    return isIOS && isSafari;
+}
+
+// Detectar si es dispositivo móvil
+function isMobileDevice() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
 async function handleGoogleAuth() {
     setLoading(true);
     
@@ -605,39 +646,63 @@ async function handleGoogleAuth() {
             // No lanzar error, solo advertir
         }
         
-        // Usar redirect en móviles, popup en desktop
-        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-        
         let result;
-        if (isMobile) {
+        const isIOS = isIOSSafari();
+        const isMobile = isMobileDevice();
+        
+        // Estrategia especial para iOS Safari
+        if (isIOS) {
+            // En iOS Safari, usar redirect con timeout
+            showSuccess('Redirigiendo a Google...');
+            
+            // Agregar timeout para detectar si el redirect falla
+            const redirectTimeout = setTimeout(() => {
+                showError('La autenticación tardó demasiado. Intenta de nuevo.');
+                setLoading(false);
+            }, 30000); // 30 segundos timeout
+            
+            try {
+                await signInWithRedirect(auth, googleProvider);
+                clearTimeout(redirectTimeout);
+            } catch (error) {
+                clearTimeout(redirectTimeout);
+                throw error;
+            }
+            return;
+        } else if (isMobile) {
+            // En otros móviles, usar redirect
             await signInWithRedirect(auth, googleProvider);
-            // El redirect redirigirá a la página y se procesará en initAuthPage
             return;
         } else {
+            // En desktop, usar popup
             result = await signInWithPopup(auth, googleProvider);
         }
-        const user = result.user;
         
-        // Verificar si es un usuario nuevo
-        const isNewUser = result._tokenResponse?.isNewUser || false;
-        
-        if (isNewUser) {
-            // Crear perfil en Firestore para usuario nuevo
-            await createUserProfile(user, user.displayName || user.email.split('@')[0]);
+        // Procesar resultado (solo para desktop)
+        if (result) {
+            const user = result.user;
             
-            showSuccess('¡Bienvenido! Configuremos tu perfil.');
-            setTimeout(() => {
-                window.loadPage('onboarding');
-            }, 1500);
-        } else {
-            showSuccess('¡Bienvenido de vuelta!');
-            setTimeout(() => {
-                window.loadPage('dashboard');
-            }, 1500);
+            // Verificar si es un usuario nuevo
+            const isNewUser = result._tokenResponse?.isNewUser || false;
+            
+            if (isNewUser) {
+                // Crear perfil en Firestore para usuario nuevo
+                await createUserProfile(user, user.displayName || user.email.split('@')[0]);
+                
+                showSuccess('¡Bienvenido! Configuremos tu perfil.');
+                setTimeout(() => {
+                    window.loadPage('onboarding');
+                }, 1500);
+            } else {
+                showSuccess('¡Bienvenido de vuelta!');
+                setTimeout(() => {
+                    window.loadPage('dashboard');
+                }, 1500);
+            }
+            
+            // Guardar datos del usuario en localStorage
+            await saveUserToLocalStorage(user);
         }
-        
-        // Guardar datos del usuario en localStorage
-        await saveUserToLocalStorage(user);
         
     } catch (error) {
         // Manejo específico de errores comunes
@@ -647,6 +712,10 @@ async function handleGoogleAuth() {
             showError('El popup fue bloqueado. Permite popups para este sitio e intenta de nuevo.');
         } else if (error.code === 'auth/unauthorized-domain') {
             showError('Este dominio no está autorizado para Google Sign-In.');
+        } else if (error.code === 'auth/network-request-failed') {
+            showError('Error de conexión. Verifica tu conexión a internet e intenta de nuevo.');
+        } else if (error.code === 'auth/too-many-requests') {
+            showError('Demasiados intentos. Espera un momento e intenta de nuevo.');
         } else if (error.code !== 'auth/popup-closed-by-user') {
             handleAuthError(error);
         }
@@ -1030,6 +1099,32 @@ window.testAuth = async function(provider = 'google') {
     } catch (error) {
         // Error silencioso para testing
     }
+};
+
+// Función de debug para iOS
+window.debugIOSAuth = function() {
+    const isIOS = isIOSSafari();
+    const isMobile = isMobileDevice();
+    const userAgent = navigator.userAgent;
+    const currentDomain = window.location.hostname;
+    
+    console.log('=== DEBUG iOS AUTH ===');
+    console.log('Es iOS Safari:', isIOS);
+    console.log('Es móvil:', isMobile);
+    console.log('User Agent:', userAgent);
+    console.log('Dominio actual:', currentDomain);
+    console.log('Protocolo:', window.location.protocol);
+    console.log('HTTPS:', window.location.protocol === 'https:');
+    console.log('========================');
+    
+    return {
+        isIOS,
+        isMobile,
+        userAgent,
+        currentDomain,
+        protocol: window.location.protocol,
+        isHTTPS: window.location.protocol === 'https:'
+    };
 };
 
 // Exportar funciones útiles
