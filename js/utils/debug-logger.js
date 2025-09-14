@@ -9,14 +9,13 @@ class DebugLogger {
 
     init() {
         if (this.isDebugMode) {
-            console.log('🔍 Debug Logger activado - Registrando todos los eventos');
             this.setupErrorCatching();
         }
     }
 
     checkDebugMode() {
-        // Debug activado temporalmente para diagnosticar perfil
-        return true;
+        // Debug desactivado para producción
+        return false;
         
         // Para activar debug, usar: localStorage.setItem('entrenoapp_debug', 'true')
         // return window.location.search.includes('debug') || 
@@ -153,20 +152,17 @@ class DebugLogger {
     clearLogs() {
         this.logs = [];
         localStorage.removeItem('entrenoapp_debug_logs');
-        console.log('🧹 Logs limpiados');
     }
 
     enableDebugMode() {
         localStorage.setItem('entrenoapp_debug', 'true');
         this.isDebugMode = true;
         this.init();
-        console.log('🔍 Debug mode ACTIVADO');
     }
 
     disableDebugMode() {
         localStorage.removeItem('entrenoapp_debug');
         this.isDebugMode = false;
-        console.log('🔍 Debug mode DESACTIVADO');
     }
 
     // Método para mostrar panel de debug en la UI
@@ -305,16 +301,5 @@ window.showDebug = () => {
     if (window.debugLogger) {
         window.debugLogger.enableDebugMode();
         window.debugLogger.showDebugPanel();
-        console.log('🔍 Debug panel activado manualmente');
     }
 };
-
-console.log('🔍 Debug Logger cargado. Usa enableDebug() para activar.');
-
-// Auto-mostrar panel si estamos en debug mode
-setTimeout(() => {
-    if (window.debugLogger && window.debugLogger.isDebugMode) {
-        console.log('🔍 Auto-mostrando panel de debug...');
-        window.debugLogger.showDebugPanel();
-    }
-}, 2000);

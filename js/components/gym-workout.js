@@ -32,15 +32,12 @@ let gymWorkoutState = {
 // ===================================
 
 window.initGymWorkout = async function() {
-    console.log('🏋️‍♂️ Inicializando workout de gimnasio');
-    
     try {
         // Verificar si ya se completó el entrenamiento de hoy
         const todayKey = `gym_workout_completed_${new Date().toDateString()}`;
         const completedToday = localStorage.getItem(todayKey);
         
         if (completedToday) {
-            console.log('✅ Entrenamiento de gimnasio ya completado hoy');
             renderGymWorkoutCompleted();
             setupSwipeNavigation();
             return;
@@ -64,10 +61,7 @@ window.initGymWorkout = async function() {
         // Configurar swipe para volver atrás
         setupSwipeNavigation();
         
-        console.log('✅ Workout de gimnasio inicializado:', gymWorkoutState.currentWorkout);
-        
     } catch (error) {
-        console.error('❌ Error inicializando workout de gimnasio:', error);
         showError('Error cargando el entrenamiento de gimnasio');
     }
 };
@@ -285,8 +279,6 @@ function renderGymWorkoutCompleted() {
 // ===================================
 
 function startGymWorkout() {
-    console.log('🏋️‍♂️ Iniciando entrenamiento de gimnasio');
-    
     gymWorkoutState.isRunning = true;
     gymWorkoutState.startTime = Date.now();
     
@@ -305,8 +297,6 @@ function startGymWorkout() {
 }
 
 function pauseGymWorkout() {
-    console.log('⏸️ Pausando entrenamiento');
-    
     gymWorkoutState.isRunning = false;
     
     if (gymWorkoutState.timer) {
@@ -320,8 +310,6 @@ function pauseGymWorkout() {
 }
 
 function stopGymWorkout() {
-    console.log('⏹️ Finalizando entrenamiento');
-    
     gymWorkoutState.isRunning = false;
     
     if (gymWorkoutState.timer) {
@@ -450,8 +438,6 @@ function createSeriesRecordingForm(exercise) {
 }
 
 function completeExercise() {
-    console.log('✅ Ejercicio completado');
-    
     // Recopilar datos de las series
     const seriesData = collectSeriesData();
     
@@ -475,8 +461,6 @@ function completeExercise() {
 }
 
 function skipExercise() {
-    console.log('⏭️ Saltando ejercicio');
-    
     // Marcar como saltado
     gymWorkoutState.completedExercises.push({
         exercise: gymWorkoutState.exercises[gymWorkoutState.currentExercise],
@@ -561,8 +545,6 @@ function showGymWorkoutCompletion() {
 }
 
 async function saveGymWorkout() {
-    console.log('💾 Guardando resultado del entrenamiento');
-    
     const notes = document.getElementById('gym-workout-notes').value;
     gymWorkoutState.workoutData.notes = notes;
     gymWorkoutState.workoutData.exercises = gymWorkoutState.completedExercises;
@@ -591,7 +573,6 @@ async function saveGymWorkout() {
         window.navigateToPage('dashboard');
         
     } catch (error) {
-        console.error('❌ Error guardando entrenamiento:', error);
         alert('Error guardando el entrenamiento. Inténtalo de nuevo.');
     }
 }
@@ -764,4 +745,3 @@ window.completeExercise = completeExercise;
 window.skipExercise = skipExercise;
 window.saveGymWorkout = saveGymWorkout;
 
-console.log('🏋️‍♂️ Sistema de gimnasio cargado');

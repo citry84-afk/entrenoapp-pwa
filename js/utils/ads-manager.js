@@ -19,13 +19,12 @@ class AdsManager {
 
     waitForAdSense() {
         const checkAdSense = () => {
-            if (window.adsbygoogle) {
-                this.isAdSenseLoaded = true;
-                console.log('✅ Google AdSense cargado correctamente');
-                this.initializeAds();
-            } else {
-                setTimeout(checkAdSense, 100);
-            }
+        if (window.adsbygoogle) {
+            this.isAdSenseLoaded = true;
+            this.initializeAds();
+        } else {
+            setTimeout(checkAdSense, 100);
+        }
         };
         checkAdSense();
     }
@@ -42,9 +41,8 @@ class AdsManager {
         if (window.adsbygoogle && this.isAdSenseLoaded) {
             try {
                 (adsbygoogle = window.adsbygoogle || []).push({});
-                console.log('📢 Anuncios AdSense inicializados');
             } catch (error) {
-                console.error('❌ Error inicializando anuncios:', error);
+                // Error silencioso
             }
         }
     }
@@ -63,12 +61,10 @@ class AdsManager {
 
         const now = Date.now();
         if (now - this.lastAdTime < this.adCooldown) {
-            console.log('⏳ Anuncio en cooldown, esperando...');
             return false;
         }
 
         if (this.adCount >= this.maxAdsPerSession) {
-            console.log('📊 Límite de anuncios por sesión alcanzado');
             return false;
         }
 
@@ -194,7 +190,6 @@ class AdsManager {
 
     addUserPoints(points) {
         // Aquí se integraría con el sistema de puntos del usuario
-        console.log(`💰 Añadiendo ${points} puntos al usuario`);
         // TODO: Integrar con el sistema de puntos existente
     }
 
@@ -384,5 +379,3 @@ const adStyles = `
 
 // Añadir estilos al head
 document.head.insertAdjacentHTML('beforeend', adStyles);
-
-console.log('📢 Ads Manager cargado - Listo para monetización');

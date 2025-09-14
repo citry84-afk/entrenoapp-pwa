@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Descargar Iconos PNG</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            padding: 20px; 
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 { color: #333; text-align: center; }
+        .icon-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+            gap: 20px; 
+            margin: 30px 0;
+        }
+        .icon-card {
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+        .icon-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        canvas { 
+            border: 1px solid #ddd; 
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+        .download-btn {
+            background: #00D4FF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 5px;
+            transition: background 0.2s;
+        }
+        .download-btn:hover {
+            background: #00b8d4;
+        }
+        .size-info {
+            font-weight: bold;
+            color: #666;
+            margin: 10px 0;
+        }
+        .instructions {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Generador de Iconos PNG para EntrenoApp</h1>
+        
+        <div class="instructions">
+            <h3>📋 Instrucciones:</h3>
+            <ol>
+                <li>Haz clic en "Generar Iconos" para crear las versiones PNG</li>
+                <li>Descarga cada icono haciendo clic en el botón correspondiente</li>
+                <li>Guarda los archivos en la carpeta <code>assets/icons/</code></li>
+                <li>Los iconos se generarán con el logo del corredor y kettlebell</li>
+            </ol>
+        </div>
+        
+        <div style="text-align: center; margin: 30px 0;">
+            <button onclick="generateAllIcons()" class="download-btn" style="font-size: 18px; padding: 15px 30px;">
+                🚀 Generar Iconos PNG
+            </button>
+        </div>
+        
+        <div class="icon-grid" id="iconGrid"></div>
+    </div>
+    
+    <script>
+        function generateAllIcons() {
+            const sizes = [
+                { size: 192, filename: 'icon-192x192.png', name: 'Icono Principal' },
+                { size: 512, filename: 'icon-512x512.png', name: 'Icono Grande' },
+                { size: 180, filename: 'apple-touch-icon.png', name: 'Apple Touch Icon' },
+                { size: 144, filename: 'icon-144x144.png', name: 'Icono Mediano' }
+            ];
+            
+            const container = document.getElementById('iconGrid');
+            container.innerHTML = '';
+            
+            sizes.forEach(({ size, filename, name }) => {
+                const canvas = document.createElement('canvas');
+                canvas.width = size;
+                canvas.height = size;
+                canvas.style.width = '120px';
+                canvas.style.height = '120px';
+                
+                const ctx = canvas.getContext('2d');
+                
+                // Crear gradiente de fondo
+                const gradient = ctx.createLinearGradient(0, 0, size, size);
+                gradient.addColorStop(0, '#2196f3');
+                gradient.addColorStop(1, '#00bcd4');
+                
+                // Dibujar fondo redondeado
+                ctx.fillStyle = gradient;
+                const radius = (size * 100) / 512; // Proporcional al SVG original
+                roundRect(ctx, 0, 0, size, size, radius);
+                ctx.fill();
+                
+                // Dibujar el corredor con kettlebell
+                ctx.fillStyle = '#ffffff';
+                ctx.shadowColor = 'rgba(0, 0, 0, 0.2)';
+                ctx.shadowBlur = (size * 4) / 512;
+                ctx.shadowOffsetY = (size * 4) / 512;
+                
+                // Dibujar figura del corredor
+                drawRunner(ctx, size);
+                
+                // Crear tarjeta del icono
+                const iconCard = document.createElement('div');
+                iconCard.className = 'icon-card';
+                
+                const title = document.createElement('div');
+                title.className = 'size-info';
+                title.textContent = `${name} (${size}x${size}px)`;
+                
+                const downloadBtn = document.createElement('button');
+                downloadBtn.textContent = '📥 Descargar';
+                downloadBtn.className = 'download-btn';
+                
+                downloadBtn.onclick = () => {
+                    const link = document.createElement('a');
+                    link.download = filename;
+                    link.href = canvas.toDataURL('image/png');
+                    link.click();
+                };
+                
+                iconCard.appendChild(title);
+                iconCard.appendChild(canvas);
+                iconCard.appendChild(downloadBtn);
+                container.appendChild(iconCard);
+            });
+        }
+        
+        function drawRunner(ctx, size) {
+            const scale = size / 512;
+            const centerX = size / 2;
+            const centerY = size / 2;
+            
+            // Dibujar figura del corredor (simplificada pero reconocible)
+            ctx.beginPath();
+            
+            // Cabeza
+            ctx.arc(centerX, centerY - 80 * scale, 20 * scale, 0, 2 * Math.PI);
+            
+            // Cuerpo
+            ctx.moveTo(centerX, centerY - 60 * scale);
+            ctx.lineTo(centerX, centerY + 40 * scale);
+            
+            // Brazos
+            ctx.moveTo(centerX, centerY - 40 * scale);
+            ctx.lineTo(centerX - 30 * scale, centerY - 20 * scale);
+            ctx.moveTo(centerX, centerY - 40 * scale);
+            ctx.lineTo(centerX + 30 * scale, centerY - 20 * scale);
+            
+            // Piernas
+            ctx.moveTo(centerX, centerY + 40 * scale);
+            ctx.lineTo(centerX - 25 * scale, centerY + 80 * scale);
+            ctx.moveTo(centerX, centerY + 40 * scale);
+            ctx.lineTo(centerX + 25 * scale, centerY + 80 * scale);
+            
+            // Kettlebell (círculo con asa)
+            ctx.moveTo(centerX + 40 * scale, centerY + 20 * scale);
+            ctx.arc(centerX + 40 * scale, centerY + 20 * scale, 15 * scale, 0, 2 * Math.PI);
+            
+            ctx.fill();
+        }
+        
+        function roundRect(ctx, x, y, width, height, radius) {
+            ctx.beginPath();
+            ctx.moveTo(x + radius, y);
+            ctx.lineTo(x + width - radius, y);
+            ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+            ctx.lineTo(x + width, y + height - radius);
+            ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+            ctx.lineTo(x + radius, y + height);
+            ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+            ctx.lineTo(x, y + radius);
+            ctx.quadraticCurveTo(x, y, x + radius, y);
+            ctx.closePath();
+        }
+    </script>
+</body>
+</html>

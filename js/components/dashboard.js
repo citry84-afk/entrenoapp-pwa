@@ -29,13 +29,11 @@ let dashboardState = {
 
 // Inicializar dashboard
 window.initDashboard = function() {
-    console.log('🏠 Inicializando dashboard personalizado');
     try {
         loadUserPlan();
         renderDashboard();
         setupDashboardListeners();
     } catch (error) {
-        console.error('❌ Error en initDashboard:', error);
         // Renderizar dashboard de error
         const container = document.querySelector('.dashboard-container');
         if (container) {
@@ -59,13 +57,11 @@ async function loadUserPlan() {
         
         // Verificar que auth esté disponible
         if (!auth) {
-            console.error('❌ Firebase auth no está disponible');
             return;
         }
         
         const user = auth.currentUser;
         if (!user) {
-            console.log('⚠️ No hay usuario autenticado');
             return;
         }
         
@@ -132,10 +128,8 @@ async function loadUserPlan() {
             }, 2000);
         }
         
-        console.log('✅ Datos del dashboard cargados:', dashboardState);
-        
     } catch (error) {
-        console.error('❌ Error cargando datos del dashboard:', error);
+        // Error silencioso
     } finally {
         dashboardState.isLoading = false;
         renderDashboard();
@@ -144,13 +138,7 @@ async function loadUserPlan() {
 
 // Generar entrenamiento de hoy
 function generateTodaysWorkout(plan) {
-    console.log('📅 Generando workout de hoy...', { plan: plan });
-    if (window.debugLogger) {
-        window.debugLogger.logInfo('DASHBOARD_GENERATE_WORKOUT', 'Generando workout de hoy', { plan: plan });
-    }
-    
     if (!plan) {
-        console.log('❌ No hay plan para generar workout');
         return null;
     }
     
@@ -158,12 +146,9 @@ function generateTodaysWorkout(plan) {
     const dayOfWeek = today.getDay(); // 0 = Domingo, 1 = Lunes, etc.
     const currentWeek = plan.currentWeek || 1;
     
-    console.log('📅 Info del día:', { dayOfWeek, currentWeek, planType: plan.type });
-    
     // Para planes personalizados generados por onboarding, ser más flexible
     if (plan.metadata && plan.metadata.basedOnOnboarding) {
         // Siempre mostrar el entrenamiento correspondiente del plan personalizado
-        console.log('📋 Plan personalizado: mostrando entrenamiento correspondiente');
     } else {
         // Para planes predefinidos, usar lógica de días fijos
         const trainingDays = getTrainingDays(plan.frequency);
@@ -1826,5 +1811,4 @@ window.showAchievementCategory = function(category, achievements = null) {
     `).join('');
 }
 
-console.log('🏠 Dashboard personalizado cargado');
 

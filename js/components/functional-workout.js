@@ -34,15 +34,12 @@ let functionalWorkoutState = {
 // ===================================
 
 window.initFunctionalWorkout = async function() {
-    console.log('⚡ Inicializando workout funcional');
-    
     try {
         // Verificar si ya se completó el WOD de hoy
         const todayKey = `functional_wod_completed_${new Date().toDateString()}`;
         const completedToday = localStorage.getItem(todayKey);
         
         if (completedToday) {
-            console.log('✅ WOD funcional ya completado hoy');
             renderFunctionalWorkoutCompleted();
             setupSwipeNavigation();
             return;
@@ -66,10 +63,7 @@ window.initFunctionalWorkout = async function() {
         // Configurar swipe para volver atrás
         setupSwipeNavigation();
         
-        console.log('✅ Workout funcional inicializado:', functionalWorkoutState.currentWod);
-        
     } catch (error) {
-        console.error('❌ Error inicializando workout funcional:', error);
         showError('Error cargando el entrenamiento funcional');
     }
 };
@@ -267,8 +261,6 @@ function renderFunctionalWorkoutCompleted() {
 // ===================================
 
 function startFunctionalWorkout() {
-    console.log('⚡ Iniciando WOD funcional');
-    
     functionalWorkoutState.isRunning = true;
     functionalWorkoutState.startTime = Date.now();
     
@@ -283,8 +275,6 @@ function startFunctionalWorkout() {
 }
 
 function pauseFunctionalWorkout() {
-    console.log('⏸️ Pausando WOD');
-    
     functionalWorkoutState.isRunning = false;
     
     if (functionalWorkoutState.timer) {
@@ -298,8 +288,6 @@ function pauseFunctionalWorkout() {
 }
 
 function stopFunctionalWorkout() {
-    console.log('⏹️ Finalizando WOD');
-    
     functionalWorkoutState.isRunning = false;
     
     if (functionalWorkoutState.timer) {
@@ -383,8 +371,6 @@ function showWorkoutCompletion() {
 }
 
 async function saveFunctionalWorkout() {
-    console.log('💾 Guardando resultado del WOD');
-    
     const notes = document.getElementById('workout-notes').value;
     functionalWorkoutState.workoutData.notes = notes;
     functionalWorkoutState.workoutData.rounds = functionalWorkoutState.completedMovements;
@@ -413,7 +399,6 @@ async function saveFunctionalWorkout() {
         window.navigateToPage('dashboard');
         
     } catch (error) {
-        console.error('❌ Error guardando WOD:', error);
         alert('Error guardando el WOD. Inténtalo de nuevo.');
     }
 }
@@ -549,4 +534,3 @@ window.pauseFunctionalWorkout = pauseFunctionalWorkout;
 window.stopFunctionalWorkout = stopFunctionalWorkout;
 window.saveFunctionalWorkout = saveFunctionalWorkout;
 
-console.log('⚡ Sistema de WOD funcional cargado');
