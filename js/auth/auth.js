@@ -218,12 +218,20 @@ function renderLoginForm() {
                 -->
             </div>
             
-            ${isIOSSafari() ? `
+            ${(isIOSSafari() || isChromeAndroid()) ? `
                 <div class="ios-fallback text-center mt-md">
-                    <p class="text-secondary mb-sm">¿Problemas con Google en Safari?</p>
-                    <button id="show-email-login" class="link-button">
-                        Usar email y contraseña
-                    </button>
+                    <p class="text-secondary mb-sm">
+                        ${isIOSSafari() ? '¿Problemas con Google en Safari?' : '¿Problemas con Google en Chrome?'}
+                    </p>
+                    <div class="fallback-buttons">
+                        <button id="force-google-redirect" class="link-button mb-sm">
+                            Forzar Google (Redirect)
+                        </button>
+                        <br>
+                        <button id="show-email-login" class="link-button">
+                            Usar email y contraseña
+                        </button>
+                    </div>
                 </div>
             ` : ''}
             
@@ -441,12 +449,27 @@ function setupFormListeners() {
         appleLogin.addEventListener('click', handleAppleAuth);
     }
     
-    // Botón de fallback para iOS
+    // Botones de fallback
     const showEmailLogin = document.getElementById('show-email-login');
     if (showEmailLogin) {
         showEmailLogin.addEventListener('click', (e) => {
             e.preventDefault();
             showView('login');
+        });
+    }
+    
+    const forceGoogleRedirect = document.getElementById('force-google-redirect');
+    if (forceGoogleRedirect) {
+        forceGoogleRedirect.addEventListener('click', async (e) => {
+            e.preventDefault();
+            setLoading(true);
+            try {
+                showSuccess('Forzando redirect a Google...');
+                await signInWithRedirect(auth, googleProvider);
+            } catch (error) {
+                handleAuthError(error);
+                setLoading(false);
+            }
         });
     }
 }
@@ -623,9 +646,32 @@ function isIOSSafari() {
     return isIOS && isSafari;
 }
 
+// Detectar si es Chrome en Android
+function isChromeAndroid() {
+    const ua = navigator.userAgent;
+    return /Android/.test(ua) && /Chrome/.test(ua) && !/Edge|OPR|Vivaldi|Brave/.test(ua);
+}
+
+// Detectar si es navegador de Telegram
+function isTelegramBrowser() {
+    const ua = navigator.userAgent;
+    return /TelegramBot|Telegram/i.test(ua);
+}
+
 // Detectar si es dispositivo móvil
 function isMobileDevice() {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
+// Detectar si tiene problemas con popups
+function hasPopupIssues() {
+    const ua = navigator.userAgent;
+    const isIOS = /iPad|iPhone|iPod/.test(ua);
+    const isChromeAndroid = /Android/.test(ua) && /Chrome/.test(ua);
+    const isTelegram = /TelegramBot|Telegram/i.test(ua);
+    
+    // Telegram funciona bien con popups, otros pueden tener problemas
+    return (isIOS || isChromeAndroid) && !isTelegram;
 }
 
 async function handleGoogleAuth() {
@@ -648,18 +694,19 @@ async function handleGoogleAuth() {
         
         let result;
         const isIOS = isIOSSafari();
-        const isMobile = isMobileDevice();
+        const isChromeAndroid = isChromeAndroid();
+        const isTelegram = isTelegramBrowser();
+        const hasIssues = hasPopupIssues();
         
-        // Estrategia especial para iOS Safari
+        // Estrategia basada en el navegador
         if (isIOS) {
-            // En iOS Safari, usar redirect con timeout
+            // iOS Safari: usar redirect con timeout
             showSuccess('Redirigiendo a Google...');
             
-            // Agregar timeout para detectar si el redirect falla
             const redirectTimeout = setTimeout(() => {
                 showError('La autenticación tardó demasiado. Intenta de nuevo.');
                 setLoading(false);
-            }, 30000); // 30 segundos timeout
+            }, 30000);
             
             try {
                 await signInWithRedirect(auth, googleProvider);
@@ -669,12 +716,21 @@ async function handleGoogleAuth() {
                 throw error;
             }
             return;
-        } else if (isMobile) {
-            // En otros móviles, usar redirect
+        } else if (isChromeAndroid) {
+            // Chrome Android: usar redirect (más confiable que popup)
+            showSuccess('Redirigiendo a Google...');
+            await signInWithRedirect(auth, googleProvider);
+            return;
+        } else if (isTelegram) {
+            // Telegram: usar popup (funciona bien)
+            result = await signInWithPopup(auth, googleProvider);
+        } else if (hasIssues) {
+            // Otros navegadores con problemas: usar redirect
+            showSuccess('Redirigiendo a Google...');
             await signInWithRedirect(auth, googleProvider);
             return;
         } else {
-            // En desktop, usar popup
+            // Desktop y navegadores sin problemas: usar popup
             result = await signInWithPopup(auth, googleProvider);
         }
         
@@ -1101,16 +1157,22 @@ window.testAuth = async function(provider = 'google') {
     }
 };
 
-// Función de debug para iOS
-window.debugIOSAuth = function() {
+// Función de debug para navegadores móviles
+window.debugMobileAuth = function() {
     const isIOS = isIOSSafari();
+    const isChromeAndroid = isChromeAndroid();
+    const isTelegram = isTelegramBrowser();
     const isMobile = isMobileDevice();
+    const hasIssues = hasPopupIssues();
     const userAgent = navigator.userAgent;
     const currentDomain = window.location.hostname;
     
-    console.log('=== DEBUG iOS AUTH ===');
+    console.log('=== DEBUG MOBILE AUTH ===');
     console.log('Es iOS Safari:', isIOS);
+    console.log('Es Chrome Android:', isChromeAndroid);
+    console.log('Es Telegram Browser:', isTelegram);
     console.log('Es móvil:', isMobile);
+    console.log('Tiene problemas con popups:', hasIssues);
     console.log('User Agent:', userAgent);
     console.log('Dominio actual:', currentDomain);
     console.log('Protocolo:', window.location.protocol);
@@ -1119,7 +1181,10 @@ window.debugIOSAuth = function() {
     
     return {
         isIOS,
+        isChromeAndroid,
+        isTelegram,
         isMobile,
+        hasIssues,
         userAgent,
         currentDomain,
         protocol: window.location.protocol,

@@ -26,6 +26,29 @@
     color: var(--primary-light);
 }
 
+.fallback-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.fallback-buttons .link-button {
+    font-size: 0.9rem;
+    color: var(--primary-color);
+    text-decoration: underline;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--spacing-sm);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.fallback-buttons .link-button:hover {
+    color: var(--primary-light);
+    background: rgba(255, 255, 255, 0.05);
+}
+
 .auth-container {
     max-width: 400px;
     margin: 0 auto;
