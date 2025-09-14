@@ -110,16 +110,28 @@
                 
                 const ctx = canvas.getContext('2d');
                 
-                // Crear gradiente de fondo
-                const gradient = ctx.createLinearGradient(0, 0, size, size);
-                gradient.addColorStop(0, '#2196f3');
+                // Crear gradiente de fondo circular
+                const gradient = ctx.createRadialGradient(size/2, size/2, 0, size/2, size/2, size/2);
+                gradient.addColorStop(0, '#1976d2');
+                gradient.addColorStop(0.5, '#2196f3');
                 gradient.addColorStop(1, '#00bcd4');
                 
-                // Dibujar fondo redondeado
+                // Dibujar fondo circular
                 ctx.fillStyle = gradient;
-                const radius = (size * 100) / 512; // Proporcional al SVG original
-                roundRect(ctx, 0, 0, size, size, radius);
+                ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
+                ctx.shadowBlur = 8 * (size / 512);
+                ctx.shadowOffsetY = 6 * (size / 512);
+                ctx.beginPath();
+                ctx.arc(size/2, size/2, (size * 240) / 512, 0, 2 * Math.PI);
                 ctx.fill();
+                
+                // Círculo interior para profundidad
+                ctx.shadowBlur = 0;
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+                ctx.lineWidth = 2 * (size / 512);
+                ctx.beginPath();
+                ctx.arc(size/2, size/2, (size * 200) / 512, 0, 2 * Math.PI);
+                ctx.stroke();
                 
                 // Dibujar el corredor con kettlebell
                 ctx.fillStyle = '#ffffff';
@@ -161,33 +173,87 @@
             const centerX = size / 2;
             const centerY = size / 2;
             
-            // Dibujar figura del corredor (simplificada pero reconocible)
-            ctx.beginPath();
+            // Dibujar figura del corredor estilizada
+            ctx.fillStyle = '#ffffff';
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
+            ctx.shadowBlur = 4 * scale;
+            ctx.shadowOffsetY = 3 * scale;
             
             // Cabeza
-            ctx.arc(centerX, centerY - 80 * scale, 20 * scale, 0, 2 * Math.PI);
+            ctx.beginPath();
+            ctx.arc(centerX, centerY - 80 * scale, 25 * scale, 0, 2 * Math.PI);
+            ctx.fill();
             
             // Cuerpo
-            ctx.moveTo(centerX, centerY - 60 * scale);
-            ctx.lineTo(centerX, centerY + 40 * scale);
-            
-            // Brazos
-            ctx.moveTo(centerX, centerY - 40 * scale);
-            ctx.lineTo(centerX - 30 * scale, centerY - 20 * scale);
-            ctx.moveTo(centerX, centerY - 40 * scale);
-            ctx.lineTo(centerX + 30 * scale, centerY - 20 * scale);
-            
-            // Piernas
-            ctx.moveTo(centerX, centerY + 40 * scale);
-            ctx.lineTo(centerX - 25 * scale, centerY + 80 * scale);
-            ctx.moveTo(centerX, centerY + 40 * scale);
-            ctx.lineTo(centerX + 25 * scale, centerY + 80 * scale);
-            
-            // Kettlebell (círculo con asa)
-            ctx.moveTo(centerX + 40 * scale, centerY + 20 * scale);
-            ctx.arc(centerX + 40 * scale, centerY + 20 * scale, 15 * scale, 0, 2 * Math.PI);
-            
+            ctx.beginPath();
+            ctx.ellipse(centerX, centerY - 20 * scale, 35 * scale, 60 * scale, 0, 0, 2 * Math.PI);
             ctx.fill();
+            
+            // Brazos en movimiento
+            ctx.save();
+            ctx.translate(centerX - 45 * scale, centerY - 10 * scale);
+            ctx.rotate(-0.35); // -20 grados
+            ctx.beginPath();
+            ctx.ellipse(0, 0, 15 * scale, 50 * scale, 0, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.restore();
+            
+            ctx.save();
+            ctx.translate(centerX + 45 * scale, centerY - 10 * scale);
+            ctx.rotate(0.35); // 20 grados
+            ctx.beginPath();
+            ctx.ellipse(0, 0, 15 * scale, 50 * scale, 0, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.restore();
+            
+            // Piernas en carrera
+            ctx.save();
+            ctx.translate(centerX - 25 * scale, centerY + 50 * scale);
+            ctx.rotate(-0.26); // -15 grados
+            ctx.beginPath();
+            ctx.ellipse(0, 0, 12 * scale, 60 * scale, 0, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.restore();
+            
+            ctx.save();
+            ctx.translate(centerX + 25 * scale, centerY + 50 * scale);
+            ctx.rotate(0.26); // 15 grados
+            ctx.beginPath();
+            ctx.ellipse(0, 0, 12 * scale, 60 * scale, 0, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.restore();
+            
+            // Zapatillas
+            ctx.fillStyle = '#1976d2';
+            ctx.beginPath();
+            ctx.ellipse(centerX - 30 * scale, centerY + 110 * scale, 20 * scale, 8 * scale, 0, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.ellipse(centerX + 30 * scale, centerY + 110 * scale, 20 * scale, 8 * scale, 0, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            // Líneas de movimiento
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.6)';
+            ctx.lineWidth = 3 * scale;
+            ctx.shadowBlur = 0;
+            
+            ctx.beginPath();
+            ctx.moveTo(centerX - 60 * scale, centerY - 20 * scale);
+            ctx.quadraticCurveTo(centerX - 80 * scale, centerY, centerX - 100 * scale, centerY + 20 * scale);
+            ctx.stroke();
+            
+            ctx.beginPath();
+            ctx.moveTo(centerX + 60 * scale, centerY - 20 * scale);
+            ctx.quadraticCurveTo(centerX + 80 * scale, centerY, centerX + 100 * scale, centerY + 20 * scale);
+            ctx.stroke();
+            
+            // Letra "E"
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+            ctx.font = `bold ${120 * scale}px Arial`;
+            ctx.textAlign = 'center';
+            ctx.shadowBlur = 4 * scale;
+            ctx.shadowOffsetY = 3 * scale;
+            ctx.fillText('E', centerX, centerY + 64 * scale);
         }
         
         function roundRect(ctx, x, y, width, height, radius) {
