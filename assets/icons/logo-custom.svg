@@ -6,10 +6,10 @@
       <stop offset="100%" stop-color="#00bcd4"/>
     </linearGradient>
     <filter id="sombra">
-      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000" flood-opacity="0.3"/>
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000" flood-opacity="0.4"/>
     </filter>
     <filter id="brillo">
-      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
       <feMerge> 
         <feMergeNode in="coloredBlur"/>
         <feMergeNode in="SourceGraphic"/>
@@ -21,41 +21,22 @@
   <circle cx="256" cy="256" r="240" fill="url(#fondoAzul)" filter="url(#sombra)"/>
   
   <!-- Círculo interior para profundidad -->
-  <circle cx="256" cy="256" r="200" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+  <circle cx="256" cy="256" r="200" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="3"/>
   
-  <!-- Corredor estilizado -->
+  <!-- Letra "E" estilizada y elegante -->
   <g transform="translate(256, 256)" filter="url(#brillo)">
-    <!-- Cabeza -->
-    <circle cx="0" cy="-80" r="25" fill="#ffffff"/>
+    <!-- E principal -->
+    <text x="0" y="60" font-family="Arial, sans-serif" font-size="280" font-weight="900" 
+          fill="#ffffff" text-anchor="middle" stroke="#1976d2" stroke-width="8">E</text>
     
-    <!-- Cuerpo -->
-    <ellipse cx="0" cy="-20" rx="35" ry="60" fill="#ffffff"/>
-    
-    <!-- Brazos en movimiento -->
-    <ellipse cx="-45" cy="-10" rx="15" ry="50" fill="#ffffff" transform="rotate(-20 -45 -10)"/>
-    <ellipse cx="45" cy="-10" rx="15" ry="50" fill="#ffffff" transform="rotate(20 45 -10)"/>
-    
-    <!-- Piernas en carrera -->
-    <ellipse cx="-25" cy="50" rx="12" ry="60" fill="#ffffff" transform="rotate(-15 -25 50)"/>
-    <ellipse cx="25" cy="50" rx="12" ry="60" fill="#ffffff" transform="rotate(15 25 50)"/>
-    
-    <!-- Zapatillas -->
-    <ellipse cx="-30" cy="110" rx="20" ry="8" fill="#1976d2"/>
-    <ellipse cx="30" cy="110" rx="20" ry="8" fill="#1976d2"/>
-    
-    <!-- Líneas de movimiento -->
-    <path d="M-60 -20 Q-80 0 -100 20" stroke="#ffffff" stroke-width="3" fill="none" opacity="0.6"/>
-    <path d="M60 -20 Q80 0 100 20" stroke="#ffffff" stroke-width="3" fill="none" opacity="0.6"/>
-    <path d="M-40 80 Q-60 100 -80 120" stroke="#ffffff" stroke-width="3" fill="none" opacity="0.6"/>
-    <path d="M40 80 Q60 100 80 120" stroke="#ffffff" stroke-width="3" fill="none" opacity="0.6"/>
+    <!-- Efecto de brillo interno -->
+    <text x="0" y="60" font-family="Arial, sans-serif" font-size="280" font-weight="900" 
+          fill="rgba(255,255,255,0.3)" text-anchor="middle">E</text>
   </g>
   
-  <!-- Texto "E" estilizado -->
-  <text x="256" y="320" font-family="Arial, sans-serif" font-size="120" font-weight="bold" 
-        fill="rgba(255,255,255,0.9)" text-anchor="middle" filter="url(#sombra)">E</text>
-  
-  <!-- Efectos de brillo -->
-  <circle cx="180" cy="180" r="30" fill="rgba(255,255,255,0.1)"/>
-  <circle cx="320" cy="320" r="20" fill="rgba(255,255,255,0.1)"/>
-  <circle cx="150" cy="350" r="15" fill="rgba(255,255,255,0.1)"/>
+  <!-- Efectos de brillo decorativos -->
+  <circle cx="180" cy="180" r="40" fill="rgba(255,255,255,0.15)"/>
+  <circle cx="320" cy="320" r="25" fill="rgba(255,255,255,0.15)"/>
+  <circle cx="150" cy="350" r="20" fill="rgba(255,255,255,0.15)"/>
+  <circle cx="350" cy="180" r="15" fill="rgba(255,255,255,0.15)"/>
 </svg>

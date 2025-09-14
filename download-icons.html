@@ -173,87 +173,50 @@
             const centerX = size / 2;
             const centerY = size / 2;
             
-            // Dibujar figura del corredor estilizada
+            // Dibujar letra "E" estilizada y elegante
             ctx.fillStyle = '#ffffff';
-            ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
-            ctx.shadowBlur = 4 * scale;
-            ctx.shadowOffsetY = 3 * scale;
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.4)';
+            ctx.shadowBlur = 12 * scale;
+            ctx.shadowOffsetY = 8 * scale;
             
-            // Cabeza
-            ctx.beginPath();
-            ctx.arc(centerX, centerY - 80 * scale, 25 * scale, 0, 2 * Math.PI);
-            ctx.fill();
+            // E principal con borde azul
+            ctx.strokeStyle = '#1976d2';
+            ctx.lineWidth = 8 * scale;
+            ctx.font = `900 ${280 * scale}px Arial`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
             
-            // Cuerpo
-            ctx.beginPath();
-            ctx.ellipse(centerX, centerY - 20 * scale, 35 * scale, 60 * scale, 0, 0, 2 * Math.PI);
-            ctx.fill();
+            // Dibujar borde
+            ctx.strokeText('E', centerX, centerY);
             
-            // Brazos en movimiento
-            ctx.save();
-            ctx.translate(centerX - 45 * scale, centerY - 10 * scale);
-            ctx.rotate(-0.35); // -20 grados
-            ctx.beginPath();
-            ctx.ellipse(0, 0, 15 * scale, 50 * scale, 0, 0, 2 * Math.PI);
-            ctx.fill();
-            ctx.restore();
+            // Dibujar relleno
+            ctx.fillText('E', centerX, centerY);
             
-            ctx.save();
-            ctx.translate(centerX + 45 * scale, centerY - 10 * scale);
-            ctx.rotate(0.35); // 20 grados
-            ctx.beginPath();
-            ctx.ellipse(0, 0, 15 * scale, 50 * scale, 0, 0, 2 * Math.PI);
-            ctx.fill();
-            ctx.restore();
+            // Efecto de brillo interno
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+            ctx.shadowBlur = 0;
+            ctx.fillText('E', centerX, centerY);
             
-            // Piernas en carrera
-            ctx.save();
-            ctx.translate(centerX - 25 * scale, centerY + 50 * scale);
-            ctx.rotate(-0.26); // -15 grados
-            ctx.beginPath();
-            ctx.ellipse(0, 0, 12 * scale, 60 * scale, 0, 0, 2 * Math.PI);
-            ctx.fill();
-            ctx.restore();
-            
-            ctx.save();
-            ctx.translate(centerX + 25 * scale, centerY + 50 * scale);
-            ctx.rotate(0.26); // 15 grados
-            ctx.beginPath();
-            ctx.ellipse(0, 0, 12 * scale, 60 * scale, 0, 0, 2 * Math.PI);
-            ctx.fill();
-            ctx.restore();
-            
-            // Zapatillas
-            ctx.fillStyle = '#1976d2';
-            ctx.beginPath();
-            ctx.ellipse(centerX - 30 * scale, centerY + 110 * scale, 20 * scale, 8 * scale, 0, 0, 2 * Math.PI);
-            ctx.fill();
-            ctx.beginPath();
-            ctx.ellipse(centerX + 30 * scale, centerY + 110 * scale, 20 * scale, 8 * scale, 0, 0, 2 * Math.PI);
-            ctx.fill();
-            
-            // Líneas de movimiento
-            ctx.strokeStyle = 'rgba(255, 255, 255, 0.6)';
-            ctx.lineWidth = 3 * scale;
+            // Efectos de brillo decorativos
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.15)';
             ctx.shadowBlur = 0;
             
+            // Círculos de brillo
             ctx.beginPath();
-            ctx.moveTo(centerX - 60 * scale, centerY - 20 * scale);
-            ctx.quadraticCurveTo(centerX - 80 * scale, centerY, centerX - 100 * scale, centerY + 20 * scale);
-            ctx.stroke();
+            ctx.arc(centerX - 76 * scale, centerY - 76 * scale, 40 * scale, 0, 2 * Math.PI);
+            ctx.fill();
             
             ctx.beginPath();
-            ctx.moveTo(centerX + 60 * scale, centerY - 20 * scale);
-            ctx.quadraticCurveTo(centerX + 80 * scale, centerY, centerX + 100 * scale, centerY + 20 * scale);
-            ctx.stroke();
+            ctx.arc(centerX + 64 * scale, centerY + 64 * scale, 25 * scale, 0, 2 * Math.PI);
+            ctx.fill();
             
-            // Letra "E"
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
-            ctx.font = `bold ${120 * scale}px Arial`;
-            ctx.textAlign = 'center';
-            ctx.shadowBlur = 4 * scale;
-            ctx.shadowOffsetY = 3 * scale;
-            ctx.fillText('E', centerX, centerY + 64 * scale);
+            ctx.beginPath();
+            ctx.arc(centerX - 106 * scale, centerY + 94 * scale, 20 * scale, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            ctx.beginPath();
+            ctx.arc(centerX + 94 * scale, centerY - 76 * scale, 15 * scale, 0, 2 * Math.PI);
+            ctx.fill();
         }
         
         function roundRect(ctx, x, y, width, height, radius) {
