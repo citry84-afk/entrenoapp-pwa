@@ -1174,24 +1174,24 @@ window.startTodaysWorkout = function() {
                     const runningWorkout = generateRunningWorkout(dashboardState.activePlan, 1);
                     localStorage.setItem('runningMode', 'plannedWorkout');
                     localStorage.setItem('todaysWorkout', JSON.stringify(runningWorkout));
-                    window.loadPage('running');
+                    window.navigateToPage('running');
                     break;
                 case 'functional':
                     const functionalWorkout = generateFunctionalWorkout(dashboardState.activePlan, 1);
                     localStorage.setItem('currentFunctionalWod', JSON.stringify(functionalWorkout));
-                    window.loadPage('functional-workout');
+                    window.navigateToPage('functional-workout');
                     break;
                 case 'gym':
                     const gymWorkout = generateGymWorkout(dashboardState.activePlan, 1);
                     localStorage.setItem('currentGymWorkout', JSON.stringify(gymWorkout));
-                    window.loadPage('gym-workout');
+                    window.navigateToPage('gym-workout');
                     break;
                 default:
-                    window.loadPage('dashboard');
+                    window.navigateToPage('dashboard');
                     break;
             }
         } else {
-            window.loadPage('dashboard');
+            window.navigateToPage('dashboard');
         }
         return;
     }
@@ -1201,22 +1201,22 @@ window.startTodaysWorkout = function() {
             case 'running':
                 localStorage.setItem('runningMode', 'plannedWorkout');
                 localStorage.setItem('todaysWorkout', JSON.stringify(workout));
-                window.loadPage('running');
+                window.navigateToPage('running');
                 break;
             case 'functional':
                 localStorage.setItem('currentFunctionalWod', JSON.stringify(workout));
-                window.loadPage('functional-workout');
+                window.navigateToPage('functional-workout');
                 break;
             case 'gym':
                 localStorage.setItem('currentGymWorkout', JSON.stringify(workout));
-                window.loadPage('gym-workout');
+                window.navigateToPage('gym-workout');
                 break;
             default:
-                window.loadPage('workouts');
+                window.navigateToPage('workouts');
                 break;
         }
     } catch (error) {
-        window.loadPage('workouts');
+        window.navigateToPage('workouts');
     }
 };
 

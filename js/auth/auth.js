@@ -1,5 +1,5 @@
 // Sistema de autenticación para EntrenoApp
-import { auth, db } from '../config/firebase-config.js';
+import { auth, db, firebaseConfig } from '../config/firebase-config.js';
 import { 
     signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
@@ -1343,6 +1343,46 @@ function updateEmailVerificationStatus() {
         console.error('❌ Error recargando usuario:', error);
     });
 }
+
+// Función de debug para Firebase
+window.debugFirebaseAuth = function() {
+    const user = auth.currentUser;
+    console.log('=== DEBUG FIREBASE AUTH ===');
+    console.log('Usuario actual:', user);
+    console.log('Email verificado:', user?.emailVerified);
+    console.log('Proveedor:', user?.providerData);
+    console.log('Configuración Firebase:', {
+        apiKey: firebaseConfig?.apiKey?.substring(0, 10) + '...',
+        authDomain: firebaseConfig?.authDomain,
+        projectId: firebaseConfig?.projectId
+    });
+    console.log('========================');
+    
+    return {
+        user,
+        emailVerified: user?.emailVerified,
+        provider: user?.providerData?.[0]?.providerId,
+        config: firebaseConfig
+    };
+};
+
+// Función para probar envío de email
+window.testEmailSending = async function() {
+    const user = auth.currentUser;
+    if (!user) {
+        showError('No hay usuario autenticado');
+        return;
+    }
+    
+    try {
+        console.log('📧 Probando envío de email de verificación...');
+        await sendEmailVerification(user);
+        showSuccess('Email de prueba enviado. Revisa tu bandeja de entrada.');
+    } catch (error) {
+        console.error('❌ Error enviando email de prueba:', error);
+        showError('Error enviando email: ' + error.message);
+    }
+};
 
 // Exportar funciones útiles
 window.logout = logout;

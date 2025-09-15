@@ -130,3 +130,4 @@ export async function initializeEntrenoApp() {
 
 // Exportar la app inicializada
 export default app;
+export { firebaseConfig };
