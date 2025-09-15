@@ -267,6 +267,13 @@ function renderLoginForm() {
                     ¿Olvidaste tu contraseña?
                 </button>
                 <br>
+                <button 
+                    id="resend-verification" 
+                    class="link-button mb-sm"
+                >
+                    Reenviar email de verificación
+                </button>
+                <br>
                 <span class="text-secondary">¿No tienes cuenta? </span>
                 <button id="show-register" class="link-button">
                     Regístrate aquí
@@ -496,6 +503,15 @@ function setupFormListeners() {
             }
         });
     }
+    
+    // Botón de reenviar verificación
+    const resendVerification = document.getElementById('resend-verification');
+    if (resendVerification) {
+        resendVerification.addEventListener('click', async (e) => {
+            e.preventDefault();
+            await resendVerificationEmail();
+        });
+    }
 }
 
 // Configurar listeners de navegación
@@ -553,8 +569,13 @@ async function handleLogin(e) {
         // Guardar datos del usuario en localStorage
         await saveUserToLocalStorage(userCredential.user);
         
-        // Mostrar éxito y redirigir
-        showSuccess('¡Bienvenido de vuelta!');
+        // Verificar si el email está verificado
+        if (!userCredential.user.emailVerified) {
+            showSuccess('¡Bienvenido de vuelta! Recuerda verificar tu email para acceder a todas las funciones.');
+        } else {
+            showSuccess('¡Bienvenido de vuelta!');
+        }
+        
         setTimeout(() => {
             window.loadPage('dashboard');
         }, 1500);
@@ -613,11 +634,15 @@ async function handleRegister(e) {
         await saveUserToLocalStorage(userCredential.user);
         
         // Enviar verificación de email
-        await sendEmailVerification(userCredential.user);
+        try {
+            await sendEmailVerification(userCredential.user);
+            showSuccess('¡Cuenta creada exitosamente! Te hemos enviado un email de verificación. Revisa tu bandeja de entrada.');
+        } catch (emailError) {
+            console.warn('⚠️ Error enviando email de verificación:', emailError);
+            showSuccess('¡Cuenta creada exitosamente! Configuremos tu perfil.');
+        }
         
-        
-        // Mostrar mensaje y redirigir al onboarding
-        showSuccess('¡Cuenta creada exitosamente! Configuremos tu perfil.');
+        // Redirigir al onboarding
         setTimeout(() => {
             window.loadPage('onboarding');
         }, 2000);
@@ -646,16 +671,26 @@ async function handleForgotPassword(e) {
     try {
         await sendPasswordResetEmail(auth, email);
         
-        showSuccess('Se ha enviado un enlace de recuperación a tu email');
+        showSuccess('Se ha enviado un enlace de recuperación a tu email. Revisa tu bandeja de entrada y spam.');
         
-        // Volver al login después de 3 segundos
+        // Volver al login después de 5 segundos
         setTimeout(() => {
             showView('login');
-        }, 3000);
+        }, 5000);
         
     } catch (error) {
-        console.error('❌ Error enviando email:', error);
-        handleAuthError(error);
+        console.error('❌ Error enviando email de recuperación:', error);
+        
+        // Manejar errores específicos de email
+        if (error.code === 'auth/user-not-found') {
+            showError('No existe una cuenta con este email. Verifica la dirección o regístrate.');
+        } else if (error.code === 'auth/invalid-email') {
+            showError('Email inválido. Verifica la dirección e intenta de nuevo.');
+        } else if (error.code === 'auth/too-many-requests') {
+            showError('Demasiados intentos. Espera unos minutos antes de solicitar otro enlace.');
+        } else {
+            handleAuthError(error);
+        }
     } finally {
         setLoading(false);
     }
@@ -875,6 +910,32 @@ async function handleAppleAuth() {
     }
 }
 
+// Reenviar email de verificación
+async function resendVerificationEmail() {
+    const user = auth.currentUser;
+    if (!user) {
+        showError('No hay usuario autenticado');
+        return;
+    }
+    
+    if (user.emailVerified) {
+        showError('Tu email ya está verificado');
+        return;
+    }
+    
+    setLoading(true);
+    
+    try {
+        await sendEmailVerification(user);
+        showSuccess('Email de verificación reenviado. Revisa tu bandeja de entrada y spam.');
+    } catch (error) {
+        console.error('❌ Error reenviando email:', error);
+        handleAuthError(error);
+    } finally {
+        setLoading(false);
+    }
+}
+
 // Cerrar sesión
 export async function logout() {
     try {
@@ -949,6 +1010,27 @@ function handleAuthError(error) {
             break;
         case 'auth/requires-recent-login':
             message = 'Por seguridad, inicia sesión nuevamente';
+            break;
+        case 'auth/too-many-requests':
+            message = 'Demasiados intentos. Espera un momento e intenta de nuevo';
+            break;
+        case 'auth/invalid-action-code':
+            message = 'El enlace de recuperación no es válido o ha expirado';
+            break;
+        case 'auth/expired-action-code':
+            message = 'El enlace de recuperación ha expirado. Solicita uno nuevo';
+            break;
+        case 'auth/user-disabled':
+            message = 'Esta cuenta ha sido deshabilitada. Contacta al soporte';
+            break;
+        case 'auth/email-already-in-use':
+            message = 'Ya existe una cuenta con este email. Intenta iniciar sesión';
+            break;
+        case 'auth/operation-not-allowed':
+            message = 'Esta operación no está permitida. Contacta al administrador';
+            break;
+        case 'auth/network-request-failed':
+            message = 'Error de conexión. Verifica tu internet e intenta de nuevo';
             break;
         default:
             console.error('Error code:', error.code);
@@ -1237,10 +1319,38 @@ window.debugRedirectAuth = async function() {
     }
 };
 
+// Verificar estado del email
+function checkEmailVerificationStatus() {
+    const user = auth.currentUser;
+    if (!user) return false;
+    
+    return user.emailVerified;
+}
+
+// Actualizar estado del email
+function updateEmailVerificationStatus() {
+    const user = auth.currentUser;
+    if (!user) return;
+    
+    // Recargar el usuario para obtener el estado actualizado
+    user.reload().then(() => {
+        if (user.emailVerified) {
+            console.log('✅ Email verificado');
+        } else {
+            console.log('⚠️ Email no verificado');
+        }
+    }).catch(error => {
+        console.error('❌ Error recargando usuario:', error);
+    });
+}
+
 // Exportar funciones útiles
 window.logout = logout;
 window.loadUserFromLocalStorage = loadUserFromLocalStorage;
 window.clearUserFromLocalStorage = clearUserFromLocalStorage;
 window.getUserProfile = getUserProfile;
 window.checkOnboardingStatus = checkOnboardingStatus;
+window.checkEmailVerificationStatus = checkEmailVerificationStatus;
+window.updateEmailVerificationStatus = updateEmailVerificationStatus;
+window.resendVerificationEmail = resendVerificationEmail;
 
