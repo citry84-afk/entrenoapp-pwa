@@ -6,6 +6,8 @@ import {
     signInWithPopup,
     signInWithRedirect,
     getRedirectResult,
+    setPersistence,
+    browserLocalPersistence,
     GoogleAuthProvider,
     OAuthProvider,
     signOut,
@@ -39,6 +41,12 @@ let authState = {
 
 // Inicializar página de autenticación
 window.initAuthPage = async function() {
+    // Forzar persistencia local para que Safari mantenga la sesión tras redirect
+    try {
+        await setPersistence(auth, browserLocalPersistence);
+    } catch (e) {
+        console.warn('Persistencia no aplicada:', e);
+    }
     // Verificar si ya hay un usuario autenticado
     const currentUser = auth.currentUser;
     if (currentUser) {
@@ -48,7 +56,7 @@ window.initAuthPage = async function() {
         return;
     }
     
-    // Verificar si hay un redirect result (para móviles)
+    // Verificar si hay un redirect result (Safari/redirect)
     try {
         const result = await getRedirectResult(auth);
         if (result) {
@@ -68,6 +76,9 @@ window.initAuthPage = async function() {
             // Guardar datos del usuario primero
             await saveUserToLocalStorage(user);
             
+            // Workaround Safari: asegurar token y rehidratar usuario
+            try { await user.getIdToken(true); } catch (_) {}
+            
             // Verificar que el usuario esté realmente autenticado
             if (auth.currentUser && auth.currentUser.uid === user.uid) {
                 if (isNewUser) {
@@ -86,6 +97,12 @@ window.initAuthPage = async function() {
                     return;
                 }
             } else {
+                // Algunos Safari requieren una recarga para materializar la sesión
+                await new Promise(r => setTimeout(r, 200));
+                if (auth.currentUser) {
+                    window.location.href = '#dashboard';
+                    return;
+                }
                 console.error('Usuario no autenticado después del redirect');
                 showError('Error en la autenticación. Intenta de nuevo.');
             }
