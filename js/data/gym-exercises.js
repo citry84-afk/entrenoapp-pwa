@@ -126,6 +126,91 @@ export const GYM_EXERCISES = {
             ],
             tips: ['Manos juntas', 'Enfoque en tríceps'],
             videoSearch: 'flexiones diamante tríceps peso corporal'
+        },
+        {
+            id: 'wide_push_ups',
+            name: 'Flexiones Amplias',
+            description: 'Flexiones con manos separadas para pecho',
+            difficulty: 'beginner',
+            equipment: ['bodyweight'],
+            primaryMuscles: ['chest'],
+            secondaryMuscles: ['triceps', 'shoulders'],
+            instructions: [
+                'Posición de plancha con manos más separadas',
+                'Manos a 1.5x ancho de hombros',
+                'Baja el pecho hacia el suelo',
+                'Empuja hacia arriba contrayendo pecho'
+            ],
+            tips: ['Manos separadas', 'Enfoque en pecho'],
+            videoSearch: 'flexiones amplias pecho peso corporal'
+        },
+        {
+            id: 'decline_push_ups',
+            name: 'Flexiones Declinadas',
+            description: 'Flexiones con pies elevados para pecho superior',
+            difficulty: 'intermediate',
+            equipment: ['bodyweight'],
+            primaryMuscles: ['chest_upper'],
+            secondaryMuscles: ['triceps', 'shoulders'],
+            instructions: [
+                'Pies en banco o superficie elevada',
+                'Manos en el suelo',
+                'Mantén cuerpo recto',
+                'Baja pecho hacia manos'
+            ],
+            tips: ['Pies elevados', 'Cuerpo recto'],
+            videoSearch: 'flexiones declinadas pecho superior'
+        },
+        {
+            id: 'incline_push_ups',
+            name: 'Flexiones Inclinadas',
+            description: 'Flexiones con manos elevadas para principiantes',
+            difficulty: 'beginner',
+            equipment: ['bodyweight'],
+            primaryMuscles: ['chest'],
+            secondaryMuscles: ['triceps', 'shoulders'],
+            instructions: [
+                'Manos en banco o superficie elevada',
+                'Pies en el suelo',
+                'Mantén cuerpo recto',
+                'Baja pecho hacia manos'
+            ],
+            tips: ['Manos elevadas', 'Más fácil que flexiones normales'],
+            videoSearch: 'flexiones inclinadas principiantes'
+        },
+        {
+            id: 'archer_push_ups',
+            name: 'Flexiones Arquero',
+            description: 'Flexiones unilaterales avanzadas',
+            difficulty: 'advanced',
+            equipment: ['bodyweight'],
+            primaryMuscles: ['chest'],
+            secondaryMuscles: ['triceps', 'shoulders', 'core'],
+            instructions: [
+                'Posición de flexión normal',
+                'Desplaza peso hacia un lado',
+                'Extiende el otro brazo',
+                'Baja hacia el lado cargado'
+            ],
+            tips: ['Movimiento unilateral', 'Muy avanzado'],
+            videoSearch: 'flexiones arquero avanzadas'
+        },
+        {
+            id: 'hindu_push_ups',
+            name: 'Flexiones Hindúes',
+            description: 'Flexiones dinámicas con movimiento fluido',
+            difficulty: 'intermediate',
+            equipment: ['bodyweight'],
+            primaryMuscles: ['chest'],
+            secondaryMuscles: ['shoulders', 'core', 'triceps'],
+            instructions: [
+                'Posición de perro boca abajo',
+                'Baja hacia cobra',
+                'Arquea hacia arriba',
+                'Regresa a posición inicial'
+            ],
+            tips: ['Movimiento fluido', 'Trabaja movilidad'],
+            videoSearch: 'flexiones hindúes dinámicas'
         }
     ],
 
@@ -249,6 +334,57 @@ export const GYM_EXERCISES = {
             ],
             tips: ['Movimiento controlado', 'Respiración normal'],
             videoSearch: 'superman ejercicio espalda baja'
+        },
+        {
+            id: 'reverse_hyperextensions',
+            name: 'Hiperextensiones Inversas',
+            description: 'Ejercicio para glúteos y espalda baja',
+            difficulty: 'beginner',
+            equipment: ['bodyweight'],
+            primaryMuscles: ['back_lower'],
+            secondaryMuscles: ['glutes', 'hamstrings'],
+            instructions: [
+                'Acuéstate boca abajo',
+                'Brazos extendidos hacia adelante',
+                'Levanta piernas y pecho simultáneamente',
+                'Mantén la posición 2-3 segundos'
+            ],
+            tips: ['Movimiento controlado', 'Contrae glúteos'],
+            videoSearch: 'hiperextensiones inversas espalda baja'
+        },
+        {
+            id: 'bird_dog',
+            name: 'Perro Pájaro',
+            description: 'Ejercicio de estabilidad para espalda y core',
+            difficulty: 'beginner',
+            equipment: ['bodyweight'],
+            primaryMuscles: ['back_lower'],
+            secondaryMuscles: ['core', 'glutes'],
+            instructions: [
+                'Posición de cuatro patas',
+                'Extiende brazo derecho y pierna izquierda',
+                'Mantén equilibrio 3-5 segundos',
+                'Alterna lados'
+            ],
+            tips: ['Mantén core activo', 'Movimiento controlado'],
+            videoSearch: 'perro pájaro estabilidad core'
+        },
+        {
+            id: 'cat_cow',
+            name: 'Gato Vaca',
+            description: 'Movilidad de columna vertebral',
+            difficulty: 'beginner',
+            equipment: ['bodyweight'],
+            primaryMuscles: ['back_lower'],
+            secondaryMuscles: ['core'],
+            instructions: [
+                'Posición de cuatro patas',
+                'Arquea espalda hacia arriba (gato)',
+                'Hunde espalda hacia abajo (vaca)',
+                'Repite movimiento fluido'
+            ],
+            tips: ['Movimiento fluido', 'Respiración coordinada'],
+            videoSearch: 'gato vaca movilidad columna'
         }
     ],
 
@@ -355,6 +491,74 @@ export const GYM_EXERCISES = {
             ],
             tips: ['Cuerpo recto', 'Hombros estables'],
             videoSearch: 'plancha inversa hombros peso corporal'
+        },
+        {
+            id: 'handstand_push_ups',
+            name: 'Flexiones en Parada de Manos',
+            description: 'Ejercicio avanzado para hombros',
+            difficulty: 'advanced',
+            equipment: ['bodyweight'],
+            primaryMuscles: ['shoulders'],
+            secondaryMuscles: ['triceps', 'core'],
+            instructions: [
+                'Parada de manos contra la pared',
+                'Baja cabeza hacia el suelo',
+                'Empuja hacia arriba',
+                'Mantén equilibrio'
+            ],
+            tips: ['Muy avanzado', 'Requiere fuerza y equilibrio'],
+            videoSearch: 'flexiones parada manos hombros'
+        },
+        {
+            id: 'wall_walks',
+            name: 'Caminatas en Pared',
+            description: 'Progresión hacia parada de manos',
+            difficulty: 'intermediate',
+            equipment: ['bodyweight'],
+            primaryMuscles: ['shoulders'],
+            secondaryMuscles: ['core', 'triceps'],
+            instructions: [
+                'Posición de plancha con pies en pared',
+                'Camina pies hacia arriba',
+                'Acerca manos a la pared',
+                'Regresa a posición inicial'
+            ],
+            tips: ['Progresión gradual', 'Mantén core activo'],
+            videoSearch: 'caminatas pared parada manos'
+        },
+        {
+            id: 'shoulder_taps',
+            name: 'Toques de Hombro',
+            description: 'Ejercicio de estabilidad para hombros',
+            difficulty: 'beginner',
+            equipment: ['bodyweight'],
+            primaryMuscles: ['shoulders'],
+            secondaryMuscles: ['core'],
+            instructions: [
+                'Posición de plancha',
+                'Toca hombro izquierdo con mano derecha',
+                'Regresa a plancha',
+                'Alterna lados'
+            ],
+            tips: ['Mantén core firme', 'Movimiento controlado'],
+            videoSearch: 'toques hombro plancha estabilidad'
+        },
+        {
+            id: 'arm_circles',
+            name: 'Círculos de Brazos',
+            description: 'Calentamiento y movilidad de hombros',
+            difficulty: 'beginner',
+            equipment: ['bodyweight'],
+            primaryMuscles: ['shoulders'],
+            secondaryMuscles: [],
+            instructions: [
+                'De pie con brazos extendidos',
+                'Haz círculos hacia adelante',
+                'Cambia dirección hacia atrás',
+                'Aumenta gradualmente el tamaño'
+            ],
+            tips: ['Movimiento controlado', 'Calentamiento ideal'],
+            videoSearch: 'círculos brazos calentamiento hombros'
         }
     ],
 
@@ -533,6 +737,401 @@ export const GYM_EXERCISES = {
             ],
             tips: ['Rango completo', 'Pausa arriba'],
             videoSearch: 'elevaciones gemelos pantorrillas gym'
+        },
+        {
+            id: 'bodyweight_squats',
+            name: 'Sentadillas de Peso Corporal',
+            description: 'Sentadillas sin peso para principiantes',
+            difficulty: 'beginner',
+            equipment: ['bodyweight'],
+            primaryMuscles: ['quadriceps', 'glutes'],
+            secondaryMuscles: ['hamstrings', 'calves', 'core'],
+            instructions: [
+                'Pies a anchura de hombros',
+                'Brazos extendidos al frente',
+                'Baja como si te sentaras',
+                'Empuja desde talones para subir'
+            ],
+            tips: ['Rodillas en línea con pies', 'Pecho arriba'],
+            videoSearch: 'sentadillas peso corporal principiantes'
+        },
+        {
+            id: 'jump_squats',
+            name: 'Sentadillas con Salto',
+            description: 'Sentadillas explosivas con salto',
+            difficulty: 'intermediate',
+            equipment: ['bodyweight'],
+            primaryMuscles: ['quadriceps', 'glutes'],
+            secondaryMuscles: ['calves', 'core'],
+            instructions: [
+                'Posición de sentadilla',
+                'Salta explosivamente hacia arriba',
+                'Aterriza suavemente',
+                'Inmediatamente baja a sentadilla'
+            ],
+            tips: ['Aterrizaje suave', 'Movimiento explosivo'],
+            videoSearch: 'sentadillas salto explosivas'
+        },
+        {
+            id: 'pistol_squats',
+            name: 'Sentadillas Pistola',
+            description: 'Sentadillas unilaterales avanzadas',
+            difficulty: 'advanced',
+            equipment: ['bodyweight'],
+            primaryMuscles: ['quadriceps', 'glutes'],
+            secondaryMuscles: ['core', 'calves'],
+            instructions: [
+                'De pie sobre una pierna',
+                'Extiende la otra pierna al frente',
+                'Baja en sentadilla con una pierna',
+                'Empuja para volver arriba'
+            ],
+            tips: ['Muy avanzado', 'Requiere equilibrio'],
+            videoSearch: 'sentadillas pistola unilateral'
+        },
+        {
+            id: 'bulgarian_split_squats',
+            name: 'Sentadillas Búlgaras',
+            description: 'Sentadillas unilaterales con pie trasero elevado',
+            difficulty: 'intermediate',
+            equipment: ['bodyweight'],
+            primaryMuscles: ['quadriceps', 'glutes'],
+            secondaryMuscles: ['hamstrings', 'core'],
+            instructions: [
+                'Pie trasero en banco o superficie elevada',
+                'Pie delantero adelante',
+                'Baja en sentadilla unilateral',
+                'Empuja con pierna delantera'
+            ],
+            tips: ['Pie trasero elevado', 'Enfoque en pierna delantera'],
+            videoSearch: 'sentadillas búlgaras unilateral'
+        },
+        {
+            id: 'wall_sits',
+            name: 'Sentadilla en Pared',
+            description: 'Isométrico para cuádriceps y glúteos',
+            difficulty: 'beginner',
+            equipment: ['bodyweight'],
+            primaryMuscles: ['quadriceps', 'glutes'],
+            secondaryMuscles: ['core'],
+            instructions: [
+                'Espalda contra la pared',
+                'Desliza hacia abajo hasta 90°',
+                'Mantén posición isométrica',
+                'Presiona contra la pared'
+            ],
+            tips: ['Posición 90°', 'Mantén tiempo'],
+            videoSearch: 'sentadilla pared isométrico'
+        },
+        {
+            id: 'step_ups',
+            name: 'Subidas al Escalón',
+            description: 'Ejercicio unilateral para piernas',
+            difficulty: 'beginner',
+            equipment: ['bodyweight'],
+            primaryMuscles: ['quadriceps', 'glutes'],
+            secondaryMuscles: ['hamstrings', 'calves'],
+            instructions: [
+                'Pie en escalón o banco',
+                'Sube con una pierna',
+                'Baja controladamente',
+                'Alterna piernas'
+            ],
+            tips: ['Movimiento controlado', 'Alterna piernas'],
+            videoSearch: 'subidas escalón piernas'
+        },
+        {
+            id: 'single_leg_glute_bridges',
+            name: 'Puente de Glúteos a Una Pierna',
+            description: 'Puente unilateral para glúteos',
+            difficulty: 'intermediate',
+            equipment: ['bodyweight'],
+            primaryMuscles: ['glutes'],
+            secondaryMuscles: ['hamstrings', 'core'],
+            instructions: [
+                'Acuéstate con una pierna extendida',
+                'Otra pierna flexionada',
+                'Levanta cadera con una pierna',
+                'Contrae glúteos en la cima'
+            ],
+            tips: ['Una pierna extendida', 'Contrae glúteos'],
+            videoSearch: 'puente glúteos una pierna'
+        },
+        {
+            id: 'lateral_lunges',
+            name: 'Zancadas Laterales',
+            description: 'Zancadas hacia los lados para abductores',
+            difficulty: 'beginner',
+            equipment: ['bodyweight'],
+            primaryMuscles: ['quadriceps', 'glutes'],
+            secondaryMuscles: ['abductors', 'adductors'],
+            instructions: [
+                'De pie con pies juntos',
+                'Da paso largo hacia un lado',
+                'Baja en zancada lateral',
+                'Empuja para volver al centro'
+            ],
+            tips: ['Paso lateral', 'Mantén torso erguido'],
+            videoSearch: 'zancadas laterales abductores'
+        },
+        {
+            id: 'reverse_lunges',
+            name: 'Zancadas Hacia Atrás',
+            description: 'Zancadas hacia atrás para mayor control',
+            difficulty: 'beginner',
+            equipment: ['bodyweight'],
+            primaryMuscles: ['quadriceps', 'glutes'],
+            secondaryMuscles: ['hamstrings', 'calves'],
+            instructions: [
+                'De pie con pies juntos',
+                'Da paso hacia atrás',
+                'Baja en zancada',
+                'Empuja con pierna delantera'
+            ],
+            tips: ['Paso hacia atrás', 'Controla la bajada'],
+            videoSearch: 'zancadas atrás control'
+        },
+        {
+            id: 'walking_lunges',
+            name: 'Zancadas Caminando',
+            description: 'Zancadas dinámicas caminando',
+            difficulty: 'intermediate',
+            equipment: ['bodyweight'],
+            primaryMuscles: ['quadriceps', 'glutes'],
+            secondaryMuscles: ['hamstrings', 'calves', 'core'],
+            instructions: [
+                'De pie con pies juntos',
+                'Da paso largo hacia adelante',
+                'Baja en zancada',
+                'Continúa caminando con zancadas'
+            ],
+            tips: ['Movimiento continuo', 'Mantén ritmo'],
+            videoSearch: 'zancadas caminando dinámicas'
+        },
+        {
+            id: 'single_leg_calf_raises',
+            name: 'Elevaciones de Gemelos a Una Pierna',
+            description: 'Elevaciones unilaterales de pantorrillas',
+            difficulty: 'intermediate',
+            equipment: ['bodyweight'],
+            primaryMuscles: ['calves'],
+            secondaryMuscles: [],
+            instructions: [
+                'De pie sobre una pierna',
+                'Otra pierna flexionada',
+                'Sube sobre dedos de pie',
+                'Baja controladamente'
+            ],
+            tips: ['Una pierna', 'Movimiento controlado'],
+            videoSearch: 'elevaciones gemelos una pierna'
+        },
+        {
+            id: 'mountain_climbers',
+            name: 'Escaladores de Montaña',
+            description: 'Ejercicio cardiovascular para piernas y core',
+            difficulty: 'intermediate',
+            equipment: ['bodyweight'],
+            primaryMuscles: ['quadriceps', 'glutes'],
+            secondaryMuscles: ['core', 'shoulders'],
+            instructions: [
+                'Posición de plancha',
+                'Lleva rodilla al pecho',
+                'Alterna piernas rápidamente',
+                'Mantén core activo'
+            ],
+            tips: ['Movimiento rápido', 'Core activo'],
+            videoSearch: 'escaladores montaña cardio'
+        },
+        {
+            id: 'burpees',
+            name: 'Burpees',
+            description: 'Ejercicio completo de cuerpo entero',
+            difficulty: 'intermediate',
+            equipment: ['bodyweight'],
+            primaryMuscles: ['quadriceps', 'glutes'],
+            secondaryMuscles: ['chest', 'shoulders', 'core'],
+            instructions: [
+                'De pie con pies juntos',
+                'Baja a sentadilla y pon manos en suelo',
+                'Salta pies hacia atrás a plancha',
+                'Haz flexión, salta pies adelante y salta arriba'
+            ],
+            tips: ['Movimiento completo', 'Muy intenso'],
+            videoSearch: 'burpees ejercicio completo'
+        }
+    ],
+
+    // CORE Y ABDOMINALES
+    core: [
+        {
+            id: 'plank',
+            name: 'Plancha',
+            description: 'Ejercicio isométrico fundamental para core',
+            difficulty: 'beginner',
+            equipment: ['bodyweight'],
+            primaryMuscles: ['core'],
+            secondaryMuscles: ['shoulders', 'glutes'],
+            instructions: [
+                'Posición de flexión con antebrazos',
+                'Codos bajo hombros',
+                'Mantén cuerpo recto',
+                'Contrae core y glúteos'
+            ],
+            tips: ['Cuerpo recto', 'Respiración normal'],
+            videoSearch: 'plancha core abdominales'
+        },
+        {
+            id: 'side_plank',
+            name: 'Plancha Lateral',
+            description: 'Plancha de lado para oblicuos',
+            difficulty: 'intermediate',
+            equipment: ['bodyweight'],
+            primaryMuscles: ['obliques'],
+            secondaryMuscles: ['core', 'shoulders'],
+            instructions: [
+                'De lado con antebrazo en suelo',
+                'Cuerpo en línea recta',
+                'Mantén posición',
+                'Alterna lados'
+            ],
+            tips: ['Cuerpo recto', 'No dejes caer cadera'],
+            videoSearch: 'plancha lateral oblicuos'
+        },
+        {
+            id: 'russian_twists',
+            name: 'Giros Rusos',
+            description: 'Ejercicio rotacional para oblicuos',
+            difficulty: 'intermediate',
+            equipment: ['bodyweight'],
+            primaryMuscles: ['obliques'],
+            secondaryMuscles: ['core'],
+            instructions: [
+                'Sentado con rodillas flexionadas',
+                'Inclínate hacia atrás 45°',
+                'Gira torso de lado a lado',
+                'Mantén core activo'
+            ],
+            tips: ['Movimiento controlado', 'Core activo'],
+            videoSearch: 'giros rusos oblicuos'
+        },
+        {
+            id: 'bicycle_crunches',
+            name: 'Crunches en Bicicleta',
+            description: 'Crunches dinámicos para oblicuos',
+            difficulty: 'intermediate',
+            equipment: ['bodyweight'],
+            primaryMuscles: ['obliques'],
+            secondaryMuscles: ['core'],
+            instructions: [
+                'Acuéstate con manos en nuca',
+                'Lleva rodilla al codo opuesto',
+                'Alterna lados',
+                'Mantén core activo'
+            ],
+            tips: ['Movimiento controlado', 'No tires del cuello'],
+            videoSearch: 'crunches bicicleta oblicuos'
+        },
+        {
+            id: 'mountain_climbers',
+            name: 'Escaladores de Montaña',
+            description: 'Ejercicio cardiovascular para core',
+            difficulty: 'intermediate',
+            equipment: ['bodyweight'],
+            primaryMuscles: ['core'],
+            secondaryMuscles: ['quadriceps', 'shoulders'],
+            instructions: [
+                'Posición de plancha',
+                'Lleva rodilla al pecho',
+                'Alterna piernas rápidamente',
+                'Mantén core activo'
+            ],
+            tips: ['Movimiento rápido', 'Core activo'],
+            videoSearch: 'escaladores montaña core'
+        },
+        {
+            id: 'dead_bug',
+            name: 'Bicho Muerto',
+            description: 'Ejercicio de estabilidad para core',
+            difficulty: 'beginner',
+            equipment: ['bodyweight'],
+            primaryMuscles: ['core'],
+            secondaryMuscles: [],
+            instructions: [
+                'Acuéstate con brazos hacia arriba',
+                'Rodillas a 90°',
+                'Extiende brazo y pierna opuestos',
+                'Regresa y alterna'
+            ],
+            tips: ['Movimiento controlado', 'Mantén core activo'],
+            videoSearch: 'bicho muerto estabilidad core'
+        },
+        {
+            id: 'hollow_body',
+            name: 'Cuerpo Hueco',
+            description: 'Isométrico avanzado para core',
+            difficulty: 'advanced',
+            equipment: ['bodyweight'],
+            primaryMuscles: ['core'],
+            secondaryMuscles: ['hip_flexors'],
+            instructions: [
+                'Acuéstate con brazos y piernas extendidos',
+                'Levanta hombros y piernas del suelo',
+                'Mantén posición hueca',
+                'Respira normalmente'
+            ],
+            tips: ['Muy avanzado', 'Posición hueca'],
+            videoSearch: 'cuerpo hueco core avanzado'
+        },
+        {
+            id: 'leg_raises',
+            name: 'Elevaciones de Piernas',
+            description: 'Ejercicio para abdominales inferiores',
+            difficulty: 'intermediate',
+            equipment: ['bodyweight'],
+            primaryMuscles: ['lower_abs'],
+            secondaryMuscles: ['hip_flexors'],
+            instructions: [
+                'Acuéstate con manos bajo glúteos',
+                'Levanta piernas rectas',
+                'Hasta 90° o más',
+                'Baja controladamente'
+            ],
+            tips: ['Piernas rectas', 'Movimiento controlado'],
+            videoSearch: 'elevaciones piernas abdominales'
+        },
+        {
+            id: 'flutter_kicks',
+            name: 'Patadas Alternadas',
+            description: 'Ejercicio dinámico para core',
+            difficulty: 'intermediate',
+            equipment: ['bodyweight'],
+            primaryMuscles: ['core'],
+            secondaryMuscles: ['hip_flexors'],
+            instructions: [
+                'Acuéstate con manos bajo glúteos',
+                'Levanta piernas ligeramente',
+                'Alterna patadas pequeñas',
+                'Mantén core activo'
+            ],
+            tips: ['Patadas pequeñas', 'Core activo'],
+            videoSearch: 'patadas alternadas core'
+        },
+        {
+            id: 'bear_crawl',
+            name: 'Gateo de Oso',
+            description: 'Ejercicio de movilidad para core',
+            difficulty: 'intermediate',
+            equipment: ['bodyweight'],
+            primaryMuscles: ['core'],
+            secondaryMuscles: ['shoulders', 'quadriceps'],
+            instructions: [
+                'Posición de cuatro patas',
+                'Rodillas ligeramente elevadas',
+                'Gatea hacia adelante y atrás',
+                'Mantén core activo'
+            ],
+            tips: ['Rodillas elevadas', 'Core activo'],
+            videoSearch: 'gateo oso movilidad core'
         }
     ]
 };

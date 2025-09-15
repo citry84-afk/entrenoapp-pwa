@@ -346,16 +346,51 @@ function findAlternativeExercises(session, availableEquipment) {
     
     // Ejercicios básicos de peso corporal que siempre funcionan
     const bodyweightExercises = [
+        // PECHO
         { exerciseId: 'push_ups', sets: 3, reps: '8-15', rest: 90 },
-        { exerciseId: 'squats', sets: 3, reps: '10-15', rest: 120 },
+        { exerciseId: 'wide_push_ups', sets: 3, reps: '8-15', rest: 90 },
+        { exerciseId: 'diamond_push_ups', sets: 3, reps: '5-10', rest: 90 },
+        { exerciseId: 'incline_push_ups', sets: 3, reps: '10-20', rest: 90 },
+        { exerciseId: 'pike_push_ups', sets: 3, reps: '5-10', rest: 90 },
+        
+        // ESPALDA
+        { exerciseId: 'pull_ups', sets: 3, reps: '6-12', rest: 150 },
+        { exerciseId: 'inverted_rows', sets: 3, reps: '8-15', rest: 90 },
+        { exerciseId: 'superman', sets: 3, reps: '10-15', rest: 60 },
+        { exerciseId: 'bird_dog', sets: 3, reps: '10-15', rest: 60 },
+        
+        // HOMBROS
+        { exerciseId: 'reverse_plank', sets: 3, reps: '20-30s', rest: 60 },
+        { exerciseId: 'shoulder_taps', sets: 3, reps: '20-30', rest: 60 },
+        { exerciseId: 'arm_circles', sets: 3, reps: '20-30', rest: 30 },
+        
+        // PIERNAS
+        { exerciseId: 'bodyweight_squats', sets: 3, reps: '10-15', rest: 120 },
+        { exerciseId: 'jump_squats', sets: 3, reps: '8-12', rest: 120 },
         { exerciseId: 'lunges', sets: 3, reps: '10-15', rest: 120 },
+        { exerciseId: 'bulgarian_split_squats', sets: 3, reps: '8-12', rest: 120 },
+        { exerciseId: 'wall_sits', sets: 3, reps: '30-60s', rest: 90 },
+        { exerciseId: 'step_ups', sets: 3, reps: '10-15', rest: 90 },
+        { exerciseId: 'lateral_lunges', sets: 3, reps: '8-12', rest: 90 },
+        { exerciseId: 'reverse_lunges', sets: 3, reps: '8-12', rest: 90 },
+        { exerciseId: 'walking_lunges', sets: 3, reps: '10-15', rest: 120 },
+        { exerciseId: 'single_leg_glute_bridges', sets: 3, reps: '8-12', rest: 90 },
+        { exerciseId: 'single_leg_calf_raises', sets: 3, reps: '10-15', rest: 60 },
+        
+        // CORE
         { exerciseId: 'plank', sets: 3, reps: '30-60s', rest: 60 },
+        { exerciseId: 'side_plank', sets: 3, reps: '20-30s', rest: 60 },
+        { exerciseId: 'russian_twists', sets: 3, reps: '20-30', rest: 60 },
+        { exerciseId: 'bicycle_crunches', sets: 3, reps: '20-30', rest: 60 },
         { exerciseId: 'mountain_climbers', sets: 3, reps: '20-30', rest: 60 },
+        { exerciseId: 'dead_bug', sets: 3, reps: '10-15', rest: 60 },
+        { exerciseId: 'leg_raises', sets: 3, reps: '10-15', rest: 60 },
+        { exerciseId: 'flutter_kicks', sets: 3, reps: '20-30', rest: 60 },
+        { exerciseId: 'bear_crawl', sets: 3, reps: '10-15', rest: 90 },
+        
+        // CARDIO/FUNCIONAL
         { exerciseId: 'burpees', sets: 3, reps: '5-10', rest: 120 },
-        { exerciseId: 'jumping_jacks', sets: 3, reps: '20-30', rest: 60 },
-        { exerciseId: 'glute_bridges', sets: 3, reps: '12-20', rest: 90 },
-        { exerciseId: 'calf_raises', sets: 3, reps: '15-25', rest: 60 },
-        { exerciseId: 'tricep_dips', sets: 3, reps: '8-15', rest: 90 }
+        { exerciseId: 'jumping_jacks', sets: 3, reps: '20-30', rest: 60 }
     ];
     
     // Si solo tenemos peso corporal, usar ejercicios específicos por grupo muscular
