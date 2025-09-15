@@ -250,26 +250,20 @@ function renderLoginForm() {
             </div>
             
             <div class="social-auth mb-lg">
-                <button 
-                    id="google-login" 
-                    class="glass-button social-button google-button btn-full mb-sm"
-                    ${authState.isLoading ? 'disabled' : ''}
-                >
-                    <span class="social-icon">🔍</span>
-                    Continuar con Google
-                </button>
-                
-                <!-- Apple Sign-In temporalmente deshabilitado hasta configuración completa -->
-                <!--
-                <button 
-                    id="apple-login" 
-                    class="glass-button social-button apple-button btn-full"
-                    ${authState.isLoading ? 'disabled' : ''}
-                >
-                    <span class="social-icon">🍎</span>
-                    Continuar con Apple
-                </button>
-                -->
+                ${!isIOSSafari() ? `
+                    <button 
+                        id="google-login" 
+                        class="glass-button social-button google-button btn-full mb-sm"
+                        ${authState.isLoading ? 'disabled' : ''}
+                    >
+                        <span class="social-icon">🔍</span>
+                        Continuar con Google
+                    </button>
+                ` : `
+                    <div class="text-center text-secondary mb-sm">
+                        Google no disponible en iOS. Usa email y contraseña.
+                    </div>
+                `}
             </div>
             
             ${(isIOSSafari() || isChromeOnAndroid()) ? `
@@ -406,26 +400,20 @@ function renderRegisterForm() {
             </div>
             
             <div class="social-auth mb-lg">
-                <button 
-                    id="google-register" 
-                    class="glass-button social-button google-button btn-full mb-sm"
-                    ${authState.isLoading ? 'disabled' : ''}
-                >
-                    <span class="social-icon">🔍</span>
-                    Continuar con Google
-                </button>
-                
-                <!-- Apple Sign-In temporalmente deshabilitado hasta configuración completa -->
-                <!--
-                <button 
-                    id="apple-register" 
-                    class="glass-button social-button apple-button btn-full"
-                    ${authState.isLoading ? 'disabled' : ''}
-                >
-                    <span class="social-icon">🍎</span>
-                    Continuar con Apple
-                </button>
-                -->
+                ${!isIOSSafari() ? `
+                    <button 
+                        id="google-register" 
+                        class="glass-button social-button google-button btn-full mb-sm"
+                        ${authState.isLoading ? 'disabled' : ''}
+                    >
+                        <span class="social-icon">🔍</span>
+                        Continuar con Google
+                    </button>
+                ` : `
+                    <div class="text-center text-secondary mb-sm">
+                        Google no disponible en iOS. Crea tu cuenta con email y contraseña.
+                    </div>
+                `}
             </div>
             
             <div class="auth-links text-center">
