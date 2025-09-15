@@ -616,12 +616,24 @@ function applyTheme(theme) {
 
 // Configurar banner de anuncios
 function setupAdBanner() {
-    if (appConfig.adSettings.bannerEnabled) {
-        adBanner.style.display = 'flex';
-        document.body.classList.add('has-ad-banner');
-        
-        // Simular contenido de anuncio
-        adBanner.querySelector('.ad-content').innerHTML = `
+    if (!appConfig.adSettings.bannerEnabled) return;
+    if (!adBanner) return;
+
+    adBanner.style.display = 'flex';
+    document.body.classList.add('has-ad-banner');
+
+    // Asegurar contenedor de contenido
+    let content = adBanner.querySelector('.ad-content');
+    if (!content) {
+        content = document.createElement('div');
+        content.className = 'ad-content';
+        adBanner.appendChild(content);
+    }
+
+    // Si no hay un <ins class="adsbygoogle"> visible, poner fallback discreto
+    const hasAdsIns = adBanner.querySelector('ins.adsbygoogle');
+    if (!hasAdsIns) {
+        content.innerHTML = `
             <span style="font-size: 0.8rem; color: rgba(255,255,255,0.6);">
                 📱 Espacio publicitario discreto
             </span>
