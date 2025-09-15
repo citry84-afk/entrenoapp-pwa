@@ -279,6 +279,12 @@ function renderLoginForm() {
                     Regístrate aquí
                 </button>
             </div>
+            
+            <div class="debug-section text-center mt-md">
+                <button id="debug-firebase-btn" class="debug-btn" onclick="window.runAllTests()">
+                    🔧 Debug Firebase
+                </button>
+            </div>
         </div>
     `;
 }
@@ -1347,24 +1353,65 @@ function updateEmailVerificationStatus() {
 // Función de debug para Firebase
 window.debugFirebaseAuth = function() {
     const user = auth.currentUser;
+    const debugInfo = {
+        user: user,
+        emailVerified: user?.emailVerified,
+        provider: user?.providerData?.[0]?.providerId,
+        config: firebaseConfig,
+        timestamp: new Date().toISOString(),
+        url: window.location.href,
+        userAgent: navigator.userAgent
+    };
+    
     console.log('=== DEBUG FIREBASE AUTH ===');
-    console.log('Usuario actual:', user);
-    console.log('Email verificado:', user?.emailVerified);
-    console.log('Proveedor:', user?.providerData);
-    console.log('Configuración Firebase:', {
+    console.log('🕐 Timestamp:', debugInfo.timestamp);
+    console.log('🌐 URL:', debugInfo.url);
+    console.log('👤 Usuario actual:', user);
+    console.log('✅ Email verificado:', user?.emailVerified);
+    console.log('🔐 Proveedor:', user?.providerData);
+    console.log('⚙️ Configuración Firebase:', {
         apiKey: firebaseConfig?.apiKey?.substring(0, 10) + '...',
         authDomain: firebaseConfig?.authDomain,
-        projectId: firebaseConfig?.projectId
+        projectId: firebaseConfig?.projectId,
+        storageBucket: firebaseConfig?.storageBucket
     });
     console.log('========================');
     
-    return {
-        user,
-        emailVerified: user?.emailVerified,
-        provider: user?.providerData?.[0]?.providerId,
-        config: firebaseConfig
-    };
+    // Mostrar en pantalla también
+    const debugDiv = document.getElementById('firebase-debug') || createDebugDiv();
+    debugDiv.innerHTML = `
+        <h3>🔧 Debug Firebase Auth</h3>
+        <p><strong>Usuario:</strong> ${user ? user.email : 'No autenticado'}</p>
+        <p><strong>Email verificado:</strong> ${user?.emailVerified ? '✅ Sí' : '❌ No'}</p>
+        <p><strong>Proveedor:</strong> ${user?.providerData?.[0]?.providerId || 'N/A'}</p>
+        <p><strong>Proyecto:</strong> ${firebaseConfig?.projectId}</p>
+        <p><strong>Dominio:</strong> ${firebaseConfig?.authDomain}</p>
+    `;
+    
+    return debugInfo;
 };
+
+// Crear div de debug si no existe
+function createDebugDiv() {
+    const debugDiv = document.createElement('div');
+    debugDiv.id = 'firebase-debug';
+    debugDiv.style.cssText = `
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        background: rgba(0,0,0,0.8);
+        color: white;
+        padding: 15px;
+        border-radius: 8px;
+        font-family: monospace;
+        font-size: 12px;
+        z-index: 10000;
+        max-width: 300px;
+        border: 2px solid #00ff00;
+    `;
+    document.body.appendChild(debugDiv);
+    return debugDiv;
+}
 
 // Función para probar envío de email
 window.testEmailSending = async function() {
@@ -1376,12 +1423,151 @@ window.testEmailSending = async function() {
     
     try {
         console.log('📧 Probando envío de email de verificación...');
+        console.log('👤 Usuario:', user.email);
+        console.log('✅ Email verificado:', user.emailVerified);
+        
+        // Mostrar loading
+        const loadingDiv = document.getElementById('email-test-loading') || createLoadingDiv();
+        loadingDiv.style.display = 'block';
+        loadingDiv.innerHTML = '📧 Enviando email de verificación...';
+        
         await sendEmailVerification(user);
-        showSuccess('Email de prueba enviado. Revisa tu bandeja de entrada.');
+        
+        console.log('✅ Email enviado exitosamente');
+        showSuccess('✅ Email de verificación enviado exitosamente. Revisa tu bandeja de entrada y spam.');
+        
+        // Ocultar loading
+        loadingDiv.style.display = 'none';
+        
+        // Actualizar estado del usuario
+        await user.reload();
+        console.log('🔄 Usuario recargado. Email verificado:', user.emailVerified);
+        
     } catch (error) {
         console.error('❌ Error enviando email de prueba:', error);
-        showError('Error enviando email: ' + error.message);
+        
+        // Ocultar loading
+        const loadingDiv = document.getElementById('email-test-loading');
+        if (loadingDiv) loadingDiv.style.display = 'none';
+        
+        // Mostrar error específico
+        let errorMessage = 'Error enviando email: ' + error.message;
+        
+        if (error.code === 'auth/operation-not-allowed') {
+            errorMessage = '❌ Email/Password no está habilitado en Firebase Console';
+        } else if (error.code === 'auth/unauthorized-domain') {
+            errorMessage = '❌ Dominio no autorizado. Agrega ' + window.location.hostname + ' a dominios autorizados';
+        } else if (error.code === 'auth/too-many-requests') {
+            errorMessage = '❌ Demasiados intentos. Espera unos minutos antes de intentar de nuevo';
+        }
+        
+        showError(errorMessage);
+        
+        // Mostrar en consola para debug
+        console.log('🔍 Código de error:', error.code);
+        console.log('🔍 Mensaje completo:', error.message);
     }
+};
+
+// Crear div de loading para pruebas
+function createLoadingDiv() {
+    const loadingDiv = document.createElement('div');
+    loadingDiv.id = 'email-test-loading';
+    loadingDiv.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(0,0,0,0.9);
+        color: white;
+        padding: 20px;
+        border-radius: 8px;
+        font-family: monospace;
+        font-size: 14px;
+        z-index: 10001;
+        border: 2px solid #ffaa00;
+        display: none;
+    `;
+    document.body.appendChild(loadingDiv);
+    return loadingDiv;
+}
+
+// Función para verificar configuración de Firebase
+window.checkFirebaseConfig = function() {
+    const config = firebaseConfig;
+    const debugInfo = {
+        apiKey: config?.apiKey ? '✅ Configurado' : '❌ Faltante',
+        authDomain: config?.authDomain ? '✅ Configurado' : '❌ Faltante',
+        projectId: config?.projectId ? '✅ Configurado' : '❌ Faltante',
+        storageBucket: config?.storageBucket ? '✅ Configurado' : '❌ Faltante',
+        messagingSenderId: config?.messagingSenderId ? '✅ Configurado' : '❌ Faltante',
+        appId: config?.appId ? '✅ Configurado' : '❌ Faltante'
+    };
+    
+    console.log('=== VERIFICACIÓN DE CONFIGURACIÓN FIREBASE ===');
+    console.log('🔑 API Key:', debugInfo.apiKey);
+    console.log('🌐 Auth Domain:', debugInfo.authDomain);
+    console.log('📁 Project ID:', debugInfo.projectId);
+    console.log('💾 Storage Bucket:', debugInfo.storageBucket);
+    console.log('📱 Messaging Sender ID:', debugInfo.messagingSenderId);
+    console.log('🆔 App ID:', debugInfo.appId);
+    console.log('===============================================');
+    
+    // Mostrar en pantalla
+    const configDiv = document.getElementById('firebase-config-check') || createConfigDiv();
+    configDiv.innerHTML = `
+        <h3>⚙️ Verificación Firebase</h3>
+        <p><strong>API Key:</strong> ${debugInfo.apiKey}</p>
+        <p><strong>Auth Domain:</strong> ${debugInfo.authDomain}</p>
+        <p><strong>Project ID:</strong> ${debugInfo.projectId}</p>
+        <p><strong>Storage Bucket:</strong> ${debugInfo.storageBucket}</p>
+        <p><strong>Messaging Sender ID:</strong> ${debugInfo.messagingSenderId}</p>
+        <p><strong>App ID:</strong> ${debugInfo.appId}</p>
+    `;
+    
+    return debugInfo;
+};
+
+// Crear div de configuración
+function createConfigDiv() {
+    const configDiv = document.createElement('div');
+    configDiv.id = 'firebase-config-check';
+    configDiv.style.cssText = `
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        background: rgba(0,0,0,0.8);
+        color: white;
+        padding: 15px;
+        border-radius: 8px;
+        font-family: monospace;
+        font-size: 12px;
+        z-index: 10000;
+        max-width: 300px;
+        border: 2px solid #0066ff;
+    `;
+    document.body.appendChild(configDiv);
+    return configDiv;
+}
+
+// Función para ejecutar todas las pruebas
+window.runAllTests = function() {
+    console.log('🧪 Ejecutando todas las pruebas de Firebase...');
+    
+    // 1. Verificar configuración
+    window.checkFirebaseConfig();
+    
+    // 2. Debug de autenticación
+    window.debugFirebaseAuth();
+    
+    // 3. Probar envío de email (si hay usuario)
+    if (auth.currentUser) {
+        window.testEmailSending();
+    } else {
+        console.log('⚠️ No hay usuario autenticado para probar emails');
+    }
+    
+    console.log('✅ Pruebas completadas. Revisa los resultados arriba.');
 };
 
 // Exportar funciones útiles
