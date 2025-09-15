@@ -733,10 +733,12 @@ function hasPopupIssues() {
     const ua = navigator.userAgent;
     const isIOS = /iPad|iPhone|iPod/.test(ua);
     const isChromeAndroid = /Android/.test(ua) && /Chrome/.test(ua);
+    // Safari de escritorio suele bloquear third-party cookies/popups en OAuth
+    const isSafariDesktop = /Safari\//.test(ua) && !/Chrome|Chromium|Android|Mobile/i.test(ua);
     const isTelegram = /TelegramBot|Telegram/i.test(ua);
     
     // Telegram funciona bien con popups, otros pueden tener problemas
-    return (isIOS || isChromeAndroid) && !isTelegram;
+    return (isIOS || isChromeAndroid || isSafariDesktop) && !isTelegram;
 }
 
 async function handleGoogleAuth() {
@@ -790,7 +792,7 @@ async function handleGoogleAuth() {
             // Telegram: usar popup (funciona bien)
             result = await signInWithPopup(auth, googleProvider);
         } else if (hasIssues) {
-            // Otros navegadores con problemas: usar redirect
+            // Otros navegadores con problemas (incluye Safari desktop): usar redirect
             showSuccess('Redirigiendo a Google...');
             await signInWithRedirect(auth, googleProvider);
             return;
