@@ -92,6 +92,40 @@ export const GYM_EXERCISES = {
             ],
             tips: ['Núcleo firme', 'Rango completo de movimiento'],
             videoSearch: 'flexiones técnica correcta'
+        },
+        {
+            id: 'pike_push_ups',
+            name: 'Flexiones Pike',
+            description: 'Flexiones con elevación de cadera para hombros',
+            difficulty: 'intermediate',
+            equipment: ['bodyweight'],
+            primaryMuscles: ['shoulders'],
+            secondaryMuscles: ['triceps', 'core'],
+            instructions: [
+                'Posición de plancha con cadera elevada',
+                'Forma una V invertida con el cuerpo',
+                'Baja la cabeza hacia el suelo',
+                'Empuja hacia arriba manteniendo la posición'
+            ],
+            tips: ['Cadera alta', 'Movimiento controlado'],
+            videoSearch: 'flexiones pike hombros peso corporal'
+        },
+        {
+            id: 'diamond_push_ups',
+            name: 'Flexiones Diamante',
+            description: 'Flexiones con manos juntas para tríceps',
+            difficulty: 'intermediate',
+            equipment: ['bodyweight'],
+            primaryMuscles: ['triceps'],
+            secondaryMuscles: ['chest', 'shoulders'],
+            instructions: [
+                'Posición de plancha con manos juntas',
+                'Forma un diamante con los dedos',
+                'Baja el pecho hacia las manos',
+                'Empuja hacia arriba contrayendo tríceps'
+            ],
+            tips: ['Manos juntas', 'Enfoque en tríceps'],
+            videoSearch: 'flexiones diamante tríceps peso corporal'
         }
     ],
 
@@ -181,6 +215,40 @@ export const GYM_EXERCISES = {
             ],
             tips: ['Torso estable', 'Movimiento controlado'],
             videoSearch: 'remo polea baja espalda gym'
+        },
+        {
+            id: 'inverted_rows',
+            name: 'Remo Invertido',
+            description: 'Ejercicio de peso corporal para espalda',
+            difficulty: 'beginner',
+            equipment: ['bodyweight'],
+            primaryMuscles: ['back_middle'],
+            secondaryMuscles: ['biceps', 'rhomboids'],
+            instructions: [
+                'Acuéstate bajo una barra o mesa',
+                'Agarra la barra con agarre supino',
+                'Mantén cuerpo recto',
+                'Tira del pecho hacia la barra'
+            ],
+            tips: ['Cuerpo recto', 'Contrae omóplatos'],
+            videoSearch: 'remo invertido peso corporal espalda'
+        },
+        {
+            id: 'superman',
+            name: 'Superman',
+            description: 'Ejercicio de extensión lumbar',
+            difficulty: 'beginner',
+            equipment: ['bodyweight'],
+            primaryMuscles: ['back_lower'],
+            secondaryMuscles: ['glutes', 'rhomboids'],
+            instructions: [
+                'Acuéstate boca abajo',
+                'Extiende brazos hacia adelante',
+                'Levanta pecho y piernas simultáneamente',
+                'Mantén la posición 2-3 segundos'
+            ],
+            tips: ['Movimiento controlado', 'Respiración normal'],
+            videoSearch: 'superman ejercicio espalda baja'
         }
     ],
 
@@ -270,6 +338,23 @@ export const GYM_EXERCISES = {
             ],
             tips: ['Solo movimiento vertical', 'Pausa arriba'],
             videoSearch: 'encogimientos trapecio gym'
+        },
+        {
+            id: 'reverse_plank',
+            name: 'Plancha Inversa',
+            description: 'Ejercicio de peso corporal para hombros posteriores',
+            difficulty: 'intermediate',
+            equipment: ['bodyweight'],
+            primaryMuscles: ['shoulders_rear'],
+            secondaryMuscles: ['triceps', 'core'],
+            instructions: [
+                'Siéntate con piernas extendidas',
+                'Apoya manos detrás de la cadera',
+                'Levanta cadera hacia arriba',
+                'Mantén cuerpo recto'
+            ],
+            tips: ['Cuerpo recto', 'Hombros estables'],
+            videoSearch: 'plancha inversa hombros peso corporal'
         }
     ],
 
