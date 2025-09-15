@@ -161,7 +161,7 @@ function adaptRoutineForLevel(routine, experience) {
 
 function adjustForSessionTime(routine, sessionTime) {
     const timeMultipliers = {
-        'short': 0.7,    // 30-45 min
+        'short': 0.8,    // 30-45 min - Reducido de 0.7 a 0.8 para mantener más ejercicios
         'medium': 1,     // 45-60 min
         'long': 1.3      // 60+ min
     };
@@ -171,14 +171,27 @@ function adjustForSessionTime(routine, sessionTime) {
     routine.sessions.forEach(session => {
         const targetExercises = Math.round(session.exercises.length * multiplier);
         
+        // Asegurar mínimo de 4 ejercicios por sesión
+        const minExercises = 4;
+        const finalTargetExercises = Math.max(targetExercises, minExercises);
+        
         if (multiplier < 1) {
-            // Reducir ejercicios priorizando compuestos
-            session.exercises = session.exercises
-                .sort((a, b) => getExercisePriority(a.exerciseId) - getExercisePriority(b.exerciseId))
-                .slice(0, targetExercises);
+            // Reducir ejercicios priorizando compuestos, pero mantener mínimo
+            if (session.exercises.length > finalTargetExercises) {
+                session.exercises = session.exercises
+                    .sort((a, b) => getExercisePriority(a.exerciseId) - getExercisePriority(b.exerciseId))
+                    .slice(0, finalTargetExercises);
+            }
         } else if (multiplier > 1) {
             // Agregar ejercicios de aislamiento
-            const additionalExercises = generateAdditionalExercises(session, targetExercises - session.exercises.length);
+            const additionalExercises = generateAdditionalExercises(session, finalTargetExercises - session.exercises.length);
+            session.exercises.push(...additionalExercises);
+        }
+        
+        // Verificar que tenemos al menos 4 ejercicios
+        if (session.exercises.length < minExercises) {
+            const needed = minExercises - session.exercises.length;
+            const additionalExercises = generateAdditionalExercises(session, needed);
             session.exercises.push(...additionalExercises);
         }
     });
@@ -241,7 +254,7 @@ function filterByEquipment(routine, availableEquipment) {
         console.log(`📋 Sesión ${session.name}: ${originalCount} → ${session.exercises.length} ejercicios`);
         
         // Si quedan muy pocos ejercicios, agregar alternativos
-        if (session.exercises.length < 3) {
+        if (session.exercises.length < 4) {
             const alternatives = findAlternativeExercises(session, expandedEquipment);
             session.exercises.push(...alternatives);
         }
@@ -278,8 +291,51 @@ function getExercisePriority(exerciseId) {
 }
 
 function generateAdditionalExercises(session, count) {
-    // Implementar lógica para agregar ejercicios adicionales
-    return [];
+    if (count <= 0) return [];
+    
+    const additionalExercises = [];
+    const sessionName = session.name.toLowerCase();
+    
+    // Ejercicios básicos que siempre funcionan
+    const basicExercises = [
+        { exerciseId: 'push_ups', sets: 3, reps: '8-15', rest: 90 },
+        { exerciseId: 'squats', sets: 3, reps: '10-15', rest: 120 },
+        { exerciseId: 'lunges', sets: 3, reps: '10-15', rest: 120 },
+        { exerciseId: 'plank', sets: 3, reps: '30-60s', rest: 60 },
+        { exerciseId: 'mountain_climbers', sets: 3, reps: '20-30', rest: 60 }
+    ];
+    
+    // Ejercicios específicos por tipo de sesión
+    if (sessionName.includes('push') || sessionName.includes('pecho')) {
+        additionalExercises.push(
+            { exerciseId: 'dumbbell_flyes', sets: 3, reps: '10-15', rest: 90 },
+            { exerciseId: 'tricep_dips', sets: 3, reps: '8-15', rest: 90 }
+        );
+    } else if (sessionName.includes('pull') || sessionName.includes('espalda')) {
+        additionalExercises.push(
+            { exerciseId: 'face_pulls', sets: 3, reps: '12-18', rest: 90 },
+            { exerciseId: 'barbell_curl', sets: 3, reps: '8-12', rest: 90 }
+        );
+    } else if (sessionName.includes('leg') || sessionName.includes('pierna')) {
+        additionalExercises.push(
+            { exerciseId: 'calf_raises', sets: 3, reps: '15-25', rest: 60 },
+            { exerciseId: 'glute_bridges', sets: 3, reps: '12-20', rest: 90 }
+        );
+    } else {
+        // Para sesiones full body o no específicas
+        additionalExercises.push(
+            { exerciseId: 'burpees', sets: 3, reps: '5-10', rest: 120 },
+            { exerciseId: 'jumping_jacks', sets: 3, reps: '20-30', rest: 60 }
+        );
+    }
+    
+    // Agregar ejercicios básicos si no hay suficientes específicos
+    while (additionalExercises.length < count) {
+        const basicExercise = basicExercises[additionalExercises.length % basicExercises.length];
+        additionalExercises.push({ ...basicExercise });
+    }
+    
+    return additionalExercises.slice(0, count);
 }
 
 function findAlternativeExercises(session, availableEquipment) {
@@ -327,8 +383,14 @@ function findAlternativeExercises(session, availableEquipment) {
         alternatives.push(...basicExercises);
     }
     
+    // Agregar más ejercicios básicos para asegurar mínimo de 4
+    while (alternatives.length < 4) {
+        const basicExercise = basicExercises[alternatives.length % basicExercises.length];
+        alternatives.push({ ...basicExercise });
+    }
+    
     console.log(`✅ Agregados ${alternatives.length} ejercicios alternativos`);
-    return alternatives.slice(0, 5); // Máximo 5 ejercicios
+    return alternatives.slice(0, 6); // Máximo 6 ejercicios
 }
 
 function generatePlanName(frequency, experience, goal) {
