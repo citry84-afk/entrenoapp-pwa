@@ -8,6 +8,7 @@ import {
     getRedirectResult,
     setPersistence,
     browserLocalPersistence,
+    onAuthStateChanged,
     GoogleAuthProvider,
     OAuthProvider,
     signOut,
@@ -120,6 +121,14 @@ window.initAuthPage = async function() {
             showError('Error en la autenticación. Intenta de nuevo.');
         }
     }
+    
+    // Safari: enganchar al cambio de estado por si llega tarde
+    onAuthStateChanged(auth, async (user) => {
+        if (user) {
+            await saveUserToLocalStorage(user);
+            window.location.href = '#dashboard';
+        }
+    });
     
     renderAuthContent();
     setupAuthListeners();
@@ -793,6 +802,7 @@ async function handleGoogleAuth() {
             }, 30000);
             
             try {
+                try { await setPersistence(auth, browserLocalPersistence); } catch (_) {}
                 await signInWithRedirect(auth, googleProvider);
                 clearTimeout(redirectTimeout);
             } catch (error) {
@@ -803,6 +813,7 @@ async function handleGoogleAuth() {
         } else if (isChromeAndroid) {
             // Chrome Android: usar redirect (más confiable que popup)
             showSuccess('Redirigiendo a Google...');
+            try { await setPersistence(auth, browserLocalPersistence); } catch (_) {}
             await signInWithRedirect(auth, googleProvider);
             return;
         } else if (isTelegram) {
@@ -811,6 +822,7 @@ async function handleGoogleAuth() {
         } else if (hasIssues) {
             // Otros navegadores con problemas (incluye Safari desktop): usar redirect
             showSuccess('Redirigiendo a Google...');
+            try { await setPersistence(auth, browserLocalPersistence); } catch (_) {}
             await signInWithRedirect(auth, googleProvider);
             return;
         } else {
