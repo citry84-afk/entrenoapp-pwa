@@ -3,64 +3,68 @@
    =========================================== */
 
 .glass-effect {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-primary);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid var(--border-primary);
     border-radius: 16px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
 }
 
 .glass-effect-dark {
-    background: rgba(0, 0, 0, 0.2);
+    background: var(--bg-dark);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-secondary);
     border-radius: 16px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 .glass-card {
-    background: rgba(255, 255, 255, 0.15);
+    background: var(--bg-primary);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    border: 1px solid var(--border-primary);
     border-radius: 20px;
     padding: 20px;
     margin: 16px;
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
     transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .glass-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2);
-    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.25);
+    background: var(--bg-primary);
+    border-color: var(--border-accent);
 }
 
 .glass-card-active {
-    background: rgba(0, 122, 255, 0.2);
-    border: 1px solid rgba(0, 122, 255, 0.4);
-    box-shadow: 0 12px 40px rgba(0, 122, 255, 0.3);
+    background: rgba(0, 122, 255, 0.25);
+    border: 1px solid var(--border-accent);
+    box-shadow: 0 12px 40px rgba(0, 122, 255, 0.4);
 }
 
 .glass-button {
-    background: rgba(255, 255, 255, 0.2);
+    background: var(--bg-primary);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid var(--border-primary);
     border-radius: 12px;
     padding: 12px 24px;
-    color: white;
+    color: var(--text-primary);
     font-weight: 600;
     transition: all 0.2s ease;
     cursor: pointer;
     outline: none;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .glass-button:hover {
-    background: rgba(255, 255, 255, 0.25);
+    background: var(--bg-primary);
+    border-color: var(--border-accent);
     transform: scale(1.02);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
 
 .glass-button:active {
@@ -68,37 +72,41 @@
 }
 
 .glass-button-primary {
-    background: rgba(0, 122, 255, 0.8);
-    border: 1px solid rgba(0, 122, 255, 0.9);
-    color: white;
+    background: var(--primary-blue);
+    border: 1px solid var(--primary-blue-dark);
+    color: var(--text-primary);
+    box-shadow: 0 4px 16px rgba(0, 122, 255, 0.3);
 }
 
 .glass-button-primary:hover {
-    background: rgba(0, 122, 255, 0.9);
+    background: var(--primary-blue-dark);
+    box-shadow: 0 6px 20px rgba(0, 122, 255, 0.4);
 }
 
 .glass-input {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-secondary);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid var(--border-secondary);
     border-radius: 12px;
     padding: 16px;
-    color: white;
+    color: var(--text-primary);
     font-size: 16px;
     width: 100%;
     outline: none;
     transition: all 0.3s ease;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .glass-input::placeholder {
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--text-tertiary);
+    text-shadow: none;
 }
 
 .glass-input:focus {
-    border-color: rgba(0, 122, 255, 0.6);
-    background: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.1);
+    border-color: var(--border-accent);
+    background: var(--bg-primary);
+    box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.15);
 }
 
 .glass-nav {

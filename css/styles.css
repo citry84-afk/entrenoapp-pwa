@@ -3,19 +3,37 @@
    =========================================== */
 
 :root {
-    /* Colores principales estilo iOS */
+    /* Colores principales estilo iOS con mejor contraste */
     --primary-blue: #007AFF;
     --primary-blue-dark: #0056CC;
+    --primary-blue-light: #4A9EFF;
     --secondary-blue: #5AC8FA;
     --success-green: #34C759;
+    --success-green-dark: #28A745;
     --warning-orange: #FF9500;
+    --warning-orange-dark: #E6850E;
     --error-red: #FF3B30;
+    --error-red-dark: #DC2626;
     --purple: #AF52DE;
+    --purple-dark: #9C3DD4;
     
-    /* Colores de texto */
+    /* Colores de texto con mejor contraste */
     --text-primary: #FFFFFF;
-    --text-secondary: rgba(255, 255, 255, 0.8);
-    --text-tertiary: rgba(255, 255, 255, 0.6);
+    --text-secondary: rgba(255, 255, 255, 0.9);
+    --text-tertiary: rgba(255, 255, 255, 0.7);
+    --text-quaternary: rgba(255, 255, 255, 0.5);
+    
+    /* Colores de fondo con mejor contraste */
+    --bg-primary: rgba(255, 255, 255, 0.15);
+    --bg-secondary: rgba(255, 255, 255, 0.1);
+    --bg-tertiary: rgba(255, 255, 255, 0.05);
+    --bg-dark: rgba(0, 0, 0, 0.3);
+    --bg-dark-light: rgba(0, 0, 0, 0.2);
+    
+    /* Colores de borde con mejor contraste */
+    --border-primary: rgba(255, 255, 255, 0.3);
+    --border-secondary: rgba(255, 255, 255, 0.2);
+    --border-accent: rgba(0, 122, 255, 0.5);
     
     /* Espaciado */
     --spacing-xs: 4px;
@@ -40,6 +58,39 @@
     --transition-fast: 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     --transition-normal: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     --transition-slow: 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Clases de texto con mejor contraste */
+.text-high-contrast {
+    color: var(--text-primary) !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+    font-weight: 600 !important;
+}
+
+.text-medium-contrast {
+    color: var(--text-secondary) !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+}
+
+.text-low-contrast {
+    color: var(--text-tertiary) !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Clases de fondo con mejor contraste */
+.bg-high-contrast {
+    background: var(--bg-primary) !important;
+    border: 1px solid var(--border-primary) !important;
+}
+
+.bg-medium-contrast {
+    background: var(--bg-secondary) !important;
+    border: 1px solid var(--border-secondary) !important;
+}
+
+.bg-low-contrast {
+    background: var(--bg-tertiary) !important;
+    border: 1px solid var(--border-secondary) !important;
 }
 
 /* Reset y base */
