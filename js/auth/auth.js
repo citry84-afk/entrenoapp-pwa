@@ -242,7 +242,7 @@ function renderLoginForm() {
                 -->
             </div>
             
-            ${(isIOSSafari() || isChromeAndroid()) ? `
+            ${(isIOSSafari() || isChromeOnAndroid()) ? `
                 <div class="ios-fallback text-center mt-md">
                     <p class="text-secondary mb-sm">
                         ${isIOSSafari() ? '¿Problemas con Google en Safari?' : '¿Problemas con Google en Chrome?'}
@@ -712,7 +712,7 @@ function isIOSSafari() {
 }
 
 // Detectar si es Chrome en Android
-function isChromeAndroid() {
+function isChromeOnAndroid() {
     const ua = navigator.userAgent;
     return /Android/.test(ua) && /Chrome/.test(ua) && !/Edge|OPR|Vivaldi|Brave/.test(ua);
 }
@@ -761,7 +761,7 @@ async function handleGoogleAuth() {
         
         let result;
         const isIOS = isIOSSafari();
-        const isChromeAndroid = isChromeAndroid();
+        const isChromeAndroid = isChromeOnAndroid();
         const isTelegram = isTelegramBrowser();
         const hasIssues = hasPopupIssues();
         
@@ -1274,7 +1274,7 @@ window.testAuth = async function(provider = 'google') {
 // Función de debug para navegadores móviles
 window.debugMobileAuth = function() {
     const isIOS = isIOSSafari();
-    const isChromeAndroid = isChromeAndroid();
+    const isChromeAndroid = isChromeOnAndroid();
     const isTelegram = isTelegramBrowser();
     const isMobile = isMobileDevice();
     const hasIssues = hasPopupIssues();
