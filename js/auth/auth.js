@@ -609,7 +609,7 @@ async function handleLogin(e) {
         }
         
         setTimeout(() => {
-            window.loadPage('dashboard');
+            window.location.href = '#dashboard';
         }, 1500);
         
     } catch (error) {
@@ -676,7 +676,7 @@ async function handleRegister(e) {
         
         // Redirigir al onboarding
         setTimeout(() => {
-            window.loadPage('onboarding');
+            window.location.href = '#onboarding';
         }, 2000);
         
     } catch (error) {
@@ -842,12 +842,12 @@ async function handleGoogleAuth() {
                 
                 showSuccess('¡Bienvenido! Configuremos tu perfil.');
                 setTimeout(() => {
-                    window.loadPage('onboarding');
+                    window.location.href = '#onboarding';
                 }, 1500);
             } else {
                 showSuccess('¡Bienvenido de vuelta!');
                 setTimeout(() => {
-                    window.loadPage('dashboard');
+                    window.location.href = '#dashboard';
                 }, 1500);
             }
             
@@ -916,12 +916,12 @@ async function handleAppleAuth() {
             
             showSuccess('¡Bienvenido! Configuremos tu perfil.');
             setTimeout(() => {
-                window.loadPage('onboarding');
+                window.location.href = '#onboarding';
             }, 1500);
         } else {
             showSuccess('¡Bienvenido de vuelta!');
             setTimeout(() => {
-                window.loadPage('dashboard');
+                window.location.href = '#dashboard';
             }, 1500);
         }
         
@@ -990,13 +990,13 @@ export async function logout() {
         
         
         // Redirigir a la página de login
-        window.loadPage('auth');
+        window.location.href = '#auth';
         
     } catch (error) {
         console.error('❌ Error cerrando sesión:', error);
         // Aún así, limpiar datos locales
         clearUserFromLocalStorage();
-        window.loadPage('auth');
+        window.location.href = '#auth';
     }
 }
 
