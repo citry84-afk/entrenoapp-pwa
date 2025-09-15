@@ -34,11 +34,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Mostrar pantalla de carga
         showLoadingScreen();
         
+        // Configurar listener de auth ANTES de inicializar (iOS redirect timing)
+        setupAuthListener();
+
         // Inicializar Firebase
         await initializeEntrenoApp();
-        
-        // Configurar listeners
-        setupAuthListener();
         setupNavigationListeners();
         setupNetworkListeners();
         setupServiceWorkerListeners();

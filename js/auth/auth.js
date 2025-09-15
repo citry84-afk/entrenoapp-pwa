@@ -48,6 +48,10 @@ window.initAuthPage = async function() {
     } catch (e) {
         console.warn('Persistencia no aplicada:', e);
     }
+    
+    // Mostrar spinner mientras resolvemos redirect en iOS
+    const authContent = document.getElementById('auth-content');
+    if (authContent) authContent.innerHTML = '<div class="text-center"><div class="loading-spinner"></div><p class="text-secondary">Procesando autenticación...</p></div>';
     // Verificar si ya hay un usuario autenticado
     const currentUser = auth.currentUser;
     if (currentUser) {
