@@ -525,6 +525,536 @@ export const workoutTypes = {
     test: 'Test/Evaluación'
 };
 
+// ===================================
+// EJERCICIOS ESPECÍFICOS DE RUNNING
+// ===================================
+
+export const runningExercises = {
+    // CALENTAMIENTO
+    warmup: [
+        {
+            id: 'walking_warmup',
+            name: 'Caminata de Calentamiento',
+            description: 'Caminata suave para activar músculos',
+            duration: '5-10 min',
+            intensity: 'Muy fácil',
+            instructions: [
+                'Caminar a ritmo cómodo',
+                'Movimientos suaves de brazos',
+                'Respiración relajada'
+            ],
+            tips: ['Prepara el cuerpo para el ejercicio', 'No debe cansarte']
+        },
+        {
+            id: 'jogging_warmup',
+            name: 'Trote de Calentamiento',
+            description: 'Trote suave para activar sistema cardiovascular',
+            duration: '5-10 min',
+            intensity: 'Fácil',
+            instructions: [
+                'Trotar a ritmo conversacional',
+                'Movimientos naturales de brazos',
+                'Respiración controlada'
+            ],
+            tips: ['Debes poder mantener conversación', 'Prepara el corazón']
+        },
+        {
+            id: 'dynamic_stretches',
+            name: 'Estiramientos Dinámicos',
+            description: 'Movimientos activos para preparar músculos',
+            duration: '5 min',
+            intensity: 'Moderado',
+            instructions: [
+                'Círculos de brazos',
+                'Elevaciones de rodillas',
+                'Patadas al glúteo',
+                'Zancadas dinámicas'
+            ],
+            tips: ['Movimientos controlados', 'No rebotes']
+        }
+    ],
+
+    // ENFRIAMIENTO
+    cooldown: [
+        {
+            id: 'walking_cooldown',
+            name: 'Caminata de Enfriamiento',
+            description: 'Caminata suave para bajar frecuencia cardíaca',
+            duration: '5-10 min',
+            intensity: 'Muy fácil',
+            instructions: [
+                'Caminar a ritmo muy suave',
+                'Respiración profunda',
+                'Relajar músculos'
+            ],
+            tips: ['Ayuda a la recuperación', 'Baja la frecuencia cardíaca']
+        },
+        {
+            id: 'static_stretches',
+            name: 'Estiramientos Estáticos',
+            description: 'Estiramientos para mejorar flexibilidad',
+            duration: '10-15 min',
+            intensity: 'Suave',
+            instructions: [
+                'Estirar cuádriceps',
+                'Estirar isquiotibiales',
+                'Estirar pantorrillas',
+                'Estirar glúteos'
+            ],
+            tips: ['Mantener 30 segundos cada estiramiento', 'No rebotes']
+        }
+    ],
+
+    // EJERCICIOS DE TÉCNICA
+    technique: [
+        {
+            id: 'high_knees',
+            name: 'Elevaciones de Rodillas',
+            description: 'Mejora la técnica de carrera y fuerza',
+            duration: '30-60 seg',
+            intensity: 'Moderado',
+            instructions: [
+                'Correr en el lugar',
+                'Elevar rodillas al pecho',
+                'Brazos activos',
+                'Pies en punta'
+            ],
+            tips: ['Mantén el torso erguido', 'Ritmo controlado']
+        },
+        {
+            id: 'butt_kicks',
+            name: 'Patadas al Glúteo',
+            description: 'Mejora la técnica de zancada posterior',
+            duration: '30-60 seg',
+            intensity: 'Moderado',
+            instructions: [
+                'Correr en el lugar',
+                'Llevar talones al glúteo',
+                'Brazos activos',
+                'Ritmo constante'
+            ],
+            tips: ['Mantén el torso erguido', 'No rebotes']
+        },
+        {
+            id: 'skipping',
+            name: 'Skipping',
+            description: 'Mejora la coordinación y técnica',
+            duration: '30-60 seg',
+            intensity: 'Moderado',
+            instructions: [
+                'Saltar alternando pies',
+                'Elevar rodillas',
+                'Brazos coordinados',
+                'Ritmo constante'
+            ],
+            tips: ['Coordinación brazos-piernas', 'Ritmo controlado']
+        },
+        {
+            id: 'carioca',
+            name: 'Carioca',
+            description: 'Mejora la movilidad y coordinación lateral',
+            duration: '30-60 seg',
+            intensity: 'Moderado',
+            instructions: [
+                'Movimiento lateral',
+                'Cruzar piernas adelante y atrás',
+                'Brazos coordinados',
+                'Mantener ritmo'
+            ],
+            tips: ['Movimiento fluido', 'No apresures']
+        },
+        {
+            id: 'side_shuffles',
+            name: 'Desplazamientos Laterales',
+            description: 'Fortalece músculos estabilizadores',
+            duration: '30-60 seg',
+            intensity: 'Moderado',
+            instructions: [
+                'Desplazamiento lateral',
+                'Pies separados',
+                'Brazos activos',
+                'Ritmo constante'
+            ],
+            tips: ['Mantén posición baja', 'Movimiento controlado']
+        }
+    ],
+
+    // EJERCICIOS DE FUERZA
+    strength: [
+        {
+            id: 'squats',
+            name: 'Sentadillas',
+            description: 'Fortalece cuádriceps y glúteos',
+            reps: '10-20',
+            sets: '2-3',
+            instructions: [
+                'Pies separados al ancho de hombros',
+                'Bajar como si te sentaras',
+                'Rodillas en línea con pies',
+                'Subir contrayendo glúteos'
+            ],
+            tips: ['Mantén pecho erguido', 'No dejes que las rodillas se vayan hacia adentro']
+        },
+        {
+            id: 'lunges',
+            name: 'Zancadas',
+            description: 'Fortalece piernas unilateralmente',
+            reps: '10-15 por pierna',
+            sets: '2-3',
+            instructions: [
+                'Paso largo hacia adelante',
+                'Bajar hasta 90 grados',
+                'Empujar con pierna delantera',
+                'Alternar piernas'
+            ],
+            tips: ['Mantén torso erguido', 'Controla la bajada']
+        },
+        {
+            id: 'calf_raises',
+            name: 'Elevaciones de Gemelos',
+            description: 'Fortalece pantorrillas',
+            reps: '15-25',
+            sets: '2-3',
+            instructions: [
+                'De pie con pies juntos',
+                'Subir sobre dedos de pies',
+                'Mantener contracción arriba',
+                'Bajar controladamente'
+            ],
+            tips: ['Rango completo de movimiento', 'Pausa arriba']
+        },
+        {
+            id: 'single_leg_glute_bridges',
+            name: 'Puente de Glúteos a Una Pierna',
+            description: 'Fortalece glúteos y estabilizadores',
+            reps: '8-12 por pierna',
+            sets: '2-3',
+            instructions: [
+                'Acuéstate con una pierna extendida',
+                'Otra pierna flexionada',
+                'Levantar cadera con una pierna',
+                'Contraer glúteos en la cima'
+            ],
+            tips: ['Una pierna extendida', 'Contrae glúteos']
+        },
+        {
+            id: 'wall_sits',
+            name: 'Sentadilla en Pared',
+            description: 'Fortalece cuádriceps isométricamente',
+            duration: '30-60 seg',
+            sets: '2-3',
+            instructions: [
+                'Espalda contra la pared',
+                'Deslizar hacia abajo hasta 90°',
+                'Mantener posición',
+                'Presionar contra la pared'
+            ],
+            tips: ['Posición 90 grados', 'Mantén tiempo']
+        }
+    ],
+
+    // EJERCICIOS DE CORE
+    core: [
+        {
+            id: 'plank',
+            name: 'Plancha',
+            description: 'Fortalece core completo',
+            duration: '30-60 seg',
+            sets: '2-3',
+            instructions: [
+                'Posición de flexión con antebrazos',
+                'Codos bajo hombros',
+                'Mantener cuerpo recto',
+                'Contraer core y glúteos'
+            ],
+            tips: ['Cuerpo recto', 'Respiración normal']
+        },
+        {
+            id: 'side_plank',
+            name: 'Plancha Lateral',
+            description: 'Fortalece oblicuos',
+            duration: '20-30 seg por lado',
+            sets: '2-3',
+            instructions: [
+                'De lado con antebrazo en suelo',
+                'Cuerpo en línea recta',
+                'Mantener posición',
+                'Alternar lados'
+            ],
+            tips: ['Cuerpo recto', 'No dejes caer cadera']
+        },
+        {
+            id: 'russian_twists',
+            name: 'Giros Rusos',
+            description: 'Fortalece oblicuos y rotación',
+            reps: '20-30',
+            sets: '2-3',
+            instructions: [
+                'Sentado con rodillas flexionadas',
+                'Inclinarse hacia atrás 45°',
+                'Girar torso de lado a lado',
+                'Mantener core activo'
+            ],
+            tips: ['Movimiento controlado', 'Core activo']
+        },
+        {
+            id: 'mountain_climbers',
+            name: 'Escaladores de Montaña',
+            description: 'Fortalece core y mejora cardio',
+            duration: '30-60 seg',
+            sets: '2-3',
+            instructions: [
+                'Posición de plancha',
+                'Llevar rodilla al pecho',
+                'Alternar piernas rápidamente',
+                'Mantener core activo'
+            ],
+            tips: ['Movimiento rápido', 'Core activo']
+        }
+    ],
+
+    // EJERCICIOS DE MOVILIDAD
+    mobility: [
+        {
+            id: 'leg_swings',
+            name: 'Balanceos de Piernas',
+            description: 'Mejora movilidad de cadera',
+            reps: '10-15 por pierna',
+            sets: '2-3',
+            instructions: [
+                'Sujetarse a una pared',
+                'Balancear pierna hacia adelante y atrás',
+                'Balancear pierna hacia los lados',
+                'Alternar piernas'
+            ],
+            tips: ['Movimiento controlado', 'No rebotes']
+        },
+        {
+            id: 'hip_circles',
+            name: 'Círculos de Cadera',
+            description: 'Mejora movilidad de cadera',
+            reps: '10-15 por dirección',
+            sets: '2-3',
+            instructions: [
+                'Pies separados al ancho de hombros',
+                'Manos en cintura',
+                'Hacer círculos con cadera',
+                'Cambiar dirección'
+            ],
+            tips: ['Movimiento fluido', 'Rango completo']
+        },
+        {
+            id: 'ankle_circles',
+            name: 'Círculos de Tobillo',
+            description: 'Mejora movilidad de tobillo',
+            reps: '10-15 por pie',
+            sets: '2-3',
+            instructions: [
+                'Levantar un pie del suelo',
+                'Hacer círculos con el tobillo',
+                'Cambiar dirección',
+                'Alternar pies'
+            ],
+            tips: ['Movimiento controlado', 'Rango completo']
+        }
+    ]
+};
+
+// ===================================
+// PLANES DE ENTRENAMIENTO ESPECÍFICOS
+// ===================================
+
+export const specializedRunningPlans = {
+    // PLAN DE VELOCIDAD 5K
+    speed_5k_advanced: {
+        id: 'speed_5k_advanced',
+        name: '5K Velocidad Avanzado',
+        description: 'Plan intensivo para mejorar tiempo en 5K',
+        level: 'avanzado',
+        duration: 8,
+        daysPerWeek: 5,
+        goal: 'Mejorar tiempo personal en 5K',
+        focus: 'Velocidad y resistencia anaeróbica',
+        weeks: [
+            {
+                week: 1,
+                description: 'Base de velocidad con intervalos cortos',
+                sessions: [
+                    {
+                        day: 1,
+                        type: 'easy',
+                        name: 'Carrera Fácil',
+                        duration: 30,
+                        intensity: 'Fácil',
+                        tips: ['Ritmo conversacional', 'Recuperación activa']
+                    },
+                    {
+                        day: 2,
+                        type: 'intervals',
+                        name: 'Intervalos 400m',
+                        warmup: { duration: 10, intensity: 'Fácil' },
+                        main: {
+                            intervals: [
+                                { distance: '400m', intensity: 'Fuerte', rest: '90 seg' }
+                            ],
+                            rounds: 6,
+                            totalTime: 24
+                        },
+                        cooldown: { duration: 10, intensity: 'Fácil' },
+                        tips: ['Ritmo de 5K', 'Recuperación completa']
+                    },
+                    {
+                        day: 3,
+                        type: 'easy',
+                        name: 'Carrera de Recuperación',
+                        duration: 25,
+                        intensity: 'Muy fácil',
+                        tips: ['Recuperación activa', 'Ritmo muy cómodo']
+                    },
+                    {
+                        day: 4,
+                        type: 'tempo',
+                        name: 'Tempo 5K',
+                        warmup: { duration: 10, intensity: 'Fácil' },
+                        main: {
+                            duration: 20,
+                            intensity: 'Tempo',
+                            pace: 'Ritmo de 10K'
+                        },
+                        cooldown: { duration: 10, intensity: 'Fácil' },
+                        tips: ['Esfuerzo controlado', 'Ritmo sostenible']
+                    },
+                    {
+                        day: 5,
+                        type: 'long',
+                        name: 'Carrera Larga',
+                        duration: 45,
+                        intensity: 'Fácil',
+                        tips: ['Ritmo conversacional', 'Desarrollo aeróbico']
+                    }
+                ]
+            }
+        ]
+    },
+
+    // PLAN DE TRAIL RUNNING
+    trail_running_advanced: {
+        id: 'trail_running_advanced',
+        name: 'Trail Running Avanzado',
+        description: 'Preparación completa para carreras de montaña',
+        level: 'avanzado',
+        duration: 12,
+        daysPerWeek: 5,
+        goal: 'Prepararse para trail running competitivo',
+        focus: 'Fuerza, técnica y adaptación al terreno',
+        weeks: [
+            {
+                week: 1,
+                description: 'Adaptación al terreno irregular',
+                sessions: [
+                    {
+                        day: 1,
+                        type: 'easy',
+                        name: 'Carrera en Terreno Plano',
+                        duration: 30,
+                        intensity: 'Fácil',
+                        terrain: 'Plano',
+                        tips: ['Ritmo conversacional', 'Adaptación gradual']
+                    },
+                    {
+                        day: 2,
+                        type: 'hill',
+                        name: 'Repeticiones en Cuesta',
+                        warmup: { duration: 10, intensity: 'Fácil' },
+                        main: {
+                            intervals: [
+                                { duration: '2 min', intensity: 'Fuerte', terrain: 'Cuesta', rest: '2 min' }
+                            ],
+                            rounds: 6,
+                            totalTime: 24
+                        },
+                        cooldown: { duration: 10, intensity: 'Fácil' },
+                        tips: ['Técnica de subida', 'Recuperación en bajada']
+                    },
+                    {
+                        day: 3,
+                        type: 'easy',
+                        name: 'Carrera de Recuperación',
+                        duration: 25,
+                        intensity: 'Muy fácil',
+                        terrain: 'Plano',
+                        tips: ['Recuperación activa', 'Técnica relajada']
+                    },
+                    {
+                        day: 4,
+                        type: 'trail',
+                        name: 'Carrera en Senderos',
+                        duration: 40,
+                        intensity: 'Moderado',
+                        terrain: 'Senderos',
+                        tips: ['Técnica de trail', 'Atención al terreno']
+                    },
+                    {
+                        day: 5,
+                        type: 'long',
+                        name: 'Carrera Larga en Montaña',
+                        duration: 60,
+                        intensity: 'Fácil',
+                        terrain: 'Montaña',
+                        tips: ['Ritmo conversacional', 'Gestión de energía']
+                    }
+                ]
+            }
+        ]
+    },
+
+    // PLAN DE RECUPERACIÓN
+    recovery_plan: {
+        id: 'recovery_plan',
+        name: 'Plan de Recuperación',
+        description: 'Recuperación activa y mantenimiento',
+        level: 'todos',
+        duration: 4,
+        daysPerWeek: 3,
+        goal: 'Recuperación y mantenimiento',
+        focus: 'Recuperación activa y prevención de lesiones',
+        weeks: [
+            {
+                week: 1,
+                description: 'Recuperación activa y estiramientos',
+                sessions: [
+                    {
+                        day: 1,
+                        type: 'easy',
+                        name: 'Carrera Muy Fácil',
+                        duration: 20,
+                        intensity: 'Muy fácil',
+                        tips: ['Ritmo muy cómodo', 'Solo si te sientes bien']
+                    },
+                    {
+                        day: 2,
+                        type: 'cross_training',
+                        name: 'Entrenamiento Cruzado',
+                        duration: 30,
+                        activity: 'Ciclismo/Natación',
+                        intensity: 'Fácil',
+                        tips: ['Actividad diferente', 'Mantener forma física']
+                    },
+                    {
+                        day: 3,
+                        type: 'stretching',
+                        name: 'Sesión de Estiramientos',
+                        duration: 45,
+                        activity: 'Yoga/Estiramientos',
+                        intensity: 'Suave',
+                        tips: ['Flexibilidad', 'Relajación']
+                    }
+                ]
+            }
+        ]
+    }
+};
+
 console.log('🏃 Planes de running cargados');
 
 export default runningPlans;
