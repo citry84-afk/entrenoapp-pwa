@@ -293,49 +293,143 @@ function getExercisePriority(exerciseId) {
 function generateAdditionalExercises(session, count) {
     if (count <= 0) return [];
     
+    console.log(`➕ Generando ${count} ejercicios adicionales para ${session.name}`);
+    
     const additionalExercises = [];
     const sessionName = session.name.toLowerCase();
     
-    // Ejercicios básicos que siempre funcionan
-    const basicExercises = [
-        { exerciseId: 'push_ups', sets: 3, reps: '8-15', rest: 90 },
-        { exerciseId: 'squats', sets: 3, reps: '10-15', rest: 120 },
-        { exerciseId: 'lunges', sets: 3, reps: '10-15', rest: 120 },
-        { exerciseId: 'plank', sets: 3, reps: '30-60s', rest: 60 },
-        { exerciseId: 'mountain_climbers', sets: 3, reps: '20-30', rest: 60 }
-    ];
+    // Obtener ejercicios ya usados en la sesión para evitar repeticiones
+    const usedExerciseIds = session.exercises.map(ex => ex.exerciseId);
+    console.log(`📋 Ejercicios ya usados:`, usedExerciseIds);
     
-    // Ejercicios específicos por tipo de sesión
+    // Ejercicios específicos por tipo de sesión con mayor variedad
     if (sessionName.includes('push') || sessionName.includes('pecho')) {
-        additionalExercises.push(
+        const pushExercises = [
+            { exerciseId: 'wide_push_ups', sets: 3, reps: '8-15', rest: 90 },
+            { exerciseId: 'diamond_push_ups', sets: 3, reps: '5-10', rest: 90 },
+            { exerciseId: 'incline_push_ups', sets: 3, reps: '10-20', rest: 90 },
+            { exerciseId: 'decline_push_ups', sets: 3, reps: '8-12', rest: 90 },
+            { exerciseId: 'pike_push_ups', sets: 3, reps: '5-10', rest: 90 },
+            { exerciseId: 'archer_push_ups', sets: 3, reps: '3-8', rest: 120 },
+            { exerciseId: 'hindu_push_ups', sets: 3, reps: '5-10', rest: 90 },
+            { exerciseId: 'tricep_dips', sets: 3, reps: '8-15', rest: 90 },
             { exerciseId: 'dumbbell_flyes', sets: 3, reps: '10-15', rest: 90 },
-            { exerciseId: 'tricep_dips', sets: 3, reps: '8-15', rest: 90 }
-        );
+            { exerciseId: 'incline_dumbbell_press', sets: 3, reps: '8-12', rest: 120 }
+        ];
+        additionalExercises.push(...pushExercises.filter(ex => !usedExerciseIds.includes(ex.exerciseId)));
+        
     } else if (sessionName.includes('pull') || sessionName.includes('espalda')) {
-        additionalExercises.push(
+        const pullExercises = [
+            { exerciseId: 'pull_ups', sets: 3, reps: '6-12', rest: 150 },
+            { exerciseId: 'inverted_rows', sets: 3, reps: '8-15', rest: 90 },
+            { exerciseId: 'superman', sets: 3, reps: '10-15', rest: 60 },
+            { exerciseId: 'bird_dog', sets: 3, reps: '10-15', rest: 60 },
+            { exerciseId: 'cat_cow', sets: 3, reps: '10-15', rest: 30 },
+            { exerciseId: 'reverse_hyperextensions', sets: 3, reps: '10-15', rest: 60 },
+            { exerciseId: 'barbell_row', sets: 3, reps: '8-12', rest: 120 },
+            { exerciseId: 'lat_pulldown', sets: 3, reps: '8-12', rest: 120 },
             { exerciseId: 'face_pulls', sets: 3, reps: '12-18', rest: 90 },
             { exerciseId: 'barbell_curl', sets: 3, reps: '8-12', rest: 90 }
-        );
+        ];
+        additionalExercises.push(...pullExercises.filter(ex => !usedExerciseIds.includes(ex.exerciseId)));
+        
     } else if (sessionName.includes('leg') || sessionName.includes('pierna')) {
-        additionalExercises.push(
+        const legExercises = [
+            { exerciseId: 'bodyweight_squats', sets: 3, reps: '10-15', rest: 120 },
+            { exerciseId: 'jump_squats', sets: 3, reps: '8-12', rest: 120 },
+            { exerciseId: 'pistol_squats', sets: 3, reps: '3-8', rest: 150 },
+            { exerciseId: 'bulgarian_split_squats', sets: 3, reps: '8-12', rest: 120 },
+            { exerciseId: 'wall_sits', sets: 3, reps: '30-60s', rest: 90 },
+            { exerciseId: 'lunges', sets: 3, reps: '10-15', rest: 120 },
+            { exerciseId: 'lateral_lunges', sets: 3, reps: '8-12', rest: 90 },
+            { exerciseId: 'reverse_lunges', sets: 3, reps: '8-12', rest: 90 },
+            { exerciseId: 'walking_lunges', sets: 3, reps: '10-15', rest: 120 },
+            { exerciseId: 'step_ups', sets: 3, reps: '10-15', rest: 90 },
+            { exerciseId: 'single_leg_glute_bridges', sets: 3, reps: '8-12', rest: 90 },
+            { exerciseId: 'glute_bridges', sets: 3, reps: '12-20', rest: 90 },
             { exerciseId: 'calf_raises', sets: 3, reps: '15-25', rest: 60 },
-            { exerciseId: 'glute_bridges', sets: 3, reps: '12-20', rest: 90 }
-        );
+            { exerciseId: 'single_leg_calf_raises', sets: 3, reps: '10-15', rest: 60 },
+            { exerciseId: 'mountain_climbers', sets: 3, reps: '20-30', rest: 60 },
+            { exerciseId: 'burpees', sets: 3, reps: '5-10', rest: 120 }
+        ];
+        additionalExercises.push(...legExercises.filter(ex => !usedExerciseIds.includes(ex.exerciseId)));
+        
+    } else if (sessionName.includes('shoulder') || sessionName.includes('hombro')) {
+        const shoulderExercises = [
+            { exerciseId: 'reverse_plank', sets: 3, reps: '20-30s', rest: 60 },
+            { exerciseId: 'handstand_push_ups', sets: 3, reps: '3-8', rest: 180 },
+            { exerciseId: 'wall_walks', sets: 3, reps: '5-10', rest: 120 },
+            { exerciseId: 'shoulder_taps', sets: 3, reps: '20-30', rest: 60 },
+            { exerciseId: 'arm_circles', sets: 3, reps: '20-30', rest: 30 },
+            { exerciseId: 'overhead_press', sets: 3, reps: '8-12', rest: 120 },
+            { exerciseId: 'lateral_raises', sets: 3, reps: '12-18', rest: 90 },
+            { exerciseId: 'front_raises', sets: 3, reps: '12-18', rest: 90 },
+            { exerciseId: 'rear_delt_flyes', sets: 3, reps: '12-18', rest: 90 }
+        ];
+        additionalExercises.push(...shoulderExercises.filter(ex => !usedExerciseIds.includes(ex.exerciseId)));
+        
+    } else if (sessionName.includes('core') || sessionName.includes('abdominal')) {
+        const coreExercises = [
+            { exerciseId: 'plank', sets: 3, reps: '30-60s', rest: 60 },
+            { exerciseId: 'side_plank', sets: 3, reps: '20-30s', rest: 60 },
+            { exerciseId: 'russian_twists', sets: 3, reps: '20-30', rest: 60 },
+            { exerciseId: 'bicycle_crunches', sets: 3, reps: '20-30', rest: 60 },
+            { exerciseId: 'mountain_climbers', sets: 3, reps: '20-30', rest: 60 },
+            { exerciseId: 'dead_bug', sets: 3, reps: '10-15', rest: 60 },
+            { exerciseId: 'hollow_body', sets: 3, reps: '20-30s', rest: 90 },
+            { exerciseId: 'leg_raises', sets: 3, reps: '10-15', rest: 60 },
+            { exerciseId: 'flutter_kicks', sets: 3, reps: '20-30', rest: 60 },
+            { exerciseId: 'bear_crawl', sets: 3, reps: '10-15', rest: 90 }
+        ];
+        additionalExercises.push(...coreExercises.filter(ex => !usedExerciseIds.includes(ex.exerciseId)));
+        
     } else {
-        // Para sesiones full body o no específicas
-        additionalExercises.push(
+        // Para sesiones full body o no específicas - mezcla de todo
+        const fullBodyExercises = [
+            { exerciseId: 'push_ups', sets: 3, reps: '8-15', rest: 90 },
+            { exerciseId: 'bodyweight_squats', sets: 3, reps: '10-15', rest: 120 },
+            { exerciseId: 'lunges', sets: 3, reps: '10-15', rest: 120 },
+            { exerciseId: 'plank', sets: 3, reps: '30-60s', rest: 60 },
+            { exerciseId: 'mountain_climbers', sets: 3, reps: '20-30', rest: 60 },
             { exerciseId: 'burpees', sets: 3, reps: '5-10', rest: 120 },
-            { exerciseId: 'jumping_jacks', sets: 3, reps: '20-30', rest: 60 }
-        );
+            { exerciseId: 'jumping_jacks', sets: 3, reps: '20-30', rest: 60 },
+            { exerciseId: 'pull_ups', sets: 3, reps: '6-12', rest: 150 },
+            { exerciseId: 'inverted_rows', sets: 3, reps: '8-15', rest: 90 },
+            { exerciseId: 'glute_bridges', sets: 3, reps: '12-20', rest: 90 },
+            { exerciseId: 'calf_raises', sets: 3, reps: '15-25', rest: 60 },
+            { exerciseId: 'russian_twists', sets: 3, reps: '20-30', rest: 60 },
+            { exerciseId: 'bicycle_crunches', sets: 3, reps: '20-30', rest: 60 },
+            { exerciseId: 'dead_bug', sets: 3, reps: '10-15', rest: 60 }
+        ];
+        additionalExercises.push(...fullBodyExercises.filter(ex => !usedExerciseIds.includes(ex.exerciseId)));
     }
     
-    // Agregar ejercicios básicos si no hay suficientes específicos
+    // Si no hay suficientes ejercicios específicos, agregar ejercicios básicos
+    const basicExercises = [
+        { exerciseId: 'push_ups', sets: 3, reps: '8-15', rest: 90 },
+        { exerciseId: 'bodyweight_squats', sets: 3, reps: '10-15', rest: 120 },
+        { exerciseId: 'lunges', sets: 3, reps: '10-15', rest: 120 },
+        { exerciseId: 'plank', sets: 3, reps: '30-60s', rest: 60 },
+        { exerciseId: 'mountain_climbers', sets: 3, reps: '20-30', rest: 60 },
+        { exerciseId: 'burpees', sets: 3, reps: '5-10', rest: 120 },
+        { exerciseId: 'jumping_jacks', sets: 3, reps: '20-30', rest: 60 },
+        { exerciseId: 'glute_bridges', sets: 3, reps: '12-20', rest: 90 },
+        { exerciseId: 'calf_raises', sets: 3, reps: '15-25', rest: 60 }
+    ];
+    
     while (additionalExercises.length < count) {
         const basicExercise = basicExercises[additionalExercises.length % basicExercises.length];
-        additionalExercises.push({ ...basicExercise });
+        if (!usedExerciseIds.includes(basicExercise.exerciseId)) {
+            additionalExercises.push({ ...basicExercise });
+        }
     }
     
-    return additionalExercises.slice(0, count);
+    // Mezclar para mayor variabilidad
+    const shuffled = additionalExercises.sort(() => Math.random() - 0.5);
+    const result = shuffled.slice(0, count);
+    
+    console.log(`✅ Generados ${result.length} ejercicios adicionales:`, result.map(ex => ex.exerciseId));
+    return result;
 }
 
 function findAlternativeExercises(session, availableEquipment) {
@@ -400,31 +494,61 @@ function findAlternativeExercises(session, availableEquipment) {
         if (session.name.includes('Push') || session.name.includes('Pecho')) {
             alternatives.push(
                 { exerciseId: 'push_ups', sets: 4, reps: '8-15', rest: 90 },
-                { exerciseId: 'tricep_dips', sets: 3, reps: '8-15', rest: 90 },
+                { exerciseId: 'wide_push_ups', sets: 3, reps: '8-15', rest: 90 },
+                { exerciseId: 'diamond_push_ups', sets: 3, reps: '5-10', rest: 90 },
+                { exerciseId: 'incline_push_ups', sets: 3, reps: '10-20', rest: 90 },
                 { exerciseId: 'pike_push_ups', sets: 3, reps: '5-10', rest: 90 },
-                { exerciseId: 'diamond_push_ups', sets: 3, reps: '5-10', rest: 90 }
+                { exerciseId: 'tricep_dips', sets: 3, reps: '8-15', rest: 90 }
             );
         } else if (session.name.includes('Pull') || session.name.includes('Espalda')) {
             alternatives.push(
                 { exerciseId: 'pull_ups', sets: 4, reps: '6-12', rest: 150 },
                 { exerciseId: 'inverted_rows', sets: 3, reps: '8-15', rest: 90 },
                 { exerciseId: 'superman', sets: 3, reps: '10-15', rest: 60 },
-                { exerciseId: 'reverse_plank', sets: 3, reps: '20-30s', rest: 60 }
+                { exerciseId: 'bird_dog', sets: 3, reps: '10-15', rest: 60 },
+                { exerciseId: 'cat_cow', sets: 3, reps: '10-15', rest: 30 },
+                { exerciseId: 'reverse_hyperextensions', sets: 3, reps: '10-15', rest: 60 }
             );
         } else if (session.name.includes('Legs') || session.name.includes('Piernas')) {
             alternatives.push(
-                { exerciseId: 'squats', sets: 4, reps: '10-15', rest: 120 },
+                { exerciseId: 'bodyweight_squats', sets: 4, reps: '10-15', rest: 120 },
+                { exerciseId: 'jump_squats', sets: 3, reps: '8-12', rest: 120 },
                 { exerciseId: 'lunges', sets: 3, reps: '10-15', rest: 120 },
-                { exerciseId: 'glute_bridges', sets: 3, reps: '12-20', rest: 90 },
+                { exerciseId: 'bulgarian_split_squats', sets: 3, reps: '8-12', rest: 120 },
+                { exerciseId: 'wall_sits', sets: 3, reps: '30-60s', rest: 90 },
+                { exerciseId: 'lateral_lunges', sets: 3, reps: '8-12', rest: 90 },
+                { exerciseId: 'single_leg_glute_bridges', sets: 3, reps: '8-12', rest: 90 },
                 { exerciseId: 'calf_raises', sets: 3, reps: '15-25', rest: 60 }
+            );
+        } else if (session.name.includes('Shoulder') || session.name.includes('Hombro')) {
+            alternatives.push(
+                { exerciseId: 'reverse_plank', sets: 3, reps: '20-30s', rest: 60 },
+                { exerciseId: 'shoulder_taps', sets: 3, reps: '20-30', rest: 60 },
+                { exerciseId: 'arm_circles', sets: 3, reps: '20-30', rest: 30 },
+                { exerciseId: 'wall_walks', sets: 3, reps: '5-10', rest: 120 }
+            );
+        } else if (session.name.includes('Core') || session.name.includes('Abdominal')) {
+            alternatives.push(
+                { exerciseId: 'plank', sets: 3, reps: '30-60s', rest: 60 },
+                { exerciseId: 'side_plank', sets: 3, reps: '20-30s', rest: 60 },
+                { exerciseId: 'russian_twists', sets: 3, reps: '20-30', rest: 60 },
+                { exerciseId: 'bicycle_crunches', sets: 3, reps: '20-30', rest: 60 },
+                { exerciseId: 'mountain_climbers', sets: 3, reps: '20-30', rest: 60 },
+                { exerciseId: 'dead_bug', sets: 3, reps: '10-15', rest: 60 },
+                { exerciseId: 'leg_raises', sets: 3, reps: '10-15', rest: 60 },
+                { exerciseId: 'flutter_kicks', sets: 3, reps: '20-30', rest: 60 }
             );
         } else {
             // Para sesiones full body o no específicas
             alternatives.push(
                 { exerciseId: 'push_ups', sets: 3, reps: '8-15', rest: 90 },
-                { exerciseId: 'squats', sets: 3, reps: '10-15', rest: 120 },
+                { exerciseId: 'bodyweight_squats', sets: 3, reps: '10-15', rest: 120 },
                 { exerciseId: 'lunges', sets: 3, reps: '10-15', rest: 120 },
-                { exerciseId: 'plank', sets: 3, reps: '30-60s', rest: 60 }
+                { exerciseId: 'plank', sets: 3, reps: '30-60s', rest: 60 },
+                { exerciseId: 'mountain_climbers', sets: 3, reps: '20-30', rest: 60 },
+                { exerciseId: 'burpees', sets: 3, reps: '5-10', rest: 120 },
+                { exerciseId: 'pull_ups', sets: 3, reps: '6-12', rest: 150 },
+                { exerciseId: 'inverted_rows', sets: 3, reps: '8-15', rest: 90 }
             );
         }
     } else {
@@ -435,8 +559,17 @@ function findAlternativeExercises(session, availableEquipment) {
             }
             if (availableEquipment.includes('dumbbells')) {
                 alternatives.push({ exerciseId: 'incline_dumbbell_press', sets: 3, reps: '8-12', rest: 150 });
+                alternatives.push({ exerciseId: 'dumbbell_flyes', sets: 3, reps: '10-15', rest: 90 });
             }
-            alternatives.push({ exerciseId: 'push_ups', sets: 3, reps: '8-15', rest: 90 });
+            if (availableEquipment.includes('parallel_bars')) {
+                alternatives.push({ exerciseId: 'dips', sets: 3, reps: '8-15', rest: 120 });
+            }
+            // Siempre agregar ejercicios de peso corporal
+            alternatives.push(
+                { exerciseId: 'push_ups', sets: 3, reps: '8-15', rest: 90 },
+                { exerciseId: 'wide_push_ups', sets: 3, reps: '8-15', rest: 90 },
+                { exerciseId: 'diamond_push_ups', sets: 3, reps: '5-10', rest: 90 }
+            );
         }
         
         if (session.name.includes('Pull') || session.name.includes('Espalda')) {
@@ -447,13 +580,65 @@ function findAlternativeExercises(session, availableEquipment) {
             if (availableEquipment.includes('pull_up_bar')) {
                 alternatives.push({ exerciseId: 'pull_ups', sets: 4, reps: '6-12', rest: 150 });
             }
+            if (availableEquipment.includes('cable_machine')) {
+                alternatives.push({ exerciseId: 'lat_pulldown', sets: 3, reps: '8-12', rest: 120 });
+                alternatives.push({ exerciseId: 'face_pulls', sets: 3, reps: '12-18', rest: 90 });
+            }
+            // Siempre agregar ejercicios de peso corporal
+            alternatives.push(
+                { exerciseId: 'inverted_rows', sets: 3, reps: '8-15', rest: 90 },
+                { exerciseId: 'superman', sets: 3, reps: '10-15', rest: 60 },
+                { exerciseId: 'bird_dog', sets: 3, reps: '10-15', rest: 60 }
+            );
         }
         
         if (session.name.includes('Legs') || session.name.includes('Piernas')) {
             if (availableEquipment.includes('barbell')) {
                 alternatives.push({ exerciseId: 'squats', sets: 4, reps: '8-12', rest: 180 });
             }
-            alternatives.push({ exerciseId: 'lunges', sets: 3, reps: '10-15', rest: 120 });
+            if (availableEquipment.includes('leg_press_machine')) {
+                alternatives.push({ exerciseId: 'leg_press', sets: 3, reps: '12-20', rest: 150 });
+            }
+            if (availableEquipment.includes('leg_curl_machine')) {
+                alternatives.push({ exerciseId: 'leg_curls', sets: 3, reps: '10-15', rest: 120 });
+            }
+            // Siempre agregar ejercicios de peso corporal
+            alternatives.push(
+                { exerciseId: 'bodyweight_squats', sets: 3, reps: '10-15', rest: 120 },
+                { exerciseId: 'lunges', sets: 3, reps: '10-15', rest: 120 },
+                { exerciseId: 'bulgarian_split_squats', sets: 3, reps: '8-12', rest: 120 },
+                { exerciseId: 'wall_sits', sets: 3, reps: '30-60s', rest: 90 },
+                { exerciseId: 'lateral_lunges', sets: 3, reps: '8-12', rest: 90 }
+            );
+        }
+        
+        if (session.name.includes('Shoulder') || session.name.includes('Hombro')) {
+            if (availableEquipment.includes('barbell')) {
+                alternatives.push({ exerciseId: 'overhead_press', sets: 3, reps: '8-12', rest: 120 });
+            }
+            if (availableEquipment.includes('dumbbells')) {
+                alternatives.push({ exerciseId: 'lateral_raises', sets: 3, reps: '12-18', rest: 90 });
+                alternatives.push({ exerciseId: 'front_raises', sets: 3, reps: '12-18', rest: 90 });
+            }
+            // Siempre agregar ejercicios de peso corporal
+            alternatives.push(
+                { exerciseId: 'reverse_plank', sets: 3, reps: '20-30s', rest: 60 },
+                { exerciseId: 'shoulder_taps', sets: 3, reps: '20-30', rest: 60 },
+                { exerciseId: 'arm_circles', sets: 3, reps: '20-30', rest: 30 }
+            );
+        }
+        
+        if (session.name.includes('Core') || session.name.includes('Abdominal')) {
+            // Siempre agregar ejercicios de peso corporal
+            alternatives.push(
+                { exerciseId: 'plank', sets: 3, reps: '30-60s', rest: 60 },
+                { exerciseId: 'side_plank', sets: 3, reps: '20-30s', rest: 60 },
+                { exerciseId: 'russian_twists', sets: 3, reps: '20-30', rest: 60 },
+                { exerciseId: 'bicycle_crunches', sets: 3, reps: '20-30', rest: 60 },
+                { exerciseId: 'mountain_climbers', sets: 3, reps: '20-30', rest: 60 },
+                { exerciseId: 'dead_bug', sets: 3, reps: '10-15', rest: 60 },
+                { exerciseId: 'leg_raises', sets: 3, reps: '10-15', rest: 60 }
+            );
         }
         
         // Agregar ejercicios básicos si no hay específicos
