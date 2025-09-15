@@ -531,6 +531,215 @@ export const functionalWods = {
                 ],
                 notes: ['Hero WOD', 'Muy pesado y largo']
             }
+        },
+        {
+            id: 'hero_wod_1',
+            name: 'Hero WOD 1',
+            type: 'hero',
+            description: 'WOD heroico de alta intensidad',
+            difficulty: 'avanzado',
+            timeNeeded: '20-30 min',
+            equipment: ['barra_olimpica', 'barra_dominadas', 'kettlebell'],
+            workout: {
+                structure: 'For Time',
+                movements: [
+                    { exercise: 'Thrusters', reps: '21', weight: '40kg/30kg' },
+                    { exercise: 'Pull-ups', reps: '21' },
+                    { exercise: 'Kettlebell Swings', reps: '21', weight: '24kg/16kg' },
+                    { exercise: 'Thrusters', reps: '15', weight: '40kg/30kg' },
+                    { exercise: 'Pull-ups', reps: '15' },
+                    { exercise: 'Kettlebell Swings', reps: '15', weight: '24kg/16kg' },
+                    { exercise: 'Thrusters', reps: '9', weight: '40kg/30kg' },
+                    { exercise: 'Pull-ups', reps: '9' },
+                    { exercise: 'Kettlebell Swings', reps: '9', weight: '24kg/16kg' }
+                ],
+                notes: ['Hero WOD', 'Mantén el ritmo', 'Partition como necesites']
+            }
+        },
+        {
+            id: 'hero_wod_2',
+            name: 'Hero WOD 2',
+            type: 'hero',
+            description: 'WOD heroico con running',
+            difficulty: 'avanzado',
+            timeNeeded: '25-35 min',
+            equipment: ['barra_olimpica', 'barra_dominadas'],
+            workout: {
+                structure: 'For Time',
+                movements: [
+                    { exercise: 'Run', reps: '800m' },
+                    { exercise: 'Back Squats', reps: '50', weight: '50kg/35kg' },
+                    { exercise: 'Pull-ups', reps: '50' },
+                    { exercise: 'Run', reps: '800m' }
+                ],
+                notes: ['Hero WOD', 'Mantén el ritmo', 'Muy pesado']
+            }
+        },
+        {
+            id: 'hero_wod_3',
+            name: 'Hero WOD 3',
+            type: 'hero',
+            description: 'WOD heroico con overhead squats',
+            difficulty: 'avanzado',
+            timeNeeded: '20-30 min',
+            equipment: ['barra_olimpica', 'barra_dominadas'],
+            workout: {
+                structure: 'For Time',
+                movements: [
+                    { exercise: 'Overhead Squats', reps: '21', weight: '40kg/30kg' },
+                    { exercise: 'Pull-ups', reps: '42' },
+                    { exercise: 'Overhead Squats', reps: '21', weight: '40kg/30kg' },
+                    { exercise: 'Pull-ups', reps: '42' }
+                ],
+                notes: ['Hero WOD', 'Partition como necesites', 'Muy técnico']
+            }
+        },
+        {
+            id: 'hero_wod_4',
+            name: 'Hero WOD 4',
+            type: 'hero',
+            description: 'WOD heroico con deadlifts',
+            difficulty: 'avanzado',
+            timeNeeded: '15-25 min',
+            equipment: ['barra_olimpica', 'barra_dominadas'],
+            workout: {
+                structure: 'For Time',
+                movements: [
+                    { exercise: 'Deadlifts', reps: '21', weight: '100kg/70kg' },
+                    { exercise: 'Pull-ups', reps: '21' },
+                    { exercise: 'Deadlifts', reps: '15', weight: '100kg/70kg' },
+                    { exercise: 'Pull-ups', reps: '15' },
+                    { exercise: 'Deadlifts', reps: '9', weight: '100kg/70kg' },
+                    { exercise: 'Pull-ups', reps: '9' }
+                ],
+                notes: ['Hero WOD', 'Muy pesado', 'Alternar ejercicios']
+            }
+        },
+        {
+            id: 'hero_wod_5',
+            name: 'Hero WOD 5',
+            type: 'hero',
+            description: 'WOD heroico con cleans',
+            difficulty: 'avanzado',
+            timeNeeded: '20-30 min',
+            equipment: ['barra_olimpica', 'barra_dominadas'],
+            workout: {
+                structure: 'For Time',
+                movements: [
+                    { exercise: 'Squat Cleans', reps: '30', weight: '40kg/30kg' },
+                    { exercise: 'Pull-ups', reps: '30' },
+                    { exercise: 'Squat Cleans', reps: '20', weight: '40kg/30kg' },
+                    { exercise: 'Pull-ups', reps: '20' },
+                    { exercise: 'Squat Cleans', reps: '10', weight: '40kg/30kg' },
+                    { exercise: 'Pull-ups', reps: '10' }
+                ],
+                notes: ['Hero WOD', 'Mantén técnica', 'Partition como necesites']
+            }
+        },
+        {
+            id: 'hero_wod_6',
+            name: 'Hero WOD 6',
+            type: 'hero',
+            description: 'WOD heroico con thrusters y running',
+            difficulty: 'avanzado',
+            timeNeeded: '25-35 min',
+            equipment: ['barra_olimpica', 'barra_dominadas'],
+            workout: {
+                structure: 'For Time',
+                movements: [
+                    { exercise: 'Thrusters', reps: '21', weight: '40kg/30kg' },
+                    { exercise: 'Pull-ups', reps: '21' },
+                    { exercise: 'Run', reps: '400m' },
+                    { exercise: 'Thrusters', reps: '15', weight: '40kg/30kg' },
+                    { exercise: 'Pull-ups', reps: '15' },
+                    { exercise: 'Run', reps: '400m' },
+                    { exercise: 'Thrusters', reps: '9', weight: '40kg/30kg' },
+                    { exercise: 'Pull-ups', reps: '9' },
+                    { exercise: 'Run', reps: '400m' }
+                ],
+                notes: ['Hero WOD', 'Mantén el ritmo', 'Muy intenso']
+            }
+        },
+        {
+            id: 'hero_wod_7',
+            name: 'Hero WOD 7',
+            type: 'hero',
+            description: 'WOD heroico con snatches',
+            difficulty: 'avanzado',
+            timeNeeded: '15-25 min',
+            equipment: ['barra_olimpica', 'barra_dominadas'],
+            workout: {
+                structure: 'For Time',
+                movements: [
+                    { exercise: 'Snatches', reps: '21', weight: '40kg/30kg' },
+                    { exercise: 'Pull-ups', reps: '21' },
+                    { exercise: 'Snatches', reps: '15', weight: '40kg/30kg' },
+                    { exercise: 'Pull-ups', reps: '15' },
+                    { exercise: 'Snatches', reps: '9', weight: '40kg/30kg' },
+                    { exercise: 'Pull-ups', reps: '9' }
+                ],
+                notes: ['Hero WOD', 'Muy técnico', 'Mantén forma']
+            }
+        },
+        {
+            id: 'hero_wod_8',
+            name: 'Hero WOD 8',
+            type: 'hero',
+            description: 'WOD heroico con box jumps',
+            difficulty: 'avanzado',
+            timeNeeded: '20-30 min',
+            equipment: ['barra_olimpica', 'barra_dominadas', 'cajón'],
+            workout: {
+                structure: 'For Time',
+                movements: [
+                    { exercise: 'Squat Cleans', reps: '19', weight: '40kg/30kg' },
+                    { exercise: 'Pull-ups', reps: '19' },
+                    { exercise: 'Box Jumps', reps: '19', height: '60cm/50cm' }
+                ],
+                notes: ['Hero WOD', '6 rondas total', 'Mantén el ritmo']
+            }
+        },
+        {
+            id: 'hero_wod_9',
+            name: 'Hero WOD 9',
+            type: 'hero',
+            description: 'WOD heroico con wall balls',
+            difficulty: 'avanzado',
+            timeNeeded: '20-30 min',
+            equipment: ['wallball', 'barra_dominadas'],
+            workout: {
+                structure: 'For Time',
+                movements: [
+                    { exercise: 'Wall Ball Shots', reps: '21', weight: '9kg/6kg' },
+                    { exercise: 'Pull-ups', reps: '21' },
+                    { exercise: 'Wall Ball Shots', reps: '15', weight: '9kg/6kg' },
+                    { exercise: 'Pull-ups', reps: '15' },
+                    { exercise: 'Wall Ball Shots', reps: '9', weight: '9kg/6kg' },
+                    { exercise: 'Pull-ups', reps: '9' }
+                ],
+                notes: ['Hero WOD', 'Mantén el ritmo', 'Muy intenso']
+            }
+        },
+        {
+            id: 'hero_wod_10',
+            name: 'Hero WOD 10',
+            type: 'hero',
+            description: 'WOD heroico con kettlebell',
+            difficulty: 'avanzado',
+            timeNeeded: '25-35 min',
+            equipment: ['kettlebell', 'barra_dominadas'],
+            workout: {
+                structure: 'For Time',
+                movements: [
+                    { exercise: 'Kettlebell Swings', reps: '21', weight: '24kg/16kg' },
+                    { exercise: 'Pull-ups', reps: '21' },
+                    { exercise: 'Kettlebell Swings', reps: '15', weight: '24kg/16kg' },
+                    { exercise: 'Pull-ups', reps: '15' },
+                    { exercise: 'Kettlebell Swings', reps: '9', weight: '24kg/16kg' },
+                    { exercise: 'Pull-ups', reps: '9' }
+                ],
+                notes: ['Hero WOD', 'Mantén el ritmo', 'Muy intenso']
+            }
         }
     ],
 
@@ -712,6 +921,232 @@ export const functionalWods = {
                     { exercise: 'Thrusters', reps: '7', weight: '40kg/30kg' }
                 ],
                 notes: ['Tantas rondas como sea posible']
+            }
+        },
+        {
+            id: 'open_22_1',
+            name: 'Open 22.1',
+            type: 'competition',
+            description: 'CrossFit Open 2022 - Workout 1',
+            difficulty: 'intermedio',
+            timeNeeded: '15 min',
+            equipment: ['barra_olimpica', 'barra_dominadas'],
+            workout: {
+                structure: 'AMRAP 15 minutos',
+                movements: [
+                    { exercise: 'Thrusters', reps: '15', weight: '40kg/30kg' },
+                    { exercise: 'Bar Muscle-ups', reps: '15' }
+                ],
+                notes: ['Tantas rondas como sea posible', 'Muy técnico']
+            }
+        },
+        {
+            id: 'open_23_1',
+            name: 'Open 23.1',
+            type: 'competition',
+            description: 'CrossFit Open 2023 - Workout 1',
+            difficulty: 'intermedio',
+            timeNeeded: '15 min',
+            equipment: ['wallball', 'barra_dominadas'],
+            workout: {
+                structure: 'AMRAP 15 minutos',
+                movements: [
+                    { exercise: 'Wall Ball Shots', reps: '25', weight: '9kg/6kg' },
+                    { exercise: 'Pull-ups', reps: '25' }
+                ],
+                notes: ['Tantas rondas como sea posible', 'Mantén el ritmo']
+            }
+        },
+        {
+            id: 'open_24_1',
+            name: 'Open 24.1',
+            type: 'competition',
+            description: 'CrossFit Open 2024 - Workout 1',
+            difficulty: 'intermedio',
+            timeNeeded: '15 min',
+            equipment: ['barra_olimpica', 'barra_dominadas'],
+            workout: {
+                structure: 'AMRAP 15 minutos',
+                movements: [
+                    { exercise: 'Thrusters', reps: '21', weight: '40kg/30kg' },
+                    { exercise: 'Chest-to-bar Pull-ups', reps: '21' }
+                ],
+                notes: ['Tantas rondas como sea posible', 'Muy intenso']
+            }
+        }
+    ],
+
+    // WODS DE PRINCIPIANTE
+    beginner: [
+        {
+            id: 'beginner_1',
+            name: 'Cindy Light',
+            type: 'benchmark',
+            description: 'Versión suave de Cindy para principiantes',
+            difficulty: 'principiante',
+            timeNeeded: '15 min',
+            equipment: ['barra_dominadas'],
+            workout: {
+                structure: 'AMRAP 15 minutos',
+                movements: [
+                    { exercise: 'Ring Rows', reps: '5' },
+                    { exercise: 'Push-ups (rodillas)', reps: '10' },
+                    { exercise: 'Air Squats', reps: '15' }
+                ],
+                notes: ['Tantas rondas como sea posible', 'Ritmo cómodo']
+            }
+        },
+        {
+            id: 'beginner_2',
+            name: 'Fran Light',
+            type: 'benchmark',
+            description: 'Versión suave de Fran para principiantes',
+            difficulty: 'principiante',
+            timeNeeded: '5-10 min',
+            equipment: ['barra_olimpica', 'barra_dominadas'],
+            workout: {
+                structure: '21-15-9 reps for time',
+                movements: [
+                    { exercise: 'Thrusters', reps: '21-15-9', weight: '20kg/15kg' },
+                    { exercise: 'Ring Rows', reps: '21-15-9' }
+                ],
+                notes: ['Tan rápido como sea posible', 'Peso reducido']
+            }
+        },
+        {
+            id: 'beginner_3',
+            name: 'Helen Light',
+            type: 'benchmark',
+            description: 'Versión suave de Helen para principiantes',
+            difficulty: 'principiante',
+            timeNeeded: '10-15 min',
+            equipment: ['kettlebell', 'barra_dominadas'],
+            workout: {
+                structure: '3 rondas for time',
+                movements: [
+                    { exercise: 'Run', reps: '200m' },
+                    { exercise: 'Kettlebell Swings', reps: '15', weight: '16kg/12kg' },
+                    { exercise: 'Ring Rows', reps: '9' }
+                ],
+                notes: ['Mantén ritmo constante', 'Peso reducido']
+            }
+        },
+        {
+            id: 'beginner_4',
+            name: 'Grace Light',
+            type: 'benchmark',
+            description: 'Versión suave de Grace para principiantes',
+            difficulty: 'principiante',
+            timeNeeded: '3-8 min',
+            equipment: ['barra_olimpica'],
+            workout: {
+                structure: 'For Time',
+                movements: [
+                    { exercise: 'Clean and Jerks', reps: '30', weight: '30kg/20kg' }
+                ],
+                notes: ['Sin parar', 'Peso reducido', 'Máxima velocidad']
+            }
+        },
+        {
+            id: 'beginner_5',
+            name: 'Angie Light',
+            type: 'benchmark',
+            description: 'Versión suave de Angie para principiantes',
+            difficulty: 'principiante',
+            timeNeeded: '10-20 min',
+            equipment: ['barra_dominadas'],
+            workout: {
+                structure: 'For Time',
+                movements: [
+                    { exercise: 'Ring Rows', reps: '50' },
+                    { exercise: 'Push-ups (rodillas)', reps: '50' },
+                    { exercise: 'Sit-ups', reps: '50' },
+                    { exercise: 'Air Squats', reps: '50' }
+                ],
+                notes: ['Un ejercicio a la vez', 'No alternar', 'Peso reducido']
+            }
+        },
+        {
+            id: 'beginner_6',
+            name: 'Karen Light',
+            type: 'benchmark',
+            description: 'Versión suave de Karen para principiantes',
+            difficulty: 'principiante',
+            timeNeeded: '5-10 min',
+            equipment: ['wallball'],
+            workout: {
+                structure: 'For Time',
+                movements: [
+                    { exercise: 'Wall Ball Shots', reps: '75', weight: '6kg/4kg', target: '2.7m/2.4m' }
+                ],
+                notes: ['Sin descanso', 'Peso reducido', 'Mantén el ritmo']
+            }
+        },
+        {
+            id: 'beginner_7',
+            name: 'Nancy Light',
+            type: 'benchmark',
+            description: 'Versión suave de Nancy para principiantes',
+            difficulty: 'principiante',
+            timeNeeded: '10-20 min',
+            equipment: ['barra_olimpica'],
+            workout: {
+                structure: '5 rondas for time',
+                movements: [
+                    { exercise: 'Run', reps: '200m' },
+                    { exercise: 'Overhead Squats', reps: '15', weight: '20kg/15kg' }
+                ],
+                notes: ['Alternar running y squats', 'Peso reducido', 'Mantén técnica']
+            }
+        },
+        {
+            id: 'beginner_8',
+            name: 'Diane Light',
+            type: 'benchmark',
+            description: 'Versión suave de Diane para principiantes',
+            difficulty: 'principiante',
+            timeNeeded: '5-15 min',
+            equipment: ['barra_olimpica'],
+            workout: {
+                structure: '21-15-9 reps for time',
+                movements: [
+                    { exercise: 'Deadlifts', reps: '21-15-9', weight: '50kg/35kg' },
+                    { exercise: 'Pike Push-ups', reps: '21-15-9' }
+                ],
+                notes: ['Alternar ejercicios', 'Peso reducido', 'Técnica modificada']
+            }
+        },
+        {
+            id: 'beginner_9',
+            name: 'Elizabeth Light',
+            type: 'benchmark',
+            description: 'Versión suave de Elizabeth para principiantes',
+            difficulty: 'principiante',
+            timeNeeded: '8-15 min',
+            equipment: ['barra_olimpica', 'anillas'],
+            workout: {
+                structure: '21-15-9 reps for time',
+                movements: [
+                    { exercise: 'Cleans', reps: '21-15-9', weight: '30kg/20kg' },
+                    { exercise: 'Ring Rows', reps: '21-15-9' }
+                ],
+                notes: ['Alternar ejercicios', 'Peso reducido', 'Técnica modificada']
+            }
+        },
+        {
+            id: 'beginner_10',
+            name: 'Isabel Light',
+            type: 'benchmark',
+            description: 'Versión suave de Isabel para principiantes',
+            difficulty: 'principiante',
+            timeNeeded: '3-8 min',
+            equipment: ['barra_olimpica'],
+            workout: {
+                structure: 'For Time',
+                movements: [
+                    { exercise: 'Snatches', reps: '30', weight: '30kg/20kg' }
+                ],
+                notes: ['Sin parar', 'Peso reducido', 'Máxima velocidad']
             }
         }
     ],

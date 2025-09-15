@@ -72,7 +72,7 @@ export function generateFunctionalWod(plan, week, userLevel = 'intermedio') {
 
 function selectWodType(week, frequency) {
     // Rotar entre tipos de WOD según la semana
-    const wodTypes = ['hero', 'benchmark', 'competition'];
+    const wodTypes = ['hero', 'benchmark', 'competition', 'beginner'];
     const typeIndex = (week - 1) % wodTypes.length;
     return wodTypes[typeIndex];
 }
@@ -80,7 +80,9 @@ function selectWodType(week, frequency) {
 function selectWodByType(type, difficulty) {
     const wods = functionalWods[type === 'hero' ? 'heroes' : 
                                 type === 'benchmark' ? 'heroes' : 
-                                'competition'];
+                                type === 'competition' ? 'competition' :
+                                type === 'beginner' ? 'beginner' :
+                                'heroes'];
     
     if (!wods || wods.length === 0) return null;
     
