@@ -48,6 +48,11 @@ class AdsManager {
     }
 
     showMainBanner() {
+        // Verificar si el usuario es premium
+        if (window.premiumManager && window.premiumManager.hasPremium()) {
+            return;
+        }
+        
         const banner = document.getElementById('ad-banner');
         if (banner) {
             banner.style.display = 'block';
@@ -91,8 +96,8 @@ class AdsManager {
                     <div class="ad-container">
                         <ins class="adsbygoogle"
                              style="display:block"
-                             data-ad-client="ca-pub-4129506161314540"
-                             data-ad-slot="6673201053"
+                             data-ad-client="ca-pub-4837743291717475"
+                             data-ad-slot="auto"
                              data-ad-format="auto"
                              data-full-width-responsive="true"></ins>
                     </div>
@@ -123,6 +128,11 @@ class AdsManager {
     }
 
     canShowAd() {
+        // Verificar si el usuario es premium
+        if (window.premiumManager && window.premiumManager.hasPremium()) {
+            return false;
+        }
+        
         return this.isAdSenseLoaded && 
                this.adCount < this.maxAdsPerSession &&
                (Date.now() - this.lastAdTime) >= this.adCooldown;
@@ -148,8 +158,8 @@ class AdsManager {
                     <div class="ad-container">
                         <ins class="adsbygoogle"
                              style="display:block"
-                             data-ad-client="ca-pub-4129506161314540"
-                             data-ad-slot="6673201053"
+                             data-ad-client="ca-pub-4837743291717475"
+                             data-ad-slot="auto"
                              data-ad-format="auto"
                              data-full-width-responsive="true"></ins>
                     </div>
@@ -246,6 +256,11 @@ class AdsManager {
 
     // Método para mostrar anuncio nativo en el feed
     createNativeAd(containerId) {
+        // Verificar si el usuario es premium
+        if (window.premiumManager && window.premiumManager.hasPremium()) {
+            return;
+        }
+        
         const container = document.getElementById(containerId);
         if (!container) return;
 
@@ -256,8 +271,8 @@ class AdsManager {
                 <div class="native-ad-label">Publicidad</div>
                 <ins class="adsbygoogle"
                      style="display:block"
-                     data-ad-client="ca-pub-4129506161314540"
-                     data-ad-slot="6673201053"
+                     data-ad-client="ca-pub-4837743291717475"
+                     data-ad-slot="auto"
                      data-ad-format="auto"
                      data-full-width-responsive="true"></ins>
             </div>
@@ -265,6 +280,23 @@ class AdsManager {
 
         container.appendChild(nativeAd);
         this.pushAdUnits();
+    }
+    
+    // Método para desactivar anuncios (cuando el usuario se hace premium)
+    disableAds() {
+        // Ocultar banner principal
+        const banner = document.getElementById('ad-banner');
+        if (banner) {
+            banner.style.display = 'none';
+        }
+        
+        // Remover anuncios nativos existentes
+        const nativeAds = document.querySelectorAll('.native-ad');
+        nativeAds.forEach(ad => ad.remove());
+        
+        // Resetear contador de anuncios
+        this.adCount = 0;
+        this.lastAdTime = 0;
     }
 }
 

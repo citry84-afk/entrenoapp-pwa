@@ -595,6 +595,9 @@ function renderDashboard() {
             
             <!-- Acciones rápidas -->
             ${renderQuickActions()}
+            
+            <!-- Sección de monetización -->
+            ${renderMonetizationSection()}
         </div>
     `;
 }
@@ -1355,6 +1358,87 @@ async function deletePlanFromStorage() {
     } catch (error) {
         console.error('❌ Error eliminando plan:', error);
     }
+}
+
+// ===================================
+// FUNCIONES DE MONETIZACIÓN
+// ===================================
+
+// Renderizar sección de monetización
+function renderMonetizationSection() {
+    const isPremium = window.premiumManager?.hasPremium() || false;
+    
+    if (isPremium) {
+        return `
+            <div class="monetization-section glass-card">
+                <h3 class="section-title">💎 Premium Activo</h3>
+                <div class="premium-status">
+                    <div class="premium-icon">✨</div>
+                    <div class="premium-info">
+                        <h4>¡Disfruta de todas las funciones premium!</h4>
+                        <p>Sin anuncios, análisis avanzados y mucho más</p>
+                    </div>
+                </div>
+                <div class="premium-actions">
+                    <button class="glass-button glass-button-secondary" onclick="window.affiliateStore.showStore()">
+                        🛍️ Tienda Fitness
+                    </button>
+                    <button class="glass-button glass-button-secondary" onclick="window.donationManager.showDonationModal()">
+                        💝 Apoyar App
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+    
+    return `
+        <div class="monetization-section glass-card">
+            <h3 class="section-title">🚀 Desbloquea Más</h3>
+            <div class="monetization-options">
+                <div class="monetization-card premium-card">
+                    <div class="card-header">
+                        <div class="card-icon">💎</div>
+                        <h4>Premium</h4>
+                    </div>
+                    <div class="card-content">
+                        <p>Sin anuncios, análisis avanzados y funciones exclusivas</p>
+                        <div class="card-price">Desde 4.99€/mes</div>
+                    </div>
+                    <button class="glass-button glass-button-primary" onclick="window.premiumManager.showPremiumModal()">
+                        Ver Planes
+                    </button>
+                </div>
+                
+                <div class="monetization-card store-card">
+                    <div class="card-header">
+                        <div class="card-icon">🛍️</div>
+                        <h4>Tienda Fitness</h4>
+                    </div>
+                    <div class="card-content">
+                        <p>Equipamiento y suplementos con descuentos exclusivos</p>
+                        <div class="card-price">Hasta 30% descuento</div>
+                    </div>
+                    <button class="glass-button glass-button-secondary" onclick="window.affiliateStore.showStore()">
+                        Ver Tienda
+                    </button>
+                </div>
+                
+                <div class="monetization-card donation-card">
+                    <div class="card-header">
+                        <div class="card-icon">💝</div>
+                        <h4>Apoyar App</h4>
+                    </div>
+                    <div class="card-content">
+                        <p>Ayuda a mantener la app gratuita y mejorar</p>
+                        <div class="card-price">Desde 2€</div>
+                    </div>
+                    <button class="glass-button glass-button-secondary" onclick="window.donationManager.showDonationModal()">
+                        Donar
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
 }
 
 // ===================================
