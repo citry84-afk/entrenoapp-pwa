@@ -1384,20 +1384,20 @@ function renderHealthSection() {
                 <div class="health-header">
                     <h3>🏥 Mi Salud</h3>
                     <div class="health-status-badge">
-                        <span class="status-icon">📱</span>
-                        <span class="status-text">Conectar Dispositivo</span>
+                        <span class="status-icon">📊</span>
+                        <span class="status-text">Introducir Datos</span>
                     </div>
                 </div>
                 
                 <div class="health-empty-state">
                     <div class="empty-icon">📊</div>
-                    <h4>¡Conecta tu salud!</h4>
-                    <p>Activa los permisos para sincronizar datos de tu dispositivo y llevar un seguimiento completo de tu salud.</p>
+                    <h4>¡Empieza a seguir tu salud!</h4>
+                    <p>Introduce tus datos de salud para llevar un seguimiento completo y desbloquear logros.</p>
                     
                     <div class="health-benefits">
                         <div class="benefit-item">
                             <span class="benefit-icon">👣</span>
-                            <span>Contar pasos automáticamente</span>
+                            <span>Seguir tus pasos diarios</span>
                         </div>
                         <div class="benefit-item">
                             <span class="benefit-icon">😴</span>
@@ -1441,7 +1441,7 @@ function renderHealthSection() {
                     <div class="metric-info">
                         <div class="metric-value">${healthData.steps > 0 ? healthData.steps.toLocaleString() : '--'}</div>
                         <div class="metric-label">Pasos</div>
-                        ${healthData.steps === 0 ? '<div class="metric-hint">Conectar dispositivo</div>' : ''}
+                        ${healthData.steps === 0 ? '<div class="metric-hint">Introducir datos</div>' : ''}
                     </div>
                 </div>
                 
@@ -1450,7 +1450,7 @@ function renderHealthSection() {
                     <div class="metric-info">
                         <div class="metric-value">${healthData.sleepHours > 0 ? `${healthData.sleepHours}h` : '--'}</div>
                         <div class="metric-label">Sueño</div>
-                        ${healthData.sleepHours === 0 ? '<div class="metric-hint">Activar permisos</div>' : ''}
+                        ${healthData.sleepHours === 0 ? '<div class="metric-hint">Introducir datos</div>' : ''}
                     </div>
                 </div>
                 
@@ -1468,7 +1468,7 @@ function renderHealthSection() {
                     <div class="metric-info">
                         <div class="metric-value">${healthData.heartRate > 0 ? healthData.heartRate : '--'}</div>
                         <div class="metric-label">BPM</div>
-                        ${healthData.heartRate === 0 ? '<div class="metric-hint">Conectar wearable</div>' : ''}
+                        ${healthData.heartRate === 0 ? '<div class="metric-hint">Introducir datos</div>' : ''}
                     </div>
                 </div>
             </div>
@@ -1551,8 +1551,8 @@ window.showHealthSetup = function() {
                 </div>
                 
                 <div class="setup-actions">
-                    <button class="glass-button glass-button-primary" onclick="window.requestHealthPermissions()">
-                        🔐 Solicitar Permisos
+                    <button class="glass-button glass-button-primary" onclick="window.showManualHealthInput()">
+                        ✏️ Introducir Datos
                     </button>
                     <button class="glass-button glass-button-secondary" onclick="this.closest('.health-setup-modal').remove()">
                         Más tarde
@@ -1560,12 +1560,7 @@ window.showHealthSetup = function() {
                 </div>
                 
                 <div class="setup-note">
-                    <p>💡 <strong>Importante:</strong> Para que EntrenoApp aparezca en Configuración > Salud, debes:</p>
-                    <ul>
-                        <li>Instalar la app como PWA desde Safari</li>
-                        <li>Usar la app al menos una vez</li>
-                        <li>Reiniciar el iPhone si no aparece</li>
-                    </ul>
+                    <p>💡 <strong>Nota:</strong> Para un seguimiento completo de tu salud, puedes introducir tus datos manualmente desde la app Salud de tu iPhone.</p>
                 </div>
             </div>
         </div>
