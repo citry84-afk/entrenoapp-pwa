@@ -1648,7 +1648,13 @@ function showHealthSetupInstructions() {
                 </div>
                 
                 <div class="instructions-note">
-                    <p>💡 <strong>Nota:</strong> Si no aparece EntrenoApp en la lista, asegúrate de que la app esté instalada como PWA desde Safari.</p>
+                    <p>💡 <strong>Importante:</strong> Para que EntrenoApp aparezca en la lista:</p>
+                    <ul>
+                        <li>✅ Debe estar instalada como PWA desde Safari</li>
+                        <li>✅ Debe haberse usado al menos una vez</li>
+                        <li>✅ Debe estar en modo standalone (no en Safari)</li>
+                        <li>🔄 Si no aparece, reinicia el iPhone y vuelve a intentar</li>
+                    </ul>
                 </div>
             </div>
         </div>

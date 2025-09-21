@@ -1,0 +1,23 @@
+{
+  "healthKitEnabled": true,
+  "permissions": {
+    "read": [
+      "steps",
+      "heartRate",
+      "sleepAnalysis",
+      "activeEnergyBurned",
+      "walkingDistance",
+      "bodyMass",
+      "height"
+    ],
+    "write": [
+      "steps",
+      "activeEnergyBurned",
+      "walkingDistance"
+    ]
+  },
+  "usageDescription": "EntrenoApp utiliza datos de salud para proporcionar seguimiento personalizado de fitness, análisis de rendimiento y recomendaciones de entrenamiento personalizadas.",
+  "category": "fitness",
+  "appName": "EntrenoApp",
+  "bundleId": "com.lipastudios.entrenoapp"
+}

@@ -96,9 +96,9 @@ class HealthManager {
                 }
             }
 
-            // Si estamos en iOS, intentar abrir configuración de salud
+            // Intentar solicitar permisos específicos de HealthKit
             if (this.isIOS()) {
-                this.openIOSHealthSettings();
+                await this.requestHealthKitPermissions();
             }
 
             // Si estamos en Android, intentar abrir configuración de salud
@@ -109,6 +109,28 @@ class HealthManager {
             console.log('Permisos de salud:', this.permissions);
         } catch (error) {
             console.error('Error solicitando permisos de salud:', error);
+        }
+    }
+
+    async requestHealthKitPermissions() {
+        try {
+            // Intentar solicitar permisos específicos de HealthKit
+            if (window.HealthKit) {
+                const healthKit = new window.HealthKit();
+                await healthKit.requestAuthorization({
+                    read: [
+                        'HKQuantityTypeIdentifierStepCount',
+                        'HKQuantityTypeIdentifierHeartRate',
+                        'HKCategoryTypeIdentifierSleepAnalysis',
+                        'HKQuantityTypeIdentifierActiveEnergyBurned',
+                        'HKQuantityTypeIdentifierDistanceWalkingRunning'
+                    ]
+                });
+            }
+        } catch (error) {
+            console.log('HealthKit no disponible, usando configuración manual:', error);
+            // Si HealthKit no está disponible, abrir configuración manual
+            this.openIOSHealthSettings();
         }
     }
 

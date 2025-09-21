@@ -44,20 +44,40 @@
   "categories": ["health", "fitness", "sports"],
   "health_permissions": {
     "steps": {
-      "description": "Contar pasos diarios para seguimiento de actividad"
+      "description": "Contar pasos diarios para seguimiento de actividad",
+      "ios_permission": "HKQuantityTypeIdentifierStepCount"
     },
     "heart_rate": {
-      "description": "Monitorear frecuencia cardíaca durante entrenamientos"
+      "description": "Monitorear frecuencia cardíaca durante entrenamientos",
+      "ios_permission": "HKQuantityTypeIdentifierHeartRate"
     },
     "sleep": {
-      "description": "Analizar patrones de sueño para optimizar recuperación"
+      "description": "Analizar patrones de sueño para optimizar recuperación",
+      "ios_permission": "HKCategoryTypeIdentifierSleepAnalysis"
     },
     "activity": {
-      "description": "Seguir minutos de actividad física diaria"
+      "description": "Seguir minutos de actividad física diaria",
+      "ios_permission": "HKQuantityTypeIdentifierActiveEnergyBurned"
     },
     "distance": {
-      "description": "Medir distancia recorrida en entrenamientos"
+      "description": "Medir distancia recorrida en entrenamientos",
+      "ios_permission": "HKQuantityTypeIdentifierDistanceWalkingRunning"
     }
+  },
+  "ios_healthkit": {
+    "enabled": true,
+    "read_permissions": [
+      "HKQuantityTypeIdentifierStepCount",
+      "HKQuantityTypeIdentifierHeartRate",
+      "HKCategoryTypeIdentifierSleepAnalysis",
+      "HKQuantityTypeIdentifierActiveEnergyBurned",
+      "HKQuantityTypeIdentifierDistanceWalkingRunning"
+    ],
+    "write_permissions": [
+      "HKQuantityTypeIdentifierStepCount",
+      "HKQuantityTypeIdentifierActiveEnergyBurned",
+      "HKQuantityTypeIdentifierDistanceWalkingRunning"
+    ]
   },
   "shortcuts": [
     {
