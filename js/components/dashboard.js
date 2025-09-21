@@ -584,6 +584,9 @@ function renderDashboard() {
             <!-- Entrenamiento de hoy -->
             ${renderTodaysWorkout()}
             
+            <!-- Sistema de Salud -->
+            ${renderHealthSection()}
+            
             <!-- Progreso semanal -->
             ${renderWeeklyProgress()}
             
@@ -1359,6 +1362,98 @@ async function deletePlanFromStorage() {
         console.error('❌ Error eliminando plan:', error);
     }
 }
+
+// ===================================
+// FUNCIONES DE SALUD
+// ===================================
+
+// Renderizar sección de salud
+function renderHealthSection() {
+    if (!window.healthManager) {
+        return '';
+    }
+    
+    const healthData = window.healthManager.getHealthData();
+    const achievements = window.healthManager.getAchievements();
+    const recentAchievements = achievements.slice(-2).reverse();
+    
+    return `
+        <div class="health-section glass-card mb-lg">
+            <div class="health-header">
+                <h3>🏥 Mi Salud</h3>
+                <button class="glass-button glass-button-secondary btn-sm" onclick="window.showHealthDashboard()">
+                    📊 Ver Detalles
+                </button>
+            </div>
+            
+            <div class="health-metrics-mini">
+                <div class="health-metric">
+                    <div class="metric-icon">👣</div>
+                    <div class="metric-info">
+                        <div class="metric-value">${healthData.steps.toLocaleString()}</div>
+                        <div class="metric-label">Pasos</div>
+                    </div>
+                </div>
+                
+                <div class="health-metric">
+                    <div class="metric-icon">😴</div>
+                    <div class="metric-info">
+                        <div class="metric-value">${healthData.sleepHours}h</div>
+                        <div class="metric-label">Sueño</div>
+                    </div>
+                </div>
+                
+                <div class="health-metric">
+                    <div class="metric-icon">⚡</div>
+                    <div class="metric-info">
+                        <div class="metric-value">${healthData.activeMinutes}</div>
+                        <div class="metric-label">Min Activos</div>
+                    </div>
+                </div>
+                
+                <div class="health-metric">
+                    <div class="metric-icon">❤️</div>
+                    <div class="metric-info">
+                        <div class="metric-value">${healthData.heartRate}</div>
+                        <div class="metric-label">BPM</div>
+                    </div>
+                </div>
+            </div>
+            
+            ${recentAchievements.length > 0 ? `
+                <div class="recent-achievements-mini">
+                    <h4>🏆 Logros Recientes</h4>
+                    <div class="achievements-list-mini">
+                        ${recentAchievements.map(achievement => `
+                            <div class="achievement-mini">
+                                <span class="achievement-icon">${achievement.title.split(' ')[0]}</span>
+                                <span class="achievement-title">${achievement.title}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            ` : ''}
+        </div>
+    `;
+}
+
+// Mostrar dashboard de salud completo
+window.showHealthDashboard = function() {
+    const container = document.querySelector('.dashboard-container');
+    if (!container) return;
+    
+    container.innerHTML = `
+        <button class="back-button" onclick="window.initDashboard()" title="Volver al Dashboard">
+            ←
+        </button>
+        <div id="health-dashboard-container"></div>
+    `;
+    
+    // Inicializar dashboard de salud
+    if (window.healthDashboard) {
+        window.healthDashboard.render();
+    }
+};
 
 // ===================================
 // FUNCIONES DE MONETIZACIÓN

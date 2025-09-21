@@ -1,0 +1,710 @@
+/* Estilos para el Sistema de Salud y Gamificación */
+
+/* Variables CSS para colores de salud */
+:root {
+    --health-primary: #00D4FF;
+    --health-secondary: #2196F3;
+    --health-success: #4CAF50;
+    --health-warning: #FF9800;
+    --health-danger: #F44336;
+    --health-info: #00BCD4;
+    --health-gold: #FFD700;
+    --health-purple: #9C27B0;
+    
+    /* Gradientes de salud */
+    --gradient-steps: linear-gradient(135deg, #00D4FF, #2196F3);
+    --gradient-heart: linear-gradient(135deg, #F44336, #E91E63);
+    --gradient-sleep: linear-gradient(135deg, #673AB7, #9C27B0);
+    --gradient-activity: linear-gradient(135deg, #4CAF50, #8BC34A);
+    --gradient-calories: linear-gradient(135deg, #FF9800, #FFC107);
+    --gradient-distance: linear-gradient(135deg, #00BCD4, #0097A7);
+}
+
+/* Contenedor principal del dashboard de salud */
+.health-dashboard {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.health-header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    border: 1px solid rgba(0, 212, 255, 0.3);
+}
+
+.health-header h2 {
+    color: var(--health-primary);
+    margin: 0 0 10px 0;
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+}
+
+.health-header p {
+    color: #ccc;
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+/* Indicador de estado de salud */
+.health-status {
+    margin-top: 20px;
+}
+
+.status-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 25px;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.status-indicator:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.status-indicator.excellent {
+    background: linear-gradient(135deg, #4CAF50, #8BC34A);
+    color: white;
+}
+
+.status-indicator.good {
+    background: linear-gradient(135deg, #2196F3, #00BCD4);
+    color: white;
+}
+
+.status-indicator.average {
+    background: linear-gradient(135deg, #FF9800, #FFC107);
+    color: white;
+}
+
+.status-indicator.poor {
+    background: linear-gradient(135deg, #F44336, #E91E63);
+    color: white;
+}
+
+.status-icon {
+    font-size: 1.5rem;
+    animation: pulse 2s infinite;
+}
+
+/* Grid de métricas principales */
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.metric-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: all 0.4s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.metric-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.metric-card:hover::before {
+    left: 100%;
+}
+
+.metric-card:hover {
+    transform: translateY(-8px);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(0, 212, 255, 0.3);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Iconos de métricas */
+.metric-icon {
+    font-size: 3rem;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    background: rgba(0, 212, 255, 0.1);
+    border: 2px solid rgba(0, 212, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.metric-card:hover .metric-icon {
+    background: rgba(0, 212, 255, 0.2);
+    border-color: rgba(0, 212, 255, 0.5);
+    transform: scale(1.1);
+}
+
+/* Contenido de métricas */
+.metric-content {
+    flex: 1;
+}
+
+.metric-value {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: var(--health-primary);
+    margin: 0;
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+}
+
+.metric-label {
+    color: #ccc;
+    font-size: 1rem;
+    margin: 8px 0;
+    font-weight: 500;
+}
+
+.metric-subtitle {
+    color: #888;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* Barras de progreso */
+.metric-progress {
+    margin-top: 15px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 8px;
+    position: relative;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--gradient-steps);
+    transition: width 0.6s ease;
+    position: relative;
+}
+
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: shimmer 2s infinite;
+}
+
+.progress-fill.good {
+    background: var(--gradient-activity);
+}
+
+.progress-fill.warning {
+    background: var(--gradient-calories);
+}
+
+.progress-fill.danger {
+    background: var(--gradient-heart);
+}
+
+.progress-text {
+    font-size: 0.85rem;
+    color: #ccc;
+    text-align: center;
+}
+
+/* Secciones de objetivos y logros */
+.goals-progress, .recent-achievements, .health-trends {
+    margin-bottom: 40px;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.goals-progress h3, .recent-achievements h3, .health-trends h3 {
+    color: var(--health-primary);
+    margin: 0 0 25px 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Grid de objetivos */
+.goals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+}
+
+.goal-item {
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.goal-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-3px);
+}
+
+.goal-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.goal-icon {
+    font-size: 1.8rem;
+}
+
+.goal-name {
+    font-weight: bold;
+    color: var(--health-primary);
+    font-size: 1.1rem;
+}
+
+.goal-progress {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.goal-progress .progress-bar {
+    flex: 1;
+    height: 10px;
+    border-radius: 5px;
+}
+
+.goal-text {
+    font-size: 0.95rem;
+    color: #ccc;
+    white-space: nowrap;
+    font-weight: 500;
+}
+
+/* Lista de logros */
+.achievements-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.achievement-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.achievement-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateX(5px);
+}
+
+.achievement-icon {
+    font-size: 2.5rem;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 215, 0, 0.1);
+    border-radius: 15px;
+    border: 2px solid rgba(255, 215, 0, 0.3);
+}
+
+.achievement-info {
+    flex: 1;
+}
+
+.achievement-info h4 {
+    margin: 0 0 8px 0;
+    color: var(--health-primary);
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.achievement-info p {
+    margin: 0 0 8px 0;
+    color: #ccc;
+    font-size: 1rem;
+}
+
+.achievement-date {
+    font-size: 0.85rem;
+    color: #888;
+}
+
+.achievement-points {
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    color: #000;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 1rem;
+    box-shadow: 0 3px 10px rgba(255, 215, 0, 0.3);
+}
+
+/* Tendencias de salud */
+.trends-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.trend-chart {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.trend-chart h4 {
+    margin: 0 0 20px 0;
+    color: var(--health-primary);
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.mini-chart {
+    height: 120px;
+}
+
+.chart-bars {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    height: 100%;
+    gap: 8px;
+}
+
+.chart-bar {
+    flex: 1;
+    background: var(--gradient-steps);
+    border-radius: 4px 4px 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 8px 3px;
+    min-height: 20px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.chart-bar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.2), transparent);
+}
+
+.chart-bar:hover {
+    transform: scaleY(1.1);
+    background: var(--gradient-activity);
+}
+
+.bar-value {
+    font-size: 0.75rem;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 4px;
+    z-index: 1;
+}
+
+.bar-label {
+    font-size: 0.7rem;
+    color: #ccc;
+    z-index: 1;
+}
+
+/* Acciones de salud */
+.health-actions {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+/* Estados vacíos */
+.no-achievements, .no-trends {
+    text-align: center;
+    padding: 50px 20px;
+    color: #ccc;
+}
+
+.no-achievements-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    opacity: 0.5;
+    animation: float 3s ease-in-out infinite;
+}
+
+/* Modales */
+.detailed-stats-modal, .achievements-modal, .goals-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    backdrop-filter: blur(10px);
+}
+
+.modal-content {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border-radius: 25px;
+    padding: 40px;
+    max-width: 90%;
+    max-height: 90%;
+    overflow-y: auto;
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: modalSlideIn 0.4s ease-out;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-header h2 {
+    color: var(--health-primary);
+    margin: 0;
+    font-size: 2rem;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.modal-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: rotate(90deg);
+}
+
+/* Formularios */
+.goals-form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-group label {
+    color: var(--health-primary);
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.form-group input {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(0, 212, 255, 0.3);
+    border-radius: 12px;
+    padding: 15px;
+    color: white;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--health-primary);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+}
+
+/* Animaciones */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8) translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .health-dashboard {
+        padding: 15px;
+    }
+    
+    .metrics-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .goals-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .trends-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .health-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .modal-content {
+        padding: 25px;
+        margin: 20px;
+    }
+    
+    .health-header h2 {
+        font-size: 2rem;
+    }
+    
+    .metric-value {
+        font-size: 1.8rem;
+    }
+    
+    .metric-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .health-dashboard {
+        padding: 10px;
+    }
+    
+    .health-header {
+        padding: 20px;
+    }
+    
+    .health-header h2 {
+        font-size: 1.8rem;
+    }
+    
+    .metric-card {
+        padding: 20px;
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    
+    .metric-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 2rem;
+    }
+    
+    .metric-value {
+        font-size: 1.5rem;
+    }
+    
+    .modal-content {
+        padding: 20px;
+        margin: 10px;
+    }
+}
