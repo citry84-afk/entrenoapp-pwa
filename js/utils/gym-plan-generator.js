@@ -786,16 +786,23 @@ export function generateTodaysGymWorkout(plan) {
     
     if (!todaysSession) return null;
     
+    // Calcular duración basada en la selección del usuario
+    const targetDuration = plan.sessionDuration || 45; // Duración de la sesión en minutos
+    const actualDuration = Math.min(targetDuration, 90); // Máximo 90 minutos
+    
+    // Ajustar número de ejercicios según duración
+    const adjustedExercises = adjustExercisesForDuration(todaysSession.exercises, actualDuration);
+    
     // Generar workout del día
     const workout = {
         type: 'gym',
         title: `${todaysSession.name} - Semana ${currentWeek}`,
-        description: `${todaysSession.exercises.length} ejercicios • ${estimateWorkoutDuration(todaysSession)} min`,
+        description: `${adjustedExercises.length} ejercicios • ${actualDuration} min`,
         icon: '🏋️‍♂️',
         session: todaysSession,
         muscleGroups: getMuscleGroupsFromSession(todaysSession),
-        estimatedDuration: estimateWorkoutDuration(todaysSession),
-        exercises: todaysSession.exercises.map(ex => {
+        estimatedDuration: actualDuration,
+        exercises: adjustedExercises.map(ex => {
             const exerciseData = findExerciseById(ex.exerciseId);
             return {
                 ...ex,
@@ -810,6 +817,36 @@ export function generateTodaysGymWorkout(plan) {
     console.log('💾 Workout de gimnasio del día guardado:', workout.title);
     
     return workout;
+}
+
+function adjustExercisesForDuration(exercises, targetDuration) {
+    if (!exercises || exercises.length === 0) return [];
+    
+    // Calcular número de ejercicios según duración
+    const getExerciseCount = (duration) => {
+        if (duration <= 30) return 3;
+        if (duration <= 45) return 4;
+        if (duration <= 60) return 5;
+        return 6;
+    };
+    
+    const exerciseCount = getExerciseCount(targetDuration);
+    
+    // Ajustar series según duración
+    const getSetCount = (duration) => {
+        if (duration <= 30) return 3;
+        if (duration <= 45) return 4;
+        if (duration <= 60) return 4;
+        return 5;
+    };
+    
+    const setCount = getSetCount(targetDuration);
+    
+    // Tomar solo los primeros ejercicios y ajustar series
+    return exercises.slice(0, exerciseCount).map(exercise => ({
+        ...exercise,
+        sets: setCount
+    }));
 }
 
 function estimateWorkoutDuration(session) {

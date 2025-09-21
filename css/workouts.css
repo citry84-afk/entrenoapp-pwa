@@ -541,7 +541,7 @@ input:checked + .toggle-slider:before {
 
 .more-exercises {
     background: rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(255, 255, 255, 0.9);
     padding: 0.25rem 0.5rem;
     border-radius: 12px;
     font-size: 0.75rem;

@@ -75,6 +75,13 @@ async function loadUserPlan() {
             const userData = userSnap.data();
             dashboardState.userProfile = userData;
             dashboardState.activePlan = userData.activePlan;
+            
+            // Verificar si el plan tiene sessionDuration, si no, agregarlo
+            if (dashboardState.activePlan && !dashboardState.activePlan.sessionDuration) {
+                dashboardState.activePlan.sessionDuration = getDefaultSessionDuration(dashboardState.activePlan);
+                console.log('🔄 Plan actualizado con sessionDuration:', dashboardState.activePlan.sessionDuration);
+            }
+            
             dashboardState.quickStats = {
                 completedWorkouts: userData.stats?.totalWorkouts || 0,
                 currentStreak: userData.stats?.currentStreak || 0,
@@ -446,6 +453,26 @@ function calculateWeekProgress(plan) {
     const completedDays = trainingDays.filter(day => day < currentDay).length;
     
     return Math.round((completedDays / trainingDays.length) * 100);
+}
+
+// Obtener duración por defecto basada en el plan existente
+function getDefaultSessionDuration(plan) {
+    // Si el plan tiene metadatos de onboarding, usar la disponibilidad
+    if (plan.metadata && plan.metadata.availability) {
+        const availability = plan.metadata.availability;
+        const sessionDurationMap = {
+            'low': 30,     // 15-30 min -> 30 min
+            'medium': 45,  // 30-60 min -> 45 min
+            'high': 60,    // 60+ min -> 60 min
+            'athlete': 75  // Atleta -> 75 min
+        };
+        return sessionDurationMap[availability] || 45;
+    }
+    
+    // Si no hay metadatos, inferir basado en la frecuencia
+    if (plan.frequency <= 3) return 60;  // Menos frecuencia = sesiones más largas
+    if (plan.frequency <= 4) return 45;  // Frecuencia media = sesiones medias
+    return 30;  // Más frecuencia = sesiones más cortas
 }
 
 // Cargar reto diario

@@ -141,7 +141,7 @@
 
 .exercise-notes {
     font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(255, 255, 255, 0.9);
     font-style: italic;
 }
 
@@ -437,7 +437,7 @@
 
 .stat-label {
     font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(255, 255, 255, 0.9);
     text-transform: uppercase;
     letter-spacing: 1px;
 }
@@ -528,7 +528,7 @@
 
 .completed-message {
     font-size: 1.1rem;
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(255, 255, 255, 0.9);
     font-style: italic;
     margin-bottom: 30px !important;
 }
