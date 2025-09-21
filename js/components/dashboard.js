@@ -1414,8 +1414,8 @@ function renderHealthSection() {
                     </div>
                     
                     <div class="health-actions">
-                        <button class="glass-button glass-button-primary" onclick="window.showHealthSetup()">
-                            🔗 Conectar Dispositivo
+                        <button class="glass-button glass-button-primary" onclick="window.showManualHealthInput()">
+                            ✏️ Introducir Datos Manualmente
                         </button>
                         <button class="glass-button glass-button-secondary" onclick="window.showHealthDashboard()">
                             📊 Ver Dashboard
@@ -1572,6 +1572,114 @@ window.showHealthSetup = function() {
     `;
     
     document.body.appendChild(modal);
+};
+
+// Mostrar entrada manual de datos de salud
+window.showManualHealthInput = function() {
+    const modal = document.createElement('div');
+    modal.className = 'manual-health-input-modal';
+    modal.innerHTML = `
+        <div class="modal-content glass-effect">
+            <div class="modal-header">
+                <h2>📊 Introducir Datos de Salud</h2>
+                <button class="modal-close" onclick="this.closest('.manual-health-input-modal').remove()">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="input-section">
+                    <h3>📅 Datos de Hoy</h3>
+                    <p>Introduce tus datos de salud de hoy para llevar un seguimiento completo:</p>
+                    
+                    <div class="health-inputs">
+                        <div class="input-group">
+                            <label for="manual-steps">👣 Pasos:</label>
+                            <input type="number" id="manual-steps" placeholder="Ej: 8500" min="0" max="50000">
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="manual-sleep">😴 Horas de Sueño:</label>
+                            <input type="number" id="manual-sleep" placeholder="Ej: 7.5" min="0" max="12" step="0.5">
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="manual-heart-rate">❤️ Frecuencia Cardíaca (BPM):</label>
+                            <input type="number" id="manual-heart-rate" placeholder="Ej: 72" min="40" max="200">
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="manual-weight">⚖️ Peso (kg):</label>
+                            <input type="number" id="manual-weight" placeholder="Ej: 70" min="30" max="200" step="0.1">
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="manual-water">💧 Vasos de Agua:</label>
+                            <input type="number" id="manual-water" placeholder="Ej: 8" min="0" max="20">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="input-actions">
+                    <button class="glass-button glass-button-primary" onclick="window.saveManualHealthData()">
+                        💾 Guardar Datos
+                    </button>
+                    <button class="glass-button glass-button-secondary" onclick="this.closest('.manual-health-input-modal').remove()">
+                        Cancelar
+                    </button>
+                </div>
+                
+                <div class="input-note">
+                    <p>💡 <strong>Consejo:</strong> Puedes encontrar estos datos en la app Salud de tu iPhone o en tu dispositivo wearable.</p>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+};
+
+// Guardar datos de salud manuales
+window.saveManualHealthData = function() {
+    const steps = parseInt(document.getElementById('manual-steps').value) || 0;
+    const sleep = parseFloat(document.getElementById('manual-sleep').value) || 0;
+    const heartRate = parseInt(document.getElementById('manual-heart-rate').value) || 0;
+    const weight = parseFloat(document.getElementById('manual-weight').value) || 0;
+    const water = parseInt(document.getElementById('manual-water').value) || 0;
+    
+    if (steps === 0 && sleep === 0 && heartRate === 0 && weight === 0 && water === 0) {
+        alert('⚠️ Por favor, introduce al menos un dato de salud.');
+        return;
+    }
+    
+    // Guardar datos en localStorage
+    const healthData = {
+        steps: steps,
+        sleepHours: sleep,
+        heartRate: heartRate,
+        weight: weight,
+        waterGlasses: water,
+        caloriesBurned: Math.floor(steps * 0.04 + (sleep * 50)), // Estimación básica
+        activeMinutes: Math.floor(steps / 100), // Estimación básica
+        distance: Math.round((steps * 0.7) / 1000 * 10) / 10, // Estimación básica
+        timestamp: new Date().toISOString(),
+        source: 'manual'
+    };
+    
+    localStorage.setItem('entrenoapp_health_data', JSON.stringify(healthData));
+    
+    // Actualizar health manager si existe
+    if (window.healthManager) {
+        window.healthManager.healthData = healthData;
+        window.healthManager.saveHealthData();
+        window.healthManager.checkAchievements();
+    }
+    
+    // Cerrar modal
+    document.querySelector('.manual-health-input-modal').remove();
+    
+    // Mostrar confirmación
+    alert('✅ Datos de salud guardados correctamente!');
+    
+    // Recargar dashboard
+    window.initDashboard();
 };
 
 // Solicitar permisos de salud

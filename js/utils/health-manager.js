@@ -275,14 +275,39 @@ class HealthManager {
     }
 
     loadMockData() {
-        // Inicializar con datos en cero - el usuario los irá completando
+        // Intentar cargar datos guardados manualmente
+        const savedData = localStorage.getItem('entrenoapp_health_data');
+        if (savedData) {
+            try {
+                const parsedData = JSON.parse(savedData);
+                this.healthData = {
+                    steps: parsedData.steps || 0,
+                    heartRate: parsedData.heartRate || 0,
+                    sleepHours: parsedData.sleepHours || 0,
+                    caloriesBurned: parsedData.caloriesBurned || 0,
+                    distance: parsedData.distance || 0,
+                    activeMinutes: parsedData.activeMinutes || 0,
+                    weight: parsedData.weight || 0,
+                    waterGlasses: parsedData.waterGlasses || 0
+                };
+                console.log('Datos de salud cargados desde localStorage:', this.healthData);
+                this.checkAchievements();
+                return;
+            } catch (error) {
+                console.error('Error cargando datos de salud:', error);
+            }
+        }
+        
+        // Si no hay datos guardados, inicializar con datos en cero
         this.healthData = {
             steps: 0,
             heartRate: 0,
             sleepHours: 0,
             caloriesBurned: 0,
             distance: 0,
-            activeMinutes: 0
+            activeMinutes: 0,
+            weight: 0,
+            waterGlasses: 0
         };
         
         console.log('Sistema de salud inicializado - datos en cero');

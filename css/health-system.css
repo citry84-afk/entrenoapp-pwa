@@ -976,6 +976,97 @@
     line-height: 1.4;
 }
 
+/* Modal de entrada manual de datos */
+.manual-health-input-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    backdrop-filter: blur(10px);
+}
+
+.input-section {
+    margin-bottom: 30px;
+}
+
+.input-section h3 {
+    color: var(--health-primary);
+    margin: 0 0 10px 0;
+    font-size: 1.3rem;
+}
+
+.input-section p {
+    color: #ccc;
+    margin: 0 0 25px 0;
+    line-height: 1.5;
+}
+
+.health-inputs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-group label {
+    color: var(--health-primary);
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.input-group input {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(0, 212, 255, 0.3);
+    border-radius: 12px;
+    padding: 15px;
+    color: white;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: var(--health-primary);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+}
+
+.input-group input::placeholder {
+    color: #888;
+}
+
+.input-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.input-note {
+    padding: 15px;
+    background: rgba(0, 212, 255, 0.1);
+    border-radius: 10px;
+    border: 1px solid rgba(0, 212, 255, 0.3);
+}
+
+.input-note p {
+    margin: 0;
+    color: var(--health-primary);
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .health-dashboard {
