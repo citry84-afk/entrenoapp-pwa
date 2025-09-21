@@ -42,6 +42,23 @@
     }
   ],
   "categories": ["health", "fitness", "sports"],
+  "health_permissions": {
+    "steps": {
+      "description": "Contar pasos diarios para seguimiento de actividad"
+    },
+    "heart_rate": {
+      "description": "Monitorear frecuencia cardíaca durante entrenamientos"
+    },
+    "sleep": {
+      "description": "Analizar patrones de sueño para optimizar recuperación"
+    },
+    "activity": {
+      "description": "Seguir minutos de actividad física diaria"
+    },
+    "distance": {
+      "description": "Medir distancia recorrida en entrenamientos"
+    }
+  },
   "shortcuts": [
     {
       "name": "Entrenar Ahora",

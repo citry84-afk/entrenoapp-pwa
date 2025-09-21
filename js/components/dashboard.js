@@ -1560,7 +1560,12 @@ window.showHealthSetup = function() {
                 </div>
                 
                 <div class="setup-note">
-                    <p>💡 <strong>Nota:</strong> Si no tienes un dispositivo compatible, puedes introducir manualmente algunos datos en el dashboard de salud.</p>
+                    <p>💡 <strong>Importante:</strong> Para que EntrenoApp aparezca en Configuración > Salud, debes:</p>
+                    <ul>
+                        <li>Instalar la app como PWA desde Safari</li>
+                        <li>Usar la app al menos una vez</li>
+                        <li>Reiniciar el iPhone si no aparece</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -1573,11 +1578,101 @@ window.showHealthSetup = function() {
 window.requestHealthPermissions = function() {
     if (window.healthManager) {
         window.healthManager.requestPermissions().then(() => {
-            alert('✅ Permisos solicitados. Ve a Configuración > Privacidad > Salud para activarlos.');
+            // Mostrar modal con instrucciones específicas
+            showHealthSetupInstructions();
             document.querySelector('.health-setup-modal').remove();
-            // Recargar dashboard
-            window.initDashboard();
         });
+    }
+};
+
+// Mostrar instrucciones específicas para activar permisos
+function showHealthSetupInstructions() {
+    const modal = document.createElement('div');
+    modal.className = 'health-instructions-modal';
+    modal.innerHTML = `
+        <div class="modal-content glass-effect">
+            <div class="modal-header">
+                <h2>📱 Activar Permisos de Salud</h2>
+                <button class="modal-close" onclick="this.closest('.health-instructions-modal').remove()">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="instructions-content">
+                    <div class="instruction-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>📱 Abrir Configuración del iPhone</h3>
+                            <p>Ve a <strong>Configuración</strong> en tu iPhone</p>
+                        </div>
+                    </div>
+                    
+                    <div class="instruction-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>🔒 Ir a Privacidad y Seguridad</h3>
+                            <p>Busca y toca <strong>Privacidad y Seguridad</strong></p>
+                        </div>
+                    </div>
+                    
+                    <div class="instruction-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>🏥 Seleccionar Salud</h3>
+                            <p>Toca <strong>Salud</strong> en la lista</p>
+                        </div>
+                    </div>
+                    
+                    <div class="instruction-step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>🔍 Buscar EntrenoApp</h3>
+                            <p>Busca <strong>EntrenoApp</strong> en la lista de apps</p>
+                        </div>
+                    </div>
+                    
+                    <div class="instruction-step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h3>✅ Activar Permisos</h3>
+                            <p>Activa los permisos para: Pasos, Frecuencia Cardíaca, Sueño, Actividad</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="instructions-actions">
+                    <button class="glass-button glass-button-primary" onclick="window.openHealthSettings()">
+                        🔗 Abrir Configuración
+                    </button>
+                    <button class="glass-button glass-button-secondary" onclick="this.closest('.health-instructions-modal').remove()">
+                        Entendido
+                    </button>
+                </div>
+                
+                <div class="instructions-note">
+                    <p>💡 <strong>Nota:</strong> Si no aparece EntrenoApp en la lista, asegúrate de que la app esté instalada como PWA desde Safari.</p>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+}
+
+// Abrir configuración de salud
+window.openHealthSettings = function() {
+    // Intentar abrir configuración de salud en iOS
+    const iOSHealthURL = 'x-apple-health://';
+    const settingsURL = 'App-prefs:HEALTH';
+    
+    // Intentar abrir configuración de salud
+    try {
+        window.location.href = settingsURL;
+    } catch (error) {
+        try {
+            window.location.href = iOSHealthURL;
+        } catch (error2) {
+            // Fallback: mostrar instrucciones manuales
+            alert('No se puede abrir automáticamente. Ve manualmente a:\nConfiguración > Privacidad y Seguridad > Salud');
+        }
     }
 };
 

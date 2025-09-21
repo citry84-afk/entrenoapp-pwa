@@ -893,6 +893,89 @@
     line-height: 1.4;
 }
 
+/* Modal de instrucciones de salud */
+.health-instructions-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    backdrop-filter: blur(10px);
+}
+
+.instructions-content {
+    margin-bottom: 30px;
+}
+
+.instruction-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 25px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.instruction-step:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(0, 212, 255, 0.3);
+}
+
+.step-number {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #00D4FF, #2196F3);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.instruction-step .step-content h3 {
+    color: var(--health-primary);
+    margin: 0 0 8px 0;
+    font-size: 1.1rem;
+}
+
+.instruction-step .step-content p {
+    color: #ccc;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.instructions-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.instructions-note {
+    padding: 15px;
+    background: rgba(255, 152, 0, 0.1);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 152, 0, 0.3);
+}
+
+.instructions-note p {
+    margin: 0;
+    color: #FF9800;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .health-dashboard {

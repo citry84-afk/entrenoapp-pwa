@@ -67,28 +67,91 @@ class HealthManager {
         if (!this.isSupported) return;
 
         try {
-            // Solicitar permisos para diferentes tipos de datos
-            const permissions = [
-                { name: 'steps', description: 'Pasos diarios' },
-                { name: 'heartRate', description: 'Frecuencia cardíaca' },
-                { name: 'sleep', description: 'Horas de sueño' },
-                { name: 'activity', description: 'Minutos de actividad' },
-                { name: 'distance', description: 'Distancia recorrida' }
-            ];
-
-            for (const permission of permissions) {
+            // Intentar solicitar permisos reales de Web Health API
+            if ('navigator' in window && 'permissions' in navigator) {
                 try {
-                    // En un entorno real, aquí se solicitarían los permisos nativos
-                    // Por ahora simulamos la concesión de permisos
-                    this.permissions[permission.name] = true;
+                    // Solicitar permisos para diferentes tipos de datos
+                    const healthPermissions = [
+                        { name: 'health', description: 'Datos de salud generales' }
+                    ];
+
+                    for (const permission of healthPermissions) {
+                        try {
+                            const result = await navigator.permissions.query({ name: permission.name });
+                            console.log(`Permiso ${permission.name}:`, result.state);
+                            
+                            if (result.state === 'granted') {
+                                this.permissions.steps = true;
+                                this.permissions.heartRate = true;
+                                this.permissions.sleep = true;
+                                this.permissions.activity = true;
+                                this.permissions.distance = true;
+                            }
+                        } catch (error) {
+                            console.log(`Error solicitando permiso para ${permission.name}:`, error);
+                        }
+                    }
                 } catch (error) {
-                    console.log(`Error solicitando permiso para ${permission.name}:`, error);
+                    console.log('Web Health API no disponible:', error);
                 }
+            }
+
+            // Si estamos en iOS, intentar abrir configuración de salud
+            if (this.isIOS()) {
+                this.openIOSHealthSettings();
+            }
+
+            // Si estamos en Android, intentar abrir configuración de salud
+            if (this.isAndroid()) {
+                this.openAndroidHealthSettings();
             }
 
             console.log('Permisos de salud:', this.permissions);
         } catch (error) {
             console.error('Error solicitando permisos de salud:', error);
+        }
+    }
+
+    isIOS() {
+        return /iPad|iPhone|iPod/.test(navigator.userAgent);
+    }
+
+    isAndroid() {
+        return /Android/.test(navigator.userAgent);
+    }
+
+    openIOSHealthSettings() {
+        // Intentar abrir configuración de salud en iOS
+        const healthURLs = [
+            'x-apple-health://',
+            'App-prefs:HEALTH',
+            'prefs:root=HEALTH'
+        ];
+
+        for (const url of healthURLs) {
+            try {
+                window.location.href = url;
+                break;
+            } catch (error) {
+                continue;
+            }
+        }
+    }
+
+    openAndroidHealthSettings() {
+        // Intentar abrir configuración de salud en Android
+        const healthURLs = [
+            'intent://settings/health#Intent;scheme=android-app;package=com.google.android.apps.fitness;end',
+            'intent://settings/health#Intent;scheme=android-app;package=com.google.android.gms;end'
+        ];
+
+        for (const url of healthURLs) {
+            try {
+                window.location.href = url;
+                break;
+            } catch (error) {
+                continue;
+            }
         }
     }
 
