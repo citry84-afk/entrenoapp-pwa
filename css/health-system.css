@@ -30,24 +30,24 @@
 
 .health-header {
     text-align: center;
-    margin-bottom: 30px;
-    padding: 30px;
+    margin-bottom: 20px;
+    padding: 20px;
     background: rgba(255, 255, 255, 0.05);
-    border-radius: 20px;
+    border-radius: 15px;
     border: 1px solid rgba(0, 212, 255, 0.3);
 }
 
 .health-header h2 {
     color: var(--health-primary);
-    margin: 0 0 10px 0;
-    font-size: 2.5rem;
+    margin: 0 0 8px 0;
+    font-size: 2rem;
     font-weight: bold;
     text-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
 }
 
 .health-header p {
     color: #ccc;
-    font-size: 1.1rem;
+    font-size: 1rem;
     margin: 0;
 }
 
@@ -659,71 +659,72 @@
 
 .health-empty-state {
     text-align: center;
-    padding: 40px 20px;
+    padding: 25px 15px;
 }
 
 .empty-icon {
-    font-size: 4rem;
-    margin-bottom: 20px;
+    font-size: 3rem;
+    margin-bottom: 15px;
     opacity: 0.7;
 }
 
 .health-empty-state h4 {
     color: var(--health-primary);
-    margin: 0 0 15px 0;
-    font-size: 1.3rem;
+    margin: 0 0 10px 0;
+    font-size: 1.1rem;
 }
 
 .health-empty-state p {
     color: #ccc;
-    margin: 0 0 30px 0;
-    line-height: 1.6;
+    margin: 0 0 20px 0;
+    line-height: 1.5;
+    font-size: 0.9rem;
 }
 
 .health-benefits {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
-    margin-bottom: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
 }
 
 .benefit-item {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 15px;
+    gap: 10px;
+    padding: 12px;
     background: rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
+    border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .benefit-icon {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
 }
 
 .benefit-item span:last-child {
     color: #ccc;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
 }
 
 .health-actions {
     display: flex;
-    gap: 15px;
+    gap: 12px;
     justify-content: center;
     flex-wrap: wrap;
 }
 
 .health-metrics-mini {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 15px;
-    margin-bottom: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 12px;
+    margin-bottom: 15px;
 }
 
 .health-metric {
-    padding: 15px;
+    padding: 12px;
     background: rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
+    border-radius: 10px;
     text-align: center;
     transition: all 0.3s ease;
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -740,15 +741,15 @@
 }
 
 .health-metric .metric-icon {
-    font-size: 2rem;
-    margin-bottom: 8px;
+    font-size: 1.5rem;
+    margin-bottom: 6px;
 }
 
 .health-metric .metric-value {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     font-weight: bold;
     color: var(--health-primary);
-    margin: 0 0 5px 0;
+    margin: 0 0 3px 0;
 }
 
 .health-metric.no-data .metric-value {
@@ -757,23 +758,23 @@
 
 .health-metric .metric-label {
     color: #ccc;
-    font-size: 0.8rem;
-    margin: 0 0 5px 0;
+    font-size: 0.75rem;
+    margin: 0 0 3px 0;
 }
 
 .metric-hint {
     color: #888;
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     font-style: italic;
 }
 
 .recent-achievements-mini {
-    margin-top: 20px;
+    margin-top: 15px;
 }
 
 .recent-achievements-mini h4 {
     color: var(--health-primary);
-    margin: 0 0 15px 0;
+    margin: 0 0 10px 0;
     font-size: 1.1rem;
 }
 
