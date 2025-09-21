@@ -21,6 +21,123 @@
     <title>EntrenoApp - Tu Entrenador Personal</title>
     <!-- Health System Integration - Deploy trigger -->
     
+    <!-- PWA Install Prompt -->
+    <script>
+        // Detectar si la app no está instalada como PWA
+        window.addEventListener('load', () => {
+            // Verificar si estamos en modo standalone (PWA instalada)
+            if (!window.matchMedia('(display-mode: standalone)').matches) {
+                // Mostrar banner de instalación después de 3 segundos
+                setTimeout(() => {
+                    showInstallBanner();
+                }, 3000);
+            }
+        });
+
+        function showInstallBanner() {
+            const banner = document.createElement('div');
+            banner.id = 'pwa-install-banner';
+            banner.innerHTML = `
+                <div class="install-banner">
+                    <div class="install-content">
+                        <div class="install-icon">📱</div>
+                        <div class="install-text">
+                            <h3>Instalar EntrenoApp</h3>
+                            <p>Para acceder a datos de salud y mejor experiencia</p>
+                        </div>
+                        <button class="install-button" onclick="showInstallInstructions()">
+                            Instalar
+                        </button>
+                        <button class="install-close" onclick="hideInstallBanner()">×</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(banner);
+        }
+
+        function hideInstallBanner() {
+            const banner = document.getElementById('pwa-install-banner');
+            if (banner) {
+                banner.remove();
+                // Recordar que el usuario cerró el banner
+                localStorage.setItem('pwa-install-dismissed', 'true');
+            }
+        }
+
+        function showInstallInstructions() {
+            const modal = document.createElement('div');
+            modal.className = 'install-instructions-modal';
+            modal.innerHTML = `
+                <div class="modal-content glass-effect">
+                    <div class="modal-header">
+                        <h2>📱 Instalar EntrenoApp</h2>
+                        <button class="modal-close" onclick="this.closest('.install-instructions-modal').remove()">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="install-steps">
+                            <div class="install-step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h3>📱 Tocar el botón "Compartir"</h3>
+                                    <p>En Safari, toca el botón <strong>"Compartir"</strong> (cuadrado con flecha)</p>
+                                </div>
+                            </div>
+                            
+                            <div class="install-step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h3>➕ Añadir a pantalla de inicio</h3>
+                                    <p>Desplázate hacia abajo y toca <strong>"Añadir a pantalla de inicio"</strong></p>
+                                </div>
+                            </div>
+                            
+                            <div class="install-step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h3>✅ Confirmar instalación</h3>
+                                    <p>Toca <strong>"Añadir"</strong> para instalar la app</p>
+                                </div>
+                            </div>
+                            
+                            <div class="install-step">
+                                <div class="step-number">4</div>
+                                <div class="step-content">
+                                    <h3>🏠 Abrir desde pantalla de inicio</h3>
+                                    <p>Busca el icono de EntrenoApp en tu pantalla de inicio</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="install-benefits">
+                            <h3>🎯 Beneficios de instalar como app:</h3>
+                            <ul>
+                                <li>✅ Acceso a datos de salud del iPhone</li>
+                                <li>✅ Funciona sin conexión a internet</li>
+                                <li>✅ Notificaciones push</li>
+                                <li>✅ Mejor rendimiento</li>
+                                <li>✅ Integración con el sistema</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="install-actions">
+                            <button class="glass-button glass-button-primary" onclick="this.closest('.install-instructions-modal').remove()">
+                                Entendido
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            hideInstallBanner();
+        }
+
+        // No mostrar banner si el usuario ya lo cerró
+        if (localStorage.getItem('pwa-install-dismissed') === 'true') {
+            // No mostrar banner
+        }
+    </script>
+    
     <!-- Iconos PWA mejorados -->
     <link rel="icon" type="image/png" href="assets/icons/icon-192x192.png">
     <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192x192.png">
@@ -57,6 +174,7 @@
     <link rel="stylesheet" href="css/interval-training.css">
     <link rel="stylesheet" href="css/monetization.css">
     <link rel="stylesheet" href="css/health-system.css">
+    <link rel="stylesheet" href="css/pwa-install.css">
     
     <!-- Firebase -->
     <script type="module" src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
