@@ -142,6 +142,22 @@
     font-style: italic;
 }
 
+/* Modal de selección de método de pago */
+.payment-method-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    z-index: 9998;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
 /* Modal de checkout */
 .payment-checkout-modal {
     position: fixed;
@@ -354,6 +370,111 @@
     }
 }
 
+/* Estilos específicos para el modal de método de pago */
+.payment-method-modal .modal-content {
+    max-width: 450px;
+}
+
+.payment-method-modal .plan-summary {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+
+.payment-method-modal .plan-summary h3 {
+    color: white;
+    margin: 0 0 10px 0;
+    font-size: 1.3rem;
+}
+
+.payment-method-modal .plan-price {
+    margin: 0;
+}
+
+.payment-method-modal .price-amount {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--payment-primary);
+}
+
+.payment-method-modal .price-interval {
+    color: #ccc;
+    font-size: 1rem;
+    margin-left: 5px;
+}
+
+.payment-method-modal .payment-methods h4 {
+    color: white;
+    margin: 0 0 20px 0;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+.payment-method-modal .payment-method-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.payment-method-modal .payment-method-option {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #ccc;
+}
+
+.payment-method-modal .payment-method-option:hover {
+    border-color: var(--payment-primary);
+    background: rgba(0, 212, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.payment-method-modal .payment-method-option.selected {
+    border-color: var(--payment-primary);
+    background: rgba(0, 212, 255, 0.2);
+    color: white;
+}
+
+.payment-method-modal .payment-method-icon {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.payment-method-modal .payment-method-label {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.payment-method-modal .payment-method-description {
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+.payment-method-modal .payment-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.payment-method-modal .payment-actions .glass-button {
+    flex: 1;
+    max-width: 200px;
+}
+
+.payment-method-modal .payment-actions .glass-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .payment-success-notification,
@@ -397,5 +518,23 @@
     
     .payment-method-options {
         grid-template-columns: 1fr 1fr;
+    }
+    
+    .payment-method-modal .payment-method-options {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .payment-method-modal .modal-content {
+        margin: 10px;
+        max-width: none;
+    }
+    
+    .payment-method-modal .payment-actions {
+        flex-direction: column;
+    }
+    
+    .payment-method-modal .payment-actions .glass-button {
+        max-width: none;
     }
 }

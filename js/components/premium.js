@@ -209,14 +209,108 @@ class PremiumManager {
             // Cerrar modal premium
             this.closePremiumModal();
             
-            // Mostrar checkout con sistema de pagos
-            await window.paymentSystem.subscribeToPlan(planType);
+            // Mostrar modal de selección de método de pago
+            this.showPaymentMethodModal(planType);
             
         } catch (error) {
             console.error('Error en checkout:', error);
             // Reabrir modal premium en caso de error
             this.showPremiumModal();
         }
+    }
+
+    showPaymentMethodModal(planType) {
+        const plan = Object.values(this.premiumPlans).find(p => p.id.includes(planType));
+        
+        const modal = document.createElement('div');
+        modal.className = 'payment-method-modal';
+        modal.innerHTML = `
+            <div class="modal-content glass-effect">
+                <div class="modal-header">
+                    <h2>💳 Método de Pago</h2>
+                    <button class="modal-close" onclick="this.closest('.payment-method-modal').remove()">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="plan-summary">
+                        <h3>${plan.name}</h3>
+                        <div class="plan-price">
+                            <span class="price-amount">${plan.price}€</span>
+                            <span class="price-interval">/${plan.interval === 'month' ? 'mes' : plan.interval === 'year' ? 'año' : 'vida'}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="payment-methods">
+                        <h4>Selecciona tu método de pago:</h4>
+                        
+                        <div class="payment-method-options">
+                            <div class="payment-method-option" data-method="card">
+                                <div class="payment-method-icon">💳</div>
+                                <div class="payment-method-label">Tarjeta de Crédito</div>
+                                <div class="payment-method-description">Visa, Mastercard, American Express</div>
+                            </div>
+                            
+                            <div class="payment-method-option" data-method="paypal">
+                                <div class="payment-method-icon">🅿️</div>
+                                <div class="payment-method-label">PayPal</div>
+                                <div class="payment-method-description">Paga con tu cuenta PayPal</div>
+                            </div>
+                        </div>
+                        
+                        <div class="payment-actions">
+                            <button class="glass-button glass-button-primary" id="proceed-payment" disabled>
+                                Continuar con el Pago
+                            </button>
+                            <button class="glass-button glass-button-secondary" onclick="this.closest('.payment-method-modal').remove()">
+                                Cancelar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(modal);
+        this.setupPaymentMethodSelection(planType);
+    }
+
+    setupPaymentMethodSelection(planType) {
+        const options = document.querySelectorAll('.payment-method-option');
+        const proceedButton = document.getElementById('proceed-payment');
+        let selectedMethod = null;
+
+        options.forEach(option => {
+            option.addEventListener('click', () => {
+                // Remover selección anterior
+                options.forEach(opt => opt.classList.remove('selected'));
+                
+                // Seleccionar nuevo método
+                option.classList.add('selected');
+                selectedMethod = option.dataset.method;
+                
+                // Habilitar botón de continuar
+                proceedButton.disabled = false;
+            });
+        });
+
+        proceedButton.addEventListener('click', async () => {
+            if (selectedMethod) {
+                try {
+                    proceedButton.disabled = true;
+                    proceedButton.textContent = 'Procesando...';
+                    
+                    // Cerrar modal
+                    document.querySelector('.payment-method-modal').remove();
+                    
+                    // Procesar pago con el método seleccionado
+                    await window.paymentSystem.subscribeToPlan(planType, selectedMethod);
+                    
+                } catch (error) {
+                    console.error('Error procesando pago:', error);
+                    proceedButton.disabled = false;
+                    proceedButton.textContent = 'Continuar con el Pago';
+                }
+            }
+        });
     }
 
     showPremiumActivated(plan) {

@@ -109,12 +109,15 @@ class PaymentSystem {
             // Mostrar loading
             this.showPaymentLoading(plan);
 
-            if (this.stripe && !this.stripe.toString().includes('pk_test_')) {
+            if (paymentMethod === 'paypal') {
+                // Procesar pago con PayPal
+                return await this.processPayPalPayment(plan);
+            } else if (this.stripe && !this.stripe.toString().includes('pk_test_')) {
                 // Procesar pago real con Stripe
                 return await this.processStripePayment(plan);
             } else {
                 // Simular pago para desarrollo
-                return await this.simulatePayment(plan);
+                return await this.simulatePayment(plan, paymentMethod);
             }
         } catch (error) {
             console.error('❌ Error procesando pago:', error);
@@ -153,7 +156,104 @@ class PaymentSystem {
         return result;
     }
 
-    async simulatePayment(plan) {
+    async processPayPalPayment(plan) {
+        try {
+            // Inicializar PayPal SDK
+            if (!window.paypal) {
+                await this.loadPayPalSDK();
+            }
+
+            // Crear orden de pago usando la configuración
+            const order = await this.createPayPalOrder(plan.id, plan.price, plan.currency);
+            
+            // Aprobar la orden con PayPal
+            const result = await window.paypal.Buttons({
+                createOrder: () => order.id,
+                onApprove: (data) => this.onPayPalApprove(data, plan),
+                onCancel: (data) => this.onPayPalCancel(data),
+                onError: (err) => this.onPayPalError(err)
+            }).render('#paypal-button-container');
+
+            return result;
+
+        } catch (error) {
+            console.error('❌ Error procesando pago PayPal:', error);
+            throw error;
+        }
+    }
+
+    async loadPayPalSDK() {
+        if (window.PayPalConfig) {
+            return await window.PayPalConfig.loadPayPalSDK();
+        } else {
+            throw new Error('Configuración de PayPal no encontrada');
+        }
+    }
+
+    getPayPalClientId() {
+        if (window.PayPalConfig) {
+            const config = window.PayPalConfig.getPayPalConfig();
+            return config.current.clientId;
+        }
+        return 'sb'; // Fallback
+    }
+
+    async createPayPalOrder(planId, amount, currency = 'EUR') {
+        if (window.PayPalConfig) {
+            return await window.PayPalConfig.createPayPalOrder(planId, amount, currency);
+        } else {
+            // Fallback simulado
+            return {
+                id: 'paypal_order_' + Date.now(),
+                status: 'CREATED'
+            };
+        }
+    }
+
+    async onPayPalApprove(data, plan) {
+        try {
+            console.log('✅ PayPal aprobado:', data);
+            
+            // Simular captura del pago
+            const paymentResult = {
+                success: true,
+                planId: plan.id,
+                transactionId: data.orderID,
+                amount: plan.price,
+                currency: plan.currency,
+                method: 'paypal',
+                timestamp: new Date().toISOString()
+            };
+
+            // Activar premium
+            this.activatePremium(plan);
+            
+            // Guardar información del pago
+            this.savePaymentInfo(paymentResult);
+            
+            // Trackear evento
+            this.trackPaymentEvent('payment_success_paypal', plan);
+            
+            // Redirigir a página de éxito
+            window.location.href = `${window.location.origin}/?payment=success&method=paypal&plan=${plan.id}`;
+
+        } catch (error) {
+            console.error('❌ Error aprobando PayPal:', error);
+            this.showPaymentError('Error procesando pago con PayPal');
+        }
+    }
+
+    onPayPalCancel(data) {
+        console.log('❌ PayPal cancelado:', data);
+        this.showPaymentError('Pago cancelado');
+    }
+
+    onPayPalError(err) {
+        console.error('❌ Error PayPal:', err);
+        this.showPaymentError('Error en el proceso de pago con PayPal');
+    }
+
+    async simulatePayment(plan, paymentMethod = 'card') {
         // Simular proceso de pago
         return new Promise((resolve, reject) => {
             setTimeout(() => {
@@ -161,9 +261,10 @@ class PaymentSystem {
                 const paymentResult = {
                     success: true,
                     planId: plan.id,
-                    transactionId: 'sim_' + Date.now(),
+                    transactionId: `${paymentMethod}_sim_` + Date.now(),
                     amount: plan.price,
                     currency: plan.currency,
+                    method: paymentMethod,
                     timestamp: new Date().toISOString()
                 };
 
@@ -173,8 +274,9 @@ class PaymentSystem {
                 // Guardar información del pago
                 this.savePaymentInfo(paymentResult);
                 
-                // Trackear evento
-                this.trackPaymentEvent('payment_success', plan);
+                // Trackear evento según método de pago
+                const eventName = paymentMethod === 'paypal' ? 'payment_success_paypal' : 'payment_success';
+                this.trackPaymentEvent(eventName, plan);
                 
                 resolve(paymentResult);
             }, 2000); // Simular 2 segundos de procesamiento
@@ -328,12 +430,22 @@ class PaymentSystem {
     }
 
     // Métodos públicos para la UI
-    async subscribeToPlan(planId) {
+    async subscribeToPlan(planId, paymentMethod = 'card') {
         try {
-            const result = await this.processPayment(planId);
+            const result = await this.processPayment(planId, paymentMethod);
             return result;
         } catch (error) {
             console.error('Error en suscripción:', error);
+            throw error;
+        }
+    }
+
+    async subscribeToPlanWithPayPal(planId) {
+        try {
+            const result = await this.processPayment(planId, 'paypal');
+            return result;
+        } catch (error) {
+            console.error('Error en suscripción PayPal:', error);
             throw error;
         }
     }
