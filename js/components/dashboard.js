@@ -575,31 +575,31 @@ function renderDashboard() {
             ←
         </button>
         <div class="personalized-dashboard glass-fade-in">
-            <!-- Header personalizado -->
+            <!-- 1. Bienvenida -->
             ${renderPersonalizedHeader()}
             
-            <!-- Plan activo central -->
-            ${renderActivePlan()}
-            
-            <!-- Entrenamiento de hoy -->
+            <!-- 2. Entrenamiento del día -->
             ${renderTodaysWorkout()}
             
-            <!-- Sistema de Salud -->
-            ${renderHealthSection()}
+            <!-- 3. Reto del día -->
+            ${renderTodayChallenge()}
             
-            <!-- Progreso semanal -->
+            <!-- 4. Progreso de esta semana -->
             ${renderWeeklyProgress()}
             
-            <!-- Reto diario y estadísticas -->
-            <div class="dashboard-grid">
-                ${renderTodayChallenge()}
-                ${renderQuickStats()}
-            </div>
+            <!-- 5. Tu progreso (estadísticas rápidas) -->
+            ${renderQuickStats()}
             
-            <!-- Acciones rápidas -->
-            ${renderQuickActions()}
+            <!-- 6. Tus estadísticas (estadísticas detalladas) -->
+            ${renderDetailedStats()}
             
-            <!-- Sección de monetización -->
+            <!-- 7. Mi salud -->
+            ${renderHealthSection()}
+            
+            <!-- 8. Tu plan activo -->
+            ${renderActivePlan()}
+            
+            <!-- 9. Desbloquea más -->
             ${renderMonetizationSection()}
         </div>
     `;
@@ -1006,7 +1006,7 @@ function renderQuickStats() {
     
     return `
         <div class="quick-stats glass-card">
-            <h3 class="stats-title">📈 Tus Estadísticas</h3>
+            <h3 class="stats-title">📈 Tu Progreso</h3>
             <div class="stats-grid">
                 <div class="stat-item">
                     <div class="stat-value">${stats.completedWorkouts}</div>
@@ -1026,6 +1026,82 @@ function renderQuickStats() {
                         <div class="stat-label">Próximo hito</div>
                     </div>
                 ` : ''}
+            </div>
+        </div>
+    `;
+}
+
+// Renderizar estadísticas detalladas
+function renderDetailedStats() {
+    const stats = dashboardState.quickStats;
+    const plan = dashboardState.activePlan;
+    
+    return `
+        <div class="detailed-stats glass-card">
+            <h3 class="section-title">📊 Tus Estadísticas Detalladas</h3>
+            <div class="detailed-stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">🏋️‍♂️</div>
+                    <div class="stat-content">
+                        <div class="stat-value">${stats.completedWorkouts}</div>
+                        <div class="stat-label">Entrenamientos Completados</div>
+                        <div class="stat-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: ${Math.min((stats.completedWorkouts / 100) * 100, 100)}%"></div>
+                            </div>
+                            <span class="progress-text">${stats.completedWorkouts}/100</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">🔥</div>
+                    <div class="stat-content">
+                        <div class="stat-value">${stats.currentStreak}</div>
+                        <div class="stat-label">Racha Actual</div>
+                        <div class="stat-subtitle">¡Sigue así!</div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">⭐</div>
+                    <div class="stat-content">
+                        <div class="stat-value">${stats.totalPoints}</div>
+                        <div class="stat-label">Puntos Totales</div>
+                        ${stats.nextMilestone ? `
+                            <div class="stat-subtitle">Próximo hito: ${stats.nextMilestone} puntos</div>
+                        ` : ''}
+                    </div>
+                </div>
+                
+                ${plan ? `
+                    <div class="stat-card">
+                        <div class="stat-icon">📅</div>
+                        <div class="stat-content">
+                            <div class="stat-value">${plan.currentWeek || 1}</div>
+                            <div class="stat-label">Semana Actual</div>
+                            <div class="stat-subtitle">de ${plan.duration || 12} semanas</div>
+                        </div>
+                    </div>
+                ` : ''}
+                
+                <div class="stat-card">
+                    <div class="stat-icon">🎯</div>
+                    <div class="stat-content">
+                        <div class="stat-value">${Math.round((stats.completedWorkouts / Math.max(1, (plan?.duration || 12) * 3)) * 100)}%</div>
+                        <div class="stat-label">Objetivo Semanal</div>
+                        <div class="stat-subtitle">Basado en tu plan</div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">🏆</div>
+                    <div class="stat-content">
+                        <div class="stat-value">${Math.floor(stats.totalPoints / 100)}</div>
+                        <div class="stat-label">Logros Desbloqueados</div>
+                        <div class="stat-subtitle">¡Sigue entrenando!</div>
+                    </div>
+                </div>
             </div>
         </div>
     `;
