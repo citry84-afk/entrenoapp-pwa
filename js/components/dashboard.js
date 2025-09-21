@@ -184,17 +184,27 @@ function generateRunningWorkout(plan, week) {
     const progression = Math.min(week / plan.duration, 1);
     const todayDistance = Math.round((baseDistance * 0.3 + baseDistance * 0.7 * progression) * 10) / 10;
     
+    // Calcular duración basada en la selección del usuario
+    const targetDuration = plan.sessionDuration || 45; // Duración de la sesión en minutos
+    const actualDuration = Math.min(targetDuration, 90); // Máximo 90 minutos
+    
+    // Ajustar distancia según duración objetivo
+    const pacePerKm = 6; // 6 minutos por km
+    const warmupCooldown = 10; // 10 minutos de calentamiento + enfriamiento
+    const availableTime = actualDuration - warmupCooldown;
+    const adjustedDistance = Math.round((availableTime / pacePerKm) * 10) / 10;
+    
     return {
         type: 'running',
-        title: `Sesión de Running - ${todayDistance}km`,
-        description: `Corre ${todayDistance}km a ritmo cómodo. Semana ${week} de ${plan.duration}`,
+        title: `Sesión de Running - ${adjustedDistance}km`,
+        description: `Corre ${adjustedDistance}km a ritmo cómodo. Semana ${week} de ${plan.duration} semanas (${actualDuration} min)`,
         icon: '🏃‍♂️',
-        duration: Math.round(todayDistance * 6), // Estimación 6 min/km
-        distance: todayDistance,
+        duration: actualDuration,
+        distance: adjustedDistance,
         intensity: plan.focus === 'speed' ? 'high' : 'moderate',
         instructions: [
             'Calentamiento: 5 minutos caminando',
-            `Correr ${todayDistance}km a ritmo constante`,
+            `Correr ${adjustedDistance}km a ritmo constante`,
             'Enfriamiento: 5 minutos caminando',
             'Estiramientos: 10 minutos'
         ]
@@ -240,14 +250,28 @@ function generateFunctionalWorkout(plan, week) {
     
     const todayWorkout = workouts[week % workouts.length];
     
+    // Calcular duración basada en la selección del usuario
+    const targetDuration = plan.sessionDuration || 45; // Duración de la sesión en minutos
+    const actualDuration = Math.min(targetDuration, 90); // Máximo 90 minutos
+    
+    // Ajustar número de series según duración
+    const getSetCount = (duration) => {
+        if (duration <= 30) return 3;
+        if (duration <= 45) return 4;
+        if (duration <= 60) return 5;
+        return 6;
+    };
+    
+    const adjustedSets = getSetCount(actualDuration);
+    
     return {
         type: 'functional',
         title: todayWorkout.title,
-        description: `Entrenamiento funcional - Semana ${week} de ${plan.duration}`,
+        description: `Entrenamiento funcional - Semana ${week} de ${plan.duration} semanas (${actualDuration} min)`,
         icon: '⚡',
-        duration: 45,
+        duration: actualDuration,
         exercises: todayWorkout.exercises,
-        sets: todayWorkout.sets,
+        sets: adjustedSets,
         reps: todayWorkout.reps,
         intensity: plan.intensity || 'moderate',
         structure: 'Circuito',
@@ -288,57 +312,103 @@ function generateGymWorkout(plan, week) {
     const workoutIndex = today % currentSplit.length;
     const todayMuscleGroup = currentSplit[workoutIndex];
     
+    // Calcular duración basada en la selección del usuario
+    const targetDuration = plan.sessionDuration || 45; // Duración de la sesión en minutos
+    const actualDuration = Math.min(targetDuration, 90); // Máximo 90 minutos
+    
     return {
         type: 'gym',
         title: `Entrenamiento de ${todayMuscleGroup}`,
-        description: `Rutina ${plan.split?.replace('_', ' ') || 'Gimnasio'} - Semana ${week} de ${plan.duration}`,
+        description: `Rutina ${plan.split?.replace('_', ' ') || 'Gimnasio'} - Semana ${week} de ${plan.duration} semanas (${actualDuration} min)`,
         icon: '🏋️‍♂️',
-        duration: 60,
+        duration: actualDuration,
         muscleGroup: todayMuscleGroup,
         sets: plan.focus === 'strength' ? '4-6 series' : '3-4 series',
         reps: plan.focus === 'strength' ? '4-6 reps' : '8-12 reps',
         intensity: plan.focus === 'strength' ? 'high' : 'moderate',
         // Agregar información para el resumen mejorado
-        exercises: generateBasicExerciseList(todayMuscleGroup)
+        exercises: generateBasicExerciseList(todayMuscleGroup, actualDuration)
     };
 }
 
 // Generar lista básica de ejercicios para fallback
-function generateBasicExerciseList(muscleGroup) {
+function generateBasicExerciseList(muscleGroup, duration = 45) {
+    // Calcular número de ejercicios según duración
+    // 30 min = 3-4 ejercicios, 45 min = 5-6 ejercicios, 60+ min = 7-8 ejercicios
+    const getExerciseCount = (duration) => {
+        if (duration <= 30) return 3;
+        if (duration <= 45) return 4;
+        if (duration <= 60) return 5;
+        return 6;
+    };
+    
+    const exerciseCount = getExerciseCount(duration);
+    
     const exercisesByGroup = {
         'Cuerpo Completo': [
-            { name: 'Sentadillas', sets: 3, reps: '8-12' },
-            { name: 'Press de Banca', sets: 3, reps: '8-12' },
-            { name: 'Peso Muerto', sets: 3, reps: '6-10' }
+            { name: 'Sentadillas', sets: 3, reps: '8-12', time: 8 },
+            { name: 'Press de Banca', sets: 3, reps: '8-12', time: 8 },
+            { name: 'Peso Muerto', sets: 3, reps: '6-10', time: 8 },
+            { name: 'Press Militar', sets: 3, reps: '8-12', time: 6 },
+            { name: 'Remo con Barra', sets: 3, reps: '8-12', time: 6 },
+            { name: 'Plancha', sets: 3, reps: '30-60s', time: 4 },
+            { name: 'Curl con Barra', sets: 3, reps: '10-12', time: 5 },
+            { name: 'Fondos', sets: 3, reps: '8-15', time: 5 }
         ],
         'Pecho': [
-            { name: 'Press de Banca', sets: 4, reps: '8-12' },
-            { name: 'Press Inclinado', sets: 3, reps: '8-12' },
-            { name: 'Aperturas', sets: 3, reps: '10-15' }
+            { name: 'Press de Banca', sets: 4, reps: '8-12', time: 10 },
+            { name: 'Press Inclinado', sets: 3, reps: '8-12', time: 8 },
+            { name: 'Aperturas', sets: 3, reps: '10-15', time: 6 },
+            { name: 'Press Declinado', sets: 3, reps: '8-12', time: 8 },
+            { name: 'Fondos', sets: 3, reps: '8-15', time: 6 },
+            { name: 'Cruces con Mancuernas', sets: 3, reps: '12-15', time: 5 },
+            { name: 'Flexiones', sets: 3, reps: '10-20', time: 4 },
+            { name: 'Pullover', sets: 3, reps: '10-12', time: 5 }
         ],
         'Espalda': [
-            { name: 'Dominadas', sets: 4, reps: '6-12' },
-            { name: 'Remo con Barra', sets: 3, reps: '8-12' },
-            { name: 'Jalón al Pecho', sets: 3, reps: '10-15' }
+            { name: 'Dominadas', sets: 4, reps: '6-12', time: 10 },
+            { name: 'Remo con Barra', sets: 3, reps: '8-12', time: 8 },
+            { name: 'Jalón al Pecho', sets: 3, reps: '10-15', time: 6 },
+            { name: 'Peso Muerto', sets: 3, reps: '6-10', time: 8 },
+            { name: 'Remo con Mancuerna', sets: 3, reps: '8-12', time: 6 },
+            { name: 'Hiperextensiones', sets: 3, reps: '12-15', time: 5 },
+            { name: 'Curl de Bíceps', sets: 3, reps: '10-12', time: 5 },
+            { name: 'Face Pulls', sets: 3, reps: '12-15', time: 4 }
         ],
         'Piernas': [
-            { name: 'Sentadillas', sets: 4, reps: '8-12' },
-            { name: 'Prensa', sets: 3, reps: '12-15' },
-            { name: 'Curl Femoral', sets: 3, reps: '10-15' }
+            { name: 'Sentadillas', sets: 4, reps: '8-12', time: 10 },
+            { name: 'Prensa', sets: 3, reps: '12-15', time: 8 },
+            { name: 'Curl Femoral', sets: 3, reps: '10-15', time: 6 },
+            { name: 'Zancadas', sets: 3, reps: '10-12', time: 6 },
+            { name: 'Peso Muerto Rumano', sets: 3, reps: '8-12', time: 8 },
+            { name: 'Extensiones de Cuádriceps', sets: 3, reps: '12-15', time: 5 },
+            { name: 'Elevaciones de Gemelos', sets: 3, reps: '15-20', time: 4 },
+            { name: 'Sentadilla Búlgara', sets: 3, reps: '8-10', time: 6 }
         ],
         'Hombros': [
-            { name: 'Press Militar', sets: 4, reps: '8-12' },
-            { name: 'Elevaciones Laterales', sets: 3, reps: '12-15' },
-            { name: 'Aperturas Posteriores', sets: 3, reps: '12-15' }
+            { name: 'Press Militar', sets: 4, reps: '8-12', time: 10 },
+            { name: 'Elevaciones Laterales', sets: 3, reps: '12-15', time: 6 },
+            { name: 'Aperturas Posteriores', sets: 3, reps: '12-15', time: 5 },
+            { name: 'Press Arnold', sets: 3, reps: '8-12', time: 8 },
+            { name: 'Elevaciones Frontales', sets: 3, reps: '10-12', time: 5 },
+            { name: 'Remo al Mentón', sets: 3, reps: '8-12', time: 6 },
+            { name: 'Elevaciones Laterales Inclinado', sets: 3, reps: '12-15', time: 5 },
+            { name: 'Press con Mancuernas', sets: 3, reps: '8-12', time: 8 }
         ],
         'Brazos': [
-            { name: 'Curl con Barra', sets: 3, reps: '10-12' },
-            { name: 'Press Cerrado', sets: 3, reps: '8-12' },
-            { name: 'Fondos', sets: 3, reps: '8-15' }
+            { name: 'Curl con Barra', sets: 3, reps: '10-12', time: 6 },
+            { name: 'Press Cerrado', sets: 3, reps: '8-12', time: 6 },
+            { name: 'Fondos', sets: 3, reps: '8-15', time: 5 },
+            { name: 'Curl con Mancuernas', sets: 3, reps: '10-12', time: 5 },
+            { name: 'Extensión de Tríceps', sets: 3, reps: '10-12', time: 5 },
+            { name: 'Curl Martillo', sets: 3, reps: '10-12', time: 5 },
+            { name: 'Press Francés', sets: 3, reps: '8-12', time: 6 },
+            { name: 'Curl 21s', sets: 3, reps: '21', time: 4 }
         ]
     };
     
-    return exercisesByGroup[muscleGroup] || exercisesByGroup['Cuerpo Completo'];
+    const allExercises = exercisesByGroup[muscleGroup] || exercisesByGroup['Cuerpo Completo'];
+    return allExercises.slice(0, exerciseCount);
 }
 
 // Obtener días de entrenamiento según frecuencia

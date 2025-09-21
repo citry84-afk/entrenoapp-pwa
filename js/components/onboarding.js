@@ -613,19 +613,27 @@ async function generatePersonalizedPlan(userData) {
             'high': 5      // 5 días por semana
         }[availability] || 4;
         
+        // Determinar duración de la sesión en minutos
+        const sessionDuration = {
+            'low': 30,     // 15-30 min -> 30 min
+            'medium': 45,  // 30-60 min -> 45 min
+            'high': 60,    // 60+ min -> 60 min
+            'athlete': 75  // Atleta -> 75 min
+        }[availability] || 45;
+        
         let plan = {};
         
         // Generar plan según actividad principal
         switch (primaryActivity) {
             case 'running':
-                plan = generateRunningPlan(experience, planDuration, weeklyFrequency, goals);
+                plan = generateRunningPlan(experience, planDuration, weeklyFrequency, goals, sessionDuration);
                 break;
             case 'functional':
-                plan = generateFunctionalPlan(experience, planDuration, weeklyFrequency, goals, userData.equipment);
+                plan = generateFunctionalPlan(experience, planDuration, weeklyFrequency, goals, userData.equipment, sessionDuration);
                 break;
             case 'gym':
             default:
-                plan = generateGymPlan(experience, planDuration, weeklyFrequency, goals, userData.equipment);
+                plan = generateGymPlan(experience, planDuration, weeklyFrequency, goals, userData.equipment, sessionDuration);
                 break;
         }
         
@@ -652,7 +660,7 @@ async function generatePersonalizedPlan(userData) {
 }
 
 // Generar plan de running personalizado
-function generateRunningPlan(experience, duration, frequency, goals) {
+function generateRunningPlan(experience, duration, frequency, goals, sessionDuration = 45) {
     const isWeightLoss = goals.includes('lose_weight');
     const isEndurance = goals.includes('improve_endurance');
     const isSpeed = goals.includes('get_stronger'); // Adaptamos fuerza a velocidad para running
@@ -670,6 +678,7 @@ function generateRunningPlan(experience, duration, frequency, goals) {
         targetDistance: targetDistance,
         duration: duration,
         frequency: frequency,
+        sessionDuration: sessionDuration, // Duración de cada sesión en minutos
         currentWeek: 1,
         currentSession: 1,
         status: 'active',
@@ -686,7 +695,7 @@ function generateRunningPlan(experience, duration, frequency, goals) {
 }
 
 // Generar plan de entrenamiento funcional
-function generateFunctionalPlan(experience, duration, frequency, goals, equipment) {
+function generateFunctionalPlan(experience, duration, frequency, goals, equipment, sessionDuration = 45) {
     const isStrength = goals.includes('get_stronger');
     const isWeightLoss = goals.includes('lose_weight');
     const isEndurance = goals.includes('improve_endurance');
@@ -705,6 +714,7 @@ function generateFunctionalPlan(experience, duration, frequency, goals, equipmen
         description: `Entrenamiento funcional personalizado con ${hasEquipment ? 'equipamiento' : 'peso corporal'}`,
         duration: duration,
         frequency: frequency,
+        sessionDuration: sessionDuration, // Duración de cada sesión en minutos
         intensity: intensity,
         currentWeek: 1,
         currentSession: 1,
@@ -723,7 +733,7 @@ function generateFunctionalPlan(experience, duration, frequency, goals, equipmen
 }
 
 // Generar plan de gimnasio
-function generateGymPlan(experience, duration, frequency, goals, equipment) {
+function generateGymPlan(experience, duration, frequency, goals, equipment, sessionDuration = 45) {
     const isStrength = goals.includes('get_stronger');
     const isMuscle = goals.includes('build_muscle');
     const isWeightLoss = goals.includes('lose_weight');
@@ -744,6 +754,7 @@ function generateGymPlan(experience, duration, frequency, goals, equipment) {
         split: split,
         duration: duration,
         frequency: frequency,
+        sessionDuration: sessionDuration, // Duración de cada sesión en minutos
         currentWeek: 1,
         currentSession: 1,
         status: 'active',
