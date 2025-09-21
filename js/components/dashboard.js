@@ -1376,6 +1376,55 @@ function renderHealthSection() {
     const healthData = window.healthManager.getHealthData();
     const achievements = window.healthManager.getAchievements();
     const recentAchievements = achievements.slice(-2).reverse();
+    const hasData = healthData.steps > 0 || healthData.sleepHours > 0 || healthData.activeMinutes > 0;
+    
+    if (!hasData) {
+        return `
+            <div class="health-section glass-card mb-lg">
+                <div class="health-header">
+                    <h3>🏥 Mi Salud</h3>
+                    <div class="health-status-badge">
+                        <span class="status-icon">📱</span>
+                        <span class="status-text">Conectar Dispositivo</span>
+                    </div>
+                </div>
+                
+                <div class="health-empty-state">
+                    <div class="empty-icon">📊</div>
+                    <h4>¡Conecta tu salud!</h4>
+                    <p>Activa los permisos para sincronizar datos de tu dispositivo y llevar un seguimiento completo de tu salud.</p>
+                    
+                    <div class="health-benefits">
+                        <div class="benefit-item">
+                            <span class="benefit-icon">👣</span>
+                            <span>Contar pasos automáticamente</span>
+                        </div>
+                        <div class="benefit-item">
+                            <span class="benefit-icon">😴</span>
+                            <span>Monitorear tu sueño</span>
+                        </div>
+                        <div class="benefit-item">
+                            <span class="benefit-icon">❤️</span>
+                            <span>Frecuencia cardíaca</span>
+                        </div>
+                        <div class="benefit-item">
+                            <span class="benefit-icon">🏆</span>
+                            <span>Logros y gamificación</span>
+                        </div>
+                    </div>
+                    
+                    <div class="health-actions">
+                        <button class="glass-button glass-button-primary" onclick="window.showHealthSetup()">
+                            🔗 Conectar Dispositivo
+                        </button>
+                        <button class="glass-button glass-button-secondary" onclick="window.showHealthDashboard()">
+                            📊 Ver Dashboard
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
     
     return `
         <div class="health-section glass-card mb-lg">
@@ -1387,35 +1436,39 @@ function renderHealthSection() {
             </div>
             
             <div class="health-metrics-mini">
-                <div class="health-metric">
+                <div class="health-metric ${healthData.steps > 0 ? 'has-data' : 'no-data'}">
                     <div class="metric-icon">👣</div>
                     <div class="metric-info">
-                        <div class="metric-value">${healthData.steps.toLocaleString()}</div>
+                        <div class="metric-value">${healthData.steps > 0 ? healthData.steps.toLocaleString() : '--'}</div>
                         <div class="metric-label">Pasos</div>
+                        ${healthData.steps === 0 ? '<div class="metric-hint">Conectar dispositivo</div>' : ''}
                     </div>
                 </div>
                 
-                <div class="health-metric">
+                <div class="health-metric ${healthData.sleepHours > 0 ? 'has-data' : 'no-data'}">
                     <div class="metric-icon">😴</div>
                     <div class="metric-info">
-                        <div class="metric-value">${healthData.sleepHours}h</div>
+                        <div class="metric-value">${healthData.sleepHours > 0 ? `${healthData.sleepHours}h` : '--'}</div>
                         <div class="metric-label">Sueño</div>
+                        ${healthData.sleepHours === 0 ? '<div class="metric-hint">Activar permisos</div>' : ''}
                     </div>
                 </div>
                 
-                <div class="health-metric">
+                <div class="health-metric ${healthData.activeMinutes > 0 ? 'has-data' : 'no-data'}">
                     <div class="metric-icon">⚡</div>
                     <div class="metric-info">
-                        <div class="metric-value">${healthData.activeMinutes}</div>
+                        <div class="metric-value">${healthData.activeMinutes > 0 ? healthData.activeMinutes : '--'}</div>
                         <div class="metric-label">Min Activos</div>
+                        ${healthData.activeMinutes === 0 ? '<div class="metric-hint">Entrena con la app</div>' : ''}
                     </div>
                 </div>
                 
-                <div class="health-metric">
+                <div class="health-metric ${healthData.heartRate > 0 ? 'has-data' : 'no-data'}">
                     <div class="metric-icon">❤️</div>
                     <div class="metric-info">
-                        <div class="metric-value">${healthData.heartRate}</div>
+                        <div class="metric-value">${healthData.heartRate > 0 ? healthData.heartRate : '--'}</div>
                         <div class="metric-label">BPM</div>
+                        ${healthData.heartRate === 0 ? '<div class="metric-hint">Conectar wearable</div>' : ''}
                     </div>
                 </div>
             </div>
@@ -1432,7 +1485,12 @@ function renderHealthSection() {
                         `).join('')}
                     </div>
                 </div>
-            ` : ''}
+            ` : `
+                <div class="no-achievements-mini">
+                    <div class="no-achievements-icon">🏆</div>
+                    <p>¡Completa entrenamientos para desbloquear logros!</p>
+                </div>
+            `}
         </div>
     `;
 }
@@ -1452,6 +1510,74 @@ window.showHealthDashboard = function() {
     // Inicializar dashboard de salud
     if (window.healthDashboard) {
         window.healthDashboard.render();
+    }
+};
+
+// Mostrar setup de salud
+window.showHealthSetup = function() {
+    const modal = document.createElement('div');
+    modal.className = 'health-setup-modal';
+    modal.innerHTML = `
+        <div class="modal-content glass-effect">
+            <div class="modal-header">
+                <h2>🔗 Conectar Dispositivo de Salud</h2>
+                <button class="modal-close" onclick="this.closest('.health-setup-modal').remove()">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="setup-steps">
+                    <div class="setup-step">
+                        <div class="step-icon">📱</div>
+                        <div class="step-content">
+                            <h3>1. Activa los permisos</h3>
+                            <p>Ve a Configuración > Privacidad > Salud y permite el acceso a EntrenoApp</p>
+                        </div>
+                    </div>
+                    
+                    <div class="setup-step">
+                        <div class="step-icon">🔄</div>
+                        <div class="step-content">
+                            <h3>2. Sincronización automática</h3>
+                            <p>Los datos se actualizarán automáticamente cada hora</p>
+                        </div>
+                    </div>
+                    
+                    <div class="setup-step">
+                        <div class="step-icon">🏆</div>
+                        <div class="step-content">
+                            <h3>3. Desbloquea logros</h3>
+                            <p>Completa objetivos para ganar XP y desbloquear logros</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="setup-actions">
+                    <button class="glass-button glass-button-primary" onclick="window.requestHealthPermissions()">
+                        🔐 Solicitar Permisos
+                    </button>
+                    <button class="glass-button glass-button-secondary" onclick="this.closest('.health-setup-modal').remove()">
+                        Más tarde
+                    </button>
+                </div>
+                
+                <div class="setup-note">
+                    <p>💡 <strong>Nota:</strong> Si no tienes un dispositivo compatible, puedes introducir manualmente algunos datos en el dashboard de salud.</p>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+};
+
+// Solicitar permisos de salud
+window.requestHealthPermissions = function() {
+    if (window.healthManager) {
+        window.healthManager.requestPermissions().then(() => {
+            alert('✅ Permisos solicitados. Ve a Configuración > Privacidad > Salud para activarlos.');
+            document.querySelector('.health-setup-modal').remove();
+            // Recargar dashboard
+            window.initDashboard();
+        });
     }
 };
 
@@ -1475,9 +1601,6 @@ function renderMonetizationSection() {
                     </div>
                 </div>
                 <div class="premium-actions">
-                    <button class="glass-button glass-button-secondary" onclick="window.affiliateStore.showStore()">
-                        🛍️ Tienda Fitness
-                    </button>
                     <button class="glass-button glass-button-secondary" onclick="window.donationManager.showDonationModal()">
                         💝 Apoyar App
                     </button>
@@ -1504,19 +1627,6 @@ function renderMonetizationSection() {
                     </button>
                 </div>
                 
-                <div class="monetization-card store-card">
-                    <div class="card-header">
-                        <div class="card-icon">🛍️</div>
-                        <h4>Tienda Fitness</h4>
-                    </div>
-                    <div class="card-content">
-                        <p>Equipamiento y suplementos con descuentos exclusivos</p>
-                        <div class="card-price">Hasta 30% descuento</div>
-                    </div>
-                    <button class="glass-button glass-button-secondary" onclick="window.affiliateStore.showStore()">
-                        Ver Tienda
-                    </button>
-                </div>
                 
                 <div class="monetization-card donation-card">
                     <div class="card-header">

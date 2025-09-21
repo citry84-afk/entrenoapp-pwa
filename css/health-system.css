@@ -627,6 +627,272 @@
     }
 }
 
+/* Estilos para sección de salud en dashboard */
+.health-section {
+    margin-bottom: 30px;
+}
+
+.health-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.health-header h3 {
+    color: var(--health-primary);
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.health-status-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 15px;
+    background: linear-gradient(135deg, #FF9800, #FFC107);
+    color: white;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.health-empty-state {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.empty-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    opacity: 0.7;
+}
+
+.health-empty-state h4 {
+    color: var(--health-primary);
+    margin: 0 0 15px 0;
+    font-size: 1.3rem;
+}
+
+.health-empty-state p {
+    color: #ccc;
+    margin: 0 0 30px 0;
+    line-height: 1.6;
+}
+
+.health-benefits {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.benefit-icon {
+    font-size: 1.5rem;
+}
+
+.benefit-item span:last-child {
+    color: #ccc;
+    font-size: 0.9rem;
+}
+
+.health-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.health-metrics-mini {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.health-metric {
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.health-metric.has-data {
+    border-color: rgba(0, 212, 255, 0.3);
+    background: rgba(0, 212, 255, 0.05);
+}
+
+.health-metric.no-data {
+    border-color: rgba(255, 255, 255, 0.1);
+    opacity: 0.6;
+}
+
+.health-metric .metric-icon {
+    font-size: 2rem;
+    margin-bottom: 8px;
+}
+
+.health-metric .metric-value {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: var(--health-primary);
+    margin: 0 0 5px 0;
+}
+
+.health-metric.no-data .metric-value {
+    color: #888;
+}
+
+.health-metric .metric-label {
+    color: #ccc;
+    font-size: 0.8rem;
+    margin: 0 0 5px 0;
+}
+
+.metric-hint {
+    color: #888;
+    font-size: 0.7rem;
+    font-style: italic;
+}
+
+.recent-achievements-mini {
+    margin-top: 20px;
+}
+
+.recent-achievements-mini h4 {
+    color: var(--health-primary);
+    margin: 0 0 15px 0;
+    font-size: 1.1rem;
+}
+
+.achievements-list-mini {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.achievement-mini {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: rgba(255, 215, 0, 0.1);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.achievement-mini .achievement-icon {
+    font-size: 1.5rem;
+}
+
+.achievement-mini .achievement-title {
+    color: #FFD700;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.no-achievements-mini {
+    text-align: center;
+    padding: 20px;
+    color: #888;
+}
+
+.no-achievements-mini .no-achievements-icon {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    opacity: 0.5;
+}
+
+.no-achievements-mini p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+/* Modal de setup de salud */
+.health-setup-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    backdrop-filter: blur(10px);
+}
+
+.setup-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.setup-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.step-icon {
+    font-size: 2.5rem;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 212, 255, 0.1);
+    border-radius: 15px;
+    border: 2px solid rgba(0, 212, 255, 0.3);
+}
+
+.step-content h3 {
+    color: var(--health-primary);
+    margin: 0 0 8px 0;
+    font-size: 1.2rem;
+}
+
+.step-content p {
+    color: #ccc;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.setup-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.setup-note {
+    padding: 15px;
+    background: rgba(255, 152, 0, 0.1);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 152, 0, 0.3);
+}
+
+.setup-note p {
+    margin: 0;
+    color: #FF9800;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .health-dashboard {
@@ -670,6 +936,30 @@
         width: 60px;
         height: 60px;
         font-size: 2.5rem;
+    }
+    
+    .health-metrics-mini {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    
+    .health-benefits {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .setup-steps {
+        gap: 20px;
+    }
+    
+    .setup-step {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    
+    .setup-actions {
+        flex-direction: column;
     }
 }
 

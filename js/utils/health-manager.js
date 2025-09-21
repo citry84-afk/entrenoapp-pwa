@@ -123,16 +123,11 @@ class HealthManager {
         if (!this.permissions.steps) return;
 
         try {
+            // Por ahora, mantener en 0 hasta que el usuario active los permisos
             // En implementación real, se conectaría con la API de salud
-            // Por ahora simulamos datos realistas
-            const currentHour = new Date().getHours();
-            const baseSteps = 5000; // Pasos base
-            const hourlySteps = Math.floor(Math.random() * 200) + 50; // Pasos por hora
-            const timeMultiplier = Math.min(currentHour / 12, 1); // Más pasos durante el día
+            this.healthData.steps = 0;
             
-            this.healthData.steps = Math.floor(baseSteps + (hourlySteps * currentHour * timeMultiplier));
-            
-            console.log(`Pasos cargados: ${this.healthData.steps}`);
+            console.log('Sistema de pasos inicializado - esperando permisos del usuario');
         } catch (error) {
             console.error('Error cargando pasos:', error);
         }
@@ -142,13 +137,10 @@ class HealthManager {
         if (!this.permissions.heartRate) return;
 
         try {
-            // Simular frecuencia cardíaca promedio
-            const restingHR = 65 + Math.floor(Math.random() * 20); // 65-85 bpm
-            const activityMultiplier = 1 + (this.healthData.activeMinutes / 60) * 0.3;
+            // Por ahora, mantener en 0 hasta que el usuario active los permisos
+            this.healthData.heartRate = 0;
             
-            this.healthData.heartRate = Math.floor(restingHR * activityMultiplier);
-            
-            console.log(`Frecuencia cardíaca cargada: ${this.healthData.heartRate} bpm`);
+            console.log('Sistema de frecuencia cardíaca inicializado - esperando permisos del usuario');
         } catch (error) {
             console.error('Error cargando frecuencia cardíaca:', error);
         }
@@ -158,11 +150,10 @@ class HealthManager {
         if (!this.permissions.sleep) return;
 
         try {
-            // Simular horas de sueño (6-9 horas)
-            const sleepHours = 6.5 + Math.random() * 2.5;
-            this.healthData.sleepHours = Math.round(sleepHours * 10) / 10;
+            // Por ahora, mantener en 0 hasta que el usuario active los permisos
+            this.healthData.sleepHours = 0;
             
-            console.log(`Horas de sueño cargadas: ${this.healthData.sleepHours} horas`);
+            console.log('Sistema de sueño inicializado - esperando permisos del usuario');
         } catch (error) {
             console.error('Error cargando datos de sueño:', error);
         }
@@ -172,14 +163,13 @@ class HealthManager {
         if (!this.permissions.activity) return;
 
         try {
-            // Simular minutos activos basados en entrenamientos
+            // Solo contar entrenamientos reales de la app
             const workoutMinutes = parseInt(localStorage.getItem('todays_workout_minutes') || '0');
-            const additionalActivity = Math.floor(Math.random() * 30) + 10;
             
-            this.healthData.activeMinutes = workoutMinutes + additionalActivity;
-            this.healthData.caloriesBurned = Math.floor(this.healthData.activeMinutes * 8.5 + this.healthData.steps * 0.04);
+            this.healthData.activeMinutes = workoutMinutes;
+            this.healthData.caloriesBurned = Math.floor(workoutMinutes * 8.5); // Aproximación básica
             
-            console.log(`Actividad cargada: ${this.healthData.activeMinutes} min, ${this.healthData.caloriesBurned} calorías`);
+            console.log(`Actividad cargada: ${this.healthData.activeMinutes} min de entrenamientos`);
         } catch (error) {
             console.error('Error cargando datos de actividad:', error);
         }
@@ -189,29 +179,29 @@ class HealthManager {
         if (!this.permissions.distance) return;
 
         try {
-            // Calcular distancia basada en pasos (promedio 0.7m por paso)
-            this.healthData.distance = Math.round((this.healthData.steps * 0.7) / 1000 * 10) / 10;
+            // Solo contar distancia real de entrenamientos de running
+            const runningDistance = parseFloat(localStorage.getItem('todays_running_distance') || '0');
+            this.healthData.distance = runningDistance;
             
-            console.log(`Distancia cargada: ${this.healthData.distance} km`);
+            console.log(`Distancia cargada: ${this.healthData.distance} km de running`);
         } catch (error) {
             console.error('Error cargando distancia:', error);
         }
     }
 
     loadMockData() {
-        // Datos simulados para testing
+        // Inicializar con datos en cero - el usuario los irá completando
         this.healthData = {
-            steps: 8500 + Math.floor(Math.random() * 3000),
-            heartRate: 72 + Math.floor(Math.random() * 20),
-            sleepHours: 7.2 + Math.random() * 1.5,
-            caloriesBurned: 450 + Math.floor(Math.random() * 200),
-            distance: 6.2 + Math.random() * 2,
-            activeMinutes: 45 + Math.floor(Math.random() * 30)
+            steps: 0,
+            heartRate: 0,
+            sleepHours: 0,
+            caloriesBurned: 0,
+            distance: 0,
+            activeMinutes: 0
         };
         
-        console.log('Datos de salud simulados cargados:', this.healthData);
+        console.log('Sistema de salud inicializado - datos en cero');
         this.saveHealthData();
-        this.checkAchievements();
     }
 
     saveHealthData() {
