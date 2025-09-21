@@ -143,7 +143,12 @@ class PremiumManager {
         planButtons.forEach(button => {
             button.addEventListener('click', (e) => {
                 const planId = e.target.dataset.plan;
-                this.selectPlan(planId);
+                // Determinar el tipo de plan para el sistema de pagos
+                let planType = 'monthly';
+                if (planId.includes('yearly')) planType = 'yearly';
+                if (planId.includes('lifetime')) planType = 'lifetime';
+                
+                this.showCheckout(planType);
             });
         });
     }
@@ -197,6 +202,21 @@ class PremiumManager {
         
         // Trackear evento
         this.trackEvent('premium_activated', { plan: plan.id });
+    }
+
+    async showCheckout(planType) {
+        try {
+            // Cerrar modal premium
+            this.closePremiumModal();
+            
+            // Mostrar checkout con sistema de pagos
+            await window.paymentSystem.subscribeToPlan(planType);
+            
+        } catch (error) {
+            console.error('Error en checkout:', error);
+            // Reabrir modal premium en caso de error
+            this.showPremiumModal();
+        }
     }
 
     showPremiumActivated(plan) {
