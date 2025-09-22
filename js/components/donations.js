@@ -192,11 +192,17 @@ class DonationManager {
         const amount = parseFloat(customAmount);
 
         if (!amount || amount <= 0) return;
+        
+        // Si el método es PayPal, redirigir a PayPal.me con la cantidad
+        if (selectedMethod === 'paypal' && window.PayPalConfig && window.PayPalConfig.PAYPAL_CONFIG?.account?.payme) {
+            const base = window.PayPalConfig.PAYPAL_CONFIG.account.payme;
+            const url = `${base}/${amount}`; // PayPal.me permite cantidad en la URL
+            window.location.href = url;
+            return;
+        }
 
-        // Mostrar loading
+        // Mostrar loading para otros métodos o si no hay PayPal.me
         this.showDonationLoading(amount, selectedMethod);
-
-        // Simular procesamiento
         setTimeout(() => {
             this.showDonationSuccess(amount);
         }, 2000);

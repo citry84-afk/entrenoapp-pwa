@@ -31,7 +31,9 @@ const PAYPAL_CONFIG = {
     account: {
         email: 'citry84@gmail.com',
         businessName: 'EntrenoApp',
-        supportEmail: 'citry84@gmail.com'
+        supportEmail: 'citry84@gmail.com',
+        // Enlaces directos
+        payme: 'https://paypal.me/lipastudios'
     },
     
     // URLs de retorno

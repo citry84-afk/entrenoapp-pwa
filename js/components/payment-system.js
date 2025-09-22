@@ -158,6 +158,14 @@ class PaymentSystem {
 
     async processPayPalPayment(plan) {
         try {
+            // Si hay PayPal.me configurado, usar redirección directa
+            if (window.PayPalConfig && window.PayPalConfig.PAYPAL_CONFIG?.account?.payme) {
+                const base = window.PayPalConfig.PAYPAL_CONFIG.account.payme;
+                const url = `${base}/${plan.price}`;
+                window.location.href = url;
+                return;
+            }
+
             // Inicializar PayPal SDK
             if (!window.paypal) {
                 await this.loadPayPalSDK();
