@@ -28,15 +28,10 @@ class HealthManager {
     }
 
     async init() {
-        await this.checkSupport();
-        if (this.isSupported) {
-            await this.requestPermissions();
-            await this.loadHealthData();
-            this.startPeriodicSync();
-        } else {
-            console.log('Health API no soportada, usando datos simulados');
-            this.loadMockData();
-        }
+        // Modo manual: desactivar APIs nativas y usar solo datos guardados/manuales
+        this.isSupported = false;
+        this.loadMockData();
+        return;
     }
 
     async checkSupport() {
