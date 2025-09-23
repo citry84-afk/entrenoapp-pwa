@@ -307,6 +307,13 @@ function generateFunctionalWorkout(plan, week) {
 
 // Generar entrenamiento de gimnasio
 function generateGymWorkout(plan, week) {
+    console.log('🔍 DEBUG generateGymWorkout - Plan recibido:', {
+        planSessionDuration: plan.sessionDuration,
+        planType: plan.type,
+        planMetadata: plan.metadata,
+        hasRoutine: !!plan.routine
+    });
+    
     // Usar el generador avanzado si está disponible
     if (window.generateTodaysGymWorkout && plan.routine) {
         try {
@@ -319,6 +326,8 @@ function generateGymWorkout(plan, week) {
             console.error('❌ Error generando workout avanzado:', error);
         }
     }
+    
+    console.log('🔄 Usando generador básico (fallback)');
     
     // Fallback: generador básico mejorado
     const splits = {
@@ -336,6 +345,12 @@ function generateGymWorkout(plan, week) {
     // Calcular duración basada en la selección del usuario
     const targetDuration = plan.sessionDuration || 45; // Duración de la sesión en minutos
     const actualDuration = Math.min(targetDuration, 90); // Máximo 90 minutos
+    
+    console.log('🔍 DEBUG generador básico:', {
+        targetDuration,
+        actualDuration,
+        todayMuscleGroup
+    });
     
     return {
         type: 'gym',
