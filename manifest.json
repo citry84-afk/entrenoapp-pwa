@@ -102,4 +102,17 @@
       "icons": [{"src": "assets/icons/icon-192x192.png", "sizes": "192x192"}]
     }
   ]
+  ,
+  "related_applications": [
+    {
+      "platform": "web",
+      "url": "https://www.tiktok.com/@EntrenoApp",
+      "id": "social.tiktok.EntrenoApp"
+    },
+    {
+      "platform": "web",
+      "url": "https://www.instagram.com/entrenoappfacil",
+      "id": "social.instagram.entrenoappfacil"
+    }
+  ]
 }
