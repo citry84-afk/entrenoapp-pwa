@@ -822,48 +822,76 @@ export function generateTodaysGymWorkout(plan) {
 function adjustExercisesForDuration(exercises, targetDuration) {
     if (!exercises || exercises.length === 0) return [];
     
-    // Calcular número de ejercicios según duración
-    const getExerciseCount = (duration) => {
-        if (duration <= 30) return 3;
-        if (duration <= 45) return 4;
-        if (duration <= 60) return 5;
-        return 6;
-    };
+    // Calcular tiempo real basado en:
+    // - 1 minuto por serie (ejecución)
+    // - 45 segundos de descanso entre series
+    // - 2 minutos de descanso entre ejercicios
+    // - 5 minutos de calentamiento
+    // - 5 minutos de estiramientos
     
-    const exerciseCount = getExerciseCount(targetDuration);
+    const warmupTime = 5; // minutos
+    const cooldownTime = 5; // minutos
+    const timePerSet = 1; // minuto por serie
+    const restBetweenSets = 0.75; // 45 segundos
+    const restBetweenExercises = 2; // 2 minutos
     
-    // Ajustar series según duración
-    const getSetCount = (duration) => {
-        if (duration <= 30) return 3;
-        if (duration <= 45) return 4;
-        if (duration <= 60) return 4;
-        return 5;
-    };
+    const availableTime = targetDuration - warmupTime - cooldownTime;
     
-    const setCount = getSetCount(targetDuration);
+    // Calcular número óptimo de ejercicios y series
+    let bestConfig = { exercises: 3, sets: 3 };
+    let bestTime = 0;
     
-    // Tomar solo los primeros ejercicios y ajustar series
-    return exercises.slice(0, exerciseCount).map(exercise => ({
+    // Probar diferentes combinaciones
+    for (let ex = 2; ex <= Math.min(6, exercises.length); ex++) {
+        for (let sets = 2; sets <= 5; sets++) {
+            const totalTime = ex * (sets * (timePerSet + restBetweenSets) + restBetweenExercises) - restBetweenExercises;
+            
+            if (totalTime <= availableTime && totalTime > bestTime) {
+                bestTime = totalTime;
+                bestConfig = { exercises: ex, sets: sets };
+            }
+        }
+    }
+    
+    // Ajustar para que no exceda el tiempo disponible
+    const adjustedExercises = exercises.slice(0, bestConfig.exercises).map(exercise => ({
         ...exercise,
-        sets: setCount
+        sets: bestConfig.sets
     }));
+    
+    console.log(`⏱️ Ajustando entrenamiento para ${targetDuration}min:`, {
+        ejercicios: bestConfig.exercises,
+        series: bestConfig.sets,
+        tiempoCalculado: bestTime + warmupTime + cooldownTime,
+        tiempoDisponible: targetDuration
+    });
+    
+    return adjustedExercises;
 }
 
 function estimateWorkoutDuration(session) {
     if (!session || !session.exercises) return 45;
     
-    let totalTime = 0;
+    const warmupTime = 5; // minutos
+    const cooldownTime = 5; // minutos
+    const timePerSet = 1; // minuto por serie
+    const restBetweenSets = 0.75; // 45 segundos
+    const restBetweenExercises = 2; // 2 minutos
     
-    session.exercises.forEach(exercise => {
-        // Tiempo por serie (incluyendo ejecución + descanso)
-        const timePerSet = 60 + (exercise.rest || 120); // 60s ejecución + descanso
-        totalTime += exercise.sets * timePerSet;
+    let totalTime = warmupTime + cooldownTime;
+    
+    session.exercises.forEach((exercise, index) => {
+        // Tiempo por ejercicio: series * (tiempo ejecución + descanso entre series)
+        const exerciseTime = exercise.sets * (timePerSet + restBetweenSets);
+        totalTime += exerciseTime;
+        
+        // Agregar descanso entre ejercicios (excepto el último)
+        if (index < session.exercises.length - 1) {
+            totalTime += restBetweenExercises;
+        }
     });
     
-    // Agregar tiempo de calentamiento y cooldown
-    totalTime += 600; // 10 minutos
-    
-    return Math.round(totalTime / 60); // Convertir a minutos
+    return Math.round(totalTime);
 }
 
 function getMuscleGroupsFromSession(session) {

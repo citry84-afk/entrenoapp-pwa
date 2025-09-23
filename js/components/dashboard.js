@@ -261,15 +261,29 @@ function generateFunctionalWorkout(plan, week) {
     const targetDuration = plan.sessionDuration || 45; // Duración de la sesión en minutos
     const actualDuration = Math.min(targetDuration, 90); // Máximo 90 minutos
     
-    // Ajustar número de series según duración
-    const getSetCount = (duration) => {
-        if (duration <= 30) return 3;
-        if (duration <= 45) return 4;
-        if (duration <= 60) return 5;
-        return 6;
-    };
+    // Calcular series basado en tiempo real
+    const warmupTime = 5; // minutos
+    const cooldownTime = 5; // minutos
+    const timePerSet = 0.5; // 30 segundos por serie (funcional es más rápido)
+    const restBetweenSets = 0.5; // 30 segundos descanso
+    const restBetweenExercises = 1; // 1 minuto entre ejercicios
     
-    const adjustedSets = getSetCount(actualDuration);
+    const availableTime = actualDuration - warmupTime - cooldownTime;
+    
+    // Calcular número óptimo de series
+    let bestSets = 3;
+    let bestTime = 0;
+    
+    for (let sets = 2; sets <= 6; sets++) {
+        const totalTime = todayWorkout.exercises.length * (sets * (timePerSet + restBetweenSets) + restBetweenExercises) - restBetweenExercises;
+        
+        if (totalTime <= availableTime && totalTime > bestTime) {
+            bestTime = totalTime;
+            bestSets = sets;
+        }
+    }
+    
+    const adjustedSets = bestSets;
     
     return {
         type: 'functional',
@@ -340,16 +354,38 @@ function generateGymWorkout(plan, week) {
 
 // Generar lista básica de ejercicios para fallback
 function generateBasicExerciseList(muscleGroup, duration = 45) {
-    // Calcular número de ejercicios según duración
-    // 30 min = 3-4 ejercicios, 45 min = 5-6 ejercicios, 60+ min = 7-8 ejercicios
-    const getExerciseCount = (duration) => {
-        if (duration <= 30) return 3;
-        if (duration <= 45) return 4;
-        if (duration <= 60) return 5;
-        return 6;
-    };
+    // Calcular tiempo real basado en:
+    // - 1 minuto por serie (ejecución)
+    // - 45 segundos de descanso entre series
+    // - 2 minutos de descanso entre ejercicios
+    // - 5 minutos de calentamiento
+    // - 5 minutos de estiramientos
     
-    const exerciseCount = getExerciseCount(duration);
+    const warmupTime = 5; // minutos
+    const cooldownTime = 5; // minutos
+    const timePerSet = 1; // minuto por serie
+    const restBetweenSets = 0.75; // 45 segundos
+    const restBetweenExercises = 2; // 2 minutos
+    
+    const availableTime = duration - warmupTime - cooldownTime;
+    
+    // Calcular número óptimo de ejercicios y series
+    let bestConfig = { exercises: 3, sets: 3 };
+    let bestTime = 0;
+    
+    // Probar diferentes combinaciones
+    for (let ex = 2; ex <= 6; ex++) {
+        for (let sets = 2; sets <= 5; sets++) {
+            const totalTime = ex * (sets * (timePerSet + restBetweenSets) + restBetweenExercises) - restBetweenExercises;
+            
+            if (totalTime <= availableTime && totalTime > bestTime) {
+                bestTime = totalTime;
+                bestConfig = { exercises: ex, sets: sets };
+            }
+        }
+    }
+    
+    const exerciseCount = bestConfig.exercises;
     
     const exercisesByGroup = {
         'Cuerpo Completo': [
@@ -415,7 +451,10 @@ function generateBasicExerciseList(muscleGroup, duration = 45) {
     };
     
     const allExercises = exercisesByGroup[muscleGroup] || exercisesByGroup['Cuerpo Completo'];
-    return allExercises.slice(0, exerciseCount);
+    return allExercises.slice(0, exerciseCount).map(exercise => ({
+        ...exercise,
+        sets: bestConfig.sets
+    }));
 }
 
 // Obtener días de entrenamiento según frecuencia
