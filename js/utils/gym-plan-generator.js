@@ -38,6 +38,15 @@ export function generateGymPlan(onboardingData) {
     // Filtrar por equipo disponible
     const equipmentFilteredRoutine = filterByEquipment(timeAdjustedRoutine, equipment);
     
+    // Mapear session_time a duración en minutos
+    const sessionTimeMap = {
+        'short': 30,     // 30-45 min -> 30 min
+        'medium': 45,    // 45-60 min -> 45 min  
+        'long': 60       // 60+ min -> 60 min
+    };
+    
+    const sessionDuration = sessionTimeMap[session_time] || 45;
+
     // Generar plan completo
     const gymPlan = {
         type: 'gym',
@@ -45,6 +54,7 @@ export function generateGymPlan(onboardingData) {
         description: generatePlanDescription(weeklyFrequency, experience),
         duration: calculatePlanDuration(experience),
         frequency: weeklyFrequency,
+        sessionDuration: sessionDuration, // Agregar duración de sesión en minutos
         currentWeek: 1,
         currentSession: 1,
         status: 'active',
@@ -81,7 +91,18 @@ export function generateGymPlan(onboardingData) {
         progressionRules: generateProgressionRules(experience, goals[0])
     };
     
+    // Limpiar workouts antiguos para que se generen con la nueva duración
+    const keysToRemove = [];
+    for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key && key.startsWith('gym_workout_')) {
+            keysToRemove.push(key);
+        }
+    }
+    keysToRemove.forEach(key => localStorage.removeItem(key));
+    
     console.log('✅ Plan de gimnasio generado:', gymPlan);
+    console.log('🧹 Workouts antiguos limpiados para nueva duración:', sessionDuration, 'min');
     return gymPlan;
 }
 
@@ -160,6 +181,15 @@ function adaptRoutineForLevel(routine, experience) {
 // ===================================
 
 function adjustForSessionTime(routine, sessionTime) {
+    // Mapear session_time a duración en minutos
+    const sessionTimeMap = {
+        'short': 30,     // 30-45 min -> 30 min
+        'medium': 45,    // 45-60 min -> 45 min  
+        'long': 60       // 60+ min -> 60 min
+    };
+    
+    const sessionDuration = sessionTimeMap[sessionTime] || 45;
+    
     const timeMultipliers = {
         'short': 0.8,    // 30-45 min - Reducido de 0.7 a 0.8 para mantener más ejercicios
         'medium': 1,     // 45-60 min
