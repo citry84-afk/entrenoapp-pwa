@@ -615,6 +615,16 @@ async function finishOnboarding() {
         // Guardar plan en localStorage para acceso rápido
         localStorage.setItem('entrenoapp_active_plan', JSON.stringify(personalizedPlan));
         
+        // Limpiar workouts antiguos para que se generen con la nueva duración
+        const keysToRemove = [];
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            if (key && key.startsWith('gym_workout_')) {
+                keysToRemove.push(key);
+            }
+        }
+        keysToRemove.forEach(key => localStorage.removeItem(key));
+        
         // Limpiar datos de onboarding de localStorage
         localStorage.removeItem('entrenoapp_onboarding');
         
@@ -872,8 +882,14 @@ function mapFrequencyToLevel(weeklyFreq) {
 
 // Obtener tiempo de sesión 
 function getSessionTime(sessionTime) {
-    // sessionTime del onboarding puede ser diferente
-    return sessionTime || 'medium';
+    // Mapear session_time del onboarding a duración en minutos
+    const sessionTimeMap = {
+        'short': 30,     // 30-45 min -> 30 min
+        'medium': 45,    // 45-60 min -> 45 min  
+        'long': 60       // 60+ min -> 60 min
+    };
+    
+    return sessionTimeMap[sessionTime] || 45; // Default 45 min
 }
 
 // Plan por defecto
