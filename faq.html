@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <meta name="description" content="Preguntas Frecuentes de EntrenoApp - Resuelve todas tus dudas sobre la app de fitness, instalación, uso y funcionalidades.">
+    <title>Preguntas Frecuentes | EntrenoApp - FAQ Completa</title>
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://entrenoapp.netlify.app/faq.html">
+    <meta property="og:title" content="Preguntas Frecuentes | EntrenoApp - FAQ Completa">
+    <meta property="og:description" content="Resuelve todas tus dudas sobre EntrenoApp: instalación, uso, funcionalidades y más.">
+    <meta property="og:image" content="https://entrenoapp.netlify.app/assets/icons/icon-512x512.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://entrenoapp.netlify.app/faq.html">
+    <meta property="twitter:title" content="Preguntas Frecuentes | EntrenoApp - FAQ Completa">
+    <meta property="twitter:description" content="Resuelve todas tus dudas sobre EntrenoApp: instalación, uso, funcionalidades y más.">
+    <meta property="twitter:image" content="https://entrenoapp.netlify.app/assets/icons/icon-512x512.png">
+    
+    <!-- Schema.org markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "¿Cómo instalo EntrenoApp en mi dispositivo?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "EntrenoApp es una PWA (Progressive Web App). Para instalarla: 1) Abre la app en Safari (iOS) o Chrome (Android), 2) Toca el botón 'Compartir', 3) Selecciona 'Añadir a pantalla de inicio', 4) Confirma la instalación."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "¿Es gratuita la aplicación?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Sí, EntrenoApp es completamente gratuita. Incluye publicidad discreta que nos ayuda a mantener la app gratuita. También ofrecemos opciones premium para usuarios que quieren una experiencia sin anuncios."
+                }
+            }
+        ]
+    }
+    </script>
+    
+    <!-- Iconos -->
+    <link rel="icon" type="image/png" href="assets/icons/icon-192x192.png">
+    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Estilos -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/glassmorphism.css">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-633RQLC6T0"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-633RQLC6T0');
+    </script>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4837743291717475" crossorigin="anonymous"></script>
+    
+    <style>
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 80px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 60px;
+            color: #333;
+        }
+        
+        .faq-categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 50px;
+        }
+        
+        .category-btn {
+            background: #f8f9fa;
+            color: #333;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .category-btn:hover,
+        .category-btn.active {
+            background: #00D4FF;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background: white;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: box-shadow 0.3s ease;
+        }
+        
+        .faq-item:hover {
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .faq-question {
+            background: #f8f9fa;
+            padding: 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #333;
+            border: none;
+            width: 100%;
+            text-align: left;
+        }
+        
+        .faq-question:hover {
+            background: #e9ecef;
+        }
+        
+        .faq-icon {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+        
+        .faq-answer {
+            padding: 0 25px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 25px;
+            max-height: 500px;
+        }
+        
+        .faq-answer p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .faq-answer ul {
+            color: #666;
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .faq-answer li {
+            margin-bottom: 8px;
+        }
+        
+        .faq-answer a {
+            color: #00D4FF;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .faq-answer a:hover {
+            text-decoration: underline;
+        }
+        
+        .search-section {
+            background: #f8f9fa;
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .search-box {
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            border: 2px solid #e9ecef;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: #00D4FF;
+        }
+        
+        .search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            font-size: 1.2rem;
+        }
+        
+        .ad-section {
+            padding: 40px 20px;
+            background: #f8f9fa;
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .ad-container {
+            max-width: 728px;
+            margin: 0 auto;
+        }
+        
+        .contact-cta {
+            background: linear-gradient(135deg, #00D4FF, #0099CC);
+            color: white;
+            padding: 60px 40px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .contact-cta h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+        
+        .contact-cta p {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            opacity: 0.9;
+        }
+        
+        .contact-btn {
+            background: white;
+            color: #00D4FF;
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .contact-btn:hover {
+            transform: translateY(-2px);
+            text-decoration: none;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .faq-categories {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .category-btn {
+                width: 100%;
+                max-width: 300px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">❓ Preguntas Frecuentes</h1>
+            <p class="hero-subtitle">Resuelve todas tus dudas sobre EntrenoApp</p>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="search-section">
+        <div class="container">
+            <h2 class="section-title">¿Qué necesitas saber?</h2>
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="Buscar en las preguntas frecuentes..." id="faq-search">
+                <span class="search-icon">🔍</span>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- FAQ Categories -->
+        <section class="section">
+            <div class="faq-categories">
+                <a href="#instalacion" class="category-btn active" data-category="instalacion">📱 Instalación</a>
+                <a href="#uso" class="category-btn" data-category="uso">💻 Uso de la App</a>
+                <a href="#funciones" class="category-btn" data-category="funciones">⚙️ Funciones</a>
+                <a href="#cuenta" class="category-btn" data-category="cuenta">👤 Cuenta</a>
+                <a href="#pagos" class="category-btn" data-category="pagos">💳 Pagos</a>
+                <a href="#problemas" class="category-btn" data-category="problemas">🔧 Problemas</a>
+            </div>
+
+            <!-- FAQ List -->
+            <div class="faq-list">
+                <!-- Instalación -->
+                <div class="faq-item" data-category="instalacion">
+                    <button class="faq-question">
+                        ¿Cómo instalo EntrenoApp en mi dispositivo?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>EntrenoApp es una PWA (Progressive Web App). Para instalarla:</p>
+                        <ol>
+                            <li>Abre la app en Safari (iOS) o Chrome (Android)</li>
+                            <li>Toca el botón <strong>"Compartir"</strong></li>
+                            <li>Selecciona <strong>"Añadir a pantalla de inicio"</strong></li>
+                            <li>Confirma la instalación</li>
+                        </ol>
+                        <p>Una vez instalada, funcionará como una app nativa con acceso completo a las funciones del dispositivo.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="instalacion">
+                    <button class="faq-question">
+                        ¿Necesito descargar algo de la App Store o Google Play?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>No, EntrenoApp no está disponible en las tiendas de aplicaciones tradicionales. Es una PWA que se instala directamente desde el navegador web.</p>
+                        <p>Esto nos permite:</p>
+                        <ul>
+                            <li>Actualizaciones instantáneas</li>
+                            <li>Menor uso de espacio en el dispositivo</li>
+                            <li>Funcionamiento en cualquier plataforma</li>
+                            <li>Acceso a funciones web avanzadas</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Uso de la App -->
+                <div class="faq-item" data-category="uso">
+                    <button class="faq-question">
+                        ¿Es gratuita la aplicación?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Sí, EntrenoApp es completamente gratuita. Incluye:</p>
+                        <ul>
+                            <li>Planes de entrenamiento personalizados</li>
+                            <li>Seguimiento GPS para running</li>
+                            <li>Retos diarios y sistema de logros</li>
+                            <li>Seguimiento de salud básico</li>
+                            <li>Comunidad de usuarios</li>
+                        </ul>
+                        <p>La app incluye publicidad discreta que nos ayuda a mantenerla gratuita. También ofrecemos opciones premium para una experiencia sin anuncios.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="uso">
+                    <button class="faq-question">
+                        ¿Puedo usar EntrenoApp sin conexión a internet?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Sí, una vez instalada como PWA, EntrenoApp funciona sin conexión a internet. Puedes:</p>
+                        <ul>
+                            <li>Ver tus planes de entrenamiento</li>
+                            <li>Realizar entrenamientos</li>
+                            <li>Registrar datos de salud</li>
+                            <li>Acceder a ejercicios guardados</li>
+                        </ul>
+                        <p>La sincronización con la nube ocurre automáticamente cuando vuelves a tener conexión.</p>
+                    </div>
+                </div>
+
+                <!-- Funciones -->
+                <div class="faq-item" data-category="funciones">
+                    <button class="faq-question">
+                        ¿Cómo funciona el seguimiento GPS?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>El GPS funciona cuando realizas actividades al aire libre como running:</p>
+                        <ul>
+                            <li>Registra tu ruta en tiempo real</li>
+                            <li>Calcula distancia y velocidad</li>
+                            <li>Mide el tiempo de entrenamiento</li>
+                            <li>Guarda el historial de rutas</li>
+                        </ul>
+                        <p>Los datos se almacenan localmente en tu dispositivo y puedes exportarlos si lo deseas.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="funciones">
+                    <button class="faq-question">
+                        ¿Puedo conectar mi dispositivo de salud?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>EntrenoApp está diseñada para integrarse con dispositivos de salud, aunque las PWA tienen limitaciones:</p>
+                        <ul>
+                            <li><strong>iOS:</strong> Intenta conectar con Apple Health</li>
+                            <li><strong>Android:</strong> Intenta conectar con Google Fit</li>
+                            <li><strong>Manual:</strong> Puedes introducir datos manualmente</li>
+                        </ul>
+                        <p>Si la conexión automática no funciona, puedes introducir tus datos de salud manualmente en la sección "Mi Salud".</p>
+                    </div>
+                </div>
+
+                <!-- Cuenta -->
+                <div class="faq-item" data-category="cuenta">
+                    <button class="faq-question">
+                        ¿Cómo creo una cuenta?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Crear una cuenta en EntrenoApp es muy sencillo:</p>
+                        <ol>
+                            <li>Abre la aplicación</li>
+                            <li>Toca "Regístrate aquí"</li>
+                            <li>Introduce tu email y contraseña</li>
+                            <li>Confirma tu email</li>
+                            <li>Completa el onboarding personalizado</li>
+                        </ol>
+                        <p>También puedes registrarte con Google para un proceso más rápido.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="cuenta">
+                    <button class="faq-question">
+                        ¿Cómo elimino mi cuenta?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Puedes eliminar tu cuenta de varias formas:</p>
+                        <ul>
+                            <li><strong>Desde la app:</strong> Ve a Configuración > Eliminar cuenta</li>
+                            <li><strong>Por email:</strong> Envía un email a <a href="mailto:citry84@gmail.com">citry84@gmail.com</a></li>
+                        </ul>
+                        <p>Una vez eliminada, todos tus datos serán borrados permanentemente y no podrán recuperarse.</p>
+                    </div>
+                </div>
+
+                <!-- Pagos -->
+                <div class="faq-item" data-category="pagos">
+                    <button class="faq-question">
+                        ¿Qué opciones de pago aceptan?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>EntrenoApp acepta múltiples métodos de pago:</p>
+                        <ul>
+                            <li><strong>Tarjetas:</strong> Visa, Mastercard, American Express</li>
+                            <li><strong>PayPal:</strong> Para donaciones y suscripciones</li>
+                            <li><strong>Simulado:</strong> Para pruebas en desarrollo</li>
+                        </ul>
+                        <p>Todos los pagos se procesan de forma segura y encriptada.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="pagos">
+                    <button class="faq-question">
+                        ¿Puedo cancelar mi suscripción en cualquier momento?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Sí, puedes cancelar tu suscripción en cualquier momento:</p>
+                        <ul>
+                            <li>Desde la configuración de la app</li>
+                            <li>Contactando con soporte por email</li>
+                            <li>Desde tu cuenta de PayPal (si usaste PayPal)</li>
+                        </ul>
+                        <p>La cancelación es inmediata y no se cobrarán más pagos.</p>
+                    </div>
+                </div>
+
+                <!-- Problemas -->
+                <div class="faq-item" data-category="problemas">
+                    <button class="faq-question">
+                        ¿La app no carga o funciona lentamente?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Si la app no carga correctamente, prueba estos pasos:</p>
+                        <ol>
+                            <li>Verifica tu conexión a internet</li>
+                            <li>Actualiza tu navegador a la última versión</li>
+                            <li>Limpia la caché del navegador</li>
+                            <li>Reinicia la aplicación</li>
+                            <li>Reinstala la PWA si es necesario</li>
+                        </ol>
+                        <p>Si el problema persiste, contacta con soporte técnico.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="problemas">
+                    <button class="faq-question">
+                        ¿Cómo reporto un error o problema?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Para reportar un error o problema:</p>
+                        <ul>
+                            <li><strong>Email:</strong> <a href="mailto:citry84@gmail.com">citry84@gmail.com</a></li>
+                            <li><strong>Asunto:</strong> "Bug Report EntrenoApp"</li>
+                            <li><strong>Incluye:</strong> Descripción del problema, pasos para reproducirlo, dispositivo y navegador</li>
+                        </ul>
+                        <p>Responderemos en 24-48 horas en días hábiles.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ad Section -->
+        <div class="ad-section">
+            <div class="ad-container">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-4837743291717475"
+                     data-ad-slot="auto"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+        </div>
+
+        <!-- Contact CTA -->
+        <div class="contact-cta">
+            <h3>¿No encuentras la respuesta que buscas?</h3>
+            <p>Nuestro equipo de soporte está aquí para ayudarte</p>
+            <a href="contact.html" class="contact-btn">Contactar Soporte</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer style="background: #333; color: white; padding: 40px 20px; text-align: center;">
+        <div class="container">
+            <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 20px; flex-wrap: wrap;">
+                <a href="privacy.html" style="color: white; text-decoration: none;">Privacidad</a>
+                <a href="terms.html" style="color: white; text-decoration: none;">Términos</a>
+                <a href="contact.html" style="color: white; text-decoration: none;">Contacto</a>
+                <a href="about.html" style="color: white; text-decoration: none;">Sobre Nosotros</a>
+            </div>
+            
+            <p>&copy; 2024 EntrenoApp - LIPA Studios. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Inicializar AdSense
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        
+        // FAQ functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                // Close all other FAQ items
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Toggle current item
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+        
+        // Category filtering
+        document.querySelectorAll('.category-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Update active category
+                document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const category = btn.dataset.category;
+                
+                // Show/hide FAQ items
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    if (category === 'all' || item.dataset.category === category) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // Search functionality
+        document.getElementById('faq-search').addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            
+            document.querySelectorAll('.faq-item').forEach(item => {
+                const question = item.querySelector('.faq-question').textContent.toLowerCase();
+                const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+                
+                if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

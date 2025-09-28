@@ -1,0 +1,90 @@
+/* Performance optimizations for Core Web Vitals */
+
+/* Critical CSS - Above the fold styles */
+.hero-section {
+    contain: layout style paint;
+    will-change: transform;
+}
+
+.hero-content {
+    contain: layout style;
+}
+
+/* Lazy loading for images */
+img[data-src] {
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+img[data-src].loaded {
+    opacity: 1;
+}
+
+/* Optimize animations */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Optimize font loading */
+@font-face {
+    font-family: 'System Font';
+    src: local('-apple-system'), local('BlinkMacSystemFont'), local('Segoe UI'), local('Roboto'), local('sans-serif');
+    font-display: swap;
+}
+
+/* Optimize layout shifts */
+.article-card,
+.resource-card,
+.faq-item {
+    contain: layout;
+}
+
+/* Optimize paint */
+.glass-effect {
+    contain: paint;
+    will-change: transform;
+}
+
+/* Optimize scrolling */
+.container {
+    contain: layout;
+}
+
+/* Preload critical resources */
+.preload {
+    display: none;
+}
+
+/* Optimize third-party scripts */
+.adsbygoogle {
+    contain: layout style paint;
+}
+
+/* Optimize for mobile */
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 60px 20px;
+    }
+    
+    .section {
+        padding: 60px 0;
+    }
+    
+    .container {
+        padding: 0 15px;
+    }
+}
+
+/* Optimize for print */
+@media print {
+    .ad-section,
+    .adsbygoogle,
+    .social-links,
+    .contact-cta {
+        display: none !important;
+    }
+}

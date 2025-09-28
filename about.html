@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <meta name="description" content="Conoce a LIPA Studios, creadores de EntrenoApp. Nuestra misión es democratizar el fitness y hacer que el ejercicio sea accesible para todos.">
+    <title>Sobre Nosotros | EntrenoApp - LIPA Studios</title>
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://entrenoapp.netlify.app/about.html">
+    <meta property="og:title" content="Sobre Nosotros | EntrenoApp - LIPA Studios">
+    <meta property="og:description" content="Conoce a LIPA Studios, creadores de EntrenoApp. Nuestra misión es democratizar el fitness y hacer que el ejercicio sea accesible para todos.">
+    <meta property="og:image" content="https://entrenoapp.netlify.app/assets/icons/icon-512x512.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://entrenoapp.netlify.app/about.html">
+    <meta property="twitter:title" content="Sobre Nosotros | EntrenoApp - LIPA Studios">
+    <meta property="twitter:description" content="Conoce a LIPA Studios, creadores de EntrenoApp. Nuestra misión es democratizar el fitness y hacer que el ejercicio sea accesible para todos.">
+    <meta property="twitter:image" content="https://entrenoapp.netlify.app/assets/icons/icon-512x512.png">
+    
+    <!-- Schema.org markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "LIPA Studios",
+        "url": "https://entrenoapp.netlify.app",
+        "logo": "https://entrenoapp.netlify.app/assets/icons/icon-512x512.png",
+        "description": "Desarrolladores de EntrenoApp, la aplicación de fitness más completa",
+        "foundingDate": "2024",
+        "founder": {
+            "@type": "Person",
+            "name": "Luis Alberto Moratalla"
+        },
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "email": "citry84@gmail.com",
+            "contactType": "customer service"
+        },
+        "sameAs": [
+            "https://www.tiktok.com/@EntrenoApp",
+            "https://www.instagram.com/entrenoappfacil"
+        ]
+    }
+    </script>
+    
+    <!-- Iconos -->
+    <link rel="icon" type="image/png" href="assets/icons/icon-192x192.png">
+    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Estilos -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/glassmorphism.css">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-633RQLC6T0"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-633RQLC6T0');
+    </script>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4837743291717475" crossorigin="anonymous"></script>
+    
+    <style>
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 80px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 60px;
+            color: #333;
+        }
+        
+        .story-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        .story-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .story-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .story-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .story-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .story-text {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .team-section {
+            background: #f8f9fa;
+            padding: 80px 0;
+        }
+        
+        .team-member {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .team-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #00D4FF, #0099CC);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            margin: 0 auto 20px;
+        }
+        
+        .team-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .team-role {
+            color: #00D4FF;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+        
+        .team-bio {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .team-social {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .team-social a {
+            color: #00D4FF;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .team-social a:hover {
+            transform: scale(1.2);
+        }
+        
+        .stats-section {
+            background: linear-gradient(135deg, #00D4FF, #0099CC);
+            color: white;
+            padding: 80px 0;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+        
+        .stat-item {
+            padding: 20px;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin: 60px 0;
+        }
+        
+        .value-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-left: 4px solid #00D4FF;
+        }
+        
+        .value-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .value-text {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .contact-section {
+            background: #f8f9fa;
+            padding: 80px 0;
+        }
+        
+        .contact-info {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .contact-item {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .contact-item strong {
+            color: #00D4FF;
+        }
+        
+        .ad-section {
+            padding: 40px 20px;
+            background: #f8f9fa;
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .ad-container {
+            max-width: 728px;
+            margin: 0 auto;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">🏢 Sobre LIPA Studios</h1>
+            <p class="hero-subtitle">Creadores de EntrenoApp - Democratizando el Fitness</p>
+        </div>
+    </section>
+
+    <!-- Our Story -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Nuestra Historia</h2>
+            <div class="story-grid">
+                <div class="story-card">
+                    <div class="story-icon">💡</div>
+                    <h3 class="story-title">La Idea</h3>
+                    <p class="story-text">
+                        Todo comenzó con una simple observación: el fitness debería ser accesible para todos, 
+                        sin importar el nivel económico o la experiencia previa.
+                    </p>
+                </div>
+                
+                <div class="story-card">
+                    <div class="story-icon">🚀</div>
+                    <h3 class="story-title">El Desarrollo</h3>
+                    <p class="story-text">
+                        Desarrollamos EntrenoApp con la última tecnología web, creando una experiencia 
+                        nativa que funciona en cualquier dispositivo.
+                    </p>
+                </div>
+                
+                <div class="story-card">
+                    <div class="story-icon">🌟</div>
+                    <h3 class="story-title">El Impacto</h3>
+                    <p class="story-text">
+                        Hoy ayudamos a miles de personas a mejorar su salud y bienestar a través 
+                        de entrenamientos personalizados y seguimiento inteligente.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section">
+        <div class="container">
+            <h2 class="section-title">Nuestro Equipo</h2>
+            <div class="team-member">
+                <div class="team-avatar">👨‍💻</div>
+                <h3 class="team-name">Luis Alberto Moratalla</h3>
+                <p class="team-role">Fundador y Desarrollador Principal</p>
+                <p class="team-bio">
+                    Apasionado del fitness y la tecnología, Luis combina su experiencia en desarrollo 
+                    de software con su amor por el deporte para crear soluciones innovadoras que 
+                    realmente marcan la diferencia en la vida de las personas.
+                </p>
+                <div class="team-social">
+                    <a href="mailto:citry84@gmail.com" title="Email">📧</a>
+                    <a href="https://www.linkedin.com/in/luis-moratalla" title="LinkedIn">💼</a>
+                    <a href="https://github.com/citry84-afk" title="GitHub">🐙</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <h2 class="section-title" style="color: white; margin-bottom: 60px;">Nuestro Impacto</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number">50,000+</span>
+                    <span class="stat-label">Usuarios Activos</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">1M+</span>
+                    <span class="stat-label">Entrenamientos Completados</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">95%</span>
+                    <span class="stat-label">Satisfacción del Usuario</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">24/7</span>
+                    <span class="stat-label">Soporte Disponible</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Nuestros Valores</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <h3 class="value-title">🎯 Accesibilidad</h3>
+                    <p class="value-text">
+                        Creemos que el fitness debe ser accesible para todos, independientemente de 
+                        su nivel económico, experiencia o ubicación geográfica.
+                    </p>
+                </div>
+                
+                <div class="value-card">
+                    <h3 class="value-title">🔬 Innovación</h3>
+                    <p class="value-text">
+                        Utilizamos las últimas tecnologías para crear experiencias únicas que 
+                        combinan lo mejor de la ciencia del deporte con la tecnología moderna.
+                    </p>
+                </div>
+                
+                <div class="value-card">
+                    <h3 class="value-title">🤝 Comunidad</h3>
+                    <p class="value-text">
+                        Fomentamos una comunidad positiva donde los usuarios se apoyan mutuamente 
+                        y comparten sus logros y experiencias.
+                    </p>
+                </div>
+                
+                <div class="value-card">
+                    <h3 class="value-title">📊 Transparencia</h3>
+                    <p class="value-text">
+                        Somos transparentes sobre cómo usamos los datos de nuestros usuarios y 
+                        nos comprometemos a proteger su privacidad.
+                    </p>
+                </div>
+                
+                <div class="value-card">
+                    <h3 class="value-title">🌱 Crecimiento</h3>
+                    <p class="value-text">
+                        Ayudamos a nuestros usuarios a crecer no solo físicamente, sino también 
+                        mentalmente, desarrollando hábitos saludables duraderos.
+                    </p>
+                </div>
+                
+                <div class="value-card">
+                    <h3 class="value-title">💡 Simplicidad</h3>
+                    <p class="value-text">
+                        Creemos que la tecnología debe simplificar la vida, no complicarla. 
+                        Por eso EntrenoApp es intuitiva y fácil de usar.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ad Section -->
+    <div class="ad-section">
+        <div class="ad-container">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-4837743291717475"
+                 data-ad-slot="auto"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <h2 class="section-title">¿Quieres Conocernos Mejor?</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <strong>📧 Email:</strong> <a href="mailto:citry84@gmail.com">citry84@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <strong>🏢 Empresa:</strong> LIPA Studios
+                </div>
+                <div class="contact-item">
+                    <strong>🌐 Sitio Web:</strong> <a href="https://entrenoapp.netlify.app">entrenoapp.netlify.app</a>
+                </div>
+                <div class="contact-item">
+                    <strong>📍 Ubicación:</strong> España
+                </div>
+                <div class="contact-item">
+                    <strong>📱 Redes Sociales:</strong>
+                    <br>
+                    <a href="https://www.tiktok.com/@EntrenoApp" target="_blank" rel="noopener">🎵 TikTok</a> • 
+                    <a href="https://www.instagram.com/entrenoappfacil" target="_blank" rel="noopener">📸 Instagram</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background: #333; color: white; padding: 40px 20px; text-align: center;">
+        <div class="container">
+            <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 20px; flex-wrap: wrap;">
+                <a href="privacy.html" style="color: white; text-decoration: none;">Privacidad</a>
+                <a href="terms.html" style="color: white; text-decoration: none;">Términos</a>
+                <a href="contact.html" style="color: white; text-decoration: none;">Contacto</a>
+                <a href="blog.html" style="color: white; text-decoration: none;">Blog</a>
+            </div>
+            
+            <p>&copy; 2024 EntrenoApp - LIPA Studios. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Inicializar AdSense
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</body>
+</html>
