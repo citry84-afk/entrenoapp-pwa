@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <meta name="description" content="Noticias y actualizaciones de EntrenoApp - Mantente al día con las últimas novedades, mejoras y lanzamientos de nuestra app de fitness.">
+    <title>Noticias y Actualizaciones | EntrenoApp - Últimas Novedades</title>
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://entrenoapp.netlify.app/news.html">
+    <meta property="og:title" content="Noticias y Actualizaciones | EntrenoApp - Últimas Novedades">
+    <meta property="og:description" content="Mantente al día con las últimas novedades, mejoras y lanzamientos de EntrenoApp.">
+    <meta property="og:image" content="https://entrenoapp.netlify.app/assets/icons/icon-512x512.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://entrenoapp.netlify.app/news.html">
+    <meta property="twitter:title" content="Noticias y Actualizaciones | EntrenoApp - Últimas Novedades">
+    <meta property="twitter:description" content="Mantente al día con las últimas novedades, mejoras y lanzamientos de EntrenoApp.">
+    <meta property="twitter:image" content="https://entrenoapp.netlify.app/assets/icons/icon-512x512.png">
+    
+    <!-- Schema.org markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Noticias y Actualizaciones de EntrenoApp",
+        "description": "Últimas noticias, actualizaciones y novedades de EntrenoApp",
+        "url": "https://entrenoapp.netlify.app/news.html",
+        "mainEntity": {
+            "@type": "ItemList",
+            "name": "Noticias de EntrenoApp",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Nueva actualización v2.1.0",
+                    "description": "Mejoras en el seguimiento GPS y nuevas funciones de salud"
+                }
+            ]
+        }
+    }
+    </script>
+    
+    <!-- Iconos -->
+    <link rel="icon" type="image/png" href="assets/icons/icon-192x192.png">
+    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Estilos -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/glassmorphism.css">
+    <link rel="stylesheet" href="css/performance.css">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-633RQLC6T0"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-633RQLC6T0');
+    </script>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4837743291717475" crossorigin="anonymous"></script>
+    
+    <style>
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 80px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 60px;
+            color: #333;
+        }
+        
+        .news-filters {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            background: #f8f9fa;
+            color: #333;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: #00D4FF;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+        
+        .news-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .news-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #00D4FF, #0099CC);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+        }
+        
+        .news-content {
+            padding: 25px;
+        }
+        
+        .news-category {
+            background: #00D4FF;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        
+        .news-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #333;
+            line-height: 1.4;
+        }
+        
+        .news-excerpt {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .news-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: #999;
+        }
+        
+        .read-more {
+            color: #00D4FF;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .read-more:hover {
+            color: #0099CC;
+        }
+        
+        .featured-news {
+            background: linear-gradient(135deg, #00D4FF, #0099CC);
+            color: white;
+            padding: 60px 40px;
+            border-radius: 20px;
+            margin: 40px 0;
+            text-align: center;
+        }
+        
+        .featured-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .featured-text {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .featured-button {
+            background: white;
+            color: #00D4FF;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .featured-button:hover {
+            transform: translateY(-2px);
+            text-decoration: none;
+        }
+        
+        .ad-section {
+            padding: 40px 20px;
+            background: #f8f9fa;
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .ad-container {
+            max-width: 728px;
+            margin: 0 auto;
+        }
+        
+        .newsletter-section {
+            background: #f8f9fa;
+            padding: 60px 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .newsletter-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .newsletter-text {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            gap: 15px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            padding: 15px 20px;
+            border: 2px solid #e9ecef;
+            border-radius: 50px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .newsletter-input:focus {
+            outline: none;
+            border-color: #00D4FF;
+        }
+        
+        .newsletter-button {
+            background: #00D4FF;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .newsletter-button:hover {
+            background: #0099CC;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-input,
+            .newsletter-button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">📰 Noticias y Actualizaciones</h1>
+            <p class="hero-subtitle">Mantente al día con las últimas novedades de EntrenoApp</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- News Filters -->
+        <div class="news-filters">
+            <a href="#all" class="filter-btn active" data-filter="all">Todas</a>
+            <a href="#updates" class="filter-btn" data-filter="updates">Actualizaciones</a>
+            <a href="#features" class="filter-btn" data-filter="features">Nuevas Funciones</a>
+            <a href="#events" class="filter-btn" data-filter="events">Eventos</a>
+            <a href="#tips" class="filter-btn" data-filter="tips">Consejos</a>
+        </div>
+
+        <!-- Featured News -->
+        <div class="featured-news">
+            <h2 class="featured-title">🚀 ¡Gran Actualización v2.1.0!</h2>
+            <p class="featured-text">
+                Hemos lanzado la mayor actualización de EntrenoApp con nuevas funciones de salud, 
+                mejoras en el GPS y una interfaz completamente renovada.
+            </p>
+            <a href="#update-2-1-0" class="featured-button">Leer Más</a>
+        </div>
+
+        <!-- News Grid -->
+        <div class="news-grid">
+            <article class="news-card" data-category="updates">
+                <div class="news-image">🚀</div>
+                <div class="news-content">
+                    <span class="news-category">Actualización</span>
+                    <h3 class="news-title">EntrenoApp v2.1.0 - Nueva Era del Fitness</h3>
+                    <p class="news-excerpt">
+                        Descubre las increíbles mejoras que hemos implementado: seguimiento GPS mejorado, 
+                        nuevas funciones de salud y una interfaz completamente renovada.
+                    </p>
+                    <div class="news-meta">
+                        <span>📅 20 Dic 2024</span>
+                        <a href="#" class="read-more">Leer más →</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="news-card" data-category="features">
+                <div class="news-image">❤️</div>
+                <div class="news-content">
+                    <span class="news-category">Nueva Función</span>
+                    <h3 class="news-title">Integración Completa con Apple Health</h3>
+                    <p class="news-excerpt">
+                        Ahora puedes sincronizar todos tus datos de salud directamente desde Apple Health 
+                        para un seguimiento más preciso y automático.
+                    </p>
+                    <div class="news-meta">
+                        <span>📅 18 Dic 2024</span>
+                        <a href="#" class="read-more">Leer más →</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="news-card" data-category="events">
+                <div class="news-image">🏃‍♂️</div>
+                <div class="news-content">
+                    <span class="news-category">Evento</span>
+                    <h3 class="news-title">Reto de Año Nuevo 2025</h3>
+                    <p class="news-excerpt">
+                        Únete a nuestro reto especial de Año Nuevo: 30 días de entrenamiento para 
+                        comenzar 2025 con el pie derecho. ¡Premios increíbles esperan!
+                    </p>
+                    <div class="news-meta">
+                        <span>📅 15 Dic 2024</span>
+                        <a href="#" class="read-more">Leer más →</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="news-card" data-category="tips">
+                <div class="news-image">💡</div>
+                <div class="news-content">
+                    <span class="news-category">Consejo</span>
+                    <h3 class="news-title">5 Consejos para Mantener la Motivación en Invierno</h3>
+                    <p class="news-excerpt">
+                        El invierno puede ser desafiante para mantener una rutina de ejercicio. 
+                        Te damos 5 consejos probados para mantenerte activo durante los meses fríos.
+                    </p>
+                    <div class="news-meta">
+                        <span>📅 12 Dic 2024</span>
+                        <a href="#" class="read-more">Leer más →</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="news-card" data-category="updates">
+                <div class="news-image">🔧</div>
+                <div class="news-content">
+                    <span class="news-category">Mantenimiento</span>
+                    <h3 class="news-title">Mejoras en el Rendimiento de la App</h3>
+                    <p class="news-excerpt">
+                        Hemos optimizado el rendimiento de EntrenoApp para que funcione más rápido 
+                        y consuma menos batería en tu dispositivo.
+                    </p>
+                    <div class="news-meta">
+                        <span>📅 10 Dic 2024</span>
+                        <a href="#" class="read-more">Leer más →</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="news-card" data-category="features">
+                <div class="news-image">📊</div>
+                <div class="news-content">
+                    <span class="news-category">Nueva Función</span>
+                    <h3 class="news-title">Análisis Avanzado de Progreso</h3>
+                    <p class="news-excerpt">
+                        Nueva función que analiza tu progreso y te proporciona insights personalizados 
+                        para optimizar tus entrenamientos y alcanzar tus objetivos más rápido.
+                    </p>
+                    <div class="news-meta">
+                        <span>📅 8 Dic 2024</span>
+                        <a href="#" class="read-more">Leer más →</a>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <!-- Ad Section -->
+        <div class="ad-section">
+            <div class="ad-container">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-4837743291717475"
+                     data-ad-slot="auto"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+        </div>
+
+        <!-- Newsletter Section -->
+        <div class="newsletter-section">
+            <h2 class="newsletter-title">📧 Mantente Informado</h2>
+            <p class="newsletter-text">
+                Suscríbete a nuestro newsletter para recibir las últimas noticias y actualizaciones 
+                directamente en tu email.
+            </p>
+            <form class="newsletter-form">
+                <input type="email" class="newsletter-input" placeholder="Tu email" required>
+                <button type="submit" class="newsletter-button">Suscribirse</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer style="background: #333; color: white; padding: 40px 20px; text-align: center;">
+        <div class="container">
+            <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 20px; flex-wrap: wrap;">
+                <a href="privacy.html" style="color: white; text-decoration: none;">Privacidad</a>
+                <a href="terms.html" style="color: white; text-decoration: none;">Términos</a>
+                <a href="contact.html" style="color: white; text-decoration: none;">Contacto</a>
+                <a href="about.html" style="color: white; text-decoration: none;">Sobre Nosotros</a>
+            </div>
+            
+            <p>&copy; 2024 EntrenoApp - LIPA Studios. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Inicializar AdSense
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        
+        // News filtering
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Update active filter
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const filter = btn.dataset.filter;
+                
+                // Show/hide news cards
+                document.querySelectorAll('.news-card').forEach(card => {
+                    if (filter === 'all' || card.dataset.category === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // Newsletter form
+        document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('¡Gracias por suscribirte! Te mantendremos informado sobre las últimas novedades.');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <meta name="description" content="Comparación de EntrenoApp con otras apps de fitness - Descubre por qué EntrenoApp es la mejor opción para tu entrenamiento.">
+    <title>Comparación de Apps de Fitness | EntrenoApp vs Competidores</title>
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://entrenoapp.netlify.app/compare.html">
+    <meta property="og:title" content="Comparación de Apps de Fitness | EntrenoApp vs Competidores">
+    <meta property="og:description" content="Descubre por qué EntrenoApp es la mejor opción para tu entrenamiento comparada con otras apps.">
+    <meta property="og:image" content="https://entrenoapp.netlify.app/assets/icons/icon-512x512.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://entrenoapp.netlify.app/compare.html">
+    <meta property="twitter:title" content="Comparación de Apps de Fitness | EntrenoApp vs Competidores">
+    <meta property="twitter:description" content="Descubre por qué EntrenoApp es la mejor opción para tu entrenamiento comparada con otras apps.">
+    <meta property="twitter:image" content="https://entrenoapp.netlify.app/assets/icons/icon-512x512.png">
+    
+    <!-- Schema.org markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Comparación de Apps de Fitness",
+        "description": "Comparación detallada entre EntrenoApp y otras aplicaciones de fitness",
+        "url": "https://entrenoapp.netlify.app/compare.html",
+        "mainEntity": {
+            "@type": "ItemList",
+            "name": "Comparación de Apps de Fitness",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "EntrenoApp vs MyFitnessPal",
+                    "description": "Comparación entre EntrenoApp y MyFitnessPal"
+                }
+            ]
+        }
+    }
+    </script>
+    
+    <!-- Iconos -->
+    <link rel="icon" type="image/png" href="assets/icons/icon-192x192.png">
+    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Estilos -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/glassmorphism.css">
+    <link rel="stylesheet" href="css/performance.css">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-633RQLC6T0"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-633RQLC6T0');
+    </script>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4837743291717475" crossorigin="anonymous"></script>
+    
+    <style>
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 80px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 60px;
+            color: #333;
+        }
+        
+        .comparison-table {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            margin: 60px 0;
+        }
+        
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .comparison-table th {
+            background: linear-gradient(135deg, #00D4FF, #0099CC);
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        
+        .comparison-table th:first-child {
+            background: #f8f9fa;
+            color: #333;
+            text-align: left;
+        }
+        
+        .comparison-table td {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #e9ecef;
+            vertical-align: middle;
+        }
+        
+        .comparison-table td:first-child {
+            text-align: left;
+            font-weight: 600;
+            color: #333;
+            background: #f8f9fa;
+        }
+        
+        .comparison-table .check {
+            color: #28a745;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .comparison-table .cross {
+            color: #dc3545;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .comparison-table .partial {
+            color: #ffc107;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .app-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .app-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .app-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        
+        .app-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.9rem;
+        }
+        
+        .star {
+            color: #ffc107;
+        }
+        
+        .feature-category {
+            background: #f8f9fa;
+            padding: 15px 20px;
+            font-weight: 700;
+            color: #333;
+            font-size: 1.1rem;
+        }
+        
+        .feature-name {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .feature-description {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .winner-badge {
+            background: #28a745;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+        
+        .detailed-comparison {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin: 60px 0;
+        }
+        
+        .comparison-card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .comparison-card h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .comparison-card .app-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            font-size: 2.5rem;
+        }
+        
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .pros, .cons {
+            text-align: left;
+        }
+        
+        .pros h4 {
+            color: #28a745;
+            margin-bottom: 15px;
+        }
+        
+        .cons h4 {
+            color: #dc3545;
+            margin-bottom: 15px;
+        }
+        
+        .pros ul, .cons ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .pros li, .cons li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .pros li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #28a745;
+            font-weight: bold;
+        }
+        
+        .cons li::before {
+            content: "✗";
+            position: absolute;
+            left: 0;
+            color: #dc3545;
+            font-weight: bold;
+        }
+        
+        .ad-section {
+            padding: 40px 20px;
+            background: #f8f9fa;
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .ad-container {
+            max-width: 728px;
+            margin: 0 auto;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, #00D4FF, #0099CC);
+            color: white;
+            padding: 80px 40px;
+            text-align: center;
+            border-radius: 20px;
+            margin: 40px 0;
+        }
+        
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .cta-text {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .cta-button {
+            background: white;
+            color: #00D4FF;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            text-decoration: none;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .comparison-table {
+                overflow-x: auto;
+            }
+            
+            .detailed-comparison {
+                grid-template-columns: 1fr;
+            }
+            
+            .pros-cons {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">⚖️ Comparación de Apps</h1>
+            <p class="hero-subtitle">Descubre por qué EntrenoApp es la mejor opción para tu fitness</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- Main Comparison Table -->
+        <section class="section">
+            <h2 class="section-title">Comparación Detallada</h2>
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Característica</th>
+                            <th>
+                                <div class="app-header">
+                                    <div class="app-icon" style="background: linear-gradient(45deg, #00D4FF, #0099CC);">💪</div>
+                                    <div class="app-name">EntrenoApp</div>
+                                    <div class="app-rating">
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span>4.8/5</span>
+                                    </div>
+                                    <div class="winner-badge">GANADOR</div>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="app-header">
+                                    <div class="app-icon" style="background: #007AFF;">📱</div>
+                                    <div class="app-name">MyFitnessPal</div>
+                                    <div class="app-rating">
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span>☆</span>
+                                        <span>4.2/5</span>
+                                    </div>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="app-header">
+                                    <div class="app-icon" style="background: #FF6B6B;">🏃</div>
+                                    <div class="app-name">Strava</div>
+                                    <div class="app-rating">
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span>☆</span>
+                                        <span>4.1/5</span>
+                                    </div>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="app-header">
+                                    <div class="app-icon" style="background: #8B5CF6;">💪</div>
+                                    <div class="app-name">Nike Training</div>
+                                    <div class="app-rating">
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span>☆</span>
+                                        <span>4.3/5</span>
+                                    </div>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="feature-category">
+                            <td colspan="4">💪 Entrenamiento</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Planes personalizados</td>
+                            <td class="check">✓</td>
+                            <td class="partial">△</td>
+                            <td class="cross">✗</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Ejercicios con técnica</td>
+                            <td class="check">✓</td>
+                            <td class="cross">✗</td>
+                            <td class="check">✓</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Progresión automática</td>
+                            <td class="check">✓</td>
+                            <td class="cross">✗</td>
+                            <td class="partial">△</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Entrenamiento funcional</td>
+                            <td class="check">✓</td>
+                            <td class="cross">✗</td>
+                            <td class="check">✓</td>
+                        </tr>
+                        
+                        <tr class="feature-category">
+                            <td colspan="4">🏃‍♂️ Running y GPS</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Seguimiento GPS</td>
+                            <td class="check">✓</td>
+                            <td class="cross">✗</td>
+                            <td class="check">✓</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Análisis de rutas</td>
+                            <td class="check">✓</td>
+                            <td class="cross">✗</td>
+                            <td class="check">✓</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Planes de running</td>
+                            <td class="check">✓</td>
+                            <td class="cross">✗</td>
+                            <td class="partial">△</td>
+                        </tr>
+                        
+                        <tr class="feature-category">
+                            <td colspan="4">📊 Seguimiento y Análisis</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Estadísticas detalladas</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Seguimiento de salud</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                            <td class="cross">✗</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Análisis de progreso</td>
+                            <td class="check">✓</td>
+                            <td class="partial">△</td>
+                            <td class="check">✓</td>
+                        </tr>
+                        
+                        <tr class="feature-category">
+                            <td colspan="4">🎮 Gamificación</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Retos diarios</td>
+                            <td class="check">✓</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Sistema de logros</td>
+                            <td class="check">✓</td>
+                            <td class="cross">✗</td>
+                            <td class="partial">△</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Comunidad social</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                        </tr>
+                        
+                        <tr class="feature-category">
+                            <td colspan="4">💰 Precio</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Plan gratuito completo</td>
+                            <td class="check">✓</td>
+                            <td class="partial">△</td>
+                            <td class="partial">△</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Precio premium</td>
+                            <td class="feature-name">€4.99/mes</td>
+                            <td class="feature-name">€9.99/mes</td>
+                            <td class="feature-name">€7.99/mes</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Detailed Comparisons -->
+        <section class="section">
+            <h2 class="section-title">Análisis Detallado</h2>
+            <div class="detailed-comparison">
+                <div class="comparison-card">
+                    <div class="app-icon" style="background: linear-gradient(45deg, #00D4FF, #0099CC);">💪</div>
+                    <h3>EntrenoApp</h3>
+                    <div class="pros-cons">
+                        <div class="pros">
+                            <h4>✅ Ventajas</h4>
+                            <ul>
+                                <li>Completamente gratuita</li>
+                                <li>Planes personalizados</li>
+                                <li>GPS integrado</li>
+                                <li>Gamificación avanzada</li>
+                                <li>Interfaz intuitiva</li>
+                                <li>Soporte en español</li>
+                                <li>Funciona sin internet</li>
+                            </ul>
+                        </div>
+                        <div class="cons">
+                            <h4>❌ Desventajas</h4>
+                            <ul>
+                                <li>App relativamente nueva</li>
+                                <li>Menos usuarios que competidores</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comparison-card">
+                    <div class="app-icon" style="background: #007AFF;">📱</div>
+                    <h3>MyFitnessPal</h3>
+                    <div class="pros-cons">
+                        <div class="pros">
+                            <h4>✅ Ventajas</h4>
+                            <ul>
+                                <li>Base de datos nutricional</li>
+                                <li>Muchos usuarios</li>
+                                <li>Integración con apps</li>
+                                <li>Escaneo de códigos</li>
+                            </ul>
+                        </div>
+                        <div class="cons">
+                            <h4>❌ Desventajas</h4>
+                            <ul>
+                                <li>Enfoque solo en nutrición</li>
+                                <li>No tiene GPS</li>
+                                <li>Precio alto</li>
+                                <li>Interfaz compleja</li>
+                                <li>No tiene entrenamientos</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comparison-card">
+                    <div class="app-icon" style="background: #FF6B6B;">🏃</div>
+                    <h3>Strava</h3>
+                    <div class="pros-cons">
+                        <div class="pros">
+                            <h4>✅ Ventajas</h4>
+                            <ul>
+                                <li>Excelente para running</li>
+                                <li>Comunidad activa</li>
+                                <li>Análisis detallado</li>
+                                <li>Segmentos populares</li>
+                            </ul>
+                        </div>
+                        <div class="cons">
+                            <h4>❌ Desventajas</h4>
+                            <ul>
+                                <li>Solo para cardio</li>
+                                <li>No tiene gimnasio</li>
+                                <li>Precio alto</li>
+                                <li>Funciones limitadas gratis</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comparison-card">
+                    <div class="app-icon" style="background: #8B5CF6;">💪</div>
+                    <h3>Nike Training</h3>
+                    <div class="pros-cons">
+                        <div class="pros">
+                            <h4>✅ Ventajas</h4>
+                            <ul>
+                                <li>Ejercicios de calidad</li>
+                                <li>Videos instructivos</li>
+                                <li>Marca reconocida</li>
+                                <li>Diseño atractivo</li>
+                            </ul>
+                        </div>
+                        <div class="cons">
+                            <h4>❌ Desventajas</h4>
+                            <ul>
+                                <li>No personaliza planes</li>
+                                <li>No tiene GPS</li>
+                                <li>Funciones limitadas</li>
+                                <li>No tiene gimnasio</li>
+                                <li>Precio alto</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ad Section -->
+        <div class="ad-section">
+            <div class="ad-container">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-4837743291717475"
+                     data-ad-slot="auto"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <h2 class="cta-title">¿Convencido? ¡Prueba EntrenoApp!</h2>
+            <p class="cta-text">
+                Únete a miles de usuarios que ya han elegido EntrenoApp como su compañero de fitness
+            </p>
+            <a href="index.html" class="cta-button">Comenzar Gratis</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer style="background: #333; color: white; padding: 40px 20px; text-align: center;">
+        <div class="container">
+            <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 20px; flex-wrap: wrap;">
+                <a href="privacy.html" style="color: white; text-decoration: none;">Privacidad</a>
+                <a href="terms.html" style="color: white; text-decoration: none;">Términos</a>
+                <a href="contact.html" style="color: white; text-decoration: none;">Contacto</a>
+                <a href="about.html" style="color: white; text-decoration: none;">Sobre Nosotros</a>
+            </div>
+            
+            <p>&copy; 2024 EntrenoApp - LIPA Studios. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Inicializar AdSense
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</body>
+</html>

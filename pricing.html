@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <meta name="description" content="Precios y planes de EntrenoApp - Descubre nuestras opciones gratuitas y premium. Transparencia total en precios y funcionalidades.">
+    <title>Precios y Planes | EntrenoApp - Transparencia Total</title>
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://entrenoapp.netlify.app/pricing.html">
+    <meta property="og:title" content="Precios y Planes | EntrenoApp - Transparencia Total">
+    <meta property="og:description" content="Descubre nuestras opciones gratuitas y premium con transparencia total en precios.">
+    <meta property="og:image" content="https://entrenoapp.netlify.app/assets/icons/icon-512x512.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://entrenoapp.netlify.app/pricing.html">
+    <meta property="twitter:title" content="Precios y Planes | EntrenoApp - Transparencia Total">
+    <meta property="twitter:description" content="Descubre nuestras opciones gratuitas y premium con transparencia total en precios.">
+    <meta property="twitter:image" content="https://entrenoapp.netlify.app/assets/icons/icon-512x512.png">
+    
+    <!-- Schema.org markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Precios y Planes de EntrenoApp",
+        "description": "Precios transparentes y planes de suscripción de EntrenoApp",
+        "url": "https://entrenoapp.netlify.app/pricing.html",
+        "mainEntity": {
+            "@type": "ItemList",
+            "name": "Planes de EntrenoApp",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Plan Gratuito",
+                    "description": "Acceso completo a todas las funciones básicas"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Plan Premium",
+                    "description": "Sin anuncios y funciones avanzadas"
+                }
+            ]
+        }
+    }
+    </script>
+    
+    <!-- Iconos -->
+    <link rel="icon" type="image/png" href="assets/icons/icon-192x192.png">
+    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Estilos -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/glassmorphism.css">
+    <link rel="stylesheet" href="css/performance.css">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-633RQLC6T0"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-633RQLC6T0');
+    </script>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4837743291717475" crossorigin="anonymous"></script>
+    
+    <style>
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 80px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 60px;
+            color: #333;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin: 60px 0;
+        }
+        
+        .pricing-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .pricing-card.featured {
+            border: 3px solid #00D4FF;
+            transform: scale(1.05);
+        }
+        
+        .pricing-card.featured::before {
+            content: "MÁS POPULAR";
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #00D4FF;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .plan-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .plan-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .plan-description {
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .plan-price {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #00D4FF;
+            margin-bottom: 10px;
+        }
+        
+        .plan-period {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        .plan-features {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 40px;
+            text-align: left;
+        }
+        
+        .plan-features li {
+            padding: 10px 0;
+            color: #333;
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .plan-features li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #00D4FF;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .plan-features li.unavailable {
+            color: #999;
+        }
+        
+        .plan-features li.unavailable::before {
+            content: "✗";
+            color: #ccc;
+        }
+        
+        .plan-button {
+            width: 100%;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .plan-button.primary {
+            background: #00D4FF;
+            color: white;
+        }
+        
+        .plan-button.primary:hover {
+            background: #0099CC;
+            transform: translateY(-2px);
+        }
+        
+        .plan-button.secondary {
+            background: #f8f9fa;
+            color: #333;
+            border: 2px solid #e9ecef;
+        }
+        
+        .plan-button.secondary:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+        }
+        
+        .comparison-section {
+            background: #f8f9fa;
+            padding: 80px 0;
+        }
+        
+        .comparison-table {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 20px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .comparison-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .comparison-table .feature-name {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .comparison-table .check {
+            color: #00D4FF;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .comparison-table .cross {
+            color: #ccc;
+            text-align: center;
+        }
+        
+        .faq-section {
+            padding: 80px 0;
+        }
+        
+        .faq-item {
+            background: white;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            background: #f8f9fa;
+            padding: 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #333;
+            border: none;
+            width: 100%;
+            text-align: left;
+        }
+        
+        .faq-question:hover {
+            background: #e9ecef;
+        }
+        
+        .faq-icon {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+        
+        .faq-answer {
+            padding: 0 25px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 25px;
+            max-height: 500px;
+        }
+        
+        .faq-answer p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .ad-section {
+            padding: 40px 20px;
+            background: #f8f9fa;
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .ad-container {
+            max-width: 728px;
+            margin: 0 auto;
+        }
+        
+        .guarantee-section {
+            background: linear-gradient(135deg, #00D4FF, #0099CC);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            border-radius: 20px;
+            margin: 40px 0;
+        }
+        
+        .guarantee-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .guarantee-text {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .guarantee-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .guarantee-feature {
+            text-align: center;
+        }
+        
+        .guarantee-feature h4 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        .guarantee-feature p {
+            opacity: 0.9;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .pricing-card.featured {
+                transform: none;
+            }
+            
+            .comparison-table {
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">💰 Precios y Planes</h1>
+            <p class="hero-subtitle">Transparencia total en precios - Sin sorpresas, sin compromisos ocultos</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- Pricing Plans -->
+        <section class="section">
+            <h2 class="section-title">Elige tu Plan Perfecto</h2>
+            <div class="pricing-grid">
+                <!-- Free Plan -->
+                <div class="pricing-card">
+                    <div class="plan-icon">🆓</div>
+                    <h3 class="plan-name">Plan Gratuito</h3>
+                    <p class="plan-description">Acceso completo a todas las funciones básicas de EntrenoApp</p>
+                    <div class="plan-price">€0</div>
+                    <div class="plan-period">Para siempre</div>
+                    <ul class="plan-features">
+                        <li>Planes de entrenamiento personalizados</li>
+                        <li>Seguimiento GPS para running</li>
+                        <li>Retos diarios y logros</li>
+                        <li>Seguimiento básico de salud</li>
+                        <li>Comunidad de usuarios</li>
+                        <li>Estadísticas de progreso</li>
+                        <li>Soporte por email</li>
+                        <li class="unavailable">Sin anuncios</li>
+                        <li class="unavailable">Funciones premium</li>
+                        <li class="unavailable">Soporte prioritario</li>
+                    </ul>
+                    <a href="index.html" class="plan-button secondary">Comenzar Gratis</a>
+                </div>
+
+                <!-- Premium Plan -->
+                <div class="pricing-card featured">
+                    <div class="plan-icon">⭐</div>
+                    <h3 class="plan-name">Plan Premium</h3>
+                    <p class="plan-description">Experiencia completa sin anuncios y con funciones avanzadas</p>
+                    <div class="plan-price">€4.99</div>
+                    <div class="plan-period">Por mes</div>
+                    <ul class="plan-features">
+                        <li>Todo del plan gratuito</li>
+                        <li>Sin anuncios</li>
+                        <li>Funciones avanzadas de salud</li>
+                        <li>Planes de nutrición personalizados</li>
+                        <li>Análisis detallado de rendimiento</li>
+                        <li>Exportación de datos</li>
+                        <li>Soporte prioritario</li>
+                        <li>Acceso anticipado a nuevas funciones</li>
+                        <li>Rutinas exclusivas</li>
+                        <li>Backup en la nube</li>
+                    </ul>
+                    <a href="index.html" class="plan-button primary">Elegir Premium</a>
+                </div>
+
+                <!-- Donation Plan -->
+                <div class="pricing-card">
+                    <div class="plan-icon">❤️</div>
+                    <h3 class="plan-name">Apoyar App</h3>
+                    <p class="plan-description">Ayúdanos a mantener EntrenoApp gratuita para todos</p>
+                    <div class="plan-price">€2.99</div>
+                    <div class="plan-period">Donación única</div>
+                    <ul class="plan-features">
+                        <li>Acceso gratuito completo</li>
+                        <li>Apoyo al desarrollo</li>
+                        <li>Badge de "Supporter"</li>
+                        <li>Acceso a beta testing</li>
+                        <li>Votación en nuevas funciones</li>
+                        <li>Mención en créditos</li>
+                        <li>Contenido exclusivo</li>
+                        <li>Comunidad VIP</li>
+                        <li>Webinars mensuales</li>
+                        <li>Descuentos en productos</li>
+                    </ul>
+                    <a href="index.html" class="plan-button secondary">Apoyar Ahora</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparison Table -->
+        <section class="comparison-section">
+            <h2 class="section-title">Comparación Detallada</h2>
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Característica</th>
+                            <th>Gratuito</th>
+                            <th>Premium</th>
+                            <th>Supporter</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="feature-name">Entrenamientos personalizados</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Seguimiento GPS</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Retos diarios</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Sin anuncios</td>
+                            <td class="cross">✗</td>
+                            <td class="check">✓</td>
+                            <td class="cross">✗</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Análisis avanzado</td>
+                            <td class="cross">✗</td>
+                            <td class="check">✓</td>
+                            <td class="cross">✗</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Soporte prioritario</td>
+                            <td class="cross">✗</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Badge especial</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                            <td class="check">✓</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Acceso beta</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                            <td class="check">✓</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Ad Section -->
+        <div class="ad-section">
+            <div class="ad-container">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-4837743291717475"
+                     data-ad-slot="auto"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+        </div>
+
+        <!-- Guarantee Section -->
+        <div class="guarantee-section">
+            <h2 class="guarantee-title">Garantía de Satisfacción 100%</h2>
+            <p class="guarantee-text">Si no estás completamente satisfecho, te devolvemos tu dinero sin preguntas</p>
+            
+            <div class="guarantee-features">
+                <div class="guarantee-feature">
+                    <h4>🔄 Cancelación Fácil</h4>
+                    <p>Cancela en cualquier momento desde la app</p>
+                </div>
+                <div class="guarantee-feature">
+                    <h4>💰 Reembolso Completo</h4>
+                    <p>30 días de garantía de devolución</p>
+                </div>
+                <div class="guarantee-feature">
+                    <h4>📞 Soporte 24/7</h4>
+                    <p>Ayuda cuando la necesites</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <h2 class="section-title">Preguntas sobre Precios</h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        ¿Puedo cambiar de plan en cualquier momento?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Sí, puedes cambiar entre planes en cualquier momento desde la configuración de tu cuenta. Los cambios se aplican inmediatamente y se prorratean según corresponda.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        ¿Qué métodos de pago aceptan?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Aceptamos tarjetas de crédito (Visa, Mastercard, American Express), PayPal y transferencias bancarias. Todos los pagos se procesan de forma segura y encriptada.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        ¿Hay descuentos por pago anual?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Actualmente solo ofrecemos planes mensuales, pero estamos trabajando en opciones anuales con descuentos especiales. ¡Mantente atento a las actualizaciones!</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        ¿Puedo probar Premium antes de pagar?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Sí, ofrecemos una prueba gratuita de 7 días para el plan Premium. No se requiere tarjeta de crédito para la prueba.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        ¿Qué pasa si cancelo mi suscripción?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Si cancelas, mantienes acceso a las funciones Premium hasta el final del período de facturación actual. Después, tu cuenta volverá al plan gratuito.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer style="background: #333; color: white; padding: 40px 20px; text-align: center;">
+        <div class="container">
+            <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 20px; flex-wrap: wrap;">
+                <a href="privacy.html" style="color: white; text-decoration: none;">Privacidad</a>
+                <a href="terms.html" style="color: white; text-decoration: none;">Términos</a>
+                <a href="contact.html" style="color: white; text-decoration: none;">Contacto</a>
+                <a href="about.html" style="color: white; text-decoration: none;">Sobre Nosotros</a>
+            </div>
+            
+            <p>&copy; 2024 EntrenoApp - LIPA Studios. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Inicializar AdSense
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        
+        // FAQ functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                // Close all other FAQ items
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Toggle current item
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
