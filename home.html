@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#00D4FF">
+    <meta name="description" content="EntrenoApp - Tu entrenador personal de fitness. Planes de running, gimnasio y entrenamiento funcional. GPS tracking, retos diarios y seguimiento de salud.">
+    <meta name="keywords" content="fitness, running, gimnasio, entrenamiento funcional, GPS, retos, salud, ejercicio, deporte, entrenador personal">
+    <meta name="author" content="LIPA Studios">
+    <meta name="robots" content="index, follow">
+    
+    <title>EntrenoApp - Tu Entrenador Personal de Fitness | Running, Gym y Funcional</title>
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://entrenoapp.netlify.app/">
+    <meta property="og:title" content="EntrenoApp - Tu Entrenador Personal de Fitness">
+    <meta property="og:description" content="Planes personalizados de running, gimnasio y entrenamiento funcional. GPS tracking, retos diarios y seguimiento completo de salud.">
+    <meta property="og:image" content="https://entrenoapp.netlify.app/assets/icons/icon-512x512.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://entrenoapp.netlify.app/">
+    <meta property="twitter:title" content="EntrenoApp - Tu Entrenador Personal de Fitness">
+    <meta property="twitter:description" content="Planes personalizados de running, gimnasio y entrenamiento funcional. GPS tracking, retos diarios y seguimiento completo de salud.">
+    <meta property="twitter:image" content="https://entrenoapp.netlify.app/assets/icons/icon-512x512.png">
+    
+    <!-- Iconos -->
+    <link rel="icon" type="image/png" href="assets/icons/icon-192x192.png">
+    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Estilos -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/glassmorphism.css">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-633RQLC6T0"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-633RQLC6T0');
+    </script>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4837743291717475" crossorigin="anonymous"></script>
+    
+    <style>
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 80px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/><circle cx="10" cy="60" r="0.5" fill="white" opacity="0.1"/><circle cx="90" cy="40" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .hero-description {
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .cta-button {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .cta-primary {
+            background: linear-gradient(45deg, #00D4FF, #0099CC);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.4);
+        }
+        
+        .cta-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 212, 255, 0.6);
+        }
+        
+        .cta-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        .cta-secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .features-section {
+            padding: 80px 20px;
+            background: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 60px;
+            color: #333;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .feature-description {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .content-section {
+            padding: 80px 20px;
+            background: white;
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        .content-card {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 4px solid #00D4FF;
+        }
+        
+        .content-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .content-text {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .content-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .content-list li {
+            padding: 8px 0;
+            color: #666;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .content-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #00D4FF;
+            font-weight: bold;
+        }
+        
+        .ad-section {
+            padding: 40px 20px;
+            background: #f8f9fa;
+            text-align: center;
+        }
+        
+        .ad-container {
+            max-width: 728px;
+            margin: 0 auto;
+        }
+        
+        .footer {
+            background: #333;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #00D4FF;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .social-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .cta-button {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">💪 EntrenoApp</h1>
+            <h2 class="hero-subtitle">Tu Entrenador Personal de Fitness</h2>
+            <p class="hero-description">
+                Descubre la app de fitness más completa. Planes personalizados de running, gimnasio y entrenamiento funcional. 
+                GPS tracking, retos diarios y seguimiento completo de tu salud. ¡Transforma tu vida con EntrenoApp!
+            </p>
+            <div class="cta-buttons">
+                <a href="index.html" class="cta-button cta-primary">Comenzar Ahora</a>
+                <a href="#features" class="cta-button cta-secondary">Conocer Más</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section">
+        <div class="container">
+            <h2 class="section-title">¿Por qué elegir EntrenoApp?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🏃‍♂️</div>
+                    <h3 class="feature-title">Running con GPS</h3>
+                    <p class="feature-description">
+                        Planes de running personalizados con seguimiento GPS en tiempo real. 
+                        Rutas, distancias, ritmos y análisis detallado de tus carreras.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🏋️‍♂️</div>
+                    <h3 class="feature-title">Gimnasio Completo</h3>
+                    <p class="feature-description">
+                        Rutinas de gimnasio adaptadas a tu nivel. Ejercicios con técnica correcta, 
+                        progresión automática y seguimiento de pesos y repeticiones.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">Entrenamiento Funcional</h3>
+                    <p class="feature-description">
+                        WODs funcionales y entrenamientos HIIT. Mejora tu condición física 
+                        con ejercicios que imitan movimientos de la vida diaria.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3 class="feature-title">Seguimiento de Salud</h3>
+                    <p class="feature-description">
+                        Monitorea pasos, frecuencia cardíaca, sueño y actividad. 
+                        Integración con dispositivos de salud para un seguimiento completo.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🏆</div>
+                    <h3 class="feature-title">Retos Diarios</h3>
+                    <p class="feature-description">
+                        Mantén la motivación con retos diarios personalizados. 
+                        Sistema de gamificación con logros, puntos y niveles.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3 class="feature-title">App Nativa</h3>
+                    <p class="feature-description">
+                        Instala EntrenoApp como app nativa en tu dispositivo. 
+                        Funciona sin conexión y con acceso completo a datos de salud.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Section -->
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Todo lo que necesitas para tu fitness</h2>
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3 class="content-title">Planes Personalizados</h3>
+                    <p class="content-text">
+                        Nuestro algoritmo crea planes únicos basados en tu nivel, objetivos y disponibilidad. 
+                        Desde principiantes hasta atletas avanzados.
+                    </p>
+                    <ul class="content-list">
+                        <li>Evaluación inicial completa</li>
+                        <li>Adaptación automática del plan</li>
+                        <li>Progresión gradual y segura</li>
+                        <li>Objetivos realistas y medibles</li>
+                    </ul>
+                </div>
+                
+                <div class="content-card">
+                    <h3 class="content-title">Tecnología Avanzada</h3>
+                    <p class="content-text">
+                        Utilizamos las últimas tecnologías para ofrecerte la mejor experiencia de entrenamiento.
+                    </p>
+                    <ul class="content-list">
+                        <li>GPS de alta precisión</li>
+                        <li>Integración con dispositivos de salud</li>
+                        <li>Análisis de datos en tiempo real</li>
+                        <li>Notificaciones inteligentes</li>
+                    </ul>
+                </div>
+                
+                <div class="content-card">
+                    <h3 class="content-title">Comunidad y Motivación</h3>
+                    <p class="content-text">
+                        Únete a una comunidad activa de personas comprometidas con su salud y fitness.
+                    </p>
+                    <ul class="content-list">
+                        <li>Retos comunitarios</li>
+                        <li>Compartir logros</li>
+                        <li>Consejos de expertos</li>
+                        <li>Soporte 24/7</li>
+                    </ul>
+                </div>
+                
+                <div class="content-card">
+                    <h3 class="content-title">Resultados Garantizados</h3>
+                    <p class="content-text">
+                        Miles de usuarios han transformado su vida con EntrenoApp. 
+                        ¡Tú puedes ser el siguiente!
+                    </p>
+                    <ul class="content-list">
+                        <li>+50,000 usuarios activos</li>
+                        <li>95% de satisfacción</li>
+                        <li>Resultados en 30 días</li>
+                        <li>Garantía de devolución</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ad Section -->
+    <section class="ad-section">
+        <div class="ad-container">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-4837743291717475"
+                 data-ad-slot="auto"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="social-links">
+            <a href="https://www.tiktok.com/@EntrenoApp" target="_blank" rel="noopener">🎵 TikTok</a>
+            <a href="https://www.instagram.com/entrenoappfacil" target="_blank" rel="noopener">📸 Instagram</a>
+        </div>
+        
+        <div class="footer-links">
+            <a href="privacy.html">Política de Privacidad</a>
+            <a href="terms.html">Términos de Uso</a>
+            <a href="contact.html">Contacto</a>
+            <a href="ads.txt">ads.txt</a>
+        </div>
+        
+        <p>&copy; 2024 EntrenoApp - LIPA Studios. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // Inicializar AdSense
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</body>
+</html>
