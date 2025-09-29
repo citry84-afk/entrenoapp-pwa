@@ -792,11 +792,12 @@ function renderPersonalizedHeader() {
 // Bloque Legal al final del dashboard
 function renderLegalBlock() {
     return `
-        <div class="glass-card" style="margin-top:12px; padding:12px; opacity:0.9;">
+        <div style="height:12px"></div>
+        <div class="glass-card" style="margin:12px 0 84px; padding:12px; opacity:0.95;">
             <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:center;">
-                <a href="/privacy.html" class="glass-button" style="padding:8px 12px;">Privacidad</a>
-                <a href="/terms.html" class="glass-button" style="padding:8px 12px;">Términos</a>
-                <a href="/contact.html" class="glass-button" style="padding:8px 12px;">Contacto</a>
+                <a href="/privacy.html" class="glass-button glass-button-secondary" style="padding:8px 12px;">Privacidad</a>
+                <a href="/terms.html" class="glass-button glass-button-secondary" style="padding:8px 12px;">Términos</a>
+                <a href="/contact.html" class="glass-button glass-button-secondary" style="padding:8px 12px;">Contacto</a>
             </div>
         </div>
     `;
