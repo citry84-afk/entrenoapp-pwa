@@ -311,9 +311,75 @@
                 max-width: 300px;
             }
         }
+        .main-navigation {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .nav-logo a {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: #667eea;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Navigation Bar -->
+    <nav class="main-navigation">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/home.html">🏃‍♂️ EntrenoApp</a>
+            </div>
+            <div class="nav-links">
+                <a href="/home.html">Inicio</a>
+                <a href="/workout-guides.html">Guías</a>
+                <a href="/fitness-tips.html">Consejos</a>
+                <a href="/exercises-library.html">Ejercicios</a>
+                <a href="/fitness-calculators.html">Calculadoras</a>
+                <a href="/blog.html">Blog</a>
+                <a href="/about.html">Nosotros</a>
+                <a href="/contact.html">Contacto</a>
+            </div>
+        </div>
+    </nav>
+
     <!-- Hero Section -->
     <section class="hero-section">
         <div class="hero-content">
@@ -476,6 +542,10 @@
         <div class="footer-links">
             <a href="blog.html">Blog</a>
             <a href="about.html">Sobre Nosotros</a>
+            <a href="workout-guides.html">Guías de Entrenamiento</a>
+            <a href="fitness-tips.html">Consejos de Fitness</a>
+            <a href="exercises-library.html">Biblioteca de Ejercicios</a>
+            <a href="fitness-calculators.html">Calculadoras</a>
             <a href="resources.html">Recursos</a>
             <a href="faq.html">FAQ</a>
             <a href="privacy.html">Privacidad</a>

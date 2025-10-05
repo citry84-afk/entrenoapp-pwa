@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#00D4FF">
+    <meta name="description" content="Consejos de fitness y entrenamiento: nutrición, recuperación, motivación y técnicas avanzadas. Expertos en fitness te ayudan a alcanzar tus objetivos.">
+    <meta name="keywords" content="consejos fitness, nutrición deportiva, recuperación, motivación, técnicas entrenamiento, expertos fitness">
+    <meta name="author" content="LIPA Studios">
+    <meta name="robots" content="index, follow">
+    
+    <title>Consejos de Fitness - EntrenoApp | Nutrición, Recuperación y Motivación</title>
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://entrenoapp.netlify.app/fitness-tips.html">
+    <meta property="og:title" content="Consejos de Fitness - EntrenoApp">
+    <meta property="og:description" content="Consejos de fitness y entrenamiento: nutrición, recuperación, motivación y técnicas avanzadas.">
+    <meta property="og:image" content="https://entrenoapp.netlify.app/assets/icons/icon-512x512.png">
+    
+    <!-- Iconos -->
+    <link rel="icon" type="image/png" href="assets/icons/icon-192x192.png">
+    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Estilos -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/glassmorphism.css">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-633RQLC6T0"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-633RQLC6T0');
+    </script>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4837743291717475" crossorigin="anonymous"></script>
+    
+    <style>
+        .tips-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 60px 20px;
+            text-align: center;
+            color: white;
+        }
+        
+        .tips-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .tips-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .tips-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .tip-category {
+            margin-bottom: 60px;
+        }
+        
+        .tip-category h2 {
+            color: #667eea;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .tip-category h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+        }
+        
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .tip-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .tip-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+        }
+        
+        .tip-card h3 {
+            color: #667eea;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .tip-card p {
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .tip-card ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .tip-card li {
+            margin-bottom: 8px;
+            color: #555;
+            line-height: 1.5;
+        }
+        
+        .tip-highlight {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-weight: 500;
+        }
+        
+        .breadcrumbs {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .breadcrumbs a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+        
+        .ads-container {
+            margin: 40px 0;
+            text-align: center;
+        }
+        
+        .ads-container ins {
+            display: block;
+            margin: 20px auto;
+            max-width: 728px;
+        }
+        
+        .expert-quote {
+            background: rgba(102, 126, 234, 0.1);
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 0 10px 10px 0;
+            font-style: italic;
+        }
+        
+        .expert-quote p {
+            margin: 0;
+            color: #333;
+            font-size: 1.1rem;
+        }
+        
+        .expert-quote .author {
+            text-align: right;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #667eea;
+        }
+    </style>
+</head>
+<body>
+    <div class="breadcrumbs">
+        <a href="/">Inicio</a> > <a href="/home.html">EntrenoApp</a> > Consejos de Fitness
+    </div>
+    
+    <div class="tips-hero">
+        <h1>💡 Consejos de Fitness</h1>
+        <p>Descubre los secretos de los expertos para maximizar tus resultados y mantenerte motivado en tu camino fitness</p>
+    </div>
+    
+    <div class="tips-container">
+        <div class="ads-container">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-4837743291717475"
+                 data-ad-slot="1234567890"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+        </div>
+        
+        <div class="tip-category">
+            <h2>🥗 Nutrición Deportiva</h2>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h3>🍽️ Alimentación Pre-Entrenamiento</h3>
+                    <p>Lo que comes antes de entrenar puede marcar la diferencia en tu rendimiento y energía durante el ejercicio.</p>
+                    <ul>
+                        <li>Come 2-3 horas antes del entrenamiento</li>
+                        <li>Incluye carbohidratos complejos y proteínas</li>
+                        <li>Evita alimentos grasos y azúcares simples</li>
+                        <li>Hidrátate bien antes de empezar</li>
+                        <li>Si entrenas temprano, toma algo ligero 30 min antes</li>
+                    </ul>
+                    <div class="tip-highlight">
+                        💡 Consejo: Un plátano con una cucharada de mantequilla de almendras es perfecto para entrenamientos matutinos.
+                    </div>
+                </div>
+                
+                <div class="tip-card">
+                    <h3>🔄 Recuperación Post-Entrenamiento</h3>
+                    <p>La ventana de oportunidad de 30-45 minutos después del ejercicio es crucial para la recuperación muscular.</p>
+                    <ul>
+                        <li>Proteína: 20-25g para síntesis muscular</li>
+                        <li>Carbohidratos: 3:1 ratio con proteína</li>
+                        <li>Hidratación: reponer líquidos perdidos</li>
+                        <li>Antioxidantes: frutas y verduras</li>
+                        <li>Evita alcohol y cafeína excesiva</li>
+                    </ul>
+                    <div class="tip-highlight">
+                        💡 Consejo: Un batido de proteína con plátano y avena es ideal post-entrenamiento.
+                    </div>
+                </div>
+                
+                <div class="tip-card">
+                    <h3>💧 Hidratación Inteligente</h3>
+                    <p>La hidratación correcta mejora el rendimiento, previene lesiones y acelera la recuperación.</p>
+                    <ul>
+                        <li>Bebe 500ml de agua 2 horas antes</li>
+                        <li>Durante el ejercicio: 150-200ml cada 15-20 min</li>
+                        <li>Para entrenamientos >60 min: bebida isotónica</li>
+                        <li>Monitorea el color de tu orina</li>
+                        <li>No esperes a tener sed</li>
+                    </ul>
+                    <div class="tip-highlight">
+                        💡 Consejo: El color ideal de la orina es amarillo claro, como limonada.
+                    </div>
+                </div>
+                
+                <div class="tip-card">
+                    <h3>⚡ Suplementación Básica</h3>
+                    <p>Los suplementos pueden complementar una dieta equilibrada, pero nunca la reemplazan.</p>
+                    <ul>
+                        <li>Proteína en polvo: conveniencia post-entreno</li>
+                        <li>Creatina: mejora fuerza y potencia</li>
+                        <li>Omega-3: antiinflamatorio natural</li>
+                        <li>Vitamina D: especialmente en invierno</li>
+                        <li>Magnesio: relajación muscular</li>
+                    </ul>
+                    <div class="tip-highlight">
+                        💡 Consejo: Consulta con un profesional antes de suplementar.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="expert-quote">
+                <p>"La nutrición representa el 70% del éxito en fitness. Puedes entrenar perfecto, pero sin una alimentación adecuada, nunca verás los resultados que buscas."</p>
+                <div class="author">- Dr. María González, Nutricionista Deportiva</div>
+            </div>
+        </div>
+        
+        <div class="ads-container">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-4837743291717475"
+                 data-ad-slot="1234567890"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+        </div>
+        
+        <div class="tip-category">
+            <h2>🛌 Recuperación y Descanso</h2>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h3>😴 Calidad del Sueño</h3>
+                    <p>El sueño es cuando tu cuerpo se repara y crece. Una mala calidad de sueño puede arruinar meses de entrenamiento.</p>
+                    <ul>
+                        <li>7-9 horas de sueño por noche</li>
+                        <li>Horario consistente de acostarse y levantarse</li>
+                        <li>Habitación fresca (18-20°C) y oscura</li>
+                        <li>Evita pantallas 1 hora antes de dormir</li>
+                        <li>Rutina relajante pre-sueño</li>
+                    </ul>
+                    <div class="tip-highlight">
+                        💡 Consejo: La hormona del crecimiento se libera principalmente durante el sueño profundo.
+                    </div>
+                </div>
+                
+                <div class="tip-card">
+                    <h3>🧘 Relajación y Mindfulness</h3>
+                    <p>El estrés crónico eleva el cortisol, lo que interfiere con la recuperación y el crecimiento muscular.</p>
+                    <ul>
+                        <li>Meditación diaria: 10-15 minutos</li>
+                        <li>Respiración profunda en momentos de estrés</li>
+                        <li>Yoga o estiramientos suaves</li>
+                        <li>Actividades que disfrutes fuera del gym</li>
+                        <li>Desconexión digital periódica</li>
+                    </ul>
+                    <div class="tip-highlight">
+                        💡 Consejo: 5 minutos de respiración profunda pueden reducir significativamente el estrés.
+                    </div>
+                </div>
+                
+                <div class="tip-card">
+                    <h3>🔄 Recuperación Activa</h3>
+                    <p>El descanso no significa inactividad total. La recuperación activa puede acelerar la reparación muscular.</p>
+                    <ul>
+                        <li>Caminata ligera o paseo en bicicleta</li>
+                        <li>Natación suave o aqua-aeróbicos</li>
+                        <li>Estiramientos y movilidad articular</li>
+                        <li>Masaje o foam rolling</li>
+                        <li>Actividades de baja intensidad</li>
+                    </ul>
+                    <div class="tip-highlight">
+                        💡 Consejo: La recuperación activa aumenta el flujo sanguíneo sin estresar los músculos.
+                    </div>
+                </div>
+                
+                <div class="tip-card">
+                    <h3>📅 Periodización del Descanso</h3>
+                    <p>Planifica tu descanso tanto como planificas tus entrenamientos para evitar el sobreentrenamiento.</p>
+                    <ul>
+                        <li>1 día completo de descanso por semana</li>
+                        <li>Semana de descarga cada 4-6 semanas</li>
+                        <li>Variación de intensidad en la semana</li>
+                        <li>Escucha las señales de tu cuerpo</li>
+                        <li>No entrenes si estás enfermo</li>
+                    </ul>
+                    <div class="tip-highlight">
+                        💡 Consejo: El sobreentrenamiento puede retrasar tus progresos meses.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="ads-container">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-4837743291717475"
+                 data-ad-slot="1234567890"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+        </div>
+        
+        <div class="tip-category">
+            <h2>🧠 Motivación y Mentalidad</h2>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h3>🎯 Establecer Metas Efectivas</h3>
+                    <p>Las metas SMART (Específicas, Medibles, Alcanzables, Relevantes, Temporales) te mantienen enfocado y motivado.</p>
+                    <ul>
+                        <li>Específicas: "Perder 5kg" vs "Estar en forma"</li>
+                        <li>Medibles: números concretos y fechas</li>
+                        <li>Alcanzables: desafiantes pero realistas</li>
+                        <li>Relevantes: importantes para ti</li>
+                        <li>Temporales: con fecha límite clara</li>
+                    </ul>
+                    <div class="tip-highlight">
+                        💡 Consejo: Divide metas grandes en objetivos semanales más pequeños.
+                    </div>
+                </div>
+                
+                <div class="tip-card">
+                    <h3>📊 Seguimiento de Progreso</h3>
+                    <p>Lo que se mide, se mejora. El seguimiento te mantiene motivado y te permite ajustar tu plan.</p>
+                    <ul>
+                        <li>Fotos de progreso semanales</li>
+                        <li>Mediciones corporales</li>
+                        <li>Registro de entrenamientos</li>
+                        <li>Pesos levantados y repeticiones</li>
+                        <li>Energía y estado de ánimo diario</li>
+                    </ul>
+                    <div class="tip-highlight">
+                        💡 Consejo: Las fotos muestran cambios que las básculas no reflejan.
+                    </div>
+                </div>
+                
+                <div class="tip-card">
+                    <h3>👥 Construir Hábitos Duraderos</h3>
+                    <p>Los hábitos son la base del éxito a largo plazo. Construye sistemas, no solo motivación temporal.</p>
+                    <ul>
+                        <li>Empieza pequeño: 5 minutos diarios</li>
+                        <li>Hazlo a la misma hora cada día</li>
+                        <li>Prepara tu entorno para el éxito</li>
+                        <li>Celebra las pequeñas victorias</li>
+                        <li>Ten un plan B para días difíciles</li>
+                    </ul>
+                    <div class="tip-highlight">
+                        💡 Consejo: Se necesitan 21 días para formar un hábito, pero 66 para automatizarlo.
+                    </div>
+                </div>
+                
+                <div class="tip-card">
+                    <h3>🔥 Superar la Motivación</h3>
+                    <p>La motivación es temporal. La disciplina y los sistemas te llevarán más lejos que la motivación sola.</p>
+                    <ul>
+                        <li>Entrena incluso cuando no tienes ganas</li>
+                        <li>Reduce la fricción: prepara tu ropa la noche anterior</li>
+                        <li>Encuentra tu "por qué" profundo</li>
+                        <li>Visualiza tus objetivos diariamente</li>
+                        <li>Rodéate de personas que te inspiren</li>
+                    </ul>
+                    <div class="tip-highlight">
+                        💡 Consejo: La motivación te lleva al gimnasio, la disciplina te hace entrenar bien.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="expert-quote">
+                <p>"La diferencia entre los que logran sus objetivos y los que no, no es la motivación inicial, sino la capacidad de mantener la consistencia cuando la motivación se desvanece."</p>
+                <div class="author">- Carlos Mendez, Coach de Rendimiento</div>
+            </div>
+        </div>
+        
+        <div class="ads-container">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-4837743291717475"
+                 data-ad-slot="1234567890"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+        </div>
+        
+        <div class="tip-category">
+            <h2>🏃‍♂️ Técnicas Avanzadas</h2>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h3>⚡ Periodización de Entrenamiento</h3>
+                    <p>Estructura tu entrenamiento en ciclos para maximizar adaptaciones y prevenir estancamientos.</p>
+                    <ul>
+                        <li>Macrociclo: plan anual completo</li>
+                        <li>Mesociclo: 4-6 semanas de enfoque</li>
+                        <li>Microciclo: semana de entrenamiento</li>
+                        <li>Variación de volumen e intensidad</li>
+                        <li>Adaptación progresiva del estrés</li>
+                    </ul>
+                    <div class="tip-highlight">
+                        💡 Consejo: La periodización previene el sobreentrenamiento y maximiza las ganancias.
+                    </div>
+                </div>
+                
+                <div class="tip-card">
+                    <h3>🎯 Técnicas de Intensificación</h3>
+                    <p>Métodos avanzados para superar mesetas y maximizar el crecimiento muscular.</p>
+                    <ul>
+                        <li>Superseries: ejercicios consecutivos sin descanso</li>
+                        <li>Dropsets: reducir peso y continuar</li>
+                        <li>Rest-pause: pausas cortas dentro de una serie</li>
+                        <li>Repeticiones forzadas: con ayuda de un compañero</li>
+                        <li>Técnica de pre-fatiga muscular</li>
+                    </ul>
+                    <div class="tip-highlight">
+                        💡 Consejo: Usa estas técnicas ocasionalmente, no en cada entrenamiento.
+                    </div>
+                </div>
+                
+                <div class="tip-card">
+                    <h3>🧠 Conexión Mente-Músculo</h3>
+                    <p>La conexión neuromuscular mejora la activación muscular y los resultados del entrenamiento.</p>
+                    <ul>
+                        <li>Visualiza el músculo trabajando</li>
+                        <li>Concentración en la contracción</li>
+                        <li>Control excéntrico lento</li>
+                        <li>Pausa en la contracción máxima</li>
+                        <li>Evita el impulso y el balanceo</li>
+                    </ul>
+                    <div class="tip-highlight">
+                        💡 Consejo: La calidad del movimiento supera la cantidad de peso.
+                    </div>
+                </div>
+                
+                <div class="tip-card">
+                    <h3>📈 Progresión Inteligente</h3>
+                    <p>El principio de sobrecarga progresiva es fundamental para el crecimiento continuo.</p>
+                    <ul>
+                        <li>Aumenta peso cuando puedas hacer 2+ repeticiones extra</li>
+                        <li>Progresión semanal de 2.5-5%</li>
+                        <li>Registra todos tus entrenamientos</li>
+                        <li>Planifica aumentos de volumen</li>
+                        <li>Escucha a tu cuerpo para ajustar</li>
+                    </ul>
+                    <div class="tip-highlight">
+                        💡 Consejo: La progresión debe ser gradual y sostenible a largo plazo.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="ads-container">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-4837743291717475"
+                 data-ad-slot="1234567890"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+        </div>
+    </div>
+    
+    <footer class="glass-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>EntrenoApp</h3>
+                <p>Tu entrenador personal de fitness</p>
+            </div>
+            <div class="footer-section">
+                <h4>Enlaces</h4>
+                <ul>
+                    <li><a href="/home.html">Inicio</a></li>
+                    <li><a href="/about.html">Nosotros</a></li>
+                    <li><a href="/contact.html">Contacto</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="/privacy.html">Privacidad</a></li>
+                    <li><a href="/terms.html">Términos</a></li>
+                    <li><a href="/contact.html">Contacto</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Síguenos</h4>
+                <div class="social-links">
+                    <a href="https://tiktok.com/@EntrenoApp" target="_blank">TikTok</a>
+                    <a href="https://instagram.com/entrenoappfacil" target="_blank">Instagram</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 LIPA Studios. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+    
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</body>
+</html>
+
