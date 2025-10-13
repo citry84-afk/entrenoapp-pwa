@@ -27,6 +27,7 @@
     <!-- Estilos -->
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/glassmorphism.css">
+    <link rel="stylesheet" href="css/content-pages.css">
     
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-633RQLC6T0"></script>
@@ -39,139 +40,20 @@
     
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4837743291717475" crossorigin="anonymous"></script>
-    
-    <style>
-        .guides-hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 60px 20px;
-            text-align: center;
-            color: white;
-        }
-        
-        .guides-hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-        
-        .guides-hero p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        .guides-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-        
-        .guide-section {
-            margin-bottom: 60px;
-        }
-        
-        .guide-section h2 {
-            color: #667eea;
-            font-size: 2rem;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-        
-        .guides-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-        
-        .guide-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: transform 0.3s ease;
-        }
-        
-        .guide-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .guide-card h3 {
-            color: #667eea;
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-        }
-        
-        .guide-card p {
-            line-height: 1.6;
-            margin-bottom: 20px;
-            color: #333;
-        }
-        
-        .guide-card ul {
-            margin-left: 20px;
-            margin-bottom: 20px;
-        }
-        
-        .guide-card li {
-            margin-bottom: 8px;
-            color: #555;
-        }
-        
-        .read-more {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 25px;
-            text-decoration: none;
-            display: inline-block;
-            transition: transform 0.3s ease;
-        }
-        
-        .read-more:hover {
-            transform: scale(1.05);
-        }
-        
-        .breadcrumbs {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 15px 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-        
-        .breadcrumbs a {
-            color: #667eea;
-            text-decoration: none;
-        }
-        
-        .breadcrumbs a:hover {
-            text-decoration: underline;
-        }
-        
-        .ads-container {
-            margin: 40px 0;
-            text-align: center;
-        }
-        
-        .ads-container ins {
-            display: block;
-            margin: 20px auto;
-            max-width: 728px;
-        }
-    </style>
 </head>
 <body>
     <div class="breadcrumbs">
         <a href="/">Inicio</a> > <a href="/home.html">EntrenoApp</a> > Guías de Entrenamiento
     </div>
     
-    <div class="guides-hero">
-        <h1>🏃‍♂️ Guías Completas de Entrenamiento</h1>
-        <p>Aprende las mejores técnicas y rutinas de running, gimnasio y entrenamiento funcional con nuestros expertos</p>
+    <div class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">🏃‍♂️ Guías Completas de Entrenamiento</h1>
+            <p class="hero-description">Aprende las mejores técnicas y rutinas de running, gimnasio y entrenamiento funcional con nuestros expertos</p>
+        </div>
     </div>
     
-    <div class="guides-container">
+    <div class="container" style="padding: 60px 20px;">
         <div class="ads-container">
             <ins class="adsbygoogle"
                  style="display:block"
@@ -182,7 +64,7 @@
         </div>
         
         <div class="guide-section">
-            <h2>🏃‍♂️ Guías de Running</h2>
+            <h2 class="section-title">🏃‍♂️ Guías de Running</h2>
             <div class="guides-grid">
                 <div class="guide-card">
                     <h3>Guía Completa para Principiantes</h3>
@@ -235,7 +117,7 @@
         </div>
         
         <div class="guide-section">
-            <h2>🏋️‍♂️ Guías de Gimnasio</h2>
+            <h2 class="section-title">🏋️‍♂️ Guías de Gimnasio</h2>
             <div class="guides-grid">
                 <div class="guide-card">
                     <h3>Rutina Push/Pull/Legs</h3>
@@ -288,7 +170,7 @@
         </div>
         
         <div class="guide-section">
-            <h2>⚡ Guías de Entrenamiento Funcional</h2>
+            <h2 class="section-title">⚡ Guías de Entrenamiento Funcional</h2>
             <div class="guides-grid">
                 <div class="guide-card">
                     <h3>WODs para Principiantes</h3>
@@ -341,7 +223,7 @@
         </div>
         
         <div class="guide-section">
-            <h2>💪 Consejos de Expertos</h2>
+            <h2 class="section-title">💪 Consejos de Expertos</h2>
             <div class="guides-grid">
                 <div class="guide-card">
                     <h3>Nutrición Deportiva</h3>
