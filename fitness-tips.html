@@ -7,7 +7,8 @@
     <meta name="description" content="Consejos de fitness y entrenamiento: nutrición, recuperación, motivación y técnicas avanzadas. Expertos en fitness te ayudan a alcanzar tus objetivos.">
     <meta name="keywords" content="consejos fitness, nutrición deportiva, recuperación, motivación, técnicas entrenamiento, expertos fitness">
     <meta name="author" content="LIPA Studios">
-    <meta name="google-site-verification" content="DSyHkxyNB3t94dJbNUw_GKpCGAp4tLsK6JBeGhvhQbQ" />    <meta name="robots" content="index, follow">
+    <meta name="google-site-verification" content="DSyHkxyNB3t94dJbNUw_GKpCGAp4tLsK6JBeGhvhQbQ" />
+    <meta name="robots" content="index, follow">
     
     <title>Consejos de Fitness - EntrenoApp | Nutrición, Recuperación y Motivación</title>
     
@@ -26,7 +27,8 @@
     <!-- Estilos -->
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/glassmorphism.css">
-    <link rel="stylesheet" href="css/content-pages.css">    
+    <link rel="stylesheet" href="css/content-pages.css">
+    
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-633RQLC6T0"></script>
     <script>
@@ -39,367 +41,505 @@
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4837743291717475" crossorigin="anonymous"></script>
     
+    <style>
+        /* Artículo completo */
+        .article-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            background: white;
+            line-height: 1.8;
+        }
+        
+        .article-header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        .article-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            color: #6a6a6a;
+            font-size: 0.95rem;
+            flex-wrap: wrap;
+        }
+        
+        .article-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .article-image {
+            width: 100%;
+            max-width: 700px;
+            height: 400px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 16px;
+            margin: 40px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+        }
+        
+        .article-intro {
+            font-size: 1.3rem;
+            color: #4a4a4a;
+            font-weight: 500;
+            margin: 30px 0;
+            padding: 25px;
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            border-radius: 8px;
+        }
+        
+        .article-content {
+            font-size: 1.1rem;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        
+        .article-content h2 {
+            font-size: 2rem;
+            color: #667eea;
+            margin: 50px 0 25px;
+            font-weight: 700;
+        }
+        
+        .article-content h3 {
+            font-size: 1.5rem;
+            color: #1a1a1a;
+            margin: 35px 0 20px;
+            font-weight: 600;
+        }
+        
+        .article-content p {
+            margin-bottom: 20px;
+        }
+        
+        .article-content ul,
+        .article-content ol {
+            margin: 20px 0;
+            padding-left: 30px;
+        }
+        
+        .article-content li {
+            margin-bottom: 12px;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-left: 4px solid #667eea;
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 8px;
+        }
+        
+        .highlight-box strong {
+            color: #667eea;
+            font-size: 1.1rem;
+        }
+        
+        .tip-list {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        
+        .tip-item {
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .tip-item:last-child {
+            border-bottom: none;
+        }
+        
+        .tip-item strong {
+            color: #667eea;
+            font-size: 1.1rem;
+        }
+        
+        .author-bio {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 16px;
+            margin-top: 60px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .author-avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+        
+        .author-info h4 {
+            color: #1a1a1a;
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+        }
+        
+        .author-info p {
+            color: #6a6a6a;
+            margin: 0;
+        }
+        
+        .cta-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 16px;
+            text-align: center;
+            margin: 50px 0;
+        }
+        
+        .cta-box h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+        
+        .cta-box p {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            opacity: 0.95;
+        }
+        
+        .cta-button {
+            background: white;
+            color: #667eea;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+        }
+        
+        @media (max-width: 768px) {
+            .article-title {
+                font-size: 2rem;
+            }
+            
+            .article-image {
+                height: 250px;
+                font-size: 3rem;
+            }
+            
+            .author-bio {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Navigation -->
+    <nav class="main-navigation">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">💪 EntrenoApp</a>
+            <ul class="nav-links">
+                <li><a href="/">Inicio</a></li>
+                <li><a href="/app.html">App</a></li>
+                <li><a href="/blog.html">Blog</a></li>
+                <li><a href="/workout-guides.html">Guías</a></li>
+                <li><a href="/contact.html">Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Breadcrumbs -->
     <div class="breadcrumbs">
-        <a href="/">Inicio</a> > <a href="/home.html">EntrenoApp</a> > Consejos de Fitness
-    </div>
-    
-    <div class="tips-hero">
-        <h1>💡 Consejos de Fitness</h1>
-        <p>Descubre los secretos de los expertos para maximizar tus resultados y mantenerte motivado en tu camino fitness</p>
-    </div>
-    
-    <div class="tips-container">
-        <div class="ads-container">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-4837743291717475"
-                 data-ad-slot="1234567890"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
+        <div class="container">
+            <a href="/">Inicio</a> > <a href="/blog.html">Blog</a> > Consejos de Fitness
         </div>
-        
-        <div class="tip-category">
-            <h2>🥗 Nutrición Deportiva</h2>
-            <div class="tips-grid">
-                <div class="tip-card">
-                    <h3>🍽️ Alimentación Pre-Entrenamiento</h3>
-                    <p>Lo que comes antes de entrenar puede marcar la diferencia en tu rendimiento y energía durante el ejercicio.</p>
-                    <ul>
-                        <li>Come 2-3 horas antes del entrenamiento</li>
-                        <li>Incluye carbohidratos complejos y proteínas</li>
-                        <li>Evita alimentos grasos y azúcares simples</li>
-                        <li>Hidrátate bien antes de empezar</li>
-                        <li>Si entrenas temprano, toma algo ligero 30 min antes</li>
-                    </ul>
-                    <div class="tip-highlight">
-                        💡 Consejo: Un plátano con una cucharada de mantequilla de almendras es perfecto para entrenamientos matutinos.
-                    </div>
-                </div>
-                
-                <div class="tip-card">
-                    <h3>🔄 Recuperación Post-Entrenamiento</h3>
-                    <p>La ventana de oportunidad de 30-45 minutos después del ejercicio es crucial para la recuperación muscular.</p>
-                    <ul>
-                        <li>Proteína: 20-25g para síntesis muscular</li>
-                        <li>Carbohidratos: 3:1 ratio con proteína</li>
-                        <li>Hidratación: reponer líquidos perdidos</li>
-                        <li>Antioxidantes: frutas y verduras</li>
-                        <li>Evita alcohol y cafeína excesiva</li>
-                    </ul>
-                    <div class="tip-highlight">
-                        💡 Consejo: Un batido de proteína con plátano y avena es ideal post-entrenamiento.
-                    </div>
-                </div>
-                
-                <div class="tip-card">
-                    <h3>💧 Hidratación Inteligente</h3>
-                    <p>La hidratación correcta mejora el rendimiento, previene lesiones y acelera la recuperación.</p>
-                    <ul>
-                        <li>Bebe 500ml de agua 2 horas antes</li>
-                        <li>Durante el ejercicio: 150-200ml cada 15-20 min</li>
-                        <li>Para entrenamientos >60 min: bebida isotónica</li>
-                        <li>Monitorea el color de tu orina</li>
-                        <li>No esperes a tener sed</li>
-                    </ul>
-                    <div class="tip-highlight">
-                        💡 Consejo: El color ideal de la orina es amarillo claro, como limonada.
-                    </div>
-                </div>
-                
-                <div class="tip-card">
-                    <h3>⚡ Suplementación Básica</h3>
-                    <p>Los suplementos pueden complementar una dieta equilibrada, pero nunca la reemplazan.</p>
-                    <ul>
-                        <li>Proteína en polvo: conveniencia post-entreno</li>
-                        <li>Creatina: mejora fuerza y potencia</li>
-                        <li>Omega-3: antiinflamatorio natural</li>
-                        <li>Vitamina D: especialmente en invierno</li>
-                        <li>Magnesio: relajación muscular</li>
-                    </ul>
-                    <div class="tip-highlight">
-                        💡 Consejo: Consulta con un profesional antes de suplementar.
-                    </div>
+    </div>
+    
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">💡 Consejos de Fitness</h1>
+            <p class="hero-description">Descubre los secretos de los expertos para maximizar tus resultados y mantenerte motivado en tu camino fitness</p>
+        </div>
+    </div>
+    
+    <!-- Article Container -->
+    <div class="article-container">
+        <!-- Article 1: Nutrición Deportiva -->
+        <article>
+            <div class="article-header">
+                <h1 class="article-title">🍎 Nutrición Deportiva: La Guía Completa para Rendir al Máximo</h1>
+                <div class="article-meta">
+                    <span>📅 12 de Enero, 2024</span>
+                    <span>⏱️ 15 min lectura</span>
+                    <span>👤 Por María González</span>
                 </div>
             </div>
             
-            <div class="expert-quote">
-                <p>"La nutrición representa el 70% del éxito en fitness. Puedes entrenar perfecto, pero sin una alimentación adecuada, nunca verás los resultados que buscas."</p>
-                <div class="author">- Dr. María González, Nutricionista Deportiva</div>
+            <div class="article-image">🍎</div>
+            
+            <div class="article-intro">
+                La nutrición es el 70% del éxito en fitness. Aprende a alimentarte correctamente para maximizar tu rendimiento, acelerar la recuperación y alcanzar tus objetivos más rápido.
             </div>
-        </div>
-        
-        <div class="ads-container">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-4837743291717475"
-                 data-ad-slot="1234567890"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-        </div>
-        
-        <div class="tip-category">
-            <h2>🛌 Recuperación y Descanso</h2>
-            <div class="tips-grid">
-                <div class="tip-card">
-                    <h3>😴 Calidad del Sueño</h3>
-                    <p>El sueño es cuando tu cuerpo se repara y crece. Una mala calidad de sueño puede arruinar meses de entrenamiento.</p>
+            
+            <div class="article-content">
+                <h2>¿Por qué es tan importante la nutrición deportiva?</h2>
+                <p>Puedes entrenar como un campeón, pero si tu nutrición no es adecuada, nunca alcanzarás tu máximo potencial. La comida es el combustible que tu cuerpo necesita para rendir, recuperarse y crecer.</p>
+                
+                <div class="highlight-box">
+                    <strong>💡 Datos clave:</strong>
                     <ul>
-                        <li>7-9 horas de sueño por noche</li>
-                        <li>Horario consistente de acostarse y levantarse</li>
-                        <li>Habitación fresca (18-20°C) y oscura</li>
-                        <li>Evita pantallas 1 hora antes de dormir</li>
-                        <li>Rutina relajante pre-sueño</li>
+                        <li>El 70% de tu composición corporal depende de la nutrición</li>
+                        <li>La recuperación muscular requiere proteína y carbohidratos</li>
+                        <li>La hidratación afecta directamente al rendimiento</li>
+                        <li>El timing de las comidas puede marcar la diferencia</li>
                     </ul>
-                    <div class="tip-highlight">
-                        💡 Consejo: La hormona del crecimiento se libera principalmente durante el sueño profundo.
+                </div>
+                
+                <h2>Macronutrientes: Los Pilares de tu Alimentación</h2>
+                
+                <h3>1. Proteínas: Los Ladrillos de tus Músculos</h3>
+                <p>Las proteínas son esenciales para la construcción y reparación muscular. Sin suficiente proteína, tu cuerpo no puede recuperarse adecuadamente del entrenamiento.</p>
+                
+                <div class="tip-list">
+                    <div class="tip-item">
+                        <strong>📊 Cantidad recomendada:</strong> 1.6-2.2g por kg de peso corporal para atletas
+                    </div>
+                    <div class="tip-item">
+                        <strong>🥩 Mejores fuentes:</strong> Pechuga de pollo, salmón, atún, huevos, carne magra, yogur griego, legumbres
+                    </div>
+                    <div class="tip-item">
+                        <strong>⏰ Timing óptimo:</strong> Distribuir a lo largo del día, con especial atención post-entrenamiento
                     </div>
                 </div>
                 
-                <div class="tip-card">
-                    <h3>🧘 Relajación y Mindfulness</h3>
-                    <p>El estrés crónico eleva el cortisol, lo que interfiere con la recuperación y el crecimiento muscular.</p>
-                    <ul>
-                        <li>Meditación diaria: 10-15 minutos</li>
-                        <li>Respiración profunda en momentos de estrés</li>
-                        <li>Yoga o estiramientos suaves</li>
-                        <li>Actividades que disfrutes fuera del gym</li>
-                        <li>Desconexión digital periódica</li>
-                    </ul>
-                    <div class="tip-highlight">
-                        💡 Consejo: 5 minutos de respiración profunda pueden reducir significativamente el estrés.
+                <h3>2. Carbohidratos: Tu Combustible Principal</h3>
+                <p>Los carbohidratos son la fuente principal de energía durante el ejercicio. Sin ellos, te sentirás débil y no podrás entrenar con intensidad.</p>
+                
+                <div class="tip-list">
+                    <div class="tip-item">
+                        <strong>📊 Cantidad recomendada:</strong> 4-7g por kg de peso corporal, dependiendo de tu nivel de actividad
+                    </div>
+                    <div class="tip-item">
+                        <strong>🍠 Mejores fuentes:</strong> Avena, arroz integral, batata, quinoa, frutas, pasta integral
+                    </div>
+                    <div class="tip-item">
+                        <strong>⏰ Timing óptimo:</strong> Mayor cantidad antes y después del entrenamiento
                     </div>
                 </div>
                 
-                <div class="tip-card">
-                    <h3>🔄 Recuperación Activa</h3>
-                    <p>El descanso no significa inactividad total. La recuperación activa puede acelerar la reparación muscular.</p>
-                    <ul>
-                        <li>Caminata ligera o paseo en bicicleta</li>
-                        <li>Natación suave o aqua-aeróbicos</li>
-                        <li>Estiramientos y movilidad articular</li>
-                        <li>Masaje o foam rolling</li>
-                        <li>Actividades de baja intensidad</li>
-                    </ul>
-                    <div class="tip-highlight">
-                        💡 Consejo: La recuperación activa aumenta el flujo sanguíneo sin estresar los músculos.
+                <h3>3. Grasas: Esenciales para la Salud</h3>
+                <p>Las grasas saludables son cruciales para la producción de hormonas, absorción de vitaminas y salud general.</p>
+                
+                <div class="tip-list">
+                    <div class="tip-item">
+                        <strong>📊 Cantidad recomendada:</strong> 0.8-1g por kg de peso corporal
+                    </div>
+                    <div class="tip-item">
+                        <strong>🥑 Mejores fuentes:</strong> Aguacate, frutos secos, aceite de oliva, pescado azul, semillas
+                    </div>
+                    <div class="tip-item">
+                        <strong>⏰ Timing óptimo:</strong> Distribuir a lo largo del día, evitar grandes cantidades pre-entrenamiento
                     </div>
                 </div>
                 
-                <div class="tip-card">
-                    <h3>📅 Periodización del Descanso</h3>
-                    <p>Planifica tu descanso tanto como planificas tus entrenamientos para evitar el sobreentrenamiento.</p>
+                <h2>Timing de Nutrientes: Cuándo Comer</h2>
+                
+                <h3>Antes del Entrenamiento (2-3 horas antes)</h3>
+                <p>Necesitas carbohidratos para tener energía y algo de proteína para evitar el catabolismo muscular.</p>
+                
+                <div class="highlight-box">
+                    <strong>🍽️ Ejemplos de comidas pre-entrenamiento:</strong>
                     <ul>
-                        <li>1 día completo de descanso por semana</li>
-                        <li>Semana de descarga cada 4-6 semanas</li>
-                        <li>Variación de intensidad en la semana</li>
-                        <li>Escucha las señales de tu cuerpo</li>
-                        <li>No entrenes si estás enfermo</li>
+                        <li>Avena con plátano y un puñado de frutos secos</li>
+                        <li>Arroz integral con pollo y verduras</li>
+                        <li>Batido de proteína con fruta</li>
+                        <li>Pan integral con pavo y aguacate</li>
                     </ul>
-                    <div class="tip-highlight">
-                        💡 Consejo: El sobreentrenamiento puede retrasar tus progresos meses.
-                    </div>
                 </div>
-            </div>
-        </div>
-        
-        <div class="ads-container">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-4837743291717475"
-                 data-ad-slot="1234567890"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-        </div>
-        
-        <div class="tip-category">
-            <h2>🧠 Motivación y Mentalidad</h2>
-            <div class="tips-grid">
-                <div class="tip-card">
-                    <h3>🎯 Establecer Metas Efectivas</h3>
-                    <p>Las metas SMART (Específicas, Medibles, Alcanzables, Relevantes, Temporales) te mantienen enfocado y motivado.</p>
+                
+                <h3>Durante el Entrenamiento</h3>
+                <p>Solo necesario para sesiones de más de 90 minutos. Para entrenamientos más cortos, el agua es suficiente.</p>
+                
+                <h3>Después del Entrenamiento (Ventana de 30-60 minutos)</h3>
+                <p>Este es el momento más crítico. Tu cuerpo está en un estado anabólico y absorbe nutrientes de forma óptima.</p>
+                
+                <div class="highlight-box">
+                    <strong>🍽️ Ejemplos de comidas post-entrenamiento:</strong>
                     <ul>
-                        <li>Específicas: "Perder 5kg" vs "Estar en forma"</li>
-                        <li>Medibles: números concretos y fechas</li>
-                        <li>Alcanzables: desafiantes pero realistas</li>
-                        <li>Relevantes: importantes para ti</li>
-                        <li>Temporales: con fecha límite clara</li>
+                        <li>Batido de proteína con plátano y avena</li>
+                        <li>Pollo con arroz y verduras</li>
+                        <li>Pescado con patata asada</li>
+                        <li>Yogur griego con fruta y miel</li>
                     </ul>
-                    <div class="tip-highlight">
-                        💡 Consejo: Divide metas grandes en objetivos semanales más pequeños.
+                </div>
+                
+                <h2>Hidratación: El Elemento Más Olvidado</h2>
+                <p>La deshidratación puede reducir tu rendimiento hasta en un 30%. La hidratación correcta es crucial para el rendimiento y la recuperación.</p>
+                
+                <div class="tip-list">
+                    <div class="tip-item">
+                        <strong>💧 Antes del entrenamiento:</strong> 500-600ml de agua 2-3 horas antes
+                    </div>
+                    <div class="tip-item">
+                        <strong>💧 Durante el entrenamiento:</strong> 150-250ml cada 15-20 minutos
+                    </div>
+                    <div class="tip-item">
+                        <strong>💧 Después del entrenamiento:</strong> 1.5 veces el peso perdido en sudor
+                    </div>
+                    <div class="tip-item">
+                        <strong>💧 Indicador de hidratación:</strong> El color de tu orina debe ser amarillo claro
                     </div>
                 </div>
                 
-                <div class="tip-card">
-                    <h3>📊 Seguimiento de Progreso</h3>
-                    <p>Lo que se mide, se mejora. El seguimiento te mantiene motivado y te permite ajustar tu plan.</p>
-                    <ul>
-                        <li>Fotos de progreso semanales</li>
-                        <li>Mediciones corporales</li>
-                        <li>Registro de entrenamientos</li>
-                        <li>Pesos levantados y repeticiones</li>
-                        <li>Energía y estado de ánimo diario</li>
-                    </ul>
-                    <div class="tip-highlight">
-                        💡 Consejo: Las fotos muestran cambios que las básculas no reflejan.
+                <h2>Suplementación: ¿Qué Realmente Funciona?</h2>
+                
+                <h3>Suplementos Fundamentales</h3>
+                <div class="highlight-box">
+                    <strong>✅ Proteína en polvo:</strong> Conveniente para alcanzar tus objetivos diarios de proteína
+                    <br><br>
+                    <strong>✅ Creatina:</strong> Aumenta la fuerza y potencia, mejora la recuperación
+                    <br><br>
+                    <strong>✅ Omega-3:</strong> Reduce la inflamación, mejora la salud cardiovascular
+                    <br><br>
+                    <strong>✅ Vitamina D:</strong> Esencial para la salud ósea y función inmune
+                </div>
+                
+                <h3>Suplementos Opcionales</h3>
+                <div class="highlight-box">
+                    <strong>🤔 Cafeína:</strong> Mejora el rendimiento y la concentración (3-6mg por kg de peso)
+                    <br><br>
+                    <strong>🤔 Beta-alanina:</strong> Reduce la fatiga en ejercicios de alta intensidad
+                    <br><br>
+                    <strong>🤔 BCAA:</strong> Pueden ayudar en entrenamientos en ayunas
+                </div>
+                
+                <h2>Errores Comunes de Nutrición Deportiva</h2>
+                
+                <div class="tip-list">
+                    <div class="tip-item">
+                        <strong>❌ Error 1:</strong> No comer suficiente proteína → Resultado: Mala recuperación y pérdida de músculo
+                    </div>
+                    <div class="tip-item">
+                        <strong>❌ Error 2:</strong> Eliminar carbohidratos completamente → Resultado: Falta de energía y bajo rendimiento
+                    </div>
+                    <div class="tip-item">
+                        <strong>❌ Error 3:</strong> No hidratarse adecuadamente → Resultado: Bajo rendimiento y calambres
+                    </div>
+                    <div class="tip-item">
+                        <strong>❌ Error 4:</strong> No comer nada después del entrenamiento → Resultado: Recuperación lenta y pérdida de músculo
+                    </div>
+                    <div class="tip-item">
+                        <strong>❌ Error 5:</strong> Confiar demasiado en los suplementos → Resultado: Descuido de la alimentación real
                     </div>
                 </div>
                 
-                <div class="tip-card">
-                    <h3>👥 Construir Hábitos Duraderos</h3>
-                    <p>Los hábitos son la base del éxito a largo plazo. Construye sistemas, no solo motivación temporal.</p>
-                    <ul>
-                        <li>Empieza pequeño: 5 minutos diarios</li>
-                        <li>Hazlo a la misma hora cada día</li>
-                        <li>Prepara tu entorno para el éxito</li>
-                        <li>Celebra las pequeñas victorias</li>
-                        <li>Ten un plan B para días difíciles</li>
-                    </ul>
-                    <div class="tip-highlight">
-                        💡 Consejo: Se necesitan 21 días para formar un hábito, pero 66 para automatizarlo.
-                    </div>
+                <h2>Plan de Alimentación de Ejemplo</h2>
+                
+                <h3>Día de Entrenamiento</h3>
+                <div class="highlight-box">
+                    <strong>🌅 Desayuno (7:00):</strong> Avena con plátano, frutos secos y huevos revueltos
+                    <br><br>
+                    <strong>🥤 Pre-entrenamiento (9:30):</strong> Batido de proteína con fruta
+                    <br><br>
+                    <strong>💪 Post-entrenamiento (11:30):</strong> Pollo con arroz integral y verduras
+                    <br><br>
+                    <strong>🍽️ Almuerzo (14:00):</strong> Salmón con batata asada y ensalada
+                    <br><br>
+                    <strong>🍎 Merienda (17:00):</strong> Yogur griego con frutos secos
+                    <br><br>
+                    <strong>🍽️ Cena (20:00):</strong> Pavo con quinoa y verduras al vapor
                 </div>
                 
-                <div class="tip-card">
-                    <h3>🔥 Superar la Motivación</h3>
-                    <p>La motivación es temporal. La disciplina y los sistemas te llevarán más lejos que la motivación sola.</p>
-                    <ul>
-                        <li>Entrena incluso cuando no tienes ganas</li>
-                        <li>Reduce la fricción: prepara tu ropa la noche anterior</li>
-                        <li>Encuentra tu "por qué" profundo</li>
-                        <li>Visualiza tus objetivos diariamente</li>
-                        <li>Rodéate de personas que te inspiren</li>
-                    </ul>
-                    <div class="tip-highlight">
-                        💡 Consejo: La motivación te lleva al gimnasio, la disciplina te hace entrenar bien.
-                    </div>
+                <h2>Consejos Finales</h2>
+                <ul>
+                    <li><strong>Planifica tus comidas:</strong> Dedica un día a la semana a preparar tus comidas</li>
+                    <li><strong>Come alimentos reales:</strong> Prioriza comida natural sobre procesados</li>
+                    <li><strong>Escucha a tu cuerpo:</strong> Ajusta las cantidades según tu hambre y energía</li>
+                    <li><strong>No te obsesiones:</strong> Un 80% de alimentación correcta es suficiente</li>
+                    <li><strong>Mantén un diario:</strong> Anota lo que comes y cómo te sientes</li>
+                </ul>
+                
+                <div class="cta-box">
+                    <h3>¿Quieres un plan nutricional personalizado?</h3>
+                    <p>EntrenoApp te ayuda a calcular tus necesidades calóricas y crear un plan adaptado a tus objetivos</p>
+                    <a href="/app.html" class="cta-button">Empezar Ahora</a>
                 </div>
             </div>
             
-            <div class="expert-quote">
-                <p>"La diferencia entre los que logran sus objetivos y los que no, no es la motivación inicial, sino la capacidad de mantener la consistencia cuando la motivación se desvanece."</p>
-                <div class="author">- Carlos Mendez, Coach de Rendimiento</div>
+            <div class="author-bio">
+                <div class="author-avatar">MG</div>
+                <div class="author-info">
+                    <h4>María González</h4>
+                    <p>Nutricionista deportiva certificada con más de 8 años de experiencia. Especializada en nutrición para atletas y personas activas. Ha ayudado a cientos de clientes a alcanzar sus objetivos de composición corporal y rendimiento.</p>
+                </div>
             </div>
-        </div>
-        
-        <div class="ads-container">
+        </article>
+    </div>
+    
+    <!-- Ad Section -->
+    <div class="ad-section">
+        <div class="ad-container">
             <ins class="adsbygoogle"
                  style="display:block"
                  data-ad-client="ca-pub-4837743291717475"
-                 data-ad-slot="1234567890"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-        </div>
-        
-        <div class="tip-category">
-            <h2>🏃‍♂️ Técnicas Avanzadas</h2>
-            <div class="tips-grid">
-                <div class="tip-card">
-                    <h3>⚡ Periodización de Entrenamiento</h3>
-                    <p>Estructura tu entrenamiento en ciclos para maximizar adaptaciones y prevenir estancamientos.</p>
-                    <ul>
-                        <li>Macrociclo: plan anual completo</li>
-                        <li>Mesociclo: 4-6 semanas de enfoque</li>
-                        <li>Microciclo: semana de entrenamiento</li>
-                        <li>Variación de volumen e intensidad</li>
-                        <li>Adaptación progresiva del estrés</li>
-                    </ul>
-                    <div class="tip-highlight">
-                        💡 Consejo: La periodización previene el sobreentrenamiento y maximiza las ganancias.
-                    </div>
-                </div>
-                
-                <div class="tip-card">
-                    <h3>🎯 Técnicas de Intensificación</h3>
-                    <p>Métodos avanzados para superar mesetas y maximizar el crecimiento muscular.</p>
-                    <ul>
-                        <li>Superseries: ejercicios consecutivos sin descanso</li>
-                        <li>Dropsets: reducir peso y continuar</li>
-                        <li>Rest-pause: pausas cortas dentro de una serie</li>
-                        <li>Repeticiones forzadas: con ayuda de un compañero</li>
-                        <li>Técnica de pre-fatiga muscular</li>
-                    </ul>
-                    <div class="tip-highlight">
-                        💡 Consejo: Usa estas técnicas ocasionalmente, no en cada entrenamiento.
-                    </div>
-                </div>
-                
-                <div class="tip-card">
-                    <h3>🧠 Conexión Mente-Músculo</h3>
-                    <p>La conexión neuromuscular mejora la activación muscular y los resultados del entrenamiento.</p>
-                    <ul>
-                        <li>Visualiza el músculo trabajando</li>
-                        <li>Concentración en la contracción</li>
-                        <li>Control excéntrico lento</li>
-                        <li>Pausa en la contracción máxima</li>
-                        <li>Evita el impulso y el balanceo</li>
-                    </ul>
-                    <div class="tip-highlight">
-                        💡 Consejo: La calidad del movimiento supera la cantidad de peso.
-                    </div>
-                </div>
-                
-                <div class="tip-card">
-                    <h3>📈 Progresión Inteligente</h3>
-                    <p>El principio de sobrecarga progresiva es fundamental para el crecimiento continuo.</p>
-                    <ul>
-                        <li>Aumenta peso cuando puedas hacer 2+ repeticiones extra</li>
-                        <li>Progresión semanal de 2.5-5%</li>
-                        <li>Registra todos tus entrenamientos</li>
-                        <li>Planifica aumentos de volumen</li>
-                        <li>Escucha a tu cuerpo para ajustar</li>
-                    </ul>
-                    <div class="tip-highlight">
-                        💡 Consejo: La progresión debe ser gradual y sostenible a largo plazo.
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="ads-container">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-4837743291717475"
-                 data-ad-slot="1234567890"
+                 data-ad-slot="auto"
                  data-ad-format="auto"
                  data-full-width-responsive="true"></ins>
         </div>
     </div>
     
-    <footer class="glass-footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>EntrenoApp</h3>
-                <p>Tu entrenador personal de fitness</p>
-            </div>
-            <div class="footer-section">
-                <h4>Enlaces</h4>
-                <ul>
-                    <li><a href="/home.html">Inicio</a></li>
-                    <li><a href="/about.html">Nosotros</a></li>
-                    <li><a href="/contact.html">Contacto</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Legal</h4>
-                <ul>
-                    <li><a href="/privacy.html">Privacidad</a></li>
-                    <li><a href="/terms.html">Términos</a></li>
-                    <li><a href="/contact.html">Contacto</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Síguenos</h4>
-                <div class="social-links">
-                    <a href="https://tiktok.com/@EntrenoApp" target="_blank">TikTok</a>
-                    <a href="https://instagram.com/entrenoappfacil" target="_blank">Instagram</a>
-                </div>
-            </div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="social-links">
+            <a href="https://www.tiktok.com/@EntrenoApp" target="_blank" rel="noopener">🎵 TikTok</a>
+            <a href="https://www.instagram.com/entrenoappfacil" target="_blank" rel="noopener">📸 Instagram</a>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 LIPA Studios. Todos los derechos reservados.</p>
+        
+        <div class="footer-links">
+            <a href="blog.html">Blog</a>
+            <a href="about.html">Sobre Nosotros</a>
+            <a href="workout-guides.html">Guías de Entrenamiento</a>
+            <a href="fitness-tips.html">Consejos de Fitness</a>
+            <a href="exercises-library.html">Biblioteca de Ejercicios</a>
+            <a href="fitness-calculators.html">Calculadoras</a>
+            <a href="resources.html">Recursos</a>
+            <a href="faq.html">FAQ</a>
+            <a href="privacy.html">Privacidad</a>
+            <a href="terms.html">Términos</a>
+            <a href="contact.html">Contacto</a>
         </div>
+        
+        <p>&copy; 2024 EntrenoApp - LIPA Studios. Todos los derechos reservados.</p>
     </footer>
     
     <script>
@@ -407,4 +547,3 @@
     </script>
 </body>
 </html>
-
