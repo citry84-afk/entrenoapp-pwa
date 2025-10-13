@@ -125,7 +125,13 @@
             border: 2px solid #e0e0e0;
             border-radius: 8px;
             font-size: 1rem;
+            color: #1a1a1a;
+            background: white;
             transition: border-color 0.3s ease;
+        }
+        
+        .form-input::placeholder {
+            color: #999;
         }
         
         .form-input:focus {
@@ -139,14 +145,29 @@
             border: 2px solid #e0e0e0;
             border-radius: 8px;
             font-size: 1rem;
+            color: #1a1a1a;
             background: white;
             cursor: pointer;
             transition: border-color 0.3s ease;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23667eea" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>');
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 20px;
+            padding-right: 40px;
         }
         
         .form-select:focus {
             outline: none;
             border-color: #667eea;
+        }
+        
+        .form-select option {
+            color: #1a1a1a;
+            background: white;
+            padding: 10px;
         }
         
         .calculate-button {
