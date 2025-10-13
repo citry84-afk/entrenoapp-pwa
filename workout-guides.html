@@ -40,12 +40,251 @@
     
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4837743291717475" crossorigin="anonymous"></script>
+    
+    <style>
+        /* Artículo completo */
+        .article-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            background: white;
+            line-height: 1.8;
+        }
+        
+        .article-header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        .article-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            color: #6a6a6a;
+            font-size: 0.95rem;
+            flex-wrap: wrap;
+        }
+        
+        .article-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .article-image {
+            width: 100%;
+            max-width: 700px;
+            height: 400px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 16px;
+            margin: 40px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+        }
+        
+        .article-intro {
+            font-size: 1.3rem;
+            color: #4a4a4a;
+            font-weight: 500;
+            margin: 30px 0;
+            padding: 25px;
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            border-radius: 8px;
+        }
+        
+        .article-content {
+            font-size: 1.1rem;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        
+        .article-content h2 {
+            font-size: 2rem;
+            color: #667eea;
+            margin: 50px 0 25px;
+            font-weight: 700;
+        }
+        
+        .article-content h3 {
+            font-size: 1.5rem;
+            color: #1a1a1a;
+            margin: 35px 0 20px;
+            font-weight: 600;
+        }
+        
+        .article-content p {
+            margin-bottom: 20px;
+        }
+        
+        .article-content ul,
+        .article-content ol {
+            margin: 20px 0;
+            padding-left: 30px;
+        }
+        
+        .article-content li {
+            margin-bottom: 12px;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-left: 4px solid #667eea;
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 8px;
+        }
+        
+        .highlight-box strong {
+            color: #667eea;
+            font-size: 1.1rem;
+        }
+        
+        .exercise-list {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        
+        .exercise-item {
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .exercise-item:last-child {
+            border-bottom: none;
+        }
+        
+        .exercise-item strong {
+            color: #667eea;
+            font-size: 1.1rem;
+        }
+        
+        .author-bio {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 16px;
+            margin-top: 60px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .author-avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+        
+        .author-info h4 {
+            color: #1a1a1a;
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+        }
+        
+        .author-info p {
+            color: #6a6a6a;
+            margin: 0;
+        }
+        
+        .cta-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 16px;
+            text-align: center;
+            margin: 50px 0;
+        }
+        
+        .cta-box h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+        
+        .cta-box p {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            opacity: 0.95;
+        }
+        
+        .cta-button {
+            background: white;
+            color: #667eea;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+        }
+        
+        @media (max-width: 768px) {
+            .article-title {
+                font-size: 2rem;
+            }
+            
+            .article-image {
+                height: 250px;
+                font-size: 3rem;
+            }
+            
+            .author-bio {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Navigation -->
+    <nav class="main-navigation">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">💪 EntrenoApp</a>
+            <ul class="nav-links">
+                <li><a href="/">Inicio</a></li>
+                <li><a href="/app.html">App</a></li>
+                <li><a href="/blog.html">Blog</a></li>
+                <li><a href="/workout-guides.html">Guías</a></li>
+                <li><a href="/contact.html">Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Breadcrumbs -->
     <div class="breadcrumbs">
-        <a href="/">Inicio</a> > <a href="/home.html">EntrenoApp</a> > Guías de Entrenamiento
+        <div class="container">
+            <a href="/">Inicio</a> > <a href="/blog.html">Blog</a> > Guías de Entrenamiento
+        </div>
     </div>
     
+    <!-- Hero Section -->
     <div class="hero-section">
         <div class="hero-content">
             <h1 class="hero-title">🏃‍♂️ Guías Completas de Entrenamiento</h1>
@@ -53,253 +292,216 @@
         </div>
     </div>
     
-    <div class="container" style="padding: 60px 20px;">
-        <div class="ads-container">
+    <!-- Article Container -->
+    <div class="article-container">
+        <!-- Article 1: Running para Principiantes -->
+        <article>
+            <div class="article-header">
+                <h1 class="article-title">🏃‍♂️ Guía Completa: Empezar a Correr desde Cero</h1>
+                <div class="article-meta">
+                    <span>📅 15 de Enero, 2024</span>
+                    <span>⏱️ 12 min lectura</span>
+                    <span>👤 Por Carlos Méndez</span>
+                </div>
+            </div>
+            
+            <div class="article-image">🏃‍♂️</div>
+            
+            <div class="article-intro">
+                ¿Quieres empezar a correr pero no sabes por dónde comenzar? Esta guía completa te llevará desde el sofá hasta correr 5K en solo 8 semanas, con un plan paso a paso diseñado por entrenadores profesionales.
+            </div>
+            
+            <div class="article-content">
+                <h2>¿Por qué empezar a correr?</h2>
+                <p>Correr es uno de los ejercicios más accesibles y efectivos para mejorar tu salud cardiovascular, perder peso y aumentar tu energía. No necesitas equipamiento costoso ni un gimnasio: solo un par de zapatillas y la motivación para empezar.</p>
+                
+                <div class="highlight-box">
+                    <strong>💡 Beneficios de correr regularmente:</strong>
+                    <ul>
+                        <li>Mejora la salud cardiovascular y reduce el riesgo de enfermedades del corazón</li>
+                        <li>Quema calorías eficientemente (aproximadamente 100 calorías por cada 1.6 km)</li>
+                        <li>Fortalece huesos y músculos</li>
+                        <li>Reduce el estrés y mejora el estado de ánimo</li>
+                        <li>Mejora la calidad del sueño</li>
+                    </ul>
+                </div>
+                
+                <h2>Plan de 8 Semanas para Principiantes</h2>
+                <p>Este plan está diseñado para personas que no han corrido antes o que llevan tiempo sin hacer ejercicio. La clave es la progresión gradual para evitar lesiones y mantener la motivación.</p>
+                
+                <h3>Semana 1-2: Caminar y trotar suave</h3>
+                <div class="exercise-list">
+                    <div class="exercise-item">
+                        <strong>Día 1, 3, 5:</strong> 5 minutos caminando + 1 minuto trotando suave. Repetir 3 veces. Total: 18 minutos
+                    </div>
+                    <div class="exercise-item">
+                        <strong>Día 2, 4:</strong> Descanso activo (caminata de 20 minutos)
+                    </div>
+                    <div class="exercise-item">
+                        <strong>Día 6:</strong> Descanso completo
+                    </div>
+                    <div class="exercise-item">
+                        <strong>Día 7:</strong> Caminata de 30 minutos a ritmo cómodo
+                    </div>
+                </div>
+                
+                <h3>Semana 3-4: Aumentar el tiempo de trote</h3>
+                <div class="exercise-list">
+                    <div class="exercise-item">
+                        <strong>Día 1, 3, 5:</strong> 5 minutos caminando + 2 minutos trotando. Repetir 3 veces. Total: 21 minutos
+                    </div>
+                    <div class="exercise-item">
+                        <strong>Día 2, 4:</strong> Descanso activo (caminata de 25 minutos)
+                    </div>
+                    <div class="exercise-item">
+                        <strong>Día 6:</strong> Descanso completo
+                    </div>
+                    <div class="exercise-item">
+                        <strong>Día 7:</strong> Caminata de 35 minutos
+                    </div>
+                </div>
+                
+                <h3>Semana 5-6: Más trote, menos caminata</h3>
+                <div class="exercise-list">
+                    <div class="exercise-item">
+                        <strong>Día 1, 3, 5:</strong> 3 minutos caminando + 3 minutos trotando. Repetir 4 veces. Total: 24 minutos
+                    </div>
+                    <div class="exercise-item">
+                        <strong>Día 2, 4:</strong> Descanso activo (caminata de 30 minutos)
+                    </div>
+                    <div class="exercise-item">
+                        <strong>Día 6:</strong> Descanso completo
+                    </div>
+                    <div class="exercise-item">
+                        <strong>Día 7:</strong> 20 minutos de trote continuo
+                    </div>
+                </div>
+                
+                <h3>Semana 7-8: Preparación para 5K</h3>
+                <div class="exercise-list">
+                    <div class="exercise-item">
+                        <strong>Día 1, 3, 5:</strong> 5 minutos caminando + 8 minutos trotando. Repetir 2 veces. Total: 26 minutos
+                    </div>
+                    <div class="exercise-item">
+                        <strong>Día 2, 4:</strong> Descanso activo (caminata de 30 minutos)
+                    </div>
+                    <div class="exercise-item">
+                        <strong>Día 6:</strong> Descanso completo
+                    </div>
+                    <div class="exercise-item">
+                        <strong>Día 7 (Semana 8):</strong> ¡Corre tu primera 5K! Objetivo: completar la distancia, no importa el tiempo
+                    </div>
+                </div>
+                
+                <h2>Técnica de Carrera Correcta</h2>
+                <p>Una buena técnica no solo mejora tu rendimiento, sino que también previene lesiones. Presta atención a estos aspectos clave:</p>
+                
+                <h3>Postura</h3>
+                <p>Mantén la espalda recta y los hombros relajados. Imagina que hay una cuerda atada a la parte superior de tu cabeza que te mantiene erguido. Evita inclinarte hacia adelante o hacia atrás.</p>
+                
+                <h3>Cadencia</h3>
+                <p>Intenta dar entre 170-180 pasos por minuto. Esto reduce el impacto en tus articulaciones y mejora la eficiencia. Puedes usar una app o simplemente contar tus pasos durante 30 segundos y multiplicar por 2.</p>
+                
+                <h3>Aterrizaje</h3>
+                <p>Aterriza con la parte media del pie, no con el talón. Esto distribuye mejor el impacto y reduce el riesgo de lesiones. Evita "golpear" el suelo; intenta hacer un contacto suave.</p>
+                
+                <h3>Brazos</h3>
+                <p>Mantén los brazos en un ángulo de 90 grados y muévelos de forma natural hacia adelante y atrás, no de lado a lado. Los brazos deben moverse en oposición a las piernas.</p>
+                
+                <h2>Equipamiento Esencial</h2>
+                <p>No necesitas mucho para empezar a correr, pero invertir en el equipamiento correcto hará una gran diferencia:</p>
+                
+                <div class="highlight-box">
+                    <strong>👟 Zapatillas de running:</strong> Lo más importante. Busca zapatillas específicas para running que se ajusten bien a tu tipo de pie. Si es posible, ve a una tienda especializada donde puedan analizar tu pisada.
+                    <br><br>
+                    <strong>👕 Ropa técnica:</strong> Prendas de materiales transpirables que evacúen el sudor. Evita el algodón, que se moja y puede causar rozaduras.
+                    <br><br>
+                    <strong>🧦 Calcetines técnicos:</strong> Previenen ampollas y mantienen los pies secos.
+                    <br><br>
+                    <strong>🎧 Auriculares (opcional):</strong> Música o podcasts pueden hacer que las carreras sean más entretenidas.
+                </div>
+                
+                <h2>Nutrición e Hidratación</h2>
+                <h3>Antes de correr</h3>
+                <p>Si vas a correr por menos de 60 minutos, no necesitas comer antes. Si corres por más tiempo o por la mañana, come algo ligero 30-60 minutos antes: un plátano, una rebanada de pan con miel, o un puñado de frutos secos.</p>
+                
+                <h3>Durante la carrera</h3>
+                <p>Para carreras de menos de 60 minutos, solo necesitas agua. Para carreras más largas, considera bebidas deportivas o geles energéticos.</p>
+                
+                <h3>Después de correr</h3>
+                <p>En los primeros 30 minutos después de correr, consume una combinación de carbohidratos y proteínas (proporción 3:1). Por ejemplo: un batido de proteína con fruta, o yogur griego con frutos secos.</p>
+                
+                <h2>Prevención de Lesiones</h2>
+                <p>Las lesiones más comunes en principiantes son:</p>
+                
+                <div class="highlight-box">
+                    <strong>🔴 Rodilla del corredor (síndrome patelofemoral):</strong> Dolor alrededor o detrás de la rótula. Prevención: Fortalece cuádriceps y glúteos, evita aumentos bruscos de volumen.
+                    <br><br>
+                    <strong>🔴 Fascitis plantar:</strong> Dolor en la planta del pie. Prevención: Estira la pantorrilla y la fascia plantar, usa zapatillas adecuadas.
+                    <br><br>
+                    <strong>🔴 Periostitis tibial:</strong> Dolor en la parte interna de la tibia. Prevención: Aumenta el volumen gradualmente, fortalece tibiales, mejora la técnica.
+                </div>
+                
+                <h2>Consejos Finales</h2>
+                <ul>
+                    <li><strong>Escucha a tu cuerpo:</strong> Si sientes dolor (no solo fatiga), para y descansa.</li>
+                    <li><strong>No aumentes más del 10% por semana:</strong> La regla del 10% es una guía clásica para evitar sobrecargas.</li>
+                    <li><strong>Incluye días de descanso:</strong> El descanso es cuando tu cuerpo se adapta y mejora.</li>
+                    <li><strong>Calienta antes y estira después:</strong> 5 minutos de caminata antes y estiramientos suaves después.</li>
+                    <li><strong>Mantén un diario:</strong> Anota cómo te sientes, la distancia, el tiempo. Esto te ayudará a ver tu progreso.</li>
+                </ul>
+                
+                <div class="cta-box">
+                    <h3>¿Listo para empezar?</h3>
+                    <p>Descarga EntrenoApp y obtén un plan de running personalizado basado en tu nivel actual</p>
+                    <a href="/app.html" class="cta-button">Empezar Ahora</a>
+                </div>
+            </div>
+            
+            <div class="author-bio">
+                <div class="author-avatar">CM</div>
+                <div class="author-info">
+                    <h4>Carlos Méndez</h4>
+                    <p>Entrenador personal certificado con más de 10 años de experiencia. Especialista en running y preparación física. Ha ayudado a más de 500 corredores a alcanzar sus objetivos, desde principiantes hasta maratonistas.</p>
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <!-- Ad Section -->
+    <div class="ad-section">
+        <div class="ad-container">
             <ins class="adsbygoogle"
                  style="display:block"
                  data-ad-client="ca-pub-4837743291717475"
-                 data-ad-slot="1234567890"
+                 data-ad-slot="auto"
                  data-ad-format="auto"
                  data-full-width-responsive="true"></ins>
-        </div>
-        
-        <div class="guide-section">
-            <h2 class="section-title">🏃‍♂️ Guías de Running</h2>
-            <div class="guides-grid">
-                <div class="guide-card">
-                    <h3>Guía Completa para Principiantes</h3>
-                    <p>Todo lo que necesitas saber para empezar a correr de forma segura y efectiva. Desde la técnica básica hasta la planificación de tus primeras carreras.</p>
-                    <ul>
-                        <li>Técnica de carrera correcta</li>
-                        <li>Plan de 8 semanas para principiantes</li>
-                        <li>Prevención de lesiones</li>
-                        <li>Equipamiento esencial</li>
-                        <li>Alimentación e hidratación</li>
-                    </ul>
-                    <a href="#" class="read-more">Leer Guía Completa</a>
-                </div>
-                
-                <div class="guide-card">
-                    <h3>Entrenamiento de Resistencia</h3>
-                    <p>Mejora tu capacidad aeróbica y aumenta la distancia de tus carreras con técnicas probadas de entrenamiento de resistencia.</p>
-                    <ul>
-                        <li>Entrenamiento por zonas de frecuencia cardíaca</li>
-                        <li>Carreras largas progresivas</li>
-                        <li>Fartlek y cambios de ritmo</li>
-                        <li>Recuperación activa</li>
-                        <li>Planificación de volumen semanal</li>
-                    </ul>
-                    <a href="#" class="read-more">Leer Guía Completa</a>
-                </div>
-                
-                <div class="guide-card">
-                    <h3>Preparación para Carreras</h3>
-                    <p>Prepara tu primera 5K, 10K o media maratón con planes específicos y consejos de nutrición y mentalidad.</p>
-                    <ul>
-                        <li>Planes de 12 semanas para 5K</li>
-                        <li>Preparación para 10K en 16 semanas</li>
-                        <li>Media maratón: plan de 20 semanas</li>
-                        <li>Estrategia de carrera</li>
-                        <li>Nutrición pre y post carrera</li>
-                    </ul>
-                    <a href="#" class="read-more">Leer Guía Completa</a>
-                </div>
-            </div>
-        </div>
-        
-        <div class="ads-container">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-4837743291717475"
-                 data-ad-slot="1234567890"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-        </div>
-        
-        <div class="guide-section">
-            <h2 class="section-title">🏋️‍♂️ Guías de Gimnasio</h2>
-            <div class="guides-grid">
-                <div class="guide-card">
-                    <h3>Rutina Push/Pull/Legs</h3>
-                    <p>La división más efectiva para el desarrollo muscular equilibrado. Aprende a estructurar tus entrenamientos para maximizar el crecimiento.</p>
-                    <ul>
-                        <li>Día Push: pecho, hombros, tríceps</li>
-                        <li>Día Pull: espalda, bíceps</li>
-                        <li>Día Legs: cuádriceps, glúteos, isquiotibiales</li>
-                        <li>Progresión de cargas</li>
-                        <li>Descanso entre series</li>
-                    </ul>
-                    <a href="#" class="read-more">Leer Guía Completa</a>
-                </div>
-                
-                <div class="guide-card">
-                    <h3>Fuerza para Principiantes</h3>
-                    <p>Construye una base sólida de fuerza con ejercicios fundamentales y progresiones seguras para principiantes.</p>
-                    <ul>
-                        <li>Ejercicios básicos: sentadilla, peso muerto, press</li>
-                        <li>Forma correcta y seguridad</li>
-                        <li>Progresión gradual de pesos</li>
-                        <li>Rutina de 3 días por semana</li>
-                        <li>Prevención de lesiones</li>
-                    </ul>
-                    <a href="#" class="read-more">Leer Guía Completa</a>
-                </div>
-                
-                <div class="guide-card">
-                    <h3>Hipertrofia Avanzada</h3>
-                    <p>Técnicas avanzadas para maximizar el crecimiento muscular: superseries, dropsets, rest-pause y más.</p>
-                    <ul>
-                        <li>Superseries y triseries</li>
-                        <li>Dropsets y rest-pause</li>
-                        <li>Entrenamiento excéntrico</li>
-                        <li>Periodización para hipertrofia</li>
-                        <li>Nutrición para crecimiento</li>
-                    </ul>
-                    <a href="#" class="read-more">Leer Guía Completa</a>
-                </div>
-            </div>
-        </div>
-        
-        <div class="ads-container">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-4837743291717475"
-                 data-ad-slot="1234567890"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-        </div>
-        
-        <div class="guide-section">
-            <h2 class="section-title">⚡ Guías de Entrenamiento Funcional</h2>
-            <div class="guides-grid">
-                <div class="guide-card">
-                    <h3>WODs para Principiantes</h3>
-                    <p>Workouts of the Day adaptados para empezar en el entrenamiento funcional de forma segura y progresiva.</p>
-                    <ul>
-                        <li>WODs de 10-15 minutos</li>
-                        <li>Ejercicios básicos: burpees, mountain climbers</li>
-                        <li>Escalado de ejercicios</li>
-                        <li>Progresión de intensidad</li>
-                        <li>Técnica antes que velocidad</li>
-                    </ul>
-                    <a href="#" class="read-more">Leer Guía Completa</a>
-                </div>
-                
-                <div class="guide-card">
-                    <h3>Entrenamiento HIIT</h3>
-                    <p>High Intensity Interval Training para quemar grasa y mejorar la condición física en menos tiempo.</p>
-                    <ul>
-                        <li>Protocolos HIIT: Tabata, 30/30, 45/15</li>
-                        <li>Ejercicios de alta intensidad</li>
-                        <li>Progresión de intervalos</li>
-                        <li>Recuperación y descanso</li>
-                        <li>Beneficios metabólicos</li>
-                    </ul>
-                    <a href="#" class="read-more">Leer Guía Completa</a>
-                </div>
-                
-                <div class="guide-card">
-                    <h3>Entrenamiento en Casa</h3>
-                    <p>Rutinas efectivas sin equipamiento o con materiales mínimos para entrenar en casa.</p>
-                    <ul>
-                        <li>Rutinas sin equipamiento</li>
-                        <li>Uso de materiales domésticos</li>
-                        <li>Ejercicios con peso corporal</li>
-                        <li>Rutinas de 20-30 minutos</li>
-                        <li>Espacios reducidos</li>
-                    </ul>
-                    <a href="#" class="read-more">Leer Guía Completa</a>
-                </div>
-            </div>
-        </div>
-        
-        <div class="ads-container">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-4837743291717475"
-                 data-ad-slot="1234567890"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-        </div>
-        
-        <div class="guide-section">
-            <h2 class="section-title">💪 Consejos de Expertos</h2>
-            <div class="guides-grid">
-                <div class="guide-card">
-                    <h3>Nutrición Deportiva</h3>
-                    <p>Aprende a alimentarte correctamente para optimizar tu rendimiento y recuperación.</p>
-                    <ul>
-                        <li>Macronutrientes para deportistas</li>
-                        <li>Timing de comidas</li>
-                        <li>Hidratación durante el ejercicio</li>
-                        <li>Suplementación básica</li>
-                        <li>Alimentación pre y post entrenamiento</li>
-                    </ul>
-                    <a href="#" class="read-more">Leer Guía Completa</a>
-                </div>
-                
-                <div class="guide-card">
-                    <h3>Prevención de Lesiones</h3>
-                    <p>Mantente libre de lesiones con técnicas de prevención y recuperación activa.</p>
-                    <ul>
-                        <li>Calentamiento dinámico</li>
-                        <li>Estiramientos post-entrenamiento</li>
-                        <li>Ejercicios de movilidad</li>
-                        <li>Escucha a tu cuerpo</li>
-                        <li>Descanso y recuperación</li>
-                    </ul>
-                    <a href="#" class="read-more">Leer Guía Completa</a>
-                </div>
-                
-                <div class="guide-card">
-                    <h3>Psicología del Deporte</h3>
-                    <p>Desarrolla la mentalidad correcta para alcanzar tus objetivos fitness.</p>
-                    <ul>
-                        <li>Establecimiento de metas SMART</li>
-                        <li>Motivación intrínseca vs extrínseca</li>
-                        <li>Gestión del estrés</li>
-                        <li>Visualización y mentalización</li>
-                        <li>Construcción de hábitos</li>
-                    </ul>
-                    <a href="#" class="read-more">Leer Guía Completa</a>
-                </div>
-            </div>
         </div>
     </div>
     
-    <footer class="glass-footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>EntrenoApp</h3>
-                <p>Tu entrenador personal de fitness</p>
-            </div>
-            <div class="footer-section">
-                <h4>Enlaces</h4>
-                <ul>
-                    <li><a href="/home.html">Inicio</a></li>
-                    <li><a href="/about.html">Nosotros</a></li>
-                    <li><a href="/contact.html">Contacto</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Legal</h4>
-                <ul>
-                    <li><a href="/privacy.html">Privacidad</a></li>
-                    <li><a href="/terms.html">Términos</a></li>
-                    <li><a href="/contact.html">Contacto</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Síguenos</h4>
-                <div class="social-links">
-                    <a href="https://tiktok.com/@EntrenoApp" target="_blank">TikTok</a>
-                    <a href="https://instagram.com/entrenoappfacil" target="_blank">Instagram</a>
-                </div>
-            </div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="social-links">
+            <a href="https://www.tiktok.com/@EntrenoApp" target="_blank" rel="noopener">🎵 TikTok</a>
+            <a href="https://www.instagram.com/entrenoappfacil" target="_blank" rel="noopener">📸 Instagram</a>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 LIPA Studios. Todos los derechos reservados.</p>
+        
+        <div class="footer-links">
+            <a href="blog.html">Blog</a>
+            <a href="about.html">Sobre Nosotros</a>
+            <a href="workout-guides.html">Guías de Entrenamiento</a>
+            <a href="fitness-tips.html">Consejos de Fitness</a>
+            <a href="exercises-library.html">Biblioteca de Ejercicios</a>
+            <a href="fitness-calculators.html">Calculadoras</a>
+            <a href="resources.html">Recursos</a>
+            <a href="faq.html">FAQ</a>
+            <a href="privacy.html">Privacidad</a>
+            <a href="terms.html">Términos</a>
+            <a href="contact.html">Contacto</a>
         </div>
+        
+        <p>&copy; 2024 EntrenoApp - LIPA Studios. Todos los derechos reservados.</p>
     </footer>
     
     <script>
@@ -307,4 +509,3 @@
     </script>
 </body>
 </html>
-
