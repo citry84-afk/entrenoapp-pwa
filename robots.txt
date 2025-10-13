@@ -1,7 +1,23 @@
 User-agent: *
 Allow: /
 
+# Sitemap
 Sitemap: https://entrenoapp.netlify.app/sitemap.xml
 
+# Allow all bots to crawl
+User-agent: Googlebot
+Allow: /
 
+User-agent: Googlebot-Image
+Allow: /
 
+User-agent: Mediapartners-Google
+Allow: /
+
+User-agent: AdsBot-Google
+Allow: /
+
+# Disallow only service worker and config files
+Disallow: /sw.js
+Disallow: /manifest.json
+Disallow: /*.json

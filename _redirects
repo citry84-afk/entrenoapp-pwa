@@ -1,11 +1,8 @@
 # Redirects para EntrenoApp
 # Netlify redirects file
 
-# Redirect root to home page
-/ /home.html 200
-
-# Redirect index to home
-/index.html /home.html 301
+# Redirect old home to new structure
+/home.html / 301
 
 # Redirect old privacy to new privacy
 /privacy /privacy.html 301
