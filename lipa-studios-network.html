@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#00D4FF">
+    <meta name="description" content="Red de proyectos LIPA Studios: EntrenoApp (fitness), Finanzas Muy Fáciles (finanzas) y Juegos HTML5 (entretenimiento). Tu bienestar completo.">
+    <meta name="google-site-verification" content="DSyHkxyNB3t94dJbNUw_GKpCGAp4tLsK6JBeGhvhQbQ" />
+    <title>Red LIPA Studios | Fitness, Finanzas y Entretenimiento</title>
+    <link rel="stylesheet" href="css/content-pages.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-633RQLC6T0"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-633RQLC6T0');</script>
+    <style>
+        .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:40px;margin:60px 0}
+        .project-card{background:#fff;border-radius:20px;padding:40px;box-shadow:0 8px 32px rgba(0,0,0,.1);transition:all .3s ease;position:relative;overflow:hidden}
+        .project-card:hover{transform:translateY(-5px);box-shadow:0 12px 48px rgba(0,0,0,.15)}
+        .project-card::before{content:'';position:absolute;top:0;left:0;right:0;height:6px;background:var(--gradient)}
+        .project-card.entrenoapp{--gradient:linear-gradient(135deg,#667eea 0%,#764ba2 100%)}
+        .project-card.finanzas{--gradient:linear-gradient(135deg,#f093fb 0%,#f5576c 100%)}
+        .project-card.lipastudios{--gradient:linear-gradient(135deg,#4facfe 0%,#00f2fe 100%)}
+        .project-icon{font-size:4rem;margin-bottom:20px}
+        .project-title{font-size:2rem;font-weight:700;color:#1a1a1a;margin-bottom:15px}
+        .project-description{color:#666;line-height:1.6;margin-bottom:25px}
+        .project-features{list-style:none;padding:0;margin:25px 0}
+        .project-features li{padding:8px 0;padding-left:25px;position:relative;color:#4a4a4a}
+        .project-features li::before{content:'✓';position:absolute;left:0;color:#667eea;font-weight:bold}
+        .project-link{display:inline-block;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;padding:14px 32px;border-radius:50px;text-decoration:none;font-weight:600;transition:all .3s}
+        .project-link:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(102,126,234,.4)}
+        .synergy-section{background:linear-gradient(135deg,#667eea15 0%,#764ba215 100%);border-left:4px solid #667eea;padding:30px;margin:50px 0;border-radius:12px}
+        .benefit-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin:30px 0}
+        .benefit-card{background:#fff;padding:25px;border-radius:12px;text-align:center}
+        .benefit-icon{font-size:3rem;margin-bottom:15px}
+        .benefit-title{font-size:1.2rem;font-weight:600;color:#667eea;margin-bottom:10px}
+    </style>
+</head>
+<body>
+    <nav class="main-navigation">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">💪 EntrenoApp</a>
+            <ul class="nav-links">
+                <li><a href="/">Inicio</a></li>
+                <li><a href="/app.html">App</a></li>
+                <li><a href="/blog.html">Blog</a></li>
+                <li><a href="/contact.html">Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">🌟 Red LIPA Studios</h1>
+            <p class="hero-description">Tu bienestar completo: Salud física, financiera y mental</p>
+        </div>
+    </div>
+    
+    <div class="article-container">
+        <div class="article-content">
+            <h2 style="text-align:center;font-size:2.5rem;margin-bottom:20px">3 Proyectos, 1 Misión: Tu Mejor Versión</h2>
+            <p style="text-align:center;font-size:1.2rem;color:#666;max-width:800px;margin:0 auto 60px">En LIPA Studios creemos que el bienestar verdadero incluye cuerpo, finanzas y mente. Por eso hemos creado 3 proyectos complementarios.</p>
+
+            <div class="projects-grid">
+                <!-- EntrenoApp -->
+                <div class="project-card entrenoapp">
+                    <div class="project-icon">💪</div>
+                    <h3 class="project-title">EntrenoApp</h3>
+                    <p class="project-description">Tu asistente de fitness personal. Planes de entrenamiento personalizados, seguimiento de progreso y guías de nutrición.</p>
+                    <ul class="project-features">
+                        <li>Planes personalizados (gym, running, funcional)</li>
+                        <li>Seguimiento de progreso</li>
+                        <li>Guías de nutrición y suplementación</li>
+                        <li>Calculadoras fitness</li>
+                        <li>Blog educativo</li>
+                    </ul>
+                    <a href="/" class="project-link">🏋️ Ir a EntrenoApp</a>
+                </div>
+
+                <!-- Finanzas Muy Fáciles -->
+                <div class="project-card finanzas">
+                    <div class="project-icon">💰</div>
+                    <h3 class="project-title">Finanzas Muy Fáciles</h3>
+                    <p class="project-description">Aprende a gestionar tu dinero de forma simple. Educación financiera, calculadoras y herramientas prácticas.</p>
+                    <ul class="project-features">
+                        <li>Educación financiera gratuita</li>
+                        <li>Calculadoras de ahorro e inversión</li>
+                        <li>Guías paso a paso</li>
+                        <li>Planificación de presupuesto</li>
+                        <li>Sin jerga complicada</li>
+                    </ul>
+                    <a href="https://finanzasmuyfaciles.netlify.app" target="_blank" class="project-link" style="background:linear-gradient(135deg,#f093fb 0%,#f5576c 100%)">💸 Ir a Finanzas Muy Fáciles</a>
+                </div>
+
+                <!-- LIPA Studios Games -->
+                <div class="project-card lipastudios">
+                    <div class="project-icon">🎮</div>
+                    <h3 class="project-title">LIPA Studios Games</h3>
+                    <p class="project-description">12 juegos HTML5 gratis sin anuncios. Desde K-pop Idol Tycoon hasta puzzles neon. Entretenimiento puro.</p>
+                    <ul class="project-features">
+                        <li>12 juegos gratis sin anuncios</li>
+                        <li>Idol Agency Tycoon (K-pop)</li>
+                        <li>Juegos neon cyberpunk</li>
+                        <li>Optimizados para móvil</li>
+                        <li>Nuevos juegos cada mes</li>
+                    </ul>
+                    <a href="https://lipastudios.com" target="_blank" class="project-link" style="background:linear-gradient(135deg,#4facfe 0%,#00f2fe 100%)">🕹️ Ir a LIPA Studios</a>
+                </div>
+            </div>
+
+            <div class="synergy-section">
+                <h3 style="color:#667eea;font-size:2rem;margin-bottom:20px">🔗 Por Qué Estos 3 Proyectos Se Complementan</h3>
+                <p style="font-size:1.1rem;line-height:1.8">El éxito en la vida requiere equilibrio. No puedes tener salud física sin estabilidad financiera, ni disfrutar de ambas sin momentos de desconexión y diversión. Nuestros proyectos trabajan juntos:</p>
+
+                <div class="benefit-grid">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">💪➡️💰</div>
+                        <div class="benefit-title">Fitness + Finanzas</div>
+                        <p>Un cuerpo sano reduce gastos médicos. Aprende a invertir en tu salud de forma inteligente.</p>
+                    </div>
+
+                    <div class="benefit-card">
+                        <div class="benefit-icon">💰➡️🎮</div>
+                        <div class="benefit-title">Finanzas + Juegos</div>
+                        <p>La gestión financiera reduce estrés. Los juegos te ayudan a desconectar y recargar energías.</p>
+                    </div>
+
+                    <div class="benefit-card">
+                        <div class="benefit-icon">🎮➡️💪</div>
+                        <div class="benefit-title">Juegos + Fitness</div>
+                        <p>Descanso mental = mejor rendimiento físico. Equilibra tu entrenamiento con diversión.</p>
+                    </div>
+
+                    <div class="benefit-card">
+                        <div class="benefit-icon">🔄</div>
+                        <div class="benefit-title">Ecosistema Completo</div>
+                        <p>Todo de la misma familia LIPA Studios. Calidad y confianza garantizadas.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h2 style="margin-top:60px;font-size:2rem">🎯 Casos de Uso Reales</h2>
+
+            <h3 style="color:#667eea;margin-top:30px">📅 Lunes: Planifica tu Semana</h3>
+            <p><strong>Mañana:</strong> Crea tu plan de entrenamiento en <a href="/" style="color:#667eea">EntrenoApp</a><br>
+            <strong>Mediodía:</strong> Revisa tu presupuesto en <a href="https://finanzasmuyfaciles.netlify.app" target="_blank" style="color:#f5576c">Finanzas Muy Fáciles</a><br>
+            <strong>Noche:</strong> Relájate con los juegos de <a href="https://lipastudios.com" target="_blank" style="color:#00f2fe">LIPA Studios</a></p>
+
+            <h3 style="color:#667eea;margin-top:30px">💡 Sábado: Mejora Personal</h3>
+            <p><strong>Lee un artículo:</strong> Aprende sobre nutrición deportiva en <a href="/blog.html" style="color:#667eea">nuestro blog</a><br>
+            <strong>Calcula tu ahorro:</strong> Usa las calculadoras de <a href="https://finanzasmuyfaciles.netlify.app" target="_blank" style="color:#f5576c">Finanzas</a><br>
+            <strong>Desconecta:</strong> Juega Idol Agency Tycoon en <a href="https://lipastudios.com" target="_blank" style="color:#00f2fe">LIPA Studios</a></p>
+
+            <h3 style="color:#667eea;margin-top:30px">🚀 Objetivo 2025: Triple Transformación</h3>
+            <p><strong>Físicamente:</strong> Sigue tu plan de entrenamiento (EntrenoApp)<br>
+            <strong>Financieramente:</strong> Ahorra e invierte inteligentemente (Finanzas Muy Fáciles)<br>
+            <strong>Mentalmente:</strong> Reduce estrés con entretenimiento sano (LIPA Studios)</p>
+
+            <div style="background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;padding:40px;border-radius:20px;text-align:center;margin:60px 0">
+                <h2 style="color:#fff;font-size:2.5rem;margin-bottom:20px">🌟 Únete a la Comunidad LIPA Studios</h2>
+                <p style="font-size:1.2rem;margin-bottom:30px;opacity:0.9">Más de 500+ personas ya mejoran su vida con nuestros proyectos</p>
+                <div style="display:flex;gap:20px;justify-content:center;flex-wrap:wrap">
+                    <a href="/" style="background:#fff;color:#667eea;padding:14px 28px;border-radius:50px;text-decoration:none;font-weight:600">💪 EntrenoApp</a>
+                    <a href="https://finanzasmuyfaciles.netlify.app" target="_blank" style="background:#fff;color:#f5576c;padding:14px 28px;border-radius:50px;text-decoration:none;font-weight:600">💰 Finanzas</a>
+                    <a href="https://lipastudios.com" target="_blank" style="background:#fff;color:#00f2fe;padding:14px 28px;border-radius:50px;text-decoration:none;font-weight:600">🎮 Juegos</a>
+                </div>
+            </div>
+
+            <h2 style="margin-top:60px">❓ Preguntas Frecuentes</h2>
+
+            <h3>¿Son gratis todos los proyectos?</h3>
+            <p><strong>Sí.</strong> EntrenoApp tiene versión gratuita + premium opcional. Finanzas Muy Fáciles es 100% gratis. LIPA Studios Games son todos gratis sin anuncios molestos.</p>
+
+            <h3>¿Necesito cuenta para los 3 proyectos?</h3>
+            <p>No. Cada proyecto es independiente. Puedes usar el que necesites cuando lo necesites.</p>
+
+            <h3>¿Por qué LIPA Studios crea proyectos tan diferentes?</h3>
+            <p>Creemos en el bienestar integral. Cuerpo + finanzas + mente = vida equilibrada. Cada proyecto aporta una pieza del puzzle.</p>
+
+            <div style="background:#f8f9fa;padding:30px;border-radius:12px;margin-top:40px">
+                <h3 style="color:#667eea">📧 Contacto LIPA Studios</h3>
+                <p>Email: <a href="mailto:lipastudios4@gmail.com" style="color:#667eea">lipastudios4@gmail.com</a></p>
+                <p>TikTok: <a href="https://www.tiktok.com/@EntrenoApp" target="_blank" style="color:#667eea">@EntrenoApp</a></p>
+                <p>Instagram: <a href="https://www.instagram.com/entrenoappfacil" target="_blank" style="color:#667eea">@entrenoappfacil</a></p>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <div class="social-links">
+            <a href="https://www.tiktok.com/@EntrenoApp" target="_blank">🎵 TikTok</a>
+            <a href="https://www.instagram.com/entrenoappfacil" target="_blank">📸 Instagram</a>
+        </div>
+        <p>&copy; 2025 LIPA Studios - Todos los derechos reservados</p>
+    </footer>
+</body>
+</html>
+
