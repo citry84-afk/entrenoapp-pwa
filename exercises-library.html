@@ -4,18 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#00D4FF">
-    <meta name="description" content="Biblioteca completa de ejercicios: running, gimnasio y funcional. Técnicas, variaciones y consejos profesionales para cada ejercicio.">
-    <meta name="keywords" content="ejercicios, biblioteca, running, gimnasio, funcional, técnicas, variaciones, fitness">
+    <meta name="description" content="Biblioteca completa de ejercicios: técnica correcta, músculos trabajados, variaciones y progresiones. Guía profesional para cada ejercicio.">
+    <meta name="keywords" content="ejercicios, técnica, músculos, gimnasio, entrenamiento, fuerza, hipertrofia">
     <meta name="author" content="LIPA Studios">
-    <meta name="google-site-verification" content="DSyHkxyNB3t94dJbNUw_GKpCGAp4tLsK6JBeGhvhQbQ" />    <meta name="robots" content="index, follow">
+    <meta name="google-site-verification" content="DSyHkxyNB3t94dJbNUw_GKpCGAp4tLsK6JBeGhvhQbQ" />
+    <meta name="robots" content="index, follow">
     
-    <title>Biblioteca de Ejercicios - EntrenoApp | Running, Gym y Funcional</title>
+    <title>Biblioteca de Ejercicios - EntrenoApp | Técnica y Guías Profesionales</title>
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://entrenoapp.netlify.app/exercises-library.html">
     <meta property="og:title" content="Biblioteca de Ejercicios - EntrenoApp">
-    <meta property="og:description" content="Biblioteca completa de ejercicios: running, gimnasio y funcional. Técnicas y variaciones profesionales.">
+    <meta property="og:description" content="Biblioteca completa de ejercicios con técnica correcta y guías profesionales.">
     <meta property="og:image" content="https://entrenoapp.netlify.app/assets/icons/icon-512x512.png">
     
     <!-- Iconos -->
@@ -26,7 +27,8 @@
     <!-- Estilos -->
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/glassmorphism.css">
-    <link rel="stylesheet" href="css/content-pages.css">    
+    <link rel="stylesheet" href="css/content-pages.css">
+    
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-633RQLC6T0"></script>
     <script>
@@ -39,480 +41,627 @@
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4837743291717475" crossorigin="anonymous"></script>
     
+    <style>
+        .exercises-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        
+        .exercise-section {
+            margin-bottom: 80px;
+        }
+        
+        .exercise-section h2 {
+            font-size: 2.5rem;
+            color: #667eea;
+            margin-bottom: 40px;
+            text-align: center;
+            font-weight: 700;
+        }
+        
+        .exercises-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .exercise-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .exercise-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.2);
+            border-color: #667eea;
+        }
+        
+        .exercise-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .exercise-icon {
+            font-size: 3rem;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .exercise-title {
+            font-size: 1.5rem;
+            color: #1a1a1a;
+            font-weight: 700;
+            margin: 0;
+        }
+        
+        .exercise-info {
+            margin-bottom: 20px;
+        }
+        
+        .info-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+        
+        .info-label {
+            font-weight: 600;
+            color: #667eea;
+            min-width: 120px;
+        }
+        
+        .info-value {
+            color: #4a4a4a;
+        }
+        
+        .muscles-worked {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .muscles-worked strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        .muscles-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .muscle-tag {
+            background: #e8eaf6;
+            color: #667eea;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .exercise-steps {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .exercise-steps h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .step-item {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+        
+        .step-number {
+            background: #667eea;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+        
+        .step-text {
+            color: #4a4a4a;
+            line-height: 1.6;
+        }
+        
+        .tips-box {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 8px;
+        }
+        
+        .tips-box strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .tips-box ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        
+        .tips-box li {
+            color: #4a4a4a;
+            margin-bottom: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .exercises-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .exercise-section h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Navigation -->
+    <nav class="main-navigation">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">💪 EntrenoApp</a>
+            <ul class="nav-links">
+                <li><a href="/">Inicio</a></li>
+                <li><a href="/app.html">App</a></li>
+                <li><a href="/blog.html">Blog</a></li>
+                <li><a href="/workout-guides.html">Guías</a></li>
+                <li><a href="/contact.html">Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Breadcrumbs -->
     <div class="breadcrumbs">
-        <a href="/">Inicio</a> > <a href="/home.html">EntrenoApp</a> > Biblioteca de Ejercicios
+        <div class="container">
+            <a href="/">Inicio</a> > <a href="/blog.html">Recursos</a> > Biblioteca de Ejercicios
+        </div>
     </div>
     
-    <div class="library-hero">
-        <h1>💪 Biblioteca de Ejercicios</h1>
-        <p>Descubre más de 200 ejercicios con técnicas detalladas, variaciones y consejos profesionales</p>
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">💪 Biblioteca de Ejercicios</h1>
+            <p class="hero-description">Aprende la técnica correcta de cada ejercicio. Guías profesionales con músculos trabajados, progresiones y consejos de seguridad.</p>
+        </div>
     </div>
     
-    <div class="library-container">
-        <div class="search-box">
-            <input type="text" class="search-input" placeholder="Buscar ejercicios..." id="exerciseSearch">
-        </div>
-        
-        <div class="ads-container">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-4837743291717475"
-                 data-ad-slot="1234567890"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-        </div>
-        
-        <div class="category-tabs">
-            <button class="tab-button active" data-category="running">🏃‍♂️ Running</button>
-            <button class="tab-button" data-category="gym">🏋️‍♂️ Gimnasio</button>
-            <button class="tab-button" data-category="functional">⚡ Funcional</button>
-            <button class="tab-button" data-category="cardio">❤️ Cardio</button>
-        </div>
-        
-        <!-- Running Exercises -->
-        <div class="exercise-category active" id="running">
-            <h2 style="text-align: center; color: #667eea; margin-bottom: 30px;">🏃‍♂️ Ejercicios de Running</h2>
+    <!-- Exercises Container -->
+    <div class="exercises-container">
+        <!-- Ejercicios de Piernas -->
+        <div class="exercise-section">
+            <h2>🦵 Ejercicios de Piernas</h2>
+            
             <div class="exercises-grid">
+                <!-- Sentadilla -->
                 <div class="exercise-card">
-                    <span class="difficulty-badge difficulty-beginner">Principiante</span>
-                    <h3>🏃‍♂️ Carrera Continua</h3>
-                    <p>La base del running. Mantén un ritmo constante durante toda la duración del ejercicio.</p>
-                    <ul>
-                        <li>Mantén una postura erguida</li>
-                        <li>Pisada suave y natural</li>
-                        <li>Respiración rítmica</li>
-                        <li>Ritmo conversacional</li>
-                        <li>Hidratación regular</li>
-                    </ul>
-                    <div class="muscle-groups">
-                        <h4>Músculos trabajados:</h4>
-                        <div class="muscle-tags">
-                            <span class="muscle-tag">Cuádriceps</span>
-                            <span class="muscle-tag">Glúteos</span>
-                            <span class="muscle-tag">Pantorrillas</span>
-                            <span class="muscle-tag">Core</span>
+                    <div class="exercise-header">
+                        <div class="exercise-icon">🦵</div>
+                        <h3 class="exercise-title">Sentadilla</h3>
+                    </div>
+                    
+                    <div class="exercise-info">
+                        <div class="info-row">
+                            <span class="info-label">Dificultad:</span>
+                            <span class="info-value">⭐ Intermedio</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Equipamiento:</span>
+                            <span class="info-value">Barra + Discos</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Series:</span>
+                            <span class="info-value">3-5 series</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Repeticiones:</span>
+                            <span class="info-value">6-12 reps</span>
                         </div>
                     </div>
-                </div>
-                
-                <div class="exercise-card">
-                    <span class="difficulty-badge difficulty-intermediate">Intermedio</span>
-                    <h3>⚡ Fartlek</h3>
-                    <p>Entrenamiento de cambios de ritmo libre. Alterna entre ritmos rápidos y lentos según te sientas.</p>
-                    <ul>
-                        <li>5 min calentamiento suave</li>
-                        <li>Alterna ritmos cada 2-3 min</li>
-                        <li>Escucha a tu cuerpo</li>
-                        <li>Termina con 5 min enfriamiento</li>
-                        <li>Total: 20-30 minutos</li>
-                    </ul>
-                    <div class="muscle-groups">
-                        <h4>Músculos trabajados:</h4>
-                        <div class="muscle-tags">
-                            <span class="muscle-tag">Sistema aeróbico</span>
-                            <span class="muscle-tag">Sistema anaeróbico</span>
-                            <span class="muscle-tag">Corazón</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="exercise-card">
-                    <span class="difficulty-badge difficulty-advanced">Avanzado</span>
-                    <h3>🎯 Intervalos Tabata</h3>
-                    <p>Protocolo de alta intensidad: 20 segundos máximo esfuerzo, 10 segundos descanso, repetir 8 veces.</p>
-                    <ul>
-                        <li>Calentamiento: 10 minutos</li>
-                        <li>8 ciclos de 20s/10s</li>
-                        <li>Máximo esfuerzo en cada intervalo</li>
-                        <li>Enfriamiento: 10 minutos</li>
-                        <li>Total: 16 minutos efectivos</li>
-                    </ul>
-                    <div class="muscle-groups">
-                        <h4>Músculos trabajados:</h4>
-                        <div class="muscle-tags">
-                            <span class="muscle-tag">Sistema anaeróbico</span>
-                            <span class="muscle-tag">VO2 máx</span>
-                            <span class="muscle-tag">Metabolismo</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="exercise-card">
-                    <span class="difficulty-badge difficulty-intermediate">Intermedio</span>
-                    <h3>🏔️ Carrera en Cuestas</h3>
-                    <p>Fortalece las piernas y mejora la potencia con subidas controladas.</p>
-                    <ul>
-                        <li>Busca una cuesta del 5-8%</li>
-                        <li>Subida: esfuerzo 7/10</li>
-                        <li>Bajada: recuperación activa</li>
-                        <li>6-8 repeticiones</li>
-                        <li>Recuperación: 2-3 minutos</li>
-                    </ul>
-                    <div class="muscle-groups">
-                        <h4>Músculos trabajados:</h4>
-                        <div class="muscle-tags">
-                            <span class="muscle-tag">Cuádriceps</span>
-                            <span class="muscle-tag">Glúteos</span>
-                            <span class="muscle-tag">Pantorrillas</span>
-                            <span class="muscle-tag">Core</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Gym Exercises -->
-        <div class="exercise-category" id="gym">
-            <h2 style="text-align: center; color: #667eea; margin-bottom: 30px;">🏋️‍♂️ Ejercicios de Gimnasio</h2>
-            <div class="exercises-grid">
-                <div class="exercise-card">
-                    <span class="difficulty-badge difficulty-beginner">Principiante</span>
-                    <h3>🏋️‍♂️ Sentadilla</h3>
-                    <p>El rey de los ejercicios. Trabaja todo el tren inferior de forma funcional.</p>
-                    <ul>
-                        <li>Pies separados al ancho de hombros</li>
-                        <li>Descender hasta 90° de flexión</li>
-                        <li>Mantener el pecho erguido</li>
-                        <li>Rodillas alineadas con los pies</li>
-                        <li>Subir empujando con los talones</li>
-                    </ul>
-                    <div class="muscle-groups">
-                        <h4>Músculos trabajados:</h4>
-                        <div class="muscle-tags">
+                    
+                    <div class="muscles-worked">
+                        <strong>Músculos trabajados:</strong>
+                        <div class="muscles-list">
                             <span class="muscle-tag">Cuádriceps</span>
                             <span class="muscle-tag">Glúteos</span>
                             <span class="muscle-tag">Isquiotibiales</span>
                             <span class="muscle-tag">Core</span>
                         </div>
                     </div>
-                </div>
-                
-                <div class="exercise-card">
-                    <span class="difficulty-badge difficulty-beginner">Principiante</span>
-                    <h3>💪 Press de Banca</h3>
-                    <p>Ejercicio fundamental para el desarrollo del pecho, hombros y tríceps.</p>
-                    <ul>
-                        <li>Acostado en banco plano</li>
-                        <li>Agarre ligeramente más ancho que hombros</li>
-                        <li>Descenso controlado hasta el pecho</li>
-                        <li>Empuje explosivo hacia arriba</li>
-                        <li>Mantener escápulas retraídas</li>
-                    </ul>
-                    <div class="muscle-groups">
-                        <h4>Músculos trabajados:</h4>
-                        <div class="muscle-tags">
-                            <span class="muscle-tag">Pecho</span>
-                            <span class="muscle-tag">Hombros</span>
-                            <span class="muscle-tag">Tríceps</span>
+                    
+                    <div class="exercise-steps">
+                        <h4>Técnica correcta:</h4>
+                        <div class="step-item">
+                            <div class="step-number">1</div>
+                            <div class="step-text">Coloca la barra sobre tus trapecios, con los pies separados al ancho de los hombros</div>
                         </div>
+                        <div class="step-item">
+                            <div class="step-number">2</div>
+                            <div class="step-text">Mantén el pecho erguido y la espalda recta durante todo el movimiento</div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number">3</div>
+                            <div class="step-text">Desciende flexionando rodillas y cadera hasta que los muslos estén paralelos al suelo</div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number">4</div>
+                            <div class="step-text">Empuja con los talones para volver a la posición inicial, manteniendo las rodillas alineadas</div>
+                        </div>
+                    </div>
+                    
+                    <div class="tips-box">
+                        <strong>💡 Consejos clave:</strong>
+                        <ul>
+                            <li>Mantén los talones siempre en contacto con el suelo</li>
+                            <li>No dejes que las rodillas se desplacen hacia adentro</li>
+                            <li>Mira hacia adelante, no hacia abajo</li>
+                            <li>Respira: inspira al bajar, espira al subir</li>
+                        </ul>
                     </div>
                 </div>
                 
+                <!-- Peso Muerto -->
                 <div class="exercise-card">
-                    <span class="difficulty-badge difficulty-intermediate">Intermedio</span>
-                    <h3>🏋️‍♂️ Peso Muerto</h3>
-                    <p>Ejercicio completo que trabaja toda la cadena posterior y el core.</p>
-                    <ul>
-                        <li>Barra sobre la mitad del pie</li>
-                        <li>Agarrar con manos separadas</li>
-                        <li>Pecho arriba, espalda recta</li>
-                        <li>Levantar con cadera y rodillas</li>
-                        <li>Barra pegada al cuerpo</li>
-                    </ul>
-                    <div class="muscle-groups">
-                        <h4>Músculos trabajados:</h4>
-                        <div class="muscle-tags">
+                    <div class="exercise-header">
+                        <div class="exercise-icon">🏋️</div>
+                        <h3 class="exercise-title">Peso Muerto</h3>
+                    </div>
+                    
+                    <div class="exercise-info">
+                        <div class="info-row">
+                            <span class="info-label">Dificultad:</span>
+                            <span class="info-value">⭐⭐ Avanzado</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Equipamiento:</span>
+                            <span class="info-value">Barra + Discos</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Series:</span>
+                            <span class="info-value">3-4 series</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Repeticiones:</span>
+                            <span class="info-value">5-8 reps</span>
+                        </div>
+                    </div>
+                    
+                    <div class="muscles-worked">
+                        <strong>Músculos trabajados:</strong>
+                        <div class="muscles-list">
                             <span class="muscle-tag">Isquiotibiales</span>
                             <span class="muscle-tag">Glúteos</span>
                             <span class="muscle-tag">Espalda baja</span>
-                            <span class="muscle-tag">Trapecio</span>
+                            <span class="muscle-tag">Trapecios</span>
                         </div>
+                    </div>
+                    
+                    <div class="exercise-steps">
+                        <h4>Técnica correcta:</h4>
+                        <div class="step-item">
+                            <div class="step-number">1</div>
+                            <div class="step-text">Párate con los pies separados al ancho de las caderas, con la barra sobre la mitad del pie</div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number">2</div>
+                            <div class="step-text">Agárrate a la barra con agarre mixto (una mano pronada, otra supinada)</div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number">3</div>
+                            <div class="step-text">Mantén la espalda recta y el pecho erguido mientras levantas la barra</div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number">4</div>
+                            <div class="step-text">Empuja las caderas hacia adelante al llegar arriba, contrae glúteos</div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number">5</div>
+                            <div class="step-text">Baja la barra controladamente siguiendo el mismo camino</div>
+                        </div>
+                    </div>
+                    
+                    <div class="tips-box">
+                        <strong>💡 Consejos clave:</strong>
+                        <ul>
+                            <li>Nunca redondees la espalda durante el movimiento</li>
+                            <li>Mantén la barra cerca de las espinillas</li>
+                            <li>Los brazos deben estar rectos, no los uses para tirar</li>
+                            <li>Usa cinturón para pesos pesados</li>
+                        </ul>
                     </div>
                 </div>
                 
+                <!-- Prensa de Piernas -->
                 <div class="exercise-card">
-                    <span class="difficulty-badge difficulty-intermediate">Intermedio</span>
-                    <h3>🦅 Dominadas</h3>
-                    <p>Ejercicio de peso corporal para el desarrollo de la espalda y bíceps.</p>
-                    <ul>
-                        <li>Agarre más ancho que hombros</li>
-                        <li>Colgar completamente extendido</li>
-                        <li>Subir hasta tocar la barra con el pecho</li>
-                        <li>Descenso controlado</li>
-                        <li>Mantener core activado</li>
-                    </ul>
-                    <div class="muscle-groups">
-                        <h4>Músculos trabajados:</h4>
-                        <div class="muscle-tags">
-                            <span class="muscle-tag">Dorsales</span>
-                            <span class="muscle-tag">Romboides</span>
-                            <span class="muscle-tag">Bíceps</span>
-                            <span class="muscle-tag">Core</span>
+                    <div class="exercise-header">
+                        <div class="exercise-icon">🦶</div>
+                        <h3 class="exercise-title">Prensa de Piernas</h3>
+                    </div>
+                    
+                    <div class="exercise-info">
+                        <div class="info-row">
+                            <span class="info-label">Dificultad:</span>
+                            <span class="info-value">⭐ Principiante</span>
                         </div>
+                        <div class="info-row">
+                            <span class="info-label">Equipamiento:</span>
+                            <span class="info-value">Máquina</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Series:</span>
+                            <span class="info-value">3-4 series</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Repeticiones:</span>
+                            <span class="info-value">10-15 reps</span>
+                        </div>
+                    </div>
+                    
+                    <div class="muscles-worked">
+                        <strong>Músculos trabajados:</strong>
+                        <div class="muscles-list">
+                            <span class="muscle-tag">Cuádriceps</span>
+                            <span class="muscle-tag">Glúteos</span>
+                            <span class="muscle-tag">Pantorrillas</span>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-steps">
+                        <h4>Técnica correcta:</h4>
+                        <div class="step-item">
+                            <div class="step-number">1</div>
+                            <div class="step-text">Siéntate en la máquina con la espalda completamente apoyada</div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number">2</div>
+                            <div class="step-text">Coloca los pies en la plataforma, separados al ancho de los hombros</div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number">3</div>
+                            <div class="step-text">Baja el peso lentamente hasta que las rodillas formen un ángulo de 90 grados</div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number">4</div>
+                            <div class="step-text">Empuja con los talones para extender las piernas, sin bloquear las rodillas</div>
+                        </div>
+                    </div>
+                    
+                    <div class="tips-box">
+                        <strong>💡 Consejos clave:</strong>
+                        <ul>
+                            <li>Mantén la espalda siempre apoyada en el respaldo</li>
+                            <li>No bajes demasiado para evitar lesiones en las rodillas</li>
+                            <li>Controla el peso en ambas fases del movimiento</li>
+                            <li>Ideal para principiantes o personas con problemas de espalda</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
         
-        <!-- Functional Exercises -->
-        <div class="exercise-category" id="functional">
-            <h2 style="text-align: center; color: #667eea; margin-bottom: 30px;">⚡ Ejercicios Funcionales</h2>
+        <!-- Ejercicios de Pecho -->
+        <div class="exercise-section">
+            <h2>💪 Ejercicios de Pecho</h2>
+            
             <div class="exercises-grid">
+                <!-- Press de Banca -->
                 <div class="exercise-card">
-                    <span class="difficulty-badge difficulty-beginner">Principiante</span>
-                    <h3>🐸 Burpees</h3>
-                    <p>Ejercicio funcional completo que combina fuerza y cardio en un solo movimiento.</p>
-                    <ul>
-                        <li>Posición de pie</li>
-                        <li>Flexión hasta el suelo</li>
-                        <li>Salto de rana</li>
-                        <li>Salto vertical con brazos arriba</li>
-                        <li>Repetir sin pausa</li>
-                    </ul>
-                    <div class="muscle-groups">
-                        <h4>Músculos trabajados:</h4>
-                        <div class="muscle-tags">
-                            <span class="muscle-tag">Todo el cuerpo</span>
-                            <span class="muscle-tag">Core</span>
-                            <span class="muscle-tag">Sistema cardiovascular</span>
+                    <div class="exercise-header">
+                        <div class="exercise-icon">🏋️</div>
+                        <h3 class="exercise-title">Press de Banca</h3>
+                    </div>
+                    
+                    <div class="exercise-info">
+                        <div class="info-row">
+                            <span class="info-label">Dificultad:</span>
+                            <span class="info-value">⭐ Intermedio</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Equipamiento:</span>
+                            <span class="info-value">Barra + Banco</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Series:</span>
+                            <span class="info-value">3-4 series</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Repeticiones:</span>
+                            <span class="info-value">6-10 reps</span>
                         </div>
                     </div>
-                </div>
-                
-                <div class="exercise-card">
-                    <span class="difficulty-badge difficulty-intermediate">Intermedio</span>
-                    <h3>🏔️ Mountain Climbers</h3>
-                    <p>Ejercicio dinámico que mejora la condición cardiovascular y fortalece el core.</p>
-                    <ul>
-                        <li>Posición de plancha</li>
-                        <li>Alternar piernas rápidamente</li>
-                        <li>Mantener core activado</li>
-                        <li>Movimiento controlado</li>
-                        <li>Respiración constante</li>
-                    </ul>
-                    <div class="muscle-groups">
-                        <h4>Músculos trabajados:</h4>
-                        <div class="muscle-tags">
-                            <span class="muscle-tag">Core</span>
-                            <span class="muscle-tag">Hombros</span>
-                            <span class="muscle-tag">Piernas</span>
-                            <span class="muscle-tag">Sistema cardiovascular</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="exercise-card">
-                    <span class="difficulty-badge difficulty-intermediate">Intermedio</span>
-                    <h3>🦵 Sentadilla con Salto</h3>
-                    <p>Variación explosiva de la sentadilla que mejora la potencia y quema calorías.</p>
-                    <ul>
-                        <li>Posición de sentadilla</li>
-                        <li>Descender hasta 90°</li>
-                        <li>Salto explosivo hacia arriba</li>
-                        <li>Aterrizaje suave</li>
-                        <li>Repetir inmediatamente</li>
-                    </ul>
-                    <div class="muscle-groups">
-                        <h4>Músculos trabajados:</h4>
-                        <div class="muscle-tags">
-                            <span class="muscle-tag">Cuádriceps</span>
-                            <span class="muscle-tag">Glúteos</span>
-                            <span class="muscle-tag">Pantorrillas</span>
-                            <span class="muscle-tag">Core</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="exercise-card">
-                    <span class="difficulty-badge difficulty-advanced">Avanzado</span>
-                    <h3>🦅 Muscle-ups</h3>
-                    <p>Ejercicio avanzado que combina dominadas y fondos en un solo movimiento.</p>
-                    <ul>
-                        <li>Colgar de la barra</li>
-                        <li>Impulso con kipping</li>
-                        <li>Transición sobre la barra</li>
-                        <li>Fondo completo</li>
-                        <li>Descenso controlado</li>
-                    </ul>
-                    <div class="muscle-groups">
-                        <h4>Músculos trabajados:</h4>
-                        <div class="muscle-tags">
-                            <span class="muscle-tag">Dorsales</span>
-                            <span class="muscle-tag">Pecho</span>
+                    
+                    <div class="muscles-worked">
+                        <strong>Músculos trabajados:</strong>
+                        <div class="muscles-list">
+                            <span class="muscle-tag">Pectorales</span>
+                            <span class="muscle-tag">Deltoides anterior</span>
                             <span class="muscle-tag">Tríceps</span>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-steps">
+                        <h4>Técnica correcta:</h4>
+                        <div class="step-item">
+                            <div class="step-number">1</div>
+                            <div class="step-text">Acuéstate en el banco con los ojos debajo de la barra</div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number">2</div>
+                            <div class="step-text">Agarra la barra con las manos ligeramente más anchas que los hombros</div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number">3</div>
+                            <div class="step-text">Baja la barra controladamente hasta tocar el pecho</div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number">4</div>
+                            <div class="step-text">Empuja la barra hacia arriba explosivamente, manteniendo los pies en el suelo</div>
+                        </div>
+                    </div>
+                    
+                    <div class="tips-box">
+                        <strong>💡 Consejos clave:</strong>
+                        <ul>
+                            <li>Mantén los omóplatos retraídos y pegados al banco</li>
+                            <li>Arquea ligeramente la espalda, pero mantén los glúteos en contacto con el banco</li>
+                            <li>No rebotes la barra en el pecho</li>
+                            <li>Usa un spotter cuando uses pesos pesados</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Flexiones -->
+                <div class="exercise-card">
+                    <div class="exercise-header">
+                        <div class="exercise-icon">🤸</div>
+                        <h3 class="exercise-title">Flexiones</h3>
+                    </div>
+                    
+                    <div class="exercise-info">
+                        <div class="info-row">
+                            <span class="info-label">Dificultad:</span>
+                            <span class="info-value">⭐ Principiante</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Equipamiento:</span>
+                            <span class="info-value">Ninguno</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Series:</span>
+                            <span class="info-value">3-4 series</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Repeticiones:</span>
+                            <span class="info-value">10-20 reps</span>
+                        </div>
+                    </div>
+                    
+                    <div class="muscles-worked">
+                        <strong>Músculos trabajados:</strong>
+                        <div class="muscles-list">
+                            <span class="muscle-tag">Pectorales</span>
+                            <span class="muscle-tag">Tríceps</span>
+                            <span class="muscle-tag">Deltoides</span>
                             <span class="muscle-tag">Core</span>
                         </div>
+                    </div>
+                    
+                    <div class="exercise-steps">
+                        <h4>Técnica correcta:</h4>
+                        <div class="step-item">
+                            <div class="step-number">1</div>
+                            <div class="step-text">Colócate en posición de plancha con las manos separadas al ancho de los hombros</div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number">2</div>
+                            <div class="step-text">Mantén el cuerpo en línea recta desde la cabeza hasta los talones</div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number">3</div>
+                            <div class="step-text">Baja el cuerpo hasta que el pecho casi toque el suelo</div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number">4</div>
+                            <div class="step-text">Empuja hacia arriba hasta extender completamente los brazos</div>
+                        </div>
+                    </div>
+                    
+                    <div class="tips-box">
+                        <strong>💡 Consejos clave:</strong>
+                        <ul>
+                            <li>Mantén el core activado durante todo el movimiento</li>
+                            <li>No dejes que las caderas se hundan o suban</li>
+                            <li>Para principiantes: hazlas con las rodillas en el suelo</li>
+                            <li>Para avanzados: eleva los pies o usa lastre</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
         
-        <!-- Cardio Exercises -->
-        <div class="exercise-category" id="cardio">
-            <h2 style="text-align: center; color: #667eea; margin-bottom: 30px;">❤️ Ejercicios Cardiovasculares</h2>
-            <div class="exercises-grid">
-                <div class="exercise-card">
-                    <span class="difficulty-badge difficulty-beginner">Principiante</span>
-                    <h3>🚶‍♂️ Caminar Rápido</h3>
-                    <p>Ejercicio cardiovascular de bajo impacto perfecto para principiantes.</p>
-                    <ul>
-                        <li>Ritmo de 5-6 km/h</li>
-                        <li>Postura erguida</li>
-                        <li>Brazos balanceando naturalmente</li>
-                        <li>Pisada de talón a punta</li>
-                        <li>30-60 minutos diarios</li>
-                    </ul>
-                    <div class="muscle-groups">
-                        <h4>Músculos trabajados:</h4>
-                        <div class="muscle-tags">
-                            <span class="muscle-tag">Piernas</span>
-                            <span class="muscle-tag">Core</span>
-                            <span class="muscle-tag">Sistema cardiovascular</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="exercise-card">
-                    <span class="difficulty-badge difficulty-intermediate">Intermedio</span>
-                    <h3>🚴‍♂️ Ciclismo</h3>
-                    <p>Ejercicio cardiovascular de bajo impacto que fortalece las piernas.</p>
-                    <ul>
-                        <li>Cadencia de 80-100 rpm</li>
-                        <li>Postura cómoda</li>
-                        <li>Pedaleo suave y constante</li>
-                        <li>Hidratación regular</li>
-                        <li>45-90 minutos por sesión</li>
-                    </ul>
-                    <div class="muscle-groups">
-                        <h4>Músculos trabajados:</h4>
-                        <div class="muscle-tags">
-                            <span class="muscle-tag">Cuádriceps</span>
-                            <span class="muscle-tag">Glúteos</span>
-                            <span class="muscle-tag">Pantorrillas</span>
-                            <span class="muscle-tag">Core</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="exercise-card">
-                    <span class="difficulty-badge difficulty-intermediate">Intermedio</span>
-                    <h3>🏊‍♂️ Natación</h3>
-                    <p>Ejercicio cardiovascular completo que trabaja todo el cuerpo sin impacto.</p>
-                    <ul>
-                        <li>Estilos variados</li>
-                        <li>Técnica correcta</li>
-                        <li>Respiración rítmica</li>
-                        <li>Calentamiento en agua</li>
-                        <li>20-45 minutos por sesión</li>
-                    </ul>
-                    <div class="muscle-groups">
-                        <h4>Músculos trabajados:</h4>
-                        <div class="muscle-tags">
-                            <span class="muscle-tag">Todo el cuerpo</span>
-                            <span class="muscle-tag">Core</span>
-                            <span class="muscle-tag">Sistema cardiovascular</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="exercise-card">
-                    <span class="difficulty-badge difficulty-advanced">Avanzado</span>
-                    <h3>⚡ HIIT</h3>
-                    <p>Entrenamiento de alta intensidad por intervalos para máxima quema de calorías.</p>
-                    <ul>
-                        <li>4 minutos de calentamiento</li>
-                        <li>20 segundos máximo esfuerzo</li>
-                        <li>10 segundos descanso</li>
-                        <li>Repetir 8 veces</li>
-                        <li>4 minutos enfriamiento</li>
-                    </ul>
-                    <div class="muscle-tags">
-                        <span class="muscle-tag">Sistema cardiovascular</span>
-                        <span class="muscle-tag">Metabolismo</span>
-                        <span class="muscle-tag">VO2 máx</span>
-                    </div>
-                </div>
-            </div>
+        <!-- CTA Box -->
+        <div class="cta-box" style="margin-top: 60px;">
+            <h3>¿Quieres más ejercicios?</h3>
+            <p>Descarga EntrenoApp y accede a más de 200 ejercicios con videos y guías detalladas</p>
+            <a href="/app.html" class="cta-button">Empezar Ahora</a>
         </div>
-        
-        <div class="ads-container">
+    </div>
+    
+    <!-- Ad Section -->
+    <div class="ad-section">
+        <div class="ad-container">
             <ins class="adsbygoogle"
                  style="display:block"
                  data-ad-client="ca-pub-4837743291717475"
-                 data-ad-slot="1234567890"
+                 data-ad-slot="auto"
                  data-ad-format="auto"
                  data-full-width-responsive="true"></ins>
         </div>
     </div>
     
-    <footer class="glass-footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>EntrenoApp</h3>
-                <p>Tu entrenador personal de fitness</p>
-            </div>
-            <div class="footer-section">
-                <h4>Enlaces</h4>
-                <ul>
-                    <li><a href="/home.html">Inicio</a></li>
-                    <li><a href="/about.html">Nosotros</a></li>
-                    <li><a href="/workout-guides.html">Guías</a></li>
-                    <li><a href="/contact.html">Contacto</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Legal</h4>
-                <ul>
-                    <li><a href="/privacy.html">Privacidad</a></li>
-                    <li><a href="/terms.html">Términos</a></li>
-                    <li><a href="/contact.html">Contacto</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Síguenos</h4>
-                <div class="social-links">
-                    <a href="https://tiktok.com/@EntrenoApp" target="_blank">TikTok</a>
-                    <a href="https://instagram.com/entrenoappfacil" target="_blank">Instagram</a>
-                </div>
-            </div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="social-links">
+            <a href="https://www.tiktok.com/@EntrenoApp" target="_blank" rel="noopener">🎵 TikTok</a>
+            <a href="https://www.instagram.com/entrenoappfacil" target="_blank" rel="noopener">📸 Instagram</a>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 LIPA Studios. Todos los derechos reservados.</p>
+        
+        <div class="footer-links">
+            <a href="blog.html">Blog</a>
+            <a href="about.html">Sobre Nosotros</a>
+            <a href="workout-guides.html">Guías de Entrenamiento</a>
+            <a href="fitness-tips.html">Consejos de Fitness</a>
+            <a href="exercises-library.html">Biblioteca de Ejercicios</a>
+            <a href="fitness-calculators.html">Calculadoras</a>
+            <a href="resources.html">Recursos</a>
+            <a href="faq.html">FAQ</a>
+            <a href="privacy.html">Privacidad</a>
+            <a href="terms.html">Términos</a>
+            <a href="contact.html">Contacto</a>
         </div>
+        
+        <p>&copy; 2024 EntrenoApp - LIPA Studios. Todos los derechos reservados.</p>
     </footer>
     
     <script>
-        // Tab functionality
-        document.querySelectorAll('.tab-button').forEach(button => {
-            button.addEventListener('click', () => {
-                // Remove active class from all buttons and categories
-                document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
-                document.querySelectorAll('.exercise-category').forEach(cat => cat.classList.remove('active'));
-                
-                // Add active class to clicked button and corresponding category
-                button.classList.add('active');
-                document.getElementById(button.dataset.category).classList.add('active');
-            });
-        });
-        
-        // Search functionality
-        document.getElementById('exerciseSearch').addEventListener('input', (e) => {
-            const searchTerm = e.target.value.toLowerCase();
-            document.querySelectorAll('.exercise-card').forEach(card => {
-                const text = card.textContent.toLowerCase();
-                if (text.includes(searchTerm)) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        });
-        
-        // Initialize AdSense
         (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
 </body>
 </html>
-
