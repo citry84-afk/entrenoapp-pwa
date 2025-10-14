@@ -52,14 +52,152 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4837743291717475" crossorigin="anonymous"></script>
     
     <style>
+        /* Cajas especiales */
         .warning-box{background:linear-gradient(135deg,#ff1744,#ff6e40);color:#fff;padding:30px;border-radius:15px;margin:30px 0;box-shadow:0 8px 25px rgba(255,23,68,.3)}
         .warning-box h3{color:#fff;margin-bottom:15px}
-        .success-story{background:linear-gradient(135deg,#00e676,#00c853);color:#fff;padding:25px;border-radius:12px;margin:25px 0;font-style:italic}
-        .stack-box{background:#f8f9fa;border:3px solid #667eea;border-radius:15px;padding:30px;margin:30px 0}
+        .success-story{background:linear-gradient(135deg,#00e676,#00c853);color:#fff;padding:25px;border-radius:12px;margin:25px 0;font-style:italic;box-shadow:0 8px 25px rgba(0,230,118,.3)}
+        .stack-box{background:#f8f9fa;border:3px solid #667eea;border-radius:15px;padding:30px;margin:30px 0;box-shadow:0 5px 20px rgba(102,126,234,.15)}
         .stack-item{display:flex;align-items:center;margin:15px 0;font-size:1.1rem}
         .stack-icon{font-size:2rem;margin-right:15px}
-        .price-tag{background:linear-gradient(135deg,#ffd700,#ff6b6b);color:#fff;padding:8px 20px;border-radius:50px;display:inline-block;font-weight:700;margin:10px 0}
-        .viral-stat{background:rgba(102,126,234,.1);border-left:5px solid #667eea;padding:20px;margin:20px 0;font-size:1.2rem;font-weight:600}
+        .price-tag{background:linear-gradient(135deg,#ffd700,#ff6b6b);color:#fff;padding:8px 20px;border-radius:50px;display:inline-block;font-weight:700;margin:10px 0;box-shadow:0 4px 15px rgba(255,215,0,.4)}
+        .viral-stat{background:rgba(102,126,234,.1);border-left:5px solid #667eea;padding:20px;margin:20px 0;font-size:1.2rem;font-weight:600;border-radius:0 8px 8px 0}
+        
+        /* Mejoras visuales artículo */
+        .article-content h2{
+            background:linear-gradient(135deg,#667eea,#764ba2);
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+            font-size:2.2rem;
+            margin:40px 0 25px;
+            padding-left:15px;
+            border-left:5px solid #667eea;
+        }
+        
+        .article-content h3{
+            color:#667eea;
+            font-size:1.8rem;
+            margin:30px 0 20px;
+            padding-bottom:10px;
+            border-bottom:3px solid rgba(102,126,234,.2);
+        }
+        
+        .article-content p{
+            font-size:1.1rem;
+            line-height:1.8;
+            margin:20px 0;
+            color:#2c3e50;
+        }
+        
+        .article-content strong{
+            color:#667eea;
+            font-weight:700;
+        }
+        
+        .article-content ul, .article-content ol{
+            margin:20px 0 20px 30px;
+            line-height:1.9;
+        }
+        
+        .article-content li{
+            margin:12px 0;
+            font-size:1.05rem;
+            color:#34495e;
+        }
+        
+        .article-content li strong{
+            color:#ff1744;
+        }
+        
+        /* Iconos en listas */
+        .article-content li:before{
+            content:"▸";
+            color:#667eea;
+            font-weight:bold;
+            display:inline-block;
+            width:1em;
+            margin-left:-1em;
+        }
+        
+        /* Quote/Destacados */
+        .article-content blockquote{
+            background:rgba(102,126,234,.05);
+            border-left:5px solid #667eea;
+            padding:20px 30px;
+            margin:30px 0;
+            font-style:italic;
+            font-size:1.15rem;
+            border-radius:0 10px 10px 0;
+        }
+        
+        /* Tablas elegantes */
+        .article-content table{
+            width:100%;
+            border-collapse:collapse;
+            margin:30px 0;
+            box-shadow:0 5px 20px rgba(0,0,0,.1);
+            border-radius:10px;
+            overflow:hidden;
+        }
+        
+        .article-content th{
+            background:linear-gradient(135deg,#667eea,#764ba2);
+            color:#fff;
+            padding:15px;
+            text-align:left;
+            font-weight:600;
+        }
+        
+        .article-content td{
+            padding:12px 15px;
+            border-bottom:1px solid #e0e0e0;
+        }
+        
+        .article-content tr:hover{
+            background:rgba(102,126,234,.05);
+        }
+        
+        /* Secciones alternadas */
+        .math-section{
+            background:linear-gradient(135deg,#fff5f5,#ffe5e5);
+            padding:30px;
+            border-radius:15px;
+            margin:30px 0;
+            border:2px solid #ff1744;
+        }
+        
+        .science-section{
+            background:linear-gradient(135deg,#f0f4ff,#e5edff);
+            padding:30px;
+            border-radius:15px;
+            margin:30px 0;
+            border:2px solid #667eea;
+        }
+        
+        /* Números destacados */
+        .big-number{
+            font-size:3rem;
+            font-weight:900;
+            background:linear-gradient(135deg,#667eea,#764ba2);
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+            line-height:1.2;
+        }
+        
+        /* Separadores */
+        .separator{
+            height:3px;
+            background:linear-gradient(90deg,transparent,#667eea,transparent);
+            margin:50px 0;
+            border-radius:3px;
+        }
+        
+        /* Responsive mejoras */
+        @media (max-width:768px){
+            .article-content h2{font-size:1.8rem}
+            .article-content h3{font-size:1.5rem}
+            .article-content p{font-size:1.05rem}
+            .big-number{font-size:2.2rem}
+        }
     </style>
 </head>
 <body>
@@ -129,25 +267,43 @@
 
             <h3>Matemáticas Brutales del 75 Hard:</h3>
 
-            <div style="background:#f8f9fa;padding:25px;border-radius:12px;margin:25px 0">
-                <p><strong>Gasto calórico diario normal:</strong> 2,000-2,500 kcal</p>
-                <p><strong>2 entrenos (45 min cada uno):</strong> +800-1,200 kcal</p>
-                <p><strong>TOTAL necesario:</strong> 2,800-3,700 kcal/día</p>
+            <div class="math-section">
+                <p><strong>⚡ Gasto calórico diario normal:</strong> <span class="big-number">2,000-2,500</span> kcal</p>
+                <p><strong>🏋️ 2 entrenos (45 min cada uno):</strong> <span class="big-number">+800-1,200</span> kcal</p>
+                <p><strong>🎯 TOTAL necesario:</strong> <span class="big-number">2,800-3,700</span> kcal/día</p>
                 
-                <p style="margin-top:20px"><strong>Proteína necesaria recuperación:</strong> 2g/kg peso corporal</p>
-                <p><strong>Ejemplo persona 75kg:</strong> 150g proteína/día</p>
-                <p><strong>Solo con comida:</strong> 750g pechuga pollo o 25 huevos 😱</p>
+                <div class="separator"></div>
                 
-                <p style="margin-top:20px;color:#ff1744;font-weight:700">Es física y matemáticamente DIFÍCIL alcanzar macros solo con comida normal.</p>
+                <p style="margin-top:20px"><strong>💪 Proteína necesaria recuperación:</strong> 2g/kg peso corporal</p>
+                <p><strong>📊 Ejemplo persona 75kg:</strong> <span class="big-number" style="font-size:2rem">150g</span> proteína/día</p>
+                <p><strong>🍗 Solo con comida:</strong> 750g pechuga pollo o <span class="big-number" style="font-size:2rem">25</span> huevos 😱</p>
+                
+                <p style="margin-top:30px;color:#ff1744;font-weight:700;font-size:1.3rem;text-align:center;padding:20px;background:rgba(255,255,255,.8);border-radius:10px">⚠️ Es física y matemáticamente DIFÍCIL alcanzar macros solo con comida normal.</p>
             </div>
 
             <h3>Estudios Científicos:</h3>
 
-            <ul>
-                <li>📚 <strong>Journal of Sports Science (2023):</strong> Atletas con suplementación adecuada tienen 67% menos lesiones en entrenamientos intensivos prolongados</li>
-                <li>📚 <strong>American Journal of Clinical Nutrition (2024):</strong> Proteína suplementada aumenta recuperación muscular 40% vs solo comida</li>
-                <li>📚 <strong>Sports Medicine Review (2023):</strong> Creatina mejora rendimiento en entrenamientos dobles diarios hasta 15%</li>
-            </ul>
+            <div class="science-section">
+                <div style="display:grid;gap:20px">
+                    <div style="background:white;padding:20px;border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,.1)">
+                        <p style="font-size:2.5rem;margin:0">📚</p>
+                        <p style="margin:10px 0 5px;color:#667eea;font-weight:700">Journal of Sports Science (2023)</p>
+                        <p style="margin:0">Atletas con suplementación adecuada tienen <span class="big-number" style="font-size:2rem">67%</span> menos lesiones en entrenamientos intensivos prolongados</p>
+                    </div>
+                    
+                    <div style="background:white;padding:20px;border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,.1)">
+                        <p style="font-size:2.5rem;margin:0">📚</p>
+                        <p style="margin:10px 0 5px;color:#667eea;font-weight:700">American Journal of Clinical Nutrition (2024)</p>
+                        <p style="margin:0">Proteína suplementada aumenta recuperación muscular <span class="big-number" style="font-size:2rem">40%</span> vs solo comida</p>
+                    </div>
+                    
+                    <div style="background:white;padding:20px;border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,.1)">
+                        <p style="font-size:2.5rem;margin:0">📚</p>
+                        <p style="margin:10px 0 5px;color:#667eea;font-weight:700">Sports Medicine Review (2023)</p>
+                        <p style="margin:0">Creatina mejora rendimiento en entrenamientos dobles diarios hasta <span class="big-number" style="font-size:2rem">15%</span></p>
+                    </div>
+                </div>
+            </div>
 
             <h2>💊 Los 7 Suplementos ESENCIALES (Orden de Prioridad)</h2>
 
@@ -382,42 +538,75 @@
 
             <h2>💰 El Stack Completo: Inversión vs Valor</h2>
 
-            <div class="stack-box">
-                <h3 style="color:#667eea;margin-bottom:20px">📦 STACK COMPLETO 75 HARD (75 días)</h3>
+            <div class="stack-box" style="background:linear-gradient(135deg,#f8f9fa,#e8f2ff);border:3px solid #667eea;box-shadow:0 10px 40px rgba(102,126,234,.2)">
+                <h3 style="color:#667eea;margin-bottom:30px;font-size:2rem;text-align:center">📦 STACK COMPLETO 75 HARD (75 días)</h3>
                 
-                <div class="stack-item">
-                    <span class="stack-icon">1️⃣</span>
-                    <span>Proteína Whey (4kg) - €90</span>
+                <div style="display:grid;gap:15px;margin-bottom:30px">
+                    <div style="background:white;padding:20px;border-radius:12px;box-shadow:0 3px 10px rgba(0,0,0,.08);display:flex;align-items:center;justify-content:space-between">
+                        <div style="display:flex;align-items:center;gap:15px">
+                            <span style="font-size:2.5rem">1️⃣</span>
+                            <span style="font-size:1.1rem;font-weight:600">Proteína Whey (4kg)</span>
+                        </div>
+                        <span style="font-size:1.3rem;font-weight:700;color:#667eea">€90</span>
+                    </div>
+                    
+                    <div style="background:white;padding:20px;border-radius:12px;box-shadow:0 3px 10px rgba(0,0,0,.08);display:flex;align-items:center;justify-content:space-between">
+                        <div style="display:flex;align-items:center;gap:15px">
+                            <span style="font-size:2.5rem">2️⃣</span>
+                            <span style="font-size:1.1rem;font-weight:600">Creatina (500g)</span>
+                        </div>
+                        <span style="font-size:1.3rem;font-weight:700;color:#667eea">€20</span>
+                    </div>
+                    
+                    <div style="background:white;padding:20px;border-radius:12px;box-shadow:0 3px 10px rgba(0,0,0,.08);display:flex;align-items:center;justify-content:space-between">
+                        <div style="display:flex;align-items:center;gap:15px">
+                            <span style="font-size:2.5rem">3️⃣</span>
+                            <span style="font-size:1.1rem;font-weight:600">Multivitamínico (90 caps)</span>
+                        </div>
+                        <span style="font-size:1.3rem;font-weight:700;color:#667eea">€25</span>
+                    </div>
+                    
+                    <div style="background:white;padding:20px;border-radius:12px;box-shadow:0 3px 10px rgba(0,0,0,.08);display:flex;align-items:center;justify-content:space-between">
+                        <div style="display:flex;align-items:center;gap:15px">
+                            <span style="font-size:2.5rem">4️⃣</span>
+                            <span style="font-size:1.1rem;font-weight:600">BCAA's (500g)</span>
+                        </div>
+                        <span style="font-size:1.3rem;font-weight:700;color:#667eea">€30</span>
+                    </div>
+                    
+                    <div style="background:white;padding:20px;border-radius:12px;box-shadow:0 3px 10px rgba(0,0,0,.08);display:flex;align-items:center;justify-content:space-between">
+                        <div style="display:flex;align-items:center;gap:15px">
+                            <span style="font-size:2.5rem">5️⃣</span>
+                            <span style="font-size:1.1rem;font-weight:600">Magnesio/ZMA (90 caps)</span>
                 </div>
-                <div class="stack-item">
-                    <span class="stack-icon">2️⃣</span>
-                    <span>Creatina (500g) - €20</span>
+                        <span style="font-size:1.3rem;font-weight:700;color:#667eea">€20</span>
                 </div>
-                <div class="stack-item">
-                    <span class="stack-icon">3️⃣</span>
-                    <span>Multivitamínico (90 caps) - €25</span>
+                    
+                    <div style="background:white;padding:20px;border-radius:12px;box-shadow:0 3px 10px rgba(0,0,0,.08);display:flex;align-items:center;justify-content:space-between">
+                        <div style="display:flex;align-items:center;gap:15px">
+                            <span style="font-size:2.5rem">6️⃣</span>
+                            <span style="font-size:1.1rem;font-weight:600">Pre-entreno (30 servicios)</span>
                 </div>
-                <div class="stack-item">
-                    <span class="stack-icon">4️⃣</span>
-                    <span>BCAA's (500g) - €30</span>
+                        <span style="font-size:1.3rem;font-weight:700;color:#667eea">€35</span>
                 </div>
-                <div class="stack-item">
-                    <span class="stack-icon">5️⃣</span>
-                    <span>Magnesio/ZMA (90 caps) - €20</span>
+                    
+                    <div style="background:white;padding:20px;border-radius:12px;box-shadow:0 3px 10px rgba(0,0,0,.08);display:flex;align-items:center;justify-content:space-between">
+                        <div style="display:flex;align-items:center;gap:15px">
+                            <span style="font-size:2.5rem">7️⃣</span>
+                            <span style="font-size:1.1rem;font-weight:600">Ashwagandha (60 caps)</span>
                 </div>
-                <div class="stack-item">
-                    <span class="stack-icon">6️⃣</span>
-                    <span>Pre-entreno (30 servicios) - €35</span>
+                        <span style="font-size:1.3rem;font-weight:700;color:#667eea">€22</span>
                 </div>
-                <div class="stack-item">
-                    <span class="stack-icon">7️⃣</span>
-                    <span>Ashwagandha (60 caps) - €22</span>
                 </div>
                 
-                <div style="border-top:3px solid #667eea;margin:25px 0;padding-top:20px">
-                    <div class="price-tag" style="font-size:1.5rem">TOTAL: €242 (75 días)</div>
-                    <p style="margin-top:15px;font-size:1.1rem"><strong>= €3.23/día</strong></p>
-                    <p style="color:#666">Menos que un café Starbucks. ¿Vale la pena COMPLETAR vs FALLAR de nuevo?</p>
+                <div style="border-top:3px solid #667eea;margin:30px 0;padding-top:30px;background:white;padding:30px;border-radius:15px;box-shadow:0 5px 20px rgba(0,0,0,.1)">
+                    <div style="text-align:center">
+                        <p style="color:#666;margin-bottom:10px;font-size:1.1rem">TOTAL 75 DÍAS</p>
+                        <div class="price-tag" style="font-size:2.5rem;display:inline-block;margin:10px 0">€242</div>
+                        <p style="margin-top:15px;font-size:1.3rem;color:#667eea;font-weight:700">= €3.23/día</p>
+                        <p style="color:#666;margin-top:20px;font-size:1.1rem">☕ Menos que un café Starbucks</p>
+                        <p style="color:#ff1744;font-weight:700;margin-top:15px;font-size:1.1rem">¿Vale la pena COMPLETAR vs FALLAR de nuevo?</p>
+                    </div>
                 </div>
             </div>
 
@@ -437,85 +626,201 @@
 
             <h2>📅 Protocolo Diario Suplementación</h2>
 
-            <div style="background:#f8f9fa;padding:25px;border-radius:12px;margin:25px 0">
-                <h3>🌅 AL DESPERTAR (7 AM)</h3>
-                <ul>
-                    <li>💊 Multivitamínico (1 cápsula)</li>
-                    <li>🌿 Ashwagandha (1 cápsula)</li>
-                    <li>💧 BCAA's (10g en agua) - Opcional</li>
-                </ul>
+            <div style="display:grid;gap:20px;margin:30px 0">
+                <!-- 7 AM -->
+                <div style="background:linear-gradient(135deg,#fff5e6,#ffe8cc);border:3px solid #ff9800;border-radius:15px;padding:25px;box-shadow:0 5px 20px rgba(255,152,0,.2)">
+                    <h3 style="color:#ff6f00;margin-bottom:15px;font-size:1.5rem">🌅 AL DESPERTAR (7 AM)</h3>
+                    <div style="display:grid;gap:10px">
+                        <div style="background:white;padding:12px 20px;border-radius:10px;display:flex;align-items:center;gap:15px">
+                            <span style="font-size:1.8rem">💊</span>
+                            <span style="font-weight:600">Multivitamínico (1 cápsula)</span>
+                        </div>
+                        <div style="background:white;padding:12px 20px;border-radius:10px;display:flex;align-items:center;gap:15px">
+                            <span style="font-size:1.8rem">🌿</span>
+                            <span style="font-weight:600">Ashwagandha (1 cápsula)</span>
+                        </div>
+                        <div style="background:white;padding:12px 20px;border-radius:10px;display:flex;align-items:center;gap:15px;opacity:0.7">
+                            <span style="font-size:1.8rem">💧</span>
+                            <span style="font-weight:600">BCAA's (10g en agua) - <em>Opcional</em></span>
+                        </div>
+                    </div>
+                </div>
 
-                <h3 style="margin-top:25px">🏋️ PRE-ENTRENO 1 (8:30 AM)</h3>
-                <ul>
-                    <li>⚡ Creatina (5g en agua/batido)</li>
-                </ul>
+                <!-- 8:30 AM -->
+                <div style="background:linear-gradient(135deg,#e3f2fd,#bbdefb);border:3px solid #2196f3;border-radius:15px;padding:25px;box-shadow:0 5px 20px rgba(33,150,243,.2)">
+                    <h3 style="color:#1976d2;margin-bottom:15px;font-size:1.5rem">🏋️ PRE-ENTRENO 1 (8:30 AM)</h3>
+                    <div style="background:white;padding:12px 20px;border-radius:10px;display:flex;align-items:center;gap:15px">
+                        <span style="font-size:1.8rem">⚡</span>
+                        <span style="font-weight:600">Creatina (5g en agua/batido)</span>
+                    </div>
+                </div>
 
-                <h3 style="margin-top:25px">💪 POST-ENTRENO 1 (10 AM)</h3>
-                <ul>
-                    <li>🥛 Proteína Whey (1 batido 25-30g)</li>
-                </ul>
+                <!-- 10 AM -->
+                <div style="background:linear-gradient(135deg,#f3e5f5,#e1bee7);border:3px solid #9c27b0;border-radius:15px;padding:25px;box-shadow:0 5px 20px rgba(156,39,176,.2)">
+                    <h3 style="color:#7b1fa2;margin-bottom:15px;font-size:1.5rem">💪 POST-ENTRENO 1 (10 AM)</h3>
+                    <div style="background:white;padding:12px 20px;border-radius:10px;display:flex;align-items:center;gap:15px">
+                        <span style="font-size:1.8rem">🥛</span>
+                        <span style="font-weight:600">Proteína Whey (1 batido 25-30g)</span>
+                    </div>
+                </div>
 
-                <h3 style="margin-top:25px">🔥 PRE-ENTRENO 2 (5:30 PM)</h3>
-                <ul>
-                    <li>⚡ Pre-entreno (1 scoop)</li>
-                </ul>
+                <!-- 5:30 PM -->
+                <div style="background:linear-gradient(135deg,#ffebee,#ffcdd2);border:3px solid #f44336;border-radius:15px;padding:25px;box-shadow:0 5px 20px rgba(244,67,54,.2)">
+                    <h3 style="color:#c62828;margin-bottom:15px;font-size:1.5rem">🔥 PRE-ENTRENO 2 (5:30 PM)</h3>
+                    <div style="background:white;padding:12px 20px;border-radius:10px;display:flex;align-items:center;gap:15px">
+                        <span style="font-size:1.8rem">⚡</span>
+                        <span style="font-weight:600">Pre-entreno (1 scoop)</span>
+                    </div>
+                </div>
 
-                <h3 style="margin-top:25px">💪 POST-ENTRENO 2 (7 PM)</h3>
-                <ul>
-                    <li>🥛 Proteína Whey (1 batido 25-30g)</li>
-                    <li>⚡ Creatina (opcional si no tomaste mañana)</li>
-                </ul>
+                <!-- 7 PM -->
+                <div style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border:3px solid #4caf50;border-radius:15px;padding:25px;box-shadow:0 5px 20px rgba(76,175,80,.2)">
+                    <h3 style="color:#2e7d32;margin-bottom:15px;font-size:1.5rem">💪 POST-ENTRENO 2 (7 PM)</h3>
+                    <div style="display:grid;gap:10px">
+                        <div style="background:white;padding:12px 20px;border-radius:10px;display:flex;align-items:center;gap:15px">
+                            <span style="font-size:1.8rem">🥛</span>
+                            <span style="font-weight:600">Proteína Whey (1 batido 25-30g)</span>
+                        </div>
+                        <div style="background:white;padding:12px 20px;border-radius:10px;display:flex;align-items:center;gap:15px;opacity:0.7">
+                            <span style="font-size:1.8rem">⚡</span>
+                            <span style="font-weight:600">Creatina (opcional si no tomaste mañana)</span>
+                        </div>
+                    </div>
+                </div>
 
-                <h3 style="margin-top:25px">🌙 ANTES DORMIR (10 PM)</h3>
-                <ul>
-                    <li>😴 Magnesio/ZMA (2 cápsulas)</li>
-                    <li>🌿 Ashwagandha (1 cápsula)</li>
-                </ul>
+                <!-- 10 PM -->
+                <div style="background:linear-gradient(135deg,#e0f2f1,#b2dfdb);border:3px solid #009688;border-radius:15px;padding:25px;box-shadow:0 5px 20px rgba(0,150,136,.2)">
+                    <h3 style="color:#00695c;margin-bottom:15px;font-size:1.5rem">🌙 ANTES DORMIR (10 PM)</h3>
+                    <div style="display:grid;gap:10px">
+                        <div style="background:white;padding:12px 20px;border-radius:10px;display:flex;align-items:center;gap:15px">
+                            <span style="font-size:1.8rem">😴</span>
+                            <span style="font-weight:600">Magnesio/ZMA (2 cápsulas)</span>
+                        </div>
+                        <div style="background:white;padding:12px 20px;border-radius:10px;display:flex;align-items:center;gap:15px">
+                            <span style="font-size:1.8rem">🌿</span>
+                            <span style="font-weight:600">Ashwagandha (1 cápsula)</span>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <h2>❓ FAQ - Preguntas Reales</h2>
 
-            <h3>¿Puedo hacer 75 Hard sin suplementos?</h3>
-            <p><strong>Respuesta honesta:</strong> SÍ, técnicamente puedes. PERO:</p>
-            <ul>
-                <li>Necesitarás comer 6-8 veces/día (insostenible)</li>
-                <li>Probabilidad lesión aumenta 3x</li>
-                <li>Fatiga día 30+ será BRUTAL</li>
-                <li>80% fallan sin suplementación vs 40% con suplementos</li>
-            </ul>
-            <p><strong>¿Vale la pena arriesgarte?</strong></p>
+            <div style="display:grid;gap:25px;margin:30px 0">
+                <!-- FAQ 1 -->
+                <div style="background:linear-gradient(135deg,#fff9e6,#fff3cd);border:3px solid #ffc107;border-radius:15px;padding:30px;box-shadow:0 5px 20px rgba(255,193,7,.2)">
+                    <h3 style="color:#f57c00;margin-bottom:15px;font-size:1.6rem">❓ ¿Puedo hacer 75 Hard sin suplementos?</h3>
+                    <p style="font-size:1.1rem;margin-bottom:15px"><strong>Respuesta honesta:</strong> SÍ, técnicamente puedes. PERO:</p>
+                    <div style="display:grid;gap:10px">
+                        <div style="background:white;padding:15px 20px;border-radius:10px;border-left:4px solid #ffc107">
+                            <p style="margin:0">🍗 Necesitarás comer 6-8 veces/día (insostenible)</p>
+                        </div>
+                        <div style="background:white;padding:15px 20px;border-radius:10px;border-left:4px solid #ff9800">
+                            <p style="margin:0">⚠️ Probabilidad lesión aumenta <span class="big-number" style="font-size:1.5rem">3x</span></p>
+                        </div>
+                        <div style="background:white;padding:15px 20px;border-radius:10px;border-left:4px solid #ff5722">
+                            <p style="margin:0">😰 Fatiga día 30+ será BRUTAL</p>
+                        </div>
+                        <div style="background:white;padding:15px 20px;border-radius:10px;border-left:4px solid #ff1744">
+                            <p style="margin:0">📊 <span class="big-number" style="font-size:1.5rem">80%</span> fallan sin suplementación vs <span class="big-number" style="font-size:1.5rem">40%</span> con suplementos</p>
+                        </div>
+                    </div>
+                    <p style="margin-top:20px;color:#ff1744;font-weight:700;font-size:1.2rem;text-align:center">¿Vale la pena arriesgarte?</p>
+                </div>
 
-            <h3>¿Qué pasa si solo compro 2-3 suplementos?</h3>
-            <p><strong>Prioridad mínima viable:</strong></p>
-            <ol>
-                <li>Proteína Whey (NO NEGOCIABLE)</li>
-                <li>Creatina (crítico para energía)</li>
-                <li>Multivitamínico (prevenir enfermedad)</li>
-            </ol>
-            <p>Solo estos 3 = €135 (75 días) = €1.80/día</p>
+                <!-- FAQ 2 -->
+                <div style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border:3px solid #4caf50;border-radius:15px;padding:30px;box-shadow:0 5px 20px rgba(76,175,80,.2)">
+                    <h3 style="color:#2e7d32;margin-bottom:15px;font-size:1.6rem">💰 ¿Qué pasa si solo compro 2-3 suplementos?</h3>
+                    <p style="font-size:1.1rem;margin-bottom:15px"><strong>Prioridad mínima viable:</strong></p>
+                    <div style="display:grid;gap:12px;margin-bottom:20px">
+                        <div style="background:white;padding:18px 25px;border-radius:12px;display:flex;align-items:center;gap:15px;box-shadow:0 3px 10px rgba(0,0,0,.1)">
+                            <span style="font-size:2.5rem">1️⃣</span>
+                            <div>
+                                <p style="margin:0;font-weight:700;color:#4caf50">Proteína Whey</p>
+                                <p style="margin:5px 0 0;color:#666;font-size:0.95rem">NO NEGOCIABLE</p>
+                            </div>
+                        </div>
+                        <div style="background:white;padding:18px 25px;border-radius:12px;display:flex;align-items:center;gap:15px;box-shadow:0 3px 10px rgba(0,0,0,.1)">
+                            <span style="font-size:2.5rem">2️⃣</span>
+                            <div>
+                                <p style="margin:0;font-weight:700;color:#4caf50">Creatina</p>
+                                <p style="margin:5px 0 0;color:#666;font-size:0.95rem">Crítico para energía</p>
+                            </div>
+                        </div>
+                        <div style="background:white;padding:18px 25px;border-radius:12px;display:flex;align-items:center;gap:15px;box-shadow:0 3px 10px rgba(0,0,0,.1)">
+                            <span style="font-size:2.5rem">3️⃣</span>
+                            <div>
+                                <p style="margin:0;font-weight:700;color:#4caf50">Multivitamínico</p>
+                                <p style="margin:5px 0 0;color:#666;font-size:0.95rem">Prevenir enfermedad</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="background:white;padding:20px;border-radius:12px;text-align:center">
+                        <p style="margin:0;color:#666">Solo estos 3 = <span class="big-number" style="font-size:2rem">€135</span> (75 días)</p>
+                        <p style="margin:10px 0 0;font-size:1.2rem;color:#4caf50;font-weight:700">= €1.80/día</p>
+                    </div>
+                </div>
 
-            <h3>¿Los suplementos tienen efectos secundarios?</h3>
-            <p><strong>En dosis recomendadas:</strong> NO en personas sanas.</p>
-            <p><strong>Excepciones:</strong></p>
-            <ul>
-                <li>Pre-entreno: Posible insomnio si tomas tarde</li>
-                <li>Beta-alanina: Hormigueo (normal, inofensivo)</li>
-                <li>Proteína: Gases si intolerancia láctea (usa isolate o vegetal)</li>
-            </ul>
+                <!-- FAQ 3 -->
+                <div style="background:linear-gradient(135deg,#e3f2fd,#bbdefb);border:3px solid #2196f3;border-radius:15px;padding:30px;box-shadow:0 5px 20px rgba(33,150,243,.2)">
+                    <h3 style="color:#1976d2;margin-bottom:15px;font-size:1.6rem">⚠️ ¿Los suplementos tienen efectos secundarios?</h3>
+                    <p style="font-size:1.1rem;margin-bottom:15px"><strong>En dosis recomendadas:</strong> NO en personas sanas.</p>
+                    <p style="font-size:1.1rem;margin-bottom:15px"><strong>Excepciones:</strong></p>
+                    <div style="display:grid;gap:10px">
+                        <div style="background:white;padding:15px 20px;border-radius:10px;border-left:4px solid #2196f3">
+                            <p style="margin:0"><strong>Pre-entreno:</strong> Posible insomnio si tomas tarde</p>
+                        </div>
+                        <div style="background:white;padding:15px 20px;border-radius:10px;border-left:4px solid #2196f3">
+                            <p style="margin:0"><strong>Beta-alanina:</strong> Hormigueo (normal, inofensivo)</p>
+                        </div>
+                        <div style="background:white;padding:15px 20px;border-radius:10px;border-left:4px solid #2196f3">
+                            <p style="margin:0"><strong>Proteína:</strong> Gases si intolerancia láctea (usa isolate o vegetal)</p>
+                        </div>
+                    </div>
+                </div>
 
-            <h3>¿Necesito "ciclar" algún suplemento?</h3>
-            <p><strong>NO para 75 días.</strong> Todos estos son seguros uso continuo.</p>
-            <p><strong>Única excepción:</strong> Pre-entreno (algunos recomiendan descanso cada 8-12 semanas para resetear tolerancia cafeína)</p>
+                <!-- FAQ 4 -->
+                <div style="background:linear-gradient(135deg,#f3e5f5,#e1bee7);border:3px solid #9c27b0;border-radius:15px;padding:30px;box-shadow:0 5px 20px rgba(156,39,176,.2)">
+                    <h3 style="color:#7b1fa2;margin-bottom:15px;font-size:1.6rem">🔄 ¿Necesito "ciclar" algún suplemento?</h3>
+                    <p style="font-size:1.1rem;margin-bottom:15px"><strong>NO para 75 días.</strong> Todos estos son seguros uso continuo.</p>
+                    <div style="background:white;padding:20px;border-radius:12px;border-left:4px solid #9c27b0">
+                        <p style="margin:0"><strong>Única excepción:</strong> Pre-entreno (algunos recomiendan descanso cada 8-12 semanas para resetear tolerancia cafeína)</p>
+                    </div>
+                </div>
 
-            <h3>¿Qué marca compro?</h3>
-            <p><strong>Marcas probadas:</strong></p>
-            <ul>
-                <li>Optimum Nutrition (proteína)</li>
-                <li>Myprotein (creatina, BCAA's - calidad-precio)</li>
-                <li>Solgar (multivitamínico, magnesio)</li>
-                <li>C4 / Pre-Kaged (pre-entrenos)</li>
-                <li>Now Foods (ashwagandha)</li>
-            </ul>
+                <!-- FAQ 5 -->
+                <div style="background:linear-gradient(135deg,#fff3e0,#ffe0b2);border:3px solid #ff9800;border-radius:15px;padding:30px;box-shadow:0 5px 20px rgba(255,152,0,.2)">
+                    <h3 style="color:#e65100;margin-bottom:15px;font-size:1.6rem">🏆 ¿Qué marca compro?</h3>
+                    <p style="font-size:1.1rem;margin-bottom:15px"><strong>Marcas probadas:</strong></p>
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px">
+                        <div style="background:white;padding:20px;border-radius:12px;text-align:center;box-shadow:0 3px 10px rgba(0,0,0,.1)">
+                            <p style="font-size:2rem;margin:0">🥇</p>
+                            <p style="margin:10px 0 0;font-weight:700;color:#ff9800">Optimum Nutrition</p>
+                            <p style="margin:5px 0 0;color:#666;font-size:0.9rem">Proteína</p>
+                        </div>
+                        <div style="background:white;padding:20px;border-radius:12px;text-align:center;box-shadow:0 3px 10px rgba(0,0,0,.1)">
+                            <p style="font-size:2rem;margin:0">🥈</p>
+                            <p style="margin:10px 0 0;font-weight:700;color:#ff9800">Myprotein</p>
+                            <p style="margin:5px 0 0;color:#666;font-size:0.9rem">Creatina, BCAA's</p>
+                        </div>
+                        <div style="background:white;padding:20px;border-radius:12px;text-align:center;box-shadow:0 3px 10px rgba(0,0,0,.1)">
+                            <p style="font-size:2rem;margin:0">🥉</p>
+                            <p style="margin:10px 0 0;font-weight:700;color:#ff9800">Solgar</p>
+                            <p style="margin:5px 0 0;color:#666;font-size:0.9rem">Multi, Magnesio</p>
+                        </div>
+                        <div style="background:white;padding:20px;border-radius:12px;text-align:center;box-shadow:0 3px 10px rgba(0,0,0,.1)">
+                            <p style="font-size:2rem;margin:0">⚡</p>
+                            <p style="margin:10px 0 0;font-weight:700;color:#ff9800">C4 / Pre-Kaged</p>
+                            <p style="margin:5px 0 0;color:#666;font-size:0.9rem">Pre-entrenos</p>
+                        </div>
+                        <div style="background:white;padding:20px;border-radius:12px;text-align:center;box-shadow:0 3px 10px rgba(0,0,0,.1)">
+                            <p style="font-size:2rem;margin:0">🌿</p>
+                            <p style="margin:10px 0 0;font-weight:700;color:#ff9800">Now Foods</p>
+                            <p style="margin:5px 0 0;color:#666;font-size:0.9rem">Ashwagandha</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <h2>✅ Checklist Final Antes de Empezar</h2>
 
