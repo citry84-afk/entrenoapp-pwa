@@ -1,9 +1,9 @@
-// EntrenoApp - Aplicación Principal
-import { initializeEntrenoApp, auth, appConfig } from './config/firebase-config.js';
-import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+// EntrenoApp - Aplicación Principal (Sin autenticación para AdSense)
+import { initializeEntrenoApp, appConfig } from './config/firebase-config.js';
+// import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
 
 // Importar componentes
-import './auth/auth.js';
+// import './auth/auth.js'; // Deshabilitado para AdSense
 import './components/dashboard.js';
 import './components/workouts.js';
 import './components/running.js';
@@ -34,11 +34,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Mostrar pantalla de carga
         showLoadingScreen();
         
-        // Configurar listener de auth ANTES de inicializar (iOS redirect timing)
-        setupAuthListener();
+        // Auth deshabilitado para AdSense - acceso sin registro
+        // setupAuthListener();
 
-        // Inicializar Firebase
+        // Inicializar Firebase (sin auth)
         await initializeEntrenoApp();
+        
+        // Simular usuario guest para que la app funcione
+        appState.currentUser = { uid: 'guest', isGuest: true, displayName: 'Usuario' };
         setupNavigationListeners();
         setupNetworkListeners();
         setupServiceWorkerListeners();
@@ -52,7 +55,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Marcar como inicializada
         appState.isInitialized = true;
         
-        console.log('✅ EntrenoApp inicializada correctamente');
+        // Mostrar app directamente sin login
+        hideLoadingScreen();
+        navigateTo('dashboard');
+        
+        console.log('✅ EntrenoApp inicializada correctamente (Modo Guest para AdSense)');
         
     } catch (error) {
         console.error('❌ Error inicializando la aplicación:', error);
@@ -90,8 +97,13 @@ function showErrorScreen(error) {
     `;
 }
 
-// Configurar listener de autenticación
+// Configurar listener de autenticación (DESHABILITADO PARA ADSENSE)
 function setupAuthListener() {
+    // Auth deshabilitado - todos los usuarios son "guest"
+    console.log('🔐 Auth deshabilitado - Modo Guest activo para AdSense');
+    return;
+    
+    /* CÓDIGO ORIGINAL COMENTADO
     onAuthStateChanged(auth, (user) => {
         console.log('🔐 Estado de autenticación cambió:', user ? 'autenticado' : 'no autenticado');
         
@@ -105,6 +117,7 @@ function setupAuthListener() {
             handleUserNotAuthenticated();
         }
     });
+    */
 }
 
 // Manejar usuario autenticado
