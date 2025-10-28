@@ -600,7 +600,13 @@
                 try {
                     const handle = CHANNEL_HANDLE.replace('@', '');
                     const searchUrl = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&type=channel&q=${encodeURIComponent(handle)}&part=snippet&maxResults=1`;
-                    const searchResponse = await fetch(searchUrl);
+                    const searchResponse = await fetch(searchUrl, {
+                        method: 'GET',
+                        headers: {
+                            'Accept': 'application/json'
+                        },
+                        mode: 'cors'
+                    });
                     const searchData = await searchResponse.json();
                     
                     if (!searchData.items || searchData.items.length === 0) {
@@ -610,7 +616,13 @@
                     
                     const channelId = searchData.items[0].id?.channelId || searchData.items[0].id;
                     const videosUrl = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${channelId}&part=snippet,id&order=date&maxResults=6`;
-                    const videosResponse = await fetch(videosUrl);
+                    const videosResponse = await fetch(videosUrl, {
+                        method: 'GET',
+                        headers: {
+                            'Accept': 'application/json'
+                        },
+                        mode: 'cors'
+                    });
                     const videosData = await videosResponse.json();
                     
                     if (videosData.items && videosData.items.length > 0) {
@@ -623,7 +635,8 @@
                         container.innerHTML = html;
                     }
                 } catch (error) {
-                    container.innerHTML = '<p>Error cargando videos</p>';
+                    console.error('Error cargando videos de YouTube:', error);
+                    container.innerHTML = '<p style="text-align:center;">⚠️ Error cargando videos. <button onclick="window.loadVideos()" style="background:#667eea;color:white;padding:10px 20px;border:none;border-radius:5px;cursor:pointer;margin-left:10px;">Reintentar</button></p>';
                 }
             }
             
