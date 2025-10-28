@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnóstico YouTube</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-box {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .success { color: green; }
+        .error { color: red; }
+        .warning { color: orange; }
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 Diagnóstico de YouTube Integration</h1>
+    
+    <div class="test-box">
+        <h2>1. Verificar archivos en la web</h2>
+        <button onclick="testFiles()">Probar Archivos</button>
+        <div id="filesResult"></div>
+    </div>
+    
+    <div class="test-box">
+        <h2>2. Verificar API Key</h2>
+        <button onclick="testAPIKey()">Probar API</button>
+        <div id="apiResult"></div>
+    </div>
+    
+    <div class="test-box">
+        <h2>3. Verificar Canal</h2>
+        <button onclick="testChannel()">Buscar Canal</button>
+        <div id="channelResult"></div>
+    </div>
+    
+    <div class="test-box">
+        <h2>4. Cargar Videos</h2>
+        <button onclick="loadVideos()">Cargar Videos</button>
+        <div id="videosResult"></div>
+    </div>
+    
+    <div class="test-box">
+        <h2>5. Ver En Sitio Real</h2>
+        <button onclick="window.open('https://entrenoapp.netlify.app', '_blank')">Abrir Landing Page</button>
+        <button onclick="window.open('https://entrenoapp.netlify.app/test-youtube-api.html', '_blank')">Abrir Test API</button>
+    </div>
+
+    <script>
+        const API_KEY = 'AIzaSyD4_1H8Zi1U9DAEkSrX9D1FtxLmcJR2vTM';
+        const CHANNEL_HANDLE = '@entrenoapp';
+
+        async function testFiles() {
+            const result = document.getElementById('filesResult');
+            result.innerHTML = '🔄 Probando archivos...';
+            
+            const files = [
+                'https://entrenoapp.netlify.app/js/components/youtube-gallery.js',
+                'https://entrenoapp.netlify.app/index.html',
+                'https://entrenoapp.netlify.app/youtube-gallery.html'
+            ];
+            
+            let results = '<h3>Resultados:</h3><ul>';
+            for (const file of files) {
+                try {
+                    const response = await fetch(file, { method: 'HEAD' });
+                    const status = response.ok ? '✅' : '❌';
+                    results += `<li>${status} ${file} (${response.status})</li>`;
+                } catch (error) {
+                    results += `<li>❌ ${file} - Error: ${error.message}</li>`;
+                }
+            }
+            results += '</ul>';
+            result.innerHTML = results;
+        }
+
+        async function testAPIKey() {
+            const result = document.getElementById('apiResult');
+            result.innerHTML = '🔄 Probando API Key...';
+            
+            try {
+                const url = `https://www.googleapis.com/youtube/v3/activities?key=${API_KEY}&part=snippet&channelId=UC-lHJZR3DtoQ_LoIvMm6Xk0&maxResults=1`;
+                const response = await fetch(url);
+                
+                if (response.ok) {
+                    result.innerHTML = '<p class="success">✅ API Key funciona correctamente</p>';
+                } else {
+                    const error = await response.json();
+                    result.innerHTML = `<p class="error">❌ Error: ${JSON.stringify(error)}</p>`;
+                }
+            } catch (error) {
+                result.innerHTML = `<p class="error">❌ Error de red: ${error.message}</p>`;
+            }
+        }
+
+        async function testChannel() {
+            const result = document.getElementById('channelResult');
+            result.innerHTML = '🔄 Buscando canal...';
+            
+            try {
+                const handle = CHANNEL_HANDLE.replace('@', '');
+                const url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&type=channel&q=${encodeURIComponent(handle)}&part=snippet&maxResults=1`;
+                const response = await fetch(url);
+                const data = await response.json();
+                
+                if (data.items && data.items.length > 0) {
+                    const channel = data.items[0];
+                    result.innerHTML = `
+                        <p class="success">✅ Canal encontrado</p>
+                        <p><strong>Nombre:</strong> ${channel.snippet.title}</p>
+                        <p><strong>Channel ID:</strong> ${channel.id?.channelId || channel.id}</p>
+                    `;
+                } else {
+                    result.innerHTML = '<p class="error">❌ Canal no encontrado</p>';
+                }
+            } catch (error) {
+                result.innerHTML = `<p class="error">❌ Error: ${error.message}</p>`;
+            }
+        }
+
+        async function loadVideos() {
+            const result = document.getElementById('videosResult');
+            result.innerHTML = '🔄 Cargando videos...';
+            
+            try {
+                // Primero obtener el channel ID
+                const handle = CHANNEL_HANDLE.replace('@', '');
+                const searchUrl = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&type=channel&q=${encodeURIComponent(handle)}&part=snippet&maxResults=1`;
+                const searchResponse = await fetch(searchUrl);
+                const searchData = await searchResponse.json();
+                
+                if (!searchData.items || searchData.items.length === 0) {
+                    result.innerHTML = '<p class="error">❌ Canal no encontrado</p>';
+                    return;
+                }
+                
+                const channelId = searchData.items[0].id?.channelId || searchData.items[0].id;
+                
+                // Buscar videos
+                const videosUrl = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${channelId}&part=snippet,id&order=date&maxResults=6`;
+                const videosResponse = await fetch(videosUrl);
+                const videosData = await videosResponse.json();
+                
+                if (videosData.items && videosData.items.length > 0) {
+                    let html = '<p class="success">✅ Videos encontrados:</p><ul>';
+                    videosData.items.forEach((item, index) => {
+                        const videoId = item.id?.videoId || item.id;
+                        html += `<li><strong>${index + 1}.</strong> ${item.snippet.title}</li>`;
+                        html += `<li style="margin-left: 20px;">ID: ${videoId}</li>`;
+                    });
+                    html += '</ul>';
+                    result.innerHTML = html;
+                } else {
+                    result.innerHTML = '<p class="warning">⚠️ No se encontraron videos</p>';
+                }
+            } catch (error) {
+                result.innerHTML = `<p class="error">❌ Error: ${error.message}</p>`;
+            }
+        }
+    </script>
+</body>
+</html>
