@@ -598,24 +598,12 @@
                 container.innerHTML = '<p style="text-align:center;">Cargando videos...</p>';
                 
                 try {
+                    // Usar método directo: buscar videos del canal por su handle
                     const handle = CHANNEL_HANDLE.replace('@', '');
-                    const searchUrl = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&type=channel&q=${encodeURIComponent(handle)}&part=snippet&maxResults=1`;
-                    const searchResponse = await fetch(searchUrl, {
-                        method: 'GET',
-                        headers: {
-                            'Accept': 'application/json'
-                        },
-                        mode: 'cors'
-                    });
-                    const searchData = await searchResponse.json();
+                    console.log('Buscando videos del canal:', handle);
                     
-                    if (!searchData.items || searchData.items.length === 0) {
-                        container.innerHTML = '<p>Videos no disponibles</p>';
-                        return;
-                    }
-                    
-                    const channelId = searchData.items[0].id?.channelId || searchData.items[0].id;
-                    const videosUrl = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${channelId}&part=snippet,id&order=date&maxResults=6`;
+                    // Buscar directamente videos por canal usando el handle en la búsqueda
+                    const videosUrl = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&q=channel:${handle}&part=snippet,id&order=date&maxResults=6&type=video`;
                     const videosResponse = await fetch(videosUrl, {
                         method: 'GET',
                         headers: {
@@ -624,8 +612,10 @@
                         mode: 'cors'
                     });
                     const videosData = await videosResponse.json();
+                    console.log('Videos obtenidos:', videosData);
                     
                     if (videosData.items && videosData.items.length > 0) {
+                        console.log('Número de videos encontrados:', videosData.items.length);
                         let html = '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;">';
                         videosData.items.forEach(item => {
                             const videoId = item.id?.videoId || item.id;
@@ -633,6 +623,9 @@
                         });
                         html += '</div>';
                         container.innerHTML = html;
+                    } else {
+                        console.log('No se encontraron videos');
+                        container.innerHTML = '<p style="text-align:center;">No hay videos disponibles en este momento.</p>';
                     }
                 } catch (error) {
                     console.error('Error cargando videos de YouTube:', error);
