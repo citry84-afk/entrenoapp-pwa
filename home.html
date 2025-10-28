@@ -396,6 +396,17 @@
         </div>
     </section>
 
+    <!-- YouTube Videos Section -->
+    <section id="youtube-videos" style="padding: 60px 20px; background: #f8f9fa;">
+        <div class="container">
+            <h2 class="section-title">📺 Videos de EntrenoApp</h2>
+            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 40px; color: #666;">
+                Aprende fitness con nuestros tutoriales y rutinas
+            </p>
+            <div id="youtube-gallery"></div>
+        </div>
+    </section>
+
     <!-- Features Section -->
     <section id="features" class="features-section">
         <div class="container">
@@ -559,6 +570,50 @@
     <script>
         // Inicializar AdSense
         (adsbygoogle = window.adsbygoogle || []).push({});
+        
+        // Cargar videos de YouTube
+        document.addEventListener('DOMContentLoaded', function() {
+            const API_KEY = 'AIzaSyD4_1H8Zi1U9DAEkSrX9D1FtxLmcJR2vTM';
+            const CHANNEL_HANDLE = '@entrenoapp';
+            
+            async function loadYouTubeVideos() {
+                const container = document.getElementById('youtube-gallery');
+                if (!container) return;
+                
+                container.innerHTML = '<p style="text-align:center;">Cargando videos...</p>';
+                
+                try {
+                    const handle = CHANNEL_HANDLE.replace('@', '');
+                    const searchUrl = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&type=channel&q=${encodeURIComponent(handle)}&part=snippet&maxResults=1`;
+                    const searchResponse = await fetch(searchUrl);
+                    const searchData = await searchResponse.json();
+                    
+                    if (!searchData.items || searchData.items.length === 0) {
+                        container.innerHTML = '<p>Videos no disponibles</p>';
+                        return;
+                    }
+                    
+                    const channelId = searchData.items[0].id?.channelId || searchData.items[0].id;
+                    const videosUrl = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${channelId}&part=snippet,id&order=date&maxResults=6`;
+                    const videosResponse = await fetch(videosUrl);
+                    const videosData = await videosResponse.json();
+                    
+                    if (videosData.items && videosData.items.length > 0) {
+                        let html = '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;">';
+                        videosData.items.forEach(item => {
+                            const videoId = item.id?.videoId || item.id;
+                            html += `<div style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 3px 10px rgba(0,0,0,0.1); cursor: pointer;" onclick="window.open('https://youtube.com/watch?v=${videoId}', '_blank')"><div style="position: relative; padding-top: 56.25%;"><img src="${item.snippet.thumbnails.high.url}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;" alt="${item.snippet.title}"><div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; background: rgba(255,0,0,0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center;"><div style="width: 0; height: 0; border-left: 20px solid white; border-top: 12px solid transparent; border-bottom: 12px solid transparent; margin-left: 5px;"></div></div></div><div style="padding: 15px;"><h3 style="font-size: 1.1rem; margin: 0 0 10px 0;">${item.snippet.title}</h3><p style="font-size: 0.9rem; color: #666;">${item.snippet.description.substring(0, 100)}...</p></div></div>`;
+                        });
+                        html += '</div>';
+                        container.innerHTML = html;
+                    }
+                } catch (error) {
+                    container.innerHTML = '<p>Error cargando videos</p>';
+                }
+            }
+            
+            setTimeout(loadYouTubeVideos, 1500);
+        });
     </script>
 </body>
 </html>
