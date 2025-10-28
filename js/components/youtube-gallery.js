@@ -77,6 +77,18 @@ class YouTubeGallery {
         const response = await fetch(url);
         const data = await response.json();
         
+        // Verificar errores de API
+        if (data.error) {
+            console.error('Error de YouTube API:', data.error);
+            throw new Error('Error de API: ' + data.error.message);
+        }
+        
+        // Verificar que data.items existe
+        if (!data.items || data.items.length === 0) {
+            console.warn('No se encontraron videos para el canal:', this.config.channelId);
+            return [];
+        }
+        
         return data.items.map(item => ({
             id: item.id.videoId,
             title: item.snippet.title,
