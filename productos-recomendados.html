@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🛒 Productos Recomendados - EntrenoApp</title>
+    <meta name="description" content="Descubre los mejores suplementos y equipamiento de fitness que uso personalmente. Productos probados y recomendados para tu entrenamiento.">
+    <meta name="keywords" content="suplementos fitness, equipamiento gimnasio, proteína, creatina, pesas, esterilla yoga, bandas resistencia">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="🛒 Productos Recomendados - EntrenoApp">
+    <meta property="og:description" content="Los mejores suplementos y equipamiento de fitness que uso personalmente">
+    <meta property="og:image" content="https://entrenoapp.netlify.app/images/productos-recomendados.jpg">
+    <meta property="og:url" content="https://entrenoapp.netlify.app/productos-recomendados.html">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="🛒 Productos Recomendados - EntrenoApp">
+    <meta name="twitter:description" content="Los mejores suplementos y equipamiento de fitness que uso personalmente">
+    <meta name="twitter:image" content="https://entrenoapp.netlify.app/images/productos-recomendados.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    
+    <!-- AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXX" crossorigin="anonymous"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            margin-bottom: 40px;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+        
+        main {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #667eea;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .intro {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .category-section {
+            margin: 60px 0;
+        }
+        
+        .category-title {
+            color: #667eea;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: center;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        .product-recommendation {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .product-recommendation:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .amazon-button {
+            display: inline-block;
+            background: #ff9900;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: all 0.3s;
+            box-shadow: 0 3px 10px rgba(255,153,0,0.3);
+        }
+        
+        .amazon-button:hover {
+            background: #e68900;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255,153,0,0.4);
+        }
+        
+        .product-recommendation h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+        
+        .product-recommendation p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+        
+        .price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #ff9900;
+            margin-top: 10px;
+        }
+        
+        .disclaimer {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 40px 0;
+            text-align: center;
+        }
+        
+        .disclaimer h3 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+        
+        .disclaimer p {
+            color: #856404;
+            margin: 0;
+        }
+        
+        footer {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #ffd700;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            main {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .category-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="/" class="logo">🏋️ EntrenoApp</a>
+            <ul class="nav-links">
+                <li><a href="/">🏠 Inicio</a></li>
+                <li><a href="/app.html">💪 App</a></li>
+                <li><a href="/blog.html">📝 Blog</a></li>
+                <li><a href="/youtube-gallery.html">📺 Videos</a></li>
+                <li><a href="/productos-recomendados.html">🛒 Productos</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h1>🛒 Productos que Recomiendo Personalmente</h1>
+        
+        <div class="intro">
+            <p>Después de años probando diferentes productos de fitness, estos son los que realmente funcionan y uso en mi día a día. Todos están probados por mí y los recomiendo sin reservas.</p>
+        </div>
+
+        <div class="disclaimer">
+            <h3>⚠️ Transparencia Total</h3>
+            <p>Como afiliado de Amazon, recibo una pequeña comisión si compras a través de mis enlaces. Esto no afecta el precio que pagas y me ayuda a mantener EntrenoApp gratis. ¡Gracias por tu apoyo!</p>
+        </div>
+
+        <div class="category-section">
+            <h2 class="category-title">🥤 Suplementos Deportivos</h2>
+            
+            <div class="product-recommendation">
+                <h3>🥤 Proteína Whey - Optimum Nutrition Gold Standard</h3>
+                <p><strong>Por qué la recomiendo:</strong> La mejor relación calidad-precio del mercado. Sabor increíble, se disuelve perfectamente y sin ingredientes artificiales innecesarios.</p>
+                <p><strong>Mi experiencia:</strong> La uso desde hace 3 años. 24g de proteína por scoop, mezcla perfecta y sabores auténticos. Es la proteína que más me gusta.</p>
+                <p><strong>Cuándo tomarla:</strong> Post-entrenamiento o entre comidas para completar tu ingesta de proteínas.</p>
+                <a href="https://amazon.es/dp/B000QSNYGI?tag=suplementospa-21" target="_blank" class="amazon-button">
+                    🛒 Ver en Amazon
+                </a>
+                <div class="price">Desde €29.99</div>
+            </div>
+
+            <div class="product-recommendation">
+                <h3>💪 Creatina Creapure - HSN</h3>
+                <p><strong>Por qué la recomiendo:</strong> Creatina de la más alta calidad (Creapure). Sin sabor, se disuelve perfectamente y es la más pura del mercado.</p>
+                <p><strong>Mi experiencia:</strong> Increíble calidad. Noté mejoras en fuerza y volumen muscular desde la primera semana. Es la creatina que uso siempre.</p>
+                <p><strong>Cuándo tomarla:</strong> Cualquier momento del día, 3-5g diarios. Yo la tomo con el desayuno.</p>
+                <a href="https://amazon.es/dp/B00HZQ8K5O?tag=suplementospa-21" target="_blank" class="amazon-button">
+                    🛒 Ver en Amazon
+                </a>
+                <div class="price">€19.99</div>
+            </div>
+
+            <div class="product-recommendation">
+                <h3>🧬 Multivitamínico - Solgar VM-75</h3>
+                <p><strong>Por qué la recomiendo:</strong> Multivitamínico completo con 75 nutrientes. Perfecto para asegurar que no te falte nada en tu dieta.</p>
+                <p><strong>Mi experiencia:</strong> Me siento más energético y mi sistema inmunitario está más fuerte. Una pastilla al día es suficiente.</p>
+                <p><strong>Cuándo tomarlo:</strong> Con el desayuno, una pastilla al día.</p>
+                <a href="https://amazon.es/dp/B001G7R0C0?tag=suplementospa-21" target="_blank" class="amazon-button">
+                    🛒 Ver en Amazon
+                </a>
+                <div class="price">€24.99</div>
+            </div>
+
+            <div class="product-recommendation">
+                <h3>🐟 Omega 3 - Solgar</h3>
+                <p><strong>Por qué la recomiendo:</strong> Omega 3 de alta concentración. Perfecto para la salud cardiovascular y la recuperación muscular.</p>
+                <p><strong>Mi experiencia:</strong> Mejora notable en la recuperación post-entreno y mi colesterol está perfecto.</p>
+                <p><strong>Cuándo tomarlo:</strong> Con las comidas, 1-2 cápsulas al día.</p>
+                <a href="https://amazon.es/dp/B001G7R0C0?tag=suplementospa-21" target="_blank" class="amazon-button">
+                    🛒 Ver en Amazon
+                </a>
+                <div class="price">€18.99</div>
+            </div>
+        </div>
+
+        <div class="category-section">
+            <h2 class="category-title">🏋️ Equipamiento de Gimnasio</h2>
+            
+            <div class="product-recommendation">
+                <h3>🏠 Set de Pesas Ajustables - Amazon Basics</h3>
+                <p><strong>Por qué las recomiendo:</strong> Perfectas para principiantes. Se ajustan de 2.5kg a 20kg cada una. Ocupan poco espacio y son muy versátiles.</p>
+                <p><strong>Mi experiencia:</strong> Las uso desde hace 2 años. Calidad excelente, se ajustan fácilmente y no se deslizan durante el ejercicio.</p>
+                <p><strong>Para qué sirven:</strong> Ejercicios de fuerza, tonificación y resistencia. Perfectas para principiantes.</p>
+                <a href="https://amazon.es/dp/B08XYZ123?tag=suplementospa-21" target="_blank" class="amazon-button">
+                    🛒 Ver en Amazon
+                </a>
+                <div class="price">€89.99</div>
+            </div>
+
+            <div class="product-recommendation">
+                <h3>🏋️ Esterilla de Yoga - Decathlon</h3>
+                <p><strong>Por qué la recomiendo:</strong> Esterilla de alta calidad, antideslizante y cómoda. Perfecta para ejercicios en el suelo.</p>
+                <p><strong>Mi experiencia:</strong> La uso todos los días. No se desliza, es cómoda y resistente. La mejor relación calidad-precio.</p>
+                <p><strong>Para qué sirve:</strong> Ejercicios en el suelo, yoga, pilates, estiramientos.</p>
+                <a href="https://amazon.es/dp/B07XYZ456?tag=suplementospa-21" target="_blank" class="amazon-button">
+                    🛒 Ver en Amazon
+                </a>
+                <div class="price">€19.99</div>
+            </div>
+
+            <div class="product-recommendation">
+                <h3>💪 Bandas de Resistencia - Fit Simplify</h3>
+                <p><strong>Por qué las recomiendo:</strong> Set completo con 5 resistencias diferentes. Incluye agarres y anclas para la puerta.</p>
+                <p><strong>Mi experiencia:</strong> Increíblemente versátiles. Puedes hacer cientos de ejercicios diferentes. Perfectas para viajes.</p>
+                <p><strong>Para qué sirven:</strong> Ejercicios de resistencia, tonificación, rehabilitación. Perfectas para viajes.</p>
+                <a href="https://amazon.es/dp/B01N4U8PB0?tag=suplementospa-21" target="_blank" class="amazon-button">
+                    🛒 Ver en Amazon
+                </a>
+                <div class="price">€24.99</div>
+            </div>
+
+            <div class="product-recommendation">
+                <h3>🏠 Barra de Dominadas - Amazon Basics</h3>
+                <p><strong>Por qué la recomiendo:</strong> Se instala en cualquier marco de puerta. Soporta hasta 100kg y es muy estable.</p>
+                <p><strong>Mi experiencia:</strong> Fácil instalación, muy estable. Perfecta para dominadas, flexiones y ejercicios de suspensión.</p>
+                <p><strong>Para qué sirve:</strong> Dominadas, flexiones, ejercicios de suspensión, estiramientos.</p>
+                <a href="https://amazon.es/dp/B07XYZ789?tag=suplementospa-21" target="_blank" class="amazon-button">
+                    🛒 Ver en Amazon
+                </a>
+                <div class="price">€39.99</div>
+            </div>
+        </div>
+
+        <div class="category-section">
+            <h2 class="category-title">👕 Ropa Deportiva</h2>
+            
+            <div class="product-recommendation">
+                <h3>👕 Camisetas Técnicas - Decathlon</h3>
+                <p><strong>Por qué las recomiendo:</strong> Ropa técnica de calidad a precio imbatible. Transpirable, cómoda y duradera.</p>
+                <p><strong>Mi experiencia:</strong> Las uso para entrenar todos los días. Se secan rápido, no se pegan al cuerpo y duran mucho.</p>
+                <p><strong>Para qué sirven:</strong> Entrenamientos de cardio, fuerza, running. Perfectas para cualquier actividad.</p>
+                <a href="https://amazon.es/dp/B08XYZ123?tag=suplementospa-21" target="_blank" class="amazon-button">
+                    🛒 Ver en Amazon
+                </a>
+                <div class="price">Desde €9.99</div>
+            </div>
+
+            <div class="product-recommendation">
+                <h3>👖 Leggings Deportivos - Decathlon</h3>
+                <p><strong>Por qué las recomiendo:</strong> Leggings cómodos, elásticos y que no se caen durante el ejercicio.</p>
+                <p><strong>Mi experiencia:</strong> Perfectos para cualquier tipo de entrenamiento. Se mantienen en su sitio y son muy cómodos.</p>
+                <p><strong>Para qué sirven:</strong> Entrenamientos de fuerza, cardio, yoga, running.</p>
+                <a href="https://amazon.es/dp/B07XYZ456?tag=suplementospa-21" target="_blank" class="amazon-button">
+                    🛒 Ver en Amazon
+                </a>
+                <div class="price">Desde €14.99</div>
+            </div>
+        </div>
+
+        <div class="disclaimer">
+            <h3>💝 ¿Te gusta EntrenoApp?</h3>
+            <p>Si estos productos te han sido útiles, considera hacer una donación para mantener la app gratis y sin publicidad molesta.</p>
+            <form action="https://www.paypal.com/donate" method="post" target="_top" style="margin-top: 15px;">
+                <input type="hidden" name="business" value="lipastudios4@gmail.com">
+                <input type="hidden" name="item_name" value="EntrenoApp - Desarrollo y Mantenimiento">
+                <input type="hidden" name="currency_code" value="EUR">
+                <input type="image" src="https://www.paypalobjects.com/es_ES/ES/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - Donar" alt="Botón Donar con PayPal">
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <p>&copy; 2025 EntrenoApp. Todos los derechos reservados.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="/privacy.html">Privacidad</a>
+                    <a href="/terms.html">Términos</a>
+                    <a href="/contact.html">Contacto</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AdSense -->
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</body>
+</html>
