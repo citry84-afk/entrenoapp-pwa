@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#00D4FF">
+    <meta name="description" content="Videos de EntrenoApp - Tutoriales de fitness, rutinas de ejercicio y consejos de salud. Aprende con nuestros videos expertos.">
+    <meta name="robots" content="index, follow">
+    <meta name="google-site-verification" content="DSyHkxyNB3t94dJbNUw_GKpCGAp4tLsK6JBeGhvhQbQ" />
+    
+    <title>Videos de EntrenoApp - Tutoriales de Fitness y Salud</title>
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://entrenoapp.netlify.app/youtube-gallery.html">
+    <meta property="og:title" content="Videos de EntrenoApp - Tutoriales de Fitness">
+    <meta property="og:description" content="Aprende fitness con nuestros videos expertos. Rutinas, ejercicios y consejos de salud.">
+    <meta property="og:image" content="https://entrenoapp.netlify.app/assets/icons/icon-512x512.png">
+    
+    <!-- Iconos -->
+    <link rel="icon" type="image/png" href="assets/icons/icon-192x192.png">
+    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+    
+    <!-- Estilos -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/glassmorphism.css">
+    <link rel="stylesheet" href="css/content-pages.css">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-633RQLC6T0"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-633RQLC6T0');
+    </script>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4837743291717475" crossorigin="anonymous"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px 0;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header */
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            padding: 40px 20px;
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        /* Navigation */
+        .main-navigation {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .nav-logo a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+        
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        /* Video Slider Container */
+        .video-slider-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            margin-bottom: 40px;
+        }
+        
+        .slider-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .slider-header h2 {
+            color: #667eea;
+            font-size: 2rem;
+        }
+        
+        .slider-controls {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .slider-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .slider-btn:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+        }
+        
+        .slider-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        /* Video Slider */
+        .video-slider {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 15px;
+        }
+        
+        .video-slide {
+            display: none;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            position: relative;
+            background: #000;
+            border-radius: 15px;
+        }
+        
+        .video-slide.active {
+            display: block;
+        }
+        
+        .video-slide iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+        }
+        
+        /* Video Grid */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .video-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .video-card-thumbnail {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            background: #000;
+        }
+        
+        .video-card-thumbnail img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .video-card-play {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70px;
+            height: 70px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .video-card:hover .video-card-play {
+            background: #667eea;
+        }
+        
+        .video-card-play::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 25px solid #667eea;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            margin-left: 5px;
+        }
+        
+        .video-card:hover .video-card-play::after {
+            border-left-color: white;
+        }
+        
+        .video-card-info {
+            padding: 20px;
+        }
+        
+        .video-card-info h3 {
+            color: #333;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .video-card-info p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        
+        .video-card-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #999;
+            font-size: 0.85rem;
+        }
+        
+        /* Categories */
+        .categories {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+        
+        .category-btn {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        
+        .category-btn.active,
+        .category-btn:hover {
+            background: #667eea;
+            color: white;
+        }
+        
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+        
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* YouTube Subscribe Button */
+        .youtube-subscribe {
+            text-align: center;
+            background: linear-gradient(135deg, #ff0000, #cc0000);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 40px;
+        }
+        
+        .youtube-subscribe h3 {
+            margin-bottom: 15px;
+        }
+        
+        .subscribe-btn {
+            background: white;
+            color: #ff0000;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        
+        .subscribe-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .video-slider-container {
+                padding: 20px;
+            }
+            
+            .slider-header {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="main-navigation">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/home.html">🏃‍♂️ EntrenoApp</a>
+            </div>
+            <div class="nav-links">
+                <a href="/home.html">Inicio</a>
+                <a href="/app.html">App</a>
+                <a href="/blog.html">Blog</a>
+                <a href="/about.html">Sobre Nosotros</a>
+                <a href="/contact.html">Contacto</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🎥 Videos de EntrenoApp</h1>
+            <p>Aprende fitness con nuestros tutoriales y rutinas de ejercicio</p>
+        </div>
+
+        <!-- Video Slider Container -->
+        <div class="video-slider-container">
+            <div class="slider-header">
+                <h2>Video Destacado</h2>
+                <div class="slider-controls">
+                    <button class="slider-btn" id="prevBtn">
+                        <span>◀</span> Anterior
+                    </button>
+                    <button class="slider-btn" id="nextBtn">
+                        Siguiente <span>▶</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Categories -->
+            <div class="categories" id="categories"></div>
+            
+            <!-- Video Slider -->
+            <div class="video-slider" id="videoSlider"></div>
+        </div>
+
+        <!-- Video Grid -->
+        <div class="video-grid" id="videoGrid">
+            <div class="loading">
+                <div class="spinner"></div>
+                <p>Cargando videos...</p>
+            </div>
+        </div>
+
+        <!-- YouTube Subscribe -->
+        <div class="youtube-subscribe">
+            <h3>📺 Suscríbete a nuestro canal de YouTube</h3>
+            <p>Recibe notificaciones de nuevos videos y tutoriales</p>
+            <a href="TU_CANAL_YOUTUBE" target="_blank" class="subscribe-btn" id="subscribeBtn">
+                Suscribirse al Canal
+            </a>
+        </div>
+    </div>
+
+    <!-- YouTube API -->
+    <script src="https://apis.google.com/js/api.js"></script>
+    
+    <script>
+        // CONFIGURACIÓN - REEMPLAZA ESTOS VALORES CON TUS DATOS
+        const YOUTUBE_CONFIG = {
+            // Obtén tu API Key en: https://console.cloud.google.com/apis/credentials
+            apiKey: 'TU_API_KEY_YOUTUBE', // 👈 REEMPLAZA ESTO
+            
+            // ID de tu canal de YouTube
+            channelId: 'TU_CHANNEL_ID', // 👈 REEMPLAZA ESTO (ejemplo: UCxxxxx...)
+            
+            // URL de tu canal para suscribirse
+            channelUrl: 'https://youtube.com/@entrenoapp', // 👈 REEMPLAZA ESTO
+            
+            // Videos que quieres mostrar en el slider (IDs de YouTube)
+            featuredVideos: [
+                'VIDEO_ID_1', // 👈 Reemplaza con tus IDs de videos
+                'VIDEO_ID_2',
+                'VIDEO_ID_3'
+            ]
+        };
+
+        // Estado de la aplicación
+        let currentVideoIndex = 0;
+        let videos = [];
+        let currentCategory = 'all';
+
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', function() {
+            // Actualizar botón de suscripción
+            document.getElementById('subscribeBtn').href = YOUTUBE_CONFIG.channelUrl;
+            
+            // Cargar videos
+            loadYouTubeVideos();
+        });
+
+        // Cargar videos de YouTube
+        async function loadYouTubeVideos() {
+            const loadingDiv = document.getElementById('videoGrid');
+            loadingDiv.innerHTML = '<div class="loading"><div class="spinner"></div><p>Cargando videos...</p></div>';
+
+            try {
+                // Si tienes API Key, usa esta función
+                if (YOUTUBE_CONFIG.apiKey && YOUTUBE_CONFIG.apiKey !== 'TU_API_KEY_YOUTUBE') {
+                    videos = await fetchYouTubeVideosWithAPI();
+                } else {
+                    // Modo manual: Usar videos manualmente configurados
+                    videos = getManualVideos();
+                }
+                
+                displayVideos();
+                setupSlider();
+                
+            } catch (error) {
+                console.error('Error cargando videos:', error);
+                loadingDiv.innerHTML = `
+                    <div class="loading">
+                        <p style="color: red;">Error cargando videos. Configura tu API Key de YouTube.</p>
+                        <p style="color: #666; font-size: 0.9rem; margin-top: 10px;">
+                            Video de ejemplo para probar:
+                        </p>
+                    </div>
+                `;
+                
+                // Mostrar video de ejemplo
+                videos = getManualVideos();
+                displayVideos();
+                setupSlider();
+            }
+        }
+
+        // Obtener videos manualmente (sin API)
+        function getManualVideos() {
+            return [
+                {
+                    id: 'dQw4w9WgXcQ', // Video de ejemplo - Reemplaza con tus IDs
+                    title: 'Ejemplo: Tutorial de Fitness en Casa',
+                    description: 'Aprende ejercicios efectivos sin equipamiento',
+                    category: 'fitness',
+                    thumbnail: `https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg`
+                }
+                // Añade más videos aquí manualmente
+            ];
+        }
+
+        // Cargar videos con API de YouTube
+        async function fetchYouTubeVideosWithAPI() {
+            const url = `https://www.googleapis.com/youtube/v3/search?key=${YOUTUBE_CONFIG.apiKey}&channelId=${YOUTUBE_CONFIG.channelId}&part=snippet,id&order=date&maxResults=12`;
+            
+            const response = await fetch(url);
+            const data = await response.json();
+            
+            return data.items.map(item => ({
+                id: item.id.videoId,
+                title: item.snippet.title,
+                description: item.snippet.description.substring(0, 100) + '...',
+                category: 'all',
+                thumbnail: item.snippet.thumbnails.high.url
+            }));
+        }
+
+        // Mostrar videos en la cuadrícula
+        function displayVideos() {
+            const videoGrid = document.getElementById('videoGrid');
+            
+            if (videos.length === 0) {
+                videoGrid.innerHTML = '<div class="loading"><p>No hay videos disponibles</p></div>';
+                return;
+            }
+            
+            let html = '';
+            
+            videos.forEach((video, index) => {
+                html += `
+                    <div class="video-card" data-video-id="${video.id}">
+                        <div class="video-card-thumbnail">
+                            <img src="${video.thumbnail}" alt="${video.title}">
+                            <div class="video-card-play"></div>
+                        </div>
+                        <div class="video-card-info">
+                            <h3>${video.title}</h3>
+                            <p>${video.description}</p>
+                            <div class="video-card-meta">
+                                <span>👁️ YouTube</span>
+                                <span>${video.category}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            videoGrid.innerHTML = html;
+            
+            // Agregar eventos a las tarjetas
+            document.querySelectorAll('.video-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const videoId = this.dataset.videoId;
+                    playVideoInSlider(videoId);
+                    
+                    // Encontrar índice del video
+                    const videoIndex = videos.findIndex(v => v.id === videoId);
+                    if (videoIndex !== -1) {
+                        currentVideoIndex = videoIndex;
+                        updateSlider();
+                    }
+                });
+            });
+        }
+
+        // Configurar slider
+        function setupSlider() {
+            // Usar videos destacados si están configurados, sino los primeros 3
+            const featuredVideos = YOUTUBE_CONFIG.featuredVideos && 
+                                 YOUTUBE_CONFIG.featuredVideos.length > 0 &&
+                                 YOUTUBE_CONFIG.featuredVideos[0] !== 'VIDEO_ID_1'
+                                 ? YOUTUBE_CONFIG.featuredVideos 
+                                 : videos.slice(0, 3).map(v => v.id);
+            
+            // Configurar botones
+            document.getElementById('prevBtn').addEventListener('click', () => {
+                currentVideoIndex = (currentVideoIndex - 1 + featuredVideos.length) % featuredVideos.length;
+                playVideoInSlider(featuredVideos[currentVideoIndex]);
+                updateSlider();
+            });
+            
+            document.getElementById('nextBtn').addEventListener('click', () => {
+                currentVideoIndex = (currentVideoIndex + 1) % featuredVideos.length;
+                playVideoInSlider(featuredVideos[currentVideoIndex]);
+                updateSlider();
+            });
+            
+            // Reproducir primer video
+            if (featuredVideos.length > 0) {
+                playVideoInSlider(featuredVideos[0]);
+            }
+        }
+
+        // Reproducir video en el slider
+        function playVideoInSlider(videoId) {
+            const videoSlider = document.getElementById('videoSlider');
+            
+            videoSlider.innerHTML = `
+                <div class="video-slide active">
+                    <iframe 
+                        src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            `;
+            
+            // Track en Analytics
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'video_play', {
+                    'video_id': videoId,
+                    'event_category': 'youtube',
+                    'event_label': 'slider'
+                });
+            }
+        }
+
+        // Actualizar controles del slider
+        function updateSlider() {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            // Aquí puedes deshabilitar botones si es necesario
+            prevBtn.disabled = false;
+            nextBtn.disabled = false;
+        }
+
+        // Mostrar instrucciones de configuración
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mostrar mensaje si no está configurado
+            if (YOUTUBE_CONFIG.apiKey === 'TU_API_KEY_YOUTUBE' || 
+                YOUTUBE_CONFIG.channelId === 'TU_CHANNEL_ID') {
+                
+                const videoGrid = document.getElementById('videoGrid');
+                videoGrid.innerHTML = `
+                    <div class="loading" style="grid-column: 1/-1;">
+                        <h3 style="color: #667eea; margin-bottom: 20px;">⚠️ Configuración Requerida</h3>
+                        <div style="text-align: left; max-width: 600px; margin: 0 auto;">
+                            <p style="color: #666; margin-bottom: 15px;">
+                                Para mostrar tus videos de YouTube, necesitas:
+                            </p>
+                            <ol style="text-align: left; color: #666; line-height: 2;">
+                                <li><strong>API Key de YouTube:</strong> Obtén una en <a href="https://console.cloud.google.com" target="_blank">Google Cloud Console</a></li>
+                                <li><strong>ID de tu canal:</strong> Encuéntralo en tu canal de YouTube</li>
+                                <li><strong>Editar el archivo:</strong> Abre <code>youtube-gallery.html</code> y reemplaza los valores en YOUTUBE_CONFIG</li>
+                                <li><strong>IDs de videos destacados:</strong> Añade los IDs de tus videos favoritos</li>
+                            </ol>
+                            <p style="color: #667eea; font-weight: bold; margin-top: 20px;">
+                                📝 Busca "YOUTUBE_CONFIG" en el archivo para ver dónde cambiar los valores
+                            </p>
+                        </div>
+                    </div>
+                `;
+            }
+        });
+    </script>
+</body>
+</html>
