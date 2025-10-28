@@ -613,6 +613,17 @@
             }
             
             setTimeout(loadYouTubeVideos, 1500);
+            
+            // Función global para cargar manualmente
+            window.loadVideos = loadYouTubeVideos;
+            
+            // Añadir botón de carga manual
+            setTimeout(function() {
+                const container = document.getElementById('youtube-gallery');
+                if (container && container.innerHTML.trim() === '') {
+                    container.innerHTML = '<button onclick="window.loadVideos()" style="background:#667eea;color:white;padding:15px 30px;border:none;border-radius:25px;cursor:pointer;display:block;margin:20px auto;">🎥 Cargar Videos</button>';
+                }
+            }, 2000);
         });
     </script>
 </body>
