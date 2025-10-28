@@ -459,24 +459,18 @@
     <script>
         // CONFIGURACIÓN - REEMPLAZA ESTOS VALORES CON TUS DATOS
         const YOUTUBE_CONFIG = {
-            // Obtén tu API Key en: https://console.cloud.google.com/apis/credentials
+            // API Key configurada
             apiKey: 'AIzaSyCQ4rpzvvORPzZuCH1N9X5zxn4ahDgTFGo',
             
-            // Opciones de identificación del canal: usa uno de estos dos
-            // 1) channelId: 'UCxxxxxxxxxxxxxxxx',
-            // 2) channelHandle: '@tu_handle'  ← RESOLVERÁ automáticamente el channelId
-            channelId: 'TU_CHANNEL_ID',
+            // Channel Handle - Se resolverá automáticamente el Channel ID
             channelHandle: '@entrenoapp',
             
-            // URL de tu canal para suscribirse (se usará esta si la pones; si no, se intentará inferir por handle)
-            channelUrl: 'https://youtube.com/@entrenoapp',
+            // URL del canal
+            channelUrl: 'https://youtube.com/@entrenoapp?si=2CrstgJ0ipET-zRB',
             
-            // Videos que quieres mostrar en el slider (IDs de YouTube)
-            featuredVideos: [
-                'VIDEO_ID_1',
-                'VIDEO_ID_2',
-                'VIDEO_ID_3'
-            ]
+            // Videos destacados (se llenarán automáticamente con los últimos 3 videos)
+            // O puedes poner IDs específicos aquí manualmente
+            featuredVideos: []  // Se llenará automáticamente
         };
 
         // Estado de la aplicación
