@@ -589,6 +589,7 @@
         // Cargar videos de YouTube
         document.addEventListener('DOMContentLoaded', function() {
             const API_KEY = 'AIzaSyD4_1H8Zi1U9DAEkSrX9D1FtxLmcJR2vTM';
+            const CHANNEL_URL = 'https://youtube.com/@entrenoapp?si=AD4KTHXX-k7e9LYC';
             const CHANNEL_HANDLE = '@entrenoapp';
             
             async function loadYouTubeVideos() {
@@ -598,12 +599,44 @@
                 container.innerHTML = '<p style="text-align:center;">Cargando videos...</p>';
                 
                 try {
-                    // Usar método directo: buscar videos del canal por su handle
+                    // Buscar canal primero, luego videos
                     const handle = CHANNEL_HANDLE.replace('@', '');
-                    console.log('Buscando videos del canal:', handle);
+                    console.log('Buscando canal:', handle);
                     
-                    // Buscar directamente videos por canal usando el handle en la búsqueda
-                    const videosUrl = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&q=channel:${handle}&part=snippet,id&order=date&maxResults=6&type=video`;
+                    // 1. Buscar el canal
+                    const searchChannelUrl = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&q=${encodeURIComponent(handle)}&part=snippet&type=channel&maxResults=5`;
+                    const channelResponse = await fetch(searchChannelUrl);
+                    const channelData = await channelResponse.json();
+                    console.log('Canales encontrados:', channelData);
+                    
+                    // 2. Encontrar el canal correcto (el que tiene el username correcto)
+                    let channelId = null;
+                    if (channelData.items && channelData.items.length > 0) {
+                        for (let channel of channelData.items) {
+                            const customUrl = channel.snippet.customUrl || '';
+                            const channelTitle = channel.snippet.channelTitle || '';
+                            
+                            if (customUrl.toLowerCase().includes(handle.toLowerCase()) || 
+                                channelTitle.toLowerCase().includes('entrenoapp')) {
+                                channelId = channel.id.channelId;
+                                console.log('Canal encontrado:', channelTitle, channelId);
+                                break;
+                            }
+                        }
+                        
+                        // Si no lo encontramos por filtro, usar el primero
+                        if (!channelId && channelData.items.length > 0) {
+                            channelId = channelData.items[0].id.channelId;
+                            console.log('Usando primer canal:', channelData.items[0].snippet.channelTitle);
+                        }
+                    }
+                    
+                    if (!channelId) {
+                        throw new Error('No se encontró el canal');
+                    }
+                    
+                    // 3. Buscar videos del canal
+                    const videosUrl = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${channelId}&part=snippet,id&order=date&maxResults=6&type=video`;
                     const videosResponse = await fetch(videosUrl, {
                         method: 'GET',
                         headers: {
