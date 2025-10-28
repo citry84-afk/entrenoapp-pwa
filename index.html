@@ -86,6 +86,17 @@
         </div>
     </section>
 
+    <!-- YouTube Videos Section -->
+    <section id="youtube-videos" style="padding: 60px 20px; background: #f8f9fa;">
+        <div class="container">
+            <h2 class="section-title">📺 Videos de EntrenoApp</h2>
+            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 40px; color: #666;">
+                Aprende fitness con nuestros tutoriales y rutinas
+            </p>
+            <div id="youtube-gallery"></div>
+        </div>
+    </section>
+
     <!-- Features Section -->
     <section id="features" class="features-section">
         <div class="container">
@@ -347,9 +358,29 @@
         <p>&copy; 2024 EntrenoApp - LIPA Studios. Todos los derechos reservados.</p>
     </footer>
 
+    <!-- YouTube Gallery Component -->
+    <script src="js/components/youtube-gallery.js"></script>
+    
     <script>
         // Inicializar AdSense
         (adsbygoogle = window.adsbygoogle || []).push({});
+        
+        // Inicializar galería de YouTube
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                if (typeof YouTubeGallery !== 'undefined') {
+                    new YouTubeGallery({
+                        containerId: 'youtube-gallery',
+                        apiKey: 'AIzaSyD4_1H8Zi1U9DAEkSrX9D1FtxLmcJR2vTM',
+                        channelHandle: '@entrenoapp',
+                        channelUrl: 'https://youtube.com/@entrenoapp?si=2CrstgJ0ipET-zRB',
+                        maxVideos: 6,
+                        autoPlay: false,
+                        showThumbnails: true
+                    });
+                }
+            }, 1000);
+        });
     </script>
 </body>
 </html>
