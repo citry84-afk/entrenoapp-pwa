@@ -7,6 +7,7 @@ class YouTubeGallery {
             containerId: config.containerId || 'youtube-gallery',
             apiKey: config.apiKey || '',
             channelId: config.channelId || '',
+            channelHandle: config.channelHandle || '',
             channelUrl: config.channelUrl || '',
             maxVideos: config.maxVideos || 12,
             featuredVideos: config.featuredVideos || [],
@@ -24,9 +25,35 @@ class YouTubeGallery {
     }
     
     async init() {
+        // Intentar resolver channelId a partir del handle si no viene configurado
+        if (!this.config.channelId && this.config.apiKey && this.config.channelHandle) {
+            try {
+                this.config.channelId = await this.resolveChannelIdFromHandle(this.config.channelHandle);
+                if (!this.config.channelUrl) {
+                    this.config.channelUrl = `https://youtube.com/${this.config.channelHandle.replace(/^@/, '')}`;
+                }
+            } catch (e) {
+                console.warn('No se pudo resolver channelId desde channelHandle:', e);
+            }
+        }
+
         await this.loadVideos();
         this.render();
         this.setupEventListeners();
+    }
+
+    async resolveChannelIdFromHandle(handle) {
+        // Buscar el canal por handle usando la API de búsqueda
+        const q = encodeURIComponent(handle);
+        const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=channel&q=${q}&maxResults=1&key=${this.config.apiKey}`;
+        const resp = await fetch(url);
+        const data = await resp.json();
+        if (data && data.items && data.items.length > 0) {
+            return data.items[0].snippet && data.items[0].snippet.channelId
+                ? data.items[0].snippet.channelId
+                : (data.items[0].id && data.items[0].id.channelId ? data.items[0].id.channelId : '');
+        }
+        throw new Error('Channel no encontrado para handle: ' + handle);
     }
     
     async loadVideos() {
