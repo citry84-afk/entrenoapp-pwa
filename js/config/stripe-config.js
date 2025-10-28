@@ -26,7 +26,7 @@ const STRIPE_CONFIG = {
     // URLs de la API
     apiUrls: {
         test: 'http://localhost:3001/api', // Para desarrollo local
-        production: 'https://entrenoapp.netlify.app/api' // Para producción
+        production: 'https://entrenoapp.com/api' // Para producción
     },
     
     // Configuración de productos

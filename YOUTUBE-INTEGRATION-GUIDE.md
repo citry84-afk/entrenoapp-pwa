@@ -310,7 +310,7 @@ git push origin main
 ```
 
 ### **2. Verificar en producción:**
-- Ve a: https://entrenoapp.netlify.app/youtube-gallery.html
+- Ve a: https://entrenoapp.com/youtube-gallery.html
 - Verifica que los videos se cargan
 - Prueba la navegación del slider
 

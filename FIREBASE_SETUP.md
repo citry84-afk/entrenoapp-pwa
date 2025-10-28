@@ -1,7 +1,7 @@
 # 🔥 Configuración de Firebase para EntrenoApp
 
 ## ❌ **Problema Actual**
-Los errores "Este dominio no está autorizado para Google/Apple Sign-In" indican que el dominio `entrenoapp.netlify.app` no está configurado en Firebase Console.
+Los errores "Este dominio no está autorizado para Google/Apple Sign-In" indican que el dominio `entrenoapp.com` no está configurado en Firebase Console.
 
 ## ✅ **Solución Paso a Paso**
 
@@ -13,7 +13,7 @@ Los errores "Este dominio no está autorizado para Google/Apple Sign-In" indican
 1. **Ve a** Authentication → Settings
 2. **En la pestaña "Authorized domains"**
 3. **Añade estos dominios:**
-   - `entrenoapp.netlify.app`
+   - `entrenoapp.com`
    - `localhost` (para desarrollo)
    - `127.0.0.1` (para desarrollo)
 
@@ -55,7 +55,7 @@ Si no tienes acceso a Firebase Console, necesitarás:
 
 ### **Dominios Requeridos:**
 ```
-entrenoapp.netlify.app
+entrenoapp.com
 localhost
 127.0.0.1
 ```

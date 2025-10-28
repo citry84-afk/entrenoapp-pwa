@@ -34,7 +34,7 @@ AIzaSyCQ4rpzvvORPzZuCH1N9X5zxn4ahDgTFGo
 ### **2.3 Restricciones de aplicaciones:**
 En **"Restricciones de aplicaciones"**, elige:
 - ✅ **"Sitios web HTTP"** 
-- Añade: `https://entrenoapp.netlify.app`
+- Añade: `https://entrenoapp.com`
 - Añade: `https://*.netlify.app/*`
 
 ### **2.4 Restricciones de API:**
@@ -137,7 +137,7 @@ git push origin main
 ### **6.2 Esperar 1-2 minutos** para que Netlify despliegue
 
 ### **6.3 Abrir en el navegador:**
-👉 **Abre:** https://entrenoapp.netlify.app/youtube-gallery.html
+👉 **Abre:** https://entrenoapp.com/youtube-gallery.html
 
 ### **6.4 Verificar:**
 - ✅ ¿Se ven tus videos?
@@ -160,7 +160,7 @@ git push origin main
 
 ### **❌ Error: "Access denied"**
 - Verifica las restricciones de la API Key
-- Asegúrate de haber añadido `entrenoapp.netlify.app` en sitios web
+- Asegúrate de haber añadido `entrenoapp.com` en sitios web
 - Espera 10-15 minutos después de guardar restricciones
 
 ### **❌ No se ven videos**

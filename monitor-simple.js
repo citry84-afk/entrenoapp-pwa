@@ -2,7 +2,7 @@
 console.log('🔍 Monitor de AdSense iniciado...');
 
 function checkSiteHealth() {
-    const siteUrl = 'https://entrenoapp.netlify.app';
+    const siteUrl = 'https://entrenoapp.com';
     console.log(`📊 Verificando: ${siteUrl}`);
     
     // Simular verificación (en un entorno real usarías fetch)

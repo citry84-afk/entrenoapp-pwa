@@ -34,7 +34,7 @@ Script: "Tenía miedo al 75 Hard. Esto es lo que me ayudó. El 80% falla por fal
 Duración: 20 segundos
 Hashtags: #75hard #75hardchallenge #fitness #suplementos #entrenamiento #gym #motivacion #fitnessmotivation #workout #gymlife #health #nutrition #suplementosfitness #entrenar #fitnessespaña
 
-Link en bio: https://entrenoapp.netlify.app/75-hard-challenge-suplementos-2025.html
+Link en bio: https://entrenoapp.com/75-hard-challenge-suplementos-2025.html
 ```
 
 #### **2. PUBLICAR EN REDDIT (30 min):**
@@ -53,11 +53,11 @@ Texto completo en: REDDIT-POST-75-HARD.md
 #### **4. SOLICITAR INDEXACIÓN (30 min):**
 ```
 5 URLs en Google Search Console:
-- https://entrenoapp.netlify.app/cortisol-face-suplementos-2025.html
-- https://entrenoapp.netlify.app/gym-anxiety-guia-completa-2025.html
-- https://entrenoapp.netlify.app/proteina-cuanta-realmente-necesitas-2025.html
-- https://entrenoapp.netlify.app/sleep-hacking-recuperacion-fitness-2025.html
-- https://entrenoapp.netlify.app/lipa-studios-network.html
+- https://entrenoapp.com/cortisol-face-suplementos-2025.html
+- https://entrenoapp.com/gym-anxiety-guia-completa-2025.html
+- https://entrenoapp.com/proteina-cuanta-realmente-necesitas-2025.html
+- https://entrenoapp.com/sleep-hacking-recuperacion-fitness-2025.html
+- https://entrenoapp.com/lipa-studios-network.html
 ```
 
 ---
@@ -71,7 +71,7 @@ Script: "Tenía cortisol face y esto me funcionó (no es botox). Mi cara se hinc
 Duración: 20 segundos
 Hashtags: #cortisolface #carahinchada #suplementos #belleza #fitness #salud #antiinflamatorio #ashwagandha #magnesio #omega3
 
-Link en bio: https://entrenoapp.netlify.app/cortisol-face-suplementos-2025.html
+Link en bio: https://entrenoapp.com/cortisol-face-suplementos-2025.html
 ```
 
 #### **2. PUBLICAR EN REDDIT (30 min):**

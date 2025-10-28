@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://entrenoapp.netlify.app/sitemap.xml
+Sitemap: https://entrenoapp.com/sitemap.xml
 
 # Allow all bots to crawl
 User-agent: Googlebot

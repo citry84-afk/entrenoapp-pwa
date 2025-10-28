@@ -21,7 +21,7 @@
 2. ✅ Social media posts: "📱 Instala EntrenoApp desde tu navegador"
 3. ✅ Email marketing: "Añade EntrenoApp a tu pantalla de inicio"
 4. ✅ In-app prompts: "Instala para mejor experiencia"
-5. ✅ Landing page específica: entrenoapp.netlify.app/install
+5. ✅ Landing page específica: entrenoapp.com/install
 
 ### **FASE 3: Monitoreo y Mejora**
 1. ✅ Analytics de instalaciones

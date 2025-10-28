@@ -4,40 +4,40 @@
 
 ### 1. Páginas Principales:
 ```
-https://entrenoapp.netlify.app/
-https://entrenoapp.netlify.app/app.html
-https://entrenoapp.netlify.app/blog.html
+https://entrenoapp.com/
+https://entrenoapp.com/app.html
+https://entrenoapp.com/blog.html
 ```
 
 ### 2. Artículos Nuevos (Alta Prioridad):
 ```
-https://entrenoapp.netlify.app/gamificacion-fitness-gaming.html
-https://entrenoapp.netlify.app/batidoras-proteina-2025.html
-https://entrenoapp.netlify.app/pesas-equipamiento-casa-2025.html
+https://entrenoapp.com/gamificacion-fitness-gaming.html
+https://entrenoapp.com/batidoras-proteina-2025.html
+https://entrenoapp.com/pesas-equipamiento-casa-2025.html
 ```
 
 ### 3. Artículos Afiliados Amazon:
 ```
-https://entrenoapp.netlify.app/suplementos-recomendados.html
-https://entrenoapp.netlify.app/equipamiento-fitness-casa.html
-https://entrenoapp.netlify.app/relojes-fitness-smartwatch.html
-https://entrenoapp.netlify.app/proteinas-vegetales-2025.html
-https://entrenoapp.netlify.app/libros-nutricion-deportiva-2025.html
+https://entrenoapp.com/suplementos-recomendados.html
+https://entrenoapp.com/equipamiento-fitness-casa.html
+https://entrenoapp.com/relojes-fitness-smartwatch.html
+https://entrenoapp.com/proteinas-vegetales-2025.html
+https://entrenoapp.com/libros-nutricion-deportiva-2025.html
 ```
 
 ### 4. Contenido Educativo:
 ```
-https://entrenoapp.netlify.app/workout-guides.html
-https://entrenoapp.netlify.app/fitness-tips.html
-https://entrenoapp.netlify.app/fitness-calculators.html
+https://entrenoapp.com/workout-guides.html
+https://entrenoapp.com/fitness-tips.html
+https://entrenoapp.com/fitness-calculators.html
 ```
 
 ### 5. Legal + Red:
 ```
-https://entrenoapp.netlify.app/lipa-studios-network.html
-https://entrenoapp.netlify.app/privacy.html
-https://entrenoapp.netlify.app/terms.html
-https://entrenoapp.netlify.app/contact.html
+https://entrenoapp.com/lipa-studios-network.html
+https://entrenoapp.com/privacy.html
+https://entrenoapp.com/terms.html
+https://entrenoapp.com/contact.html
 ```
 
 ---
@@ -46,7 +46,7 @@ https://entrenoapp.netlify.app/contact.html
 
 ### Para CADA URL:
 
-1. **Copia la URL** (ejemplo: `https://entrenoapp.netlify.app/gamificacion-fitness-gaming.html`)
+1. **Copia la URL** (ejemplo: `https://entrenoapp.com/gamificacion-fitness-gaming.html`)
 
 2. **Pega en la barra superior** de Search Console (donde dice "Inspeccionar las URL de...")
 
@@ -91,7 +91,7 @@ https://entrenoapp.netlify.app/contact.html
 ### Verifica sitemap primero:
 En Search Console → Sitemaps → Debería estar:
 ```
-https://entrenoapp.netlify.app/sitemap.xml
+https://entrenoapp.com/sitemap.xml
 Estado: Correcto ✅
 ```
 
@@ -102,7 +102,7 @@ Si no está → Envíalo primero (ya lo tienes creado)
 ## 📊 Monitoreo Post-Solicitud:
 
 ### Día 1-2:
-- Vuelve a buscar `site:entrenoapp.netlify.app`
+- Vuelve a buscar `site:entrenoapp.com`
 - Deberían empezar a aparecer resultados
 
 ### Día 3-5:
@@ -121,7 +121,7 @@ Si no está → Envíalo primero (ya lo tienes creado)
 - [ ] Solicitar indexación 3 artículos nuevos
 - [ ] Solicitar indexación 5 artículos afiliados principales
 - [ ] Verificar sitemap enviado en Search Console
-- [ ] Esperar 48h y revisar `site:entrenoapp.netlify.app`
+- [ ] Esperar 48h y revisar `site:entrenoapp.com`
 - [ ] Revisar "Cobertura" en Search Console (día 5)
 
 ---

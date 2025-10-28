@@ -117,7 +117,7 @@
 Estimado equipo de Google AdSense,
 
 Nos dirigimos a ustedes para solicitar una nueva revisión de nuestro sitio web 
-entrenoapp.netlify.app tras haber implementado mejoras significativas basadas 
+entrenoapp.com tras haber implementado mejoras significativas basadas 
 en el feedback anterior.
 
 MEJORAS IMPLEMENTADAS:

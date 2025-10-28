@@ -63,7 +63,7 @@ Netlify oficialmente confirma que **AdSense requiere dominio propio** para aprob
 ### **PASO 4: Actualizar Configuración (10 minutos)**
 
 1. **Google Analytics:**
-   - Cambiar URL de `entrenoapp.netlify.app` a `entrenoapp.com`
+   - Cambiar URL de `entrenoapp.com` a `entrenoapp.com`
 
 2. **Sitemap.xml:**
    - Actualizar todas las URLs

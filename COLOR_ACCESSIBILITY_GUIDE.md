@@ -45,7 +45,7 @@
 ## 🧪 Cómo Probar la Accesibilidad
 
 ### **1. Prueba Visual**
-1. **Abre la app**: https://entrenoapp.netlify.app
+1. **Abre la app**: https://entrenoapp.com
 2. **Navega por todas las pantallas**
 3. **Verifica que el texto sea legible** en todos los fondos
 4. **Comprueba que los botones** tengan suficiente contraste

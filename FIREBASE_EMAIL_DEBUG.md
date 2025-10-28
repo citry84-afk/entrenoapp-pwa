@@ -17,7 +17,7 @@ Los emails de verificación y recuperación de contraseña no llegan a los usuar
 #### B. Verificar Dominios Autorizados
 1. En **Authentication** > **Settings** > **Authorized domains**
 2. Agrega estos dominios si no están:
-   - `entrenoapp.netlify.app`
+   - `entrenoapp.com`
    - `localhost` (para desarrollo)
    - `127.0.0.1` (para desarrollo)
 

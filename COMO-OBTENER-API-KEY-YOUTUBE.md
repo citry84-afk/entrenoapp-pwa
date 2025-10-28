@@ -89,7 +89,7 @@ Sigue estos pasos para obtener tu API Key de YouTube.
 En "Restricciones de aplicaciones":
 - Selecciona: **"Sitios web HTTP"**
 - Click en "Añadir un elemento"
-- Pega: `https://entrenoapp.netlify.app`
+- Pega: `https://entrenoapp.com`
 - Click en "Añadir otro"
 - Pega: `https://*.netlify.app/*`
 
@@ -110,7 +110,7 @@ En "Restricciones de API":
 ## ✅ **PASO 6: Verificar que Funciona**
 
 ### **6.1 Abre tu script de prueba:**
-👉 **URL:** https://entrenoapp.netlify.app/test-youtube-api.html
+👉 **URL:** https://entrenoapp.com/test-youtube-api.html
 
 ### **6.2 Pega tu API Key:**
 - En el campo "API Key"

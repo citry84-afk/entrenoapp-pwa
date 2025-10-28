@@ -17,15 +17,15 @@ Convertir viewers de YouTube en usuarios instalados de EntrenoApp
 ### **En Cada Video, Di:**
 
 **Versión Corta:**
-> "🎯 Descarga EntrenoApp gratis: entrenoapp.netlify.app"
+> "🎯 Descarga EntrenoApp gratis: entrenoapp.com"
 
 **Versión Completa:**
-> "Si quieres planes personalizados de entrenamiento, entrenamiento con GPS, y seguimiento completo de tu progreso, descarga EntrenoApp. Es gratis y funciona perfecto desde tu navegador. El link está en la descripción: entrenoapp.netlify.app"
+> "Si quieres planes personalizados de entrenamiento, entrenamiento con GPS, y seguimiento completo de tu progreso, descarga EntrenoApp. Es gratis y funciona perfecto desde tu navegador. El link está en la descripción: entrenoapp.com"
 
 ### **Link en Descripción:**
 ```
 🔥 ENTREAAP - TU ENTRENADOR PERSONAL
-👉 Pruébala gratis: https://entrenoapp.netlify.app
+👉 Pruébala gratis: https://entrenoapp.com
 📱 Funciona en iOS y Android
 💪 Planes personalizados + GPS tracking + Retos diarios
 
@@ -41,13 +41,13 @@ OTROS LINKS:
 ### **Card (aparece durante el video):**
 - Tiempo: Minuto 1, 3, y último minuto
 - Texto: "🎯 Prueba EntrenoApp gratis"
-- Link: https://entrenoapp.netlify.app
+- Link: https://entrenoapp.com
 
 ### **End Screen (últimos 20 segundos):**
 - Video relevante (si tienes)
 - Suscripción al canal
 - **Link a la web:** "Prueba EntrenoApp"
-- URL: https://entrenoapp.netlify.app
+- URL: https://entrenoapp.com
 
 ---
 
@@ -56,7 +56,7 @@ OTROS LINKS:
 ### **Métricas a Seguir:**
 1. **Vistas en videos de YouTube**
 2. **Clicks en link de la descripción** (YouTube Studio)
-3. **Visitas a entrenoapp.netlify.app** (Google Analytics)
+3. **Visitas a entrenoapp.com** (Google Analytics)
 4. **Instalaciones PWA** (Métricas de instalación)
 
 ### **Ver en Google Analytics:**

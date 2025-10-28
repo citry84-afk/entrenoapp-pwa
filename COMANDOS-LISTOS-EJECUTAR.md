@@ -13,7 +13,7 @@ Script: "Tenía miedo al 75 Hard. Esto es lo que me ayudó. El 80% falla por fal
 Duración: 20 segundos
 Hashtags: #75hard #75hardchallenge #fitness #suplementos #entrenamiento #gym #motivacion #fitnessmotivation #workout #gymlife #health #nutrition #suplementosfitness #entrenar #fitnessespaña
 
-Link en bio: https://entrenoapp.netlify.app/75-hard-challenge-suplementos-2025.html
+Link en bio: https://entrenoapp.com/75-hard-challenge-suplementos-2025.html
 ```
 
 ---
@@ -45,7 +45,7 @@ El 80% falla por falta de suplementación correcta. No es falta de voluntad, es 
 
 **No es marketing.** Es lo que realmente necesitas para completar el desafío sin morir en el intento.
 
-Link: https://entrenoapp.netlify.app/75-hard-challenge-suplementos-2025.html
+Link: https://entrenoapp.com/75-hard-challenge-suplementos-2025.html
 
 Espero que os sirva! 💪
 
@@ -79,7 +79,7 @@ Los 7 suplementos esenciales son:
 **No es marketing.** Es lo que realmente necesitas para completar el desafío sin morir en el intento.
 
 He creado una guía completa con protocolo diario, precios, y estudios científicos:
-https://entrenoapp.netlify.app/75-hard-challenge-suplementos-2025.html
+https://entrenoapp.com/75-hard-challenge-suplementos-2025.html
 
 Espero que te sirva! 💪
 ```
@@ -106,7 +106,7 @@ Ese día fui. Y fue el mejor día de mi vida.
 **3 años después:** El gym es mi terapia. Mi lugar seguro. Mi segundo hogar.
 
 He creado una guía completa con 7 productos + 5 estrategias:
-https://entrenoapp.netlify.app/gym-anxiety-guia-completa-2025.html
+https://entrenoapp.com/gym-anxiety-guia-completa-2025.html
 
 Si yo pude, tú puedes. De verdad. 💪
 ```
@@ -139,7 +139,7 @@ La ciencia es clara: 1.6-2.2g/kg peso corporal es suficiente para ganar músculo
 7. Legumbres (8-10g/100g)
 
 He creado una guía completa con calculadora, menú diario 150g, y estudios científicos:
-https://entrenoapp.netlify.app/proteina-cuanta-realmente-necesitas-2025.html
+https://entrenoapp.com/proteina-cuanta-realmente-necesitas-2025.html
 
 Espero que te sirva! 💪
 ```
@@ -150,17 +150,17 @@ Espero que te sirva! 💪
 
 ### **URLS DÍA 1 (5 URLs):**
 ```
-1. https://entrenoapp.netlify.app/cortisol-face-suplementos-2025.html
-2. https://entrenoapp.netlify.app/gym-anxiety-guia-completa-2025.html
-3. https://entrenoapp.netlify.app/proteina-cuanta-realmente-necesitas-2025.html
-4. https://entrenoapp.netlify.app/sleep-hacking-recuperacion-fitness-2025.html
-5. https://entrenoapp.netlify.app/lipa-studios-network.html
+1. https://entrenoapp.com/cortisol-face-suplementos-2025.html
+2. https://entrenoapp.com/gym-anxiety-guia-completa-2025.html
+3. https://entrenoapp.com/proteina-cuanta-realmente-necesitas-2025.html
+4. https://entrenoapp.com/sleep-hacking-recuperacion-fitness-2025.html
+5. https://entrenoapp.com/lipa-studios-network.html
 ```
 
 ### **PASOS:**
 ```
 1. Ve a https://search.google.com/search-console
-2. Selecciona: entrenoapp.netlify.app
+2. Selecciona: entrenoapp.com
 3. Ve a "Inspección de URL"
 4. Pega cada URL
 5. Haz clic en "SOLICITAR INDEXACIÓN"

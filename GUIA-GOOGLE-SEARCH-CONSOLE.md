@@ -33,12 +33,12 @@ Tu sitio ya tiene el meta tag de verificación:
 #### Opción B: Archivo HTML
 1. Google te da un archivo HTML (ejemplo: google123456.html)
 2. Súbelo a la raíz de tu proyecto
-3. Accede: https://entrenoapp.netlify.app/google123456.html
+3. Accede: https://entrenoapp.com/google123456.html
 4. Clic "Verificar" en Search Console
 
 ### Paso 3: Enviar Sitemap
 1. En Search Console → Panel izquierdo → "Sitemaps"
-2. Introduce: `https://entrenoapp.netlify.app/sitemap.xml`
+2. Introduce: `https://entrenoapp.com/sitemap.xml`
 3. Clic "Enviar"
 4. ✅ Google empezará a rastrear automáticamente
 
@@ -79,7 +79,7 @@ Tu sitio ya tiene el meta tag de verificación:
 - Ver errores específicos de página
 
 **Cómo acelerar indexación de artículo nuevo:**
-1. Introduce URL: `https://entrenoapp.netlify.app/gamificacion-fitness-gaming.html`
+1. Introduce URL: `https://entrenoapp.com/gamificacion-fitness-gaming.html`
 2. Si dice "URL no está en Google" → Clic "Solicitar indexación"
 3. Google la rastreará en 1-2 días (vs 1-2 semanas natural)
 

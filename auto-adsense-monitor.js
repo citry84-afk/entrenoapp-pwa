@@ -16,11 +16,11 @@ const MONITORING_CONFIG = {
     
     // URLs a monitorear
     urlsToCheck: [
-        'https://entrenoapp.netlify.app/',
-        'https://entrenoapp.netlify.app/app.html',
-        'https://entrenoapp.netlify.app/blog.html',
-        'https://entrenoapp.netlify.app/guia-completa-fitness-casa-2025.html',
-        'https://entrenoapp.netlify.app/nutricion-deportiva-guia-completa-2025.html'
+        'https://entrenoapp.com/',
+        'https://entrenoapp.com/app.html',
+        'https://entrenoapp.com/blog.html',
+        'https://entrenoapp.com/guia-completa-fitness-casa-2025.html',
+        'https://entrenoapp.com/nutricion-deportiva-guia-completa-2025.html'
     ],
     
     // Intervalos de monitoreo
@@ -87,8 +87,8 @@ function checkContentQuality() {
 function checkInternalLinks() {
     console.log('🔗 Verificando enlaces internos...');
     
-    const internalLinks = document.querySelectorAll('a[href*="entrenoapp.netlify.app"]');
-    const externalLinks = document.querySelectorAll('a[href^="http"]:not([href*="entrenoapp.netlify.app"])');
+    const internalLinks = document.querySelectorAll('a[href*="entrenoapp.com"]');
+    const externalLinks = document.querySelectorAll('a[href^="http"]:not([href*="entrenoapp.com"])');
     
     console.log(`📊 Enlaces internos: ${internalLinks.length}`);
     console.log(`📊 Enlaces externos: ${externalLinks.length}`);
@@ -160,7 +160,7 @@ function generateStatusReport() {
     console.log('🌐 URL:', window.location.href);
     console.log('📱 User Agent:', navigator.userAgent);
     console.log('📊 Resolución:', screen.width + 'x' + screen.height);
-    console.log('🔗 Enlaces internos:', document.querySelectorAll('a[href*="entrenoapp.netlify.app"]').length);
+    console.log('🔗 Enlaces internos:', document.querySelectorAll('a[href*="entrenoapp.com"]').length);
     console.log('📝 Palabras:', document.body.innerText.split(' ').length);
     console.log('🖼️ Imágenes:', document.querySelectorAll('img').length);
     console.log('📑 Encabezados:', document.querySelectorAll('h1, h2, h3, h4, h5, h6').length);
@@ -191,7 +191,7 @@ function checkAdSenseReadiness() {
     if (h1) readinessScore += 1;
     
     // Verificar enlaces internos
-    const internalLinks = document.querySelectorAll('a[href*="entrenoapp.netlify.app"]');
+    const internalLinks = document.querySelectorAll('a[href*="entrenoapp.com"]');
     if (internalLinks.length > 5) readinessScore += 1;
     
     // Verificar imágenes con alt

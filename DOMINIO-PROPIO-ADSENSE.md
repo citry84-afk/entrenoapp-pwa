@@ -3,7 +3,7 @@
 ## ⚠️ **PROBLEMA IDENTIFICADO**
 
 **Causa probable del rechazo de AdSense:**
-- ❌ Usas subdominio gratuito: `entrenoapp.netlify.app`
+- ❌ Usas subdominio gratuito: `entrenoapp.com`
 - ✅ AdSense prefiere dominios propios: `entrenoapp.com`
 
 ---

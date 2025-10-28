@@ -11,49 +11,49 @@
 **Hook:** "Tenía miedo al 75 Hard. Esto es lo que me ayudó."
 **Hashtags:** #75hard #75hardchallenge #fitness #suplementos #entrenamiento #gym #motivacion
 **Hora:** 18:00-20:00
-**Link:** https://entrenoapp.netlify.app/75-hard-challenge-suplementos-2025.html
+**Link:** https://entrenoapp.com/75-hard-challenge-suplementos-2025.html
 
 ### **MARTES - Cortisol Face #1**
 **Script:** Gancho Emocional (20 seg)
 **Hook:** "Tenía cortisol face y esto me funcionó (no es botox)"
 **Hashtags:** #cortisolface #carahinchada #suplementos #belleza #fitness #salud
 **Hora:** 18:00-20:00
-**Link:** https://entrenoapp.netlify.app/cortisol-face-suplementos-2025.html
+**Link:** https://entrenoapp.com/cortisol-face-suplementos-2025.html
 
 ### **MIÉRCOLES - Gym Anxiety #1**
 **Script:** Gancho Emocional (22 seg)
 **Hook:** "Tenía miedo al gimnasio. Esto es lo que me ayudó"
 **Hashtags:** #gymanxiety #principiantesgym #gimnasio #fitness #entrenamiento #motivacion
 **Hora:** 18:00-20:00
-**Link:** https://entrenoapp.netlify.app/gym-anxiety-guia-completa-2025.html
+**Link:** https://entrenoapp.com/gym-anxiety-guia-completa-2025.html
 
 ### **JUEVES - Protein Debate #1**
 **Script:** Gancho Emocional (20 seg)
 **Hook:** "Necesitas 2g de proteína por kg. No, 1.5g. No, 3g. ¿Quién tiene razón?"
 **Hashtags:** #proteindebate #cuantaproteina #ganarmusculo #fitness #nutricion #suplementos
 **Hora:** 18:00-20:00
-**Link:** https://entrenoapp.netlify.app/proteina-cuanta-realmente-necesitas-2025.html
+**Link:** https://entrenoapp.com/proteina-cuanta-realmente-necesitas-2025.html
 
 ### **VIERNES - Sleep Hacking #1**
 **Script:** Gancho Emocional (22 seg)
 **Hook:** "Entrenas duro. Comes bien. Pero duermes mal. Tu entrenamiento está incompleto"
 **Hashtags:** #sleephacking #mejorarsueno #recuperacion #insomnio #sueñoprofundo #fitness
 **Hora:** 18:00-20:00
-**Link:** https://entrenoapp.netlify.app/sleep-hacking-recuperacion-fitness-2025.html
+**Link:** https://entrenoapp.com/sleep-hacking-recuperacion-fitness-2025.html
 
 ### **SÁBADO - 75 Hard Challenge #2**
 **Script:** Listicle (18 seg)
 **Hook:** "3 suplementos que bajaron mi cortisol 40%"
 **Hashtags:** #75hard #suplementos #fitness #entrenamiento #motivacion
 **Hora:** 18:00-20:00
-**Link:** https://entrenoapp.netlify.app/75-hard-challenge-suplementos-2025.html
+**Link:** https://entrenoapp.com/75-hard-challenge-suplementos-2025.html
 
 ### **DOMINGO - Cortisol Face #2**
 **Script:** Listicle (15 seg)
 **Hook:** "3 suplementos que bajaron mi cortisol 40%"
 **Hashtags:** #cortisolface #suplementos #belleza #fitness #salud
 **Hora:** 18:00-20:00
-**Link:** https://entrenoapp.netlify.app/cortisol-face-suplementos-2025.html
+**Link:** https://entrenoapp.com/cortisol-face-suplementos-2025.html
 
 ---
 

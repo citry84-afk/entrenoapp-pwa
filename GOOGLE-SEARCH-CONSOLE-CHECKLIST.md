@@ -7,53 +7,53 @@
 ## 📋 URLS A INDEXAR (PRIORIDAD ALTA):
 
 ### **DÍA 1 (5 URLs):**
-- [ ] https://entrenoapp.netlify.app/cortisol-face-suplementos-2025.html
-- [ ] https://entrenoapp.netlify.app/gym-anxiety-guia-completa-2025.html
-- [ ] https://entrenoapp.netlify.app/proteina-cuanta-realmente-necesitas-2025.html
-- [ ] https://entrenoapp.netlify.app/sleep-hacking-recuperacion-fitness-2025.html
-- [ ] https://entrenoapp.netlify.app/lipa-studios-network.html
+- [ ] https://entrenoapp.com/cortisol-face-suplementos-2025.html
+- [ ] https://entrenoapp.com/gym-anxiety-guia-completa-2025.html
+- [ ] https://entrenoapp.com/proteina-cuanta-realmente-necesitas-2025.html
+- [ ] https://entrenoapp.com/sleep-hacking-recuperacion-fitness-2025.html
+- [ ] https://entrenoapp.com/lipa-studios-network.html
 
 ### **DÍA 2 (5 URLs):**
-- [ ] https://entrenoapp.netlify.app/suplementos-recomendados.html
-- [ ] https://entrenoapp.netlify.app/suplementos-para-perder-grasa.html
-- [ ] https://entrenoapp.netlify.app/equipamiento-fitness-casa.html
-- [ ] https://entrenoapp.netlify.app/relojes-fitness-smartwatch.html
-- [ ] https://entrenoapp.netlify.app/ropa-deportiva-amazon.html
+- [ ] https://entrenoapp.com/suplementos-recomendados.html
+- [ ] https://entrenoapp.com/suplementos-para-perder-grasa.html
+- [ ] https://entrenoapp.com/equipamiento-fitness-casa.html
+- [ ] https://entrenoapp.com/relojes-fitness-smartwatch.html
+- [ ] https://entrenoapp.com/ropa-deportiva-amazon.html
 
 ### **DÍA 3 (5 URLs):**
-- [ ] https://entrenoapp.netlify.app/proteinas-vegetales-2025.html
-- [ ] https://entrenoapp.netlify.app/libros-nutricion-deportiva-2025.html
-- [ ] https://entrenoapp.netlify.app/almohadas-mejorar-sueno-2025.html
-- [ ] https://entrenoapp.netlify.app/esterillas-yoga-2025.html
-- [ ] https://entrenoapp.netlify.app/batidoras-proteina-2025.html
+- [ ] https://entrenoapp.com/proteinas-vegetales-2025.html
+- [ ] https://entrenoapp.com/libros-nutricion-deportiva-2025.html
+- [ ] https://entrenoapp.com/almohadas-mejorar-sueno-2025.html
+- [ ] https://entrenoapp.com/esterillas-yoga-2025.html
+- [ ] https://entrenoapp.com/batidoras-proteina-2025.html
 
 ### **DÍA 4 (5 URLs):**
-- [ ] https://entrenoapp.netlify.app/pesas-equipamiento-casa-2025.html
-- [ ] https://entrenoapp.netlify.app/gamificacion-fitness-gaming.html
-- [ ] https://entrenoapp.netlify.app/blog.html
-- [ ] https://entrenoapp.netlify.app/about.html
-- [ ] https://entrenoapp.netlify.app/resources.html
+- [ ] https://entrenoapp.com/pesas-equipamiento-casa-2025.html
+- [ ] https://entrenoapp.com/gamificacion-fitness-gaming.html
+- [ ] https://entrenoapp.com/blog.html
+- [ ] https://entrenoapp.com/about.html
+- [ ] https://entrenoapp.com/resources.html
 
 ### **DÍA 5 (5 URLs):**
-- [ ] https://entrenoapp.netlify.app/faq.html
-- [ ] https://entrenoapp.netlify.app/testimonials.html
-- [ ] https://entrenoapp.netlify.app/pricing.html
-- [ ] https://entrenoapp.netlify.app/news.html
-- [ ] https://entrenoapp.netlify.app/compare.html
+- [ ] https://entrenoapp.com/faq.html
+- [ ] https://entrenoapp.com/testimonials.html
+- [ ] https://entrenoapp.com/pricing.html
+- [ ] https://entrenoapp.com/news.html
+- [ ] https://entrenoapp.com/compare.html
 
 ### **DÍA 6 (5 URLs):**
-- [ ] https://entrenoapp.netlify.app/workout-guides.html
-- [ ] https://entrenoapp.netlify.app/fitness-tips.html
-- [ ] https://entrenoapp.netlify.app/exercises-library.html
-- [ ] https://entrenoapp.netlify.app/fitness-calculators.html
-- [ ] https://entrenoapp.netlify.app/empezar-correr-guia-completa.html
+- [ ] https://entrenoapp.com/workout-guides.html
+- [ ] https://entrenoapp.com/fitness-tips.html
+- [ ] https://entrenoapp.com/exercises-library.html
+- [ ] https://entrenoapp.com/fitness-calculators.html
+- [ ] https://entrenoapp.com/empezar-correr-guia-completa.html
 
 ### **DÍA 7 (5 URLs):**
-- [ ] https://entrenoapp.netlify.app/nutricion-corredores.html
-- [ ] https://entrenoapp.netlify.app/privacy.html
-- [ ] https://entrenoapp.netlify.app/terms.html
-- [ ] https://entrenoapp.netlify.app/contact.html
-- [ ] https://entrenoapp.netlify.app/ads.txt
+- [ ] https://entrenoapp.com/nutricion-corredores.html
+- [ ] https://entrenoapp.com/privacy.html
+- [ ] https://entrenoapp.com/terms.html
+- [ ] https://entrenoapp.com/contact.html
+- [ ] https://entrenoapp.com/ads.txt
 
 ---
 
@@ -61,11 +61,11 @@
 
 ### **PASO 1: IR A GOOGLE SEARCH CONSOLE**
 1. Ve a https://search.google.com/search-console
-2. Selecciona tu propiedad: entrenoapp.netlify.app
+2. Selecciona tu propiedad: entrenoapp.com
 3. Ve a "Inspección de URL" (barra superior)
 
 ### **PASO 2: SOLICITAR INDEXACIÓN**
-1. Pega la URL completa (ej: https://entrenoapp.netlify.app/cortisol-face-suplementos-2025.html)
+1. Pega la URL completa (ej: https://entrenoapp.com/cortisol-face-suplementos-2025.html)
 2. Presiona Enter
 3. Espera a que Google analice la URL
 4. Haz clic en "SOLICITAR INDEXACIÓN"

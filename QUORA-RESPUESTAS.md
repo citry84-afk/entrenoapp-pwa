@@ -30,7 +30,7 @@ Los 7 suplementos esenciales son:
 **No es marketing.** Es lo que realmente necesitas para completar el desafío sin morir en el intento.
 
 He creado una guía completa con protocolo diario, precios, y estudios científicos:
-https://entrenoapp.netlify.app/75-hard-challenge-suplementos-2025.html
+https://entrenoapp.com/75-hard-challenge-suplementos-2025.html
 
 Espero que te sirva! 💪
 ```
@@ -62,7 +62,7 @@ Ese día fui. Y fue el mejor día de mi vida.
 **3 años después:** El gym es mi terapia. Mi lugar seguro. Mi segundo hogar.
 
 He creado una guía completa con 7 productos + 5 estrategias:
-https://entrenoapp.netlify.app/gym-anxiety-guia-completa-2025.html
+https://entrenoapp.com/gym-anxiety-guia-completa-2025.html
 
 Si yo pude, tú puedes. De verdad. 💪
 ```
@@ -100,7 +100,7 @@ La ciencia es clara: 1.6-2.2g/kg peso corporal es suficiente para ganar músculo
 7. Legumbres (8-10g/100g)
 
 He creado una guía completa con calculadora, menú diario 150g, y estudios científicos:
-https://entrenoapp.netlify.app/proteina-cuanta-realmente-necesitas-2025.html
+https://entrenoapp.com/proteina-cuanta-realmente-necesitas-2025.html
 
 Espero que te sirva! 💪
 ```
@@ -137,7 +137,7 @@ Con estos 7 productos + protocolo diario: 8h profundas, músculo ganado.
 **Stack completo:** €144 para 60 días (€2.40/día)
 
 He creado una guía completa con protocolo diario y estudios científicos:
-https://entrenoapp.netlify.app/sleep-hacking-recuperacion-fitness-2025.html
+https://entrenoapp.com/sleep-hacking-recuperacion-fitness-2025.html
 
 Espero que te sirva! 😴
 ```
@@ -184,7 +184,7 @@ Descubrí: era cortisol. No grasa. Empecé suplementos específicos + cambios li
 **Stack completo:** €133 para 60 días (€2.22/día)
 
 He creado una guía completa con protocolo diario y estudios científicos:
-https://entrenoapp.netlify.app/cortisol-face-suplementos-2025.html
+https://entrenoapp.com/cortisol-face-suplementos-2025.html
 
 No necesitas botox. Necesitas bajar cortisol. 💜
 ```

@@ -50,7 +50,7 @@ git push origin main
 
 Después de 3 minutos, verifica:
 ```bash
-curl -s https://entrenoapp.netlify.app/home.html | grep -c "youtube-gallery"
+curl -s https://entrenoapp.com/home.html | grep -c "youtube-gallery"
 ```
 
 **Debería devolver:** `3`

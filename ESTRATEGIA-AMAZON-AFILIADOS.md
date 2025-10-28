@@ -170,7 +170,7 @@ Añadir en `css/styles.css`:
 💪 Creatina: https://amazon.es/dp/B00HZQ8K5O?tag=suplementospa-21
 🏋️ Pesas: https://amazon.es/dp/B08XYZ123?tag=suplementospa-21
 
-📱 ENTREAAP: https://entrenoapp.netlify.app
+📱 ENTREAAP: https://entrenoapp.com
 ```
 
 ---

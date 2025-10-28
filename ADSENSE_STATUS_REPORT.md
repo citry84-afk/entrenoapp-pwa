@@ -1,7 +1,7 @@
 # 📊 Reporte de Estado para AdSense
 
 **Fecha:** Sat Oct 25 17:24:51 CEST 2025
-**Sitio:** https://entrenoapp.netlify.app
+**Sitio:** https://entrenoapp.com
 
 ## ✅ Verificaciones Completadas
 

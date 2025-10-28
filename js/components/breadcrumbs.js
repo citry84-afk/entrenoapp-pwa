@@ -107,7 +107,7 @@ class Breadcrumbs {
                 "@type": "ListItem",
                 "position": index + 1,
                 "name": crumb.name,
-                "item": `https://entrenoapp.netlify.app${crumb.url}`
+                "item": `https://entrenoapp.com${crumb.url}`
             }))
         };
         

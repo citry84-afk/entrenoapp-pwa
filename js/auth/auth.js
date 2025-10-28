@@ -764,7 +764,7 @@ async function handleGoogleAuth() {
     try {
         // Verificar si el dominio está autorizado
         const authorizedDomains = [
-            'entrenoapp.netlify.app',
+            'entrenoapp.com',
             'localhost',
             '127.0.0.1',
             'netlify.app' // Dominio base de Netlify
@@ -874,7 +874,7 @@ async function handleAppleAuth() {
     try {
         // Verificar si el dominio está autorizado
         const authorizedDomains = [
-            'entrenoapp.netlify.app',
+            'entrenoapp.com',
             'localhost',
             '127.0.0.1',
             'netlify.app' // Dominio base de Netlify
@@ -1260,7 +1260,7 @@ export async function checkOnboardingStatus(uid) {
 window.checkAuthProviders = function() {
     // Verificar dominios autorizados
     const authorizedDomains = [
-        'entrenoapp.netlify.app',
+        'entrenoapp.com',
         'localhost',
         '127.0.0.1'
     ];

@@ -27,7 +27,7 @@ El 80% falla por falta de suplementación correcta. No es falta de voluntad, es 
 
 **No es marketing.** Es lo que realmente necesitas para completar el desafío sin morir en el intento.
 
-Link: https://entrenoapp.netlify.app/75-hard-challenge-suplementos-2025.html
+Link: https://entrenoapp.com/75-hard-challenge-suplementos-2025.html
 
 Espero que os sirva! 💪
 
@@ -62,7 +62,7 @@ El 80% falla por falta de suplementación correcta. No es falta de voluntad, es 
 
 **No es marketing.** Es lo que realmente necesitas para completar el desafío.
 
-Link: https://entrenoapp.netlify.app/75-hard-challenge-suplementos-2025.html
+Link: https://entrenoapp.com/75-hard-challenge-suplementos-2025.html
 
 Espero que os sirva! 💪
 
@@ -97,7 +97,7 @@ El 80% falla por falta de suplementación correcta. No es falta de voluntad, es 
 
 **No es marketing.** Es lo que realmente necesitas para completar el desafío.
 
-Link: https://entrenoapp.netlify.app/75-hard-challenge-suplementos-2025.html
+Link: https://entrenoapp.com/75-hard-challenge-suplementos-2025.html
 
 Espero que os sirva! 💪
 

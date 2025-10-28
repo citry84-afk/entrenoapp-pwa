@@ -34,7 +34,7 @@
 - ✅ **Manifest** para instalación
 
 ## 🚀 **URLs de Producción**
-- **Sitio Principal**: https://entrenoapp.netlify.app
+- **Sitio Principal**: https://entrenoapp.com
 - **GitHub**: https://github.com/citry84-afk/entrenoapp-pwa
 - **Netlify Dashboard**: https://app.netlify.com/projects/entrenoapp
 

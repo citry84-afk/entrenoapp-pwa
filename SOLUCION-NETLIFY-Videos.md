@@ -41,7 +41,7 @@ Verifica que el archivo `home.html` contenga:
 
 Ejecuta en tu terminal:
 ```bash
-curl -s https://entrenoapp.netlify.app/home.html | grep -c "youtube-gallery"
+curl -s https://entrenoapp.com/home.html | grep -c "youtube-gallery"
 ```
 
 **Debería devolver:** `3` o más

@@ -211,7 +211,7 @@ https://www.amazon.es/dp/B000QSNYGI?tag=suplementospa-21
 ## 📞 CONTACTO
 
 **Email:** lipastudios4@gmail.com  
-**Web:** https://entrenoapp.netlify.app  
+**Web:** https://entrenoapp.com  
 **TikTok:** @EntrenoApp  
 **Instagram:** @entrenoappfacil
 

@@ -3,7 +3,7 @@
 ## 📊 ECOSISTEMA DE PROYECTOS
 
 ### 1. **EntrenoApp** (Fitness & Salud)
-- **URL:** https://entrenoapp.netlify.app
+- **URL:** https://entrenoapp.com
 - **Audiencia:** Personas interesadas en fitness, nutrición, salud
 - **Edad:** 18-45 años
 - **Pain Points:** Falta de tiempo, no saber entrenar, dudas sobre nutrición
