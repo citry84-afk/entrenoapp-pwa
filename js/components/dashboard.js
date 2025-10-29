@@ -935,7 +935,7 @@ function renderActiveWorkout(workout) {
                 
                 <!-- Botón de acción principal -->
                 <div class="workout-action-primary">
-                    <button class="glass-button glass-button-primary btn-lg enhanced-start-btn" onclick="window.startTodaysWorkout()">
+                    <button id="start-workout-btn" class="glass-button glass-button-primary btn-lg enhanced-start-btn" onclick="window.startTodaysWorkoutWithCountdown()">
                         <span class="btn-icon">🚀</span>
                         <span class="btn-text">Comenzar Entrenamiento</span>
                     </button>
@@ -1130,18 +1130,175 @@ function renderGymExerciseList(workout) {
 
 // Renderizar progreso semanal
 function renderWeeklyProgress() {
+    const plan = dashboardState.activePlan;
+    if (!plan) return '';
+    
+    // Generar plan semanal de 7 días
+    const weeklyPlan = generateWeeklyPlan(plan);
+    const todayIndex = new Date().getDay(); // 0 = Domingo, 1 = Lunes, etc.
+    const dayNames = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+    const fullDayNames = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+    
     return `
-        <div class="weekly-progress glass-card mb-lg">
-            <h3 class="progress-title">📊 Progreso de esta Semana</h3>
-            <div class="week-progress-bar">
+        <div class="weekly-plan-card glass-card mb-lg">
+            <div class="weekly-plan-header">
+                <h3 class="weekly-plan-title">📅 Plan Semanal</h3>
+                <span class="weekly-progress-text">${dashboardState.weekProgress}% completado</span>
+            </div>
+            <div class="week-progress-bar mb-md">
                 <div class="week-progress-fill" style="width: ${dashboardState.weekProgress}%"></div>
             </div>
-            <div class="progress-text">
-                ${dashboardState.weekProgress}% completado esta semana
+            <div class="weekly-calendar">
+                ${weeklyPlan.map((day, index) => {
+                    const isToday = index === todayIndex;
+                    const isCompleted = day.completed || false;
+                    const dayName = dayNames[index];
+                    const dayNumber = new Date().getDate() + (index - todayIndex);
+                    
+                    return `
+                        <div class="week-day-card ${isToday ? 'today' : ''} ${isCompleted ? 'completed' : ''}" 
+                             onclick="${day.workout ? `window.showDayWorkout(${index})` : ''}">
+                            <div class="day-header">
+                                <div class="day-name">${dayName}</div>
+                                <div class="day-number">${dayNumber}</div>
+                            </div>
+                            <div class="day-content">
+                                ${day.workout ? `
+                                    <div class="day-workout-icon">${getWorkoutIcon(day.workout.type)}</div>
+                                    <div class="day-workout-type">${getWorkoutTypeLabel(day.workout.type)}</div>
+                                    ${day.workout.duration ? `<div class="day-workout-duration">${day.workout.duration} min</div>` : ''}
+                                ` : `
+                                    <div class="day-rest">${day.isRest ? '😌' : '⚪'}</div>
+                                    <div class="day-rest-label">${day.isRest ? 'Descanso' : 'No planificado'}</div>
+                                `}
+                            </div>
+                            ${isToday ? '<div class="today-badge">Hoy</div>' : ''}
+                            ${isCompleted ? '<div class="completed-badge">✓</div>' : ''}
+                        </div>
+                    `;
+                }).join('')}
             </div>
         </div>
     `;
 }
+
+// Generar plan semanal de 7 días
+function generateWeeklyPlan(plan) {
+    const trainingDays = getTrainingDays(plan.frequency);
+    const weeklyPlan = [];
+    const today = new Date();
+    const dayOfWeek = today.getDay(); // 0 = Domingo
+    
+    // Generar 7 días empezando desde hoy
+    for (let i = 0; i < 7; i++) {
+        const currentDay = (dayOfWeek + i) % 7;
+        const isTrainingDay = trainingDays.includes(currentDay);
+        
+        if (isTrainingDay) {
+            // Generar workout para este día
+            const workout = generateDayWorkout(plan, i + 1);
+            weeklyPlan.push({
+                dayIndex: currentDay,
+                workout: workout,
+                isRest: false,
+                completed: checkIfDayCompleted(i) // TODO: implementar tracking de días completados
+            });
+        } else {
+            weeklyPlan.push({
+                dayIndex: currentDay,
+                workout: null,
+                isRest: true,
+                completed: false
+            });
+        }
+    }
+    
+    return weeklyPlan;
+}
+
+// Generar workout para un día específico
+function generateDayWorkout(plan, dayOffset) {
+    if (plan.type === 'running') {
+        return {
+            type: 'running',
+            title: 'Entrenamiento de Running',
+            duration: 30,
+            distance: '5 km',
+            intensity: 'moderate'
+        };
+    } else if (plan.type === 'gym') {
+        return {
+            type: 'gym',
+            title: 'Entrenamiento de Gimnasio',
+            duration: plan.sessionDuration || 45,
+            muscleGroup: getRandomMuscleGroup()
+        };
+    } else if (plan.type === 'functional') {
+        return {
+            type: 'functional',
+            title: 'WOD Funcional',
+            duration: 20,
+            rounds: 3
+        };
+    }
+    
+    return {
+        type: 'general',
+        title: 'Entrenamiento',
+        duration: 30
+    };
+}
+
+// Verificar si un día está completado
+function checkIfDayCompleted(dayOffset) {
+    const today = new Date();
+    const targetDate = new Date(today);
+    targetDate.setDate(today.getDate() + dayOffset);
+    
+    const dateKey = targetDate.toISOString().split('T')[0];
+    const completedDays = JSON.parse(localStorage.getItem('entrenoapp_completed_days') || '[]');
+    return completedDays.includes(dateKey);
+}
+
+// Obtener icono de workout
+function getWorkoutIcon(type) {
+    const icons = {
+        'running': '🏃‍♂️',
+        'gym': '🏋️‍♂️',
+        'functional': '⚡',
+        'general': '💪'
+    };
+    return icons[type] || '💪';
+}
+
+// Obtener etiqueta de tipo de workout
+function getWorkoutTypeLabel(type) {
+    const labels = {
+        'running': 'Running',
+        'gym': 'Gimnasio',
+        'functional': 'Funcional',
+        'general': 'Entrenamiento'
+    };
+    return labels[type] || 'Entrenamiento';
+}
+
+// Obtener grupo muscular aleatorio
+function getRandomMuscleGroup() {
+    const groups = ['Pecho', 'Espalda', 'Piernas', 'Hombros', 'Brazos', 'Full Body'];
+    return groups[Math.floor(Math.random() * groups.length)];
+}
+
+// Mostrar workout de un día específico
+window.showDayWorkout = function(dayIndex) {
+    const weeklyPlan = generateWeeklyPlan(dashboardState.activePlan);
+    const day = weeklyPlan[dayIndex];
+    
+    if (day && day.workout) {
+        // Guardar workout y navegar
+        localStorage.setItem('selectedDayWorkout', JSON.stringify(day.workout));
+        window.startTodaysWorkout();
+    }
+};
 
 // Renderizar reto diario
 function renderTodayChallenge() {
@@ -1392,6 +1549,35 @@ window.showPlanMenu = function() {
     `;
     
     document.body.insertAdjacentHTML('beforeend', menuHTML);
+};
+
+// Iniciar workout con cuenta regresiva
+window.startTodaysWorkoutWithCountdown = function() {
+    const btn = document.getElementById('start-workout-btn');
+    if (!btn || btn.classList.contains('countdown')) return;
+    
+    // Agregar overlay de cuenta regresiva
+    btn.classList.add('countdown');
+    btn.disabled = true;
+    let countdown = 3;
+    
+    const overlay = document.createElement('div');
+    overlay.className = 'countdown-overlay';
+    overlay.innerHTML = `<span class="countdown-number">${countdown}</span>`;
+    btn.appendChild(overlay);
+    
+    const interval = setInterval(() => {
+        countdown--;
+        if (countdown > 0) {
+            overlay.querySelector('.countdown-number').textContent = countdown;
+        } else {
+            clearInterval(interval);
+            btn.classList.remove('countdown');
+            btn.disabled = false;
+            overlay.remove();
+            window.startTodaysWorkout();
+        }
+    }, 1000);
 };
 
 window.startTodaysWorkout = function() {
