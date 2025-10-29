@@ -1,6 +1,11 @@
 # Redirects para EntrenoApp
 # Netlify redirects file
 
+# Enforce primary domain and HTTPS
+http://entrenoapp.com/* https://entrenoapp.com/:splat 301!
+https://www.entrenoapp.com/* https://entrenoapp.com/:splat 301!
+https://entrenoapp.netlify.app/* https://entrenoapp.com/:splat 301!
+
 # Redirect old home to new structure
 /home.html / 301
 
