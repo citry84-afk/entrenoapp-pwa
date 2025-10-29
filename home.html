@@ -313,7 +313,13 @@
                 width: 100%;
                 max-width: 300px;
             }
+            .nav-links a.extra { display:none; }
+            .more-menu { display:block; margin-left: 10px; }
         }
+        .more-menu { display:none; position: relative; }
+        .more-menu summary { cursor:pointer; padding: 6px 10px; border-radius: 8px; }
+        .more-menu[open] summary { background:#f1f1fe; }
+        .more-menu .more-list { position:absolute; right:0; top:32px; background:#fff; border:1px solid #eee; border-radius:12px; padding:10px; box-shadow:0 8px 20px rgba(0,0,0,.08); display:flex; flex-direction:column; gap:8px; }
         .main-navigation {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
@@ -373,14 +379,23 @@
             <div class="nav-links">
                 <a href="/home.html">Inicio</a>
                 <a href="/workout-guides.html">Guías</a>
-                <a href="/fitness-tips.html">Consejos</a>
-                <a href="/exercises-library.html">Ejercicios</a>
-                <a href="/fitness-calculators.html">Calculadoras</a>
-                <a href="/blog.html">Blog</a>
                 <a href="/youtube-gallery.html">📺 Videos</a>
-                <a href="/productos-recomendados.html">🛒 Productos</a>
-                <a href="/about.html">Nosotros</a>
-                <a href="/contact.html">Contacto</a>
+                <a href="/blog.html">Blog</a>
+                <a href="/productos-recomendados.html" class="extra">🛒 Productos</a>
+                <a href="/fitness-calculators.html" class="extra">Calculadoras</a>
+                <a href="/exercises-library.html" class="extra">Ejercicios</a>
+                <a href="/about.html" class="extra">Nosotros</a>
+                <a href="/contact.html" class="extra">Contacto</a>
+                <details class="more-menu">
+                  <summary>Más</summary>
+                  <div class="more-list">
+                    <a href="/productos-recomendados.html">Productos</a>
+                    <a href="/fitness-calculators.html">Calculadoras</a>
+                    <a href="/exercises-library.html">Ejercicios</a>
+                    <a href="/about.html">Nosotros</a>
+                    <a href="/contact.html">Contacto</a>
+                  </div>
+                </details>
             </div>
         </div>
     </nav>
@@ -395,8 +410,7 @@
                 GPS tracking, retos diarios y seguimiento completo de tu salud. ¡Transforma tu vida con EntrenoApp!
             </p>
             <div class="cta-buttons">
-                <a href="index.html" class="cta-button cta-primary">Comenzar Ahora</a>
-                <a href="#features" class="cta-button cta-secondary">Conocer Más</a>
+                <a href="app.html" class="cta-button cta-primary">Comenzar Ahora</a>
             </div>
         </div>
     </section>
