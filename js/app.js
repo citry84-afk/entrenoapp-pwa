@@ -55,9 +55,16 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Marcar como inicializada
         appState.isInitialized = true;
         
-        // Mostrar app directamente sin login
+        // Decidir primera pantalla según onboarding local (modo guest)
+        const hasActivePlan = !!localStorage.getItem('entrenoapp_active_plan');
+        const hasCompletedOnboarding = localStorage.getItem('entrenoapp_onboarding_complete') === 'true';
+
         hideLoadingScreen();
-        navigateTo('dashboard');
+        if (!hasActivePlan && !hasCompletedOnboarding) {
+            navigateToPage('onboarding');
+        } else {
+            navigateTo('dashboard');
+        }
         
         console.log('✅ EntrenoApp inicializada correctamente (Modo Guest para AdSense)');
         
