@@ -1301,6 +1301,55 @@ window.saveProfileChanges = async function() {
     }
     
     try {
+        // Si Auth está deshabilitado (modo invitado), guardar solo en localStorage
+        if (!auth) {
+            const displayName = document.getElementById('display-name')?.value?.trim();
+            const username = document.getElementById('username')?.value?.trim();
+            const bio = document.getElementById('bio')?.value?.trim();
+            const privacy = document.querySelector('input[name="privacy"]:checked')?.value || 'public';
+            const notifications = document.getElementById('notifications')?.checked || false;
+            const friendRequests = document.getElementById('friend-requests')?.checked || false;
+            const activityNotifications = document.getElementById('activity-notifications')?.checked || false;
+
+            if (!displayName) {
+                alert('El nombre completo es obligatorio');
+                return;
+            }
+            if (!username) {
+                alert('El nombre de usuario es obligatorio');
+                return;
+            }
+            if (!username.startsWith('@') || username.length < 4) {
+                alert('El nombre de usuario debe empezar con @ y tener al menos 3 caracteres');
+                return;
+            }
+            const usernamePattern = /^@[a-zA-Z0-9_]+$/;
+            if (!usernamePattern.test(username)) {
+                alert('El nombre de usuario solo puede contener letras, números y guiones bajos');
+                return;
+            }
+
+            const localProfile = {
+                displayName,
+                username,
+                bio: bio || '',
+                settings: {
+                    privacy,
+                    notifications,
+                    friendRequestNotifications: friendRequests,
+                    activityNotifications
+                },
+                photoURL: '/assets/default-avatar.png',
+                updatedAt: new Date().toISOString()
+            };
+            localStorage.setItem('entrenoapp_user_profile', JSON.stringify(localProfile));
+            socialState.userProfile = { ...(socialState.userProfile || {}), ...localProfile };
+            closeEditProfileModal();
+            renderProfilePage();
+            alert('✅ Perfil guardado en este dispositivo (modo invitado)');
+            return;
+        }
+
         const user = auth.currentUser;
         if (!user) {
             if (window.debugLogger) {
