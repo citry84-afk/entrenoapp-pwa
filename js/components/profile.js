@@ -88,6 +88,21 @@ let socialState = {
 // Inicializar componente social
 window.initProfile = function() {
     console.log('👤 Inicializando sistema social');
+    // Si Auth está deshabilitado (modo guest para AdSense), mostrar vista limitada
+    if (!auth) {
+        const container = document.querySelector('.profile-container');
+        if (container) {
+            container.innerHTML = `
+                <div class="glass-card text-center">
+                    <h2>Perfil</h2>
+                    <p class="text-secondary">Estás usando EntrenoApp en modo invitado.</p>
+                    <p class="text-secondary">El sistema social (amigos, ranking, solicitudes) requiere iniciar sesión y está deshabilitado temporalmente para cumplir con AdSense.</p>
+                </div>
+            `;
+        }
+        return;
+    }
+    
     loadUserProfile();
     setupRealtimeListeners();
     renderProfilePage();
@@ -97,6 +112,7 @@ window.initProfile = function() {
 // Cargar perfil del usuario
 async function loadUserProfile() {
     try {
+        if (!auth) return; // Modo invitado
         const user = auth.currentUser;
         if (!user) return;
         
