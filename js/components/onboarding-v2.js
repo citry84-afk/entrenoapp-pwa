@@ -565,37 +565,46 @@ async function finishOnboarding() {
         // Si hay usuario autenticado, guardar en Firestore; si no, usar localStorage
         debugLog('FIRESTORE_START', 'Guardando datos en Firestore...');
         if (user) {
-            const userDoc = doc(db, 'users', user.uid);
-            const userSnap = await getDoc(userDoc);
-            debugLog('USER_DOC_CHECK', `Documento existe: ${userSnap.exists()}`);
-            const userData = {
-                onboarding: {
-                    completed: true,
-                    completedAt: serverTimestamp(),
-                    responses: onboardingState.userData
-                },
-                preferences: {
-                    ...getPreferencesFromOnboarding(onboardingState.userData),
-                    language: 'es',
-                    units: 'metric'
-                },
-                activePlan: personalizedPlan,
-                updatedAt: serverTimestamp()
-            };
-            if (userSnap.exists()) {
-                await updateDoc(userDoc, userData);
-            } else {
-                userData.createdAt = serverTimestamp();
-                userData.profile = {
-                    displayName: user.displayName || user.email.split('@')[0],
-                    email: user.email,
-                    photoURL: user.photoURL || null
+            try {
+                const userDoc = doc(db, 'users', user.uid);
+                const userSnap = await getDoc(userDoc);
+                debugLog('USER_DOC_CHECK', `Documento existe: ${userSnap.exists()}`);
+                const userData = {
+                    onboarding: {
+                        completed: true,
+                        completedAt: serverTimestamp(),
+                        responses: onboardingState.userData
+                    },
+                    preferences: {
+                        ...getPreferencesFromOnboarding(onboardingState.userData),
+                        language: 'es',
+                        units: 'metric'
+                    },
+                    activePlan: personalizedPlan,
+                    updatedAt: serverTimestamp()
                 };
-                userData.stats = { totalWorkouts: 0, currentStreak: 0, totalPoints: 0, completedChallenges: 0 };
-                await setDoc(userDoc, userData);
+                if (userSnap.exists()) {
+                    await updateDoc(userDoc, userData);
+                } else {
+                    userData.createdAt = serverTimestamp();
+                    userData.profile = {
+                        displayName: user.displayName || user.email.split('@')[0],
+                        email: user.email,
+                        photoURL: user.photoURL || null
+                    };
+                    userData.stats = { totalWorkouts: 0, currentStreak: 0, totalPoints: 0, completedChallenges: 0 };
+                    await setDoc(userDoc, userData);
+                }
+                debugLog('FIRESTORE_SUCCESS', 'Datos guardados en Firestore');
+                localStorage.setItem('entrenoapp_active_plan', JSON.stringify(personalizedPlan));
+            } catch (firestoreError) {
+                // Fallback silencioso: continuar en modo local para no romper la UX
+                debugLog('FIRESTORE_FAIL', 'Fallo guardando en Firestore, usando localStorage', {
+                    error: firestoreError.message
+                });
+                localStorage.setItem('entrenoapp_active_plan', JSON.stringify(personalizedPlan));
+                localStorage.setItem('entrenoapp_onboarding_complete', 'true');
             }
-            debugLog('FIRESTORE_SUCCESS', 'Datos guardados en Firestore');
-            localStorage.setItem('entrenoapp_active_plan', JSON.stringify(personalizedPlan));
         } else {
             // Modo invitado: solo localStorage
             localStorage.setItem('entrenoapp_active_plan', JSON.stringify(personalizedPlan));
