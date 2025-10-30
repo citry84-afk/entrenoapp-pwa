@@ -87,6 +87,7 @@ async function loadUserPlan() {
         // Si no hay plan activo, intentar siempre cargar desde localStorage
         if (!dashboardState.activePlan) {
             const savedPlan = localStorage.getItem('entrenoapp_active_plan');
+            try { console.log('🔎 Buscando plan en localStorage:', !!savedPlan); } catch(e) {}
             if (savedPlan) {
                 try {
                     const plan = JSON.parse(savedPlan);
@@ -94,6 +95,32 @@ async function loadUserPlan() {
                 } catch (error) {
                     console.error('❌ Error parsing plan guardado:', error);
                     localStorage.removeItem('entrenoapp_active_plan');
+                }
+            } else {
+                // Fallback: si el onboarding se marcó como completado pero no hay plan, crear uno básico
+                const onboardingDone = localStorage.getItem('entrenoapp_onboarding_complete') === 'true';
+                if (onboardingDone) {
+                    console.warn('⚠️ Onboarding completado pero sin plan guardado. Creando plan por defecto...');
+                    const defaultPlan = {
+                        type: 'functional',
+                        name: 'Plan Funcional Básico',
+                        description: 'Plan general de fitness funcional',
+                        duration: 8,
+                        frequency: 4,
+                        currentWeek: 1,
+                        currentSession: 1,
+                        status: 'active',
+                        startDate: new Date().toISOString(),
+                        sessionDuration: 45,
+                        metadata: { generatedAt: new Date().toISOString(), basedOnOnboarding: false }
+                    };
+                    try {
+                        localStorage.setItem('entrenoapp_active_plan', JSON.stringify(defaultPlan));
+                        dashboardState.activePlan = defaultPlan;
+                        console.log('✅ Plan por defecto creado y guardado en localStorage');
+                    } catch (e) {
+                        console.error('❌ No fue posible guardar el plan por defecto en localStorage:', e);
+                    }
                 }
             }
         }
