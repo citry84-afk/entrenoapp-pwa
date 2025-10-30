@@ -1490,6 +1490,7 @@ function renderQuickActions() {
 
 // Renderizar cuando no hay plan
 function renderNoPlan() {
+    const hasLocalPlan = !!localStorage.getItem('entrenoapp_active_plan');
     return `
         <div class="no-plan-state glass-card text-center">
             <div class="no-plan-icon mb-lg">📋</div>
@@ -1500,6 +1501,13 @@ function renderNoPlan() {
             <button class="glass-button glass-button-primary" onclick="window.restartOnboarding()">
                 🎯 Crear Mi Plan
             </button>
+            <div style="height:12px"></div>
+            <div class="text-secondary" style="font-size:.85rem; opacity:.7;">Modo invitado activo</div>
+            <div style="margin-top:8px; display:flex; gap:8px; justify-content:center; flex-wrap:wrap;">
+                <button class="glass-button glass-button-secondary btn-sm" onclick="window.debugCreateTestPlan()">⚡ Forzar plan de prueba</button>
+                <button class="glass-button glass-button-secondary btn-sm" onclick="window.debugShowPlanStatus()">🔎 Estado plan</button>
+            </div>
+            ${hasLocalPlan ? '<div class="text-secondary" style="margin-top:8px; font-size:.8rem;">Se detectó plan en localStorage, vuelve a cargar si no aparece.</div>' : ''}
         </div>
     `;
 }
@@ -1529,6 +1537,38 @@ function setupDashboardListeners() {
 }
 
 // Funciones globales para interacción
+window.debugCreateTestPlan = function() {
+    const testPlan = {
+        type: 'functional',
+        name: 'Plan Test (Temporal)',
+        description: 'Plan de prueba para validar UI',
+        duration: 8,
+        frequency: 4,
+        currentWeek: 1,
+        currentSession: 1,
+        status: 'active',
+        startDate: new Date().toISOString(),
+        sessionDuration: 45,
+        metadata: { generatedAt: new Date().toISOString(), basedOnOnboarding: true }
+    };
+    localStorage.setItem('entrenoapp_active_plan', JSON.stringify(testPlan));
+    renderDashboard();
+};
+
+window.debugShowPlanStatus = function() {
+    const saved = localStorage.getItem('entrenoapp_active_plan');
+    if (!saved) {
+        alert('No hay plan en localStorage');
+        return;
+    }
+    try {
+        const plan = JSON.parse(saved);
+        alert(`Plan detectado: ${plan.name} (${plan.type})`);
+    } catch (e) {
+        alert('Error leyendo plan en localStorage');
+    }
+};
+
 window.showPlanMenu = function() {
     const plan = dashboardState.activePlan;
     if (!plan) return;
