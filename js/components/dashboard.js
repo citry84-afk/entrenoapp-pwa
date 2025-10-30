@@ -55,39 +55,33 @@ async function loadUserPlan() {
     try {
         dashboardState.isLoading = true;
         
-        // Verificar que auth esté disponible
-        if (!auth) {
-            return;
-        }
-        
-        const user = auth.currentUser;
-        if (!user) {
-            return;
-        }
-        
-        dashboardState.user = user;
-        
-        // Cargar perfil y plan activo desde Firestore
-        const userDoc = doc(db, 'users', user.uid);
-        const userSnap = await getDoc(userDoc);
-        
-        if (userSnap.exists()) {
-            const userData = userSnap.data();
-            dashboardState.userProfile = userData;
-            dashboardState.activePlan = userData.activePlan;
+        // Intentar cargar desde Firestore solo si hay auth y usuario
+        if (auth && auth.currentUser) {
+            const user = auth.currentUser;
+            dashboardState.user = user;
             
-            // Verificar si el plan tiene sessionDuration, si no, agregarlo
-            if (dashboardState.activePlan && !dashboardState.activePlan.sessionDuration) {
-                dashboardState.activePlan.sessionDuration = getDefaultSessionDuration(dashboardState.activePlan);
-                console.log('🔄 Plan actualizado con sessionDuration:', dashboardState.activePlan.sessionDuration);
+            // Cargar perfil y plan activo desde Firestore
+            const userDoc = doc(db, 'users', user.uid);
+            const userSnap = await getDoc(userDoc);
+            
+            if (userSnap.exists()) {
+                const userData = userSnap.data();
+                dashboardState.userProfile = userData;
+                dashboardState.activePlan = userData.activePlan;
+                
+                // Verificar si el plan tiene sessionDuration, si no, agregarlo
+                if (dashboardState.activePlan && !dashboardState.activePlan.sessionDuration) {
+                    dashboardState.activePlan.sessionDuration = getDefaultSessionDuration(dashboardState.activePlan);
+                    console.log('🔄 Plan actualizado con sessionDuration:', dashboardState.activePlan.sessionDuration);
+                }
+                
+                dashboardState.quickStats = {
+                    completedWorkouts: userData.stats?.totalWorkouts || 0,
+                    currentStreak: userData.stats?.currentStreak || 0,
+                    totalPoints: userData.stats?.totalPoints || 0,
+                    nextMilestone: calculateNextMilestone(userData.stats?.totalPoints || 0)
+                };
             }
-            
-            dashboardState.quickStats = {
-                completedWorkouts: userData.stats?.totalWorkouts || 0,
-                currentStreak: userData.stats?.currentStreak || 0,
-                totalPoints: userData.stats?.totalPoints || 0,
-                nextMilestone: calculateNextMilestone(userData.stats?.totalPoints || 0)
-            };
         }
         
         // Si no hay plan activo, verificar localStorage (solo si viene del onboarding)
