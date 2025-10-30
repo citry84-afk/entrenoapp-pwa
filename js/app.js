@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (!hasActivePlan && !hasCompletedOnboarding) {
             navigateToPage('onboarding');
         } else {
-            navigateTo('dashboard');
+            navigateToPage('dashboard');
         }
         
         console.log('✅ EntrenoApp inicializada correctamente (Modo Guest para AdSense)');

@@ -84,22 +84,13 @@ async function loadUserPlan() {
             }
         }
         
-        // Si no hay plan activo, verificar localStorage (solo si viene del onboarding)
+        // Si no hay plan activo, intentar siempre cargar desde localStorage
         if (!dashboardState.activePlan) {
             const savedPlan = localStorage.getItem('entrenoapp_active_plan');
-            const onboardingData = localStorage.getItem('entrenoapp_onboarding');
-            
-            // Solo cargar plan guardado si viene de un onboarding completado recientemente
-            if (savedPlan && !onboardingData) {
+            if (savedPlan) {
                 try {
                     const plan = JSON.parse(savedPlan);
-                    // Verificar que el plan tenga metadatos válidos
-                    if (plan.metadata && plan.metadata.basedOnOnboarding) {
-                        dashboardState.activePlan = plan;
-                    } else {
-                        // Limpiar plan inválido
-                        localStorage.removeItem('entrenoapp_active_plan');
-                    }
+                    dashboardState.activePlan = plan;
                 } catch (error) {
                     console.error('❌ Error parsing plan guardado:', error);
                     localStorage.removeItem('entrenoapp_active_plan');
