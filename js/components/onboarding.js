@@ -459,22 +459,28 @@ async function finishOnboarding() {
     debugLog('FINISH_INIT', 'Iniciando finalización del onboarding...', onboardingState.userData);
     
     try {
-        // Verificar autenticación
-        if (!auth) {
-            throw new Error('Firebase auth no está disponible');
-        }
-        debugLog('AUTH_CHECK', 'Firebase auth disponible');
-        
-        const user = auth.currentUser;
-        if (!user) {
-            throw new Error('Usuario no autenticado');
-        }
-        debugLog('USER_AUTH', `Usuario autenticado: ${user.email}`);
-        
         // Generar plan personalizado automáticamente
         debugLog('PLAN_GENERATION_START', 'Generando plan personalizado...');
         const personalizedPlan = await generatePersonalizedPlan(onboardingState.userData);
         debugLog('PLAN_GENERATION_SUCCESS', 'Plan generado exitosamente', personalizedPlan);
+
+        // Si Auth está deshabilitado o no hay usuario, guardar localmente y continuar (modo invitado)
+        if (!auth || !auth.currentUser) {
+            debugLog('USER_GUEST', 'Sin autenticación: guardando plan en localStorage');
+            localStorage.setItem('entrenoapp_active_plan', JSON.stringify(personalizedPlan));
+            localStorage.removeItem('entrenoapp_onboarding');
+            localStorage.setItem('entrenoapp_onboarding_complete', 'true');
+            showSuccess(personalizedPlan);
+            setTimeout(() => {
+                if (window.navigateToPage) {
+                    window.navigateToPage('dashboard');
+                }
+            }, 1500);
+            return;
+        }
+        
+        const user = auth.currentUser;
+        debugLog('USER_AUTH', `Usuario autenticado: ${user.email}`);
         
         // Crear/actualizar perfil en Firestore
         debugLog('FIRESTORE_START', 'Guardando datos en Firestore...');
@@ -525,6 +531,7 @@ async function finishOnboarding() {
         
         // Guardar plan en localStorage para acceso rápido
         localStorage.setItem('entrenoapp_active_plan', JSON.stringify(personalizedPlan));
+        localStorage.setItem('entrenoapp_onboarding_complete', 'true');
         
         // Limpiar datos de onboarding de localStorage
         localStorage.removeItem('entrenoapp_onboarding');
