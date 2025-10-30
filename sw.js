@@ -1,4 +1,4 @@
-const CACHE_NAME = 'entrenoapp-v1.0.2';
+const CACHE_NAME = 'entrenoapp-v1.0.3';
 const ASSETS_TO_CACHE = [
     '/',
     '/index.html',
@@ -21,7 +21,6 @@ const ASSETS_TO_CACHE = [
     '/assets/icons/logo-custom.svg',
     '/assets/icons/icon-192x192.png',
     '/assets/icons/icon-512x512.png',
-    '/assets/icons/icon-144x144.png',
     '/assets/icons/apple-touch-icon.png',
     'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css',
     'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'
@@ -37,6 +36,11 @@ self.addEventListener('install', (event) => {
                 return cache.addAll(ASSETS_TO_CACHE);
             })
             .then(() => self.skipWaiting())
+            .catch((error) => {
+                // No bloquear la instalación si algún recurso falla (p.ej. iconos opcionales)
+                console.warn('Service Worker: Algunos recursos no se pudieron cachear:', error);
+                return self.skipWaiting();
+            })
     );
 });
 
