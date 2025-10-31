@@ -655,24 +655,78 @@ async function finishOnboarding() {
             });
         }
         
+        // RESCATE: Intentar generar y guardar plan de todos modos, incluso si hay error
+        try {
+            debugLog('RESCUE_START', 'Intentando rescate: generando plan de todos modos...');
+            const rescuePlan = await generatePersonalizedPlan(onboardingState.userData);
+            if (rescuePlan && typeof rescuePlan === 'object') {
+                localStorage.setItem('entrenoapp_active_plan', JSON.stringify(rescuePlan));
+                localStorage.setItem('entrenoapp_onboarding_complete', 'true');
+                localStorage.removeItem('entrenoapp_onboarding');
+                debugLog('RESCUE_SUCCESS', 'Plan rescatado y guardado exitosamente');
+                // Redirigir al dashboard en lugar de mostrar error
+                setTimeout(() => {
+                    if (window.navigateToPage) {
+                        window.navigateToPage('dashboard');
+                    } else {
+                        window.location.href = '#/dashboard';
+                    }
+                }, 1000);
+                return; // Salir sin mostrar error
+            }
+        } catch (rescueError) {
+            debugLog('RESCUE_FAIL', 'No se pudo rescatar el plan', rescueError);
+            // Continuar con el flujo de error normal
+        }
+        
         onboardingState.error = 'Error guardando tu perfil. Intenta de nuevo.';
         renderOnboardingContent();
         setupOnboardingListeners();
     } finally {
         onboardingState.isLoading = false;
         debugLog('FINISH_COMPLETE', 'Finalización completada (con éxito o error)');
-        // Garantizar que exista un plan en modo invitado
+        // Garantizar que exista un plan en modo invitado (última red de seguridad)
         try {
             const hasPlan = !!localStorage.getItem('entrenoapp_active_plan');
-            if (!hasPlan) {
+            if (!hasPlan && onboardingState.userData && Object.keys(onboardingState.userData).length > 0) {
+                // Intentar generar plan con datos del usuario primero
+                generatePersonalizedPlan(onboardingState.userData)
+                    .then(plan => {
+                        if (plan && typeof plan === 'object') {
+                            localStorage.setItem('entrenoapp_active_plan', JSON.stringify(plan));
+                            localStorage.setItem('entrenoapp_onboarding_complete', 'true');
+                            debugLog('FALLBACK_PLAN_CREATED', 'Plan personalizado creado en finally con datos del usuario');
+                            // Solo navegar si no se navegó ya antes
+                            setTimeout(() => {
+                                if (window.navigateToPage && window.location.hash !== '#/dashboard') {
+                                    window.navigateToPage('dashboard');
+                                }
+                            }, 500);
+                        } else {
+                            // Fallback a plan genérico si no se pudo generar con datos del usuario
+                            const fallbackPlan = generateDefaultPlan();
+                            localStorage.setItem('entrenoapp_active_plan', JSON.stringify(fallbackPlan));
+                            localStorage.setItem('entrenoapp_onboarding_complete', 'true');
+                            debugLog('FALLBACK_PLAN_CREATED', 'Plan genérico creado en finally');
+                        }
+                    })
+                    .catch(e => {
+                        console.warn('No se pudo generar plan en finally:', e);
+                        // Último recurso: plan genérico
+                        try {
+                            const fallbackPlan = generateDefaultPlan();
+                            localStorage.setItem('entrenoapp_active_plan', JSON.stringify(fallbackPlan));
+                            localStorage.setItem('entrenoapp_onboarding_complete', 'true');
+                        } catch (finalError) {
+                            console.error('Error crítico: no se pudo crear ningún plan', finalError);
+                        }
+                    });
+            } else if (!hasPlan) {
+                // Si no hay datos del usuario, generar plan genérico
                 const fallbackPlan = generateDefaultPlan();
                 localStorage.setItem('entrenoapp_active_plan', JSON.stringify(fallbackPlan));
                 localStorage.setItem('entrenoapp_onboarding_complete', 'true');
-                debugLog('FALLBACK_PLAN_CREATED', 'Plan por defecto creado tras finalizar');
-            }
-            // Navegar al dashboard si es posible
-            if (window.navigateToPage) {
-                window.navigateToPage('dashboard');
+                debugLog('FALLBACK_PLAN_CREATED', 'Plan genérico creado en finally (sin datos de usuario)');
             }
         } catch (e) {
             console.warn('No se pudo asegurar plan tras finalizar onboarding:', e);
