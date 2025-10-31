@@ -59,6 +59,29 @@ document.addEventListener('DOMContentLoaded', async () => {
         const hasActivePlan = !!localStorage.getItem('entrenoapp_active_plan');
         const hasCompletedOnboarding = localStorage.getItem('entrenoapp_onboarding_complete') === 'true';
 
+        // Rescate global: si onboarding completo pero sin plan, crear uno por defecto
+        if (!hasActivePlan && hasCompletedOnboarding) {
+            console.warn('⚠️ Onboarding completo pero sin plan. Creando plan por defecto (rescate global)...');
+            const defaultPlan = {
+                type: 'functional',
+                name: 'Plan Funcional Básico',
+                description: 'Plan general de fitness funcional',
+                duration: 8,
+                frequency: 4,
+                currentWeek: 1,
+                currentSession: 1,
+                status: 'active',
+                startDate: new Date().toISOString(),
+                sessionDuration: 45,
+                metadata: { generatedAt: new Date().toISOString(), basedOnOnboarding: false }
+            };
+            try {
+                localStorage.setItem('entrenoapp_active_plan', JSON.stringify(defaultPlan));
+            } catch (e) {
+                console.error('❌ No se pudo escribir el plan por defecto en localStorage:', e);
+            }
+        }
+
         hideLoadingScreen();
         if (!hasActivePlan && !hasCompletedOnboarding) {
             navigateToPage('onboarding');
