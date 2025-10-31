@@ -661,6 +661,22 @@ async function finishOnboarding() {
     } finally {
         onboardingState.isLoading = false;
         debugLog('FINISH_COMPLETE', 'Finalización completada (con éxito o error)');
+        // Garantizar que exista un plan en modo invitado
+        try {
+            const hasPlan = !!localStorage.getItem('entrenoapp_active_plan');
+            if (!hasPlan) {
+                const fallbackPlan = generateDefaultPlan();
+                localStorage.setItem('entrenoapp_active_plan', JSON.stringify(fallbackPlan));
+                localStorage.setItem('entrenoapp_onboarding_complete', 'true');
+                debugLog('FALLBACK_PLAN_CREATED', 'Plan por defecto creado tras finalizar');
+            }
+            // Navegar al dashboard si es posible
+            if (window.navigateToPage) {
+                window.navigateToPage('dashboard');
+            }
+        } catch (e) {
+            console.warn('No se pudo asegurar plan tras finalizar onboarding:', e);
+        }
     }
 }
 

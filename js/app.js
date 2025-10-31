@@ -700,6 +700,12 @@ window.navigateToPage = navigateToPage;
 window.navigateBack = navigateBack;
 window.appState = appState;
 
+// Compatibilidad: algunas versiones antiguas usan navigateTo
+// Creamos un alias seguro para evitar errores por JS cacheado
+try {
+    window.navigateTo = navigateToPage;
+} catch (e) {}
+
 // Función para mantener la pantalla encendida durante entrenamientos
 function keepScreenOn() {
     if ('wakeLock' in navigator) {
