@@ -750,6 +750,15 @@ function renderDashboard() {
             <!-- 4. Progreso de esta semana -->
             ${renderWeeklyProgress()}
             
+            <!-- 4.5. Calendario Mensual con Heat Map -->
+            ${renderMonthlyCalendar()}
+            
+            <!-- 4.6. Gráficos de Progreso -->
+            ${renderProgressCharts()}
+            
+            <!-- 4.7. Comparación Semana Anterior -->
+            ${renderWeekComparison()}
+            
             <!-- 5. Tu progreso (estadísticas rápidas) -->
             ${renderQuickStats()}
             
@@ -769,6 +778,11 @@ function renderDashboard() {
             ${renderLegalBlock()}
         </div>
     `;
+    
+    // Inicializar gráficos después de renderizar
+    setTimeout(() => {
+        initProgressCharts();
+    }, 100);
 }
 
 // Renderizar header personalizado
@@ -2784,6 +2798,501 @@ window.showAchievementCategory = function(category, achievements = null) {
             </div>
         </div>
     `).join('');
+}
+
+// ==========================================
+// MEJORAS FASE 1: Calendario Mensual con Heat Map
+// ==========================================
+
+function renderMonthlyCalendar() {
+    const plan = dashboardState.activePlan;
+    if (!plan) return '';
+    
+    // Obtener datos de entrenamientos del mes actual
+    const workoutData = getMonthlyWorkoutData();
+    const today = new Date();
+    const firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
+    const lastDay = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+    const daysInMonth = lastDay.getDate();
+    const startDayOfWeek = firstDay.getDay(); // 0 = Domingo
+    
+    const monthNames = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 
+                      'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+    
+    return `
+        <div class="monthly-calendar-card glass-card mb-lg">
+            <div class="calendar-header">
+                <h3 class="calendar-title">🔥 Calendario de Actividad</h3>
+                <div class="calendar-month">${monthNames[today.getMonth()]} ${today.getFullYear()}</div>
+            </div>
+            
+            <div class="heat-map-legend mb-md">
+                <span class="legend-label">Menos</span>
+                <div class="legend-colors">
+                    <div class="legend-color" style="background: #ebedf0;"></div>
+                    <div class="legend-color" style="background: #c6e48b;"></div>
+                    <div class="legend-color" style="background: #7bc96f;"></div>
+                    <div class="legend-color" style="background: #239a3b;"></div>
+                    <div class="legend-color" style="background: #196127;"></div>
+                </div>
+                <span class="legend-label">Más</span>
+            </div>
+            
+            <div class="monthly-calendar-grid">
+                ${['L', 'M', 'X', 'J', 'V', 'S', 'D'].map(day => 
+                    `<div class="calendar-weekday">${day}</div>`
+                ).join('')}
+                
+                ${Array(startDayOfWeek === 0 ? 6 : (startDayOfWeek === 1 ? 0 : startDayOfWeek - 1)).fill(null).map(() => 
+                    `<div class="calendar-day empty"></div>`
+                ).join('')}
+                
+                ${Array.from({ length: daysInMonth }, (_, i) => {
+                    const day = i + 1;
+                    const date = new Date(today.getFullYear(), today.getMonth(), day);
+                    const dateKey = date.toISOString().split('T')[0];
+                    const workoutCount = workoutData[dateKey] || 0;
+                    const isToday = day === today.getDate();
+                    const isPast = date < today && date.toDateString() !== today.toDateString();
+                    
+                    // Calcular intensidad del color (0-4)
+                    let intensity = 0;
+                    if (workoutCount > 0) {
+                        intensity = Math.min(4, workoutCount); // Máximo 4 entrenamientos = verde muy oscuro
+                    }
+                    
+                    const intensityColors = [
+                        '#ebedf0', // Gris claro (sin entrenamientos)
+                        '#c6e48b', // Verde muy claro (1 entrenamiento)
+                        '#7bc96f', // Verde claro (2 entrenamientos)
+                        '#239a3b', // Verde medio (3 entrenamientos)
+                        '#196127'  // Verde oscuro (4+ entrenamientos)
+                    ];
+                    
+                    return `
+                        <div class="calendar-day ${isToday ? 'today' : ''} ${isPast && workoutCount > 0 ? 'completed' : ''}" 
+                             style="background-color: ${intensityColors[intensity]};"
+                             title="${day} ${monthNames[today.getMonth()]}: ${workoutCount} ${workoutCount === 1 ? 'entrenamiento' : 'entrenamientos'}">
+                            <span class="day-number">${day}</span>
+                            ${workoutCount > 0 ? `<span class="workout-count">${workoutCount}</span>` : ''}
+                        </div>
+                    `;
+                }).join('')}
+            </div>
+            
+            <div class="calendar-stats mt-md">
+                <div class="calendar-stat">
+                    <span class="stat-value">${Object.values(workoutData).reduce((a, b) => a + b, 0)}</span>
+                    <span class="stat-label">Entrenamientos este mes</span>
+                </div>
+                <div class="calendar-stat">
+                    <span class="stat-value">${getCurrentStreak(workoutData)}</span>
+                    <span class="stat-label">Racha actual</span>
+                </div>
+                <div class="calendar-stat">
+                    <span class="stat-value">${getBestStreak(workoutData)}</span>
+                    <span class="stat-label">Mejor racha</span>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// Obtener datos de entrenamientos del mes actual desde localStorage
+function getMonthlyWorkoutData() {
+    const today = new Date();
+    const firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
+    const lastDay = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+    
+    const workoutData = {};
+    const completedDays = JSON.parse(localStorage.getItem('entrenoapp_completed_days') || '[]');
+    const completedWorkouts = JSON.parse(localStorage.getItem('entrenoapp_completed_workouts') || '[]');
+    
+    // Contar entrenamientos por día
+    completedWorkouts.forEach(workout => {
+        if (workout.date) {
+            const workoutDate = new Date(workout.date);
+            if (workoutDate >= firstDay && workoutDate <= lastDay) {
+                const dateKey = workoutDate.toISOString().split('T')[0];
+                workoutData[dateKey] = (workoutData[dateKey] || 0) + 1;
+            }
+        }
+    });
+    
+    // También contar días completados
+    completedDays.forEach(dateKey => {
+        const date = new Date(dateKey);
+        if (date >= firstDay && date <= lastDay) {
+            if (!workoutData[dateKey]) {
+                workoutData[dateKey] = 1;
+            }
+        }
+    });
+    
+    return workoutData;
+}
+
+// Calcular racha actual
+function getCurrentStreak(workoutData) {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    
+    let streak = 0;
+    let currentDate = new Date(today);
+    
+    // Contar hacia atrás desde hoy
+    while (true) {
+        const dateKey = currentDate.toISOString().split('T')[0];
+        if (workoutData[dateKey] && workoutData[dateKey] > 0) {
+            streak++;
+            currentDate.setDate(currentDate.getDate() - 1);
+        } else {
+            break;
+        }
+    }
+    
+    return streak;
+}
+
+// Calcular mejor racha del mes
+function getBestStreak(workoutData) {
+    const today = new Date();
+    const firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
+    const lastDay = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+    
+    let bestStreak = 0;
+    let currentStreak = 0;
+    
+    for (let day = 1; day <= lastDay.getDate(); day++) {
+        const date = new Date(today.getFullYear(), today.getMonth(), day);
+        const dateKey = date.toISOString().split('T')[0];
+        
+        if (workoutData[dateKey] && workoutData[dateKey] > 0) {
+            currentStreak++;
+            bestStreak = Math.max(bestStreak, currentStreak);
+        } else {
+            currentStreak = 0;
+        }
+    }
+    
+    return bestStreak;
+}
+
+// ==========================================
+// MEJORAS FASE 1: Gráficos de Progreso
+// ==========================================
+
+function renderProgressCharts() {
+    const plan = dashboardState.activePlan;
+    if (!plan) return '';
+    
+    // Obtener datos de las últimas 4 semanas
+    const weeklyData = getWeeklyProgressData(4);
+    
+    return `
+        <div class="progress-charts-card glass-card mb-lg">
+            <div class="charts-header">
+                <h3 class="charts-title">📈 Tu Progreso</h3>
+                <div class="charts-subtitle">Últimas 4 semanas</div>
+            </div>
+            
+            <div class="charts-container">
+                <div class="chart-wrapper">
+                    <canvas id="weeklyWorkoutsChart" class="progress-chart"></canvas>
+                </div>
+                
+                <div class="chart-wrapper">
+                    <canvas id="weeklyMinutesChart" class="progress-chart"></canvas>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// Obtener datos de progreso semanal
+function getWeeklyProgressData(weeksCount = 4) {
+    const today = new Date();
+    const data = {
+        weeks: [],
+        workouts: [],
+        minutes: []
+    };
+    
+    // Obtener entrenamientos completados
+    const completedWorkouts = JSON.parse(localStorage.getItem('entrenoapp_completed_workouts') || '[]');
+    
+    // Calcular datos para cada semana
+    for (let i = weeksCount - 1; i >= 0; i--) {
+        const weekStart = new Date(today);
+        weekStart.setDate(today.getDate() - (today.getDay() - 1) - (i * 7));
+        weekStart.setHours(0, 0, 0, 0);
+        
+        const weekEnd = new Date(weekStart);
+        weekEnd.setDate(weekStart.getDate() + 6);
+        weekEnd.setHours(23, 59, 59, 999);
+        
+        const weekWorkouts = completedWorkouts.filter(workout => {
+            if (!workout.date) return false;
+            const workoutDate = new Date(workout.date);
+            return workoutDate >= weekStart && workoutDate <= weekEnd;
+        });
+        
+        const weekMinutes = weekWorkouts.reduce((total, workout) => {
+            return total + (workout.duration || 0);
+        }, 0);
+        
+        data.weeks.push(`Sem ${weeksCount - i}`);
+        data.workouts.push(weekWorkouts.length);
+        data.minutes.push(weekMinutes);
+    }
+    
+    return data;
+}
+
+// Inicializar gráficos después de renderizar el dashboard
+function initProgressCharts() {
+    if (typeof Chart === 'undefined') {
+        console.warn('Chart.js no está cargado');
+        return;
+    }
+    
+    const weeklyData = getWeeklyProgressData(4);
+    
+    // Gráfico de entrenamientos semanales
+    const workoutsCtx = document.getElementById('weeklyWorkoutsChart');
+    if (workoutsCtx) {
+        new Chart(workoutsCtx, {
+            type: 'line',
+            data: {
+                labels: weeklyData.weeks,
+                datasets: [{
+                    label: 'Entrenamientos',
+                    data: weeklyData.workouts,
+                    borderColor: '#667eea',
+                    backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                    tension: 0.4,
+                    fill: true,
+                    pointRadius: 5,
+                    pointHoverRadius: 7,
+                    pointBackgroundColor: '#667eea',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    title: {
+                        display: true,
+                        text: 'Entrenamientos por Semana',
+                        color: '#667eea',
+                        font: {
+                            size: 14,
+                            weight: 'bold'
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+    }
+    
+    // Gráfico de minutos semanales
+    const minutesCtx = document.getElementById('weeklyMinutesChart');
+    if (minutesCtx) {
+        new Chart(minutesCtx, {
+            type: 'bar',
+            data: {
+                labels: weeklyData.weeks,
+                datasets: [{
+                    label: 'Minutos',
+                    data: weeklyData.minutes,
+                    backgroundColor: 'rgba(102, 126, 234, 0.6)',
+                    borderColor: '#667eea',
+                    borderWidth: 2,
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    title: {
+                        display: true,
+                        text: 'Minutos de Entrenamiento',
+                        color: '#667eea',
+                        font: {
+                            size: 14,
+                            weight: 'bold'
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+    }
+}
+
+// ==========================================
+// MEJORAS FASE 1: Comparación Semana Anterior
+// ==========================================
+
+function renderWeekComparison() {
+    const plan = dashboardState.activePlan;
+    if (!plan) return '';
+    
+    const comparison = getWeekComparison();
+    
+    if (!comparison.hasData) {
+        return ''; // No mostrar si no hay datos suficientes
+    }
+    
+    const workoutsDiff = comparison.current.workouts - comparison.previous.workouts;
+    const minutesDiff = comparison.current.minutes - comparison.previous.minutes;
+    const workoutsPercent = comparison.previous.workouts > 0 
+        ? Math.round((workoutsDiff / comparison.previous.workouts) * 100)
+        : comparison.current.workouts > 0 ? 100 : 0;
+    const minutesPercent = comparison.previous.minutes > 0
+        ? Math.round((minutesDiff / comparison.previous.minutes) * 100)
+        : comparison.current.minutes > 0 ? 100 : 0;
+    
+    return `
+        <div class="week-comparison-card glass-card mb-lg">
+            <div class="comparison-header">
+                <h3 class="comparison-title">⚖️ Comparación Semanal</h3>
+                <div class="comparison-subtitle">Esta semana vs Semana anterior</div>
+            </div>
+            
+            <div class="comparison-grid">
+                <div class="comparison-item">
+                    <div class="comparison-label">Entrenamientos</div>
+                    <div class="comparison-values">
+                        <div class="comparison-value">
+                            <span class="value-current">${comparison.current.workouts}</span>
+                            <span class="value-label">Esta semana</span>
+                        </div>
+                        <div class="comparison-arrow ${workoutsDiff >= 0 ? 'positive' : 'negative'}">
+                            ${workoutsDiff >= 0 ? '↑' : '↓'}
+                        </div>
+                        <div class="comparison-value">
+                            <span class="value-previous">${comparison.previous.workouts}</span>
+                            <span class="value-label">Semana anterior</span>
+                        </div>
+                    </div>
+                    <div class="comparison-change ${workoutsDiff >= 0 ? 'positive' : 'negative'}">
+                        ${workoutsDiff >= 0 ? '+' : ''}${workoutsDiff} entrenamientos
+                        ${workoutsPercent !== 0 ? `(${workoutsDiff >= 0 ? '+' : ''}${workoutsPercent}%)` : ''}
+                    </div>
+                </div>
+                
+                <div class="comparison-item">
+                    <div class="comparison-label">Minutos de entrenamiento</div>
+                    <div class="comparison-values">
+                        <div class="comparison-value">
+                            <span class="value-current">${comparison.current.minutes}</span>
+                            <span class="value-label">Esta semana</span>
+                        </div>
+                        <div class="comparison-arrow ${minutesDiff >= 0 ? 'positive' : 'negative'}">
+                            ${minutesDiff >= 0 ? '↑' : '↓'}
+                        </div>
+                        <div class="comparison-value">
+                            <span class="value-previous">${comparison.previous.minutes}</span>
+                            <span class="value-label">Semana anterior</span>
+                        </div>
+                    </div>
+                    <div class="comparison-change ${minutesDiff >= 0 ? 'positive' : 'negative'}">
+                        ${minutesDiff >= 0 ? '+' : ''}${minutesDiff} minutos
+                        ${minutesPercent !== 0 ? `(${minutesDiff >= 0 ? '+' : ''}${minutesPercent}%)` : ''}
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// Obtener datos de comparación entre semana actual y anterior
+function getWeekComparison() {
+    const today = new Date();
+    
+    // Semana actual (lunes a domingo)
+    const currentWeekStart = new Date(today);
+    currentWeekStart.setDate(today.getDate() - (today.getDay() - 1));
+    currentWeekStart.setHours(0, 0, 0, 0);
+    
+    const currentWeekEnd = new Date(currentWeekStart);
+    currentWeekEnd.setDate(currentWeekStart.getDate() + 6);
+    currentWeekEnd.setHours(23, 59, 59, 999);
+    
+    // Semana anterior
+    const previousWeekStart = new Date(currentWeekStart);
+    previousWeekStart.setDate(currentWeekStart.getDate() - 7);
+    
+    const previousWeekEnd = new Date(previousWeekStart);
+    previousWeekEnd.setDate(previousWeekStart.getDate() + 6);
+    previousWeekEnd.setHours(23, 59, 59, 999);
+    
+    const completedWorkouts = JSON.parse(localStorage.getItem('entrenoapp_completed_workouts') || '[]');
+    
+    const currentWorkouts = completedWorkouts.filter(workout => {
+        if (!workout.date) return false;
+        const workoutDate = new Date(workout.date);
+        return workoutDate >= currentWeekStart && workoutDate <= currentWeekEnd;
+    });
+    
+    const previousWorkouts = completedWorkouts.filter(workout => {
+        if (!workout.date) return false;
+        const workoutDate = new Date(workout.date);
+        return workoutDate >= previousWeekStart && workoutDate <= previousWeekEnd;
+    });
+    
+    const currentMinutes = currentWorkouts.reduce((total, workout) => total + (workout.duration || 0), 0);
+    const previousMinutes = previousWorkouts.reduce((total, workout) => total + (workout.duration || 0), 0);
+    
+    return {
+        hasData: currentWorkouts.length > 0 || previousWorkouts.length > 0,
+        current: {
+            workouts: currentWorkouts.length,
+            minutes: currentMinutes
+        },
+        previous: {
+            workouts: previousWorkouts.length,
+            minutes: previousMinutes
+        }
+    };
 }
 
 
