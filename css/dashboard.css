@@ -842,7 +842,189 @@
     }
 }
 
-/* Responsive específico para calendario */
+/* Responsive específico para plan semanal */
+@media (max-width: 768px) {
+    .weekly-plan-card {
+        padding: 1rem;
+        overflow-x: hidden;
+    }
+    
+    .weekly-plan-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .weekly-plan-title {
+        font-size: 1.25rem;
+    }
+    
+    .weekly-progress-text {
+        font-size: 0.85rem;
+    }
+    
+    .weekly-calendar {
+        gap: 0.4rem;
+    }
+    
+    .week-day-card {
+        padding: 0.5rem;
+        min-height: 90px;
+        border-radius: 10px;
+    }
+    
+    .day-header {
+        margin-bottom: 0.4rem;
+    }
+    
+    .day-name {
+        font-size: 0.7rem;
+    }
+    
+    .day-number {
+        font-size: 1.1rem;
+    }
+    
+    .day-workout-icon {
+        font-size: 1.5rem;
+    }
+    
+    .day-workout-type {
+        font-size: 0.75rem;
+    }
+    
+    .day-workout-duration {
+        font-size: 0.65rem;
+    }
+    
+    .day-rest {
+        font-size: 1.5rem;
+    }
+    
+    .day-rest-label {
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .weekly-plan-card {
+        padding: 0.75rem;
+        margin: 0 -0.5rem;
+        border-radius: 0;
+    }
+    
+    .weekly-plan-header {
+        margin-bottom: 0.75rem;
+    }
+    
+    .weekly-plan-title {
+        font-size: 1.125rem;
+    }
+    
+    .weekly-progress-text {
+        font-size: 0.8rem;
+    }
+    
+    .weekly-calendar {
+        gap: 0.35rem;
+        margin-top: 0.75rem;
+    }
+    
+    .week-day-card {
+        padding: 0.5rem 0.4rem;
+        min-height: 85px;
+        border-radius: 8px;
+        border-width: 1.5px;
+    }
+    
+    .week-day-card.today {
+        border-width: 2px;
+    }
+    
+    .day-header {
+        margin-bottom: 0.35rem;
+        gap: 0.2rem;
+    }
+    
+    .day-name {
+        font-size: 0.65rem;
+        font-weight: 700;
+    }
+    
+    .day-number {
+        font-size: 1rem;
+        font-weight: 700;
+    }
+    
+    .day-content {
+        gap: 0.35rem;
+    }
+    
+    .day-workout-icon {
+        font-size: 1.25rem;
+        margin-bottom: 0.15rem;
+    }
+    
+    .day-workout-type {
+        font-size: 0.7rem;
+        font-weight: 600;
+        line-height: 1.2;
+    }
+    
+    .day-workout-duration {
+        font-size: 0.6rem;
+    }
+    
+    .day-rest {
+        font-size: 1.25rem;
+    }
+    
+    .day-rest-label {
+        font-size: 0.65rem;
+        line-height: 1.2;
+    }
+    
+    .today-badge,
+    .completed-badge {
+        font-size: 0.7rem;
+        padding: 0.15rem 0.35rem;
+        border-radius: 6px;
+    }
+}
+
+@media (max-width: 360px) {
+    .weekly-calendar {
+        gap: 0.3rem;
+    }
+    
+    .week-day-card {
+        padding: 0.4rem 0.3rem;
+        min-height: 80px;
+        border-radius: 6px;
+    }
+    
+    .day-name {
+        font-size: 0.6rem;
+    }
+    
+    .day-number {
+        font-size: 0.95rem;
+    }
+    
+    .day-workout-icon {
+        font-size: 1.15rem;
+    }
+    
+    .day-workout-type {
+        font-size: 0.65rem;
+    }
+    
+    .day-rest {
+        font-size: 1.15rem;
+    }
+}
+
+/* Responsive específico para calendario mensual */
 @media (max-width: 768px) {
     .monthly-calendar-card {
         padding: 1rem;
@@ -1561,8 +1743,10 @@
 .weekly-calendar {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 0.75rem;
+    gap: 0.5rem;
     margin-top: 1rem;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .week-day-card {
@@ -1578,11 +1762,18 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    box-sizing: border-box;
+    min-width: 0;
+    overflow: hidden;
 }
 
 .week-day-card:hover {
     background: rgba(255, 255, 255, 0.1);
     transform: translateY(-2px);
+}
+
+.week-day-card:active {
+    transform: scale(0.95);
 }
 
 .week-day-card.today {
