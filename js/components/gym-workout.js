@@ -561,8 +561,29 @@ async function saveGymWorkout() {
             workoutData: gymWorkoutState.workoutData
         }));
         
-        // Mostrar mensaje de éxito
-        alert('¡Entrenamiento guardado exitosamente! 🎉');
+        // Trackear entrenamiento para gráficos y estadísticas
+        if (window.trackWorkoutCompletion) {
+            const duration = gymWorkoutState.totalTime || 45;
+            const totalVolume = gymWorkoutState.completedExercises?.reduce((sum, ex) => {
+                return sum + (ex.sets?.reduce((s, set) => s + (set.weight || 0) * (set.reps || 0), 0) || 0);
+            }, 0) || 0;
+            
+            window.trackWorkoutCompletion({
+                type: 'gym',
+                duration: Math.floor(duration / 60), // Convertir a minutos
+                exercises: gymWorkoutState.completedExercises || [],
+                muscleGroups: gymWorkoutState.workoutData.muscleGroups || [],
+                totalVolume: totalVolume,
+                notes: notes
+            });
+        }
+        
+        // Mostrar mensaje de éxito con celebración
+        if (window.showWorkoutCompletion) {
+            window.showWorkoutCompletion('¡Entrenamiento guardado exitosamente! 🎉');
+        } else {
+            alert('¡Entrenamiento guardado exitosamente! 🎉');
+        }
         
         // Mostrar anuncio intersticial
         if (window.adsManager) {

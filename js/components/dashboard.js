@@ -1,5 +1,6 @@
 // Dashboard centrado en planificación personalizada para EntrenoApp
 import { auth, db } from '../config/firebase-config.js';
+// Nota: workout-tracker y celebration se cargan como módulos separados en app.html
 import { 
     doc, 
     getDoc,
@@ -1351,30 +1352,71 @@ function renderTodayChallenge() {
     `;
 }
 
-// Renderizar estadísticas rápidas
+// Renderizar estadísticas rápidas (MEJORADO - Fase 2)
 function renderQuickStats() {
     const stats = dashboardState.quickStats;
     
+    // Intentar obtener estadísticas actualizadas del tracker
+    let enhancedStats = stats;
+    try {
+        if (window.getUserStats && typeof window.getUserStats === 'function') {
+            const userStats = window.getUserStats();
+            enhancedStats = {
+                ...stats,
+                totalMinutes: userStats.totalMinutes || 0,
+                totalVolume: userStats.totalVolume || 0,
+                averagePerWeek: userStats.averagePerWeek || 0,
+                bestStreak: userStats.bestStreak || 0
+            };
+        }
+    } catch (e) {
+        console.warn('⚠️ No se pudieron obtener estadísticas mejoradas:', e);
+    }
+    
     return `
-        <div class="quick-stats glass-card">
-            <h3 class="stats-title">📈 Tu Progreso</h3>
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <div class="stat-value">${stats.completedWorkouts}</div>
-                    <div class="stat-label">Entrenamientos</div>
+        <div class="quick-stats glass-card enhanced-stats-card">
+            <div class="stats-header-enhanced">
+                <h3 class="stats-title">📈 Tu Progreso</h3>
+                <div class="stats-subtitle">Resumen de tu actividad</div>
+            </div>
+            <div class="stats-grid enhanced">
+                <div class="stat-item-enhanced">
+                    <div class="stat-icon-enhanced">🏋️‍♂️</div>
+                    <div class="stat-content-enhanced">
+                        <div class="stat-value-enhanced">${enhancedStats.completedWorkouts || 0}</div>
+                        <div class="stat-label-enhanced">Entrenamientos</div>
+                        ${enhancedStats.averagePerWeek ? `
+                            <div class="stat-subtitle-enhanced">${enhancedStats.averagePerWeek}/semana</div>
+                        ` : ''}
+                    </div>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-value">${stats.currentStreak}</div>
-                    <div class="stat-label">Racha</div>
+                <div class="stat-item-enhanced streak-item">
+                    <div class="stat-icon-enhanced fire">🔥</div>
+                    <div class="stat-content-enhanced">
+                        <div class="stat-value-enhanced streak-value">${enhancedStats.currentStreak || 0}</div>
+                        <div class="stat-label-enhanced">Días de racha</div>
+                        ${enhancedStats.bestStreak ? `
+                            <div class="stat-subtitle-enhanced">Mejor: ${enhancedStats.bestStreak} días</div>
+                        ` : ''}
+                    </div>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-value">${stats.totalPoints}</div>
-                    <div class="stat-label">Puntos</div>
+                <div class="stat-item-enhanced">
+                    <div class="stat-icon-enhanced">⭐</div>
+                    <div class="stat-content-enhanced">
+                        <div class="stat-value-enhanced">${enhancedStats.totalPoints || 0}</div>
+                        <div class="stat-label-enhanced">Puntos</div>
+                        ${enhancedStats.nextMilestone ? `
+                            <div class="stat-subtitle-enhanced">Hito: ${enhancedStats.nextMilestone}</div>
+                        ` : ''}
+                    </div>
                 </div>
-                ${stats.nextMilestone ? `
-                    <div class="stat-item">
-                        <div class="stat-value">${stats.nextMilestone}</div>
-                        <div class="stat-label">Próximo hito</div>
+                ${enhancedStats.totalMinutes ? `
+                    <div class="stat-item-enhanced">
+                        <div class="stat-icon-enhanced">⏱️</div>
+                        <div class="stat-content-enhanced">
+                            <div class="stat-value-enhanced">${Math.round(enhancedStats.totalMinutes)}</div>
+                            <div class="stat-label-enhanced">Minutos totales</div>
+                        </div>
                     </div>
                 ` : ''}
             </div>
