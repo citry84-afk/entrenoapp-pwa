@@ -1867,29 +1867,6 @@
     justify-content: center;
 }
 
-@media (max-width: 768px) {
-    .weekly-calendar {
-        gap: 0.5rem;
-    }
-    
-    .week-day-card {
-        min-height: 80px;
-        padding: 0.5rem;
-    }
-    
-    .day-workout-icon {
-        font-size: 1.5rem;
-    }
-    
-    .day-workout-type {
-        font-size: 0.75rem;
-    }
-    
-    .today-badge {
-        font-size: 0.6rem;
-        padding: 0.2rem 0.4rem;
-    }
-}
 
 /* ===================================
    BOTÓN CON TEMPORIZADOR
