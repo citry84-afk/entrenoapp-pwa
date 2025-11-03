@@ -73,7 +73,12 @@
 
 [[redirects]]
   from = "/index.html"
-  to = "/home.html"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/home.html"
+  to = "/"
   status = 301
 
 [[redirects]]
@@ -90,3 +95,28 @@
   from = "/contact"
   to = "/contact.html"
   status = 301
+
+# Canonical domain: force https + apex
+[[redirects]]
+  from = "http://entrenoapp.com/*"
+  to = "https://entrenoapp.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.entrenoapp.com/*"
+  to = "https://entrenoapp.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.entrenoapp.com/*"
+  to = "https://entrenoapp.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://entrenoapp.netlify.app/*"
+  to = "https://entrenoapp.com/:splat"
+  status = 301
+  force = true
