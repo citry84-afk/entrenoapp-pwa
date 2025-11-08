@@ -714,6 +714,93 @@ function calculateNextMilestone(currentPoints) {
     return nextMilestone || null;
 }
 
+function getMilestoneProgressMeta(points = 0) {
+    const milestones = [0, 100, 250, 500, 1000, 2500, 5000, 10000];
+    let previous = 0;
+    let next = milestones.find(milestone => milestone > points);
+
+    if (next !== undefined) {
+        const index = milestones.indexOf(next);
+        previous = index > 0 ? milestones[index - 1] : 0;
+    } else {
+        const step = 2500;
+        previous = milestones[milestones.length - 1];
+        while (points >= previous + step) {
+            previous += step;
+        }
+        next = previous + step;
+    }
+
+    const range = Math.max(next - previous, 1);
+    const progress = Math.max(0, Math.min(((points - previous) / range) * 100, 100));
+
+    return {
+        previous,
+        next,
+        progress
+    };
+}
+
+function buildGamificationBadges(stats = {}) {
+    const totalWorkouts = stats.completedWorkouts || 0;
+    const points = stats.totalPoints || 0;
+    const streak = stats.currentStreak || 0;
+    const bestStreak = stats.bestStreak || streak;
+    const averagePerWeek = stats.averagePerWeek || 0;
+
+    const badges = [
+        {
+            id: 'starter',
+            icon: '🚀',
+            title: 'Primer Sprint',
+            requirement: 'Completa tu primer entrenamiento',
+            unlocked: totalWorkouts >= 1,
+            progress: Math.min(totalWorkouts / 1, 1)
+        },
+        {
+            id: 'consistency7',
+            icon: '📆',
+            title: 'Constancia 7',
+            requirement: 'Mantén una racha de 7 días',
+            unlocked: bestStreak >= 7,
+            progress: Math.min((bestStreak || streak) / 7, 1)
+        },
+        {
+            id: 'points500',
+            icon: '💎',
+            title: 'Coleccionista 500',
+            requirement: 'Consigue 500 puntos',
+            unlocked: points >= 500,
+            progress: Math.min(points / 500, 1)
+        },
+        {
+            id: 'athlete50',
+            icon: '🏆',
+            title: 'Atleta 50',
+            requirement: '50 entrenamientos completados',
+            unlocked: totalWorkouts >= 50,
+            progress: Math.min(totalWorkouts / 50, 1)
+        },
+        {
+            id: 'weeklyWarrior',
+            icon: '🔥',
+            title: 'Semana Élite',
+            requirement: 'Haz 5 entrenamientos en una semana',
+            unlocked: averagePerWeek >= 5,
+            progress: Math.min(averagePerWeek / 5, 1)
+        }
+    ];
+
+    const highlightIndex = badges.findIndex(badge => badge.unlocked);
+    if (highlightIndex >= 0) {
+        badges[highlightIndex].highlight = true;
+    } else if (badges.length > 0) {
+        badges[0].highlight = true;
+    }
+
+    return badges;
+}
+
 // Renderizar dashboard
 function renderDashboard() {
     const container = document.querySelector('.dashboard-container');
@@ -738,7 +825,7 @@ function renderDashboard() {
         <button class="back-button" onclick="window.navigateBack()" title="Atrás">
             ←
         </button>
-        <div class="personalized-dashboard glass-fade-in">
+        <div class="personalized-dashboard glass-fade-in ui-stack ui-stack--lg ui-shell-content">
             <!-- 1. Bienvenida -->
             ${renderPersonalizedHeader()}
             
@@ -762,6 +849,9 @@ function renderDashboard() {
             
             <!-- 5. Tu progreso (estadísticas rápidas) -->
             ${renderQuickStats()}
+            
+            <!-- 5.1 Gamificación y badges -->
+            ${renderGamificationHub()}
             
             <!-- 6. Tus estadísticas (estadísticas detalladas) -->
             ${renderDetailedStats()}
@@ -790,29 +880,73 @@ function renderDashboard() {
 function renderPersonalizedHeader() {
     const user = dashboardState.userProfile;
     const plan = dashboardState.activePlan;
+    const stats = dashboardState.quickStats || {};
+    const weekProgress = Math.round(dashboardState.weekProgress || 0);
+    const streak = stats.currentStreak || 0;
+    const todayLabel = new Date().toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' });
+    const planLabel = getActivityLabel(plan.type);
     
     return `
-        <div class="personalized-header glass-card mb-lg">
-            <div class="header-content">
-                <div class="user-welcome">
-                    <h1 class="welcome-title">
-                        ¡Hola, ${user?.displayName || 'Atleta'}! 👋
-                    </h1>
-                    <p class="motivational-message">${dashboardState.motivationalMessage}</p>
+        <section class="dashboard-hero ui-card ui-hero-gradient ui-tilt">
+            <div class="dashboard-hero__top">
+                <div class="dashboard-hero__meta">
+                    <span class="ui-eyebrow">${todayLabel}</span>
+                    <span class="ui-chip ui-chip--glow">
+                        <span class="chip-icon">${getPlanIcon(plan.type)}</span>
+                        ${planLabel}
+                    </span>
+                    <span class="ui-chip">
+                        Semana ${plan.currentWeek || 1}/${plan.duration}
+                    </span>
                 </div>
-                <div class="plan-info">
-                    <div class="active-plan-badge">
-                        <span class="plan-icon">${getPlanIcon(plan.type)}</span>
-                        <div class="plan-details">
-                            <div class="plan-name">${plan.name}</div>
-                            <div class="plan-progress">
-                                Semana ${plan.currentWeek || 1} de ${plan.duration}
-                            </div>
-                        </div>
+                <div class="dashboard-hero__actions">
+                    <button class="ui-icon-button" onclick="window.showPlanMenu()" title="Gestionar plan">
+                        ⚙️
+                    </button>
+                </div>
+            </div>
+
+            <div class="dashboard-hero__headline">
+                <h1 class="ui-heading-xl">Hola, ${user?.displayName || 'Atleta'} 👋</h1>
+                <p class="dashboard-hero__message ui-text-subtle">${dashboardState.motivationalMessage}</p>
+            </div>
+
+            <div class="dashboard-hero__chips">
+                <span class="ui-chip">
+                    🎯 ${plan.name}
+                </span>
+                <span class="ui-chip">
+                    🔥 Racha: ${streak} días
+                </span>
+                <span class="ui-chip">
+                    ⏱️ ${plan.sessionDuration || 45} min sesión
+                </span>
+            </div>
+
+            <div class="dashboard-hero__progress">
+                <div class="dashboard-hero__progress-header">
+                    <span class="ui-text-caption">Progreso semanal</span>
+                    <span class="dashboard-hero__progress-value">${weekProgress}%</span>
+                </div>
+                <div class="ui-progress" style="--progress-value: ${weekProgress}%;">
+                    <div class="ui-progress__bar" style="--progress-value: ${weekProgress}%;"></div>
+                </div>
+                <div class="dashboard-hero__stats">
+                    <div class="dashboard-hero__stat">
+                        <span class="stat-label">Frecuencia</span>
+                        <span class="stat-value">${plan.frequency || 3} sesiones</span>
+                    </div>
+                    <div class="dashboard-hero__stat">
+                        <span class="stat-label">Semana actual</span>
+                        <span class="stat-value">${plan.currentWeek || 1}/${plan.duration}</span>
+                    </div>
+                    <div class="dashboard-hero__stat">
+                        <span class="stat-label">Puntos</span>
+                        <span class="stat-value">${stats.totalPoints || 0}</span>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     `;
 }
 
@@ -1353,74 +1487,175 @@ function renderTodayChallenge() {
 }
 
 // Renderizar estadísticas rápidas (MEJORADO - Fase 2)
-function renderQuickStats() {
-    const stats = dashboardState.quickStats;
+function getEnhancedStats() {
+    const stats = dashboardState.quickStats || {};
     
-    // Intentar obtener estadísticas actualizadas del tracker
-    let enhancedStats = stats;
     try {
         if (window.getUserStats && typeof window.getUserStats === 'function') {
             const userStats = window.getUserStats();
-            enhancedStats = {
+            return {
                 ...stats,
                 totalMinutes: userStats.totalMinutes || 0,
                 totalVolume: userStats.totalVolume || 0,
                 averagePerWeek: userStats.averagePerWeek || 0,
-                bestStreak: userStats.bestStreak || 0
+                bestStreak: userStats.bestStreak || stats.currentStreak || 0
             };
         }
     } catch (e) {
         console.warn('⚠️ No se pudieron obtener estadísticas mejoradas:', e);
     }
     
+    return stats;
+}
+
+function renderQuickStats() {
+    const enhancedStats = getEnhancedStats();
+
+    const formatValue = (value) => {
+        if (typeof value === 'number') {
+            return value.toLocaleString('es-ES');
+        }
+        return value;
+    };
+
+    const cards = [
+        {
+            icon: '🏋️‍♂️',
+            label: 'Entrenamientos',
+            value: enhancedStats.completedWorkouts || 0,
+            sublabel: enhancedStats.averagePerWeek ? `${enhancedStats.averagePerWeek}/semana` : null
+        },
+        {
+            icon: '🔥',
+            label: 'Racha activa',
+            value: enhancedStats.currentStreak || 0,
+            sublabel: enhancedStats.bestStreak ? `Mejor: ${enhancedStats.bestStreak} días` : null
+        },
+        {
+            icon: '⭐',
+            label: 'Puntos totales',
+            value: enhancedStats.totalPoints || 0,
+            sublabel: enhancedStats.nextMilestone ? `Siguiente hito: ${enhancedStats.nextMilestone}` : null
+        }
+    ];
+
+    if (enhancedStats.totalMinutes) {
+        cards.push({
+            icon: '⏱️',
+            label: 'Minutos totales',
+            value: Math.round(enhancedStats.totalMinutes),
+            sublabel: 'Tiempo invertido'
+        });
+    }
+
+    if (enhancedStats.totalVolume) {
+        cards.push({
+            icon: '🏋️',
+            label: 'Volumen acumulado',
+            value: `${enhancedStats.totalVolume.toLocaleString('es-ES')} kg`,
+            sublabel: 'Peso movido'
+        });
+    }
+    
     return `
-        <div class="quick-stats glass-card enhanced-stats-card">
-            <div class="stats-header-enhanced">
-                <h3 class="stats-title">📈 Tu Progreso</h3>
-                <div class="stats-subtitle">Resumen de tu actividad</div>
+        <section class="quick-stats ui-card ui-stack">
+            <div class="section-heading">
+                <div>
+                    <span class="ui-text-caption">Panel de progreso</span>
+                    <h3 class="ui-heading-sm">Tu progreso</h3>
+                    <p class="ui-text-small">Resumen de tu actividad reciente</p>
+                </div>
+                <span class="ui-chip">✨ Activo ${dashboardState.activePlan?.name || 'EntrenoApp'}</span>
             </div>
-            <div class="stats-grid enhanced">
-                <div class="stat-item-enhanced">
-                    <div class="stat-icon-enhanced">🏋️‍♂️</div>
-                    <div class="stat-content-enhanced">
-                        <div class="stat-value-enhanced">${enhancedStats.completedWorkouts || 0}</div>
-                        <div class="stat-label-enhanced">Entrenamientos</div>
-                        ${enhancedStats.averagePerWeek ? `
-                            <div class="stat-subtitle-enhanced">${enhancedStats.averagePerWeek}/semana</div>
-                        ` : ''}
-                    </div>
+            <div class="quick-stats-grid ui-grid ui-grid--responsive">
+                ${cards.map(card => `
+                    <article class="ui-kpi-card quick-stats-card">
+                        <span class="kpi-icon">${card.icon}</span>
+                        <span class="ui-text-caption">${card.label}</span>
+                        <div class="ui-kpi-value">${formatValue(card.value)}</div>
+                        ${card.sublabel ? `<span class="ui-text-small">${card.sublabel}</span>` : ''}
+                    </article>
+                `).join('')}
+            </div>
+        </section>
+    `;
+}
+
+function renderGamificationHub() {
+    const enhancedStats = getEnhancedStats();
+    const totalPoints = enhancedStats.totalPoints || 0;
+    const milestoneMeta = getMilestoneProgressMeta(totalPoints);
+    const pointsToNext = milestoneMeta.next ? Math.max(milestoneMeta.next - totalPoints, 0) : 0;
+    const level = Math.max(1, Math.floor(totalPoints / 250) + 1);
+    const badges = buildGamificationBadges(enhancedStats);
+    const averagePerWeek = Number(enhancedStats.averagePerWeek || 0).toFixed(1);
+
+    return `
+        <section class="gamification-hub ui-card ui-stack">
+            <div class="section-heading">
+                <div>
+                    <span class="ui-text-caption">Gamificación</span>
+                    <h3 class="ui-heading-sm">Sube de nivel</h3>
+                    <p class="ui-text-small">Acumula puntos, mantén tu racha y desbloquea insignias exclusivas.</p>
                 </div>
-                <div class="stat-item-enhanced streak-item">
-                    <div class="stat-icon-enhanced fire">🔥</div>
-                    <div class="stat-content-enhanced">
-                        <div class="stat-value-enhanced streak-value">${enhancedStats.currentStreak || 0}</div>
-                        <div class="stat-label-enhanced">Días de racha</div>
-                        ${enhancedStats.bestStreak ? `
-                            <div class="stat-subtitle-enhanced">Mejor: ${enhancedStats.bestStreak} días</div>
-                        ` : ''}
+                <span class="ui-chip ui-chip--glow">Nivel ${level}</span>
+            </div>
+
+            <div class="gamification-metrics ui-grid ui-grid--responsive">
+                <article class="ui-kpi-card gamification-card ${milestoneMeta.progress >= 90 ? 'ui-pulse' : ''}">
+                    <span class="kpi-icon">💎</span>
+                    <span class="ui-text-caption">Puntos totales</span>
+                    <div class="ui-kpi-value">${totalPoints.toLocaleString('es-ES')}</div>
+                    <span class="ui-text-small">
+                        ${pointsToNext > 0 ? `${pointsToNext} pts para el hito ${milestoneMeta.next}` : 'Hito máximo alcanzado'}
+                    </span>
+                    <div class="ui-progress milestone-progress" style="--progress-value: ${Math.round(milestoneMeta.progress)}%;">
+                        <div class="ui-progress__bar" style="--progress-value: ${Math.round(milestoneMeta.progress)}%;"></div>
                     </div>
-                </div>
-                <div class="stat-item-enhanced">
-                    <div class="stat-icon-enhanced">⭐</div>
-                    <div class="stat-content-enhanced">
-                        <div class="stat-value-enhanced">${enhancedStats.totalPoints || 0}</div>
-                        <div class="stat-label-enhanced">Puntos</div>
-                        ${enhancedStats.nextMilestone ? `
-                            <div class="stat-subtitle-enhanced">Hito: ${enhancedStats.nextMilestone}</div>
-                        ` : ''}
+                    <div class="milestone-labels">
+                        <span>${milestoneMeta.previous}</span>
+                        <span>${milestoneMeta.next}</span>
                     </div>
-                </div>
-                ${enhancedStats.totalMinutes ? `
-                    <div class="stat-item-enhanced">
-                        <div class="stat-icon-enhanced">⏱️</div>
-                        <div class="stat-content-enhanced">
-                            <div class="stat-value-enhanced">${Math.round(enhancedStats.totalMinutes)}</div>
-                            <div class="stat-label-enhanced">Minutos totales</div>
+                </article>
+
+                <article class="ui-kpi-card gamification-card">
+                    <span class="kpi-icon">🔥</span>
+                    <span class="ui-text-caption">Racha actual</span>
+                    <div class="ui-kpi-value">${enhancedStats.currentStreak || 0}</div>
+                    <span class="ui-text-small">Mejor racha: ${(enhancedStats.bestStreak || enhancedStats.currentStreak || 0)} días</span>
+                </article>
+
+                <article class="ui-kpi-card gamification-card">
+                    <span class="kpi-icon">🏅</span>
+                    <span class="ui-text-caption">Entrenamientos</span>
+                    <div class="ui-kpi-value">${(enhancedStats.completedWorkouts || 0).toLocaleString('es-ES')}</div>
+                    <span class="ui-text-small">${averagePerWeek} entrenos/sem</span>
+                </article>
+            </div>
+
+            <div class="gamification-badges">
+                ${badges.slice(0, 4).map(badge => `
+                    <div class="badge-card ${badge.unlocked ? 'unlocked' : 'locked'} ${badge.highlight && badge.unlocked ? 'ui-glow-primary ui-pulse' : ''}">
+                        <div class="badge-icon">${badge.icon}</div>
+                        <div class="badge-title">${badge.title}</div>
+                        <div class="badge-description">${badge.requirement}</div>
+                        <div class="ui-progress badge-progress" style="--progress-value: ${Math.round(badge.progress * 100)}%;">
+                            <div class="ui-progress__bar" style="--progress-value: ${Math.round(badge.progress * 100)}%;"></div>
                         </div>
+                        <span class="badge-status">${badge.unlocked ? 'Desbloqueado' : `${Math.round(badge.progress * 100)}% listo`}</span>
                     </div>
-                ` : ''}
+                `).join('')}
             </div>
-        </div>
+
+            <div class="gamification-actions">
+                <button class="ui-button ui-button--primary" onclick="window.navigateToPage('challenges')">
+                    🎯 Ir a retos
+                </button>
+                <button class="ui-button ui-button--ghost" onclick="window.navigateToPage('progress')">
+                    📊 Ver historial
+                </button>
+            </div>
+        </section>
     `;
 }
 

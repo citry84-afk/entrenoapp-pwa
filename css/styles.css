@@ -2,62 +2,64 @@
    ENTRENOAPP - ESTILOS PRINCIPALES
    =========================================== */
 
+@import url('design-system.css');
+
 :root {
-    /* Colores principales estilo iOS con mejor contraste */
-    --primary-blue: #007AFF;
-    --primary-blue-dark: #0056CC;
-    --primary-blue-light: #4A9EFF;
-    --secondary-blue: #5AC8FA;
-    --success-green: #34C759;
-    --success-green-dark: #28A745;
-    --warning-orange: #FF9500;
-    --warning-orange-dark: #E6850E;
-    --error-red: #FF3B30;
-    --error-red-dark: #DC2626;
-    --purple: #AF52DE;
-    --purple-dark: #9C3DD4;
+    /* Colores principales conectados al design system */
+    --primary-blue: var(--ds-color-primary-500);
+    --primary-blue-dark: var(--ds-color-primary-600);
+    --primary-blue-light: var(--ds-color-primary-300);
+    --secondary-blue: var(--ds-color-secondary-500);
+    --success-green: var(--ds-color-success-500);
+    --success-green-dark: var(--ds-color-success-400);
+    --warning-orange: var(--ds-color-warning-500);
+    --warning-orange-dark: var(--ds-color-warning-400);
+    --error-red: var(--ds-color-danger-500);
+    --error-red-dark: var(--ds-color-danger-400);
+    --purple: var(--ds-color-primary-400);
+    --purple-dark: var(--ds-color-primary-700);
     
     /* Colores de texto con mejor contraste */
-    --text-primary: #FFFFFF;
-    --text-secondary: rgba(255, 255, 255, 0.9);
-    --text-tertiary: rgba(255, 255, 255, 0.7);
-    --text-quaternary: rgba(255, 255, 255, 0.5);
+    --text-primary: var(--ds-color-text-primary);
+    --text-secondary: var(--ds-color-text-secondary);
+    --text-tertiary: var(--ds-color-text-tertiary);
+    --text-quaternary: var(--ds-color-text-muted);
     
-    /* Colores de fondo con mejor contraste */
-    --bg-primary: rgba(255, 255, 255, 0.15);
-    --bg-secondary: rgba(255, 255, 255, 0.1);
-    --bg-tertiary: rgba(255, 255, 255, 0.05);
-    --bg-dark: rgba(0, 0, 0, 0.3);
-    --bg-dark-light: rgba(0, 0, 0, 0.2);
+    /* Colores de fondo y superficies */
+    --bg-primary: var(--ds-color-surface-glass);
+    --bg-secondary: var(--ds-color-surface-overlay);
+    --bg-tertiary: rgba(255, 255, 255, 0.04);
+    --bg-dark: var(--ds-color-surface-800);
+    --bg-dark-light: var(--ds-color-surface-700);
     
-    /* Colores de borde con mejor contraste */
-    --border-primary: rgba(255, 255, 255, 0.3);
-    --border-secondary: rgba(255, 255, 255, 0.2);
-    --border-accent: rgba(0, 122, 255, 0.5);
+    /* Colores de borde */
+    --border-primary: var(--ds-border-subtle);
+    --border-secondary: rgba(255, 255, 255, 0.18);
+    --border-accent: rgba(112, 92, 255, 0.5);
     
     /* Espaciado */
-    --spacing-xs: 4px;
-    --spacing-sm: 8px;
-    --spacing-md: 16px;
-    --spacing-lg: 24px;
-    --spacing-xl: 32px;
-    --spacing-xxl: 48px;
+    --spacing-xs: var(--ds-space-1);
+    --spacing-sm: var(--ds-space-2);
+    --spacing-md: var(--ds-space-4);
+    --spacing-lg: var(--ds-space-5);
+    --spacing-xl: var(--ds-space-6);
+    --spacing-xxl: var(--ds-space-7);
     
     /* Bordes */
-    --border-radius-sm: 8px;
-    --border-radius-md: 12px;
-    --border-radius-lg: 16px;
-    --border-radius-xl: 20px;
+    --border-radius-sm: var(--ds-radius-xs);
+    --border-radius-md: var(--ds-radius-sm);
+    --border-radius-lg: var(--ds-radius-md);
+    --border-radius-xl: var(--ds-radius-lg);
     
     /* Sombras */
-    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
-    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.15);
-    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.2);
+    --shadow-sm: 0 12px 24px rgba(18, 16, 37, 0.16);
+    --shadow-md: var(--ds-shadow-soft);
+    --shadow-lg: var(--ds-shadow-floating);
     
     /* Transiciones */
-    --transition-fast: 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    --transition-normal: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    --transition-slow: 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --transition-fast: var(--ds-transition-fast);
+    --transition-normal: var(--ds-transition-base);
+    --transition-slow: var(--ds-transition-slow);
 }
 
 /* Clases de texto con mejor contraste */
@@ -508,8 +510,8 @@ html {
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-family: var(--ds-font-sans);
+    background: var(--ds-app-background);
     min-height: 100vh;
     color: var(--text-primary);
     overflow-x: hidden;
@@ -521,6 +523,8 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    position: relative;
+    z-index: 1;
 }
 
 /* ===========================================

@@ -7,6 +7,270 @@
 }
 
 /* ===================================
+   HERO & TOP-LEVEL LAYOUT
+   =================================== */
+
+.personalized-dashboard {
+    position: relative;
+}
+
+.dashboard-hero {
+    position: relative;
+    overflow: hidden;
+    padding: var(--ds-space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--ds-space-4);
+}
+
+.dashboard-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 90% 10%, rgba(255, 255, 255, 0.16) 0%, transparent 50%);
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+.dashboard-hero__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--ds-space-3);
+}
+
+.dashboard-hero__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--ds-space-2);
+}
+
+.dashboard-hero .chip-icon {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 0.35rem;
+}
+
+.dashboard-hero__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--ds-space-2);
+}
+
+.dashboard-hero__headline {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ds-space-2);
+    max-width: 540px;
+}
+
+.dashboard-hero__message {
+    margin: 0;
+    color: var(--ds-color-text-secondary);
+}
+
+.dashboard-hero__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--ds-space-2);
+}
+
+.dashboard-hero__progress {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ds-space-3);
+}
+
+.dashboard-hero__progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dashboard-hero__progress-value {
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.dashboard-hero__stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: var(--ds-space-3);
+}
+
+.dashboard-hero__stat {
+    padding: var(--ds-space-3);
+    border-radius: var(--ds-radius-md);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(var(--ds-blur-soft));
+    -webkit-backdrop-filter: blur(var(--ds-blur-soft));
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.dashboard-hero__stat-label,
+.dashboard-hero__stat .stat-label {
+    font-size: var(--ds-font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--ds-color-text-muted);
+}
+
+.dashboard-hero__stat-value,
+.dashboard-hero__stat .stat-value {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--ds-color-text-primary);
+}
+
+/* ===================================
+   QUICK STATS GRID
+   =================================== */
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: var(--ds-space-3);
+}
+
+.section-heading h3 {
+    margin: 0;
+}
+
+.section-heading p {
+    margin: 0;
+    max-width: 48ch;
+}
+
+.quick-stats {
+    padding: var(--ds-space-5);
+}
+
+.quick-stats-grid {
+    gap: var(--ds-space-4);
+}
+
+.quick-stats-card {
+    position: relative;
+    isolation: isolate;
+    min-height: 160px;
+    padding: var(--ds-space-4);
+}
+
+.quick-stats-card .kpi-icon {
+    position: absolute;
+    top: var(--ds-space-2);
+    right: var(--ds-space-2);
+    font-size: 1.5rem;
+    opacity: 0.85;
+}
+
+.quick-stats-card .ui-text-caption {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.quick-stats-card .ui-text-small {
+    color: rgba(255, 255, 255, 0.65);
+}
+
+/* ===================================
+   GAMIFICATION HUB
+   =================================== */
+
+.gamification-hub {
+    padding: var(--ds-space-5);
+    gap: var(--ds-space-4);
+}
+
+.gamification-metrics {
+    gap: var(--ds-space-4);
+}
+
+.milestone-progress {
+    margin-top: var(--ds-space-3);
+}
+
+.milestone-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--ds-font-size-xs);
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: var(--ds-space-2);
+}
+
+.gamification-badges {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: var(--ds-space-3);
+}
+
+.badge-card {
+    position: relative;
+    padding: var(--ds-space-4);
+    border-radius: var(--ds-radius-md);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(var(--ds-blur-soft));
+    -webkit-backdrop-filter: blur(var(--ds-blur-soft));
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    min-height: 180px;
+    transition: transform var(--ds-transition-fast), box-shadow var(--ds-transition-fast);
+}
+
+.badge-card.unlocked {
+    background: linear-gradient(160deg, rgba(112, 92, 255, 0.22), rgba(0, 212, 255, 0.18));
+    border-color: rgba(112, 92, 255, 0.4);
+}
+
+.badge-card.locked {
+    opacity: 0.85;
+}
+
+.badge-card:hover {
+    transform: translateY(-4px);
+}
+
+.badge-icon {
+    font-size: 2rem;
+}
+
+.badge-title {
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.badge-description {
+    font-size: var(--ds-font-size-sm);
+    color: rgba(255, 255, 255, 0.7);
+    min-height: 48px;
+}
+
+.badge-progress {
+    height: 8px;
+}
+
+.badge-status {
+    font-size: var(--ds-font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: rgba(255, 255, 255, 0.65);
+}
+
+.gamification-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--ds-space-3);
+}
+
+/* ===================================
    ESTADO DE CARGA
    =================================== */
 
@@ -844,6 +1108,31 @@
 
 /* Responsive específico para plan semanal */
 @media (max-width: 768px) {
+    .dashboard-hero {
+        padding: var(--ds-space-4);
+    }
+
+    .dashboard-hero__top {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .dashboard-hero__progress-value {
+        font-size: clamp(1.6rem, 5vw, 1.9rem);
+    }
+
+    .quick-stats {
+        padding: var(--ds-space-4);
+    }
+
+    .gamification-hub {
+        padding: var(--ds-space-4);
+    }
+
+    .gamification-badges {
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    }
+
     .weekly-plan-card {
         padding: 1rem;
         overflow-x: hidden;
@@ -917,6 +1206,38 @@
 }
 
 @media (max-width: 480px) {
+    .dashboard-hero {
+        padding: var(--ds-space-3);
+    }
+
+    .dashboard-hero__chips {
+        gap: var(--ds-space-2);
+    }
+
+    .dashboard-hero__stats {
+        grid-template-columns: 1fr;
+    }
+
+    .quick-stats {
+        padding: var(--ds-space-3);
+    }
+
+    .quick-stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .gamification-hub {
+        padding: var(--ds-space-3);
+    }
+
+    .gamification-actions {
+        flex-direction: column;
+    }
+
+    .gamification-badges {
+        grid-template-columns: 1fr;
+    }
+
     .weekly-plan-card {
         padding: 0.75rem;
         margin: 0;
