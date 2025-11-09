@@ -14,6 +14,164 @@
     position: relative;
 }
 
+.dashboard-tour-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(8, 8, 24, 0.72);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    z-index: 4000;
+}
+
+.tour-card {
+    width: min(420px, 100%);
+    gap: var(--ds-space-4);
+}
+
+.tour-step-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: var(--ds-radius-full);
+    font-size: var(--ds-font-size-xs);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.tour-progress {
+    width: 100%;
+}
+
+.tour-progress-bar {
+    width: 100%;
+    height: 6px;
+    border-radius: var(--ds-radius-full);
+    background: rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+}
+
+.tour-progress-fill {
+    height: 100%;
+    background: var(--ds-gradient-primary);
+    transition: width var(--ds-transition-base);
+}
+
+.tour-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--ds-space-3);
+}
+
+.tour-action-buttons {
+    display: flex;
+    gap: var(--ds-space-2);
+}
+
+.tour-description {
+    margin: 0;
+    color: var(--ds-color-text-secondary);
+    font-size: var(--ds-font-size-md);
+}
+
+.dashboard-checklist {
+    padding: var(--ds-space-5);
+    gap: var(--ds-space-4);
+}
+
+.checklist-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.checklist-items {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ds-space-3);
+}
+
+.checklist-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--ds-space-3);
+    padding: var(--ds-space-3);
+    border-radius: var(--ds-radius-md);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    transition: all var(--ds-transition-base);
+}
+
+.checklist-item.completed {
+    opacity: 0.6;
+}
+
+.checklist-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    max-width: 70%;
+}
+
+.checklist-title-row {
+    display: flex;
+    align-items: center;
+    gap: var(--ds-space-2);
+}
+
+.checklist-info h4 {
+    margin: 0;
+    font-size: var(--ds-font-size-lg);
+}
+
+.checklist-info p {
+    margin: 0;
+    color: var(--ds-color-text-secondary);
+    font-size: var(--ds-font-size-sm);
+}
+
+.checklist-icon {
+    font-size: 1.6rem;
+}
+
+.checklist-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--ds-space-2);
+}
+
+.checklist-status {
+    font-size: var(--ds-font-size-sm);
+    color: var(--ds-color-text-muted);
+    font-weight: 600;
+}
+
+.checklist-progress-value {
+    font-size: var(--ds-font-size-sm);
+    color: var(--ds-color-text-muted);
+    font-weight: 600;
+}
+
+.collapse-btn {
+    min-width: 0;
+}
+
+.collapsed-section {
+    display: none !important;
+}
+
+.collapsed-section-wrapper {
+    opacity: 0.85;
+}
+
 .dashboard-hero {
     position: relative;
     overflow: hidden;
@@ -1125,6 +1283,18 @@
         padding: var(--ds-space-4);
     }
 
+    .dashboard-tour-overlay {
+        padding: 1.5rem;
+    }
+
+    .dashboard-checklist {
+        padding: var(--ds-space-4);
+    }
+
+    .checklist-info {
+        max-width: 100%;
+    }
+
     .gamification-hub {
         padding: var(--ds-space-4);
     }
@@ -1224,6 +1394,30 @@
 
     .quick-stats-grid {
         grid-template-columns: 1fr;
+    }
+
+    .tour-card {
+        padding: var(--ds-space-4);
+    }
+
+    .tour-actions {
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--ds-space-2);
+    }
+
+    .tour-action-buttons {
+        justify-content: space-between;
+    }
+
+    .checklist-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .checklist-actions {
+        width: 100%;
+        justify-content: flex-start;
     }
 
     .gamification-hub {

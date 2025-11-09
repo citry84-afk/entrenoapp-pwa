@@ -25,8 +25,96 @@ let dashboardState = {
         nextMilestone: null
     },
     motivationalMessage: '',
-    isLoading: true
+    isLoading: true,
+    showTour: false,
+    tourStep: 0,
+    collapsedSections: {
+        progress: false,
+        advanced: false
+    },
+    checklist: {
+        reviewPlan: false,
+        startWorkout: false,
+        enableNotifications: false
+    }
 };
+
+const DASHBOARD_TOUR_KEY = 'entrenoapp_dashboard_tour_done';
+const DASHBOARD_CHECKLIST_KEY = 'entrenoapp_dashboard_checklist';
+const DASHBOARD_COLLAPSED_KEY = 'entrenoapp_dashboard_collapsed';
+
+const DASHBOARD_TOUR_STEPS = [
+    {
+        id: 'plan-overview',
+        title: 'Tu plan personalizado',
+        description: 'Aquí verás el objetivo semanal, tu frecuencia y el nombre de tu plan. Puedes gestionar ajustes desde el icono ⚙️.'
+    },
+    {
+        id: 'todays-workout',
+        title: 'Entrenamiento de hoy',
+        description: 'Te mostramos qué toca hoy, duración estimada y los ejercicios principales. Cuando estés listo, pulsa “Comenzar entrenamiento”.'
+    },
+    {
+        id: 'gamification',
+        title: 'Puntos y rachas',
+        description: 'Gana puntos, mantén tu racha y desbloquea insignias cada vez que entrenas o completas retos diarios.'
+    },
+    {
+        id: 'analitics',
+        title: 'Progreso y calendario',
+        description: 'Consulta tu calendario de actividad y los gráficos de rendimiento cuando quieras profundizar en tus datos.'
+    }
+];
+
+function getDefaultChecklist() {
+    return {
+        reviewPlan: false,
+        startWorkout: false,
+        enableNotifications: false
+    };
+}
+
+function loadChecklistState() {
+    try {
+        const saved = localStorage.getItem(DASHBOARD_CHECKLIST_KEY);
+        if (!saved) return getDefaultChecklist();
+        const parsed = JSON.parse(saved);
+        return {
+            ...getDefaultChecklist(),
+            ...parsed
+        };
+    } catch (error) {
+        console.warn('⚠️ No se pudo cargar checklist del dashboard:', error);
+        return getDefaultChecklist();
+    }
+}
+
+function saveChecklistState(state = dashboardState.checklist) {
+    try {
+        localStorage.setItem(DASHBOARD_CHECKLIST_KEY, JSON.stringify(state));
+    } catch (error) {
+        console.warn('⚠️ No se pudo guardar checklist del dashboard:', error);
+    }
+}
+
+function loadCollapsedState() {
+    try {
+        const saved = localStorage.getItem(DASHBOARD_COLLAPSED_KEY);
+        if (!saved) return null;
+        return JSON.parse(saved);
+    } catch (error) {
+        console.warn('⚠️ No se pudo cargar el estado de secciones colapsadas:', error);
+        return null;
+    }
+}
+
+function saveCollapsedState(state = dashboardState.collapsedSections) {
+    try {
+        localStorage.setItem(DASHBOARD_COLLAPSED_KEY, JSON.stringify(state));
+    } catch (error) {
+        console.warn('⚠️ No se pudo guardar el estado de secciones colapsadas:', error);
+    }
+}
 
 // Inicializar dashboard
 window.initDashboard = function() {
@@ -58,30 +146,30 @@ async function loadUserPlan() {
         
         // Intentar cargar desde Firestore solo si hay auth y usuario
         if (auth && auth.currentUser) {
-            const user = auth.currentUser;
-            dashboardState.user = user;
+        const user = auth.currentUser;
+        dashboardState.user = user;
+        
+        // Cargar perfil y plan activo desde Firestore
+        const userDoc = doc(db, 'users', user.uid);
+        const userSnap = await getDoc(userDoc);
+        
+        if (userSnap.exists()) {
+            const userData = userSnap.data();
+            dashboardState.userProfile = userData;
+            dashboardState.activePlan = userData.activePlan;
             
-            // Cargar perfil y plan activo desde Firestore
-            const userDoc = doc(db, 'users', user.uid);
-            const userSnap = await getDoc(userDoc);
+            // Verificar si el plan tiene sessionDuration, si no, agregarlo
+            if (dashboardState.activePlan && !dashboardState.activePlan.sessionDuration) {
+                dashboardState.activePlan.sessionDuration = getDefaultSessionDuration(dashboardState.activePlan);
+                console.log('🔄 Plan actualizado con sessionDuration:', dashboardState.activePlan.sessionDuration);
+            }
             
-            if (userSnap.exists()) {
-                const userData = userSnap.data();
-                dashboardState.userProfile = userData;
-                dashboardState.activePlan = userData.activePlan;
-                
-                // Verificar si el plan tiene sessionDuration, si no, agregarlo
-                if (dashboardState.activePlan && !dashboardState.activePlan.sessionDuration) {
-                    dashboardState.activePlan.sessionDuration = getDefaultSessionDuration(dashboardState.activePlan);
-                    console.log('🔄 Plan actualizado con sessionDuration:', dashboardState.activePlan.sessionDuration);
-                }
-                
-                dashboardState.quickStats = {
-                    completedWorkouts: userData.stats?.totalWorkouts || 0,
-                    currentStreak: userData.stats?.currentStreak || 0,
-                    totalPoints: userData.stats?.totalPoints || 0,
-                    nextMilestone: calculateNextMilestone(userData.stats?.totalPoints || 0)
-                };
+            dashboardState.quickStats = {
+                completedWorkouts: userData.stats?.totalWorkouts || 0,
+                currentStreak: userData.stats?.currentStreak || 0,
+                totalPoints: userData.stats?.totalPoints || 0,
+                nextMilestone: calculateNextMilestone(userData.stats?.totalPoints || 0)
+            };
             }
         }
         
@@ -92,7 +180,7 @@ async function loadUserPlan() {
             if (savedPlan) {
                 try {
                     const plan = JSON.parse(savedPlan);
-                    dashboardState.activePlan = plan;
+                        dashboardState.activePlan = plan;
                 } catch (error) {
                     console.error('❌ Error parsing plan guardado:', error);
                     localStorage.removeItem('entrenoapp_active_plan');
@@ -123,6 +211,31 @@ async function loadUserPlan() {
                         console.error('❌ No fue posible guardar el plan por defecto en localStorage:', e);
                     }
                 }
+            }
+        }
+        
+        if (dashboardState.activePlan) {
+            const tourDone = localStorage.getItem(DASHBOARD_TOUR_KEY) === 'true';
+            dashboardState.showTour = !tourDone;
+            dashboardState.tourStep = 0;
+            dashboardState.checklist = loadChecklistState();
+            
+            const storedCollapsed = loadCollapsedState();
+            if (storedCollapsed) {
+                dashboardState.collapsedSections = {
+                    progress: storedCollapsed.progress === undefined ? false : storedCollapsed.progress,
+                    advanced: storedCollapsed.advanced === undefined ? false : storedCollapsed.advanced
+                };
+            } else {
+                dashboardState.collapsedSections = {
+                    progress: false,
+                    advanced: !tourDone
+                };
+            }
+            
+            if (dashboardState.showTour) {
+                dashboardState.collapsedSections.progress = false;
+                dashboardState.collapsedSections.advanced = true;
             }
         }
         
@@ -825,9 +938,13 @@ function renderDashboard() {
         <button class="back-button" onclick="window.navigateBack()" title="Atrás">
             ←
         </button>
+        ${renderDashboardTour()}
         <div class="personalized-dashboard glass-fade-in ui-stack ui-stack--lg ui-shell-content">
             <!-- 1. Bienvenida -->
             ${renderPersonalizedHeader()}
+            
+            <!-- 1.1 Checklist inicial -->
+            ${renderDashboardChecklist()}
             
             <!-- 2. Entrenamiento del día -->
             ${renderTodaysWorkout()}
@@ -836,10 +953,10 @@ function renderDashboard() {
             ${renderTodayChallenge()}
             
             <!-- 4. Progreso de esta semana -->
-            ${renderWeeklyProgress()}
+            ${renderWeeklyProgressSection()}
             
             <!-- 4.5. Calendario Mensual con Heat Map -->
-            ${renderMonthlyCalendar()}
+            ${renderMonthlySection()}
             
             <!-- 4.6. Gráficos de Progreso -->
             ${renderProgressCharts()}
@@ -903,13 +1020,13 @@ function renderPersonalizedHeader() {
                     <button class="ui-icon-button" onclick="window.showPlanMenu()" title="Gestionar plan">
                         ⚙️
                     </button>
-                </div>
-            </div>
+                            </div>
+                        </div>
 
             <div class="dashboard-hero__headline">
                 <h1 class="ui-heading-xl">Hola, ${user?.displayName || 'Atleta'} 👋</h1>
                 <p class="dashboard-hero__message ui-text-subtle">${dashboardState.motivationalMessage}</p>
-            </div>
+                    </div>
 
             <div class="dashboard-hero__chips">
                 <span class="ui-chip">
@@ -921,16 +1038,16 @@ function renderPersonalizedHeader() {
                 <span class="ui-chip">
                     ⏱️ ${plan.sessionDuration || 45} min sesión
                 </span>
-            </div>
+                </div>
 
             <div class="dashboard-hero__progress">
                 <div class="dashboard-hero__progress-header">
                     <span class="ui-text-caption">Progreso semanal</span>
                     <span class="dashboard-hero__progress-value">${weekProgress}%</span>
-                </div>
+            </div>
                 <div class="ui-progress" style="--progress-value: ${weekProgress}%;">
                     <div class="ui-progress__bar" style="--progress-value: ${weekProgress}%;"></div>
-                </div>
+        </div>
                 <div class="dashboard-hero__stats">
                     <div class="dashboard-hero__stat">
                         <span class="stat-label">Frecuencia</span>
@@ -945,6 +1062,113 @@ function renderPersonalizedHeader() {
                         <span class="stat-value">${stats.totalPoints || 0}</span>
                     </div>
                 </div>
+            </div>
+        </section>
+    `;
+}
+
+function renderDashboardTour() {
+    if (!dashboardState.showTour || !dashboardState.activePlan) return '';
+    
+    const steps = DASHBOARD_TOUR_STEPS;
+    const currentIndex = Math.min(dashboardState.tourStep, steps.length - 1);
+    const currentStep = steps[currentIndex];
+    const progress = Math.round(((currentIndex + 1) / steps.length) * 100);
+    
+    return `
+        <div class="dashboard-tour-overlay">
+            <div class="tour-card ui-card ui-stack">
+                <span class="tour-step-chip">Paso ${currentIndex + 1} de ${steps.length}</span>
+                <div class="tour-progress">
+                    <div class="tour-progress-bar">
+                        <div class="tour-progress-fill" style="width: ${progress}%"></div>
+                    </div>
+                </div>
+                <h2 class="tour-title">${currentStep.title}</h2>
+                <p class="tour-description">${currentStep.description}</p>
+                <div class="tour-actions">
+                    <button class="ui-button ui-button--ghost" onclick="window.skipDashboardTour()">Saltar</button>
+                    <div class="tour-action-buttons">
+                        ${currentIndex > 0 ? `<button class="ui-button" onclick="window.prevDashboardTour()">Anterior</button>` : ''}
+                        <button class="ui-button ui-button--primary" onclick="window.nextDashboardTour()">
+                            ${currentIndex === steps.length - 1 ? 'Entendido' : 'Siguiente'}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function renderDashboardChecklist() {
+    if (!dashboardState.activePlan || dashboardState.showTour) return '';
+    
+    const checklist = dashboardState.checklist || getDefaultChecklist();
+    const items = [
+        {
+            id: 'reviewPlan',
+            icon: '📅',
+            title: 'Revisa tu plan semanal',
+            description: 'Visualiza qué entrenamiento toca cada día y ajusta tu semana.',
+            action: "window.handleChecklistAction('reviewPlan')",
+            completed: checklist.reviewPlan,
+            actionLabel: 'Ver plan'
+        },
+        {
+            id: 'startWorkout',
+            icon: '🚀',
+            title: 'Empieza tu primer entrenamiento',
+            description: 'Completa la sesión de hoy para iniciar tu progreso y sumar puntos.',
+            action: "window.handleChecklistAction('startWorkout')",
+            completed: checklist.startWorkout,
+            actionLabel: 'Comenzar'
+        },
+        {
+            id: 'enableNotifications',
+            icon: '🔔',
+            title: 'Activa recordatorios',
+            description: 'Recibe avisos personalizados para no saltarte tus entrenamientos.',
+            action: "window.handleChecklistAction('enableNotifications')",
+            completed: checklist.enableNotifications,
+            actionLabel: 'Activar'
+        }
+    ];
+    
+    const allDone = items.every(item => item.completed);
+    if (allDone) return '';
+    
+    const completedCount = items.filter(item => item.completed).length;
+    
+    return `
+        <section class="dashboard-checklist ui-card ui-stack">
+            <div class="checklist-header">
+                <div>
+                    <span class="ui-text-caption">Primeros pasos</span>
+                    <h3 class="ui-heading-sm">Haz despegar tu plan</h3>
+                </div>
+                <div class="checklist-progress">
+                    <span class="checklist-progress-value">${completedCount}/${items.length}</span>
+                </div>
+            </div>
+            <div class="checklist-items">
+                ${items.map(item => `
+                    <div class="checklist-item ${item.completed ? 'completed' : ''}">
+                        <div class="checklist-info">
+                            <div class="checklist-title-row">
+                                <span class="checklist-icon">${item.icon}</span>
+                                <h4>${item.title}</h4>
+                            </div>
+                            <p>${item.description}</p>
+                        </div>
+                        <div class="checklist-actions">
+                            ${item.completed ? `<span class="checklist-status">Completado ✅</span>` : `
+                                <button class="ui-button ui-button--secondary" onclick="${item.action}">
+                                    ${item.actionLabel}
+                                </button>
+                            `}
+                        </div>
+                    </div>
+                `).join('')}
             </div>
         </section>
     `;
@@ -1096,7 +1320,7 @@ function renderActiveWorkout(workout) {
                 
                 <!-- Botón de acción principal -->
                 <div class="workout-action-primary">
-                    <button id="start-workout-btn" class="glass-button glass-button-primary btn-lg enhanced-start-btn" onclick="window.startTodaysWorkoutWithCountdown()">
+                    <button id="start-workout-btn" class="glass-button glass-button-primary btn-lg enhanced-start-btn" onclick="window.handleChecklistAction('startWorkout')">
                         <span class="btn-icon">🚀</span>
                         <span class="btn-text">Comenzar Entrenamiento</span>
                     </button>
@@ -1290,7 +1514,7 @@ function renderGymExerciseList(workout) {
 }
 
 // Renderizar progreso semanal
-function renderWeeklyProgress() {
+function renderWeeklyProgressSection() {
     const plan = dashboardState.activePlan;
     if (!plan) return '';
     
@@ -1299,17 +1523,23 @@ function renderWeeklyProgress() {
     const todayIndex = new Date().getDay(); // 0 = Domingo, 1 = Lunes, etc.
     const dayNames = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
     const fullDayNames = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+    const collapsed = dashboardState.collapsedSections.progress;
     
     return `
         <div class="weekly-plan-card glass-card mb-lg">
             <div class="weekly-plan-header">
                 <h3 class="weekly-plan-title">📅 Plan Semanal</h3>
-                <span class="weekly-progress-text">${dashboardState.weekProgress}% completado</span>
+                <div class="weekly-plan-controls">
+                    <span class="weekly-progress-text">${dashboardState.weekProgress}% completado</span>
+                    <button class="glass-button btn-sm collapse-btn" onclick="window.toggleSectionCollapse('progress')">
+                        ${collapsed ? 'Mostrar calendario' : 'Ocultar'}
+                    </button>
+                </div>
             </div>
             <div class="week-progress-bar mb-md">
                 <div class="week-progress-fill" style="width: ${dashboardState.weekProgress}%"></div>
             </div>
-            <div class="weekly-calendar">
+            <div class="weekly-calendar ${collapsed ? 'collapsed-section' : ''}">
                 ${weeklyPlan.map((day, index) => {
                     const isToday = index === todayIndex;
                     const isCompleted = day.completed || false;
@@ -1566,7 +1796,7 @@ function renderQuickStats() {
                     <p class="ui-text-small">Resumen de tu actividad reciente</p>
                 </div>
                 <span class="ui-chip">✨ Activo ${dashboardState.activePlan?.name || 'EntrenoApp'}</span>
-            </div>
+                </div>
             <div class="quick-stats-grid ui-grid ui-grid--responsive">
                 ${cards.map(card => `
                     <article class="ui-kpi-card quick-stats-card">
@@ -1576,7 +1806,7 @@ function renderQuickStats() {
                         ${card.sublabel ? `<span class="ui-text-small">${card.sublabel}</span>` : ''}
                     </article>
                 `).join('')}
-            </div>
+                </div>
         </section>
     `;
 }
@@ -1597,7 +1827,7 @@ function renderGamificationHub() {
                     <span class="ui-text-caption">Gamificación</span>
                     <h3 class="ui-heading-sm">Sube de nivel</h3>
                     <p class="ui-text-small">Acumula puntos, mantén tu racha y desbloquea insignias exclusivas.</p>
-                </div>
+                    </div>
                 <span class="ui-chip ui-chip--glow">Nivel ${level}</span>
             </div>
 
@@ -1611,7 +1841,7 @@ function renderGamificationHub() {
                     </span>
                     <div class="ui-progress milestone-progress" style="--progress-value: ${Math.round(milestoneMeta.progress)}%;">
                         <div class="ui-progress__bar" style="--progress-value: ${Math.round(milestoneMeta.progress)}%;"></div>
-                    </div>
+        </div>
                     <div class="milestone-labels">
                         <span>${milestoneMeta.previous}</span>
                         <span>${milestoneMeta.next}</span>
@@ -1876,6 +2106,19 @@ window.syncActivePlan = function(plan, options = {}) {
         console.warn('⚠️ No se pudo persistir el plan al sincronizar:', error);
     }
 
+    if (['onboarding', 'onboarding-rescue', 'onboarding-finally', 'onboarding-fallback', 'onboarding-final-error', 'onboarding-final-no-data'].includes(source)) {
+        localStorage.removeItem(DASHBOARD_TOUR_KEY);
+        localStorage.removeItem(DASHBOARD_CHECKLIST_KEY);
+        localStorage.removeItem(DASHBOARD_COLLAPSED_KEY);
+        dashboardState.showTour = true;
+        dashboardState.tourStep = 0;
+        dashboardState.checklist = getDefaultChecklist();
+        dashboardState.collapsedSections = {
+            progress: false,
+            advanced: true
+        };
+    }
+
     dashboardState.activePlan = plan;
     dashboardState.todaysWorkout = generateTodaysWorkout(plan);
     dashboardState.weekProgress = calculateWeekProgress(plan);
@@ -1888,6 +2131,124 @@ window.syncActivePlan = function(plan, options = {}) {
     if (!skipNavigation && typeof window.navigateToPage === 'function') {
         window.navigateToPage('dashboard');
     }
+};
+
+window.toggleSectionCollapse = function(section, forceValue, options = {}) {
+    const { silent = false } = options || {};
+    if (!dashboardState.collapsedSections) {
+        dashboardState.collapsedSections = { ...getDefaultCollapsedState() };
+    }
+    const current = dashboardState.collapsedSections[section];
+    const nextValue = typeof forceValue === 'boolean' ? forceValue : !current;
+    dashboardState.collapsedSections[section] = nextValue;
+    saveCollapsedState();
+    if (!silent) {
+        renderDashboard();
+    }
+};
+
+function getDefaultCollapsedState() {
+    return {
+        progress: false,
+        advanced: false
+    };
+}
+
+function completeChecklistItem(key, { silent = false } = {}) {
+    if (!dashboardState.checklist) {
+        dashboardState.checklist = getDefaultChecklist();
+    }
+    if (!dashboardState.checklist[key]) {
+        dashboardState.checklist[key] = true;
+        saveChecklistState();
+        if (!silent) {
+            renderDashboard();
+        }
+    }
+}
+
+window.handleChecklistAction = function(action) {
+    switch (action) {
+        case 'reviewPlan': {
+            window.toggleSectionCollapse('progress', false, { silent: true });
+            completeChecklistItem('reviewPlan', { silent: true });
+            renderDashboard();
+            setTimeout(() => {
+                document.querySelector('.weekly-plan-card')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 200);
+            break;
+        }
+        case 'startWorkout':
+            window.startTodaysWorkoutWithCountdown();
+            break;
+        case 'enableNotifications':
+            window.handleEnableNotifications();
+            break;
+    }
+};
+
+window.handleEnableNotifications = async function() {
+    if (!('Notification' in window)) {
+        alert('Tu dispositivo no soporta notificaciones push, pero seguiremos guardando tus entrenamientos.');
+        return;
+    }
+    
+    try {
+        const permission = await Notification.requestPermission();
+        if (permission === 'granted') {
+            completeChecklistItem('enableNotifications');
+            if (window.initNotifications) {
+                window.initNotifications();
+            }
+            alert('¡Notificaciones activadas! Te avisaremos cuando llegue la hora de entrenar.');
+        } else if (permission === 'denied') {
+            alert('Para activar los recordatorios, permite las notificaciones en los ajustes de tu navegador o dispositivo.');
+        } else {
+            alert('Permiso pendiente. Cuando quieras activarlos de nuevo, vuelve a esta sección.');
+        }
+    } catch (error) {
+        console.error('❌ Error solicitando notificaciones:', error);
+        alert('No pudimos activar las notificaciones. Inténtalo de nuevo más tarde.');
+    }
+};
+
+function completeDashboardTour({ skipped = false } = {}) {
+    dashboardState.showTour = false;
+    localStorage.setItem(DASHBOARD_TOUR_KEY, 'true');
+    dashboardState.collapsedSections.advanced = false;
+    saveCollapsedState();
+    
+    if (!skipped) {
+        completeChecklistItem('reviewPlan', { silent: true });
+    }
+    
+    renderDashboard();
+    
+    setTimeout(() => {
+        const focusEl = document.querySelector('.todays-workout-card') || document.querySelector('.weekly-plan-card');
+        focusEl?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 250);
+}
+
+window.nextDashboardTour = function() {
+    if (!dashboardState.showTour) return;
+    if (dashboardState.tourStep < DASHBOARD_TOUR_STEPS.length - 1) {
+        dashboardState.tourStep += 1;
+        renderDashboard();
+    } else {
+        completeDashboardTour({ skipped: false });
+    }
+};
+
+window.prevDashboardTour = function() {
+    if (!dashboardState.showTour) return;
+    dashboardState.tourStep = Math.max(0, dashboardState.tourStep - 1);
+    renderDashboard();
+};
+
+window.skipDashboardTour = function() {
+    if (!dashboardState.showTour) return;
+    completeDashboardTour({ skipped: true });
 };
 
 window.showPlanMenu = function() {
@@ -1928,6 +2289,9 @@ window.showPlanMenu = function() {
 window.startTodaysWorkoutWithCountdown = function() {
     const btn = document.getElementById('start-workout-btn');
     if (!btn || btn.classList.contains('countdown')) return;
+    
+    completeChecklistItem('startWorkout', { silent: true });
+    saveChecklistState();
     
     // Agregar overlay de cuenta regresiva
     btn.classList.add('countdown');
@@ -3111,7 +3475,7 @@ window.showAchievementCategory = function(category, achievements = null) {
 // MEJORAS FASE 1: Calendario Mensual con Heat Map
 // ==========================================
 
-function renderMonthlyCalendar() {
+function renderMonthlySection() {
     const plan = dashboardState.activePlan;
     if (!plan) return '';
     
@@ -3125,15 +3489,21 @@ function renderMonthlyCalendar() {
     
     const monthNames = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 
                       'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+    const collapsed = dashboardState.collapsedSections.advanced;
     
     return `
-        <div class="monthly-calendar-card glass-card mb-lg">
+        <div class="monthly-calendar-card glass-card mb-lg ${collapsed ? 'collapsed-section-wrapper' : ''}">
             <div class="calendar-header">
                 <h3 class="calendar-title">🔥 Calendario de Actividad</h3>
-                <div class="calendar-month">${monthNames[today.getMonth()]} ${today.getFullYear()}</div>
+                <div class="calendar-actions">
+                    <span class="calendar-month">${monthNames[today.getMonth()]} ${today.getFullYear()}</span>
+                    <button class="glass-button btn-sm collapse-btn" onclick="window.toggleSectionCollapse('advanced')">
+                        ${collapsed ? 'Ver calendario' : 'Ocultar'}
+                    </button>
+                </div>
             </div>
             
-            <div class="heat-map-legend mb-md">
+            <div class="heat-map-legend mb-md ${collapsed ? 'collapsed-section' : ''}">
                 <span class="legend-label">Menos</span>
                 <div class="legend-colors">
                     <div class="legend-color" style="background: #ebedf0;"></div>
@@ -3145,7 +3515,7 @@ function renderMonthlyCalendar() {
                 <span class="legend-label">Más</span>
             </div>
             
-            <div class="monthly-calendar-grid">
+            <div class="monthly-calendar-grid ${collapsed ? 'collapsed-section' : ''}">
                 ${['L', 'M', 'X', 'J', 'V', 'S', 'D'].map(day => 
                     `<div class="calendar-weekday">${day}</div>`
                 ).join('')}
@@ -3187,7 +3557,7 @@ function renderMonthlyCalendar() {
                 }).join('')}
             </div>
             
-            <div class="calendar-stats mt-md">
+            <div class="calendar-stats mt-md ${collapsed ? 'collapsed-section' : ''}">
                 <div class="calendar-stat">
                     <span class="stat-value">${Object.values(workoutData).reduce((a, b) => a + b, 0)}</span>
                     <span class="stat-label">Entrenamientos este mes</span>
@@ -3295,15 +3665,21 @@ function renderProgressCharts() {
     
     // Obtener datos de las últimas 4 semanas
     const weeklyData = getWeeklyProgressData(4);
+    const collapsed = dashboardState.collapsedSections.advanced;
     
     return `
-        <div class="progress-charts-card glass-card mb-lg">
+        <div class="progress-charts-card glass-card mb-lg ${collapsed ? 'collapsed-section-wrapper' : ''}">
             <div class="charts-header">
                 <h3 class="charts-title">📈 Tu Progreso</h3>
-                <div class="charts-subtitle">Últimas 4 semanas</div>
+                <div class="charts-controls">
+                    <span class="charts-subtitle">Últimas 4 semanas</span>
+                    <button class="glass-button btn-sm collapse-btn" onclick="window.toggleSectionCollapse('advanced')">
+                        ${collapsed ? 'Mostrar gráficos' : 'Ocultar'}
+                    </button>
+                </div>
             </div>
             
-            <div class="charts-container">
+            <div class="charts-container ${collapsed ? 'collapsed-section' : ''}">
                 <div class="chart-wrapper">
                     <canvas id="weeklyWorkoutsChart" class="progress-chart"></canvas>
                 </div>
