@@ -610,6 +610,10 @@ async function finishOnboarding() {
             localStorage.setItem('entrenoapp_active_plan', JSON.stringify(personalizedPlan));
             localStorage.setItem('entrenoapp_onboarding_complete', 'true');
         }
+
+        if (window.syncActivePlan) {
+            window.syncActivePlan(personalizedPlan, { source: 'onboarding', skipNavigation: true });
+        }
         
         // Limpiar workouts antiguos para que se generen con la nueva duración
         const keysToRemove = [];
@@ -664,6 +668,9 @@ async function finishOnboarding() {
                 localStorage.setItem('entrenoapp_onboarding_complete', 'true');
                 localStorage.removeItem('entrenoapp_onboarding');
                 debugLog('RESCUE_SUCCESS', 'Plan rescatado y guardado exitosamente');
+                if (window.syncActivePlan) {
+                    window.syncActivePlan(rescuePlan, { source: 'onboarding-rescue', skipNavigation: true });
+                }
                 // Redirigir al dashboard en lugar de mostrar error
                 setTimeout(() => {
                     if (window.navigateToPage) {
@@ -696,6 +703,9 @@ async function finishOnboarding() {
                             localStorage.setItem('entrenoapp_active_plan', JSON.stringify(plan));
                             localStorage.setItem('entrenoapp_onboarding_complete', 'true');
                             debugLog('FALLBACK_PLAN_CREATED', 'Plan personalizado creado en finally con datos del usuario');
+                                if (window.syncActivePlan) {
+                                    window.syncActivePlan(plan, { source: 'onboarding-finally', skipNavigation: true });
+                                }
                             // Solo navegar si no se navegó ya antes
                             setTimeout(() => {
                                 if (window.navigateToPage && window.location.hash !== '#/dashboard') {
@@ -707,6 +717,9 @@ async function finishOnboarding() {
                             const fallbackPlan = generateDefaultPlan();
                             localStorage.setItem('entrenoapp_active_plan', JSON.stringify(fallbackPlan));
                             localStorage.setItem('entrenoapp_onboarding_complete', 'true');
+                                if (window.syncActivePlan) {
+                                    window.syncActivePlan(fallbackPlan, { source: 'onboarding-fallback', skipNavigation: true });
+                                }
                             debugLog('FALLBACK_PLAN_CREATED', 'Plan genérico creado en finally');
                         }
                     })
@@ -717,6 +730,9 @@ async function finishOnboarding() {
                             const fallbackPlan = generateDefaultPlan();
                             localStorage.setItem('entrenoapp_active_plan', JSON.stringify(fallbackPlan));
                             localStorage.setItem('entrenoapp_onboarding_complete', 'true');
+                                if (window.syncActivePlan) {
+                                    window.syncActivePlan(fallbackPlan, { source: 'onboarding-final-error', skipNavigation: true });
+                                }
                         } catch (finalError) {
                             console.error('Error crítico: no se pudo crear ningún plan', finalError);
                         }
@@ -726,6 +742,9 @@ async function finishOnboarding() {
                 const fallbackPlan = generateDefaultPlan();
                 localStorage.setItem('entrenoapp_active_plan', JSON.stringify(fallbackPlan));
                 localStorage.setItem('entrenoapp_onboarding_complete', 'true');
+                if (window.syncActivePlan) {
+                    window.syncActivePlan(fallbackPlan, { source: 'onboarding-final-no-data', skipNavigation: true });
+                }
                 debugLog('FALLBACK_PLAN_CREATED', 'Plan genérico creado en finally (sin datos de usuario)');
             }
         } catch (e) {

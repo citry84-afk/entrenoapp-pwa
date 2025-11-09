@@ -1860,6 +1860,36 @@ window.debugShowPlanStatus = function() {
     }
 };
 
+// Sincronizar plan activo desde onboarding u otros flujos
+window.syncActivePlan = function(plan, options = {}) {
+    if (!plan || typeof plan !== 'object') {
+        console.warn('syncActivePlan ignorado: plan inválido', plan);
+        return;
+    }
+
+    const { skipNavigation = true, source = 'external' } = options;
+
+    try {
+        localStorage.setItem('entrenoapp_active_plan', JSON.stringify(plan));
+        localStorage.setItem('entrenoapp_onboarding_complete', 'true');
+    } catch (error) {
+        console.warn('⚠️ No se pudo persistir el plan al sincronizar:', error);
+    }
+
+    dashboardState.activePlan = plan;
+    dashboardState.todaysWorkout = generateTodaysWorkout(plan);
+    dashboardState.weekProgress = calculateWeekProgress(plan);
+    dashboardState.isLoading = false;
+
+    console.log(`✅ Plan sincronizado desde ${source}. Frecuencia: ${plan.frequency}, semanas: ${plan.duration}`);
+
+    renderDashboard();
+
+    if (!skipNavigation && typeof window.navigateToPage === 'function') {
+        window.navigateToPage('dashboard');
+    }
+};
+
 window.showPlanMenu = function() {
     const plan = dashboardState.activePlan;
     if (!plan) return;
