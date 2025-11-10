@@ -96,6 +96,164 @@
   to = "/contact.html"
   status = 301
 
+# Redirects para URLs sin .html (rastreadas por Google)
+[[redirects]]
+  from = "/about"
+  to = "/about.html"
+  status = 301
+
+[[redirects]]
+  from = "/blog"
+  to = "/blog.html"
+  status = 301
+
+[[redirects]]
+  from = "/app"
+  to = "/app.html"
+  status = 301
+
+[[redirects]]
+  from = "/workout-guides"
+  to = "/workout-guides.html"
+  status = 301
+
+[[redirects]]
+  from = "/fitness-tips"
+  to = "/fitness-tips.html"
+  status = 301
+
+[[redirects]]
+  from = "/fitness-calculators"
+  to = "/fitness-calculators.html"
+  status = 301
+
+[[redirects]]
+  from = "/exercises-library"
+  to = "/exercises-library.html"
+  status = 301
+
+[[redirects]]
+  from = "/faq"
+  to = "/faq.html"
+  status = 301
+
+[[redirects]]
+  from = "/resources"
+  to = "/resources.html"
+  status = 301
+
+[[redirects]]
+  from = "/testimonials"
+  to = "/testimonials.html"
+  status = 301
+
+[[redirects]]
+  from = "/pricing"
+  to = "/pricing.html"
+  status = 301
+
+[[redirects]]
+  from = "/news"
+  to = "/news.html"
+  status = 301
+
+[[redirects]]
+  from = "/compare"
+  to = "/compare.html"
+  status = 301
+
+# Redirects para artículos sin .html
+[[redirects]]
+  from = "/cortisol-face-suplementos-2025"
+  to = "/cortisol-face-suplementos-2025.html"
+  status = 301
+
+[[redirects]]
+  from = "/proteina-cuanta-realmente-necesitas-2025"
+  to = "/proteina-cuanta-realmente-necesitas-2025.html"
+  status = 301
+
+[[redirects]]
+  from = "/relojes-fitness-smartwatch"
+  to = "/relojes-fitness-smartwatch.html"
+  status = 301
+
+[[redirects]]
+  from = "/almohadas-mejorar-sueno-2025"
+  to = "/almohadas-mejorar-sueno-2025.html"
+  status = 301
+
+[[redirects]]
+  from = "/equipamiento-fitness-casa"
+  to = "/equipamiento-fitness-casa.html"
+  status = 301
+
+[[redirects]]
+  from = "/gamificacion-fitness-gaming"
+  to = "/gamificacion-fitness-gaming.html"
+  status = 301
+
+# Redirects adicionales para otros artículos
+[[redirects]]
+  from = "/suplementos-recomendados"
+  to = "/suplementos-recomendados.html"
+  status = 301
+
+[[redirects]]
+  from = "/suplementos-para-perder-grasa"
+  to = "/suplementos-para-perder-grasa.html"
+  status = 301
+
+[[redirects]]
+  from = "/proteinas-vegetales-2025"
+  to = "/proteinas-vegetales-2025.html"
+  status = 301
+
+[[redirects]]
+  from = "/libros-nutricion-deportiva-2025"
+  to = "/libros-nutricion-deportiva-2025.html"
+  status = 301
+
+[[redirects]]
+  from = "/esterillas-yoga-2025"
+  to = "/esterillas-yoga-2025.html"
+  status = 301
+
+[[redirects]]
+  from = "/batidoras-proteina-2025"
+  to = "/batidoras-proteina-2025.html"
+  status = 301
+
+[[redirects]]
+  from = "/pesas-equipamiento-casa-2025"
+  to = "/pesas-equipamiento-casa-2025.html"
+  status = 301
+
+[[redirects]]
+  from = "/ropa-deportiva-amazon"
+  to = "/ropa-deportiva-amazon.html"
+  status = 301
+
+[[redirects]]
+  from = "/empezar-a-correr-2-semanas"
+  to = "/empezar-a-correr-2-semanas.html"
+  status = 301
+
+[[redirects]]
+  from = "/empezar-correr-guia-completa"
+  to = "/empezar-correr-guia-completa.html"
+  status = 301
+
+[[redirects]]
+  from = "/nutricion-corredores"
+  to = "/nutricion-corredores.html"
+  status = 301
+
+[[redirects]]
+  from = "/rutina-gym-principiantes-2025"
+  to = "/rutina-gym-principiantes-2025.html"
+  status = 301
+
 # Canonical domain: force https + apex
 [[redirects]]
   from = "http://entrenoapp.com/*"
