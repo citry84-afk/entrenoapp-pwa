@@ -240,6 +240,11 @@
   status = 301
 
 [[redirects]]
+  from = "/empezar-correr-sobrepeso-2025"
+  to = "/empezar-correr-sobrepeso-2025.html"
+  status = 301
+
+[[redirects]]
   from = "/empezar-correr-guia-completa"
   to = "/empezar-correr-guia-completa.html"
   status = 301
