@@ -65,21 +65,9 @@
     Content-Type = "application/xml; charset=utf-8"
     Cache-Control = "public, max-age=3600"
 
-[[redirects]]
-  from = "/"
-  to = "/home.html"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/index.html"
-  to = "/"
-  status = 301
-
-[[redirects]]
-  from = "/home.html"
-  to = "/"
-  status = 301
+# index.html es la página principal (contenido estático visible para AdSense)
+# app.html es accesible desde un botón en index.html
+# NO redirigir automáticamente a app.html
 
 [[redirects]]
   from = "/privacy"
@@ -245,6 +233,11 @@
   status = 301
 
 [[redirects]]
+  from = "/10-mejores-ejercicios-casa-sin-equipamiento-2025"
+  to = "/10-mejores-ejercicios-casa-sin-equipamiento-2025.html"
+  status = 301
+
+[[redirects]]
   from = "/empezar-correr-guia-completa"
   to = "/empezar-correr-guia-completa.html"
   status = 301
@@ -257,6 +250,16 @@
 [[redirects]]
   from = "/rutina-gym-principiantes-2025"
   to = "/rutina-gym-principiantes-2025.html"
+  status = 301
+
+[[redirects]]
+  from = "/black-friday-running-fitness-2025"
+  to = "/black-friday-running-fitness-2025.html"
+  status = 301
+
+[[redirects]]
+  from = "/regalos-fitness-navidad-2025"
+  to = "/regalos-fitness-navidad-2025.html"
   status = 301
 
 # Canonical domain: force https + apex

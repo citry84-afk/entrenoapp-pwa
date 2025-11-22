@@ -1,7 +1,8 @@
-const CACHE_NAME = 'entrenoapp-v1.0.3';
+const CACHE_NAME = 'entrenoapp-v1.0.4';
 const ASSETS_TO_CACHE = [
     '/',
     '/index.html',
+    '/app.html',
     '/css/styles.css',
     '/css/glassmorphism.css',
     '/js/app.js',
@@ -12,6 +13,9 @@ const ASSETS_TO_CACHE = [
     '/js/components/running.js',
     '/js/components/challenges.js',
     '/js/components/profile.js',
+    '/js/components/progress-photos.js',
+    '/js/components/body-measurements.js',
+    '/js/components/workout-calendar.js',
     '/js/data/exercises.js',
     '/js/data/crossfit-wods.js',
     '/js/data/running-plans.js',
@@ -69,44 +73,65 @@ self.addEventListener('fetch', (event) => {
     // Evitar cachear Firebase Auth y Analytics
     if (event.request.url.includes('firebaseapp.com') || 
         event.request.url.includes('googleapis.com') ||
-        event.request.url.includes('googletagmanager.com')) {
+        event.request.url.includes('googletagmanager.com') ||
+        event.request.url.includes('pagead2.googlesyndication.com') ||
+        event.request.url.includes('adsbygoogle.js')) {
         return;
     }
 
-    event.respondWith(
-        caches.match(event.request)
-            .then((response) => {
-                // Si está en caché, devolverlo
-                if (response) {
-                    return response;
-                }
-                
-                // Si no está en caché, hacer petición de red
-                return fetch(event.request)
-                    .then((response) => {
-                        // Verificar que la respuesta sea válida
-                        if (!response || response.status !== 200 || response.type !== 'basic') {
-                            return response;
-                        }
-                        
-                        // Clonar la respuesta para cachearla
-                        const responseToCache = response.clone();
-                        
-                        caches.open(CACHE_NAME)
-                            .then((cache) => {
+    // Estrategia: Network First para archivos JS y CSS (para obtener actualizaciones)
+    // Cache First para assets estáticos
+    const url = new URL(event.request.url);
+    const isStaticAsset = url.pathname.includes('/assets/') || 
+                         url.pathname.includes('/css/') ||
+                         url.pathname.includes('/manifest.json');
+    
+    if (isStaticAsset) {
+        // Cache First para assets estáticos
+        event.respondWith(
+            caches.match(event.request)
+                .then((response) => {
+                    if (response) {
+                        return response;
+                    }
+                    return fetch(event.request).then((response) => {
+                        if (response && response.status === 200) {
+                            const responseToCache = response.clone();
+                            caches.open(CACHE_NAME).then((cache) => {
                                 cache.put(event.request, responseToCache);
                             });
-                        
+                        }
                         return response;
-                    })
-                    .catch(() => {
-                        // Si falla la red y no está en caché, mostrar página offline
+                    });
+                })
+        );
+    } else {
+        // Network First para archivos JS y HTML (para obtener actualizaciones)
+        event.respondWith(
+            fetch(event.request)
+                .then((response) => {
+                    if (response && response.status === 200) {
+                        const responseToCache = response.clone();
+                        caches.open(CACHE_NAME).then((cache) => {
+                            cache.put(event.request, responseToCache);
+                        });
+                    }
+                    return response;
+                })
+                .catch(() => {
+                    // Si falla la red, intentar desde caché
+                    return caches.match(event.request).then((response) => {
+                        if (response) {
+                            return response;
+                        }
+                        // Si no está en caché y es un documento, mostrar página offline
                         if (event.request.destination === 'document') {
                             return caches.match('/offline.html');
                         }
                     });
-            })
-    );
+                })
+        );
+    }
 });
 
 // Sincronización en background

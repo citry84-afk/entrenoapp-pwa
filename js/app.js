@@ -34,22 +34,21 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Mostrar pantalla de carga
         showLoadingScreen();
         
-        // Auth deshabilitado para AdSense - acceso sin registro
-        // setupAuthListener();
-
-        // Inicializar Firebase (sin auth)
-        await initializeEntrenoApp();
-        
-        // Simular usuario guest para que la app funcione
+        // Simular usuario guest inmediatamente (antes de Firebase)
         appState.currentUser = { uid: 'guest', isGuest: true, displayName: 'Usuario' };
+        
+        // Configurar navegación y listeners primero (no bloquean)
         setupNavigationListeners();
         setupNetworkListeners();
         setupServiceWorkerListeners();
-        
-        // Configurar tema
         setupTheme();
         
-        // Configurar banner de anuncios
+        // Inicializar Firebase en paralelo (no bloquea)
+        initializeEntrenoApp().catch(err => {
+            console.warn('⚠️ Firebase no disponible (modo offline):', err);
+        });
+        
+        // Configurar banner de anuncios (no bloquea)
         setupAdBanner();
         
         // Marcar como inicializada
@@ -82,17 +81,21 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         }
 
-        hideLoadingScreen();
-        if (!hasActivePlan && !hasCompletedOnboarding) {
-            navigateToPage('onboarding');
-        } else {
-            navigateToPage('dashboard');
-        }
+        // Ocultar loading rápidamente
+        setTimeout(() => {
+            hideLoadingScreen();
+            if (!hasActivePlan && !hasCompletedOnboarding) {
+                navigateToPage('onboarding');
+            } else {
+                navigateToPage('dashboard');
+            }
+        }, 500); // Reducido de espera indefinida a 500ms
         
         console.log('✅ EntrenoApp inicializada correctamente (Modo Guest para AdSense)');
         
     } catch (error) {
         console.error('❌ Error inicializando la aplicación:', error);
+        hideLoadingScreen();
         showErrorScreen(error);
     }
 });
@@ -310,6 +313,9 @@ async function loadPageContent(page) {
             case 'profile':
                 content = await loadProfilePage();
                 break;
+            case 'progress':
+                content = await loadProgressPage();
+                break;
             case 'progress-stats':
                 content = '<div class="challenges-container"></div>';
                 break;
@@ -332,6 +338,16 @@ async function loadPageContent(page) {
             
             // Ejecutar scripts específicos de la página
             await executePageScripts(page);
+            
+            // Para la página de progreso, asegurar que los componentes se inicialicen
+            if (page === 'progress') {
+                setTimeout(() => {
+                    console.log('🔄 Verificando inicialización de componentes de progreso...');
+                    console.log('ProgressPhotosManager disponible:', !!window.ProgressPhotosManager);
+                    console.log('BodyMeasurementsManager disponible:', !!window.BodyMeasurementsManager);
+                    console.log('WorkoutCalendarManager disponible:', !!window.WorkoutCalendarManager);
+                }, 500);
+            }
         }, 150);
         
     } catch (error) {
@@ -477,6 +493,81 @@ async function loadChallengesPage() {
     `;
 }
 
+async function loadProgressPage() {
+    return `
+        <div class="page progress-page">
+            <div class="page-header glass-effect" style="padding: 20px; margin-bottom: 20px; border-radius: 12px;">
+                <h1 style="margin: 0;">📊 Mi Progreso</h1>
+                <p style="margin: 10px 0 0 0; opacity: 0.8;">Sigue tu transformación paso a paso</p>
+            </div>
+            
+            <div class="progress-tabs glass-effect" style="display: flex; gap: 10px; margin-bottom: 20px; padding: 10px; border-radius: 12px; flex-wrap: wrap;">
+                <button class="tab-btn active" onclick="showProgressTab('photos')" style="flex: 1; min-width: 100px; padding: 12px; border: none; background: transparent; border-radius: 8px; cursor: pointer; transition: all 0.3s;">
+                    📸 Fotos
+                </button>
+                <button class="tab-btn" onclick="showProgressTab('measurements')" style="flex: 1; min-width: 100px; padding: 12px; border: none; background: transparent; border-radius: 8px; cursor: pointer; transition: all 0.3s;">
+                    📏 Medidas
+                </button>
+                <button class="tab-btn" onclick="showProgressTab('calendar')" style="flex: 1; min-width: 100px; padding: 12px; border: none; background: transparent; border-radius: 8px; cursor: pointer; transition: all 0.3s;">
+                    📅 Calendario
+                </button>
+            </div>
+            
+            <div id="progress-tab-photos" class="progress-tab active" style="display: block;">
+                <div id="progress-photos-container"></div>
+            </div>
+            
+            <div id="progress-tab-measurements" class="progress-tab" style="display: none;">
+                <div id="body-measurements-container"></div>
+            </div>
+            
+            <div id="progress-tab-calendar" class="progress-tab" style="display: none;">
+                <div id="workout-calendar-container"></div>
+            </div>
+        </div>
+    `;
+}
+
+// Función para cambiar tabs
+window.showProgressTab = function(tab) {
+    // Ocultar todos los tabs
+    document.querySelectorAll('.progress-tab').forEach(t => {
+        t.style.display = 'none';
+    });
+    
+    // Remover active de todos los botones
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+        btn.style.background = 'transparent';
+    });
+    
+    // Mostrar tab seleccionado
+    const selectedTab = document.getElementById(`progress-tab-${tab}`);
+    if (selectedTab) {
+        selectedTab.style.display = 'block';
+    }
+    
+    // Activar botón
+    const buttons = document.querySelectorAll('.tab-btn');
+    buttons.forEach(btn => {
+        if (btn.textContent.includes(tab === 'photos' ? '📸' : tab === 'measurements' ? '📏' : '📅')) {
+            btn.classList.add('active');
+            btn.style.background = 'rgba(102, 126, 234, 0.2)';
+        }
+    });
+    
+    // Inicializar componente si es necesario
+    setTimeout(() => {
+        if (tab === 'photos' && window.progressPhotosManager) {
+            window.progressPhotosManager.render();
+        } else if (tab === 'measurements' && window.bodyMeasurementsManager) {
+            window.bodyMeasurementsManager.render();
+        } else if (tab === 'calendar' && window.workoutCalendarManager) {
+            window.workoutCalendarManager.render();
+        }
+    }, 100);
+};
+
 async function loadProfilePage() {
     // Inicializar el perfil inmediatamente
     if (window.initProfile) {
@@ -581,6 +672,143 @@ async function executePageScripts(page) {
             break;
         case 'profile':
             if (window.initProfile) window.initProfile();
+            break;
+        case 'progress':
+            console.log('📊 Inicializando página de progreso...');
+            console.log('📊 Verificando módulos disponibles...');
+            console.log('  ProgressPhotosManager:', !!window.ProgressPhotosManager);
+            console.log('  BodyMeasurementsManager:', !!window.BodyMeasurementsManager);
+            console.log('  WorkoutCalendarManager:', !!window.WorkoutCalendarManager);
+            
+            // Función para inicializar componentes
+            const initProgressComponents = () => {
+                // Crear managers si no existen
+                if (!window.progressPhotosManager) {
+                    if (window.ProgressPhotosManager) {
+                        console.log('📸 Creando ProgressPhotosManager...');
+                        try {
+                            window.progressPhotosManager = new window.ProgressPhotosManager();
+                            console.log('✅ ProgressPhotosManager creado');
+                        } catch (error) {
+                            console.error('❌ Error creando ProgressPhotosManager:', error);
+                        }
+                    } else {
+                        console.error('❌ ProgressPhotosManager no está disponible. Verifica que el script esté cargado.');
+                    }
+                } else {
+                    console.log('✅ ProgressPhotosManager ya existe');
+                }
+                
+                if (!window.bodyMeasurementsManager) {
+                    if (window.BodyMeasurementsManager) {
+                        console.log('📏 Creando BodyMeasurementsManager...');
+                        try {
+                            window.bodyMeasurementsManager = new window.BodyMeasurementsManager();
+                            console.log('✅ BodyMeasurementsManager creado');
+                        } catch (error) {
+                            console.error('❌ Error creando BodyMeasurementsManager:', error);
+                        }
+                    } else {
+                        console.error('❌ BodyMeasurementsManager no está disponible. Verifica que el script esté cargado.');
+                    }
+                } else {
+                    console.log('✅ BodyMeasurementsManager ya existe');
+                }
+                
+                if (!window.workoutCalendarManager) {
+                    if (window.WorkoutCalendarManager) {
+                        console.log('📅 Creando WorkoutCalendarManager...');
+                        try {
+                            window.workoutCalendarManager = new window.WorkoutCalendarManager();
+                            console.log('✅ WorkoutCalendarManager creado');
+                        } catch (error) {
+                            console.error('❌ Error creando WorkoutCalendarManager:', error);
+                        }
+                    } else {
+                        console.error('❌ WorkoutCalendarManager no está disponible. Verifica que el script esté cargado.');
+                    }
+                } else {
+                    console.log('✅ WorkoutCalendarManager ya existe');
+                }
+                
+                // Renderizar componentes
+                setTimeout(() => {
+                    const photosContainer = document.getElementById('progress-photos-container');
+                    const measurementsContainer = document.getElementById('body-measurements-container');
+                    const calendarContainer = document.getElementById('workout-calendar-container');
+                    
+                    console.log('📋 Verificando contenedores DOM...');
+                    console.log('  progress-photos-container:', !!photosContainer);
+                    console.log('  body-measurements-container:', !!measurementsContainer);
+                    console.log('  workout-calendar-container:', !!calendarContainer);
+                    
+                    if (window.progressPhotosManager && photosContainer) {
+                        console.log('📸 Renderizando fotos...');
+                        try {
+                            window.progressPhotosManager.render();
+                            console.log('✅ Fotos renderizadas');
+                        } catch (error) {
+                            console.error('❌ Error renderizando fotos:', error);
+                        }
+                    } else {
+                        console.warn('⚠️ No se puede renderizar fotos:', {
+                            manager: !!window.progressPhotosManager,
+                            container: !!photosContainer
+                        });
+                    }
+                    
+                    if (window.bodyMeasurementsManager && measurementsContainer) {
+                        console.log('📏 Renderizando medidas...');
+                        try {
+                            window.bodyMeasurementsManager.render();
+                            console.log('✅ Medidas renderizadas');
+                        } catch (error) {
+                            console.error('❌ Error renderizando medidas:', error);
+                        }
+                    } else {
+                        console.warn('⚠️ No se puede renderizar medidas:', {
+                            manager: !!window.bodyMeasurementsManager,
+                            container: !!measurementsContainer
+                        });
+                    }
+                    
+                    if (window.workoutCalendarManager && calendarContainer) {
+                        console.log('📅 Renderizando calendario...');
+                        try {
+                            window.workoutCalendarManager.render();
+                            console.log('✅ Calendario renderizado');
+                        } catch (error) {
+                            console.error('❌ Error renderizando calendario:', error);
+                        }
+                    } else {
+                        console.warn('⚠️ No se puede renderizar calendario:', {
+                            manager: !!window.workoutCalendarManager,
+                            container: !!calendarContainer
+                        });
+                    }
+                    
+                    // Mostrar tab de fotos por defecto
+                    if (typeof window.showProgressTab === 'function') {
+                        window.showProgressTab('photos');
+                    }
+                    
+                    // Ejecutar diagnóstico si está disponible
+                    if (typeof window.runDiagnostic === 'function') {
+                        setTimeout(() => window.runDiagnostic(), 500);
+                    }
+                }, 300);
+            };
+            
+            // Intentar inicializar inmediatamente
+            initProgressComponents();
+            
+            // Si los módulos no están disponibles, esperar un poco más
+            if (!window.ProgressPhotosManager || !window.BodyMeasurementsManager || !window.WorkoutCalendarManager) {
+                console.warn('⚠️ Algunos módulos no están disponibles. Esperando 500ms más...');
+                setTimeout(() => {
+                    initProgressComponents();
+                }, 500);
+            }
             break;
         case 'progress-stats':
             if (window.renderProgressStats) window.renderProgressStats();
