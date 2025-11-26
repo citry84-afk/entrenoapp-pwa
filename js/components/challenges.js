@@ -654,34 +654,61 @@ async function completeChallenge() {
 // Guardar completación del reto
 async function saveChallengeCompletion(completionData) {
     try {
-        const user = auth.currentUser;
-        if (!user) throw new Error('Usuario no autenticado');
-        
+        // Guardar en localStorage (modo guest)
         const today = new Date().toISOString().split('T')[0];
-        const dailyDoc = doc(db, 'daily-challenges', `${user.uid}_${today}`);
+        const challengeKey = `challenge_completed_${today}`;
         
-        await setDoc(dailyDoc, {
-            userId: user.uid,
+        // Guardar en localStorage
+        const challengeData = {
             date: today,
             challenge: completionData,
             completed: [completionData.challengeId],
             totalPoints: completionData.points,
-            createdAt: serverTimestamp()
-        }, { merge: true });
+            createdAt: new Date().toISOString()
+        };
+        localStorage.setItem(challengeKey, JSON.stringify(challengeData));
         
-        const userDoc = doc(db, 'users', user.uid);
-        await updateDoc(userDoc, {
-            'stats.challengesCompleted': increment(1),
-            'stats.totalPoints': increment(completionData.points),
-            'stats.currentStreak': increment(1),
-            'updatedAt': serverTimestamp()
-        });
+        // Actualizar estadísticas en localStorage
+        const stats = JSON.parse(localStorage.getItem('entrenoapp_user_stats') || '{}');
+        stats.challengesCompleted = (stats.challengesCompleted || 0) + 1;
+        stats.totalPoints = (stats.totalPoints || 0) + completionData.points;
+        stats.currentStreak = (stats.currentStreak || 0) + 1;
+        localStorage.setItem('entrenoapp_user_stats', JSON.stringify(stats));
         
-        console.log('✅ Reto guardado en Firestore');
+        console.log('✅ Reto guardado en localStorage');
+        
+        // Intentar guardar en Firestore si hay usuario autenticado
+        try {
+            const user = auth?.currentUser;
+            if (user && !user.isGuest) {
+                const dailyDoc = doc(db, 'daily-challenges', `${user.uid}_${today}`);
+                await setDoc(dailyDoc, {
+                    userId: user.uid,
+                    date: today,
+                    challenge: completionData,
+                    completed: [completionData.challengeId],
+                    totalPoints: completionData.points,
+                    createdAt: serverTimestamp()
+                }, { merge: true });
+                
+                const userDoc = doc(db, 'users', user.uid);
+                await updateDoc(userDoc, {
+                    'stats.challengesCompleted': increment(1),
+                    'stats.totalPoints': increment(completionData.points),
+                    'stats.currentStreak': increment(1),
+                    'updatedAt': serverTimestamp()
+                });
+                
+                console.log('✅ Reto guardado en Firestore');
+            }
+        } catch (firestoreError) {
+            console.warn('⚠️ No se pudo guardar en Firestore (modo guest):', firestoreError);
+            // Continuar sin error, ya está guardado en localStorage
+        }
         
     } catch (error) {
         console.error('❌ Error guardando reto:', error);
-        throw error;
+        // No lanzar error, solo loguear
     }
 }
 

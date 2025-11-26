@@ -475,6 +475,9 @@ function renderUserProfile() {
                 </div>
                 
                 <div class="profile-actions">
+                    <button class="glass-button glass-button-primary" onclick="window.navigateToPage('progress')">
+                        📊 Mi Progreso
+                    </button>
                     <button class="glass-button glass-button-secondary" onclick="window.editProfile()">
                         ✏️ Editar
                     </button>

@@ -568,14 +568,39 @@ async function saveGymWorkout() {
                 return sum + (ex.sets?.reduce((s, set) => s + (set.weight || 0) * (set.reps || 0), 0) || 0);
             }, 0) || 0;
             
-            window.trackWorkoutCompletion({
+            const workoutData = {
                 type: 'gym',
                 duration: Math.floor(duration / 60), // Convertir a minutos
                 exercises: gymWorkoutState.completedExercises || [],
                 muscleGroups: gymWorkoutState.workoutData.muscleGroups || [],
                 totalVolume: totalVolume,
                 notes: notes
-            });
+            };
+            
+            window.trackWorkoutCompletion(workoutData);
+            
+            // Disparar evento para calendario de entrenamientos
+            const workoutEvent = {
+                id: Date.now().toString(),
+                date: new Date().toISOString(),
+                type: 'gym',
+                duration: workoutData.duration * 60, // en segundos
+                intensity: totalVolume > 5000 ? 'high' : totalVolume > 2500 ? 'medium' : 'low',
+                exercises: workoutData.exercises.map(ex => ex.name || ex.exercise || 'Ejercicio'),
+                notes: notes
+            };
+            
+            console.log('🏋️ Disparando evento workout-completed:', workoutEvent);
+            
+            // Disparar en window y document
+            window.dispatchEvent(new CustomEvent('workout-completed', { detail: workoutEvent }));
+            document.dispatchEvent(new CustomEvent('workout-completed', { detail: workoutEvent }));
+            
+            // También guardar directamente en localStorage para el calendario
+            let history = JSON.parse(localStorage.getItem('entrenoapp_workout_history') || '[]');
+            history.push(workoutEvent);
+            localStorage.setItem('entrenoapp_workout_history', JSON.stringify(history));
+            console.log('💾 Entrenamiento guardado en localStorage para calendario');
         }
         
         // Mostrar mensaje de éxito con celebración

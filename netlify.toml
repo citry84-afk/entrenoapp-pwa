@@ -262,6 +262,16 @@
   to = "/regalos-fitness-navidad-2025.html"
   status = 301
 
+[[redirects]]
+  from = "/errores-comunes-empezar-correr-2025"
+  to = "/errores-comunes-empezar-correr-2025.html"
+  status = 301
+
+[[redirects]]
+  from = "/calzado-ideal-empezar-correr-2025"
+  to = "/calzado-ideal-empezar-correr-2025.html"
+  status = 301
+
 # Canonical domain: force https + apex
 [[redirects]]
   from = "http://entrenoapp.com/*"

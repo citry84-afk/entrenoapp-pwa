@@ -117,15 +117,92 @@
                     "@type": "Answer",
                     "text": "Para evitar lesiones: (1) Calienta antes de correr (5-10 min caminando), (2) Empieza con distancias cortas, (3) Alterna días de carrera con descanso, (4) Escucha a tu cuerpo y para si sientes dolor, (5) Fortalece músculos con ejercicios complementarios, y (6) Estira después de correr."
                 }
+            },
+            {
+                "@type": "Question",
+                "name": "¿Cuántas veces por semana debo correr como principiante?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Como principiante, te recomendamos correr 3 veces por semana con días de descanso entre sesiones. Esto permite que tu cuerpo se recupere y se adapte. A medida que progreses (después de 4-6 semanas), puedes aumentar a 4 veces por semana. Lo importante es la constancia."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "¿Qué ritmo debo llevar al empezar a correr?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "El ritmo ideal es el ritmo conversacional: deberías poder mantener una conversación mientras corres sin jadear excesivamente. Si no puedes hablar, estás yendo demasiado rápido. Como principiante, no te preocupes por la velocidad. Enfócate en completar el tiempo o distancia objetivo a un ritmo cómodo."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "¿Puedo empezar a correr si tengo sobrepeso?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Sí, absolutamente puedes empezar a correr si tienes sobrepeso. De hecho, correr es excelente para perder peso. Sin embargo, es importante empezar de forma muy gradual para proteger tus articulaciones. Comienza con caminatas rápidas, luego alterna caminar y trotar suavemente. Si tienes dudas, consulta con un médico antes de comenzar."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "¿Es mejor correr por la mañana o por la tarde?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "No hay una hora mejor para empezar a correr. Lo más importante es encontrar el momento que mejor se adapte a tu rutina y que puedas mantener de forma consistente. La mejor hora es aquella en la que realmente vas a correr. La constancia es más importante que la hora del día."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "¿Necesito hacer ejercicios de fuerza además de correr?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Aunque no es estrictamente necesario, hacer ejercicios de fuerza 2-3 veces por semana es muy beneficioso. Fortalece los músculos que sostienen tus articulaciones, reduce el riesgo de lesiones y mejora tu rendimiento corriendo. Puedes hacer ejercicios simples en casa: sentadillas, planchas, zancadas."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "¿Qué hago si me duele algo mientras corro?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Si sientes dolor agudo o punzante mientras corres, detente inmediatamente. No ignores el dolor. Descansa 2-3 días y si el dolor persiste, consulta con un médico o fisioterapeuta. Es mejor perder unos días de entrenamiento que lesionarte seriamente."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "¿Cuánto tiempo debo correr en mi primera sesión?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "En tu primera sesión, comienza con 20-30 minutos totales, alternando 1 minuto corriendo suavemente con 2-3 minutos caminando. Repite esto 5-6 veces. El objetivo no es agotarte, sino acostumbrar a tu cuerpo al movimiento. Es mejor terminar sintiendo que podrías hacer más."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "¿Debo comer algo antes de correr?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Si corres por la mañana temprano, puedes correr en ayunas. Si corres más tarde, espera 1-2 horas después de una comida grande, o 30-60 minutos después de un snack ligero. Si corres menos de 30 minutos, probablemente no necesites comer antes. Lo más importante es hidratarte bien."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "¿Cómo mantengo la motivación para seguir corriendo?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Algunos consejos: (1) Establece objetivos pequeños y alcanzables, (2) Lleva un registro de tu progreso, (3) Corre con música o podcasts, (4) Únete a grupos de running o busca un compañero, (5) Recompénsate cuando alcances objetivos, (6) Recuerda por qué empezaste. La disciplina es lo que te mantiene corriendo."
+                }
             }
         ]
     }
     </script>
     
     <!-- Iconos -->
-    <link rel="icon" type="image/png" href="assets/icons/icon-192x192.png">
-    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="assets/icons/icon-192x192.png" alt="EntrenoApp - Icono de la aplicación">
+    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" alt="EntrenoApp - Icono para iOS">
     <link rel="manifest" href="manifest.json">
+    
+    <!-- Preload de recursos críticos para mejorar Core Web Vitals -->
+    <link rel="preload" href="css/styles.css" as="style">
+    <link rel="preload" href="css/glassmorphism.css" as="style">
+    <link rel="preload" href="js/app.js" as="script">
     
     <!-- Estilos -->
     <link rel="stylesheet" href="css/styles.css">
@@ -228,8 +305,253 @@
                 </div>
             </div>
 
+            <!-- Benefits Section -->
+            <div style="max-width: 1000px; margin: 60px auto 0;">
+                <h2 style="font-size: 2rem; margin-bottom: 30px; text-align: center; color: #333;">
+                    💪 Beneficios de Empezar a Correr: Por Qué Deberías Comenzar Hoy
+                </h2>
+                <p style="text-align: center; font-size: 1.1rem; color: #666; max-width: 800px; margin: 0 auto 40px;">
+                    Correr es uno de los ejercicios más accesibles y efectivos que existen. Si estás pensando en <strong>empezar a correr desde cero</strong>, estos son los beneficios que experimentarás:
+                </p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-bottom: 40px;">
+                    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; border-radius: 16px; color: white;">
+                        <div style="font-size: 2.5rem; margin-bottom: 15px;">❤️</div>
+                        <h3 style="font-size: 1.4rem; margin-bottom: 15px; color: white;">Salud Cardiovascular</h3>
+                        <p style="line-height: 1.7; opacity: 0.95;">
+                            Correr fortalece tu corazón, reduce la presión arterial y mejora la circulación. Estudios demuestran que correr regularmente reduce el riesgo de enfermedades cardíacas en un 45%.
+                        </p>
+                    </div>
+                    
+                    <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 30px; border-radius: 16px; color: white;">
+                        <div style="font-size: 2.5rem; margin-bottom: 15px;">🔥</div>
+                        <h3 style="font-size: 1.4rem; margin-bottom: 15px; color: white;">Pérdida de Peso</h3>
+                        <p style="line-height: 1.7; opacity: 0.95;">
+                            Correr quema aproximadamente 100 calorías por cada 1.6 km. Una persona que corre 5K tres veces por semana puede quemar hasta 1,500 calorías adicionales semanales.
+                        </p>
+                    </div>
+                    
+                    <div style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); padding: 30px; border-radius: 16px; color: white;">
+                        <div style="font-size: 2.5rem; margin-bottom: 15px;">🧠</div>
+                        <h3 style="font-size: 1.4rem; margin-bottom: 15px; color: white;">Salud Mental</h3>
+                        <p style="line-height: 1.7; opacity: 0.95;">
+                            Correr libera endorfinas, reduce el estrés y la ansiedad, y mejora el estado de ánimo. Muchos corredores reportan mejor calidad de sueño y mayor claridad mental.
+                        </p>
+                    </div>
+                    
+                    <div style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); padding: 30px; border-radius: 16px; color: white;">
+                        <div style="font-size: 2.5rem; margin-bottom: 15px;">💪</div>
+                        <h3 style="font-size: 1.4rem; margin-bottom: 15px; color: white;">Fuerza y Resistencia</h3>
+                        <p style="line-height: 1.7; opacity: 0.95;">
+                            Correr fortalece músculos de piernas, glúteos y core. También mejora la densidad ósea, reduciendo el riesgo de osteoporosis, especialmente importante para mujeres.
+                        </p>
+                    </div>
+                    
+                    <div style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); padding: 30px; border-radius: 16px; color: white;">
+                        <div style="font-size: 2.5rem; margin-bottom: 15px;">⚡</div>
+                        <h3 style="font-size: 1.4rem; margin-bottom: 15px; color: white;">Energía y Vitalidad</h3>
+                        <p style="line-height: 1.7; opacity: 0.95;">
+                            Contrario a lo que muchos piensan, correr aumenta tus niveles de energía durante el día. Te sentirás más activo y productivo en todas tus actividades diarias.
+                        </p>
+                    </div>
+                    
+                    <div style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%); padding: 30px; border-radius: 16px; color: white;">
+                        <div style="font-size: 2.5rem; margin-bottom: 15px;">🎯</div>
+                        <h3 style="font-size: 1.4rem; margin-bottom: 15px; color: white;">Disciplina y Confianza</h3>
+                        <p style="line-height: 1.7; opacity: 0.95;">
+                            Alcanzar objetivos de running (como correr tu primer 5K) aumenta tu autoestima y confianza. La disciplina que desarrollas corriendo se traslada a otras áreas de tu vida.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Plan 8 Semanas Table -->
+            <div style="max-width: 1000px; margin: 60px auto 0; background: #f8f9fa; padding: 40px; border-radius: 20px;">
+                <h2 style="font-size: 2rem; margin-bottom: 20px; text-align: center; color: #333;">
+                    📋 Plan de 8 Semanas para Empezar a Correr desde Cero
+                </h2>
+                <p style="text-align: center; font-size: 1.1rem; color: #666; margin-bottom: 40px;">
+                    Esta tabla muestra la progresión semanal de nuestro plan para <strong>aprender a correr</strong>. Cada semana aumenta gradualmente la intensidad y duración.
+                </p>
+                
+                <div style="overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                        <thead>
+                            <tr style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                                <th style="padding: 15px; text-align: left; font-weight: 600;">Semana</th>
+                                <th style="padding: 15px; text-align: left; font-weight: 600;">Sesiones</th>
+                                <th style="padding: 15px; text-align: left; font-weight: 600;">Rutina</th>
+                                <th style="padding: 15px; text-align: left; font-weight: 600;">Duración Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom: 1px solid #e0e0e0;">
+                                <td style="padding: 15px; font-weight: 600; color: #667eea;">Semana 1-2</td>
+                                <td style="padding: 15px;">3 veces/semana</td>
+                                <td style="padding: 15px;">1 min correr / 2 min caminar (8 rondas)</td>
+                                <td style="padding: 15px;">~30 minutos</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #e0e0e0; background: #f8f9fa;">
+                                <td style="padding: 15px; font-weight: 600; color: #667eea;">Semana 3-4</td>
+                                <td style="padding: 15px;">3 veces/semana</td>
+                                <td style="padding: 15px;">2 min correr / 2 min caminar (6 rondas)</td>
+                                <td style="padding: 15px;">~30 minutos</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #e0e0e0;">
+                                <td style="padding: 15px; font-weight: 600; color: #667eea;">Semana 5-6</td>
+                                <td style="padding: 15px;">3-4 veces/semana</td>
+                                <td style="padding: 15px;">3 min correr / 1 min caminar (5 rondas)</td>
+                                <td style="padding: 15px;">~25 minutos</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #e0e0e0; background: #f8f9fa;">
+                                <td style="padding: 15px; font-weight: 600; color: #667eea;">Semana 7</td>
+                                <td style="padding: 15px;">4 veces/semana</td>
+                                <td style="padding: 15px;">5 min correr / 1 min caminar (4 rondas)</td>
+                                <td style="padding: 15px;">~25 minutos</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 15px; font-weight: 600; color: #667eea;">Semana 8</td>
+                                <td style="padding: 15px;">4 veces/semana</td>
+                                <td style="padding: 15px;">Correr 5K sin parar</td>
+                                <td style="padding: 15px;">~30-40 minutos</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div style="margin-top: 30px; padding: 20px; background: #e3f2fd; border-radius: 12px; border-left: 4px solid #2196f3;">
+                    <p style="margin: 0; color: #1976d2; line-height: 1.7;">
+                        <strong>💡 Consejo:</strong> Este plan es una guía general. Escucha a tu cuerpo y ajusta según tu nivel. Si una semana te resulta muy difícil, repítela antes de avanzar. La clave para <strong>empezar a correr desde cero</strong> es la progresión gradual y la constancia. 
+                        <a href="empezar-correr-guia-completa.html" style="color: #667eea; font-weight: 600;">Ver plan detallado completo →</a>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Common Mistakes Section -->
+            <div style="max-width: 1000px; margin: 60px auto 0;">
+                <h2 style="font-size: 2rem; margin-bottom: 30px; text-align: center; color: #333;">
+                    ⚠️ Errores Comunes al Empezar a Correr (Y Cómo Evitarlos)
+                </h2>
+                <p style="text-align: center; font-size: 1.1rem; color: #666; max-width: 800px; margin: 0 auto 40px;">
+                    Muchos principiantes cometen estos errores cuando <strong>empiezan a correr desde cero</strong>. Conocerlos te ayudará a evitarlos y progresar más rápido:
+                </p>
+                
+                <div style="display: grid; gap: 25px;">
+                    <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 25px; border-radius: 12px;">
+                        <h3 style="font-size: 1.4rem; margin-bottom: 15px; color: #856404;">
+                            ❌ Error 1: Empezar Demasiado Rápido
+                        </h3>
+                        <p style="color: #856404; line-height: 1.7; margin-bottom: 10px;">
+                            <strong>El problema:</strong> Muchos principiantes quieren correr rápido desde el primer día, lo que lleva a agotamiento, lesiones y desmotivación.
+                        </p>
+                        <p style="color: #856404; line-height: 1.7; margin: 0;">
+                            <strong>✅ La solución:</strong> Empieza a un ritmo conversacional (deberías poder hablar mientras corres). La velocidad vendrá con el tiempo. Enfócate primero en la distancia y la constancia.
+                        </p>
+                    </div>
+                    
+                    <div style="background: #f8d7da; border-left: 4px solid #dc3545; padding: 25px; border-radius: 12px;">
+                        <h3 style="font-size: 1.4rem; margin-bottom: 15px; color: #721c24;">
+                            ❌ Error 2: No Descansar Suficiente
+                        </h3>
+                        <p style="color: #721c24; line-height: 1.7; margin-bottom: 10px;">
+                            <strong>El problema:</strong> Correr todos los días sin descanso no permite que tu cuerpo se recupere, aumentando el riesgo de lesiones y sobreentrenamiento.
+                        </p>
+                        <p style="color: #721c24; line-height: 1.7; margin: 0;">
+                            <strong>✅ La solución:</strong> Como principiante, corre máximo 3-4 veces por semana. Los días de descanso son tan importantes como los días de entrenamiento. Tu cuerpo se fortalece durante el descanso.
+                        </p>
+                    </div>
+                    
+                    <div style="background: #d1ecf1; border-left: 4px solid #0c5460; padding: 25px; border-radius: 12px;">
+                        <h3 style="font-size: 1.4rem; margin-bottom: 15px; color: #0c5460;">
+                            ❌ Error 3: Ignorar el Calentamiento y Estiramiento
+                        </h3>
+                        <p style="color: #0c5460; line-height: 1.7; margin-bottom: 10px;">
+                            <strong>El problema:</strong> Saltarse el calentamiento aumenta el riesgo de lesiones. No estirar después puede causar rigidez y dolor muscular.
+                        </p>
+                        <p style="color: #0c5460; line-height: 1.7; margin: 0;">
+                            <strong>✅ La solución:</strong> Siempre calienta 5-10 minutos caminando antes de correr. Después de correr, estira los músculos principales (cuádriceps, isquiotibiales, gemelos) durante 10-15 minutos.
+                        </p>
+                    </div>
+                    
+                    <div style="background: #d4edda; border-left: 4px solid #28a745; padding: 25px; border-radius: 12px;">
+                        <h3 style="font-size: 1.4rem; margin-bottom: 15px; color: #155724;">
+                            ❌ Error 4: Usar Zapatillas Inadecuadas
+                        </h3>
+                        <p style="color: #155724; line-height: 1.7; margin-bottom: 10px;">
+                            <strong>El problema:</strong> Correr con zapatillas viejas, de otros deportes o que no se adaptan a tu pisada puede causar lesiones en pies, tobillos y rodillas.
+                        </p>
+                        <p style="color: #155724; line-height: 1.7; margin: 0;">
+                            <strong>✅ La solución:</strong> Invierte en un buen par de zapatillas de running. Visita una tienda especializada donde analicen tu pisada (pronadora, supinadora o neutra). Las zapatillas deben reemplazarse cada 500-800 km.
+                        </p>
+                    </div>
+                    
+                    <div style="background: #e2e3e5; border-left: 4px solid #6c757d; padding: 25px; border-radius: 12px;">
+                        <h3 style="font-size: 1.4rem; margin-bottom: 15px; color: #383d41;">
+                            ❌ Error 5: Compararse con Otros
+                        </h3>
+                        <p style="color: #383d41; line-height: 1.7; margin-bottom: 10px;">
+                            <strong>El problema:</strong> Comparar tu progreso con otros corredores (especialmente experimentados) puede desmotivarte y llevarte a entrenar más allá de tus límites.
+                        </p>
+                        <p style="color: #383d41; line-height: 1.7; margin: 0;">
+                            <strong>✅ La solución:</strong> Tu única competencia eres tú mismo. Celebra tus pequeños logros: tu primer kilómetro sin parar, tu primera semana completa, tu primer 5K. Cada persona tiene su propio ritmo.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Equipment Section -->
+            <div style="max-width: 1000px; margin: 60px auto 0; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); padding: 40px; border-radius: 20px;">
+                <h2 style="font-size: 2rem; margin-bottom: 30px; text-align: center; color: #333;">
+                    👟 Equipamiento Necesario para Empezar a Correr
+                </h2>
+                <p style="text-align: center; font-size: 1.1rem; color: #666; max-width: 800px; margin: 0 auto 40px;">
+                    Una de las ventajas de <strong>empezar a correr desde cero</strong> es que necesitas muy poco equipamiento. Aquí está lo esencial:
+                </p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px;">
+                    <div style="background: white; padding: 25px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                        <div style="font-size: 2.5rem; margin-bottom: 15px;">👟</div>
+                        <h3 style="font-size: 1.4rem; margin-bottom: 15px; color: #333;">Zapatillas de Running</h3>
+                        <p style="color: #666; line-height: 1.7; margin-bottom: 15px;">
+                            <strong>Esencial:</strong> El único equipamiento realmente necesario. Busca zapatillas específicas para running, no para otros deportes. Deben tener buena amortiguación y adaptarse a tu tipo de pisada.
+                        </p>
+                        <p style="color: #888; font-size: 0.9rem; margin: 0;">
+                            💰 Inversión: 60-120€ | Duración: 500-800 km
+                        </p>
+                    </div>
+                    
+                    <div style="background: white; padding: 25px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                        <div style="font-size: 2.5rem; margin-bottom: 15px;">👕</div>
+                        <h3 style="font-size: 1.4rem; margin-bottom: 15px; color: #333;">Ropa Técnica</h3>
+                        <p style="color: #666; line-height: 1.7; margin-bottom: 15px;">
+                            <strong>Recomendado:</strong> Ropa transpirable que evacue el sudor. Evita algodón, que se moja y pesa. En invierno, usa capas (primera capa transpirable, segunda capa aislante, tercera capa cortavientos).
+                        </p>
+                        <p style="color: #888; font-size: 0.9rem; margin: 0;">
+                            💰 Inversión: 30-80€ | Puedes usar ropa deportiva que ya tengas
+                        </p>
+                    </div>
+                    
+                    <div style="background: white; padding: 25px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                        <div style="font-size: 2.5rem; margin-bottom: 15px;">⌚</div>
+                        <h3 style="font-size: 1.4rem; margin-bottom: 15px; color: #333;">Reloj o App de Running</h3>
+                        <p style="color: #666; line-height: 1.7; margin-bottom: 15px;">
+                            <strong>Opcional pero útil:</strong> Un reloj GPS o una app en tu móvil (como EntrenoApp) te ayuda a medir distancia, tiempo, ritmo y progreso. No es esencial para empezar, pero motiva mucho.
+                        </p>
+                        <p style="color: #888; font-size: 0.9rem; margin: 0;">
+                            💰 Inversión: Gratis (app) o 100-300€ (reloj GPS)
+                        </p>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 30px; padding: 20px; background: white; border-radius: 12px; border: 2px solid #667eea;">
+                    <p style="margin: 0; color: #333; line-height: 1.7; text-align: center;">
+                        <strong>💡 Lo más importante:</strong> No necesitas equipamiento caro para <strong>empezar a correr desde cero</strong>. Con un buen par de zapatillas y ropa cómoda ya puedes comenzar. El resto lo puedes añadir según progreses y veas qué necesitas realmente.
+                    </p>
+                </div>
+            </div>
+
             <!-- FAQs Section -->
-            <div style="max-width: 900px; margin: 50px auto 0;">
+            <div style="max-width: 900px; margin: 60px auto 0;">
                 <h3 style="font-size: 1.8rem; margin-bottom: 30px; text-align: center; color: #333;">
                     Preguntas Frecuentes sobre Empezar a Correr
                 </h3>
@@ -278,6 +600,108 @@
                         (3) Alterna días de carrera con descanso, (4) Escucha a tu cuerpo y para si sientes dolor, 
                         (5) Fortalece músculos con ejercicios complementarios, y (6) Estira después de correr. 
                         Nuestra <a href="empezar-correr-guia-completa.html" style="color: #667eea; font-weight: 600;">guía completa para empezar a correr</a> incluye ejercicios de prevención de lesiones y consejos de técnica correcta.
+                    </p>
+                </div>
+                
+                <div style="background: #f8f9fa; padding: 30px; border-radius: 16px; margin-bottom: 20px;">
+                    <h4 style="font-size: 1.3rem; margin-bottom: 10px; color: #333;">
+                        ¿Cuántas veces por semana debo correr como principiante?
+                    </h4>
+                    <p style="color: #666; line-height: 1.7;">
+                        Como principiante que quiere <strong>empezar a correr desde cero</strong>, te recomendamos correr <strong>3 veces por semana</strong> con días de descanso entre sesiones. 
+                        Esto permite que tu cuerpo se recupere y se adapte al nuevo ejercicio. A medida que progreses (después de 4-6 semanas), puedes aumentar a 4 veces por semana. 
+                        Lo importante es la constancia, no la frecuencia. Es mejor correr 3 veces por semana de forma constante que 5 veces una semana y luego parar.
+                    </p>
+                </div>
+                
+                <div style="background: #f8f9fa; padding: 30px; border-radius: 16px; margin-bottom: 20px;">
+                    <h4 style="font-size: 1.3rem; margin-bottom: 10px; color: #333;">
+                        ¿Qué ritmo debo llevar al empezar a correr?
+                    </h4>
+                    <p style="color: #666; line-height: 1.7;">
+                        El ritmo ideal para <strong>aprender a correr</strong> es el <strong>ritmo conversacional</strong>: deberías poder mantener una conversación mientras corres sin jadear excesivamente. 
+                        Si no puedes hablar, estás yendo demasiado rápido. Como principiante, no te preocupes por la velocidad. 
+                        Enfócate en completar el tiempo o distancia objetivo a un ritmo cómodo. La velocidad mejorará naturalmente con el tiempo y la práctica.
+                    </p>
+                </div>
+                
+                <div style="background: #f8f9fa; padding: 30px; border-radius: 16px; margin-bottom: 20px;">
+                    <h4 style="font-size: 1.3rem; margin-bottom: 10px; color: #333;">
+                        ¿Puedo empezar a correr si tengo sobrepeso?
+                    </h4>
+                    <p style="color: #666; line-height: 1.7;">
+                        Sí, absolutamente puedes <strong>empezar a correr</strong> si tienes sobrepeso. De hecho, correr es excelente para perder peso. 
+                        Sin embargo, es importante empezar de forma muy gradual para proteger tus articulaciones. Comienza con caminatas rápidas, luego alterna caminar y trotar suavemente. 
+                        Considera también ejercicios de bajo impacto como natación o ciclismo para complementar. 
+                        Si tienes dudas, consulta con un médico antes de comenzar. Tenemos una <a href="empezar-correr-sobrepeso-2025.html" style="color: #667eea; font-weight: 600;">guía específica para empezar a correr con sobrepeso</a>.
+                    </p>
+                </div>
+                
+                <div style="background: #f8f9fa; padding: 30px; border-radius: 16px; margin-bottom: 20px;">
+                    <h4 style="font-size: 1.3rem; margin-bottom: 10px; color: #333;">
+                        ¿Es mejor correr por la mañana o por la tarde?
+                    </h4>
+                    <p style="color: #666; line-height: 1.7;">
+                        No hay una hora "mejor" para <strong>empezar a correr</strong>. Lo más importante es encontrar el momento que mejor se adapte a tu rutina y que puedas mantener de forma consistente. 
+                        Algunas personas prefieren correr por la mañana porque les da energía para el día. Otras prefieren la tarde porque tienen más tiempo y están más despiertos. 
+                        La mejor hora es aquella en la que realmente vas a correr. La constancia es más importante que la hora del día.
+                    </p>
+                </div>
+                
+                <div style="background: #f8f9fa; padding: 30px; border-radius: 16px; margin-bottom: 20px;">
+                    <h4 style="font-size: 1.3rem; margin-bottom: 10px; color: #333;">
+                        ¿Necesito hacer ejercicios de fuerza además de correr?
+                    </h4>
+                    <p style="color: #666; line-height: 1.7;">
+                        Aunque no es estrictamente necesario para <strong>empezar a correr desde cero</strong>, hacer ejercicios de fuerza 2-3 veces por semana es muy beneficioso. 
+                        Fortalece los músculos que sostienen tus articulaciones (cuádriceps, glúteos, core), reduce el riesgo de lesiones y mejora tu rendimiento corriendo. 
+                        Puedes hacer ejercicios simples en casa: sentadillas, planchas, zancadas. No necesitas gimnasio ni equipamiento pesado.
+                    </p>
+                </div>
+                
+                <div style="background: #f8f9fa; padding: 30px; border-radius: 16px; margin-bottom: 20px;">
+                    <h4 style="font-size: 1.3rem; margin-bottom: 10px; color: #333;">
+                        ¿Qué hago si me duele algo mientras corro?
+                    </h4>
+                    <p style="color: #666; line-height: 1.7;">
+                        Si sientes dolor agudo o punzante mientras <strong>estás aprendiendo a correr</strong>, <strong>detente inmediatamente</strong>. 
+                        No ignores el dolor pensando que "se pasará". El dolor es la forma en que tu cuerpo te dice que algo no está bien. 
+                        Descansa 2-3 días y si el dolor persiste, consulta con un médico o fisioterapeuta. Es mejor perder unos días de entrenamiento que lesionarte seriamente y tener que parar semanas o meses.
+                    </p>
+                </div>
+                
+                <div style="background: #f8f9fa; padding: 30px; border-radius: 16px; margin-bottom: 20px;">
+                    <h4 style="font-size: 1.3rem; margin-bottom: 10px; color: #333;">
+                        ¿Cuánto tiempo debo correr en mi primera sesión?
+                    </h4>
+                    <p style="color: #666; line-height: 1.7;">
+                        En tu primera sesión para <strong>empezar a correr desde cero</strong>, no intentes correr mucho tiempo seguido. 
+                        Comienza con 20-30 minutos totales, alternando 1 minuto corriendo suavemente con 2-3 minutos caminando. 
+                        Repite esto 5-6 veces. El objetivo no es agotarte, sino acostumbrar a tu cuerpo al movimiento. 
+                        Es mejor terminar sintiendo que podrías hacer más, que terminar completamente agotado y sin ganas de volver a correr.
+                    </p>
+                </div>
+                
+                <div style="background: #f8f9fa; padding: 30px; border-radius: 16px; margin-bottom: 20px;">
+                    <h4 style="font-size: 1.3rem; margin-bottom: 10px; color: #333;">
+                        ¿Debo comer algo antes de correr?
+                    </h4>
+                    <p style="color: #666; line-height: 1.7;">
+                        Si corres por la mañana temprano, puedes correr en ayunas (muchos corredores lo hacen). Si corres más tarde, espera 1-2 horas después de una comida grande, o 30-60 minutos después de un snack ligero. 
+                        Si corres menos de 30 minutos, probablemente no necesites comer antes. Para sesiones más largas, un snack ligero (plátano, barrita energética) 30 minutos antes puede ayudar. 
+                        Lo más importante es hidratarte bien antes, durante y después de correr.
+                    </p>
+                </div>
+                
+                <div style="background: #f8f9fa; padding: 30px; border-radius: 16px; margin-bottom: 20px;">
+                    <h4 style="font-size: 1.3rem; margin-bottom: 10px; color: #333;">
+                        ¿Cómo mantengo la motivación para seguir corriendo?
+                    </h4>
+                    <p style="color: #666; line-height: 1.7;">
+                        Mantener la motivación al <strong>empezar a correr</strong> puede ser un desafío. Algunos consejos: (1) Establece objetivos pequeños y alcanzables (ej: "correr 3 veces esta semana"), 
+                        (2) Lleva un registro de tu progreso (usa una app como EntrenoApp), (3) Corre con música o podcasts que te gusten, 
+                        (4) Únete a grupos de running o busca un compañero de entrenamiento, (5) Recompénsate cuando alcances objetivos, 
+                        (6) Recuerda por qué empezaste cuando te falte motivación. La motivación viene y va, pero la disciplina es lo que te mantiene corriendo.
                     </p>
                 </div>
                 
@@ -606,6 +1030,30 @@
                 
                 <div style="background: white; border-radius: 16px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.3s;">
                     <h3 style="font-size: 1.3rem; margin-bottom: 12px; color: #333;">
+                        <a href="errores-comunes-empezar-correr-2025.html" style="color: #333; text-decoration: none;">⚠️ Errores Comunes al Empezar a Correr</a>
+                    </h3>
+                    <p style="color: #666; line-height: 1.6; margin-bottom: 15px;">
+                        Evita estos 10 errores comunes que cometen los principiantes al empezar a correr. Aprende qué NO hacer para progresar de forma segura y sin lesiones.
+                    </p>
+                    <a href="errores-comunes-empezar-correr-2025.html" style="color: #667eea; font-weight: 600; text-decoration: none;">
+                        Leer artículo →
+                    </a>
+                </div>
+                
+                <div style="background: white; border-radius: 16px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.3s;">
+                    <h3 style="font-size: 1.3rem; margin-bottom: 12px; color: #333;">
+                        <a href="calzado-ideal-empezar-correr-2025.html" style="color: #333; text-decoration: none;">👟 Calzado Ideal para Empezar a Correr</a>
+                    </h3>
+                    <p style="color: #666; line-height: 1.6; margin-bottom: 15px;">
+                        Guía completa sobre cómo elegir las zapatillas ideales para empezar a correr. Tipos de pisada, características importantes y recomendaciones para principiantes.
+                    </p>
+                    <a href="calzado-ideal-empezar-correr-2025.html" style="color: #667eea; font-weight: 600; text-decoration: none;">
+                        Leer guía →
+                    </a>
+                </div>
+                
+                <div style="background: white; border-radius: 16px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.3s;">
+                    <h3 style="font-size: 1.3rem; margin-bottom: 12px; color: #333;">
                         <a href="workout-guides.html" style="color: #333; text-decoration: none;">📖 Todas las Guías de Entrenamiento</a>
                     </h3>
                     <p style="color: #666; line-height: 1.6; margin-bottom: 15px;">
@@ -716,13 +1164,13 @@
     </footer>
 
     <!-- YouTube Gallery Component -->
-    <script src="js/components/youtube-gallery.js"></script>
+    <script defer src="js/components/youtube-gallery.js"></script>
     
     <script>
-        // Inicializar AdSense
+        // Inicializar AdSense (defer para no bloquear render)
         (adsbygoogle = window.adsbygoogle || []).push({});
         
-        // Inicializar galería de YouTube
+        // Inicializar galería de YouTube (defer para mejorar LCP)
         document.addEventListener('DOMContentLoaded', function() {
             setTimeout(function() {
                 if (typeof YouTubeGallery !== 'undefined') {

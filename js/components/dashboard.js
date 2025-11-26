@@ -1996,7 +1996,7 @@ function renderQuickActions() {
                     <div class="milestone-text">Próximo hito: ${getNextMilestone(stats.totalWorkouts || 0)} entrenamientos</div>
                 </div>
                 <div class="actions-grid">
-                    <button class="action-btn glass-button" onclick="window.viewProgressStats()">
+                    <button class="action-btn glass-button" onclick="window.navigateToPage('progress')">
                         <span class="action-icon">📈</span>
                         <span class="action-text">Ver Gráficas</span>
                     </button>
@@ -3351,9 +3351,14 @@ window.showAchievements = function() {
                     <p>Cargando logros...</p>
                 </div>
             </div>
-            <button class="glass-button glass-button-secondary" onclick="this.closest('.modal-overlay').remove(); window.navigateToPage('dashboard');">
-                Cerrar
-            </button>
+            <div style="display: flex; gap: 10px; margin-top: 20px;">
+                <button class="glass-button glass-button-primary" onclick="this.closest('.modal-overlay').remove();" style="flex: 1;">
+                    ✕ Cerrar
+                </button>
+                <button class="glass-button glass-button-secondary" onclick="this.closest('.modal-overlay').remove(); window.navigateToPage('dashboard');" style="flex: 1;">
+                    🏠 Ir al Dashboard
+                </button>
+            </div>
         </div>
     `;
     document.body.appendChild(modal);

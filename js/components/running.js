@@ -856,6 +856,9 @@ function setupRunningListeners() {
         } else if (target.id === 'voice-btn') {
             e.preventDefault();
             toggleVoice();
+        } else if (target.id === 'save-run-btn') {
+            e.preventDefault();
+            saveRun();
         } else if (target.id === 'new-run-btn') {
             e.preventDefault();
             newRun();
@@ -1308,6 +1311,67 @@ function checkTimeTarget() {
             window.EntrenoTTS.speak('¡Objetivo de tiempo alcanzado!');
         }
         stopRun();
+    }
+}
+
+// Guardar carrera
+async function saveRun() {
+    try {
+        console.log('💾 Guardando carrera...');
+        
+        const runData = {
+            id: Date.now().toString(),
+            date: new Date().toISOString(),
+            type: 'running',
+            duration: runningState.duration,
+            distance: runningState.distance,
+            avgPace: runningState.avgPace,
+            calories: runningState.calories,
+            route: runningState.route,
+            splits: runningState.splits,
+            notes: ''
+        };
+        
+        // Calcular intensidad basada en ritmo y distancia
+        let intensity = 'medium';
+        if (runningState.avgPace && runningState.avgPace < 5) { // Menos de 5 min/km = rápido
+            intensity = 'high';
+        } else if (runningState.avgPace && runningState.avgPace > 7) { // Más de 7 min/km = lento
+            intensity = 'low';
+        }
+        
+        const workoutEvent = {
+            id: runData.id,
+            date: runData.date,
+            type: 'running',
+            duration: Math.floor(runData.duration / 1000), // en segundos
+            intensity: intensity,
+            exercises: [`Carrera de ${formatDistance(runData.distance)}`],
+            notes: `Ritmo promedio: ${formatPace(runData.avgPace)}/km`
+        };
+        
+        console.log('🏃 Disparando evento workout-completed:', workoutEvent);
+        
+        // Disparar en window y document
+        window.dispatchEvent(new CustomEvent('workout-completed', { detail: workoutEvent }));
+        document.dispatchEvent(new CustomEvent('workout-completed', { detail: workoutEvent }));
+        
+        // También guardar directamente en localStorage para el calendario
+        let history = JSON.parse(localStorage.getItem('entrenoapp_workout_history') || '[]');
+        history.push(workoutEvent);
+        localStorage.setItem('entrenoapp_workout_history', JSON.stringify(history));
+        console.log('💾 Carrera guardada en localStorage para calendario');
+        
+        // Guardar datos completos de la carrera
+        let runsHistory = JSON.parse(localStorage.getItem('entrenoapp_runs_history') || '[]');
+        runsHistory.push(runData);
+        localStorage.setItem('entrenoapp_runs_history', JSON.stringify(runsHistory));
+        
+        alert('✅ Carrera guardada exitosamente');
+        
+    } catch (error) {
+        console.error('❌ Error guardando carrera:', error);
+        alert('Error guardando la carrera');
     }
 }
 

@@ -391,13 +391,38 @@ async function saveFunctionalWorkout() {
         if (window.trackWorkoutCompletion) {
             const duration = functionalWorkoutState.totalTime || 20;
             
-            window.trackWorkoutCompletion({
+            const workoutData = {
                 type: 'functional',
                 duration: Math.floor(duration / 60), // Convertir a minutos
                 exercises: functionalWorkoutState.completedMovements || [],
                 rounds: functionalWorkoutState.workoutData.rounds || 3,
                 notes: notes
-            });
+            };
+            
+            window.trackWorkoutCompletion(workoutData);
+            
+            // Disparar evento para calendario de entrenamientos
+            const workoutEvent = {
+                id: Date.now().toString(),
+                date: new Date().toISOString(),
+                type: 'functional',
+                duration: workoutData.duration * 60, // en segundos
+                intensity: workoutData.rounds > 5 ? 'high' : workoutData.rounds > 3 ? 'medium' : 'low',
+                exercises: workoutData.exercises.map(ex => ex.name || ex.movement || 'Movimiento'),
+                notes: notes
+            };
+            
+            console.log('⚡ Disparando evento workout-completed:', workoutEvent);
+            
+            // Disparar en window y document
+            window.dispatchEvent(new CustomEvent('workout-completed', { detail: workoutEvent }));
+            document.dispatchEvent(new CustomEvent('workout-completed', { detail: workoutEvent }));
+            
+            // También guardar directamente en localStorage para el calendario
+            let history = JSON.parse(localStorage.getItem('entrenoapp_workout_history') || '[]');
+            history.push(workoutEvent);
+            localStorage.setItem('entrenoapp_workout_history', JSON.stringify(history));
+            console.log('💾 Entrenamiento guardado en localStorage para calendario');
         }
         
         // Mostrar mensaje de éxito con celebración
