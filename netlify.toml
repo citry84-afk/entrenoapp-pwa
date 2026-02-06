@@ -65,6 +65,14 @@
     Content-Type = "application/xml; charset=utf-8"
     Cache-Control = "public, max-age=3600"
 
+# ads.txt - CRÍTICO para AdSense: Google debe encontrarlo en la raíz
+[[headers]]
+  for = "/ads.txt"
+  [headers.values]
+    Content-Type = "text/plain; charset=utf-8"
+    Cache-Control = "public, max-age=3600"
+    Access-Control-Allow-Origin = "*"
+
 # index.html es la página principal (contenido estático visible para AdSense)
 # app.html es accesible desde un botón en index.html
 # NO redirigir automáticamente a app.html
@@ -174,6 +182,26 @@
 [[redirects]]
   from = "/equipamiento-fitness-casa"
   to = "/equipamiento-fitness-casa.html"
+  status = 301
+
+[[redirects]]
+  from = "/como-perder-barriga-casa-2026"
+  to = "/como-perder-barriga-casa-2026.html"
+  status = 301
+
+[[redirects]]
+  from = "/rutina-gym-casa-mancuernas-2026"
+  to = "/rutina-gym-casa-mancuernas-2026.html"
+  status = 301
+
+[[redirects]]
+  from = "/recuperacion-muscular-despues-entrenar-2026"
+  to = "/recuperacion-muscular-despues-entrenar-2026.html"
+  status = 301
+
+[[redirects]]
+  from = "/que-comprar-gimnasio-casa-budget-2026"
+  to = "/que-comprar-gimnasio-casa-budget-2026.html"
   status = 301
 
 [[redirects]]
@@ -293,6 +321,13 @@
 
 [[redirects]]
   from = "https://entrenoapp.netlify.app/*"
+  to = "https://entrenoapp.com/:splat"
+  status = 301
+  force = true
+
+# Redirect default Netlify subdomain (e.g. deploy URL) to canonical domain
+[[redirects]]
+  from = "https://16127537.netlify.app/*"
   to = "https://entrenoapp.com/:splat"
   status = 301
   force = true
