@@ -215,7 +215,39 @@
 <body class="ui-shell">
     <!-- CONTENIDO ESTÁTICO VISIBLE PARA BOTS DE ADSENSE -->
     <!-- Este contenido es siempre visible para crawlers, incluso sin JavaScript -->
-    <div id="static-content-adsense" style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;">
+    <!-- Usamos sr-only class para ocultar visualmente pero mantener accesible para bots -->
+    <noscript>
+        <div style="max-width: 1200px; margin: 0 auto; padding: 40px 20px; background: #f8f9fa; min-height: 100vh;">
+            <h1>EntrenoApp - Tu Entrenador Personal de Fitness</h1>
+            <h2>Aplicación de Fitness Integral</h2>
+            <p>EntrenoApp es una aplicación de fitness integral desarrollada por LIPA Studios que te ayuda a alcanzar tus objetivos de entrenamiento. Ofrecemos planes personalizados de running, gimnasio y entrenamiento funcional con seguimiento GPS, retos diarios y análisis completo de tu progreso.</p>
+            <p>Nuestra aplicación incluye tracking de entrenamientos, seguimiento de salud, retos diarios, logros y gamificación para mantenerte motivado. Todo diseñado para adaptarse a tu nivel y objetivos individuales.</p>
+            <h3>Características Principales</h3>
+            <ul>
+                <li>Planes personalizados de running, gimnasio y entrenamiento funcional</li>
+                <li>Seguimiento GPS para carreras y entrenamientos al aire libre</li>
+                <li>Retos diarios para mantener la motivación</li>
+                <li>Seguimiento completo de salud y progreso</li>
+                <li>Gamificación con logros y puntos</li>
+                <li>Análisis detallado de tu rendimiento</li>
+            </ul>
+            <h3>Información de Contacto</h3>
+            <p>Email: <a href="mailto:lipastudios4@gmail.com">lipastudios4@gmail.com</a></p>
+            <p>Empresa: LIPA Studios</p>
+            <p>Ubicación: España</p>
+            <h3>Enlaces Importantes</h3>
+            <nav>
+                <a href="/about.html">Sobre Nosotros</a> | 
+                <a href="/privacy.html">Política de Privacidad</a> | 
+                <a href="/terms.html">Términos de Uso</a> | 
+                <a href="/contact.html">Contacto</a>
+            </nav>
+            <p>EntrenoApp está diseñada para ayudarte a alcanzar tus objetivos de fitness de manera segura y efectiva. Consulta siempre con un profesional de la salud antes de comenzar cualquier programa de ejercicio.</p>
+            <p><a href="/index.html">Ir a la página principal</a></p>
+        </div>
+    </noscript>
+    <!-- Contenido visible para bots pero oculto visualmente para usuarios con JS -->
+    <div id="static-content-adsense" style="position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden;">
         <h1>EntrenoApp - Tu Entrenador Personal de Fitness</h1>
         <h2>Aplicación de Fitness Integral</h2>
         <p>EntrenoApp es una aplicación de fitness integral desarrollada por LIPA Studios que te ayuda a alcanzar tus objetivos de entrenamiento. Ofrecemos planes personalizados de running, gimnasio y entrenamiento funcional con seguimiento GPS, retos diarios y análisis completo de tu progreso.</p>
@@ -323,6 +355,9 @@
         <a href="/contact.html" style="text-decoration:none; color:#fff;">Contacto</a>
         <span style="opacity:0.5">•</span>
         <a href="mailto:lipastudios4@gmail.com" style="text-decoration:none; color:#fff;">📧 Email</a>
+                <div class="legal-info" style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #ddd; font-size: 0.875rem; color: #666;">
+                <p>© 2026 EntrenoApp | Responsable: Luis Alberto Moratalla | NIF: 50468195P | C/ Almansa 2, 28300 Aranjuez, Madrid | Email: lipastudios4@gmail.com</p>
+            </div>
     </footer>
 
     <!-- Scripts -->
