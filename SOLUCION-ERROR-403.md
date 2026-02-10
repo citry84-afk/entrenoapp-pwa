@@ -13,7 +13,7 @@
 1. Ve a: https://console.cloud.google.com/
 2. Selecciona tu proyecto
 3. **API & Services → Credentials**
-4. Click en tu API key (`AIzaSyD4_1H8Zi1U9DAEkSrX9D1FtxLmcJR2vTM`)
+4. Haz clic en tu API key (la que estés usando actualmente; si se filtró en GitHub, regénérala)
 
 ### **Configurar Application restrictions:**
 
@@ -39,15 +39,13 @@
 
 ## ✅ **SOLUCIÓN 2: Crear Nueva API Key**
 
-### **Si la actual no funciona:**
+### **Si la actual está filtrada o no funciona:**
 
 1. **API & Services → Credentials**
-2. Click **CREATE CREDENTIALS → API Key**
-3. **Copy** la nueva key
-4. Reemplazar en `index.html` y `home.html`:
-   ```javascript
-   const API_KEY = 'NUEVA_KEY_AQUI';
-   ```
+2. Click **CREATE CREDENTIALS → API Key** (o **Regenerate key** sobre la existente)
+3. Configura restricciones (HTTP referrers + YouTube Data API v3)
+4. Guarda la nueva key en un lugar seguro (variables de entorno, archivo local fuera de Git, etc.)
+5. Úsala sólo en tu entorno local (no la subas de nuevo a GitHub)
 
 ---
 

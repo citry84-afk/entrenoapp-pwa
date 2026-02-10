@@ -760,10 +760,11 @@
         
         // Cargar videos de YouTube
         document.addEventListener('DOMContentLoaded', function() {
-            // IMPORTANTE: Si tienes problemas, usa directamente tu Channel ID
-            // Para encontrarlo: https://www.youtube.com/channel_switcher
-            // O visita tu canal y copia el ID de la URL
-            const API_KEY = 'AIzaSyD4_1H8Zi1U9DAEkSrX9D1FtxLmcJR2vTM';
+            // IMPORTANTE:
+            // 1) Configura tu propia API Key de YouTube Data API v3
+            // 2) NO la subas jamás a un repositorio público (GitHub, etc.)
+            // 3) Usa restricciones por dominio (HTTP referrers) en Google Cloud
+            const API_KEY = 'YOUR_YOUTUBE_API_KEY_HERE'; // <--- Sustituye localmente, no lo publiques
             const CHANNEL_ID = 'UCzIssceXL14IHgyRARzKKhQ'; // Tu Channel ID
             const CHANNEL_HANDLE = 'entrenoapp'; // Sin @
             const CHANNEL_URL = 'https://youtube.com/@entrenoapp';
