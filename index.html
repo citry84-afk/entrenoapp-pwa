@@ -68,16 +68,11 @@
         "@type": "SoftwareApplication",
         "name": "EntrenoApp",
         "applicationCategory": "HealthApplication",
-        "operatingSystem": "Web, iOS, Android",
+        "operatingSystem": "Web",
         "offers": {
             "@type": "Offer",
             "price": "0",
             "priceCurrency": "EUR"
-        },
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.8",
-            "ratingCount": "150"
         }
     }
     </script>
@@ -203,6 +198,7 @@
     <link rel="preload" href="css/styles.css" as="style">
     <link rel="preload" href="css/glassmorphism.css" as="style">
     <link rel="preload" href="js/app.js" as="script">
+    <link rel="prefetch" href="app.html">
     
     <!-- Estilos -->
     <link rel="stylesheet" href="css/styles.css">
@@ -223,22 +219,31 @@
     
 </head>
 <body>
+    <!-- En la app iOS/Android (Capacitor) ir directo a la app de entrenamiento -->
+    <script>
+        (function() {
+            var cap = window.Capacitor;
+            if (cap && cap.getPlatform && cap.getPlatform() !== 'web') {
+                window.location.replace('app.html');
+            }
+        })();
+    </script>
     <!-- Navigation Bar -->
     <nav class="main-navigation">
         <div class="nav-container">
             <div class="nav-logo">
-                <a href="/home.html">🏃‍♂️ EntrenoApp</a>
+                <a href="/">🏃‍♂️ EntrenoApp</a>
             </div>
             <div class="nav-links">
-                <a href="/home.html">Inicio</a>
-                <a href="/workout-guides.html">Guías</a>
-                <a href="/fitness-tips.html">Consejos</a>
-                <a href="/exercises-library.html">Ejercicios</a>
-                <a href="/fitness-calculators.html">Calculadoras</a>
-                <a href="/youtube-gallery.html">📺 Videos</a>
-                <a href="/blog.html">Blog</a>
-                <a href="/about.html">Nosotros</a>
-                <a href="/contact.html">Contacto</a>
+                <a href="/">Inicio</a>
+                <a href='/workout-guides'>Guías</a>
+                <a href='/fitness-tips'>Consejos</a>
+                <a href='/exercises-library'>Ejercicios</a>
+                <a href='/fitness-calculators'>Calculadoras</a>
+                <a href='/youtube-gallery'>📺 Videos</a>
+                <a href='/blog'>Blog</a>
+                <a href='/about'>Nosotros</a>
+                <a href='/contact'>Contacto</a>
             </div>
         </div>
     </nav>
@@ -249,15 +254,14 @@
             <h1 class="hero-title">🏃 Empezar a Correr desde Cero: Plan GRATIS 8 Semanas</h1>
             <h2 class="hero-subtitle">Tu Entrenador Personal de Fitness - Plan Running para Principiantes</h2>
             <p class="hero-description">
-                ¿Quieres <strong>empezar a correr desde cero</strong> pero no sabes cómo? EntrenoApp te ayuda a <strong>aprender a correr</strong> con planes personalizados de running para principiantes. 
-                Descubre <strong>cómo empezar a correr</strong> con rutinas de entrenamiento progresivas, consejos de técnica correcta, prevención de lesiones y seguimiento GPS en tiempo real. 
-                Si buscas una <strong>rutina para empezar a correr</strong> que se adapte a tu nivel, has llegado al lugar correcto. 
-                También incluye planes de gimnasio y entrenamiento funcional. ¡Tu transformación fitness comienza aquí!
+                ¿Quieres <strong>empezar a correr desde cero</strong> pero no sabes por dónde empezar? EntrenoApp es tu guía paso a paso con planes de running diseñados para principiantes. 
+                Incluye rutinas progresivas, consejos de técnica, prevención de lesiones y seguimiento GPS en tiempo real. 
+                Además encontrarás planes de gimnasio y entrenamiento funcional. ¡Tu transformación fitness comienza aquí!
             </p>
             <div class="cta-buttons" style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; margin-top: 30px;">
-                <a href="empezar-a-correr.html" class="cta-button cta-primary" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 18px 35px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 1.1rem; box-shadow: 0 4px 15px rgba(102,126,234,0.3); transition: transform 0.3s;">🧭 Ver HUB de Running</a>
-                <a href="empezar-correr-guia-completa.html" class="cta-button cta-secondary" style="background: white; color: #667eea; padding: 18px 35px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 1.1rem; border: 2px solid #667eea; transition: transform 0.3s;">📋 Plan 8 Semanas</a>
-                <a href="app.html" class="cta-button cta-secondary" style="background: rgba(255,255,255,0.2); color: white; padding: 18px 35px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 1.1rem; border: 2px solid rgba(255,255,255,0.3); transition: transform 0.3s;">📱 Usar la App</a>
+                <a class='cta-button cta-primary' href='/app' style='background: linear-gradient(135deg, #00D4FF 0%, #0099cc 100%); color: #fff; padding: 18px 35px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 1.1rem; box-shadow: 0 4px 15px rgba(0,212,255,0.4); transition: transform 0.3s; border: 2px solid rgba(255,255,255,0.5);'>📱 Usar la App GRATIS</a>
+                <a class='cta-button cta-primary' href='/empezar-a-correr' style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 18px 35px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 1.1rem; box-shadow: 0 4px 15px rgba(102,126,234,0.3); transition: transform 0.3s;'>🧭 Ver HUB de Running</a>
+                <a class='cta-button cta-secondary' href='/empezar-correr-guia-completa' style='background: white; color: #667eea; padding: 18px 35px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 1.1rem; border: 2px solid #667eea; transition: transform 0.3s;'>📋 Plan 8 Semanas</a>
             </div>
         </div>
     </section>
@@ -267,8 +271,8 @@
         <div class="container">
             <h2 class="section-title">🏃 Cómo Empezar a Correr desde Cero: Guía Completa para Principiantes</h2>
             <p style="text-align: center; font-size: 1.1rem; color: #666; max-width: 800px; margin: 0 auto 40px;">
-                Si quieres <strong>empezar a correr desde cero</strong> pero no sabes cómo, estás en el lugar correcto. Te enseñamos todo lo que necesitas saber para <strong>aprender a correr</strong> de forma segura y efectiva. 
-                Nuestra <a href="/empezar-correr-guia-completa.html" style="color: #667eea; font-weight: 600;">guía completa para empezar a correr</a> te ayudará a crear una <strong>rutina para empezar a correr</strong> que se adapte a tu nivel y objetivos, sin importar si eres un principiante absoluto o si llevas tiempo sin hacer ejercicio.
+                Si quieres <strong>empezar a correr desde cero</strong> pero no sabes cómo, estás en el lugar correcto. Te enseñamos todo lo que necesitas para dar tus primeros pasos de forma segura y efectiva. 
+                Nuestra <a href='/empezar-correr-guia-completa' style='color: #667eea; font-weight: 600;'>guía completa de running</a> se adapta a tu nivel y objetivos, sin importar si eres principiante absoluto o si llevas tiempo sin hacer ejercicio.
             </p>
             
             <!-- Nueva Sección: Cómo Empezar a Correr - Paso a Paso -->
@@ -277,7 +281,7 @@
                     📝 Cómo Empezar a Correr: Guía Paso a Paso para Principiantes
                 </h2>
                 <p style="text-align: center; font-size: 1.1rem; color: #666; max-width: 800px; margin: 0 auto 40px;">
-                    Si nunca has corrido antes o llevas mucho tiempo sin hacer ejercicio, esta guía paso a paso te enseñará <strong>cómo empezar a correr desde cero</strong> de forma segura y efectiva. También puedes ver nuestro <a href="/empezar-a-correr-2-semanas.html" style="color: #667eea; font-weight: 600;">plan rápido de 2 semanas</a> o nuestra <a href="/empezar-correr-guia-completa.html" style="color: #667eea; font-weight: 600;">guía completa de 8 semanas</a>.
+                    Si nunca has corrido antes o llevas mucho tiempo sin hacer ejercicio, esta guía paso a paso te enseñará <strong>cómo empezar a correr desde cero</strong> de forma segura y efectiva. También puedes ver nuestro <a href='/empezar-a-correr-2-semanas' style='color: #667eea; font-weight: 600;'>plan rápido de 2 semanas</a> o nuestra <a href='/empezar-correr-guia-completa' style='color: #667eea; font-weight: 600;'>guía completa de 8 semanas</a>.
                 </p>
                 
                 <div style="display: grid; gap: 30px;">
@@ -353,8 +357,7 @@
                 </div>
                 
                 <div style="margin-top: 40px; text-align: center;">
-                    <a href="empezar-a-correr-2-semanas.html" 
-                       style="display: inline-block; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 18px 40px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 1.1rem; box-shadow: 0 4px 15px rgba(102,126,234,0.3);">
+                    <a href='/empezar-a-correr-2-semanas' style='display: inline-block; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 18px 40px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 1.1rem; box-shadow: 0 4px 15px rgba(102,126,234,0.3);'>
                         Ver Plan Completo de 2 Semanas →
                     </a>
                 </div>
@@ -367,7 +370,7 @@
                     <p style="color: #666; line-height: 1.6; margin-bottom: 15px;">
                         Nuestro plan de running para principiantes te lleva de cero a correr 5K en solo 8 semanas. Progresión gradual y segura, sin riesgo de lesiones.
                     </p>
-                    <a href="empezar-correr-guia-completa.html" style="color: #667eea; font-weight: 600; text-decoration: none;">
+                    <a href='/empezar-correr-guia-completa' style='color: #667eea; font-weight: 600; text-decoration: none;'>
                         Ver plan completo →
                     </a>
                 </div>
@@ -378,7 +381,7 @@
                     <p style="color: #666; line-height: 1.6; margin-bottom: 15px;">
                         Aprende la técnica correcta de carrera desde el primer día. Postura, zancada, respiración y prevención de lesiones comunes en principiantes.
                     </p>
-                    <a href="empezar-correr-guia-completa.html#tecnica" style="color: #667eea; font-weight: 600; text-decoration: none;">
+                    <a href='/empezar-correr-guia-completa#tecnica' style='color: #667eea; font-weight: 600; text-decoration: none;'>
                         Aprender técnica →
                     </a>
                 </div>
@@ -389,7 +392,7 @@
                     <p style="color: #666; line-height: 1.6; margin-bottom: 15px;">
                         Crea tu rutina para empezar a correr adaptada a tu nivel, objetivos y disponibilidad. Con seguimiento GPS y análisis de progreso.
                     </p>
-                    <a href="app.html" style="color: #667eea; font-weight: 600; text-decoration: none;">
+                    <a href='/app' style='color: #667eea; font-weight: 600; text-decoration: none;'>
                         Crear mi rutina →
                     </a>
                 </div>
@@ -401,7 +404,7 @@
                     💪 Beneficios de Empezar a Correr: Por Qué Deberías Comenzar Hoy
                 </h2>
                 <p style="text-align: center; font-size: 1.1rem; color: #666; max-width: 800px; margin: 0 auto 40px;">
-                    Correr es uno de los ejercicios más accesibles y efectivos que existen. Si estás pensando en <strong>empezar a correr desde cero</strong>, estos son los beneficios que experimentarás:
+                    Correr es uno de los ejercicios más accesibles y efectivos que existen. Si estás pensando en <strong>iniciarte en el running</strong>, estos son los beneficios que experimentarás:
                 </p>
                 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-bottom: 40px;">
@@ -511,8 +514,8 @@
                 
                 <div style="margin-top: 30px; padding: 20px; background: #e3f2fd; border-radius: 12px; border-left: 4px solid #2196f3;">
                     <p style="margin: 0; color: #1976d2; line-height: 1.7;">
-                        <strong>💡 Consejo:</strong> Este plan es una guía general. Escucha a tu cuerpo y ajusta según tu nivel. Si una semana te resulta muy difícil, repítela antes de avanzar. La clave para <strong>empezar a correr desde cero</strong> es la progresión gradual y la constancia. 
-                        <a href="empezar-correr-guia-completa.html" style="color: #667eea; font-weight: 600;">Ver plan detallado completo →</a>
+                        <strong>💡 Consejo:</strong> Este plan es una guía general. Escucha a tu cuerpo y ajusta según tu nivel. Si una semana te resulta muy difícil, repítela antes de avanzar. La clave es la <strong>progresión gradual</strong> y la constancia. 
+                        <a href='/empezar-correr-guia-completa' style='color: #667eea; font-weight: 600;'>Ver plan detallado completo →</a>
                     </p>
                 </div>
             </div>
@@ -595,7 +598,7 @@
                     👟 Equipamiento Necesario para Empezar a Correr
                 </h2>
                 <p style="text-align: center; font-size: 1.1rem; color: #666; max-width: 800px; margin: 0 auto 40px;">
-                    Una de las ventajas de <strong>empezar a correr desde cero</strong> es que necesitas muy poco equipamiento. Aquí está lo esencial:
+                    Una de las grandes ventajas del running es que necesitas muy poco equipamiento. Aquí está lo esencial:
                 </p>
                 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px;">
@@ -635,7 +638,7 @@
                 
                 <div style="margin-top: 30px; padding: 20px; background: white; border-radius: 12px; border: 2px solid #667eea;">
                     <p style="margin: 0; color: #333; line-height: 1.7; text-align: center;">
-                        <strong>💡 Lo más importante:</strong> No necesitas equipamiento caro para <strong>empezar a correr desde cero</strong>. Con un buen par de zapatillas y ropa cómoda ya puedes comenzar. El resto lo puedes añadir según progreses y veas qué necesitas realmente.
+                        <strong>💡 Lo más importante:</strong> No necesitas equipamiento caro para empezar. Con un buen par de zapatillas y ropa cómoda ya puedes dar tus primeros pasos. El resto lo puedes añadir según progreses y veas qué necesitas realmente.
                     </p>
                 </div>
             </div>
@@ -651,9 +654,9 @@
                         ¿Cómo empezar a correr desde cero?
                     </h4>
                     <p style="color: #666; line-height: 1.7;">
-                        Para <strong>empezar a correr desde cero</strong>, comienza con caminatas rápidas de 20-30 minutos, 3-4 veces por semana. 
+                        Lo ideal es comenzar con caminatas rápidas de 20-30 minutos, 3-4 veces por semana. 
                         Luego alterna caminar y trotar (ej: 1 minuto corriendo, 2 minutos caminando). 
-                        Progresivamente aumenta el tiempo corriendo. Nuestro <a href="empezar-correr-guia-completa.html" style="color: #667eea; font-weight: 600;">plan de 8 semanas para empezar a correr</a> te guía paso a paso desde el primer día hasta correr 5K sin parar.
+                        Progresivamente aumenta el tiempo corriendo. Nuestro <a href='/empezar-correr-guia-completa' style='color: #667eea; font-weight: 600;'>plan de 8 semanas</a> te guía paso a paso desde el primer día hasta correr 5K sin parar.
                     </p>
                 </div>
                 
@@ -662,10 +665,10 @@
                         ¿Cuánto tiempo tarda un principiante en aprender a correr?
                     </h4>
                     <p style="color: #666; line-height: 1.7;">
-                        La mayoría de principiantes que quieren <strong>empezar a correr</strong> pueden correr 5K sin parar después de 8-12 semanas de entrenamiento consistente. 
+                        La mayoría de principiantes pueden correr 5K sin parar después de 8-12 semanas de entrenamiento consistente. 
                         El tiempo varía según tu condición física inicial, edad y frecuencia de entrenamiento. 
-                        Si sigues una <strong>rutina para empezar a correr</strong> adecuada, verás progreso desde la primera semana. 
-                        Lo importante es la constancia, no la velocidad. Nuestro <a href="empezar-correr-guia-completa.html" style="color: #667eea; font-weight: 600;">plan de running para principiantes</a> está diseñado para llevarte de cero a 5K en 8 semanas.
+                        Con una rutina adecuada, verás progreso desde la primera semana. 
+                        Lo importante es la constancia, no la velocidad. Nuestro <a href='/empezar-correr-guia-completa' style='color: #667eea; font-weight: 600;'>plan de running para principiantes</a> está diseñado para llevarte de cero a 5K en 8 semanas.
                     </p>
                 </div>
                 
@@ -674,10 +677,10 @@
                         ¿Qué necesito para empezar a correr?
                     </h4>
                     <p style="color: #666; line-height: 1.7;">
-                        Para <strong>empezar a correr desde cero</strong> necesitas: (1) Un buen par de zapatillas de running adaptadas a tu pisada, 
-                        (2) Ropa cómoda y transpirable, (3) Un <strong>plan de entrenamiento para empezar a correr</strong> progresivo, y (4) Motivación y paciencia. 
-                        No necesitas equipamiento caro, solo empezar. Nuestra app te ayuda con el plan de entrenamiento personalizado. 
-                        Si quieres <strong>aprender a correr</strong> correctamente, también te recomendamos leer nuestra <a href="empezar-correr-guia-completa.html" style="color: #667eea; font-weight: 600;">guía completa sobre cómo empezar a correr</a>.
+                        Lo esencial es: (1) Un buen par de zapatillas de running adaptadas a tu pisada, 
+                        (2) Ropa cómoda y transpirable, (3) Un plan de entrenamiento progresivo, y (4) Motivación y paciencia. 
+                        No necesitas equipamiento caro, solo dar el primer paso. Nuestra app te ayuda con el plan de entrenamiento personalizado. 
+                        También te recomendamos leer nuestra <a href='/empezar-correr-guia-completa' style='color: #667eea; font-weight: 600;'>guía completa de running para principiantes</a>.
                     </p>
                 </div>
                 
@@ -686,10 +689,10 @@
                         ¿Cómo evitar lesiones al empezar a correr?
                     </h4>
                     <p style="color: #666; line-height: 1.7;">
-                        Para evitar lesiones cuando <strong>empiezas a correr desde cero</strong>: (1) Calienta antes de correr (5-10 min caminando), (2) Empieza con distancias cortas, 
+                        Para evitar lesiones cuando empiezas: (1) Calienta antes de correr (5-10 min caminando), (2) Empieza con distancias cortas, 
                         (3) Alterna días de carrera con descanso, (4) Escucha a tu cuerpo y para si sientes dolor, 
                         (5) Fortalece músculos con ejercicios complementarios, y (6) Estira después de correr. 
-                        Nuestra <a href="empezar-correr-guia-completa.html" style="color: #667eea; font-weight: 600;">guía completa para empezar a correr</a> incluye ejercicios de prevención de lesiones y consejos de técnica correcta.
+                        Nuestra <a href='/empezar-correr-guia-completa' style='color: #667eea; font-weight: 600;'>guía completa de running</a> incluye ejercicios de prevención de lesiones y consejos de técnica correcta.
                     </p>
                 </div>
                 
@@ -698,7 +701,7 @@
                         ¿Cuántas veces por semana debo correr como principiante?
                     </h4>
                     <p style="color: #666; line-height: 1.7;">
-                        Como principiante que quiere <strong>empezar a correr desde cero</strong>, te recomendamos correr <strong>3 veces por semana</strong> con días de descanso entre sesiones. 
+                        Como principiante, te recomendamos correr <strong>3 veces por semana</strong> con días de descanso entre sesiones. 
                         Esto permite que tu cuerpo se recupere y se adapte al nuevo ejercicio. A medida que progreses (después de 4-6 semanas), puedes aumentar a 4 veces por semana. 
                         Lo importante es la constancia, no la frecuencia. Es mejor correr 3 veces por semana de forma constante que 5 veces una semana y luego parar.
                     </p>
@@ -709,7 +712,7 @@
                         ¿Qué ritmo debo llevar al empezar a correr?
                     </h4>
                     <p style="color: #666; line-height: 1.7;">
-                        El ritmo ideal para <strong>aprender a correr</strong> es el <strong>ritmo conversacional</strong>: deberías poder mantener una conversación mientras corres sin jadear excesivamente. 
+                        El ritmo ideal es el <strong>ritmo conversacional</strong>: deberías poder mantener una conversación mientras corres sin jadear excesivamente. 
                         Si no puedes hablar, estás yendo demasiado rápido. Como principiante, no te preocupes por la velocidad. 
                         Enfócate en completar el tiempo o distancia objetivo a un ritmo cómodo. La velocidad mejorará naturalmente con el tiempo y la práctica.
                     </p>
@@ -720,10 +723,10 @@
                         ¿Puedo empezar a correr si tengo sobrepeso?
                     </h4>
                     <p style="color: #666; line-height: 1.7;">
-                        Sí, absolutamente puedes <strong>empezar a correr</strong> si tienes sobrepeso. De hecho, correr es excelente para perder peso. 
+                        Sí, absolutamente. De hecho, correr es excelente para perder peso. 
                         Sin embargo, es importante empezar de forma muy gradual para proteger tus articulaciones. Comienza con caminatas rápidas, luego alterna caminar y trotar suavemente. 
                         Considera también ejercicios de bajo impacto como natación o ciclismo para complementar. 
-                        Si tienes dudas, consulta con un médico antes de comenzar. Tenemos una <a href="empezar-correr-sobrepeso-2025.html" style="color: #667eea; font-weight: 600;">guía específica para empezar a correr con sobrepeso</a>.
+                        Si tienes dudas, consulta con un médico antes de comenzar. Tenemos una <a href='/empezar-correr-sobrepeso-2025' style='color: #667eea; font-weight: 600;'>guía específica para empezar a correr con sobrepeso</a>.
                     </p>
                 </div>
                 
@@ -732,7 +735,7 @@
                         ¿Es mejor correr por la mañana o por la tarde?
                     </h4>
                     <p style="color: #666; line-height: 1.7;">
-                        No hay una hora "mejor" para <strong>empezar a correr</strong>. Lo más importante es encontrar el momento que mejor se adapte a tu rutina y que puedas mantener de forma consistente. 
+                        No hay una hora "mejor" para correr. Lo más importante es encontrar el momento que mejor se adapte a tu rutina y que puedas mantener de forma consistente. 
                         Algunas personas prefieren correr por la mañana porque les da energía para el día. Otras prefieren la tarde porque tienen más tiempo y están más despiertos. 
                         La mejor hora es aquella en la que realmente vas a correr. La constancia es más importante que la hora del día.
                     </p>
@@ -743,7 +746,7 @@
                         ¿Necesito hacer ejercicios de fuerza además de correr?
                     </h4>
                     <p style="color: #666; line-height: 1.7;">
-                        Aunque no es estrictamente necesario para <strong>empezar a correr desde cero</strong>, hacer ejercicios de fuerza 2-3 veces por semana es muy beneficioso. 
+                        Aunque no es estrictamente necesario al principio, hacer ejercicios de fuerza 2-3 veces por semana es muy beneficioso. 
                         Fortalece los músculos que sostienen tus articulaciones (cuádriceps, glúteos, core), reduce el riesgo de lesiones y mejora tu rendimiento corriendo. 
                         Puedes hacer ejercicios simples en casa: sentadillas, planchas, zancadas. No necesitas gimnasio ni equipamiento pesado.
                     </p>
@@ -765,7 +768,7 @@
                         ¿Cuánto tiempo debo correr en mi primera sesión?
                     </h4>
                     <p style="color: #666; line-height: 1.7;">
-                        En tu primera sesión para <strong>empezar a correr desde cero</strong>, no intentes correr mucho tiempo seguido. 
+                        En tu primera sesión, no intentes correr mucho tiempo seguido. 
                         Comienza con 20-30 minutos totales, alternando 1 minuto corriendo suavemente con 2-3 minutos caminando. 
                         Repite esto 5-6 veces. El objetivo no es agotarte, sino acostumbrar a tu cuerpo al movimiento. 
                         Es mejor terminar sintiendo que podrías hacer más, que terminar completamente agotado y sin ganas de volver a correr.
@@ -796,7 +799,7 @@
                 </div>
                 
                 <div style="text-align: center; margin-top: 40px;">
-                    <a href="empezar-correr-guia-completa.html" class="cta-button cta-primary" style="display: inline-block; padding: 15px 40px; font-size: 1.1rem;">
+                    <a class='cta-button cta-primary' href='/empezar-correr-guia-completa' style='display: inline-block; padding: 15px 40px; font-size: 1.1rem;'>
                         Ver Guía Completa: Plan Running 8 Semanas
                     </a>
                 </div>
@@ -820,8 +823,7 @@
                         Descubre las mejores ofertas de Black Friday en zapatillas running, relojes fitness, equipamiento y suplementos. 
                         Descuentos de hasta el 50%.
                     </p>
-                    <a href="black-friday-running-fitness-2025.html" 
-                       style="display: inline-block; background: white; color: #ff6b6b; padding: 12px 30px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s;">
+                    <a href='/black-friday-running-fitness-2025' style='display: inline-block; background: white; color: #ff6b6b; padding: 12px 30px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s;'>
                         Ver Ofertas Black Friday →
                     </a>
                 </div>
@@ -832,8 +834,7 @@
                         Ideas perfectas de regalos para runners y amantes del fitness. Desde regalos premium hasta opciones económicas. 
                         Encuentra el regalo perfecto.
                     </p>
-                    <a href="regalos-fitness-navidad-2025.html" 
-                       style="display: inline-block; background: white; color: #ff6b6b; padding: 12px 30px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s;">
+                    <a href='/regalos-fitness-navidad-2025' style='display: inline-block; background: white; color: #ff6b6b; padding: 12px 30px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s;'>
                         Ver Ideas de Regalos →
                     </a>
                 </div>
@@ -863,7 +864,7 @@
                     <p class="feature-description">
                         Planes de running personalizados para principiantes con seguimiento GPS en tiempo real. 
                         Aprende a correr desde cero con rutas, distancias, ritmos y análisis detallado de tus carreras. 
-                        <a href="empezar-correr-guia-completa.html" style="color: #667eea; font-weight: 600;">Ver guía completa →</a>
+                        <a href='/empezar-correr-guia-completa' style='color: #667eea; font-weight: 600;'>Ver guía completa →</a>
                     </p>
                 </div>
                 
@@ -924,12 +925,12 @@
                     <h3 class="content-title">Planes Personalizados para Empezar a Correr</h3>
                     <p class="content-text">
                         Nuestro algoritmo crea planes únicos basados en tu nivel, objetivos y disponibilidad. 
-                        Desde principiantes que quieren empezar a correr desde cero hasta atletas avanzados.
+                        Desde principiantes absolutos hasta atletas avanzados.
                     </p>
                     <ul class="content-list">
                         <li>Evaluación inicial completa</li>
                         <li>Adaptación automática del plan</li>
-                        <li>Progresión gradual y segura - <a href="empezar-correr-guia-completa.html" style="color: #667eea;">Ver plan de 8 semanas</a></li>
+                        <li>Progresión gradual y segura - <a href='/empezar-correr-guia-completa' style='color: #667eea;'>Ver plan de 8 semanas</a></li>
                         <li>Objetivos realistas y medibles</li>
                     </ul>
                 </div>
@@ -961,16 +962,16 @@
                 </div>
                 
                 <div class="content-card">
-                    <h3 class="content-title">Resultados Garantizados</h3>
+                    <h3 class="content-title">Resultados Reales</h3>
                     <p class="content-text">
-                        Miles de usuarios han transformado su vida con EntrenoApp. 
-                        ¡Tú puedes ser el siguiente!
+                        Creado por un runner real con años de experiencia en medias maratones y entrenamiento de fuerza. 
+                        Planes probados y basados en la práctica, no en teoría.
                     </p>
                     <ul class="content-list">
-                        <li>+50,000 usuarios activos</li>
-                        <li>95% de satisfacción</li>
-                        <li>Resultados en 30 días</li>
-                        <li>Garantía de devolución</li>
+                        <li>100% gratuito y sin compromiso</li>
+                        <li>Contenido basado en experiencia real</li>
+                        <li>Progresión visible desde la semana 1</li>
+                        <li>Guías actualizadas constantemente</li>
                     </ul>
                 </div>
             </div>
@@ -983,7 +984,7 @@
             <div style="opacity:.7; font-size:.95rem; margin-bottom: 20px;">Confiable y fácil de usar</div>
             <div style="display:flex; gap:24px; justify-content:center; flex-wrap:wrap;">
                 <div style="padding:8px 14px; background:#fff; border-radius:999px; border:1px solid #e8e8f6;">Privacidad primero</div>
-                <div style="padding:8px 14px; background:#fff; border-radius:999px; border:1px solid #e8e8f6;">Sin anuncios invasivos</div>
+                <div style="padding:8px 14px; background:#fff; border-radius:999px; border:1px solid #e8e8f6;">Publicidad no intrusiva</div>
                 <div style="padding:8px 14px; background:#fff; border-radius:999px; border:1px solid #e8e8f6;">Funciona en móvil y web</div>
             </div>
         </div>
@@ -1061,34 +1062,34 @@
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;">
                 <div style="background: white; border-radius: 16px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.3s; border: 2px solid #667eea;">
                     <h3 style="font-size: 1.3rem; margin-bottom: 12px; color: #667eea;">
-                        <a href="mantener-motivacion-correr-2025.html" style="color: #667eea; text-decoration: none;">💪 Mantener la Motivación para Correr</a>
+                        <a href='/mantener-motivacion-correr-2025' style='color: #667eea; text-decoration: none;'>💪 Mantener la Motivación para Correr</a>
                     </h3>
                     <p style="color: #666; line-height: 1.6; margin-bottom: 15px;">
                         10 estrategias probadas para no abandonar el running. Consejos psicológicos, rutinas y técnicas que realmente funcionan.
                     </p>
-                    <a href="mantener-motivacion-correr-2025.html" style="color: #667eea; font-weight: 700; text-decoration: none;">
+                    <a href='/mantener-motivacion-correr-2025' style='color: #667eea; font-weight: 700; text-decoration: none;'>
                         Leer artículo →
                     </a>
                 </div>
                 <div style="background: white; border-radius: 16px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.3s; border: 2px solid #667eea;">
                     <h3 style="font-size: 1.3rem; margin-bottom: 12px; color: #667eea;">
-                        <a href="running-vs-caminar-2025.html" style="color: #667eea; text-decoration: none;">🏃 vs 🚶 Running vs Caminar</a>
+                        <a href='/running-vs-caminar-2025' style='color: #667eea; text-decoration: none;'>🏃 vs 🚶 Running vs Caminar</a>
                     </h3>
                     <p style="color: #666; line-height: 1.6; margin-bottom: 15px;">
                         ¿Cuál es mejor para empezar? Comparación completa: calorías, beneficios, lesiones, tiempo. Guía para principiantes.
                     </p>
-                    <a href="running-vs-caminar-2025.html" style="color: #667eea; font-weight: 700; text-decoration: none;">
+                    <a href='/running-vs-caminar-2025' style='color: #667eea; font-weight: 700; text-decoration: none;'>
                         Ver comparación →
                     </a>
                 </div>
                 <div style="background: white; border-radius: 16px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.3s; border: 2px solid #667eea;">
                     <h3 style="font-size: 1.3rem; margin-bottom: 12px; color: #667eea;">
-                        <a href="que-comer-antes-despues-correr-2025.html" style="color: #667eea; text-decoration: none;">🍎 Qué Comer Antes y Después</a>
+                        <a href='/que-comer-antes-despues-correr-2025' style='color: #667eea; text-decoration: none;'>🍎 Qué Comer Antes y Después</a>
                     </h3>
                     <p style="color: #666; line-height: 1.6; margin-bottom: 15px;">
                         Guía completa de nutrición para runners: timing perfecto, alimentos ideales, hidratación y ejemplos de comidas.
                     </p>
-                    <a href="que-comer-antes-despues-correr-2025.html" style="color: #667eea; font-weight: 700; text-decoration: none;">
+                    <a href='/que-comer-antes-despues-correr-2025' style='color: #667eea; font-weight: 700; text-decoration: none;'>
                         Ver guía →
                     </a>
                 </div>
@@ -1105,194 +1106,194 @@
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;">
                 <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 16px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.3s;">
                     <h3 style="font-size: 1.3rem; margin-bottom: 12px; color: white;">
-                        <a href="empezar-a-correr.html" style="color: white; text-decoration: none;">🧭 HUB: Empezar a Correr desde Cero</a>
+                        <a href='/empezar-a-correr' style='color: white; text-decoration: none;'>🧭 HUB: Empezar a Correr desde Cero</a>
                     </h3>
                     <p style="color: rgba(255,255,255,0.9); line-height: 1.6; margin-bottom: 15px;">
                         Todos los planes y guías en un solo lugar: 2 semanas, 8 semanas, errores comunes, zapatillas y nutrición. Todo lo que necesitas para empezar a correr.
                     </p>
-                    <a href="empezar-a-correr.html" style="color: white; font-weight: 700; text-decoration: underline;">
+                    <a href='/empezar-a-correr' style='color: white; font-weight: 700; text-decoration: underline;'>
                         Ver HUB completo →
                     </a>
                 </div>
                 <div style="background: white; border-radius: 16px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.3s;">
                     <h3 style="font-size: 1.3rem; margin-bottom: 12px; color: #333;">
-                        <a href="empezar-correr-guia-completa.html" style="color: #333; text-decoration: none;">🏃 Plan Running 8 Semanas: De Cero a 5K</a>
+                        <a href='/empezar-correr-guia-completa' style='color: #333; text-decoration: none;'>🏃 Plan Running 8 Semanas: De Cero a 5K</a>
                     </h3>
                     <p style="color: #666; line-height: 1.6; margin-bottom: 15px;">
                         Guía completa para empezar a correr desde cero. Plan de entrenamiento de 8 semanas, técnica correcta, prevención de lesiones y consejos expertos.
                     </p>
-                    <a href="empezar-correr-guia-completa.html" style="color: #667eea; font-weight: 600; text-decoration: none;">
+                    <a href='/empezar-correr-guia-completa' style='color: #667eea; font-weight: 600; text-decoration: none;'>
                         Leer guía completa →
                     </a>
                 </div>
                 
                 <div style="background: white; border-radius: 16px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.3s;">
                     <h3 style="font-size: 1.3rem; margin-bottom: 12px; color: #333;">
-                        <a href="empezar-correr-sobrepeso-2025.html" style="color: #333; text-decoration: none;">🏃 Empezar a Correr con Sobrepeso</a>
+                        <a href='/empezar-correr-sobrepeso-2025' style='color: #333; text-decoration: none;'>🏃 Empezar a Correr con Sobrepeso</a>
                     </h3>
                     <p style="color: #666; line-height: 1.6; margin-bottom: 15px;">
                         Guía especializada para empezar a correr si tienes sobrepeso. Consejos de seguridad, progresión adaptada y ejercicios complementarios.
                     </p>
-                    <a href="empezar-correr-sobrepeso-2025.html" style="color: #667eea; font-weight: 600; text-decoration: none;">
+                    <a href='/empezar-correr-sobrepeso-2025' style='color: #667eea; font-weight: 600; text-decoration: none;'>
                         Leer artículo →
                     </a>
                 </div>
                 
                 <div style="background: white; border-radius: 16px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.3s;">
                     <h3 style="font-size: 1.3rem; margin-bottom: 12px; color: #333;">
-                        <a href="rutina-gym-principiantes-2025.html" style="color: #333; text-decoration: none;">🏋️ Rutina de Gimnasio para Principiantes</a>
+                        <a href='/rutina-gym-principiantes-2025' style='color: #333; text-decoration: none;'>🏋️ Rutina de Gimnasio para Principiantes</a>
                     </h3>
                     <p style="color: #666; line-height: 1.6; margin-bottom: 15px;">
                         Plan de entrenamiento de gimnasio completo para principiantes. Ejercicios básicos, técnica correcta y progresión segura.
                     </p>
-                    <a href="rutina-gym-principiantes-2025.html" style="color: #667eea; font-weight: 600; text-decoration: none;">
+                    <a href='/rutina-gym-principiantes-2025' style='color: #667eea; font-weight: 600; text-decoration: none;'>
                         Ver rutina →
                     </a>
                 </div>
                 
                 <div style="background: white; border-radius: 16px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.3s;">
                     <h3 style="font-size: 1.3rem; margin-bottom: 12px; color: #333;">
-                        <a href="guia-completa-fitness-casa-2025.html" style="color: #333; text-decoration: none;">🏠 Fitness en Casa: Guía Completa 2026</a>
+                        <a href='/guia-completa-fitness-casa-2025' style='color: #333; text-decoration: none;'>🏠 Fitness en Casa: Guía Completa 2026</a>
                     </h3>
                     <p style="color: #666; line-height: 1.6; margin-bottom: 15px;">
                         Todo lo que necesitas para entrenar en casa. Rutinas sin equipamiento, ejercicios efectivos y consejos para mantener la motivación.
                     </p>
-                    <a href="guia-completa-fitness-casa-2025.html" style="color: #667eea; font-weight: 600; text-decoration: none;">
+                    <a href='/guia-completa-fitness-casa-2025' style='color: #667eea; font-weight: 600; text-decoration: none;'>
                         Ver guía →
                     </a>
                 </div>
                 
                 <div style="background: white; border-radius: 16px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.3s;">
                     <h3 style="font-size: 1.3rem; margin-bottom: 12px; color: #333;">
-                        <a href="nutricion-deportiva-guia-completa-2025.html" style="color: #333; text-decoration: none;">🥗 Nutrición Deportiva: Guía Completa</a>
+                        <a href='/nutricion-deportiva-guia-completa-2025' style='color: #333; text-decoration: none;'>🥗 Nutrición Deportiva: Guía Completa</a>
                     </h3>
                     <p style="color: #666; line-height: 1.6; margin-bottom: 15px;">
                         Aprende a alimentarte correctamente para mejorar tu rendimiento. Guía completa de nutrición para runners y deportistas.
                     </p>
-                    <a href="nutricion-deportiva-guia-completa-2025.html" style="color: #667eea; font-weight: 600; text-decoration: none;">
+                    <a href='/nutricion-deportiva-guia-completa-2025' style='color: #667eea; font-weight: 600; text-decoration: none;'>
                         Leer guía →
                     </a>
                 </div>
                 <div style="background: white; border-radius: 16px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.3s;">
                     <h3 style="font-size: 1.3rem; margin-bottom: 12px; color: #333;">
-                        <a href="suplementos-esenciales-gimnasio-2025.html" style="color: #333; text-decoration: none;">🥛 4 Suplementos Esenciales Gimnasio 2026</a>
+                        <a href='/suplementos-esenciales-gimnasio-2025' style='color: #333; text-decoration: none;'>🥛 4 Suplementos Esenciales Gimnasio 2026</a>
                     </h3>
                     <p style="color: #666; line-height: 1.6; margin-bottom: 15px;">
                         Proteína ISO whey, creatina, magnesio y preentreno. Guía con enlaces Amazon para elegir bien.
                     </p>
-                    <a href="suplementos-esenciales-gimnasio-2025.html" style="color: #667eea; font-weight: 600; text-decoration: none;">
+                    <a href='/suplementos-esenciales-gimnasio-2025' style='color: #667eea; font-weight: 600; text-decoration: none;'>
                         Ver guía →
                     </a>
                 </div>
                 <div style="background: white; border-radius: 16px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.3s;">
                     <h3 style="font-size: 1.3rem; margin-bottom: 12px; color: #333;">
-                        <a href="equipamiento-gimnasio-casa-2025.html" style="color: #333; text-decoration: none;">🏋️ Equipamiento Gimnasio Casa 2026</a>
+                        <a href='/equipamiento-gimnasio-casa-2025' style='color: #333; text-decoration: none;'>🏋️ Equipamiento Gimnasio Casa 2026</a>
                     </h3>
                     <p style="color: #666; line-height: 1.6; margin-bottom: 15px;">
                         Barras, discos, mancuernas ajustables, bandas, paralelas, barra dominadas, chaleco y más. Enlaces Amazon.
                     </p>
-                    <a href="equipamiento-gimnasio-casa-2025.html" style="color: #667eea; font-weight: 600; text-decoration: none;">
+                    <a href='/equipamiento-gimnasio-casa-2025' style='color: #667eea; font-weight: 600; text-decoration: none;'>
                         Ver guía →
                     </a>
                 </div>
                 <div style="background: #fff; padding: 24px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border: 2px solid transparent; transition: all 0.3s;">
                     <h3 style="font-size: 1.3rem; margin-bottom: 12px; color: #333;">
-                        <a href="como-perder-barriga-casa-2026.html" style="color: #333; text-decoration: none;">🏠 Cómo Perder Barriga en Casa 2026</a>
+                        <a href='/como-perder-barriga-casa-2026' style='color: #333; text-decoration: none;'>🏠 Cómo Perder Barriga en Casa 2026</a>
                     </h3>
                     <p style="color: #666; line-height: 1.6; margin-bottom: 15px;">
                         8 ejercicios efectivos + plan de 4 semanas. Sin equipamiento caro.
                     </p>
-                    <a href="como-perder-barriga-casa-2026.html" style="color: #667eea; font-weight: 600; text-decoration: none;">
+                    <a href='/como-perder-barriga-casa-2026' style='color: #667eea; font-weight: 600; text-decoration: none;'>
                         Ver guía →
                     </a>
                 </div>
                 <div style="background: #fff; padding: 24px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border: 2px solid transparent; transition: all 0.3s;">
                     <h3 style="font-size: 1.3rem; margin-bottom: 12px; color: #333;">
-                        <a href="que-comprar-gimnasio-casa-budget-2026.html" style="color: #333; text-decoration: none;">💰 Gym Casa con Poco Dinero 2026</a>
+                        <a href='/que-comprar-gimnasio-casa-budget-2026' style='color: #333; text-decoration: none;'>💰 Gym Casa con Poco Dinero 2026</a>
                     </h3>
                     <p style="color: #666; line-height: 1.6; margin-bottom: 15px;">
                         Qué comprar primero: bandas, mancuernas, barras. Lista priorizada por presupuesto.
                     </p>
-                    <a href="que-comprar-gimnasio-casa-budget-2026.html" style="color: #667eea; font-weight: 600; text-decoration: none;">
+                    <a href='/que-comprar-gimnasio-casa-budget-2026' style='color: #667eea; font-weight: 600; text-decoration: none;'>
                         Ver guía →
                     </a>
                 </div>
                 <div style="background: white; border-radius: 16px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.3s;">
                     <h3 style="font-size: 1.3rem; margin-bottom: 12px; color: #333;">
-                        <a href="accesorios-medicion-fitness-2025.html" style="color: #333; text-decoration: none;">📏 Accesorios y Medición Fitness 2026</a>
+                        <a href='/accesorios-medicion-fitness-2025' style='color: #333; text-decoration: none;'>📏 Accesorios y Medición Fitness 2026</a>
                     </h3>
                     <p style="color: #666; line-height: 1.6; margin-bottom: 15px;">
                         Foam roller, muñequeras, cinturón, cinta métrica, adipómetro, báscula y trípode. Guía + enlaces Amazon.
                     </p>
-                    <a href="accesorios-medicion-fitness-2025.html" style="color: #667eea; font-weight: 600; text-decoration: none;">
+                    <a href='/accesorios-medicion-fitness-2025' style='color: #667eea; font-weight: 600; text-decoration: none;'>
                         Ver guía →
                     </a>
                 </div>
                 <div style="background: white; border-radius: 16px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.3s;">
                     <h3 style="font-size: 1.3rem; margin-bottom: 12px; color: #333;">
-                        <a href="tendencias-fitness-running-2026.html" style="color: #333; text-decoration: none;">📈 Tendencias Fitness y Running 2026</a>
+                        <a href='/tendencias-fitness-running-2026' style='color: #333; text-decoration: none;'>📈 Tendencias Fitness y Running 2026</a>
                     </h3>
                     <p style="color: #666; line-height: 1.6; margin-bottom: 15px;">
                         Qué cambia este año: híbrido, recuperación, tecnología y suplementación. Guía actualizada.
                     </p>
-                    <a href="tendencias-fitness-running-2026.html" style="color: #667eea; font-weight: 600; text-decoration: none;">
+                    <a href='/tendencias-fitness-running-2026' style='color: #667eea; font-weight: 600; text-decoration: none;'>
                         Leer artículo →
                     </a>
                 </div>
                 <div style="background: white; border-radius: 16px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.3s;">
                     <h3 style="font-size: 1.3rem; margin-bottom: 12px; color: #333;">
-                        <a href="empezar-correr-2026-guia-paso-paso.html" style="color: #333; text-decoration: none;">🏃 Empezar a Correr 2026: Guía Paso a Paso</a>
+                        <a href='/empezar-correr-2026-guia-paso-paso' style='color: #333; text-decoration: none;'>🏃 Empezar a Correr 2026: Guía Paso a Paso</a>
                     </h3>
                     <p style="color: #666; line-height: 1.6; margin-bottom: 15px;">
                         Plan rápido o completo, errores a evitar, zapatillas y nutrición. Todo actualizado para este año.
                     </p>
-                    <a href="empezar-correr-2026-guia-paso-paso.html" style="color: #667eea; font-weight: 600; text-decoration: none;">
+                    <a href='/empezar-correr-2026-guia-paso-paso' style='color: #667eea; font-weight: 600; text-decoration: none;'>
                         Leer guía →
                     </a>
                 </div>
                 <div style="background: white; border-radius: 16px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.3s;">
                     <h3 style="font-size: 1.3rem; margin-bottom: 12px; color: #333;">
-                        <a href="mejores-suplementos-gym-running-2026.html" style="color: #333; text-decoration: none;">💪 Mejores Suplementos Gym y Running 2026</a>
+                        <a href='/mejores-suplementos-gym-running-2026' style='color: #333; text-decoration: none;'>💪 Mejores Suplementos Gym y Running 2026</a>
                     </h3>
                     <p style="color: #666; line-height: 1.6; margin-bottom: 15px;">
                         Proteína, creatina, magnesio y preentreno. Guía actualizada + enlaces Amazon.
                     </p>
-                    <a href="mejores-suplementos-gym-running-2026.html" style="color: #667eea; font-weight: 600; text-decoration: none;">
+                    <a href='/mejores-suplementos-gym-running-2026' style='color: #667eea; font-weight: 600; text-decoration: none;'>
                         Ver guía →
                     </a>
                 </div>
                 <div style="background: white; border-radius: 16px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.3s;">
                     <h3 style="font-size: 1.3rem; margin-bottom: 12px; color: #333;">
-                        <a href="errores-comunes-empezar-correr-2025.html" style="color: #333; text-decoration: none;">⚠️ Errores Comunes al Empezar a Correr</a>
+                        <a href='/errores-comunes-empezar-correr-2025' style='color: #333; text-decoration: none;'>⚠️ Errores Comunes al Empezar a Correr</a>
                     </h3>
                     <p style="color: #666; line-height: 1.6; margin-bottom: 15px;">
                         Evita estos 10 errores comunes que cometen los principiantes al empezar a correr. Aprende qué NO hacer para progresar de forma segura y sin lesiones.
                     </p>
-                    <a href="errores-comunes-empezar-correr-2025.html" style="color: #667eea; font-weight: 600; text-decoration: none;">
+                    <a href='/errores-comunes-empezar-correr-2025' style='color: #667eea; font-weight: 600; text-decoration: none;'>
                         Leer artículo →
                     </a>
                 </div>
                 
                 <div style="background: white; border-radius: 16px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.3s;">
                     <h3 style="font-size: 1.3rem; margin-bottom: 12px; color: #333;">
-                        <a href="calzado-ideal-empezar-correr-2025.html" style="color: #333; text-decoration: none;">👟 Calzado Ideal para Empezar a Correr</a>
+                        <a href='/calzado-ideal-empezar-correr-2025' style='color: #333; text-decoration: none;'>👟 Calzado Ideal para Empezar a Correr</a>
                     </h3>
                     <p style="color: #666; line-height: 1.6; margin-bottom: 15px;">
                         Guía completa sobre cómo elegir las zapatillas ideales para empezar a correr. Tipos de pisada, características importantes y recomendaciones para principiantes.
                     </p>
-                    <a href="calzado-ideal-empezar-correr-2025.html" style="color: #667eea; font-weight: 600; text-decoration: none;">
+                    <a href='/calzado-ideal-empezar-correr-2025' style='color: #667eea; font-weight: 600; text-decoration: none;'>
                         Leer guía →
                     </a>
                 </div>
                 
                 <div style="background: white; border-radius: 16px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.3s;">
                     <h3 style="font-size: 1.3rem; margin-bottom: 12px; color: #333;">
-                        <a href="workout-guides.html" style="color: #333; text-decoration: none;">📖 Todas las Guías de Entrenamiento</a>
+                        <a href='/workout-guides' style='color: #333; text-decoration: none;'>📖 Todas las Guías de Entrenamiento</a>
                     </h3>
                     <p style="color: #666; line-height: 1.6; margin-bottom: 15px;">
                         Accede a todas nuestras guías de entrenamiento: running, gimnasio, funcional, nutrición y más. Todo lo que necesitas en un solo lugar.
                     </p>
-                    <a href="workout-guides.html" style="color: #667eea; font-weight: 600; text-decoration: none;">
+                    <a href='/workout-guides' style='color: #667eea; font-weight: 600; text-decoration: none;'>
                         Ver todas las guías →
                     </a>
                 </div>
@@ -1302,7 +1303,7 @@
 
     <section class="content-section" style="background: #fff; padding: 50px 20px;">
         <div class="container" style="text-align:center;">
-            <a href="app.html" class="cta-button cta-primary" style="display:inline-block; padding:16px 40px; border-radius:50px; font-size:1.2rem;">Empieza gratis en 60 segundos</a>
+            <a class='cta-button cta-primary' href='/app' style='display:inline-block; padding:16px 40px; border-radius:50px; font-size:1.2rem;'>Empieza gratis en 60 segundos</a>
             <div style="margin-top:10px; color:#666; font-size:.95rem;">Sin tarjetas. Puedes cancelar cuando quieras.</div>
         </div>
     </section>
@@ -1375,22 +1376,22 @@
         </div>
         
         <div class="footer-links">
-            <a href="blog.html">Blog</a>
-            <a href="about.html">Sobre Nosotros</a>
-            <a href="workout-guides.html">Guías de Entrenamiento</a>
-            <a href="fitness-tips.html">Consejos de Fitness</a>
-            <a href="exercises-library.html">Biblioteca de Ejercicios</a>
-            <a href="fitness-calculators.html">Calculadoras</a>
-            <a href="resources.html">Recursos</a>
-            <a href="faq.html">FAQ</a>
-            <a href="privacy.html">Privacidad</a>
-            <a href="terms.html">Términos</a>
-            <a href="contact.html">Contacto</a>
+            <a href='/blog'>Blog</a>
+            <a href='/about'>Sobre Nosotros</a>
+            <a href='/workout-guides'>Guías de Entrenamiento</a>
+            <a href='/fitness-tips'>Consejos de Fitness</a>
+            <a href='/exercises-library'>Biblioteca de Ejercicios</a>
+            <a href='/fitness-calculators'>Calculadoras</a>
+            <a href='/resources'>Recursos</a>
+            <a href='/faq'>FAQ</a>
+            <a href='/privacy'>Privacidad</a>
+            <a href='/terms'>Términos</a>
+            <a href='/contact'>Contacto</a>
         </div>
         
         <p>&copy; 2026 EntrenoApp - LIPA Studios. Todos los derechos reservados.</p>
         <div class="legal-info" style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #ddd; font-size: 0.875rem; color: #666;">
-            <p>© 2026 EntrenoApp | Responsable: Luis Alberto Moratalla | NIF: 50468195P | C/ Almansa 2, 28300 Aranjuez, Madrid | Email: lipastudios4@gmail.com</p>
+            <p>© 2026 EntrenoApp | Responsable: Luis Alberto Moratalla | C/ Almansa 2, 28300 Aranjuez, Madrid | Email: lipastudios4@gmail.com</p>
         </div>
         <p style="margin-top: 10px; font-size: 0.9rem; color: #666;">
             <strong>Contacto:</strong> <a href="mailto:lipastudios4@gmail.com" style="color: #00D4FF;">lipastudios4@gmail.com</a> | 
@@ -1399,31 +1400,23 @@
         </p>
     </footer>
 
-    <!-- YouTube Gallery Component -->
-    <script defer src="js/components/youtube-gallery.js"></script>
-    
+    <!-- YouTube Gallery Component (cache-bust para forzar versión con playlist del canal) -->
+    <script defer src="js/components/youtube-gallery.js?v=4"></script>
     <script>
-        // Inicializar AdSense (defer para no bloquear render)
         (adsbygoogle = window.adsbygoogle || []).push({});
-        
-        // Inicializar galería de YouTube (defer para mejorar LCP)
         document.addEventListener('DOMContentLoaded', function() {
             setTimeout(function() {
                 if (typeof YouTubeGallery !== 'undefined') {
                     new YouTubeGallery({
                         containerId: 'youtube-gallery',
-                        // IMPORTANTE: sustituye por tu propia API Key **solo en tu entorno local**
-                        // y nunca la subas al repositorio público.
-                        apiKey: 'YOUR_YOUTUBE_API_KEY_HERE',
+                        apiKey: '',
                         channelId: 'UCzIssceXL14IHgyRARzKKhQ',
-                        channelHandle: '@entrenoapp',
-                        channelUrl: 'https://youtube.com/@entrenoapp?si=2CrstgJ0ipET-zRB',
+                        channelUrl: 'https://youtube.com/@entrenoapp',
                         maxVideos: 6,
-                        autoPlay: false,
                         showThumbnails: true
                     });
                 }
-            }, 1000);
+            }, 300);
         });
     </script>
 </body>
