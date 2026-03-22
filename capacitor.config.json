@@ -1,0 +1,17 @@
+{
+  "appId": "com.lipastudios.entrenoapp",
+  "appName": "EntrenoApp",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  },
+  "ios": {
+    "contentInset": "automatic"
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0,
+      "launchAutoHide": true
+    }
+  }
+}

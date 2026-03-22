@@ -17,7 +17,5 @@ Allow: /
 User-agent: AdsBot-Google
 Allow: /
 
-# Disallow only service worker and config files
+# Disallow only service worker (allow manifest.json for PWA)
 Disallow: /sw.js
-Disallow: /manifest.json
-Disallow: /*.json

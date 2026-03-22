@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fondo dividido diagonalmente -->
+  <polygon points="0,0 307,0 205,512 0,512" fill="#0B1426"/>
+  <polygon points="307,0 512,0 512,512 205,512" fill="#F5F5F5"/>
+  
+  <!-- Líneas orbitales -->
+  <path d="M 100 150 Q 150 100 200 150" stroke="#4FC3F7" stroke-width="3" fill="none" opacity="0.8"/>
+  <path d="M 80 200 Q 180 150 280 200" stroke="#4FC3F7" stroke-width="3" fill="none" opacity="0.8"/>
+  <path d="M 60 250 Q 220 200 360 250" stroke="#4FC3F7" stroke-width="3" fill="none" opacity="0.8"/>
+  
+  <!-- Microscopio -->
+  <ellipse cx="128" cy="180" rx="20" ry="30" fill="#1976D2"/>
+  <rect x="121" y="120" width="15" height="60" fill="#1976D2"/>
+  <circle cx="128" cy="100" r="10" fill="#1976D2"/>
+  
+  <!-- Mancuerna roja -->
+  <g transform="rotate(-30 256 256)">
+    <rect x="200" y="245" width="112" height="6" fill="#FF1744"/>
+    <circle cx="310" cy="248" r="18" fill="#FF1744" stroke="#FFFFFF" stroke-width="2"/>
+    <line x1="295" y1="235" x2="325" y2="261" stroke="#0B1426" stroke-width="2"/>
+  </g>
+  
+  <!-- ADN (doble hélice) -->
+  <g opacity="0.9">
+    <!-- Hélice izquierda -->
+    <circle cx="100" cy="330" r="4" fill="#1976D2"/>
+    <circle cx="120" cy="315" r="4" fill="#1976D2"/>
+    <circle cx="140" cy="330" r="4" fill="#1976D2"/>
+    <circle cx="160" cy="315" r="4" fill="#1976D2"/>
+    <circle cx="180" cy="330" r="4" fill="#1976D2"/>
+    <circle cx="200" cy="315" r="4" fill="#1976D2"/>
+    <circle cx="220" cy="330" r="4" fill="#1976D2"/>
+    <circle cx="240" cy="315" r="4" fill="#1976D2"/>
+    
+    <!-- Hélice derecha -->
+    <circle cx="100" cy="350" r="4" fill="#1976D2"/>
+    <circle cx="120" cy="365" r="4" fill="#1976D2"/>
+    <circle cx="140" cy="350" r="4" fill="#1976D2"/>
+    <circle cx="160" cy="365" r="4" fill="#1976D2"/>
+    <circle cx="180" cy="350" r="4" fill="#1976D2"/>
+    <circle cx="200" cy="365" r="4" fill="#1976D2"/>
+    <circle cx="220" cy="350" r="4" fill="#1976D2"/>
+    <circle cx="240" cy="365" r="4" fill="#1976D2"/>
+    
+    <!-- Conexiones -->
+    <line x1="100" y1="330" x2="120" y2="365" stroke="#1976D2" stroke-width="2" opacity="0.7"/>
+    <line x1="120" y1="315" x2="140" y2="350" stroke="#1976D2" stroke-width="2" opacity="0.7"/>
+    <line x1="140" y1="330" x2="160" y2="365" stroke="#1976D2" stroke-width="2" opacity="0.7"/>
+    <line x1="160" y1="315" x2="180" y2="350" stroke="#1976D2" stroke-width="2" opacity="0.7"/>
+  </g>
+  
+  <!-- Texto ENTRENOAPP -->
+  <text x="230" y="410" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#FFFFFF">
+    <tspan fill="#FFFFFF" stroke="#0B1426" stroke-width="1">ENTRENO</tspan>
+    <tspan fill="#FF1744" stroke="#FFFFFF" stroke-width="1">APP</tspan>
+  </text>
+  
+  <!-- Libro con flechas -->
+  <rect x="236" y="470" width="40" height="25" fill="#1976D2" stroke="#0B1426" stroke-width="2"/>
+  <line x1="246" y1="478" x2="270" y2="478" stroke="#0B1426" stroke-width="1"/>
+  <line x1="246" y1="485" x2="270" y2="485" stroke="#0B1426" stroke-width="1"/>
+  <line x1="246" y1="492" x2="270" y2="492" stroke="#0B1426" stroke-width="1"/>
+  
+  <!-- Flechas -->
+  <polygon points="220,482 215,472 225,472" fill="#FF1744"/>
+  <polygon points="292,482 287,472 297,472" fill="#FF1744"/>
+</svg>

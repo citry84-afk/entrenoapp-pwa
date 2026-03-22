@@ -300,6 +300,16 @@
   to = "/calzado-ideal-empezar-correr-2025.html"
   status = 301
 
+[[redirects]]
+  from = "/guia-completa-fitness-casa-2025"
+  to = "/guia-completa-fitness-casa-2025.html"
+  status = 301
+
+[[redirects]]
+  from = "/nutricion-deportiva-guia-completa-2025"
+  to = "/nutricion-deportiva-guia-completa-2025.html"
+  status = 301
+
 # Canonical domain: force https + apex
 [[redirects]]
   from = "http://entrenoapp.com/*"

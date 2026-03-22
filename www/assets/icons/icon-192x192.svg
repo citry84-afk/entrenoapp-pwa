@@ -1,0 +1,44 @@
+<svg width="192" height="192" viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4FC3F7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1976D2;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="192" height="192" fill="#0D1421" rx="30"/>
+  
+  <!-- Speed lines -->
+  <rect x="30" y="75" width="22" height="3" fill="url(#blueGradient)" rx="1.5"/>
+  <rect x="30" y="82" width="30" height="3" fill="url(#blueGradient)" rx="1.5"/>
+  <rect x="30" y="90" width="37" height="3" fill="url(#blueGradient)" rx="1.5"/>
+  
+  <!-- Running figure with kettlebell -->
+  <!-- Kettlebell handle (head and shoulders) -->
+  <path d="M105 45 C 105 37, 112 30, 120 30 C 128 30, 135 37, 135 45 C 135 53, 128 60, 120 60 C 112 60, 105 53, 105 45 Z" fill="url(#blueGradient)"/>
+  
+  <!-- Kettlebell ball (head) -->
+  <circle cx="120" cy="45" r="15" fill="url(#blueGradient)"/>
+  
+  <!-- Body (torso) -->
+  <ellipse cx="120" cy="75" rx="9" ry="22" fill="url(#blueGradient)"/>
+  
+  <!-- Left arm (forward) -->
+  <ellipse cx="105" cy="67" rx="6" ry="15" fill="url(#blueGradient)" transform="rotate(-20 105 67)"/>
+  
+  <!-- Right arm (back) -->
+  <ellipse cx="135" cy="71" rx="6" ry="15" fill="url(#blueGradient)" transform="rotate(20 135 71)"/>
+  
+  <!-- Left leg (forward) -->
+  <ellipse cx="112" cy="105" rx="7" ry="22" fill="url(#blueGradient)" transform="rotate(-15 112 105)"/>
+  
+  <!-- Right leg (back) -->
+  <ellipse cx="128" cy="109" rx="7" ry="22" fill="url(#blueGradient)" transform="rotate(15 128 109)"/>
+  
+  <!-- Left foot -->
+  <ellipse cx="105" cy="127" rx="9" ry="6" fill="url(#blueGradient)"/>
+  
+  <!-- Right foot -->
+  <ellipse cx="135" cy="131" rx="9" ry="6" fill="url(#blueGradient)"/>
+</svg>

@@ -1,0 +1,277 @@
+/* Plan 4 semanas - 5 días */
+.plan-4-weeks-page {
+  padding: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+  padding-bottom: 100px;
+}
+
+.plan-4-weeks-header {
+  text-align: center;
+  margin-bottom: 1.25rem;
+}
+
+.plan-4-weeks-title {
+  font-size: 1.75rem;
+  margin: 0 0 0.35rem 0;
+  color: #fff;
+  font-weight: 700;
+}
+
+.plan-4-weeks-subtitle {
+  margin: 0;
+  font-size: 0.95rem;
+  opacity: 0.85;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.plan-progression-note {
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  margin-bottom: 1.25rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.plan-progression-note p {
+  margin: 0 0 0.5rem 0;
+}
+
+.plan-progression-note p:last-child {
+  margin-bottom: 0;
+}
+
+.plan-order-note {
+  margin-top: 0.75rem !important;
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+.plan-week-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  justify-content: center;
+}
+
+.plan-week-pill {
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.plan-week-pill:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.plan-week-pill.active {
+  background: linear-gradient(135deg, #00D4FF 0%, #0099cc 100%);
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #fff;
+}
+
+.plan-week-pill.descarga.active {
+  background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+}
+
+.plan-day-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+  justify-content: center;
+}
+
+.plan-day-pill {
+  padding: 0.5rem 0.85rem;
+  border-radius: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 70px;
+}
+
+.plan-day-pill:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--day-color, #00D4FF);
+}
+
+.plan-day-pill.active {
+  background: color-mix(in srgb, var(--day-color, #00D4FF) 25%, transparent);
+  border-color: var(--day-color, #00D4FF);
+  color: #fff;
+}
+
+.plan-day-num {
+  font-weight: 700;
+  font-size: 0.75rem;
+  opacity: 0.9;
+}
+
+.plan-day-name {
+  font-weight: 600;
+}
+
+.plan-day-area {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 1.25rem;
+  backdrop-filter: blur(12px);
+}
+
+.plan-day-title {
+  font-size: 1.35rem;
+  margin: 0 0 0.5rem 0;
+  color: #fff;
+  font-weight: 700;
+}
+
+.plan-day-goal {
+  margin: 0 0 1rem 0;
+  font-size: 0.95rem;
+  opacity: 0.9;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.plan-exercise-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.25rem 0;
+}
+
+.plan-exercise-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.65rem 0.75rem;
+  margin-bottom: 0.35rem;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  border-left: 4px solid var(--day-color, #00D4FF);
+}
+
+.plan-exercise-name {
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.plan-exercise-sets {
+  font-weight: 700;
+  color: #00D4FF;
+  font-size: 0.95rem;
+}
+
+.plan-mini-wod,
+.plan-day5-wod {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.plan-mini-wod-header,
+.plan-day5-desc {
+  margin-bottom: 0.5rem;
+}
+
+.plan-mini-wod-label,
+.plan-day5-week-label {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #00D4FF;
+}
+
+.plan-mini-wod-desc {
+  margin-left: 0.5rem;
+  opacity: 0.85;
+  font-size: 0.9rem;
+}
+
+.plan-mini-wod-rounds,
+.plan-day5-wod .plan-mini-wod-rounds {
+  padding-left: 1.25rem;
+  margin: 0.5rem 0 1rem 0;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.plan-timer-wrap {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.plan-timer-display {
+  font-size: 2.5rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: #00D4FF;
+  margin-bottom: 0.75rem;
+  min-height: 3rem;
+}
+
+.plan-timer-display.timer-low {
+  color: #ff6b6b;
+}
+
+.plan-timer-display.timer-done {
+  color: #6bcb77;
+}
+
+.plan-timer-buttons {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.plan-timer-btn {
+  padding: 0.6rem 1.1rem;
+  border-radius: 10px;
+  border: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.plan-timer-btn.start {
+  background: linear-gradient(135deg, #00D4FF 0%, #0099cc 100%);
+  color: #fff;
+}
+
+.plan-timer-btn.pause {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.plan-timer-btn.reset {
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.plan-timer-btn:hover {
+  transform: scale(1.02);
+}
+
+.plan-day5-wod .plan-day5-week-label {
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
