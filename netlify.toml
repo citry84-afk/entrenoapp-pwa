@@ -78,6 +78,11 @@
 # NO redirigir automáticamente a app.html
 
 [[redirects]]
+  from = "/home.html"
+  to = "/"
+  status = 301
+
+[[redirects]]
   from = "/privacy"
   to = "/privacy.html"
   status = 301
