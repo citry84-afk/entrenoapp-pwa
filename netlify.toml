@@ -306,6 +306,16 @@
   status = 301
 
 [[redirects]]
+  from = "/10-mejores-ejercicios-casa-sin-equipamiento-2025"
+  to = "/guia-completa-fitness-casa-2025.html"
+  status = 301
+
+[[redirects]]
+  from = "/10-mejores-ejercicios-casa-sin-equipamiento-2025.html"
+  to = "/guia-completa-fitness-casa-2025.html"
+  status = 301
+
+[[redirects]]
   from = "/guia-completa-fitness-casa-2025"
   to = "/guia-completa-fitness-casa-2025.html"
   status = 301
