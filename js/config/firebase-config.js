@@ -55,11 +55,7 @@ export const appConfig = {
     defaultLanguage: 'es',
     offlineDataDays: 7, // Días de datos offline
     adSettings: {
-        publisherId: 'ca-pub-4129506161314540',
-        clientId: '6673201053',
-        bannerEnabled: true,
-        interstitialEnabled: true,
-        rewardedEnabled: true
+        bannerEnabled: true
     },
     tts: {
         enabled: true,
