@@ -24,6 +24,12 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000"
 
+# Legibilidad: este CSS cambia a menudo; evitar año de caché en Safari/CDN
+[[headers]]
+  for = "/css/content-pages.css"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
 [[headers]]
   for = "/*.js"
   [headers.values]

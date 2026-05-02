@@ -525,7 +525,16 @@
    =========================================== */
 
 body {
-    background: #eceff4 !important;
+    background-color: #eceff4 !important;
+    background-image: none !important;
+    color: #1e293b !important;
+}
+
+/* Solo en páginas de artículo: anula gradientes del design system por capas */
+body:has(> main.content-page),
+body:has(main.content-page) {
+    background-color: #eceff4 !important;
+    background-image: none !important;
     color: #1e293b !important;
 }
 
@@ -572,12 +581,25 @@ main.content-page {
     --text-secondary: #334155;
     --text-tertiary: #64748b;
     color: #1e293b;
+    background-color: #eceff4 !important;
+    background-image: none !important;
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding-left: max(14px, env(safe-area-inset-left));
+    padding-right: max(14px, env(safe-area-inset-right));
+    padding-bottom: 2rem;
 }
 
 @media (prefers-color-scheme: dark) {
     body {
-        background: #eceff4 !important;
+        background-color: #eceff4 !important;
+        background-image: none !important;
         color: #1e293b !important;
+    }
+
+    body:has(main.content-page) {
+        background-color: #eceff4 !important;
+        background-image: none !important;
     }
 
     main.content-page {
@@ -585,7 +607,19 @@ main.content-page {
         --text-secondary: #334155;
         --text-tertiary: #64748b;
         color: #1e293b;
+        background-color: #eceff4 !important;
+        background-image: none !important;
     }
+}
+
+/* Párrafo intro: cartela clara (evita “gris sobre fondo oscuro” si falla el body) */
+main.content-page article p.lead-text {
+    background-color: rgba(255, 255, 255, 0.97) !important;
+    padding: 1rem 1.25rem !important;
+    border-radius: 14px !important;
+    border: 1px solid rgba(15, 23, 42, 0.1) !important;
+    box-shadow: 0 2px 14px rgba(15, 23, 42, 0.06) !important;
+    color: #0f172a !important;
 }
 
 /* Cuerpo del artículo: texto oscuro por defecto */
@@ -608,6 +642,8 @@ main.content-page article h3 {
 }
 
 main.content-page article .science-strip a,
+main.content-page article .science-strip a:link,
+main.content-page article .science-strip a:visited,
 main.content-page article .v-card a,
 main.content-page article .week-card a,
 main.content-page article .visual-table td a,
@@ -615,12 +651,14 @@ main.content-page article section a,
 main.content-page article section ul a,
 main.content-page article footer a,
 main.content-page article p.lead-text a {
-    color: #0d47a1 !important;
+    color: #0b57d0 !important;
+    text-decoration: underline !important;
+    text-underline-offset: 2px;
 }
 
 main.content-page article a:link:not(.amazon-button):not(.btn),
 main.content-page article a:visited:not(.amazon-button):not(.btn) {
-    color: #0d47a1 !important;
+    color: #0b57d0 !important;
 }
 
 main.content-page article .science-strip a:hover,
