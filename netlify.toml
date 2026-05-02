@@ -200,6 +200,11 @@
   status = 301
 
 [[redirects]]
+  from = "/adelgazar-antes-del-verano-2026"
+  to = "/adelgazar-antes-del-verano-2026.html"
+  status = 301
+
+[[redirects]]
   from = "/rutina-gym-casa-mancuernas-2026"
   to = "/rutina-gym-casa-mancuernas-2026.html"
   status = 301
