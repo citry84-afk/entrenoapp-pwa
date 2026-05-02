@@ -1,0 +1,37 @@
+EntrenoApp — De vídeo YouTube a artículo (checklist)
+===================================================
+
+Antes de publicar
+-----------------
+[ ] Keyword principal clara (1 frase) y encaje con intención de búsqueda.
+[ ] Título H1 + meta description (única, ~150 caracteres, sin copiar el título del vídeo palabra por palabra).
+[ ] canonical + og:image (icono del sitio o miniatura si la subes a /assets).
+[ ] Schema Article + FAQ (2–4 preguntas reales del vídeo).
+[ ] Script AdSense + GA4 ya incluidos en plantilla scaffold (revisar si pegaste HTML a mano).
+
+Contenido
+---------
+[ ] Lead de 2–3 líneas: promesa + para quién es.
+[ ] Estructura H2 que sigue el guión del vídeo (no solo la descripción).
+[ ] Pasos numerados o tabla si el vídeo es tutorial.
+[ ] Un bloque “errores comunes” o “mitos” si aplica (suele ganar snippets).
+[ ] Enlaces internos mínimos: 3–5 a guías relacionadas (blog, workout-guides, artículo pillar).
+
+Afiliados / monetización
+------------------------
+[ ] Solo enlaces Amazon con tag suplementospa-21 y rel adecuado (sponsored/nofollow según tu plantilla).
+[ ] Caja de disclosure si hay afiliación (como en otras landings).
+
+YouTube (repurpose)
+-------------------
+[ ] Descripción del vídeo con enlace al artículo canónico.
+[ ] Primer comentario fijado: “Guía escrita paso a paso → [URL]”.
+[ ] Shorts: 1 idea = 1 clip con CTA al artículo.
+
+Tras crear el .html
+-------------------
+[ ] Añadir URL al sitemap.xml (bloque <url> como el resto).
+[ ] Redirect en netlify.toml si publicitas URL sin .html.
+[ ] npm run verify
+[ ] npm run build (sync www para Capacitor)
+[ ] Deploy Netlify
