@@ -79,9 +79,9 @@
         
         .articles-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 20px;
         }
         
         .article-card {
@@ -242,9 +242,80 @@
                 width: 100%;
             }
         }
+
+        /* Bloque novedades — alto contraste */
+        .novedades-wrap {
+            background: #0f172a;
+            border-radius: 20px;
+            padding: 28px 24px 32px;
+            margin-bottom: 36px;
+            border: 1px solid #334155;
+            scroll-margin-top: 88px;
+        }
+        .novedades-wrap h2 {
+            color: #f8fafc;
+            margin: 0 0 8px;
+            font-size: 1.65rem;
+            font-weight: 800;
+        }
+        .novedades-wrap .novedades-lead {
+            color: #cbd5e1;
+            margin: 0 0 22px;
+            line-height: 1.55;
+            font-size: 1.05rem;
+        }
+        .novedades-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 14px;
+        }
+        .novedades-grid a {
+            display: block;
+            background: #fff;
+            border-radius: 14px;
+            padding: 16px 18px;
+            text-decoration: none;
+            color: #0f172a;
+            border: 1px solid #e2e8f0;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+        }
+        .novedades-grid a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+        }
+        .novedades-grid .tag {
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            color: #4338ca;
+        }
+        .novedades-grid .tit {
+            font-weight: 700;
+            font-size: 1.05rem;
+            margin: 6px 0 6px;
+            line-height: 1.3;
+        }
+        .novedades-grid .desc {
+            font-size: 0.9rem;
+            color: #475569;
+            line-height: 1.45;
+            margin: 0;
+        }
+        .section-archivo h2 {
+            color: #0f172a;
+            font-size: 1.75rem;
+            margin: 0 0 8px;
+            font-weight: 800;
+        }
+        .section-archivo p {
+            color: #475569;
+            margin: 0 0 22px;
+            font-size: 1.02rem;
+        }
     </style>
 </head>
-<body>
+<body class="site-readable">
     <!-- Navigation -->
     <nav class="main-navigation">
         <div class="nav-container">
@@ -252,6 +323,7 @@
             <ul class="nav-links">
                 <li><a href="/">Inicio</a></li>
                 <li><a href="/app.html">App</a></li>
+                <li><a href="/blog.html#novedades">Novedades</a></li>
                 <li><a href="/blog.html">Blog</a></li>
                 <li><a href="/workout-guides.html">Guías</a></li>
                 <li><a href="/contact.html">Contacto</a></li>
@@ -269,17 +341,59 @@
     <!-- Hero Section -->
     <div class="hero-section">
         <div class="hero-content">
-            <h1 class="hero-title">📚 Blog de Fitness</h1>
-            <p class="hero-description">Descubre los mejores consejos, guías y artículos sobre fitness, nutrición y entrenamiento de nuestros expertos</p>
+            <h1 class="hero-title">📚 Blog EntrenoApp</h1>
+            <p class="hero-description">Primero mira <strong>lo nuevo</strong> (2026). Abajo tienes el archivo completo: running, nutrición, equipamiento y más.</p>
+            <p style="margin-top: 16px;"><a href="#novedades" style="display:inline-block;background:rgba(255,255,255,0.95);color:#4338ca;padding:12px 22px;border-radius:999px;font-weight:700;text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,0.15);">↓ Ir a artículos nuevos</a></p>
         </div>
     </div>
     
     <!-- Blog Container -->
     <div class="blog-container">
+        <section id="novedades" class="novedades-wrap" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+            <div class="novedades-inner">
+                <h2>🔥 Lo más nuevo — guías 2026</h2>
+                <p class="novedades-lead">Acceso directo a lo último publicado. Sin buscar en la lista infinita.</p>
+                <div class="novedades-grid">
+                    <a href="/adelgazar-antes-del-verano-2026.html">
+                        <span class="tag">VERANO · GRASA</span>
+                        <div class="tit">Adelgazar antes del verano</div>
+                        <p class="desc">Plan realista 8 semanas, déficit sin drama.</p>
+                    </a>
+                    <a href="/hiit-casa-principiantes-2026.html">
+                        <span class="tag">HIIT · CASA</span>
+                        <div class="tit">HIIT para principiantes</div>
+                        <p class="desc">20 min, intervalos claros, sin equipo.</p>
+                    </a>
+                    <a href="/como-perder-barriga-casa-2026.html">
+                        <span class="tag" style="color:#ea580c;">ABDOMEN</span>
+                        <div class="tit">Perder barriga en casa</div>
+                        <p class="desc">8 ejercicios + plan 4 semanas.</p>
+                    </a>
+                    <a href="/empezar-correr-2026-guia-paso-paso.html">
+                        <span class="tag" style="color:#2563eb;">RUNNING</span>
+                        <div class="tit">Empezar a correr 2026</div>
+                        <p class="desc">Guía paso a paso actualizada.</p>
+                    </a>
+                    <a href="/tendencias-fitness-running-2026.html">
+                        <span class="tag" style="color:#059669;">TENDENCIAS</span>
+                        <div class="tit">Fitness y running 2026</div>
+                        <p class="desc">Qué viene en entreno este año.</p>
+                    </a>
+                    <a href="/gamificacion-fitness-gaming.html">
+                        <span class="tag" style="color:#a855f7;">GAMING</span>
+                        <div class="tit">Gamificación del fitness</div>
+                        <p class="desc">Entrena como en un videojuego.</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
         <!-- Running: sección destacada (mejor navegación + SEO interno) -->
         <section style="max-width: 1200px; margin: 0 auto 30px; padding: 0 20px;">
+            <h2 style="margin: 0 0 14px; font-size: 1.35rem; font-weight: 800; color: #0f172a;">🏃 Running desde cero</h2>
+            <p style="margin: 0 0 16px; color: #475569; line-height: 1.55; font-size: 1rem;">Planes y errores típicos — lo más buscado después de las guías nuevas.</p>
             <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 18px; padding: 26px; color: white;">
-                <h2 style="margin: 0 0 10px; font-size: 1.6rem;">🏃 Empezar a correr desde cero (Lo más buscado)</h2>
+                <h3 style="margin: 0 0 10px; font-size: 1.35rem; font-weight: 700;">Hub de running para principiantes</h3>
                 <p style="margin: 0 0 18px; opacity: 0.95; line-height: 1.6;">
                     Elige tu camino: plan rápido (2 semanas) o plan completo (8 semanas). Bonus: errores típicos y cómo elegir zapatillas.
                 </p>
@@ -307,6 +421,11 @@
                 </div>
             </div>
         </section>
+
+        <div class="section-archivo" style="max-width: 1200px; margin: 0 auto 12px; padding: 0 20px;">
+            <h2>📚 Todo el archivo de artículos</h2>
+            <p>Lista completa ordenada como en la revista: desplázate o usa el buscador del navegador (Ctrl+F / ⌘F).</p>
+        </div>
 
         <div class="articles-grid">
             <!-- Verano 2026 · adelgazar -->

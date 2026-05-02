@@ -16,6 +16,8 @@
     --text-dark: #1a1a1a;
     --text-medium: #4a4a4a;
     --text-light: #6a6a6a;
+    --text-on-light: #1e293b;
+    --text-muted-on-light: #475569;
     
     --bg-white: #ffffff;
     --bg-light: #f8f9fa;
@@ -321,22 +323,30 @@
     box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
 }
 
-/* Breadcrumbs */
+/* Breadcrumbs — texto plano legible (body oscuro de styles.css ya no hereda aquí) */
 .breadcrumbs {
-    background: var(--bg-light);
-    padding: 15px 20px;
+    background: #ffffff;
+    padding: 14px 20px;
     border-radius: 10px;
-    margin-bottom: 30px;
+    margin-bottom: 24px;
+    border: 1px solid #e2e8f0;
+    color: var(--text-on-light);
+    font-size: 0.95rem;
+}
+
+.breadcrumbs .container {
+    color: var(--text-muted-on-light);
 }
 
 .breadcrumbs a {
-    color: var(--primary-color);
+    color: #4338ca;
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .breadcrumbs a:hover {
     text-decoration: underline;
+    color: #312e81;
 }
 
 /* Ad Section */
@@ -507,5 +517,45 @@
 
 .mb-40 {
     margin-bottom: 40px;
+}
+
+/* ===========================================
+   LEGIBILIDAD: styles.css usa tema oscuro en body;
+   estas páginas cargan fondos claros — forzar texto oscuro.
+   =========================================== */
+
+body.site-readable,
+body.site-marketing,
+body:has(.blog-container),
+body:has(main.content-page),
+body:has(.article-container) {
+    background: #eceff4 !important;
+    color: #1e293b !important;
+}
+
+/* Home: secciones claras sin color explícito en cada <p> */
+body.site-marketing .content-section,
+body.site-marketing .features-section {
+    color: #1e293b;
+}
+
+body.site-marketing .content-section p,
+body.site-marketing .features-section p,
+body.site-marketing .feature-description,
+body.site-marketing .content-text {
+    color: #334155;
+}
+
+/* Hero con gradiente: siempre texto claro */
+.hero-section {
+    color: #fff !important;
+}
+
+.hero-section .hero-title,
+.hero-section .hero-subtitle,
+.hero-section .hero-description,
+.hero-section p,
+.hero-section strong {
+    color: #fff !important;
 }
 
