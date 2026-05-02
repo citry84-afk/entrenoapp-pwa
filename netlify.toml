@@ -195,6 +195,11 @@
   status = 301
 
 [[redirects]]
+  from = "/hiit-casa-principiantes-2026"
+  to = "/hiit-casa-principiantes-2026.html"
+  status = 301
+
+[[redirects]]
   from = "/rutina-gym-casa-mancuernas-2026"
   to = "/rutina-gym-casa-mancuernas-2026.html"
   status = 301
