@@ -13,6 +13,7 @@
     "hooks:install": "git config core.hooksPath githooks",
     "deploy:netlify": "npm run verify && netlify deploy --prod --dir .",
     "article:new": "node scripts/scaffold-article.js",
+    "sync:readable": "node scripts/apply-readable-site.js",
     "cap:sync": "node scripts/copy-www.js && cap sync ios",
     "cap:open": "cap open ios"
   },

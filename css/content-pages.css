@@ -520,15 +520,11 @@
 }
 
 /* ===========================================
-   LEGIBILIDAD: styles.css usa tema oscuro en body;
-   estas páginas cargan fondos claros — forzar texto oscuro.
+   LEGIBILIDAD: este archivo solo se enlaza en páginas editoriales.
+   styles.css aplica tema oscuro al body — forzamos shell claro aquí siempre.
    =========================================== */
 
-body.site-readable,
-body.site-marketing,
-body:has(.blog-container),
-body:has(main.content-page),
-body:has(.article-container) {
+body {
     background: #eceff4 !important;
     color: #1e293b !important;
 }

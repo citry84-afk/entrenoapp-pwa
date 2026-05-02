@@ -1,0 +1,22 @@
+/* ===========================================
+   READABLE SHELL — páginas con styles.css que NO cargan content-pages.css
+   Misma legibilidad que el blog: fondo claro + texto oscuro (el tema app es oscuro).
+   =========================================== */
+body {
+    background: #eceff4 !important;
+    color: #1e293b !important;
+}
+
+/* Heroes con gradiente (about, faq, etc.) */
+.hero-section {
+    color: #fff !important;
+}
+
+.hero-section .hero-title,
+.hero-section .hero-subtitle,
+.hero-section .hero-description,
+.hero-section p,
+.hero-section strong,
+.hero-section a {
+    color: #fff !important;
+}
