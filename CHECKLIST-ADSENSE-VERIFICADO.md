@@ -22,7 +22,7 @@
 
 | Ítem | Estado | Notas |
 |------|--------|--------|
-| **Sobre nosotros / About** | ✅ | `about.html`: LIPA Studios, entrenoapp.com, Luis Alberto Moratalla, email lipastudios4@gmail.com, Schema Organization. |
+| **Sobre nosotros / About** | ✅ | `about.html`: LIPA Studios, entrenoapp.com, Motivado de la Vida, email lipastudios4@gmail.com, Schema Organization. |
 | **Contacto con email válido** | ✅ | `contact.html`: lipastudios4@gmail.com, horarios, empresa, FAQ. |
 | **Política de privacidad** | ✅ | `privacy.html`: mención **entrenoapp.com**, **Google AdSense**, cookies (tipos + gestión), RGPD. Enlaces a Términos, About, Contacto. |
 | **Términos de uso** | ✅ | `terms.html`: **AdSense**, **entrenoapp.com**, enlace a políticas AdSense y a Privacidad. Enlaces a Privacy, About, Contacto. |

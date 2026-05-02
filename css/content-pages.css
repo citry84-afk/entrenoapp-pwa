@@ -555,3 +555,128 @@ body.site-marketing .content-text {
     color: #fff !important;
 }
 
+/* ===========================================
+   Artículos (main.content-page): legibilidad WCAG
+   design-system.css pone :root { color-scheme: dark } → Safari usa colores
+   de canvas/enlace del modo oscuro (texto blanco en listas, enlaces pálidos).
+   Forzamos esquema claro en el documento cuando hay artículo editorial.
+   =========================================== */
+
+html:has(main.content-page) {
+    color-scheme: light only;
+}
+
+main.content-page {
+    color-scheme: light only;
+    --text-primary: #0f172a;
+    --text-secondary: #334155;
+    --text-tertiary: #64748b;
+    color: #1e293b;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background: #eceff4 !important;
+        color: #1e293b !important;
+    }
+
+    main.content-page {
+        --text-primary: #0f172a;
+        --text-secondary: #334155;
+        --text-tertiary: #64748b;
+        color: #1e293b;
+    }
+}
+
+/* Cuerpo del artículo: texto oscuro por defecto */
+main.content-page article p,
+main.content-page article li,
+main.content-page article td,
+main.content-page article .science-strip .ref,
+main.content-page article .v-card p,
+main.content-page article .week-card p,
+main.content-page article .passion-quote,
+main.content-page article .product-card p,
+main.content-page article .disclosure p {
+    color: #1e293b !important;
+}
+
+main.content-page article h1,
+main.content-page article h2,
+main.content-page article h3 {
+    color: #0f172a !important;
+}
+
+main.content-page article .science-strip a,
+main.content-page article .v-card a,
+main.content-page article .week-card a,
+main.content-page article .visual-table td a,
+main.content-page article section a,
+main.content-page article section ul a,
+main.content-page article footer a,
+main.content-page article p.lead-text a {
+    color: #0d47a1 !important;
+}
+
+main.content-page article a:link:not(.amazon-button):not(.btn),
+main.content-page article a:visited:not(.amazon-button):not(.btn) {
+    color: #0d47a1 !important;
+}
+
+main.content-page article .science-strip a:hover,
+main.content-page article footer a:hover,
+main.content-page article section a:hover {
+    color: #042963 !important;
+}
+
+/* strong: evita acentos “oscuros” heredados del tema app / -webkit-text-fill */
+main.content-page article strong:not(.sun-hero strong):not(.pillar strong) {
+    color: #0f172a !important;
+    -webkit-text-fill-color: #0f172a !important;
+}
+
+main.content-page article .science-strip ul,
+main.content-page article .science-strip li,
+main.content-page article .science-strip li::marker {
+    color: #1e293b !important;
+}
+
+main.content-page article .passion-quote,
+main.content-page article .passion-quote strong {
+    color: #1e293b !important;
+    -webkit-text-fill-color: #1e293b !important;
+}
+
+main.content-page article footer,
+main.content-page article footer p,
+main.content-page article footer .legal-info,
+main.content-page article footer .legal-info p {
+    color: #475569 !important;
+}
+
+/* Hero y pilares: texto claro (van después y sobrescriben) */
+main.content-page article .sun-hero,
+main.content-page article .sun-hero h2,
+main.content-page article .sun-hero p,
+main.content-page article .sun-hero strong,
+main.content-page article .sun-hero .tag {
+    color: #fff !important;
+}
+
+main.content-page article .sun-hero a {
+    color: #fff !important;
+    -webkit-text-fill-color: #fff !important;
+    text-decoration: underline;
+}
+
+main.content-page article .pillar,
+main.content-page article .pillar h3,
+main.content-page article .pillar p,
+main.content-page article .pillar a {
+    color: #fff !important;
+}
+
+main.content-page article .visual-table th {
+    color: #fff !important;
+}
+

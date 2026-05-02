@@ -78,7 +78,7 @@ Tras revisar la estructura completa del sitio (index, home, app, blog, legales) 
 | Propuesta | Descripción | Impacto | Esfuerzo |
 |-----------|-------------|---------|----------|
 | **Unificar google-site-verification** | `index.html` usa `pwkGx1He7UVJLHGaDJV4I9W3Zom5rGIvizK1YPWu06A` y `app.html` usa `DSyHkxyNB3t94dJbNUw_GKpCGAp4tLsK6JBeGhvhQbQ`. Deberían coincidir (Search Console puede dar problemas si hay verificaciones distintas). | Medio | Bajo |
-| **Autor unificado** | Varias páginas usan "LIPA Studios" como author; about/privacy usan Luis Alberto Moratalla. Mantener coherencia: "LIPA Studios (Luis Alberto Moratalla)" si aplica. | Bajo | Bajo |
+| **Autor unificado** | Varias páginas usan "LIPA Studios" como author; about/privacy usan Motivado de la Vida. Mantener coherencia: "LIPA Studios (Motivado de la Vida)" si aplica. | Bajo | Bajo |
 
 ### 2.3 SEO y Contenido
 

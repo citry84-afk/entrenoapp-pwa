@@ -25,8 +25,8 @@
 - **empezar-a-correr.html:** FAQ simplificada
 
 ### TAREA 5 y 6: Author byline + Schema Article + Disclaimer médico (46 artículos)
-- **Schema.org Article** con autor Person (Luis Alberto Moratalla), publisher, fecha
-- **Author byline** (Luis Alberto Moratalla, Fundador EntrenoApp · Runner · Jefe de Producción Farmacéutica)
+- **Schema.org Article** con autor Person (Motivado de la Vida), publisher, fecha
+- **Author byline** (Motivado de la Vida, Fundador EntrenoApp · Runner · Jefe de Producción Farmacéutica)
 - **Disclaimer médico** en todas las guías de fitness/running
 
 **Archivos modificados:** 10-mejores-ejercicios, 75-hard-challenge, accesorios-*, almohadas, aprender-a-correr, batidoras, black-friday, calzado-ideal, como-*, cortisol-face, equipamiento-*, empezar-*, errores-comunes, esterillas, gamificacion, guia-completa-fitness, gym-anxiety, libros, mantener-motivacion, mejores-suplementos, nutricion-*, pesas, proteina-*, proteinas, que-comer, que-comprar, recuperacion, regalos, relojes, ropa, running-vs-caminar, rutina-*, sleep-hacking, suplementos-*, tendencias
