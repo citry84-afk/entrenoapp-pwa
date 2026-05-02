@@ -9,6 +9,7 @@
   },
   "scripts": {
     "build": "node scripts/copy-www.js",
+    "verify": "node scripts/verify-pre-deploy.js",
     "cap:sync": "node scripts/copy-www.js && cap sync ios",
     "cap:open": "cap open ios"
   },
