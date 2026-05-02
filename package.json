@@ -10,6 +10,7 @@
   "scripts": {
     "build": "node scripts/copy-www.js",
     "verify": "node scripts/verify-pre-deploy.js",
+    "hooks:install": "git config core.hooksPath githooks",
     "deploy:netlify": "npm run verify && netlify deploy --prod --dir .",
     "article:new": "node scripts/scaffold-article.js",
     "cap:sync": "node scripts/copy-www.js && cap sync ios",
