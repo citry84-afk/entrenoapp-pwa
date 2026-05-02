@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" style="background-color:#eceff4;color-scheme:light;">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -159,9 +159,37 @@
         .amazon-button:hover{background:#FF8800;transform:translateY(-2px)}
         .disclosure{background:#fff3e0;padding:20px;border-radius:8px;margin:36px 0;border-left:4px solid #FF9900}
     </style>
+    <!-- Crítico: contraste sin depender del caché de css/content-pages.css -->
+    <style>
+        html { background-color: #eceff4 !important; color-scheme: light !important; }
+        body {
+            margin: 0;
+            background-color: #eceff4 !important;
+            background-image: none !important;
+            color: #1e293b !important;
+        }
+        main.content-page {
+            background-color: #eceff4 !important;
+            background-image: none !important;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+        article.content-container { background: transparent; color: #1e293b; }
+        article.content-container > h1 { color: #0f172a !important; }
+        main.content-page article p.lead-text {
+            background-color: #ffffff !important;
+            color: #0f172a !important;
+            padding: 1rem 1.25rem !important;
+            border-radius: 14px !important;
+            border: 1px solid rgba(15, 23, 42, 0.12) !important;
+            box-shadow: 0 2px 14px rgba(15, 23, 42, 0.08) !important;
+        }
+        main.content-page article p.lead-text a { color: #0b57d0 !important; font-weight: 600; }
+        main.content-page article p.lead-text strong { color: #0f172a !important; }
+    </style>
 </head>
-<body>
-<main class="content-page">
+<body style="margin:0;background-color:#eceff4;background-image:none;color:#1e293b;">
+<main class="content-page" style="background-color:#eceff4;background-image:none;min-height:100vh;">
     <article class="content-container">
         <h1>Adelgazar Antes del Verano 2026: Plan Realista (Sin Crash Diet)</h1>
 
@@ -174,7 +202,7 @@
             </p>
         </div>
 
-        <p class="lead-text" style="font-size:1.1rem;color:#1e293b;margin-bottom:22px;line-height:1.65;">
+        <p class="lead-text" style="font-size:1.1rem;color:#0f172a;background:#fff;margin-bottom:22px;line-height:1.65;padding:16px 18px;border-radius:14px;border:1px solid rgba(15,23,42,.12);box-shadow:0 2px 14px rgba(15,23,42,.08);">
             Ojo: este artículo no compite con tu guía de <a href="/como-perder-barriga-casa-2026.html">abdomen en casa</a> — la complementa.
             Allí el foco es <strong>core + rutina</strong>; aquí el foco es <strong>estrategia global</strong> para bajar grasa sin destrozar músculo ni ánimo antes de junio.
         </p>
