@@ -49,5 +49,8 @@ pubspec.lock
 # Temporary files
 *.tmp
 *.temp
+
+# Local release artifacts
+release/
 # Local Netlify folder
 .netlify
