@@ -443,17 +443,53 @@
     gap: 10px;
 }
 
-/* Logo como imagen (opcional - descomentar cuando tengas el logo) */
-/*
-.nav-logo img {
-    height: 40px;
-    width: auto;
-    object-fit: contain;
+.brand-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--primary-color);
+    text-decoration: none;
+    line-height: 1;
 }
-.nav-logo {
-    font-size: 0; /* Oculta texto si usas imagen */
+
+.brand-logo {
+    width: 44px;
+    height: 44px;
+    border-radius: 13px;
+    object-fit: cover;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.8);
 }
-*/
+
+.hero-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 18px;
+    padding: 8px 16px 8px 8px;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.18);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.hero-brand-logo {
+    width: 72px;
+    height: 72px;
+    border-radius: 20px;
+    object-fit: cover;
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.25);
+}
+
+.hero-brand-name {
+    color: #fff;
+    font-size: 1.65rem;
+    font-weight: 900;
+    letter-spacing: 0;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.24);
+}
 
 .nav-links {
     display: flex;
@@ -475,6 +511,43 @@
 
 /* Responsive */
 @media (max-width: 768px) {
+    .main-navigation {
+        padding: 12px 14px;
+    }
+
+    .nav-container {
+        align-items: flex-start;
+        gap: 14px;
+    }
+
+    .brand-link {
+        font-size: 1.2rem;
+        white-space: nowrap;
+    }
+
+    .brand-logo {
+        width: 38px;
+        height: 38px;
+        border-radius: 12px;
+    }
+
+    .hero-brand {
+        gap: 10px;
+        margin-bottom: 16px;
+        padding: 7px 13px 7px 7px;
+        border-radius: 20px;
+    }
+
+    .hero-brand-logo {
+        width: 58px;
+        height: 58px;
+        border-radius: 16px;
+    }
+
+    .hero-brand-name {
+        font-size: 1.35rem;
+    }
+
     .hero-title {
         font-size: 2.5rem;
     }
@@ -717,4 +790,3 @@ main.content-page article .pillar a {
 main.content-page article .visual-table th {
     color: #fff !important;
 }
-
