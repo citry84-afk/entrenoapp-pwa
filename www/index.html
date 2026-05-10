@@ -54,7 +54,7 @@
         "name": "EntrenoApp",
         "url": "https://entrenoapp.com",
         "logo": "https://entrenoapp.com/assets/icons/icon-512x512.png",
-        "description": "App de fitness integral con planes personalizados de running para principiantes, gimnasio y entrenamiento funcional. Aprende a empezar a correr desde cero con GPS tracking, retos diarios y seguimiento completo de salud.",
+        "description": "App de fitness integral con planes personalizados de running para principiantes, gimnasio y entrenamiento funcional. Aprende a empezar a correr desde cero con rutinas claras, retos diarios y seguimiento de progreso.",
         "sameAs": [
             "https://www.youtube.com/@entrenoapp",
             "https://entrenoapp.com/lipa-studios-network.html"
@@ -235,7 +235,10 @@
     <nav class="main-navigation">
         <div class="nav-container">
             <div class="nav-logo">
-                <a href="/">🏃‍♂️ EntrenoApp</a>
+                <a href="/" class="brand-link" aria-label="EntrenoApp inicio">
+                    <img src="assets/logo.jpeg" alt="" class="brand-logo" width="44" height="44">
+                    <span>EntrenoApp</span>
+                </a>
             </div>
             <div class="nav-links">
                 <a href="/">Inicio</a>
@@ -248,6 +251,7 @@
                 <a href='/blog'>Blog</a>
                 <a href='/about'>Nosotros</a>
                 <a href='/contact'>Contacto</a>
+                <a href='/app' class="nav-app-link">Abrir app</a>
             </div>
         </div>
     </nav>
@@ -255,18 +259,54 @@
     <!-- Hero Section -->
     <section class="hero-section">
         <div class="hero-content">
-            <h1 class="hero-title">🏃 Empezar a Correr desde Cero: Plan GRATIS 8 Semanas</h1>
-            <h2 class="hero-subtitle">Tu Entrenador Personal de Fitness - Plan Running para Principiantes</h2>
+            <div class="hero-brand">
+                <img src="assets/logo.jpeg" alt="Logo de EntrenoApp" class="hero-brand-logo" width="96" height="96">
+                <div class="hero-brand-name">EntrenoApp</div>
+            </div>
+            <h1 class="hero-title">Tu plan de entreno en 60 segundos</h1>
+            <h2 class="hero-subtitle">Musculación, carrera o híbrido. Sin registro y fácil de seguir.</h2>
             <p class="hero-description">
-                ¿Quieres <strong>empezar a correr desde cero</strong> pero no sabes por dónde empezar? EntrenoApp es tu guía paso a paso con planes de running diseñados para principiantes. 
-                Incluye rutinas progresivas, consejos de técnica, prevención de lesiones y seguimiento GPS en tiempo real. 
-                Además encontrarás planes de gimnasio y entrenamiento funcional. ¡Tu transformación fitness comienza aquí!
+                EntrenoApp crea una rutina semanal flexible según tu objetivo, días disponibles, tiempo y material.
+                Puedes usarla para ganar músculo, empezar a correr, preparar una carrera o combinar fuerza y cardio sin complicarte.
             </p>
-            <div class="cta-buttons" style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; margin-top: 30px;">
-                <a class='cta-button cta-primary' href='/blog.html#novedades' style='background: linear-gradient(135deg, #0f766e 0%, #0d9488 100%); color: #fff; padding: 18px 35px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 1.1rem; box-shadow: 0 4px 15px rgba(13,148,136,0.35); transition: transform 0.3s; border: 2px solid rgba(255,255,255,0.35);'>📚 Ver guías nuevas 2026</a>
-                <a class='cta-button cta-primary' href='/app' style='background: linear-gradient(135deg, #00D4FF 0%, #0099cc 100%); color: #fff; padding: 18px 35px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 1.1rem; box-shadow: 0 4px 15px rgba(0,212,255,0.4); transition: transform 0.3s; border: 2px solid rgba(255,255,255,0.5);'>📱 Usar la App GRATIS</a>
-                <a class='cta-button cta-primary' href='/empezar-a-correr' style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 18px 35px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 1.1rem; box-shadow: 0 4px 15px rgba(102,126,234,0.3); transition: transform 0.3s;'>🧭 Ver HUB de Running</a>
-                <a class='cta-button cta-secondary' href='/empezar-correr-guia-completa' style='background: white; color: #667eea; padding: 18px 35px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 1.1rem; border: 2px solid #667eea; transition: transform 0.3s;'>📋 Plan 8 Semanas</a>
+            <div class="hero-proof">
+                <span>Sin cuenta</span>
+                <span>Datos en tu dispositivo</span>
+                <span>Plan flexible</span>
+            </div>
+            <div class="cta-buttons hero-cta-row">
+                <a class="cta-button cta-primary hero-main-cta" href="/app">Abrir la app gratis</a>
+                <a class="cta-button cta-secondary hero-secondary-cta" href="/empezar-a-correr">Ver guías de running</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Monetización amable: recomendaciones útiles sin interrumpir la app -->
+    <section class="gear-strip" aria-labelledby="gear-strip-title">
+        <div class="container">
+            <div class="gear-strip-head">
+                <div>
+                    <span class="gear-kicker">Material útil</span>
+                    <h2 id="gear-strip-title">Equípate sin comprar de más</h2>
+                </div>
+                <a href="/productos-recomendados.html" class="gear-all-link">Ver recomendaciones</a>
+            </div>
+            <div class="gear-grid">
+                <a href="/calzado-ideal-empezar-correr-2025.html" class="gear-card">
+                    <span class="gear-icon">👟</span>
+                    <strong>Zapatillas para empezar</strong>
+                    <span>Qué mirar antes de comprar si estás empezando a correr.</span>
+                </a>
+                <a href="/equipamiento-gimnasio-casa-2025.html" class="gear-card">
+                    <span class="gear-icon">🏋️</span>
+                    <strong>Gym en casa básico</strong>
+                    <span>Mancuernas, bandas y material que sí merece la pena.</span>
+                </a>
+                <a href="/suplementos-recomendados.html" class="gear-card">
+                    <span class="gear-icon">🥤</span>
+                    <strong>Suplementos con cabeza</strong>
+                    <span>Lo básico, cuándo tiene sentido y cuándo no hace falta.</span>
+                </a>
             </div>
         </div>
     </section>
@@ -1370,7 +1410,7 @@
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
                 <!-- Fitness -->
                 <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 20px; padding: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1); transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'" onmouseout="this.style.transform='translateY(0)'">
-                    <div style="font-size: 3.5rem; margin-bottom: 1rem;">💪</div>
+                    <img src="assets/logo.jpeg" alt="EntrenoApp" style="width: 72px; height: 72px; border-radius: 18px; object-fit: cover; margin-bottom: 1rem; box-shadow: 0 12px 30px rgba(0,0,0,0.22); border: 2px solid rgba(255,255,255,0.45);">
                     <h4 style="color: #fff; font-size: 1.5rem; margin-bottom: 1rem; font-weight: 700;">EntrenoApp</h4>
                     <p style="color: rgba(255,255,255,0.9); font-size: 1rem; margin-bottom: 1.5rem;">Tu entrenador personal con GPS tracking y planes personalizados</p>
                     <a href="https://entrenoapp.com" style="display: inline-block; padding: 12px 30px; background: #fff; color: #667eea; text-decoration: none; border-radius: 50px; font-weight: 700; font-size: 1rem;">Ver App →</a>

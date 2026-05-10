@@ -1,8 +1,8 @@
 {
   "name": "EntrenoApp - Tu Entrenador Personal",
   "short_name": "EntrenoApp",
-  "description": "App de fitness integral: running, gym y entrenamiento funcional. Planes personalizados, GPS tracking y retos diarios.",
-  "start_url": "/",
+  "description": "App de fitness integral: musculación, carrera e híbrido. Planes personalizados, hábitos diarios y seguimiento local.",
+  "start_url": "/app.html",
   "display": "standalone",
   "background_color": "#0B1426",
   "theme_color": "#00D4FF",
@@ -83,22 +83,22 @@
     {
       "name": "Entrenar Ahora",
       "short_name": "Entrenar",
-      "description": "Iniciar entrenamiento rápido",
-      "url": "/#/workouts",
+      "description": "Abrir tu entrenamiento del día",
+      "url": "/app.html",
       "icons": [{"src": "assets/icons/icon-192x192.png", "sizes": "192x192"}]
     },
     {
       "name": "Carrera Libre",
       "short_name": "Correr",
-      "description": "Iniciar sesión de running",
-      "url": "/#/running",
+      "description": "Abrir tu plan de carrera",
+      "url": "/app.html",
       "icons": [{"src": "assets/icons/icon-192x192.png", "sizes": "192x192"}]
     },
     {
       "name": "Reto Diario",
       "short_name": "Reto",
-      "description": "Ver reto del día",
-      "url": "/#/challenges",
+      "description": "Ver reto y hábitos del día",
+      "url": "/app.html",
       "icons": [{"src": "assets/icons/icon-192x192.png", "sizes": "192x192"}]
     }
   ]
