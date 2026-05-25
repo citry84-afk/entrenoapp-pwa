@@ -681,6 +681,7 @@
       <div class="ob-opts" data-f="priority">
         <div class="ob-card priority-opt" data-mode="musculacion" data-v="musculo"><div class="ob-icon">💪</div><div><div class="ob-ct">Ganar músculo</div><div class="ob-cd">Hipertrofia, volumen y progresión</div></div></div>
         <div class="ob-card priority-opt" data-mode="musculacion" data-v="fuerza"><div class="ob-icon">🎯</div><div><div class="ob-ct">Ganar fuerza</div><div class="ob-cd">Básicos, cargas altas y descanso suficiente</div></div></div>
+        <div class="ob-card priority-opt" data-mode="musculacion" data-v="vital"><div class="ob-icon">🌿</div><div><div class="ob-ct">Fuerza y movilidad</div><div class="ob-cd">Empezar con calma: silla, pared, equilibrio y fuerza útil</div></div></div>
         <div class="ob-card priority-opt" data-mode="musculacion" data-v="adelgazar"><div class="ob-icon">🔥</div><div><div class="ob-ct">Perder grasa sin dejar pesas</div><div class="ob-cd">Fuerza con sesiones eficientes</div></div></div>
         <div class="ob-card priority-opt" data-mode="carrera" data-v="run_start"><div class="ob-icon">🌱</div><div><div class="ob-ct">Empezar a correr</div><div class="ob-cd">Base aeróbica y continuidad</div></div></div>
         <div class="ob-card priority-opt" data-mode="carrera" data-v="run_pace"><div class="ob-icon">⏱️</div><div><div class="ob-ct">Mejorar ritmo</div><div class="ob-cd">Rodajes, cambios y tempo</div></div></div>
@@ -885,7 +886,7 @@ const DB={gym:{
   },
 }};
 
-const DKG={pb:80,pi:60,pim:60,ph:50,phm:40,pa:18,fd:0,ap:14,el:10,tp:30,pm:100,pmr:70,rb:70,dm:0,jl:60,jc:60,cb:40,cm:14,rm:60,fp:20,rc:50,sq:70,pr:120,ht:80,za:20,ec:40,cf:35,su:20,et:60,pib:60,dmh:0,kb_swing:16,kb_goblet:16,kb_clean:12,kb_press:12,kb_row:16,kb_dead:20,kb_lunge:12,kb_tgu:8};
+const DKG={pb:80,pi:60,pim:60,ph:50,phm:40,pa:18,fd:0,ap:14,el:10,tp:30,pm:100,pmr:70,rb:70,dm:0,jl:60,jc:60,cb:40,cm:14,rm:60,fp:20,rc:50,sq:70,pr:120,ht:80,za:20,ec:40,cf:35,su:20,et:60,pib:60,dmh:0,kb_swing:16,kb_goblet:16,kb_clean:12,kb_press:12,kb_row:16,kb_dead:20,kb_lunge:12,kb_tgu:8,vital_sit_stand:0,vital_wall_push:0,vital_row:0,vital_heel_raise:0,vital_balance:0,vital_march:0,vital_hip_hinge:0,vital_step_up:0,vital_carry:0,vital_mobility:0};
 const ALT={
   pb:[['pim','Press con mancuernas'],['phm','Press en máquina'],['fd','Fondos asistidos'],['pushup','Flexiones']],
   pi:[['pim','Press inclinado mancuernas'],['phm','Press inclinado máquina'],['pb','Press de banca plano'],['pushup_feet','Flexiones pies elevados']],
@@ -956,9 +957,9 @@ const SMART_ALT={
 };
 const EQ_LABELS={gym:'Gym completo',mancuernas:'Mancuernas',kettlebell:'Kettlebell',bandas:'Bandas',nada:'Peso corporal'};
 const KB_ID={pb:'kb_floor_press',pi:'kb_floor_press',pim:'kb_floor_press',ph:'kb_press',phm:'kb_press_half',pa:'kb_clean_press',fd:'kb_push_floor',ap:'kb_halo',el:'kb_halo',tp:'kb_close_press',pm:'kb_dead',pmr:'kb_rdl',rb:'kb_row',dm:'kb_row',jl:'kb_pullover',jc:'kb_row',cb:'kb_curl',cm:'kb_curl',rm:'kb_row',fp:'kb_halo',rc:'kb_row',sq:'kb_goblet',pr:'kb_goblet_tempo',ec:'kb_goblet_pause',cf:'kb_dead',ht:'kb_glute_bridge',za:'kb_lunge',su:'kb_stepup',et:'kb_calf'};
-const GOAL_LABELS={fuerza:'Fuerza',musculo:'Ganar músculo',adelgazar:'Perder grasa',correr:'Resistencia',fitness:'Fitness general'};
+const GOAL_LABELS={fuerza:'Fuerza',musculo:'Ganar músculo',adelgazar:'Perder grasa',correr:'Resistencia',fitness:'Fitness general',vital:'Fuerza vital'};
 const MODE_LABELS={musculacion:'Musculación',carrera:'Carrera',hibrido:'Híbrido'};
-const PRIORITY_LABELS={musculo:'Ganar músculo',fuerza:'Ganar fuerza',adelgazar:'Perder grasa',run_start:'Empezar a correr',run_pace:'Mejorar ritmo',run_race:'Preparar 5K/10K',run_half:'Preparar media maratón',run_marathon:'Preparar maratón',hybrid_muscle:'Correr sin perder músculo',hybrid_balanced:'Músculo y resistencia',hybrid_event:'Funcional / Hyrox'};
+const PRIORITY_LABELS={musculo:'Ganar músculo',fuerza:'Ganar fuerza',vital:'Fuerza y movilidad',adelgazar:'Perder grasa',run_start:'Empezar a correr',run_pace:'Mejorar ritmo',run_race:'Preparar 5K/10K',run_half:'Preparar media maratón',run_marathon:'Preparar maratón',hybrid_muscle:'Correr sin perder músculo',hybrid_balanced:'Músculo y resistencia',hybrid_event:'Funcional / Hyrox'};
 const ADMOB={
   quietScreens:new Set(['home','progress','history','settings']),
   units:{
@@ -1007,6 +1008,7 @@ function hydrate(){try{const d=JSON.parse(localStorage.getItem('ea6')||'null');i
 // ═══════════════════════════════════
 function genRoutine(p){
   p=normalizeProfile(p);
+  if(p.priority==='vital')return genVitalRoutine(p);
   if(p.mode==='carrera')return genRunRoutine(p);
   if(p.mode==='hibrido')return genHybridRoutine(p);
   return genStrengthRoutine(p);
@@ -1014,8 +1016,59 @@ function genRoutine(p){
 function normalizeProfile(p={}){
   const priority=p.priority||p.goal||'musculo';
   const mode=p.mode||(priority.startsWith('run_')?'carrera':priority.startsWith('hybrid_')?'hibrido':'musculacion');
-  const goal={run_start:'correr',run_pace:'correr',run_race:'correr',run_half:'correr',run_marathon:'correr',hybrid_muscle:'musculo',hybrid_balanced:'fitness',hybrid_event:'fitness'}[priority]||priority||'musculo';
+  const goal={vital:'vital',run_start:'correr',run_pace:'correr',run_race:'correr',run_half:'correr',run_marathon:'correr',hybrid_muscle:'musculo',hybrid_balanced:'fitness',hybrid_event:'fitness'}[priority]||priority||'musculo';
   return {experience:'intermedio',equipment:'gym',time:'40',days:'3',...p,mode,priority,goal};
+}
+function vitalEx(id,name,hint,sets=2,rr='8-10',rest=60){return{id,name,hint,sets,rr,rest,type:'vital'};}
+function vitalVariant(id,p){
+  const eq=p.equipment||'nada';
+  const variants={
+    vital_row:{
+      gym:['Remo sentado suave','Espalda alta, tira con codos y sin encoger hombros. Peso cómodo.'],
+      mancuernas:['Remo con mancuerna apoyado','Una mano apoyada en silla o banco estable. Movimiento lento y sin girar el tronco.'],
+      kettlebell:['Remo con kettlebell apoyado','Apoya una mano, espalda larga y tira con el codo hacia la cadera.'],
+      bandas:['Remo con banda','Banda a un punto firme o bajo los pies. Aprieta escápulas sin tirar del cuello.'],
+      nada:['Remo con toalla sentado','Tira de una toalla con tensión suave, pecho alto y hombros lejos de las orejas.']
+    },
+    vital_carry:{
+      gym:['Paseo con mancuernas ligeras','Camina erguido, pasos cortos y abdomen suave activo.'],
+      mancuernas:['Paseo con mancuernas ligeras','Camina erguido, pasos cortos y respiración tranquila.'],
+      kettlebell:['Paseo con kettlebell','Sujeta la kettlebell como una bolsa de la compra, cambia de lado en cada serie.'],
+      bandas:['Marcha con banda suave','Banda ligera bajo los pies si puedes. Prioriza equilibrio y postura.'],
+      nada:['Marcha erguida en el sitio','Rodillas suaves, brazos acompañan y mirada al frente.']
+    },
+    vital_hip_hinge:{
+      gym:['Bisagra de cadera con apoyo','Manos en muslos o pared. Lleva cadera atrás sin redondear la espalda.'],
+      mancuernas:['Peso muerto rumano muy ligero','Mancuernas cerca de las piernas, baja poco y con control.'],
+      kettlebell:['Peso muerto con kettlebell','Kettlebell entre los pies, espalda larga y empuja el suelo.'],
+      bandas:['Buenos días con banda suave','Banda bajo los pies y detrás del cuello solo si resulta cómodo.'],
+      nada:['Bisagra de cadera con manos en muslos','Cadera atrás, cuello largo y vuelve apretando glúteos.']
+    }
+  };
+  return variants[id]?.[eq]||variants[id]?.nada;
+}
+function genVitalRoutine(p){
+  const budget=parseInt(p.time)||20,n=Math.max(2,Math.min(4,parseInt(p.days)||3));
+  const row=vitalVariant('vital_row',p),carry=vitalVariant('vital_carry',p),hinge=vitalVariant('vital_hip_hinge',p);
+  const base={
+    sit:vitalEx('vital_sit_stand','Sentarse y levantarse de una silla','Usa una silla estable. Levántate sin prisa, rodillas alineadas y si hace falta apoya las manos.',budget<=20?2:3,'6-10',60),
+    wall:vitalEx('vital_wall_push','Flexiones en pared','Manos a la altura del pecho. Cuerpo largo, baja poco al principio y empuja suave.',2,'8-12',50),
+    row:vitalEx('vital_row',row[0],row[1],2,'8-12',50),
+    heel:vitalEx('vital_heel_raise','Elevación de talones con apoyo','Apóyate en pared o silla. Sube talones, pausa un segundo y baja lento.',2,'10-15',45),
+    balance:vitalEx('vital_balance','Equilibrio con apoyo','Una mano cerca de una silla o pared. Mantén postura alta y cambia de lado.',budget<=20?1:2,'20-30s',45),
+    march:vitalEx('vital_march','Marcha en el sitio','Marcha cómoda, brazos suaves y respiración tranquila. Debe sentirse fácil.',2,'30-45s',45),
+    hinge:vitalEx('vital_hip_hinge',hinge[0],hinge[1],2,'8-10',60),
+    step:vitalEx('vital_step_up','Subir a un escalón bajo','Usa un escalón bajo y estable. Sube empujando con toda la planta y baja con control.',2,'6-8/lado',60),
+    carry:vitalEx('vital_carry',carry[0],carry[1],2,'30-45s',45),
+    mobility:vitalEx('vital_mobility','Movilidad suave de hombros y cadera','Círculos lentos, rango cómodo y sin dolor. Esto prepara para moverte mejor.',1,'30s',30)
+  };
+  const days=[
+    {name:'Día A · Fuerza Vital',desc:'Silla, pared y espalda',exercises:[base.mobility,base.sit,base.wall,base.row,base.balance]},
+    {name:'Día B · Movilidad y equilibrio',desc:'Piernas estables y postura',exercises:[base.march,base.heel,base.hinge,base.balance,base.mobility]},
+    {name:'Día C · Funcional suave',desc:'Subir, cargar y levantarte mejor',exercises:[base.mobility,base.step,base.carry,base.sit,base.row]},
+    {name:'Día D · Repaso tranquilo',desc:'Moverte sin presión',exercises:[base.march,base.wall,base.hinge,base.heel,base.balance]}
+  ].slice(0,n);
+  return days.map(d=>addTiming({...d,exercises:fitToBudget(d.exercises,budget)},budget));
 }
 function genStrengthRoutine(p){
   const src=DB.gym[p.goal]||DB.gym.fitness,n=parseInt(p.days),budget=parseInt(p.time)||40;
@@ -1761,8 +1814,9 @@ function renderHome(c){
   const habits=getHabitState(),habitCount=['sleep','move','fuel'].filter(k=>habits[k]).length;
   const ll={p:'🌱 Principiante',i:'📈 Intermedio',a:'🎯 Avanzado'};
   const p=S.profile||{};
-  const todayLabel=S.sessions.length?(S.manualToday?'Sesión elegida para hoy':'Próxima sugerida'):'Sesión de hoy';
-  const suggestionCopy=S.sessions.length&&!S.manualToday?'La app te propone continuar por aquí según lo último que guardaste. Puedes tocar cualquier día si hoy te encaja otra cosa.':'Puedes mover la semana a tu vida real: si hoy toca otro día, márcalo y entrena tranquilo.';
+  const isVital=p.priority==='vital';
+  const todayLabel=isVital?'Fuerza vital de hoy':(S.sessions.length?(S.manualToday?'Sesión elegida para hoy':'Próxima sugerida'):'Sesión de hoy');
+  const suggestionCopy=isVital?'Entrena cerca de una silla o pared estable. Todo debe sentirse controlado: fuerza útil, equilibrio y cero prisa.':(S.sessions.length&&!S.manualToday?'La app te propone continuar por aquí según lo último que guardaste. Puedes tocar cualquier día si hoy te encaja otra cosa.':'Puedes mover la semana a tu vida real: si hoy toca otro día, márcalo y entrena tranquilo.');
   const retoObjective=reto.levels[rl]||reto.levels.i||Object.values(reto.levels)[0];
   const earned=achievementCatalog().filter(a=>(S.achievements||[]).includes(a.id));
   const goals=weeklyGoals();
@@ -2470,7 +2524,7 @@ function renderSettings(c){
   c=c||document.getElementById('content');const p=S.profile||{};
   const mk=(field,options)=>`<div class="pills">${options.map(([v,l])=>`<div class="pill${p[field]===v?' sel':''}" onclick="setPref('${field}','${v}')">${l}</div>`).join('')}</div>`;
   const priorityOptions={
-    musculacion:[['musculo','💪 Ganar músculo'],['fuerza','🧱 Ganar fuerza'],['adelgazar','🔥 Perder grasa']],
+    musculacion:[['musculo','💪 Ganar músculo'],['fuerza','🧱 Ganar fuerza'],['vital','🌿 Fuerza y movilidad'],['adelgazar','🔥 Perder grasa']],
     carrera:[['run_start','🌱 Empezar a correr'],['run_pace','⏱️ Mejorar ritmo'],['run_race','🏁 Preparar 5K / 10K'],['run_half','21K Media maratón'],['run_marathon','42K Maratón']],
     hibrido:[['hybrid_muscle','💪 Correr sin perder músculo'],['hybrid_balanced','⚖️ Músculo + resistencia'],['hybrid_event','⚡ Funcional / Hyrox']]
   };
@@ -2620,7 +2674,7 @@ function renderOnboardingReview(){
     <div class="ob-review-row"><div><div class="ob-review-k">Prioridad</div></div><div class="ob-review-v">${PRIORITY_LABELS[p.priority]||GOAL_LABELS[p.goal]}</div></div>
     <div class="ob-review-row"><div><div class="ob-review-k">Semana</div></div><div class="ob-review-v">${p.days} días · ${p.time} min</div></div>
     <div class="ob-review-row"><div><div class="ob-review-k">Material</div></div><div class="ob-review-v">${EQ_LABELS[p.equipment]||p.equipment}</div></div>
-    <div class="ob-next-box"><div class="ob-next-title">Empiezas simple. Profundizas cuando quieras.</div><div class="ob-next-text">Hoy verás titulares claros: entreno, mente, hábitos y progreso. Plus, salud y reloj quedarán como mejoras opcionales, no como barreras para empezar.</div></div>
+    <div class="ob-next-box"><div class="ob-next-title">${p.priority==='vital'?'Fuerza útil, sin prisa.':'Empiezas simple. Profundizas cuando quieras.'}</div><div class="ob-next-text">${p.priority==='vital'?'Tu semana empezará con ejercicios sencillos de silla, pared, movilidad y equilibrio. Si tienes dolor fuerte, mareo o una condición médica importante, consulta antes con un profesional.':'Hoy verás titulares claros: entreno, mente, hábitos y progreso. Plus, salud y reloj quedarán como mejoras opcionales, no como barreras para empezar.'}</div></div>
     <div class="ob-note">Crearemos una semana sugerida y flexible. Tus datos se guardan solo en este dispositivo, sin cuenta ni registro. Podrás exportar una copia desde Ajustes.</div>`;
 }
 function filterPriorityOptions(){
