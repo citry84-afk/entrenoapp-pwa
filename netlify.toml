@@ -120,6 +120,11 @@
   status = 301
 
 [[redirects]]
+  from = "/descargar"
+  to = "/descargar.html"
+  status = 301
+
+[[redirects]]
   from = "/workout-guides"
   to = "/workout-guides.html"
   status = 301
