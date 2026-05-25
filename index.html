@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#00D4FF">
-    <meta name="description" content="EntrenoApp: planes para empezar a correr y rutinas de ejercicio en casa sin equipo. Guías paso a paso para principiantes en 2026.">
+    <meta name="description" content="EntrenoApp crea rutinas personalizadas de musculación, carrera o entrenamiento híbrido en 60 segundos. App web gratis, sin registro y con progreso guardado en tu dispositivo.">
     <meta name="author" content="LIPA Studios">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <meta name="google-site-verification" content="pwkGx1He7UVJLHGaDJV4I9W3Zom5rGIvizK1YPWu06A">
@@ -12,24 +12,29 @@
     <meta name="geo.placename" content="España">
     <meta name="language" content="Spanish">
     
-    <title>EntrenoApp 2026: Running + Rutinas de Ejercicio en Casa Sin Equipo</title>
+    <title>EntrenoApp: Rutinas Personalizadas de Musculación, Running e Híbrido</title>
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://entrenoapp.com/">
-    <meta property="og:title" content="EntrenoApp 2026: Running + Rutinas de Ejercicio en Casa Sin Equipo">
-    <meta property="og:description" content="Guías para empezar a correr y entrenar en casa sin equipamiento. Planes para principiantes, rutinas y consejos prácticos.">
+    <meta property="og:title" content="EntrenoApp: Rutinas Personalizadas de Musculación, Running e Híbrido">
+    <meta property="og:description" content="Crea tu plan de entrenamiento en 60 segundos. App web gratis, sin registro, con rutina flexible y progreso local.">
     <meta property="og:image" content="https://entrenoapp.com/assets/icons/icon-512x512.png">
+    <meta property="al:ios:app_store_id" content="6749792687">
+    <meta property="al:ios:app_name" content="EntrenoApp">
+    <meta property="al:android:package" content="com.lipastudios.entrenoapp">
+    <meta property="al:android:app_name" content="EntrenoApp">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://entrenoapp.com/">
-    <meta property="twitter:title" content="EntrenoApp 2026: Running + Rutinas de Ejercicio en Casa Sin Equipo">
-    <meta property="twitter:description" content="Planes para correr y rutinas en casa sin equipo para principiantes. Guías prácticas actualizadas 2026.">
+    <meta property="twitter:title" content="EntrenoApp: Rutinas Personalizadas de Musculación, Running e Híbrido">
+    <meta property="twitter:description" content="Crea tu plan de entrenamiento en 60 segundos. App web gratis, sin registro, con rutina flexible y progreso local.">
     <meta property="twitter:image" content="https://entrenoapp.com/assets/icons/icon-512x512.png">
     
     <!-- Canonical URL -->
     <link rel="canonical" href="https://entrenoapp.com/">
+    <meta name="apple-itunes-app" content="app-id=6749792687">
     
     <!-- Schema.org BreadcrumbList -->
     <script type="application/ld+json">
@@ -67,11 +72,26 @@
         "@type": "SoftwareApplication",
         "name": "EntrenoApp",
         "applicationCategory": "HealthApplication",
-        "operatingSystem": "Web",
+        "operatingSystem": "Web, iOS, Android",
+        "description": "App de fitness en español para crear rutinas personalizadas de musculación, running o entrenamiento híbrido sin registro obligatorio.",
+        "sameAs": [
+            "https://apps.apple.com/es/app/entrenoapp/id6749792687",
+            "https://play.google.com/store/apps/details?id=com.lipastudios.entrenoapp"
+        ],
+        "downloadUrl": [
+            "https://apps.apple.com/es/app/entrenoapp/id6749792687",
+            "https://play.google.com/store/apps/details?id=com.lipastudios.entrenoapp",
+            "https://entrenoapp.com/app.html"
+        ],
         "offers": {
             "@type": "Offer",
             "price": "0",
             "priceCurrency": "EUR"
+        },
+        "url": "https://entrenoapp.com/app",
+        "potentialAction": {
+            "@type": "UseAction",
+            "target": "https://entrenoapp.com/app"
         }
     }
     </script>
@@ -221,7 +241,7 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4837743291717475" crossorigin="anonymous"></script>
     
 </head>
-<body class="site-marketing">
+<body class="site-marketing" data-page="home">
     <!-- En la app iOS/Android (Capacitor) ir directo a la app de entrenamiento -->
     <script>
         (function() {
@@ -244,14 +264,12 @@
                 <a href="/">Inicio</a>
                 <a href='/blog.html#novedades'>Novedades</a>
                 <a href='/workout-guides'>Guías</a>
-                <a href='/fitness-tips'>Consejos</a>
-                <a href='/exercises-library'>Ejercicios</a>
                 <a href='/fitness-calculators'>Calculadoras</a>
-                <a href='/youtube-gallery'>📺 Videos</a>
+                <a href='/youtube-gallery' data-growth data-growth-source="nav">📺 Videos</a>
                 <a href='/blog'>Blog</a>
                 <a href='/about'>Nosotros</a>
                 <a href='/contact'>Contacto</a>
-                <a href='/app' class="nav-app-link">Abrir app</a>
+                <a href='/descargar' class="nav-app-link" data-growth data-growth-source="nav">Descargar</a>
             </div>
         </div>
     </nav>
@@ -273,10 +291,49 @@
                 <span>Sin cuenta</span>
                 <span>Datos en tu dispositivo</span>
                 <span>Plan flexible</span>
+                <span>Disponible en iOS y Android</span>
             </div>
             <div class="cta-buttons hero-cta-row">
-                <a class="cta-button cta-primary hero-main-cta" href="/app">Abrir la app gratis</a>
-                <a class="cta-button cta-secondary hero-secondary-cta" href="/empezar-a-correr">Ver guías de running</a>
+                <a class="cta-button cta-primary hero-main-cta" href="/app" data-growth data-growth-source="hero">Abrir la app gratis</a>
+                <a class="cta-button cta-secondary hero-secondary-cta" href="https://apps.apple.com/es/app/entrenoapp/id6749792687" rel="noopener" data-growth data-growth-source="hero">App Store</a>
+                <a class="cta-button cta-secondary hero-secondary-cta" href="https://play.google.com/store/apps/details?id=com.lipastudios.entrenoapp" rel="noopener" data-growth data-growth-source="hero">Google Play</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Estado de lanzamiento: app web, iOS y Android disponibles -->
+    <section class="launch-strip" aria-labelledby="launch-strip-title">
+        <div class="container launch-card">
+            <div class="launch-copy">
+                <span class="launch-kicker">Disponible ahora</span>
+                <h2 id="launch-strip-title">Entrena desde la web, iPhone o Android.</h2>
+                <p>
+                    EntrenoApp ya está publicada en App Store y Google Play. También puedes usar la versión web gratis:
+                    onboarding rápido, rutina flexible, hábitos, progreso e historial guardados en tu dispositivo.
+                </p>
+            </div>
+            <div class="launch-actions" aria-label="Opciones para usar EntrenoApp">
+                <a class="launch-action launch-action-primary" href="/app" data-growth data-growth-source="launch_strip">
+                    <span class="launch-action-icon">↗</span>
+                    <span>
+                        <strong>Abrir app web</strong>
+                        <small>Gratis, sin registro</small>
+                    </span>
+                </a>
+                <a class="launch-action" href="https://apps.apple.com/es/app/entrenoapp/id6749792687" rel="noopener" data-growth data-growth-source="launch_strip">
+                    <span class="launch-action-icon"></span>
+                    <span>
+                        <strong>Descargar en iOS</strong>
+                        <small>App Store</small>
+                    </span>
+                </a>
+                <a class="launch-action" href="https://play.google.com/store/apps/details?id=com.lipastudios.entrenoapp" rel="noopener" data-growth data-growth-source="launch_strip">
+                    <span class="launch-action-icon">▶</span>
+                    <span>
+                        <strong>Descargar en Android</strong>
+                        <small>Google Play</small>
+                    </span>
+                </a>
             </div>
         </div>
     </section>
@@ -302,11 +359,26 @@
                     <strong>Gym en casa básico</strong>
                     <span>Mancuernas, bandas y material que sí merece la pena.</span>
                 </a>
-                <a href="/suplementos-recomendados.html" class="gear-card">
+                <a href="/mejores-suplementos-deportivos-2026.html" class="gear-card">
                     <span class="gear-icon">🥤</span>
-                    <strong>Suplementos con cabeza</strong>
-                    <span>Lo básico, cuándo tiene sentido y cuándo no hace falta.</span>
+                    <strong>Suplementos deportivos 2026</strong>
+                    <span>Creatina, proteína, cafeína y básicos útiles sin comprar de más.</span>
                 </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="growth-strip" aria-labelledby="growth-strip-title">
+        <div class="container growth-card">
+            <div>
+                <span class="growth-kicker">Ecosistema EntrenoApp</span>
+                <h2 id="growth-strip-title">Entrena, aprende la técnica y vuelve mañana.</h2>
+                <p>Usa la app para generar tu rutina, mira tutoriales en YouTube cuando dudes de un ejercicio y guarda tu progreso sin cuenta obligatoria.</p>
+            </div>
+            <div class="growth-actions">
+                <a href="/app-entreno.html" data-growth data-growth-source="ecosystem_strip">Ver app de entreno</a>
+                <a href="/descargar" data-growth data-growth-source="ecosystem_strip">Descargar app</a>
+                <a href="https://www.youtube.com/@entrenoapp" rel="noopener" data-growth data-growth-source="ecosystem_strip">Ver YouTube</a>
             </div>
         </div>
     </section>
@@ -983,10 +1055,10 @@
                 
                 <div class="feature-card">
                     <div class="feature-icon">📱</div>
-                    <h3 class="feature-title">App Nativa</h3>
+                    <h3 class="feature-title">Web, iOS y Android</h3>
                     <p class="feature-description">
-                        Instala EntrenoApp como app nativa en tu dispositivo. 
-                        Funciona sin conexión y con acceso completo a datos de salud.
+                        Usa EntrenoApp en navegador, descárgala en App Store o instálala desde Google Play.
+                        La experiencia es rápida, visual y sin registro obligatorio.
                     </p>
                 </div>
             </div>
@@ -1380,8 +1452,8 @@
 
     <section class="content-section" style="background: #fff; padding: 50px 20px;">
         <div class="container" style="text-align:center;">
-            <a class='cta-button cta-primary' href='/app' style='display:inline-block; padding:16px 40px; border-radius:50px; font-size:1.2rem;'>Empieza gratis en 60 segundos</a>
-            <div style="margin-top:10px; color:#666; font-size:.95rem;">Sin tarjetas. Puedes cancelar cuando quieras.</div>
+            <a class='cta-button cta-primary' href='/app' data-growth data-growth-source="bottom_cta" style='display:inline-block; padding:16px 40px; border-radius:50px; font-size:1.2rem;'>Empieza gratis en 60 segundos</a>
+            <div style="margin-top:10px; color:#666; font-size:.95rem;">Sin registro obligatorio. También disponible en App Store y Google Play.</div>
         </div>
     </section>
 
@@ -1480,6 +1552,7 @@
     </footer>
 
     <!-- YouTube Gallery Component (cache-bust para forzar versión con playlist del canal) -->
+    <script defer src="js/growth-tracking.js"></script>
     <script defer src="js/components/youtube-gallery.js?v=4"></script>
     <script>
         (adsbygoogle = window.adsbygoogle || []).push({});
