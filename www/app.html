@@ -53,7 +53,10 @@
     @media (min-width:700px){#app{max-width:520px;margin:0 auto;border-left:1px solid var(--border);border-right:1px solid var(--border);box-shadow:0 0 80px rgba(0,0,0,.28)}}
     .header{padding:14px 18px 12px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;border-bottom:1px solid var(--border);background:rgba(8,11,18,.72);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px)}
     .brand-head{display:flex;align-items:center;gap:10px}
-    .app-mark{display:grid;place-items:center;flex-shrink:0;background:linear-gradient(145deg,#122033,#070b13);border:1px solid rgba(255,255,255,.16);box-shadow:0 8px 22px rgba(0,0,0,.28),0 0 0 1px rgba(47,140,255,.15) inset;color:#fff;font-weight:950;letter-spacing:-.06em}
+    .app-mark{display:grid;place-items:center;flex-shrink:0;position:relative;overflow:hidden;background:linear-gradient(145deg,#122033,#070b13);border:1px solid rgba(255,255,255,.16);box-shadow:0 8px 22px rgba(0,0,0,.28),0 0 0 1px rgba(47,140,255,.15) inset;color:#fff;font-weight:950;letter-spacing:0}
+    .app-mark img{width:100%;height:100%;display:block;object-fit:cover;grid-area:1/1}
+    .app-mark span{display:none;grid-area:1/1}
+    .app-mark.logo-failed span{display:block}
     .brand-head .app-mark{width:34px;height:34px;border-radius:11px;font-size:15px}
     .header-title{font-size:20px;font-weight:850;letter-spacing:-.3px}
     .header-streak{display:flex;align-items:center;gap:5px;background:var(--accent-dim);border:1px solid var(--accent);padding:5px 12px;border-radius:20px;font-size:13px;font-weight:700;color:var(--accent)}
@@ -651,7 +654,7 @@
 
 <!-- WELCOME / FORK -->
 <div id="ob-fork">
-  <div class="app-mark fork-mark" aria-label="EntrenoApp">EA</div>
+  <div class="app-mark fork-mark" aria-label="EntrenoApp"><img src="assets/logo.jpeg" alt="" onerror="this.parentElement.classList.add('logo-failed');this.remove()"><span>EA</span></div>
   <div class="fork-logo">Entreno<span>App</span></div>
   <div class="fork-tag">Entrena con una rutina creada para ti, registra cada sesión y mira cómo progresas.</div>
   <button class="fork-btn feat" onclick="chooseCustom()">
@@ -727,7 +730,7 @@
 <!-- APP -->
 <div id="app" style="display:none">
   <div class="header">
-    <div class="brand-head"><div class="app-mark" aria-hidden="true">EA</div><div class="header-title" id="hdr-title">EntrenoApp</div></div>
+    <div class="brand-head"><div class="app-mark" aria-hidden="true"><img src="assets/logo.jpeg" alt="" onerror="this.parentElement.classList.add('logo-failed');this.remove()"><span>EA</span></div><div class="header-title" id="hdr-title">EntrenoApp</div></div>
     <div class="header-streak" id="hdr-streak">🔥 0</div>
   </div>
   <div class="content" id="content"></div>
@@ -1541,7 +1544,7 @@ function renderHabitCard(habits,habitCount){
 }
 function renderPlanCard(p){
   return `<div class="card" style="display:flex;align-items:center;gap:12px">
-    <div class="app-mark" aria-hidden="true" style="width:48px;height:48px;border-radius:15px;font-size:20px">EA</div>
+    <div class="app-mark" aria-hidden="true" style="width:48px;height:48px;border-radius:15px;font-size:20px"><img src="assets/logo.jpeg" alt="" onerror="this.parentElement.classList.add('logo-failed');this.remove()"><span>EA</span></div>
     <div>
       <div style="font-weight:900">Tu plan personalizado</div>
       <div class="tsm t2">${MODE_LABELS[p.mode]||GOAL_LABELS[p.goal]||'Plan'} · ${PRIORITY_LABELS[p.priority]||GOAL_LABELS[p.goal]||'Objetivo'} · ${p.days||'-'} días · ${p.time||'-'} min</div>
