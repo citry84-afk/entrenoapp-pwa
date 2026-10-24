@@ -1,3 +1,4 @@
+import { randomUUID } from "node:crypto";
 import { getStore } from "@netlify/blobs";
 import type { Config, Context } from "@netlify/functions";
 
@@ -116,7 +117,7 @@ export default async (req: Request, _context: Context) => {
 
     const receivedAt = new Date();
     const day = receivedAt.toISOString().slice(0, 10);
-    const key = `events/${day}/${receivedAt.getTime()}-${crypto.randomUUID()}.json`;
+    const key = `events/${day}/${receivedAt.getTime()}-${randomUUID()}.json`;
     const record = {
       schema: 1,
       event,
