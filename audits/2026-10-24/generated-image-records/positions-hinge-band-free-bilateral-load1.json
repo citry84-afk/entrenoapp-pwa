@@ -1,0 +1,22 @@
+{
+  "key": "positions-hinge-band-free-bilateral-load1",
+  "file": "generated/positions-hinge-band-free-bilateral-load1-v1.webp",
+  "alt": {
+    "es": "Dos vistas orientativas de bisagra de cadera · banda.",
+    "en": "Two orientation views of hip hinge · resistance band."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:19:36.233Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/019f5b89-f0eb-7533-a20b-f1e8b4011a4a/exec-512dab9f-99e8-4c31-af45-569d8d84f430.png",
+  "prompt": "Use case: precise-object-edit. Edit target: this two-position resistance-band good-morning illustration. Correct ONLY the muscle-color overlays: remove all coral/red muscle highlighting from the FRONT of both thighs and knees in BOTH figures, restoring natural skin and shorts there. A small restrained coral emphasis on the visible buttock and BACK of the thigh is acceptable; if those regions cannot be shown accurately, omit muscle highlights entirely. Keep the exact same two poses, adult identity, equipment/band path, hand grips, planted feet, framing, lighting, floor, navy background, clothing and 3D rendering unchanged. No text, labels, arrows or new objects. Do not modify posture or crop the image.\n",
+  "visualReview": "Corrección revisada: se retiró el resaltado anterior del muslo. Dos posiciones de bisagra con banda bajo ambos pies y sobre espalda superior, manos fuera de garganta, pies completos y espalda sin redondeo evidente. Realce posterior solo orientativo.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 43100,
+  "sha256": "cbbd0bde24df488ae84b40bc3dca677591de85dee0b9bb2850b351d9271579dd",
+  "fallbackFile": "generated/positions-hinge-band-free-bilateral-load1-v1.jpg",
+  "fallbackBytes": 108996,
+  "fallbackSha256": "b009d678ded54d92ba8ecde781b879a5ebf8ccfa68dde8f9570a3f698441c8c8"
+}

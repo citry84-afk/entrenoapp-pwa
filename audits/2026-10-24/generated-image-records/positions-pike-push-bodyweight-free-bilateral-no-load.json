@@ -1,0 +1,22 @@
+{
+  "key": "positions-pike-push-bodyweight-free-bilateral-no-load",
+  "file": "generated/positions-pike-push-bodyweight-free-bilateral-no-load-v1.webp",
+  "alt": {
+    "es": "Dos vistas orientativas de flexión pike.",
+    "en": "Two orientation views of pike push-up."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:18:31.463Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/01a16d4c-2c93-7672-b9c7-5fc639f6c4b0/exec-651a60e8-1522-491a-a415-e1f524b9ec26.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nShow hands and feet on the floor with hips lifted into an inverted V. First pose has elbows extended; second pose bends elbows to lower the crown of the head toward a point slightly in front of the hands. Keep the hips lifted and avoid a vertical handstand.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.",
+  "visualReview": "Revisión visual: posición pike con caderas altas y manos y pies en suelo, seguida de flexión de codos acercando la cabeza al suelo. Sin cargas ni apoyos inventados; énfasis ilustrativo localizado en hombro y tríceps. Revisión no clínica.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 37924,
+  "sha256": "729e3fe6dd3d637595aefa54585e5d117295afd4d194c0f51cf6aecc85b5c339",
+  "fallbackFile": "generated/positions-pike-push-bodyweight-free-bilateral-no-load-v1.jpg",
+  "fallbackBytes": 104302,
+  "fallbackSha256": "06da79cc40a6569954195c7789242abb86d06b952daa588d27781a95edb1d912"
+}

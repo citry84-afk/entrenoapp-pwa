@@ -1,0 +1,22 @@
+{
+  "key": "positions-lunge-band-free-bilateral-load1-alternating",
+  "file": "generated/positions-lunge-band-free-bilateral-load1-alternating-v1.webp",
+  "alt": {
+    "es": "Dos vistas orientativas de zancada · banda.",
+    "en": "Two orientation views of lunge · resistance band."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:39:44.761Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/019f5b89-f0eb-7533-a20b-f1e8b4011a4a/exec-6555dcd0-646e-4bdb-a275-dbe9e201882c.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nShow ONE clearly specified illustrative variant of a resistance-band split-stance lunge. A long resistance band is firmly pinned under the FRONT foot, one end held in each hand BESIDE THE SHOULDERS. In both views the same front foot keeps the band pinned, and the rear forefoot is planted behind on a stable hip-width track. First view: tall staggered stance with knees almost straight. Second view: controlled descent with both knees bent, front knee roughly above foot and rear knee lowered toward but not hitting floor; neutral spine and upright torso. Hands stay beside shoulders and the band remains outside the torso, away from neck and throat. Exactly same band path and same leading leg in both views. This illustrates one side/setup, NOT a complete alternating-leg sequence or a promise that all band setups are equivalent. Show full feet and hands. Omit muscle overlays, no bench and no external anchors.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.\n\n",
+  "visualReview": "Variante ilustrada explícita: apoyo fijo con banda bajo pie delantero y extremos en hombros, postura alta y descenso de la misma pierna. La imagen no pretende mostrar alternancia íntegra ni validar todo montaje posible. Pies, agarres y rodillas completos.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 42550,
+  "sha256": "c537cfde027a2b0b3f8f35c28482954ba21e7cbc0c7dd62007dc6d9ed9a0d382",
+  "fallbackFile": "generated/positions-lunge-band-free-bilateral-load1-alternating-v1.jpg",
+  "fallbackBytes": 108652,
+  "fallbackSha256": "f31650e79ab51172eb56d6a1f5a7d869121daac09763a7535fcb2930e4e0e8ec"
+}

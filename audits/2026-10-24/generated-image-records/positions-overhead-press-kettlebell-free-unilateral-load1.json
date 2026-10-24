@@ -1,0 +1,22 @@
+{
+  "key": "positions-overhead-press-kettlebell-free-unilateral-load1",
+  "file": "generated/positions-overhead-press-kettlebell-free-unilateral-load1-v1.webp",
+  "alt": {
+    "es": "Dos vistas orientativas de press de hombro · kettlebell unilateral.",
+    "en": "Two orientation views of standing overhead press · kettlebell · unilateral."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:38:49.627Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/01a16d50-7534-71d1-888b-d0020bbbde49/exec-2f76845a-5c77-4f0a-bf5e-09c63f2713a7.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nFirst pose has the weight or band handles at shoulder height and elbows beneath the load. Second pose presses overhead with the arms extended and rib cage stacked over the pelvis. Remain standing unless support is explicitly specified. Exactly one kettlebell, not a dumbbell or a second kettlebell.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.\n\nExact setup: one right-arm kettlebell strict press, same right arm working in both panels, opposite arm relaxed. First front rack with elbow under wrist, bowl against outside/back of forearm; second elbow extended overhead with straight wrist and bowl behind forearm. Both feet remain floor, knees straight not locked, torso stacked. Omit all muscle-color overlays. Entire kettlebell, fingers and feet visible with generous margin.\n\n",
+  "visualReview": "Revisión visual por IA: mismo brazo en rack y extensión vertical, una KB apoyada contra parte externa de antebrazo, muñeca recta y torso apilado. Mano libre relajada, pies y carga completos. Sin overlays ni errores evidentes; no validación profesional.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 34144,
+  "sha256": "c1c64474817ec57436acab43df43a3d94b9a4a61cebe36db0d45ba48e90782bf",
+  "fallbackFile": "generated/positions-overhead-press-kettlebell-free-unilateral-load1-v1.jpg",
+  "fallbackBytes": 92670,
+  "fallbackSha256": "deed69d92eed5172c4f7d1c9f355388d814d806e7a4dc77ca560bd2fa80398fe"
+}

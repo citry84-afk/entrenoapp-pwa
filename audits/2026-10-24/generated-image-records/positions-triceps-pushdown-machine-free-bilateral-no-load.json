@@ -1,0 +1,22 @@
+{
+  "key": "positions-triceps-pushdown-machine-free-bilateral-no-load",
+  "file": "generated/positions-triceps-pushdown-machine-free-bilateral-no-load-v1.webp",
+  "alt": {
+    "es": "Dos vistas orientativas de extensión de tríceps en polea · máquina o polea.",
+    "en": "Two orientation views of cable triceps pushdown · machine or cable."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:24:20.545Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/01a16d50-7534-71d1-888b-d0020bbbde49/exec-1839304d-c48c-42f2-8822-425818203eae.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nShow a high cable attached to a short straight bar. First pose has elbows bent by the torso and hands near the lower chest; second pose extends elbows so the hands move toward the thighs. Keep upper arms close to the torso and shoulders still.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.\n\nExact setup: complete compact high-pulley machine with weight stack and a visibly connected cable ending in one short straight bar held overhand with both hands; feet on floor. Both upper arms remain beside torso. Omit all muscle-color overlays for this asset; natural skin. Wide camera, scale down both scenes so the entire machine top crossbeam, all pulleys, base and all shoes sit inside at least 8 percent clear margin; never let the machine touch any edge. The high pulley is slightly above the head, not an extremely tall tower.\n\n",
+  "visualReview": "Revisión visual por IA: polea alta conectada a barra corta bilateral, codos próximos al torso flexionados y extendidos. Regenerada para mostrar aparato completo; pies y agarres visibles, sin overlays. Sin errores anatómicos evidentes; no validación profesional.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 47004,
+  "sha256": "6f66ace982ea4882623ad0bd353e5cc69d09ad45fcbea6b2582f1d9d767eca28",
+  "fallbackFile": "generated/positions-triceps-pushdown-machine-free-bilateral-no-load-v1.jpg",
+  "fallbackBytes": 132485,
+  "fallbackSha256": "d17d2e460064b6d7b314462720abacc38c1971561d0c736b5b2d3de5c40b6080"
+}

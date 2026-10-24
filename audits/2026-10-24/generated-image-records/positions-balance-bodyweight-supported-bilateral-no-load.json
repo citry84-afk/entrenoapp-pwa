@@ -1,0 +1,22 @@
+{
+  "key": "positions-balance-bodyweight-supported-bilateral-no-load",
+  "file": "generated/positions-balance-bodyweight-supported-bilateral-no-load-v1.webp",
+  "alt": {
+    "es": "Dos vistas orientativas de equilibrio con apoyo.",
+    "en": "Two orientation views of supported single-leg balance."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:54:07.356Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/01a16d4c-2c93-7672-b9c7-5fc639f6c4b0/exec-d8096c7b-b762-4b5e-91c4-39a8d999c083.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nShow a gentle standing balance hold beside a stable chair, one hand lightly touching the backrest, one foot planted and the other lifted slightly. Use two views of the same supported hold rather than a dramatic acrobatic movement.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.\n\nStrict asset correction: GENTLE VITAL SUPPORTED BALANCE HOLD. Same approachable older adult65 with average realistic build, graphite t-shirt and shorts. One hand lightly resting on sturdy chair back, one full foot planted and the other foot lifted only a few centimeters with knee gently bent, not knee-high or yoga tree pose. Left side three-quarter view; right front three-quarter view of the SAME quiet supported hold, not two invented movement phases. Keep chair stable, all feet/hand contacts visible, no closed eyes, no weights, no muscle colors, no acrobatics.\n",
+  "visualReview": "Revisión visual: dos ángulos del mismo equilibrio con una mano en silla, un pie plano y otro discretamente elevado. Adulto mayor vestido, sin yoga, acrobacia ni carga. No se presentan como dos fases de movimiento; revisión visual no clínica.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 45604,
+  "sha256": "0a174a74f58afe7571688f37ff63b8171d78a23d0a1b781afb1d3131e5c7596c",
+  "fallbackFile": "generated/positions-balance-bodyweight-supported-bilateral-no-load-v1.jpg",
+  "fallbackBytes": 117659,
+  "fallbackSha256": "69c2e6c47eadb5529a0fdbeff2a684b255a7e315b800be1aa0974044b84f738c"
+}

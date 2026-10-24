@@ -1,0 +1,22 @@
+{
+  "key": "positions-assisted-pull-up-machine",
+  "file": "generated/positions-assisted-pull-up-machine-v1.webp",
+  "fallbackFile": "generated/positions-assisted-pull-up-machine-v1.jpg",
+  "alt": {
+    "es": "Dominadas asistidas, ejemplo en máquina: dos posiciones de una variante de ejemplo; respeta el material mostrado.",
+    "en": "Assisted pull-up, machine example: two positions of an example variant; use the equipment shown."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T19:28:37.083Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/019f5b89-f0eb-7533-a20b-f1e8b4011a4a/exec-e39d76fa-39cb-4a9a-b231-2a4d33dc99fd.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nShow a recognizable assisted pull-up machine with a stable padded knee platform connected to a counterweight stack. Adult kneels on the support, hands on overhead bar. First arms nearly extended, second chest rises toward bar while knees stay on same support. No band, weighted belt or unsupported floating knees. Entire machine, head/hands/knees/shoes visible. No weight numbers or clinical prescription. Omit overlays.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.",
+  "visualReview": "Ejemplo explícito de máquina asistida: ambas rodillas apoyadas en plataforma conectada a mecanismo, mismo agarre y aparato en suspensión baja y posición alta, sin banda ni lastre. Cuerpo, zapatos y base completos; asistencia no cuantificada.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 56300,
+  "sha256": "94fad79ef2c9f68574673d707292367272441b79cccdd3558423f7b51ad3ccad",
+  "fallbackBytes": 158048,
+  "fallbackSha256": "05c0b8c2c9a4b69b4a9c99bf5cf1affd9bcfdf933863c5870a1f74cab5562ccd"
+}

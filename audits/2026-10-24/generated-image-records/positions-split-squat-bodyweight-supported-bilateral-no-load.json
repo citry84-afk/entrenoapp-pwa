@@ -1,0 +1,22 @@
+{
+  "key": "positions-split-squat-bodyweight-supported-bilateral-no-load",
+  "file": "generated/positions-split-squat-bodyweight-supported-bilateral-no-load-v1.webp",
+  "alt": {
+    "es": "Dos vistas orientativas de sentadilla búlgara.",
+    "en": "Two orientation views of rear-foot-elevated split squat."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:24:14.022Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/01a16d4c-2c93-7672-b9c7-5fc639f6c4b0/exec-e3791b42-7df4-4ebd-bd48-6fc76b6c0414.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nShow the rear foot resting on a stable low padded bench and the front foot planted on the floor. First pose stands tall in the split stance; second pose bends both knees and lowers the rear knee while the front heel stays grounded. Match bodyweight or two dumbbells.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.\n\nStrict asset correction: BODYWEIGHT only; hands resting on hips, completely empty. Exactly one stable padded low bench behind the person in each separate view. Rear foot instep rests on bench, front foot entirely on floor. Left tall split stance with rear foot supported; right controlled moderate descent with front knee bent and rear knee moving toward floor, heel still down. Side three-quarter view, same working leg and bench position. No dumbbells, no red muscle overlays, no squat with both feet planted.\n",
+  "visualReview": "Revisión visual: pie trasero sobre banco estable y pie delantero completo en suelo, sin carga y con manos en caderas. Ambas vistas mantienen la misma pierna y muestran descenso con rodilla flexionada. Sin mapas musculares; revisión no clínica.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 41232,
+  "sha256": "812b995af3b06bce7d50803d05e420b32ee5c1ef2f122eb121e2e210262e973c",
+  "fallbackFile": "generated/positions-split-squat-bodyweight-supported-bilateral-no-load-v1.jpg",
+  "fallbackBytes": 107749,
+  "fallbackSha256": "ed25ad9a6a32905d2551795b04ec1d8d7ae9110a60a0187151056809231d6d27"
+}

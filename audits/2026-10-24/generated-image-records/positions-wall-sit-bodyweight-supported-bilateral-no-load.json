@@ -1,0 +1,22 @@
+{
+  "key": "positions-wall-sit-bodyweight-supported-bilateral-no-load",
+  "file": "generated/positions-wall-sit-bodyweight-supported-bilateral-no-load-v1.webp",
+  "alt": {
+    "es": "Dos vistas orientativas de sentadilla isométrica en pared.",
+    "en": "Two orientation views of wall sit."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:29:00.751Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/01a16d4c-2c93-7672-b9c7-5fc639f6c4b0/exec-53b4c02a-bb34-4d38-992f-d598d3d9b918.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nThis is a static hold. Show one person sitting against a flat wall with back supported, hips and knees comfortably bent, feet planted forward. Use front and side views of the same hold rather than invented movement phases.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.\n\nStrict asset correction: STATIC WALL SIT: two views of the SAME HELD posture, not a standing-to-squatting sequence. Left clear side three-quarter and right front three-quarter view. Same approachable adult, graphite t-shirt and shorts, back and pelvis touching a plain vertical wall, feet flat set forward, knees above ankles around a comfortable right angle or slightly higher. Hands relaxed on thighs. No chair, no bench, no weights. Omit muscle colors entirely. Show head, feet and wall-floor contact with generous margins.\n",
+  "visualReview": "Revisión visual: dos ángulos del mismo sostén isométrico en pared, espalda apoyada y plantas completas con rodillas sobre tobillos. No hay silla ni fase de movimiento inventada. Sin carga ni énfasis muscular; revisión visual no clínica.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 39510,
+  "sha256": "cdeff6cfee03b420652a713c0417185a9253833ab815ab79a1cf5a038671a2b0",
+  "fallbackFile": "generated/positions-wall-sit-bodyweight-supported-bilateral-no-load-v1.jpg",
+  "fallbackBytes": 109792,
+  "fallbackSha256": "8e8474dc4959bf3234c1b6ca256d8bfc39ef2cf3e4f87cce801bc7bda848e1c8"
+}

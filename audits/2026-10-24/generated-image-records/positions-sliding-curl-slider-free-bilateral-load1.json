@@ -1,0 +1,22 @@
+{
+  "key": "positions-sliding-curl-slider-free-bilateral-load1",
+  "file": "generated/positions-sliding-curl-slider-free-bilateral-load1-v1.webp",
+  "alt": {
+    "es": "Dos vistas orientativas de curl femoral deslizante · deslizadores.",
+    "en": "Two orientation views of sliding hamstring curl · sliders."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:43:02.808Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/01a16d45-1dbd-7160-9764-9653df629c3d/exec-563e1f05-a360-4a8b-93c7-1c5dd964b2c2.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nShow a person lying on the back with both heels on small sliders. First pose has hips lifted and legs extended away from the body; second pose pulls heels toward the pelvis by bending both knees while keeping the hips lifted. Sliders remain under both heels.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.\n\nTwo small separate sliders are required, ONE under each heel in BOTH views; the key name load1 does NOT mean one dumbbell or one shared board. Arms and upper back rest on floor, hips stay gently lifted. First legs extend, second both knees flex while heels glide toward hips. No bench, no weights. Omit colored muscle overlays.\n",
+  "visualReview": "Revisión visual: dos deslizadores separados bajo talones en ambas vistas, espalda alta/brazos en suelo, pelvis elevada. Piernas extendidas y flexión bilateral de rodillas distinguibles; sin banco/cargas ni overlays, cuerpo completo.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 27524,
+  "sha256": "ccd78697e325175a281ef89446195889e966c14617398d8226139391f0941c67",
+  "fallbackFile": "generated/positions-sliding-curl-slider-free-bilateral-load1-v1.jpg",
+  "fallbackBytes": 75525,
+  "fallbackSha256": "9749dd661e300f5da411a26a1fa1dd4e35385d7f1d20feb44f98accee042d910"
+}

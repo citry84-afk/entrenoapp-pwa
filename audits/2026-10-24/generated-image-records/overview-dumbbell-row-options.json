@@ -1,0 +1,22 @@
+{
+  "key": "overview-dumbbell-row-options",
+  "file": "generated/overview-dumbbell-row-options-v1.webp",
+  "fallbackFile": "generated/overview-dumbbell-row-options-v1.jpg",
+  "alt": {
+    "es": "Opciones de remo con mancuernas: vista orientativa de las opciones.",
+    "en": "Dumbbell row options: indicative overview of the options."
+  },
+  "kind": "overview",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T19:37:11.792Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/019f5b89-f0eb-7533-a20b-f1e8b4011a4a/exec-1521f427-538e-47ee-b9fa-deae3818bc37.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nShow two CLEARLY SEPARATED example options, not two phases: one adult in a stable wide-foot renegade-row plank with one dumbbell grounded and other hand rowing one modest dumbbell toward ribs; a second adult in a supported one-arm dumbbell row with free hand on stable low bench. Same polished style, full bodies and correct two versus one dumbbell setup in respective examples. No connecting arrows or labels. Omit muscle overlays.\n\nPresentation: This is an indicative overview of the stated block/options, NOT two phases of a single exercise. Do not silently select one unspecified load or technique.",
+  "visualReview": "Dos alternativas separadas: remo renegado con dos mancuernas y pies separados; remo unilateral con mano y rodilla en banco estable. Material y contactos al suelo visibles, sin error claro de equipamiento o anatomía. Es vista de opciones, no dos fases consecutivas de un mismo movimiento.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 40616,
+  "sha256": "97c0d8977e10c0f0b267bbbf46abeca2d81670f18b522d7dad3de6e3408cb860",
+  "fallbackBytes": 107926,
+  "fallbackSha256": "537d10ae1dab78f50dbbdf004e405ea6e7818de18f78ca75910f232cf259063b"
+}

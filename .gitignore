@@ -54,3 +54,14 @@ pubspec.lock
 release/
 # Local Netlify folder
 .netlify
+
+# Local secrets
+secrets/
+*.p8
+AuthKey_*.p8
+
+# Local media and signing keys (not for Git)
+marketing-videos/
+scripts/__pycache__/
+*.jks
+*.keystore

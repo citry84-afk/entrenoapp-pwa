@@ -1,0 +1,17 @@
+Use case: scientific-educational.
+Asset type: original premium mobile fitness app exercise illustration, not a UI mockup.
+Input image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.
+Composition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.
+Subject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.
+Muscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.
+Lighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.
+Text: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.
+Accuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.
+
+Movement-specific brief:
+Show a prone lying hamstring curl on a floor mat, with one ankle cuff connected to a resistance band anchored securely at floor height beyond the feet. Two STACKED full-body views: first knee nearly straight, second same working knee bent bringing heel toward buttock, pelvis and torso resting on mat. Same leg and anchor in both views. No band around neck, no machine, no wrist grip. Moderate knee range. Show the low post anchor, cuff and entire band path. Omit muscle overlays.
+
+Presentation: Two separate STACKED key positions, one above the other, of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.
+
+Exact anatomy/setup: both figures lie face-down with head at left and feet toward right, torso and pelvis fully supported on mat. Forearms relaxed under forehead. Only same near-camera leg bends in second view; other leg remains straight on mat. One ankle cuff on near leg attaches to ONE continuous band to a short securely fixed post beyond feet at right. Show both post anchor ends and all band length with no band disappearing through body. Omit ALL muscle-color overlays. Full mat/person/anchor fit inside wide margins in each top-bottom panel.
+

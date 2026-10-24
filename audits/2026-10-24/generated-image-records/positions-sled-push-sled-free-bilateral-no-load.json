@@ -1,0 +1,22 @@
+{
+  "key": "positions-sled-push-sled-free-bilateral-no-load",
+  "file": "generated/positions-sled-push-sled-free-bilateral-no-load-v1.webp",
+  "alt": {
+    "es": "Dos vistas orientativas de empuje de trineo.",
+    "en": "Two orientation views of sled push."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:39:28.780Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/01a16d4c-2c93-7672-b9c7-5fc639f6c4b0/exec-6666a2a2-3086-4eb4-b4eb-cd9f5b747967.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nShow a training sled with two upright handles. Depict two alternating forward-driving leg positions with hands gripping the same handles and torso inclined as a straight stable line. Keep the sled on the ground and show no wheels.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.\n\nTargeted correction to the supplied sled-push draft: KEEP the LEFT scene unchanged. Change ONLY the RIGHT person's legs into a clearly different next driving step: the supporting leg under the hip is mostly straight, while the other knee comes forward under the chest with that shoe lifted visibly off the floor. It must NOT duplicate the split stance of the left image. Keep both hands on the two upright handles, torso inclination stable, the same sled on floor, same graphite clothing and scale. No running jump, no muscle overlays, no text. Entire body and sled in frame.\n",
+  "visualReview": "Revisión visual tras corrección: dos momentos de empuje con paso distinto, ambas manos en postes verticales y trineo sobre patines sin ruedas. Aparato y cuerpo completos; no rope ni pesos numéricos. Orientación estática, no técnica competitiva certificada.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 42212,
+  "sha256": "28d124a23f0f28d60a408eb12a20d5983da8da01a8ee034861d090b2967fcd03",
+  "fallbackFile": "generated/positions-sled-push-sled-free-bilateral-no-load-v1.jpg",
+  "fallbackBytes": 112801,
+  "fallbackSha256": "f36a32883f4d5d920bc07dce54acb73baf24ca8bab5e0551e2087d182b598e53"
+}

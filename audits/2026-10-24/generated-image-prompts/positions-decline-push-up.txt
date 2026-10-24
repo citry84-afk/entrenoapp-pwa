@@ -1,0 +1,16 @@
+Use case: scientific-educational.
+Asset type: original premium mobile fitness app exercise illustration, not a UI mockup.
+Input image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.
+Composition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.
+Subject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.
+Muscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.
+Lighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.
+Text: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.
+Accuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.
+
+Movement-specific brief:
+Two STACKED full-body views of a decline push-up with BOTH forefeet on a low broad stable platform, BOTH palms on floor. Top high plank and controlled chest lowering with elbows angled back, body stays in one line. Head neutral, not neck crane; platform unchanged, feet and palms remain planted. No chairs, weights or band. Entire platform/head/hands/shoes visible. Omit overlays.
+
+Presentation: Two separate VERTICALLY STACKED full-body key positions, one row above the other of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.
+
+Composition override: TWO WIDE ROWS stacked vertically on the landscape canvas, not two cramped side-by-side horizontal bodies. Both forefeet are on the SAME low broad rectangular exercise platform in each view, about 20–30cm high; BOTH palms on FLOOR at shoulder width. Top view elbows extended; bottom chest lowered with elbows angled back and trunk straight. Head and neck stay in line, gaze toward floor, not craning ahead. No chairs, weights, band or muscle-color overlays. Whole platform, both shoes, both hands and head fully in EACH row with margins.

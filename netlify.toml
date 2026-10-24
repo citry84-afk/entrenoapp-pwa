@@ -79,14 +79,150 @@
     Cache-Control = "public, max-age=3600"
     Access-Control-Allow-Origin = "*"
 
+# app-ads.txt - CRÍTICO para AdMob: Google debe encontrarlo en la raíz
+[[headers]]
+  for = "/app-ads.txt"
+  [headers.values]
+    Content-Type = "text/plain; charset=utf-8"
+    Cache-Control = "public, max-age=0, must-revalidate"
+    Access-Control-Allow-Origin = "*"
+
 # index.html es la página principal (contenido estático visible para AdSense)
 # app.html es accesible desde un botón en index.html
 # NO redirigir automáticamente a app.html
 
 [[redirects]]
+  from = "/api/plus/redeem"
+  to = "/.netlify/functions/redeem-plus"
+  status = 200
+
+[[redirects]]
+  from = "/api/plus/ai"
+  to = "/.netlify/functions/plus-ai"
+  status = 200
+
+[[redirects]]
+  from = "/api/plus/rewards"
+  to = "/.netlify/functions/plus-rewards"
+  status = 200
+
+[[redirects]]
+  from = "/api/plus/account"
+  to = "/.netlify/functions/plus-account"
+  status = 200
+
+[[redirects]]
+  from = "/api/plus/purchase"
+  to = "/.netlify/functions/plus-purchase"
+  status = 200
+
+[[redirects]]
   from = "/home.html"
   to = "/"
   status = 301
+
+# Consolidar artículos antiguos en las guías canónicas que queremos posicionar
+[[redirects]]
+  from = "/rutina-gym-principiantes-2025.html"
+  to = "/rutina-gym-principiantes-2026.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/rutina-gym-principiantes-2025"
+  to = "/rutina-gym-principiantes-2026.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/empezar-a-correr.html"
+  to = "/empezar-correr-2026-guia-paso-paso.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/empezar-a-correr"
+  to = "/empezar-correr-2026-guia-paso-paso.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/como-empezar-a-correr.html"
+  to = "/empezar-correr-2026-guia-paso-paso.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/como-empezar-a-correr"
+  to = "/empezar-correr-2026-guia-paso-paso.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/aprender-a-correr.html"
+  to = "/empezar-correr-2026-guia-paso-paso.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/aprender-a-correr"
+  to = "/empezar-correr-2026-guia-paso-paso.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/como-comenzar-a-correr.html"
+  to = "/empezar-correr-2026-guia-paso-paso.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/como-comenzar-a-correr"
+  to = "/empezar-correr-2026-guia-paso-paso.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/empezar-correr-guia-completa.html"
+  to = "/empezar-correr-2026-guia-paso-paso.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/empezar-a-correr-2-semanas.html"
+  to = "/empezar-correr-2026-guia-paso-paso.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/suplementos-recomendados.html"
+  to = "/mejores-suplementos-deportivos-2026.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/suplementos-esenciales-gimnasio-2025.html"
+  to = "/mejores-suplementos-deportivos-2026.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/suplementos-esenciales-gimnasio-2025"
+  to = "/mejores-suplementos-deportivos-2026.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/mejores-suplementos-gym-running-2026.html"
+  to = "/mejores-suplementos-deportivos-2026.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/mejores-suplementos-gym-running-2026"
+  to = "/mejores-suplementos-deportivos-2026.html"
+  status = 301
+  force = true
 
 [[redirects]]
   from = "/privacy"
@@ -112,6 +248,11 @@
 [[redirects]]
   from = "/blog"
   to = "/blog.html"
+  status = 301
+
+[[redirects]]
+  from = "/guias"
+  to = "/guias.html"
   status = 301
 
 [[redirects]]
@@ -238,8 +379,9 @@
 # Redirects adicionales para otros artículos
 [[redirects]]
   from = "/suplementos-recomendados"
-  to = "/suplementos-recomendados.html"
+  to = "/mejores-suplementos-deportivos-2026.html"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/suplementos-para-perder-grasa"
@@ -278,8 +420,9 @@
 
 [[redirects]]
   from = "/empezar-a-correr-2-semanas"
-  to = "/empezar-a-correr-2-semanas.html"
+  to = "/empezar-correr-2026-guia-paso-paso.html"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/empezar-correr-sobrepeso-2025"
@@ -293,8 +436,9 @@
 
 [[redirects]]
   from = "/empezar-correr-guia-completa"
-  to = "/empezar-correr-guia-completa.html"
+  to = "/empezar-correr-2026-guia-paso-paso.html"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/nutricion-corredores"
@@ -302,8 +446,13 @@
   status = 301
 
 [[redirects]]
-  from = "/rutina-gym-principiantes-2025"
-  to = "/rutina-gym-principiantes-2025.html"
+  from = "/rutina-gym-principiantes-2026"
+  to = "/rutina-gym-principiantes-2026.html"
+  status = 301
+
+[[redirects]]
+  from = "/gimnasia-para-mayores-sentados"
+  to = "/gimnasia-para-mayores-sentados.html"
   status = 301
 
 [[redirects]]

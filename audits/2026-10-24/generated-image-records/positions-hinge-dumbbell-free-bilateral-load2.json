@@ -1,0 +1,22 @@
+{
+  "key": "positions-hinge-dumbbell-free-bilateral-load2",
+  "file": "generated/positions-hinge-dumbbell-free-bilateral-load2-v1.webp",
+  "alt": {
+    "es": "Dos vistas orientativas de bisagra de cadera · mancuernas.",
+    "en": "Two orientation views of hip hinge · dumbbells."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:49:29.544Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/01a16d50-7534-71d1-888b-d0020bbbde49/exec-f172eb6d-081a-4f7a-89c8-8cf56a152ebe.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nStart standing with feet hip-width apart and soft knees. Finish with the hips moving backwards and torso inclining forward from the hips; keep the back neutral and equipment close to the body. Exactly two matching dumbbells, not a barbell or kettlebell.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.\n\nExact setup: TWO matching dumbbells, one in each hand close to front/side thighs. First tall, second hips shift backwards with nearly unchanged soft knees and arms hanging near knees. Back AND neck neutral, gaze down at floor ahead in hinged pose, never chin lifted. No squat or weights on floor. Omit all muscle overlays especially front thighs. Both DBs, hands and full shoes visible with wide margins.\n\n",
+  "visualReview": "Revisión visual por IA: dos mancuernas una por mano, posición erguida y bisagra con cadera atrás, rodillas suaves y cuello mirando al suelo. Cargas próximas a piernas sin tocar suelo, pies completos. Sin overlays ni errores evidentes; no validación profesional.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 35786,
+  "sha256": "6f9d886bec1e5c34b2ad2ddfbc074ca8e7b546153e30aa0af5768bab81bb85c2",
+  "fallbackFile": "generated/positions-hinge-dumbbell-free-bilateral-load2-v1.jpg",
+  "fallbackBytes": 96874,
+  "fallbackSha256": "0c576f71bd584cba223ddf6703c328e0eb389fea9dcdacb378cf8befd7740a6b"
+}

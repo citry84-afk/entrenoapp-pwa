@@ -1,0 +1,22 @@
+{
+  "key": "positions-overhead-press-band-free-bilateral-load1",
+  "file": "generated/positions-overhead-press-band-free-bilateral-load1-v1.webp",
+  "alt": {
+    "es": "Dos vistas orientativas de press de hombro · banda.",
+    "en": "Two orientation views of standing overhead press · resistance band."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:33:14.271Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/019f5b89-f0eb-7533-a20b-f1e8b4011a4a/exec-26f0ccf3-d20f-47ab-8112-c9d61de6fecd.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nFirst pose has the weight or band handles at shoulder height and elbows beneath the load. Second pose presses overhead with the arms extended and rib cage stacked over the pelvis. Remain standing unless support is explicitly specified. Band is under both feet and both ends are held at shoulder height before pressing overhead.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.\n\nSpecific body/equipment constraint: the single continuous band is firmly beneath BOTH feet, one end or handle in EACH hand. Hands at shoulder height in first view and high overhead in second, elbows extend without the back arching. Full arms and hands visible with margin above. No band behind neck or throat, no band coming from a ceiling or rack. Optional coral ONLY at shoulders, not thighs or chest.\n",
+  "visualReview": "Press vertical con banda bajo ambos pies, dos asas, manos y brazos completos con margen superior, tronco sin arqueo evidente y realce limitado a hombros. No monta carga en cuello ni añade anclaje externo.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 40546,
+  "sha256": "1f16200417ac5cfb883935acff75b4ea3d1a0d328f7017676233da988bf200b9",
+  "fallbackFile": "generated/positions-overhead-press-band-free-bilateral-load1-v1.jpg",
+  "fallbackBytes": 107159,
+  "fallbackSha256": "a64c4bf4127a24c6299f85d0c743e9f7c7a54252a063a12cc031f955a59141e5"
+}

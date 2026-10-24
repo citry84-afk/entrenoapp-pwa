@@ -1,0 +1,22 @@
+{
+  "key": "overview-run-walk-options",
+  "file": "generated/overview-run-walk-options-v1.webp",
+  "fallbackFile": "generated/overview-run-walk-options-v1.jpg",
+  "alt": {
+    "es": "Opciones de carrera suave y caminar rápido: vista orientativa de las opciones.",
+    "en": "Easy running and brisk-walking options: indicative overview of the options."
+  },
+  "kind": "overview",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T19:37:56.350Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/019f5b89-f0eb-7533-a20b-f1e8b4011a4a/exec-5a556423-a7a7-4357-8b67-a785208c4546.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nShow two clearly separated full-body adults in matching neutral fitness style: one in an easy relaxed running stride, the other in a brisk walking stride with one foot clearly on ground and no jumping. No race track or timers, no intensity metrics, no muscle overlays. These are alternative activities, NOT two phases of one gait.\n\nPresentation: This is an indicative overview of the stated block/options, NOT two phases of a single exercise. Do not silently select one unspecified load or technique.",
+  "visualReview": "Alternativas de carrera relajada y caminar, con cuerpos completos y ropa neutra. El caminante conserva contacto visible al suelo; no muestra salto ni métricas de intensidad. Sin error anatómico evidente. Vista de actividades alternativas, no secuencia del ciclo de marcha ni promesa de zona fisiológica.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 41652,
+  "sha256": "e156fedfd64254db3a136cbca0b66b3503e8b608cbf6d2d954444b9478f97c66",
+  "fallbackBytes": 111203,
+  "fallbackSha256": "9fa4c96678c592d873817648d4a659a142bd83515f089c938937c746dec2900b"
+}

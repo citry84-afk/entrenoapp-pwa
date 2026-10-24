@@ -1,0 +1,22 @@
+{
+  "key": "positions-incline-push-bodyweight-supported-bilateral-no-load",
+  "file": "generated/positions-incline-push-bodyweight-supported-bilateral-no-load-v1.webp",
+  "alt": {
+    "es": "Dos vistas orientativas de flexión inclinada.",
+    "en": "Two orientation views of incline push-up."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:53:13.779Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/01a16d45-1dbd-7160-9764-9653df629c3d/exec-a5938d01-32e3-49e1-8bf9-9d763a4fb9b3.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nShow hands resting on a stable low bench or counter, both feet on the floor and body forming a straight line. First pose has elbows extended; second pose bends elbows to bring the chest toward the support. Do not elevate the feet.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.\n\nHands elevated on a solid low bench in BOTH views; both toes remain on the floor, NEVER feet on bench. First arms extended and then elbows bend as chest approaches bench edge, head-spine-hips aligned, no sagging or hips up. Show all bench feet, both shoes and both hands. No weights or bands; omit colored muscle overlays.\n",
+  "visualReview": "Revisión visual: ambas manos sobre banco bajo estable y pies en suelo, nunca pies elevados. Inicio de brazos extendidos y descenso del pecho al apoyo, cuerpo largo sin hundimiento acusado. Bancos/zapatos/manos completos y sin cargas u overlays.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 33794,
+  "sha256": "6ac4eaca50d20c7dcf693004b041f71295ffd11d8040bd6f24a4bc30a373d1d7",
+  "fallbackFile": "generated/positions-incline-push-bodyweight-supported-bilateral-no-load-v1.jpg",
+  "fallbackBytes": 91494,
+  "fallbackSha256": "d777187e4e7769efcd74c1b17400399efc2725decd05f42176dc4d0dc18f7b19"
+}

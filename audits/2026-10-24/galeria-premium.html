@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><base href="../../">
+<meta name="robots" content="noindex,nofollow"><title>Revisión de imágenes · EntrenoApp</title>
+<style>
+:root{color-scheme:dark;--bg:#080d16;--text:#f1f5ff;--text2:#a8b5c9;--border:#243046;--accent:#388fff;--green:#35d07f;font-family:system-ui,-apple-system,BlinkMacSystemFont,sans-serif}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text)}header{padding:24px 20px;max-width:1440px;margin:auto}h1{font-size:28px;margin:0 0 10px}p{color:var(--text2);line-height:1.5}label{display:block;margin-bottom:7px}input,select,button{font:inherit;color:inherit;border:1px solid var(--border);background:#121c2b;border-radius:12px;min-height:44px;padding:10px 14px}input{width:min(100%,420px)}button{cursor:pointer}button:disabled{opacity:.4}nav{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:16px}.count{font-variant-numeric:tabular-nums;color:#91c2ff}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;padding:0 20px 36px;max-width:1440px;margin:auto}.item{min-width:0}.item h2{font-size:15px;line-height:1.4}.item small{color:var(--text2);display:block;margin:8px 0;overflow-wrap:anywhere}.item .exercise-visual-card{margin:0}.error{color:#ffb4b4}.exercise-visual-placeholder{font-size:12px;color:#18263b;padding:12px}.exercise-visual-placeholder p{color:#314359;font-size:11px}@media(max-width:1000px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:620px){.grid{grid-template-columns:1fr;padding:0 12px 30px}header{padding:20px 14px}h1{font-size:24px}}
+</style>
+</head>
+<body>
+<header><h1>Biblioteca visual · revisión</h1><p>Ilustraciones originales generadas con IA. Esta galería no lee ni modifica perfiles, entrenamientos o historial. Las posiciones son orientativas, no un vídeo ni una evaluación profesional de técnica.</p><label for="search">Buscar ejercicio o material</label><input id="search" type="search" placeholder="Sentadilla, banda, Vital…"><nav><select id="kind" aria-label="Tipo de lámina"><option value="">Todas</option><option value="positions">Posiciones</option><option value="overview">Vistas orientativas</option></select><button id="prev">Anterior</button><span id="page" class="count"></span><button id="next">Siguiente</button></nav><p id="summary" class="count" role="status">Cargando imágenes revisadas…</p></header>
+<main id="grid" class="grid"></main>
+<script>function currentLang(){return 'es';}</script>
+<script src="assets/js/exercise-muscles.js?v=20261024-premium1"></script>
+<script src="assets/js/exercise-media.js?v=20261024-premium1"></script>
+<script src="assets/js/exercise-generated-media.js?v=20261024-premium1"></script>
+<script src="assets/js/exercise-visual-catalogue.js?v=20261024-premium1"></script>
+<script src="assets/js/exercise-visuals.js?v=20261024-premium1"></script>
+<script>
+'use strict';
+(async()=>{
+  const [app,plan]=await Promise.all([fetch('app.html').then(r=>r.text()),fetch('audits/2026-10-24/generated-exercise-plan.json').then(r=>r.json())]);
+  const doc=new DOMParser().parseFromString(app,'text/html'),style=doc.getElementById('exercise-visual-styles');
+  if(style)document.head.append(style.cloneNode(true));
+  const activeAssets=plan.assets.filter(asset=>asset.identities.length>0),all=activeAssets.filter(asset=>exerciseGeneratedMedia(asset.key));let page=0;const size=6;
+  const normal=value=>String(value).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+  function filtered(){const query=normal(document.getElementById('search').value),kind=document.getElementById('kind').value;return all.filter(asset=>(!kind||asset.kind===kind)&&(!query||normal(JSON.stringify([asset.key,asset.title,asset.sourceNames,asset.tool,asset.identities])).includes(query)));}
+  function render(){
+    pauseExerciseVisuals();exerciseVisualStates.clear();
+    const matches=filtered(),pages=Math.max(1,Math.ceil(matches.length/size));page=Math.min(page,pages-1);
+    document.getElementById('page').textContent=(page+1)+' / '+pages;
+    document.getElementById('prev').disabled=page===0;document.getElementById('next').disabled=page>=pages-1;
+    document.getElementById('summary').textContent=all.length+' / '+activeAssets.length+' láminas revisadas · '+matches.length+' coinciden con el filtro';
+    document.getElementById('grid').innerHTML=matches.slice(page*size,page*size+size).map(asset=>{
+      const identity=asset.identities[0],name=exerciseVisualEscape(asset.title.es),key=exerciseVisualEscape(asset.key);
+      return '<article class="item"><h2>'+name+'</h2>'+renderExerciseVisual(identity,{context:'sheet',expanded:true})+'<small>'+key+' · '+asset.identities.length+' referencias</small></article>';
+    }).join('')||'<p>No hay imágenes revisadas para este filtro.</p>';
+  }
+  document.getElementById('search').addEventListener('input',()=>{page=0;render();});document.getElementById('kind').addEventListener('change',()=>{page=0;render();});
+  document.getElementById('prev').addEventListener('click',()=>{page--;render();});document.getElementById('next').addEventListener('click',()=>{page++;render();});render();
+})().catch(error=>{document.getElementById('summary').textContent='Error al cargar la galería: '+error.message;document.getElementById('summary').classList.add('error');});
+</script>
+</body></html>

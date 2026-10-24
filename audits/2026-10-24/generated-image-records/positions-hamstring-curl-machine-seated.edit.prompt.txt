@@ -1,0 +1,6 @@
+Use case: precise-object-edit.
+Input image: image 1 is the EDIT TARGET, an existing EntrenoApp seated leg-curl illustration. Preserve its people, skin, clothes, poses, proportions, two-panel composition, navy background, lighting, machine frame, camera, seat/back/thigh pads, all feet and margins.
+Change ONLY the incorrect lower-leg roller contact and its connected lever in BOTH panels. This must be seated HAMSTRING CURL, not leg extension.
+CRITICAL: both people face RIGHT. Remove the roller from the FRONT/RIGHT of shins. In left panel with extended legs, place padded roller BELOW the heels/Achilles so backs of ankles rest ON TOP of it. In right panel with bent knees, place padded roller BEHIND the lower calves/Achilles, on their LEFT/posterior side in this side view; front RIGHT surfaces of both shins and shoes remain unobstructed. Show the cushion touching posterior lower calves, never anterior shins. Connect this roller mechanically to the knee-level pivot by a believable lever on far side; do not leave floating pads or add new body parts.
+Keep knees bending down and back, back/pelvis on seat, thigh restraint above thighs. No muscle highlights, no text, no watermark, no labels, no logos. Preserve the entire machine and all hands/feet in frame.
+

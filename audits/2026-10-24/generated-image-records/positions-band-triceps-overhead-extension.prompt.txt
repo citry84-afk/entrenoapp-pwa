@@ -1,0 +1,17 @@
+Use case: scientific-educational.
+Asset type: original premium mobile fitness app exercise illustration, not a UI mockup.
+Input image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.
+Composition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.
+Subject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.
+Muscle emphasis: NONE. Natural skin and opaque graphite clothing only. Absolutely no coral/red muscle regions, no colored anatomical highlights anywhere. The style-reference muscle overlay must NOT be copied. Only the physical elastic band may be red.
+Lighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.
+Text: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.
+Accuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.
+
+Movement-specific brief:
+Show one clearly specified example: standing two-arm overhead triceps extension with band pinned securely under the rear foot in a stable split stance, held with both hands. First elbows bent with hands behind upper head, second elbows extend overhead while upper arms remain near ears. Band never loops around neck or throat. Entire band path and planted feet visible; avoid lower-back arch. No dumbbell or external rack. Omit overlays.
+
+Presentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.
+
+Exact setup: stable split stance, rear RIGHT foot pins lower end of a long band flat to floor; both hands together securely hold its upper end behind upper head. One continuous band runs from rear-foot sole UP BEHIND torso to hands without touching or encircling neck. Use THREE-QUARTER REAR SIDE camera so full band path behind back is visible. First both elbows bent and pointing upward beside ears; second both elbows extend up while upper arms stay near ears and ribs down. Two arms/two hands, no extra hanging arm. No overlays. Both feet and complete band end contacts inside wide margins.
+

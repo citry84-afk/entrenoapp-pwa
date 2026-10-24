@@ -1,0 +1,16 @@
+Use case: scientific-educational.
+Asset type: original premium mobile fitness app exercise illustration, not a UI mockup.
+Input image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.
+Composition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.
+Subject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.
+Muscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.
+Lighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.
+Text: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.
+Accuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.
+
+Movement-specific brief:
+A premium 3D circuit overview with a small neutral timer and three softly glowing sequential markers on a clean studio floor. No people, no selected exercise, no numbers, no text and no weights. This is a block overview, not a demonstration of any constituent movement.
+
+Presentation: This is an indicative overview of the stated block/options, NOT two phases of a single exercise. Do not silently select one unspecified load or technique.
+
+Strict asset correction: SINGLE premium still life, not two human poses. Dark navy studio. One compact graphite interval timer with blank unlit glass face, and three minimal cyan/mint sequential floor markers arranged in a gentle arc. No people, no weights, no labels or digits anywhere, no UI screenshot. Abstract orientation for a mixed exercise block, intentionally not a demonstration of its movements. Spacious landscape 3:2 composition, polished realistic 3D materials.

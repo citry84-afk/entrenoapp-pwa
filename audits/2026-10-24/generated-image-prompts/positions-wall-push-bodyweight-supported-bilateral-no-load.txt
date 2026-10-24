@@ -1,0 +1,16 @@
+Use case: scientific-educational.
+Asset type: original premium mobile fitness app exercise illustration, not a UI mockup.
+Input image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.
+Composition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.
+Subject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.
+Muscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.
+Lighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.
+Text: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.
+Accuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.
+
+Movement-specific brief:
+Show a person facing a flat wall with hands at chest height and feet stepped back on the floor. First pose has elbows extended and body straight; second pose bends elbows to bring the chest closer to the wall while keeping heels grounded when comfortable.
+
+Presentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.
+
+Strict asset correction: GENTLE VITAL WALL PUSH-UP. Approachable older adult around65, average realistic build, graphite loose t-shirt and shorts. Palms FLAT on a plain vertical wall at chest/shoulder height, feet about arm's reach back. Left arms extended with straight body leaning gently toward wall; right elbows bend to bring chest closer to wall, body line from shoulders through hips to ankles stays long, both heels remain grounded. Two separate wall scenes, full bodies and foot-wall geometry visible. No bench, no floor push-up, no weights or muscle colors, no extreme depth.

@@ -1,0 +1,22 @@
+{
+  "key": "positions-push-up-band-free-bilateral-load1",
+  "file": "generated/positions-push-up-band-free-bilateral-load1-v1.webp",
+  "alt": {
+    "es": "Dos vistas orientativas de flexión · banda.",
+    "en": "Two orientation views of push-up · resistance band."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:28:44.512Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/019f5b89-f0eb-7533-a20b-f1e8b4011a4a/exec-b1fb6ec7-21f5-4e67-9ad1-eca81bdc9451.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nFirst pose is a high plank with shoulders over the hands, straight trunk and feet on the floor. Second pose lowers the chest toward the floor by bending the elbows while preserving the same straight body line. Respect this variant's hand spacing and support. The band passes across the upper back below the neck and is secured under both palms. It must not pass around the throat.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.\n\nCritical mounting: a single wide flat resistance band passes ACROSS the shoulder blades/upper back and down outside the arms to be firmly pinned under the two flat palms on the ground. No external post, no band around the neck, no band tied to the feet. Both palms and the forefeet stay grounded in both views. Camera low three-quarter side, whole horizontal body visible. Both elbows angle backward around 30–45 degrees in lower pose, not sideways at 90. Omit muscle overlays to keep the band path especially clear.\n",
+  "visualReview": "Dos posiciones de flexión con cuerpo completo y apoyo de manos y antepiés. La banda pasa por espalda superior y queda fijada bajo las palmas, no cuello ni pies. Codos doblados hacia atrás y sin acentos musculares confusos.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 34128,
+  "sha256": "c3a8ced0022427c03beed0f7e804e2d7c349c2833211b38810066c4d6e258c68",
+  "fallbackFile": "generated/positions-push-up-band-free-bilateral-load1-v1.jpg",
+  "fallbackBytes": 91631,
+  "fallbackSha256": "f7846aa7e62c789dbaef7f2c7a47f92688bde0f9fb767fca58c99b7ed8d5febf"
+}

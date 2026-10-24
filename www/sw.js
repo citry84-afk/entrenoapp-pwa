@@ -1,0 +1,197 @@
+const CACHE_NAME = 'entrenoapp-v2.2.0';
+const ASSETS_TO_CACHE = [
+    '/',
+    '/index.html',
+    '/app.html',
+    '/css/styles.css',
+    '/css/glassmorphism.css',
+    '/js/app.js',
+    '/js/config/firebase-config.js',
+    '/js/auth/auth.js',
+    '/js/components/dashboard.js',
+    '/js/components/workouts.js',
+    '/js/components/running.js',
+    '/js/components/challenges.js',
+    '/js/components/profile.js',
+    '/js/components/progress-photos.js',
+    '/js/components/body-measurements.js',
+    '/js/components/workout-calendar.js',
+    '/js/data/exercises.js',
+    '/js/data/crossfit-wods.js',
+    '/js/data/running-plans.js',
+    '/js/utils/tts.js',
+    '/js/utils/offline.js',
+    '/manifest.json',
+    '/assets/icons/logo-custom.svg',
+    '/assets/icons/icon-192x192.png',
+    '/assets/icons/icon-512x512.png',
+    '/assets/icons/apple-touch-icon.png',
+    'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css',
+    'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'
+];
+
+// Instalación del service worker
+self.addEventListener('install', (event) => {
+    console.log('Service Worker: Instalando...');
+    event.waitUntil(
+        caches.open(CACHE_NAME)
+            .then((cache) => {
+                console.log('Service Worker: Cacheando archivos');
+                return cache.addAll(ASSETS_TO_CACHE);
+            })
+            .then(() => self.skipWaiting())
+            .catch((error) => {
+                // No bloquear la instalación si algún recurso falla (p.ej. iconos opcionales)
+                console.warn('Service Worker: Algunos recursos no se pudieron cachear:', error);
+                return self.skipWaiting();
+            })
+    );
+});
+
+// Activación del service worker
+self.addEventListener('activate', (event) => {
+    console.log('Service Worker: Activando...');
+    event.waitUntil(
+        caches.keys().then((cacheNames) => {
+            return Promise.all(
+                cacheNames.map((cache) => {
+                    if (cache !== CACHE_NAME) {
+                        console.log('Service Worker: Eliminando caché antigua');
+                        return caches.delete(cache);
+                    }
+                })
+            );
+        }).then(() => self.clients.claim())
+    );
+});
+
+// Interceptar peticiones de red
+self.addEventListener('fetch', (event) => {
+    // Solo cachear peticiones GET
+    if (event.request.method !== 'GET') return;
+    
+    // Evitar cachear Firebase Auth y Analytics
+    if (event.request.url.includes('firebaseapp.com') || 
+        event.request.url.includes('googleapis.com') ||
+        event.request.url.includes('googletagmanager.com') ||
+        event.request.url.includes('pagead2.googlesyndication.com') ||
+        event.request.url.includes('adsbygoogle.js')) {
+        return;
+    }
+
+    // Estrategia: Network First para archivos JS y CSS (para obtener actualizaciones)
+    // Cache First para assets estáticos
+    const url = new URL(event.request.url);
+    const isStaticAsset = url.pathname.includes('/assets/') || 
+                         url.pathname.includes('/css/') ||
+                         url.pathname.includes('/manifest.json');
+    
+    if (isStaticAsset) {
+        // Cache First para assets estáticos
+        event.respondWith(
+            caches.match(event.request)
+                .then((response) => {
+                    if (response) {
+                        return response;
+                    }
+                    return fetch(event.request).then((response) => {
+                        if (response && response.status === 200) {
+                            const responseToCache = response.clone();
+                            caches.open(CACHE_NAME).then((cache) => {
+                                cache.put(event.request, responseToCache);
+                            });
+                        }
+                        return response;
+                    });
+                })
+        );
+    } else {
+        // Network First para archivos JS y HTML (para obtener actualizaciones)
+        event.respondWith(
+            fetch(event.request)
+                .then((response) => {
+                    if (response && response.status === 200) {
+                        const responseToCache = response.clone();
+                        caches.open(CACHE_NAME).then((cache) => {
+                            cache.put(event.request, responseToCache);
+                        });
+                    }
+                    return response;
+                })
+                .catch(() => {
+                    // Si falla la red, intentar desde caché
+                    return caches.match(event.request).then((response) => {
+                        if (response) {
+                            return response;
+                        }
+                        // Si no está en caché y es un documento, mostrar página offline
+                        if (event.request.destination === 'document') {
+                            return caches.match('/offline.html');
+                        }
+                    });
+                })
+        );
+    }
+});
+
+// Sincronización en background
+self.addEventListener('sync', (event) => {
+    if (event.tag === 'background-sync') {
+        console.log('Service Worker: Sincronización en background');
+        event.waitUntil(
+            // Aquí irían las funciones de sincronización
+            syncData()
+        );
+    }
+});
+
+// Notificaciones push
+self.addEventListener('push', (event) => {
+    if (event.data) {
+        const data = event.data.json();
+        const options = {
+            body: data.body,
+            icon: '/assets/icons/icon-192x192.png',
+            badge: '/assets/icons/badge.png',
+            vibrate: [200, 100, 200],
+            data: data.data,
+            actions: [
+                {
+                    action: 'open',
+                    title: 'Abrir App'
+                },
+                {
+                    action: 'close',
+                    title: 'Cerrar'
+                }
+            ]
+        };
+        
+        event.waitUntil(
+            self.registration.showNotification(data.title, options)
+        );
+    }
+});
+
+// Manejar clics en notificaciones
+self.addEventListener('notificationclick', (event) => {
+    event.notification.close();
+    
+    if (event.action === 'open') {
+        event.waitUntil(
+            clients.openWindow('/')
+        );
+    }
+});
+
+// Función auxiliar para sincronización
+async function syncData() {
+    try {
+        // Aquí se sincronizarían los datos offline con Firebase
+        console.log('Sincronizando datos...');
+        return Promise.resolve();
+    } catch (error) {
+        console.error('Error en sincronización:', error);
+        return Promise.reject(error);
+    }
+}

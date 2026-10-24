@@ -1,0 +1,22 @@
+{
+  "key": "positions-curl-band-free-bilateral-load1-supinated-grip",
+  "file": "generated/positions-curl-band-free-bilateral-load1-supinated-grip-v1.webp",
+  "alt": {
+    "es": "Dos vistas orientativas de curl de bíceps · banda.",
+    "en": "Two orientation views of biceps curl · resistance band."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:20:51.979Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/019f5b89-f0eb-7533-a20b-f1e8b4011a4a/exec-e0c7838b-c4ba-4044-a991-6fc35d18c7c1.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nStart standing with upper arms by the torso and elbows nearly extended. Finish with elbows flexed while upper arms stay by the torso; keep wrists aligned with forearms. Use the grip specified for this variant. Use palms-forward supinated grip for biceps flexion, not a neutral hammer grip. The band is secured beneath both planted feet, with one end held in each hand.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.\n\nMuscle-overlay constraint: highlight only the biceps on the front of the upper arms, if any. Do not highlight the chest or thighs. This is a supinated biceps curl with palms up at the finish.\n",
+  "visualReview": "Revisión visual: banda continua bajo ambos pies, palmas supinadas en ambas vistas, codos cerca del torso y muñecas sin doblez evidente. Realce localizado en bíceps y sin carga o implemento ajeno al ejercicio.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 45818,
+  "sha256": "aa362023806207e23a64477360fcf784bf8f5e16a3eae444c7af0094574e5cb4",
+  "fallbackFile": "generated/positions-curl-band-free-bilateral-load1-supinated-grip-v1.jpg",
+  "fallbackBytes": 113958,
+  "fallbackSha256": "6a4bee44989a945b8a25e8f698c2c4a745733dd050e6b01916be3d23938098f3"
+}

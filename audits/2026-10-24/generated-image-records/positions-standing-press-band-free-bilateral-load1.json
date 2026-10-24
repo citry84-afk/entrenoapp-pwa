@@ -1,0 +1,22 @@
+{
+  "key": "positions-standing-press-band-free-bilateral-load1",
+  "file": "generated/positions-standing-press-band-free-bilateral-load1-v1.webp",
+  "alt": {
+    "es": "Dos vistas orientativas de press de pecho de pie · banda.",
+    "en": "Two orientation views of standing chest press · resistance band."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:31:32.929Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/019f5b89-f0eb-7533-a20b-f1e8b4011a4a/exec-2db398ca-561f-42d0-820f-4a86dc32a3cf.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nShow a STANDING chest press with a single flat resistance band wrapped across the UPPER BACK below the shoulder blades, with each band end held in a hand at chest height. The app explicitly describes a band behind the back, so NO EXTERNAL ANCHOR or post is used in this variant. First pose: hands beside chest, elbows bent and pointing diagonally back, band across upper back and down outside upper arms. Second pose: hands press straight FORWARD horizontally at chest height, elbows nearly extended, band stays behind the back and not around the throat. Stable staggered stance, upright neutral torso, both feet grounded. No overhead press, no bench, no dumbbell. Optional restrained coral chest emphasis only, no thighs or abdominal emphasis.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.\n\n",
+  "visualReview": "Montaje revisado y adaptado a indicación real de la app: banda detrás de espalda, no anclaje externo. Press horizontal hacia delante, posición de pies estable, ambas manos sujetan banda y no hay paso por garganta ni carga ajena.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 39752,
+  "sha256": "5dce241fea47000a314af3600fae9e1df4fb05a6828071141afc6082a01ef580",
+  "fallbackFile": "generated/positions-standing-press-band-free-bilateral-load1-v1.jpg",
+  "fallbackBytes": 104517,
+  "fallbackSha256": "3d209ff19a01491691c659460687efbeec066951b6c186d7ea87420145263193"
+}

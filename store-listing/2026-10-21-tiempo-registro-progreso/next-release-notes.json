@@ -1,0 +1,14 @@
+{
+  "status": "DRAFT_NOT_SUBMITTED",
+  "version": null,
+  "build": null,
+  "publicationGate": "Assign the actual version and build only after both native builds include these changes and pass device checks. Remove any bullet not included in the submitted build. These are not release notes for the already published 2.2 (119).",
+  "es-ES": {
+    "appStore": "- Recupera el entrenamiento en curso al volver a abrir la app.\n- Guarda lo completado en tu sesión de bienvenida, aunque no termines todos los pasos.\n- Elige una fecha opcional para tu siguiente sesión y encuéntrala en Hoy.\n- Encuentra plan, avisos y copias de seguridad en unos Ajustes más claros.\n- Elige si quieres activar recordatorios.\n- Exporta e importa tus datos, incluido el entrenamiento en curso.",
+    "googlePlay": "Recupera el entrenamiento en curso al reabrir la app. Guarda lo completado en la sesión de bienvenida. Elige una fecha opcional para tu siguiente sesión y encuéntrala en Hoy. Ajustes más claros para tu plan, avisos y copias de seguridad. Los recordatorios se activan solo si los eliges. Las copias incluyen también el entrenamiento en curso."
+  },
+  "en-US": {
+    "appStore": "- Resume your workout when you reopen the app.\n- Save completed steps in your welcome session, even if you do not finish every step.\n- Choose an optional date for your next workout and find it in Today.\n- Find your plan, reminders and backups in clearer Settings.\n- Choose whether to enable reminders.\n- Export and import your data, including your current workout.",
+    "googlePlay": "Resume your workout when you reopen the app. Save completed steps in your welcome session. Choose an optional date for your next workout and find it in Today. Clearer Settings for your plan, reminders and backups. Reminders are enabled only when you choose them. Backups now include your current workout."
+  }
+}

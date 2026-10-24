@@ -1,0 +1,22 @@
+{
+  "key": "positions-inverted-row-bodyweight-supported-bilateral-no-load",
+  "file": "generated/positions-inverted-row-bodyweight-supported-bilateral-no-load-v1.webp",
+  "alt": {
+    "es": "Dos vistas orientativas de remo invertido.",
+    "en": "Two orientation views of inverted bodyweight row."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:22:39.774Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/01a16d4c-2c93-7672-b9c7-5fc639f6c4b0/exec-346f8652-75a9-403f-aefc-09125b5c95da.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nShow a stable horizontal bar at waist height with the person suspended below it, heels on the floor and body straight. First pose has arms extended; second pose pulls the chest toward the bar. Match the specified standard or close hand spacing.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.\n\nStrict asset correction: no muscle overlays and no extra weights. Two complete, entirely separate identical fixed horizontal straight-bar racks (one per view), stable feet bolted to floor, bar at waist height. Person below the bar with heels planted ahead on floor, straight trunk and legs. Both hands clearly GRIP around bar, shoulder-width overhand grip. Left elbows straight, right elbows bent to pull sternum toward bar. Side three-quarter camera; ensure bar never passes through face or chest. Include every rack end and foot in frame.\n",
+  "visualReview": "Revisión visual: barras fijas de estructura estable, agarre prono al ancho de hombros, talones en suelo y cuerpo alineado. Brazos extendidos y flexionados distinguen las dos posiciones; sin cargas ni resaltados incorrectos. No validación clínica.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 42230,
+  "sha256": "62c94df6ae729245ff7c1658124f890f154a64fda8cc3e41d5421eadab58916b",
+  "fallbackFile": "generated/positions-inverted-row-bodyweight-supported-bilateral-no-load-v1.jpg",
+  "fallbackBytes": 117952,
+  "fallbackSha256": "76c7cbf0bbedcde103b9ff7beb04b1615e9cf6c83e10935f9e960037eace2f89"
+}

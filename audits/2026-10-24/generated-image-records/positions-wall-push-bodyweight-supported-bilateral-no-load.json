@@ -1,0 +1,22 @@
+{
+  "key": "positions-wall-push-bodyweight-supported-bilateral-no-load",
+  "file": "generated/positions-wall-push-bodyweight-supported-bilateral-no-load-v1.webp",
+  "alt": {
+    "es": "Dos vistas orientativas de flexión en pared.",
+    "en": "Two orientation views of wall push-up."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:49:50.132Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/01a16d4c-2c93-7672-b9c7-5fc639f6c4b0/exec-f562f1f1-4149-4f1e-9c71-51d7a6d4b27f.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nShow a person facing a flat wall with hands at chest height and feet stepped back on the floor. First pose has elbows extended and body straight; second pose bends elbows to bring the chest closer to the wall while keeping heels grounded when comfortable.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.\n\nStrict asset correction: GENTLE VITAL WALL PUSH-UP. Approachable older adult around65, average realistic build, graphite loose t-shirt and shorts. Palms FLAT on a plain vertical wall at chest/shoulder height, feet about arm's reach back. Left arms extended with straight body leaning gently toward wall; right elbows bend to bring chest closer to wall, body line from shoulders through hips to ankles stays long, both heels remain grounded. Two separate wall scenes, full bodies and foot-wall geometry visible. No bench, no floor push-up, no weights or muscle colors, no extreme depth.\n",
+  "visualReview": "Revisión visual: adulto mayor con ambas palmas contra pared, brazos extendidos y luego flexionados, cuerpo alineado y talones en suelo. Recorrido moderado, sin banco ni carga ni mapa muscular. Dos posiciones estáticas, no validación clínica.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 34398,
+  "sha256": "e9e30e362e3f8a4695acc5bd802b55a8bf532dc72a36893ae18eadead4f86809",
+  "fallbackFile": "generated/positions-wall-push-bodyweight-supported-bilateral-no-load-v1.jpg",
+  "fallbackBytes": 98530,
+  "fallbackSha256": "a7a4e245046114b913227a5fbb691dcaff297ff6721253d03a055fc495f2d1a1"
+}

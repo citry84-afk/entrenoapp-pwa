@@ -1,0 +1,22 @@
+{
+  "key": "positions-single-calf-bodyweight-free-bilateral-no-load",
+  "file": "generated/positions-single-calf-bodyweight-free-bilateral-no-load-v1.webp",
+  "alt": {
+    "es": "Dos vistas orientativas de elevación de talón unilateral.",
+    "en": "Two orientation views of single-leg calf raise."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:50:31.755Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/01a16d45-1dbd-7160-9764-9653df629c3d/exec-94c44df5-1ac2-43ed-9f7a-6fe9985352f9.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nShow the person standing on one foot on level ground, the other foot lifted clear. First pose has the supporting heel down; second pose raises that heel onto the forefoot with the ankle aligned. No load and no step or wall support unless specified.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.\n\nSingle-leg calf raise: exactly one foot contacts the level floor in each view; free knee bent with its shoe lifted completely clear. Hands rest on hips, no external support, step, bench, band or dumbbells. First supporting heel down, second heel raised visibly onto forefoot. If using warm emphasis, only the calf of the supporting leg, never the quadriceps.\n",
+  "visualReview": "Revisión visual: un solo pie apoyado, pierna libre elevada y manos en cadera sin soporte/carga. Talón de apoyo baja y sube sobre antepié claramente, pies completos y énfasis solo en pantorrilla de apoyo; sin anomalías evidentes.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 38886,
+  "sha256": "823f57efc0116da50dec7b1306fa45f6d638a4cc2ac817d176bd5c6cfe3f0405",
+  "fallbackFile": "generated/positions-single-calf-bodyweight-free-bilateral-no-load-v1.jpg",
+  "fallbackBytes": 103556,
+  "fallbackSha256": "56fdad6fd6ea844cac7b39e964c29a50b29cb8ac9486bf176ce85dc66e18b05b"
+}

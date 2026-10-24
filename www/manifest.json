@@ -105,6 +105,16 @@
   ,
   "related_applications": [
     {
+      "platform": "itunes",
+      "url": "https://apps.apple.com/es/app/entrenoapp/id6749792687",
+      "id": "6749792687"
+    },
+    {
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=com.lipastudios.entrenoapp",
+      "id": "com.lipastudios.entrenoapp"
+    },
+    {
       "platform": "web",
       "url": "https://www.tiktok.com/@EntrenoApp",
       "id": "social.tiktok.EntrenoApp"

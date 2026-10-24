@@ -1,0 +1,22 @@
+{
+  "key": "positions-table-inverted-row",
+  "file": "generated/positions-table-inverted-row-v1.webp",
+  "fallbackFile": "generated/positions-table-inverted-row-v1.jpg",
+  "alt": {
+    "es": "Remo invertido, ejemplo bajo estructura estable: dos posiciones de una variante de ejemplo; respeta el material mostrado.",
+    "en": "Under-table inverted row, stable-frame example: two positions of an example variant; use the equipment shown."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T19:26:29.965Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/019f5b89-f0eb-7533-a20b-f1e8b4011a4a/exec-962717b1-2f19-4c25-b4a6-10704a50f642.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nShow a low inverted bodyweight row under a HEAVY reinforced gym table-like frame with visible broad supports, not a light household dining table. Adult heels on floor, hands gripping a structurally fixed bar/edge underneath. First arms nearly extended and straight trunk; second elbows bend pulling chest toward edge. Same planted heels and hand grip, no loose tabletop. Full stable apparatus/body/feet. Moderate angle, knees may bend. Omit overlays.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.",
+  "visualReview": "Estructura reforzada visible, barra fija de agarre bajo tablero y apoyo de talones. Dos posiciones de remo con cuerpo alineado y flexión de codos, manos y pies completos. No se representa mesa doméstica ligera ni tabletop suelto; énfasis muscular orientativo, no medición.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 58850,
+  "sha256": "a88ac607d62489fd612b2031b460acb62b4f136fbb740751ae3d5c95f78fb4c3",
+  "fallbackBytes": 153891,
+  "fallbackSha256": "4e37ef5eea9620c500db195669853f8b94be6eb97b6324d5219eabe689f8cbed"
+}

@@ -1,0 +1,22 @@
+{
+  "key": "positions-hinge-hands-thighs-bodyweight-free-bilateral-no-load",
+  "file": "generated/positions-hinge-hands-thighs-bodyweight-free-bilateral-no-load-v1.webp",
+  "alt": {
+    "es": "Dos vistas orientativas de bisagra con manos en muslos.",
+    "en": "Two orientation views of hip hinge with hands on thighs."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:46:04.157Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/01a16d4c-2c93-7672-b9c7-5fc639f6c4b0/exec-a8217a61-4cfe-4c2d-8ca7-4c84ffc155ea.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nFirst pose stands with both hands resting on the upper thighs and knees soft. Second pose pushes the hips backwards into a shallow hinge while hands slide a short distance down the thighs. Keep the back neutral and show no equipment.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.\n\nStrict asset correction: GENTLE VITAL hands-on-thighs hip hinge. Approachable older adult about65 with realistic average build, relaxed graphite t-shirt and shorts. NO chair, no external support and no weights. Both open hands contact front of upper thighs in standing view; second view slides both hands modestly down the thighs while hips move back into a shallow hinge, knees softly bent. Keep torso long and neck neutral, eyes naturally downward, not a toe-touch or deep squat. All feet and hands visible. No muscle-color overlays.\n",
+  "visualReview": "Revisión visual: adulto mayor de pie con ambas manos sobre muslos y segunda vista de bisagra suave deslizando manos hacia rodillas. Pies planos, sin silla ni carga ni resaltados anatómicos; cuello acompaña inclinación. Revisión visual no clínica.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 38890,
+  "sha256": "9057f609e3e2051847445a45c117ffd4add61eb5bece014f670486e40ea02dbf",
+  "fallbackFile": "generated/positions-hinge-hands-thighs-bodyweight-free-bilateral-no-load-v1.jpg",
+  "fallbackBytes": 102302,
+  "fallbackSha256": "78851d3481288100006d00c77704cbcbe7e881bf9cd655e3b433eedd4c871464"
+}

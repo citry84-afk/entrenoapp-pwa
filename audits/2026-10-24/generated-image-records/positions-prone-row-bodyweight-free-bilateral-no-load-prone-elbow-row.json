@@ -1,0 +1,22 @@
+{
+  "key": "positions-prone-row-bodyweight-free-bilateral-no-load-prone-elbow-row",
+  "file": "generated/positions-prone-row-bodyweight-free-bilateral-no-load-prone-elbow-row-v1.webp",
+  "alt": {
+    "es": "Dos vistas orientativas de remo boca abajo.",
+    "en": "Two orientation views of prone upper-back exercise."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:21:58.588Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/01a16d4c-2c93-7672-b9c7-5fc639f6c4b0/exec-e3730ee5-c8c1-4846-a6de-61b903f8f295.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nShow a person lying prone on the floor, neck neutral and pelvis grounded. Use the variant-specific arm pattern, without invented weights or machinery. Avoid an exaggerated lumbar arch. Arms start reaching forward close to the floor; second pose draws elbows back beside the torso. Do not add a high Superman lumbar lift.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.\n\nStrict asset correction: no muscle-color overlays. Prone floor row WITHOUT LOAD. Full-body elevated three-quarter view from slightly above the back so arm pattern is readable. Left lies face-down, pelvis and legs grounded, arms extended forwards close to floor; right bends elbows drawing them back beside the torso with modest shoulder movement, chest remains almost on floor, no dramatic spine arch. Show open empty hands, no dumbbells, no machine, no bar. Same person and size in both views.\n",
+  "visualReview": "Revisión visual: ambas vistas boca abajo con pelvis y piernas apoyadas; brazos pasan de alcance frontal a codos junto al torso. Sin carga, máquina ni hiperextensión evidente. Vista orientativa estática, no demostración dinámica validada.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 26872,
+  "sha256": "8e3753d97da21a7e99949a9cbc73da53d47a36ee5f77ec5af647272029043956",
+  "fallbackFile": "generated/positions-prone-row-bodyweight-free-bilateral-no-load-prone-elbow-row-v1.jpg",
+  "fallbackBytes": 77189,
+  "fallbackSha256": "8b4457dae81638d069050256a46677765ec41a4c5915e3ddff1398001795013d"
+}

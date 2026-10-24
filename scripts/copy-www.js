@@ -8,11 +8,19 @@ const path = require('path');
 const root = path.join(__dirname, '..');
 const www = path.join(root, 'www');
 
-const skipHtml = [
-  'diagnostico-youtube.html',
-  'test-youtube-api.html',
-  'download-icons.html',
-  'convert_svg_to_png.html'
+const coreFiles = [
+  'app.html',
+  'index.html',
+  'manifest.json',
+  'sw.js',
+  'ads.txt',
+  'app-ads.txt',
+  'robots.txt',
+  'sitemap.xml',
+  'privacy.html',
+  'terms.html',
+  'offline.html',
+  '_redirects'
 ];
 
 function mkdir(dir) {
@@ -32,27 +40,21 @@ function copyRecursive(src, dest) {
   }
 }
 
-// Limpiar y crear www
-if (fs.existsSync(www)) {
-  fs.rmSync(www, { recursive: true });
-}
+// Crear/actualizar www sin borrar todo el directorio: algunos archivos pueden
+// estar gestionados por iCloud y una limpieza completa puede quedarse bloqueada.
 mkdir(www);
 
-// HTML
-const files = fs.readdirSync(root);
-for (const f of files) {
-  if (f.endsWith('.html') && !skipHtml.includes(f)) {
-    fs.copyFileSync(path.join(root, f), path.join(www, f));
+// Archivos base para Capacitor. No copiamos todo el blog/SEO a la app nativa.
+for (const f of coreFiles) {
+  const src = path.join(root, f);
+  if (fs.existsSync(src)) {
+    fs.copyFileSync(src, path.join(www, f));
   }
 }
 
-// manifest.json
-if (fs.existsSync(path.join(root, 'manifest.json'))) {
-  fs.copyFileSync(path.join(root, 'manifest.json'), path.join(www, 'manifest.json'));
-}
-
-// Carpetas
-for (const dir of ['css', 'js', 'assets']) {
+// La app nativa entra por index.html y redirige a app.html. Para Capacitor
+// basta con los assets que usa la app; el CSS/JS de la landing se queda en web.
+for (const dir of ['assets']) {
   const srcDir = path.join(root, dir);
   if (fs.existsSync(srcDir)) {
     copyRecursive(srcDir, path.join(www, dir));

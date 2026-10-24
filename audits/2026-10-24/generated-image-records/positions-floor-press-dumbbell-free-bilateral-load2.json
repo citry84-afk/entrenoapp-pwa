@@ -1,0 +1,22 @@
+{
+  "key": "positions-floor-press-dumbbell-free-bilateral-load2",
+  "file": "generated/positions-floor-press-dumbbell-free-bilateral-load2-v1.webp",
+  "alt": {
+    "es": "Dos vistas orientativas de press en el suelo · mancuernas.",
+    "en": "Two orientation views of floor press · dumbbells."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:20:10.905Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/01a16d45-1dbd-7160-9764-9653df629c3d/exec-1944cd61-6e13-4c7b-a1d5-ab55d9582b1e.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nShow a person lying on the back on the floor, knees bent and feet planted. First pose has upper arms gently touching the floor and elbows bent; second pose presses the load vertically above the chest. Match one-arm unilateral, two-dumbbell, or one-weight close-grip setup exactly. Exactly two matching dumbbells, not a barbell or kettlebell.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.\n\nKeep both floor-lying figures fully in frame, including planted feet. Two dumbbells PER view. No bench, no band. Subtle muscle emphasis only on visible pectorals and triceps, never quadriceps. Show both upper arms supported by the floor in the lowered pose; do not drive the elbows through the floor.\n",
+  "visualReview": "Revisión visual: cuerpo sobre suelo sin banco, rodillas flexionadas y pies apoyados, dos mancuernas por vista. Brazos superiores descansan abajo y extensión sobre pecho arriba. Pies completos aunque margen derecho ajustado; énfasis pectoral y tríceps correcto.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 33322,
+  "sha256": "4863665d80103c4ab6b9408ef3e895df993b967d988a453d83c2fb5654843839",
+  "fallbackFile": "generated/positions-floor-press-dumbbell-free-bilateral-load2-v1.jpg",
+  "fallbackBytes": 91713,
+  "fallbackSha256": "ede04f76e0d2caf94e00cab208de4a22e87799fd7754e81f3e0c6c51e4f4a899"
+}

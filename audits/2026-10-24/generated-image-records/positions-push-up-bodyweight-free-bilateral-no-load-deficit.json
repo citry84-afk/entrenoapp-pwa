@@ -1,0 +1,22 @@
+{
+  "key": "positions-push-up-bodyweight-free-bilateral-no-load-deficit",
+  "file": "generated/positions-push-up-bodyweight-free-bilateral-no-load-deficit-v1.webp",
+  "alt": {
+    "es": "Dos vistas orientativas de flexión.",
+    "en": "Two orientation views of push-up."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:17:20.684Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/01a16d4c-2c93-7672-b9c7-5fc639f6c4b0/exec-d1dad5f4-9a5d-42b3-8a7d-53f78152f5e5.png",
+  "prompt": "Use case: scientific-educational. Asset: premium mobile fitness illustration. The attached image is STYLE REFERENCE ONLY; do not copy squat pose or weights. Match polished lifelike 3D, midnight navy studio background, realistic approachable adult in graphite shorts and neutral training shoes, soft cool rim light. Landscape 3:2. EXACTLY TWO separate full-body side-by-side views of the same man performing DEFICIT PUSH-UP on two matching stable low rectangular push-up blocks: left high plank, arms straight, each hand planted on one block, toes on floor, straight shoulder-hip-ankle line; right lower position with elbows bent moderately and chest lowered a little between the blocks, same straight body, toes still on floor. Both palms clearly in contact with block tops, blocks not dumbbells, no external weights. Camera three-quarter side view so elbows, torso and blocks readable. All hands, feet, blocks and full body in frame, generous margins. No letters, numbers, labels, arrows, logo, watermark, UI. Subtle illustrative coral emphasis on chest and triceps only on visible skin, no exposure through clothes. This is static orientation, not clinical technique validation.\n",
+  "visualReview": "Revisión visual: dos bloques bajos independientes bajo las palmas, pies en suelo y cuerpo alineado en ambas posturas. La segunda flexiona los codos y baja el pecho. Apoyos y material legibles; imagen estática, no validación clínica.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 36744,
+  "sha256": "9cf4e4fa713cb2609222ffc856a077ae023333aa299b32efcbe3d0eb1eb43ed0",
+  "fallbackFile": "generated/positions-push-up-bodyweight-free-bilateral-no-load-deficit-v1.jpg",
+  "fallbackBytes": 97471,
+  "fallbackSha256": "da5b86cff0189d4c123dd07ef0668b085cabfd74858cd916e42e24831848e21e"
+}

@@ -1,0 +1,22 @@
+{
+  "key": "positions-march-bodyweight-free-bilateral-no-load",
+  "file": "generated/positions-march-bodyweight-free-bilateral-no-load-v1.webp",
+  "alt": {
+    "es": "Dos vistas orientativas de marcha en el sitio.",
+    "en": "Two orientation views of marching in place."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:47:56.953Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/01a16d4c-2c93-7672-b9c7-5fc639f6c4b0/exec-098ea5ce-6e18-44e9-acfa-cfac46dbc9c4.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nShow two alternating gentle marching positions in place, one knee lifted only to a comfortable height and the opposite arm moving naturally. Maintain an upright trunk and show no load or equipment.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.\n\nTargeted correction to supplied draft: BOTH knee raises are too high and the poses duplicate. Replace the LEFT pose with relaxed standing on BOTH full feet, arms relaxed. Replace the RIGHT pose with a tiny gentle march step: raise one foot only about the height of its own shoe (10 cm), knee stays well BELOW the hip, thigh only slightly angled forward, NOT horizontal. The other full foot stays planted. Keep older adult, graphite t-shirt/shorts, same camera, proportions and navy background. No weights, no colored muscles, no sprint arms. These are setup and one modest march moment; not both-side demonstration.\n",
+  "visualReview": "Revisión visual tras reducir rango: adulto mayor inicia con ambos pies y después eleva modestamente uno, manteniendo otro plantado. No representa carrera ni rodilla a altura de cadera; sin carga ni mapa muscular. Muestra inicio y un paso, no ambos lados.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 37580,
+  "sha256": "baef233202177907ffcc838b9bd5c4f90f3e183ecd3c7f03eecda7e904caf178",
+  "fallbackFile": "generated/positions-march-bodyweight-free-bilateral-no-load-v1.jpg",
+  "fallbackBytes": 100156,
+  "fallbackSha256": "a2264887b7aa194e0f09c02b1046e7a34a163fe52e364e33836c04081773d5f5"
+}

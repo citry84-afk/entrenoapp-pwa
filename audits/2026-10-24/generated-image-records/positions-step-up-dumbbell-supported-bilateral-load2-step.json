@@ -1,0 +1,22 @@
+{
+  "key": "positions-step-up-dumbbell-supported-bilateral-load2-step",
+  "file": "generated/positions-step-up-dumbbell-supported-bilateral-load2-step-v1.webp",
+  "alt": {
+    "es": "Dos vistas orientativas de subir al escalón · mancuernas.",
+    "en": "Two orientation views of step-up · dumbbells."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:22:57.728Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/01a16d50-7534-71d1-888b-d0020bbbde49/exec-09208bba-dc96-4de2-9bfd-2930f9fb1a6d.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nShow a stable flat step or specified chair support. First pose has one full foot on the support and the other foot on the floor. Second pose stands tall on the leading leg atop the support with the trailing leg lifted naturally. Keep the entire leading foot supported. Exactly two matching dumbbells, not a barbell or kettlebell.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.\n\nExact setup: stable low rectangular exercise step, not a chair or high box; one matching dumbbell hangs in each hand beside hips, arms straight. First position one full foot on step and opposite foot on floor; second same lead foot bears weight on step and trailing foot lifted behind step. Omit all muscle-color overlays. Entire step, hands and shoes visible with margins.\n\n",
+  "visualReview": "Revisión visual por IA: step bajo estable, dos mancuernas una por mano, pie delantero completo apoyado, segundo pie suelo y luego elevado. Contactos y anatomía legibles sin errores evidentes. Sin acentos musculares; no validación profesional.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 36526,
+  "sha256": "8e0be80fa6728168e699e860b56de02e9413aa4a53e0fd8c010b7a2178a2f651",
+  "fallbackFile": "generated/positions-step-up-dumbbell-supported-bilateral-load2-step-v1.jpg",
+  "fallbackBytes": 96865,
+  "fallbackSha256": "42daaaf23b671e458aeae8e5700a8bb9e8b5e1e71a5a9af8263215302b0a1722"
+}

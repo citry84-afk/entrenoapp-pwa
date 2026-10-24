@@ -1,0 +1,22 @@
+{
+  "key": "positions-bodyweight-walking-lunge",
+  "file": "generated/positions-bodyweight-walking-lunge-v1.webp",
+  "fallbackFile": "generated/positions-bodyweight-walking-lunge-v1.jpg",
+  "alt": {
+    "es": "Zancadas caminando, ejemplo sin carga: dos posiciones de una variante de ejemplo; respeta el material mostrado.",
+    "en": "Walking lunge, unloaded example: two positions of an example variant; use the equipment shown."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T19:41:48.882Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/01a16d45-1dbd-7160-9764-9653df629c3d/exec-f647f38d-6dc1-4965-ad60-85050ce0084f.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nShow a bodyweight walking lunge: first upright split-step preparation, second forward lunge with front foot firmly planted and rear knee lowered moderately, rear heel raised. Hands by hips, no equipment or hidden load. Stable hip-width track, not tightrope footing. Full two figures/feet, no jump, no exaggerated knee depth. Two orientation points, not a whole alternating gait cycle. Omit overlays.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.\n\nThe hands are empty in BOTH views, relaxed by hips; no hidden dumbbell, belt, plate, band or external object. Standing forward split-step then a moderate FORWARD walking-lunge example, not a reverse lunge or jump. Feet on two hip-width tracks, front heel flat and rear heel raised. Both figures/shoes fully framed; no muscle-color overlays.\n",
+  "visualReview": "Revisión visual: marcha de zancada sin carga, manos vacías al lado de cadera, preparación de paso y descenso frontal moderado. Talón delantero apoyado y trasero elevado, pies completos separados sin salto ni apoyo externo; son dos referencias, no ciclo entero de marcha.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 36856,
+  "sha256": "14abbd1f34e6be9692038404a8d45f438cf98f2a9b99a61a826eb9dcbcd31979",
+  "fallbackBytes": 100150,
+  "fallbackSha256": "92603fe36e350cbe3b3fc9a03d3284a20372b6fb1e7d548e599820ed329ada6d"
+}

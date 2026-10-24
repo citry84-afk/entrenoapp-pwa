@@ -1,0 +1,22 @@
+{
+  "key": "positions-bridge-kettlebell-free-bilateral-load1-glute",
+  "file": "generated/positions-bridge-kettlebell-free-bilateral-load1-glute-v1.webp",
+  "alt": {
+    "es": "Dos vistas orientativas de puente de glúteos · kettlebell.",
+    "en": "Two orientation views of supine bridge · kettlebell."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:32:48.041Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/01a16d50-7534-71d1-888b-d0020bbbde49/exec-c84bc9af-e870-46fb-a456-f9c6a10a9c9c.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nShow a person lying on the back with feet flat and knees bent. First pose has the pelvis resting on the floor; second pose lifts the pelvis into a straight shoulder-to-hip-to-knee line without arching the lower back. Keep the shoulders on the floor. Exactly one kettlebell, not a dumbbell or a second kettlebell.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.\n\nExact setup: exactly one small kettlebell rests on a folded padded towel across the pelvis/hip crease, held steadily in place with BOTH hands in both positions. Do not press it above chest. Head, shoulders and upper arms remain on floor; both feet flat. Second pose lifts pelvis until shoulders, hips and knees align, not hyperextended. Omit ALL colored muscle overlays including thigh; graphite shorts opaque. Entire body and kettlebell visible.\n\n",
+  "visualReview": "Revisión visual por IA: una KB sobre toalla acolchada en pelvis estabilizada con ambas manos; hombros y cabeza al suelo, pies plantados, cadera elevada sin hiperextensión evidente. Sin banco ni overlays. Montaje completo visible; no validación profesional.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 28674,
+  "sha256": "ad451d226a3c53198ef83a62ac2980ee607a11ace0e7b8e0459c508d8538a574",
+  "fallbackFile": "generated/positions-bridge-kettlebell-free-bilateral-load1-glute-v1.jpg",
+  "fallbackBytes": 80054,
+  "fallbackSha256": "cf4e4081f568f6c9603e90adf6bf776c3cca655416b0fc67624b96c355bf09e5"
+}

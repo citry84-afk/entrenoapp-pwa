@@ -1,0 +1,22 @@
+{
+  "key": "positions-cable-row-towel-supported-bilateral-load1",
+  "file": "generated/positions-cable-row-towel-supported-bilateral-load1-v1.webp",
+  "alt": {
+    "es": "Dos vistas orientativas de remo sentado · toalla.",
+    "en": "Two orientation views of seated row · towel."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:57:06.154Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/01a16d4c-2c93-7672-b9c7-5fc639f6c4b0/exec-8a593630-cf36-45c1-a264-5d199d2c7326.png",
+  "prompt": "Use case: scientific-educational. Edit this illustration with ONE targeted correction. The two people are meant to show two views of the SAME self-resisted ISOMETRIC towel-row hold, not movement phases. Keep the RIGHT person unchanged. For the LEFT person ONLY, bend both elbows comfortably near the torso and bring hands toward the lower ribs to match the held posture on the right. The towel is a real NON-STRETCH fabric loop around both soles, so preserve a believable cloth length and grip; it is not a rubber band. Keep the same older adult, graphite clothes, neutral upright trunk, legs comfortably forward with heels on floor, camera and navy studio. No weights, no extra machine or chair, no muscle overlays, text or arrows. All body parts and towel remain fully visible. This is an example hold, not a certified technique demonstration.\n",
+  "visualReview": "Revisión visual tras corrección: dos vistas del sostén auto-resistido con codos flexionados, toalla de tela alrededor de ambas suelas y talones en suelo. No se finge elasticidad ni recorrido de polea; ejemplo isométrico, no ejercicio dinámico completo o validación clínica.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 50902,
+  "sha256": "0a256ef8554f323e0b1539fa5f9b9e00421874d4f6b9ab9925c168b62d80d158",
+  "fallbackFile": "generated/positions-cable-row-towel-supported-bilateral-load1-v1.jpg",
+  "fallbackBytes": 127924,
+  "fallbackSha256": "f8d738ce3187f68c9f78d68668707a6dd8cd54174b7cbb78345b97d78aa44d6d"
+}

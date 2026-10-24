@@ -1,0 +1,22 @@
+{
+  "key": "positions-rdl-kettlebell-free-bilateral-load1",
+  "file": "generated/positions-rdl-kettlebell-free-bilateral-load1-v1.webp",
+  "alt": {
+    "es": "Dos vistas orientativas de peso muerto rumano · kettlebell.",
+    "en": "Two orientation views of romanian deadlift · kettlebell."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:43:59.400Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/01a16d50-7534-71d1-888b-d0020bbbde49/exec-50a1ab63-f000-4de1-a037-1263c4723eb2.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nFirst pose stands tall with the load close to the front of the thighs. Second pose hinges the hips backwards with soft, nearly fixed knees and a neutral back while the load travels close to the legs to just below the knees or mid-shin. Do not place the load on the floor. Exactly one kettlebell, not a dumbbell or a second kettlebell.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.\n\nExact setup: one small kettlebell held with BOTH hands on horizontal handle, arms straight. Standing first, hip hinge second with hips pushed back, knees softly bent at nearly same angle and torso neutral, kettlebell close below knees or upper shin but NEVER resting on floor. In hinged view keep neck aligned with thoracic spine and gaze down at floor ahead, not head tilted up. No squat. Omit all muscle-color overlays especially front thighs. Entire shoes, hands and kettlebell within generous margins.\n\n",
+  "visualReview": "Revisión visual por IA: una KB bilateral, erguido y bisagra con cadera atrás, rodillas suaves y peso sin tocar suelo. Regenerado para mirada al suelo y cuello mejor alineado; pies completos y sin overlays. Sin errores evidentes; no validación profesional.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 37358,
+  "sha256": "b64992e5fcdb46c75ef217c23edd4a2365f1b9af78e90f49f88cb144ca9b94b7",
+  "fallbackFile": "generated/positions-rdl-kettlebell-free-bilateral-load1-v1.jpg",
+  "fallbackBytes": 101289,
+  "fallbackSha256": "c04d532113024f48573a3ea12d69c3cfa09059e40abc60d773884068f82f4790"
+}

@@ -1,0 +1,22 @@
+{
+  "key": "positions-bridge-bodyweight-free-bilateral-no-load-glute",
+  "file": "generated/positions-bridge-bodyweight-free-bilateral-no-load-glute-v1.webp",
+  "alt": {
+    "es": "Dos vistas orientativas de puente de glúteos.",
+    "en": "Two orientation views of supine bridge."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:20:02.140Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/01a16d4c-2c93-7672-b9c7-5fc639f6c4b0/exec-aea7d968-9037-404e-bfb5-12d3580124de.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nShow a person lying on the back with feet flat and knees bent. First pose has the pelvis resting on the floor; second pose lifts the pelvis into a straight shoulder-to-hip-to-knee line without arching the lower back. Keep the shoulders on the floor.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.\n\nStrict asset correction: Glute bridge on the FLOOR, not a hip thrust or bench. Two separated full-body three-quarter SIDE views with all feet and head visible. Left pelvis on floor, right pelvis lifted; feet remain fixed and knees bent. NO muscle-color overlays anywhere; natural skin only. Do not inherit squat, dumbbell, or any red thighs from the style reference.\n",
+  "visualReview": "Revisión visual: puente en suelo con hombros y pies apoyados, pelvis baja y elevada sin banco ni carga. Manos y pies completos, sin resaltados musculares engañosos. Orientación estática revisada, no certificación técnica.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 29224,
+  "sha256": "d5fb6b84b619a2a26dcc5afba3c497da6a285c1604ba1d409203cd23526661fe",
+  "fallbackFile": "generated/positions-bridge-bodyweight-free-bilateral-no-load-glute-v1.jpg",
+  "fallbackBytes": 82927,
+  "fallbackSha256": "9bab34140056733bfb56ddfea1639f05a97520ae7a6e1144272bed8a96dd656a"
+}

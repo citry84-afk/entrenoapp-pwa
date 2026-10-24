@@ -1,0 +1,22 @@
+{
+  "key": "positions-hip-thrust-dumbbell-supported-bilateral-load1",
+  "file": "generated/positions-hip-thrust-dumbbell-supported-bilateral-load1-v1.webp",
+  "alt": {
+    "es": "Dos vistas orientativas de hip thrust · mancuernas.",
+    "en": "Two orientation views of bench-supported hip thrust · dumbbells."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:21:11.124Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/01a16d45-1dbd-7160-9764-9653df629c3d/exec-2399cc64-ca0c-49e6-84a8-113654ce4003.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nShow upper back supported on a stable padded bench, feet planted on the floor and the load centered across the pelvis. First pose lowers the pelvis; second pose raises it until torso and thighs form a level line. Keep the neck neutral and the load off the abdomen. Exactly one dumbbell, not a barbell or kettlebell.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.\n\nEmphasis override: omit all colored muscle overlays in this asset, because the working glutes are covered by opaque shorts. Keep the dumbbell horizontal across the hip crease, secured by both hands, never across the stomach. Bench supports the upper back, not the neck; show every bench foot, both planted feet and both separate complete views.\n",
+  "visualReview": "Revisión visual: una mancuerna horizontal a la altura de la pelvis, ambas manos estabilizan, espalda alta sobre banco y pies en suelo. Pelvis baja y elevada diferenciadas, ropa opaca y sin superposición muscular; margen ajustado pero apoyos completos.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 37106,
+  "sha256": "6f799b517a2a5ba1c010655d3d1d06dc10b7c215fc0b242996c39284c0b3317e",
+  "fallbackFile": "generated/positions-hip-thrust-dumbbell-supported-bilateral-load1-v1.jpg",
+  "fallbackBytes": 98888,
+  "fallbackSha256": "7b835bf8d6441764c30486c602000d03ffd5c494617e31acf24f27122f73c18e"
+}

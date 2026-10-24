@@ -1,0 +1,22 @@
+{
+  "key": "positions-row-barbell-free-bilateral-load1",
+  "file": "generated/positions-row-barbell-free-bilateral-load1-v1.webp",
+  "alt": {
+    "es": "Dos vistas orientativas de remo · barra.",
+    "en": "Two orientation views of bent-over row · barbell."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:20:07.740Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/01a16d50-7534-71d1-888b-d0020bbbde49/exec-8eeddc9c-db60-40a3-aa50-ce15b02ce46d.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nFirst pose has the torso hinged forward with the weight hanging beneath the shoulder and spine neutral. Second pose draws the elbow backwards toward the hip with the weight near the lower ribs. Keep the torso stable and use the specified support and unilateral setup. Use a single straight barbell, never two separate dumbbells.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.\n\nSetup clarification: both hands hold the one straight barbell with a shoulder-width pronated overhand grip. Both feet stay on floor, no bench. Omit ALL muscle-color overlays everywhere, including arms, back and legs; completely natural skin, no coral or red highlights at all. Leave generous margins around bar and shoes.\n\n",
+  "visualReview": "Revisión visual por IA: una barra pronada bilateral por vista, bisagra estable sin banco, recorrido de codos atrás, pies completos. Se regeneró para omitir acentos musculares ambiguos. Sin errores evidentes; no validación profesional.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 44776,
+  "sha256": "a9b6cfe74f8777edc04a5e7f32cf2c86e48b0db9c79403dbd3c3c3c96249d5a8",
+  "fallbackFile": "generated/positions-row-barbell-free-bilateral-load1-v1.jpg",
+  "fallbackBytes": 117265,
+  "fallbackSha256": "4a436ffce6e9d730171ce4347c5f990548245e8caee05d43e9d9f25f38bb8089"
+}

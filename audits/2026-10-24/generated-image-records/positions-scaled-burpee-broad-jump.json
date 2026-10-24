@@ -1,0 +1,22 @@
+{
+  "key": "positions-scaled-burpee-broad-jump",
+  "file": "generated/positions-scaled-burpee-broad-jump-v1.webp",
+  "fallbackFile": "generated/positions-scaled-burpee-broad-jump-v1.jpg",
+  "alt": {
+    "es": "Burpee con salto, puntos orientativos escalados: dos posiciones de una variante de ejemplo; respeta el material mostrado.",
+    "en": "Scaled burpee broad jump, orientation points: two positions of an example variant; use the equipment shown."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T19:27:37.906Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/019f5b89-f0eb-7533-a20b-f1e8b4011a4a/exec-90a4301a-a8cf-4307-8a3c-4fd84c698ead.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nShow two separated key orientation points of a scaled burpee-to-broad-jump sequence: first hands on floor in a controlled high plank with body straight; second adult in a small forward-jump landing position with soft knees and feet hip-width. No giant leap, no obstacles. Full bodies/hands/feet, calm stable mechanics. These are NOT every intermediate burpee step; no arrows, motion blur or invented continuous animation. Omit overlays.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.",
+  "visualReview": "Se muestran puntos orientativos, no secuencia completa: plancha alta con apoyos de manos y antepiés y posición de aterrizaje suave con rodillas flexionadas. Cuerpo y pies completos, sin saltos exagerados ni obstáculos. El gesto de salto intermedio no está mostrado.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 37418,
+  "sha256": "1228dafab8d9a86907c466807b834bcf5af055da87212e017c6b865b576c6c0d",
+  "fallbackBytes": 99523,
+  "fallbackSha256": "3919e2ea92f1e0af2f65b279a312291b58392e14670ed3e7c2378df8be74d5e8"
+}

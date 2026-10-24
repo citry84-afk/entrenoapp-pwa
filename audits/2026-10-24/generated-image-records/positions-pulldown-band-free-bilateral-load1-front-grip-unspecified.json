@@ -1,0 +1,22 @@
+{
+  "key": "positions-pulldown-band-free-bilateral-load1-front-grip-unspecified",
+  "file": "generated/positions-pulldown-band-free-bilateral-load1-front-grip-unspecified-v1.webp",
+  "alt": {
+    "es": "Dos vistas orientativas de jalón al pecho · banda.",
+    "en": "Two orientation views of front lat pulldown · resistance band."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:30:45.658Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/019f5b89-f0eb-7533-a20b-f1e8b4011a4a/exec-9304b76e-39b7-4bda-bdd3-5ebffb7e89c0.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nShow a FRONT lat pulldown using only a resistance band attached to a secure high anchor on a stable freestanding exercise post. The adult KNEELS upright on both knees on a slim floor pad, NOT on a seat. First view: both arms reach diagonally upward toward the high anterior anchor, each hand gripping one band handle. Second view: both elbows bend and come down beside the ribs, the hands descend to upper-chest/shoulder height in FRONT of the head. Torso remains stable with no exaggerated backward lean. Moderate shoulder-width grip. Band stays connected to the same visible high anchor. No cable machine, no weight stack, no thigh pad, no barbell, no bench. All colored muscle overlays omitted; make the setup and natural grips easy to read.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.\n\n",
+  "visualReview": "Se corrigió plantilla que sugería máquina. Imagen revisada: persona arrodillada sobre pad, banda de anclaje alto anterior, brazos de alcance alto a tracción frontal con codos junto al tronco; sin banco ni pad de muslos, sin tirón tras nuca.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 44734,
+  "sha256": "069616760bcf69985628d377081c94d3bad8acf3e5db5eda30b3f90b611502cc",
+  "fallbackFile": "generated/positions-pulldown-band-free-bilateral-load1-front-grip-unspecified-v1.jpg",
+  "fallbackBytes": 118967,
+  "fallbackSha256": "83a1de6b0f5591f4761946021ecf2a4490412dc1b9f2c958085bb32a9f306c25"
+}

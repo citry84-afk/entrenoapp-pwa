@@ -1,0 +1,22 @@
+{
+  "key": "positions-incline-press-machine",
+  "file": "generated/positions-incline-press-machine-v1.webp",
+  "fallbackFile": "generated/positions-incline-press-machine-v1.jpg",
+  "alt": {
+    "es": "Press inclinado en máquina, ejemplo con respaldo: dos posiciones de una variante de ejemplo; respeta el material mostrado.",
+    "en": "Incline machine chest press example: two positions of an example variant; use the equipment shown."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T19:28:27.178Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/01a16d45-1dbd-7160-9764-9653df629c3d/exec-cf93172d-732c-4768-9a4b-16b8aa384fea.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nShow a chest-press machine with backrest inclined around30–45degrees, not vertical. Hands start beside upper chest; second press handles diagonally forward/up over upper chest. Head/torso/pelvis supported, feet planted, neutral wrists. No dumbbells or barbell; lever handles visibly connected to the same real machine. Entire bodies and apparatus framed. Omit overlays.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.\n\nPrioritize a clearly INCLINED backrest about 35 degrees above horizontal, not a nearly upright seat. The chest-press lever handles push diagonally up/forward relative to the reclined upper chest, not vertically overhead. Same complete machine mechanism in both views. Override muscle emphasis: NO red/coral muscle marks anywhere; use natural skin and opaque graphite training clothes. Leave clear margins around every machine foot and shoe.\n",
+  "visualReview": "Revisión visual: máquina de press con respaldo reclinado, cabeza/torso/pelvis apoyados y ambos pies en suelo. Asas conectadas a palancas y extensión diagonal arriba/adelante, no press vertical. Inclinación ilustrativa no medida; margen derecho ajustado pero zapatos completos, sin overlays.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 69916,
+  "sha256": "5ad3a0824186bf17a900c69b79551fd0abc542808371cd54e935846a82a66302",
+  "fallbackBytes": 175310,
+  "fallbackSha256": "5c5be36d5846793abd73bc250b379737033348fa5857597010586b673f917b81"
+}

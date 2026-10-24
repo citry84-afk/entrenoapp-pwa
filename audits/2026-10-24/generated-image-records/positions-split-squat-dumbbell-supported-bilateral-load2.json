@@ -1,0 +1,22 @@
+{
+  "key": "positions-split-squat-dumbbell-supported-bilateral-load2",
+  "file": "generated/positions-split-squat-dumbbell-supported-bilateral-load2-v1.webp",
+  "alt": {
+    "es": "Dos vistas orientativas de sentadilla búlgara · mancuernas.",
+    "en": "Two orientation views of rear-foot-elevated split squat · dumbbells."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:36:51.790Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/01a16d45-1dbd-7160-9764-9653df629c3d/exec-2218c0ef-1a4b-4d6d-9dd1-72fb014cd010.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nShow the rear foot resting on a stable low padded bench and the front foot planted on the floor. First pose stands tall in the split stance; second pose bends both knees and lowers the rear knee while the front heel stays grounded. Match bodyweight or two dumbbells. Exactly two matching dumbbells, not a barbell or kettlebell.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.\n\nBulgarian split squat: rear foot rests securely on the low bench in BOTH views, front foot stays fully planted on floor. Exactly TWO dumbbells at the sides, one per hand. Clear side-three-quarter view of rear shoe contacting the bench, moderate comfortable knee depth, no unstable narrow tightrope stance. Omit all colored muscle overlays.\n",
+  "visualReview": "Revisión visual: dos mancuernas a los lados, pie posterior sobre banco bajo y anterior en suelo en ambas vistas. Posición alta y descenso de sentadilla dividida, ambos apoyos y carga íntegros; sin overlays ni un segundo banco añadido.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 37868,
+  "sha256": "7d30cf865bb6506d2eda43b4acd78ec15d16ed9f0458b5a17ac913f29b2a4d24",
+  "fallbackFile": "generated/positions-split-squat-dumbbell-supported-bilateral-load2-v1.jpg",
+  "fallbackBytes": 101477,
+  "fallbackSha256": "d239813dd7cf192787851a482860d99e59fe158770b9421ca82d5d7bfdb9cae4"
+}

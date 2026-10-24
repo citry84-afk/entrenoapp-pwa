@@ -1,1580 +1,1598 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#00D4FF">
-    <meta name="description" content="EntrenoApp crea rutinas personalizadas de musculación, carrera o entrenamiento híbrido en 60 segundos. App web gratis, sin registro y con progreso guardado en tu dispositivo.">
-    <meta name="author" content="LIPA Studios">
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-    <meta name="google-site-verification" content="pwkGx1He7UVJLHGaDJV4I9W3Zom5rGIvizK1YPWu06A">
-    <meta name="geo.region" content="ES">
-    <meta name="geo.placename" content="España">
-    <meta name="language" content="Spanish">
-    
-    <title>EntrenoApp: Rutinas Personalizadas de Musculación, Running e Híbrido</title>
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://entrenoapp.com/">
-    <meta property="og:title" content="EntrenoApp: Rutinas Personalizadas de Musculación, Running e Híbrido">
-    <meta property="og:description" content="Crea tu plan de entrenamiento en 60 segundos. App web gratis, sin registro, con rutina flexible y progreso local.">
-    <meta property="og:image" content="https://entrenoapp.com/assets/icons/icon-512x512.png">
-    <meta property="al:ios:app_store_id" content="6749792687">
-    <meta property="al:ios:app_name" content="EntrenoApp">
-    <meta property="al:android:package" content="com.lipastudios.entrenoapp">
-    <meta property="al:android:app_name" content="EntrenoApp">
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://entrenoapp.com/">
-    <meta property="twitter:title" content="EntrenoApp: Rutinas Personalizadas de Musculación, Running e Híbrido">
-    <meta property="twitter:description" content="Crea tu plan de entrenamiento en 60 segundos. App web gratis, sin registro, con rutina flexible y progreso local.">
-    <meta property="twitter:image" content="https://entrenoapp.com/assets/icons/icon-512x512.png">
-    
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://entrenoapp.com/">
-    <meta name="apple-itunes-app" content="app-id=6749792687">
-    
-    <!-- Schema.org BreadcrumbList -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-            {
-                "@type": "ListItem",
-                "position": 1,
-                "name": "Inicio",
-                "item": "https://entrenoapp.com/"
-            }
-        ]
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f7">
+  <meta name="description" content="EntrenoApp crea rutinas personalizadas, registra caminatas y carreras con GPS y permite controlar tu propia rutina de gimnasio. Gratis, sin registro obligatorio, en web, iOS y Android.">
+  <meta name="author" content="LIPA Studios">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="google-site-verification" content="pwkGx1He7UVJLHGaDJV4I9W3Zom5rGIvizK1YPWu06A">
+  <title>EntrenoApp: Rutinas, Caminar, Running y Tu Propio Plan de Gimnasio</title>
+  <link rel="canonical" href="https://entrenoapp.com/">
+  <link rel="alternate" hreflang="es" href="https://entrenoapp.com/">
+  <link rel="alternate" hreflang="en" href="https://entrenoapp.com/en.html">
+  <link rel="alternate" hreflang="x-default" href="https://entrenoapp.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://entrenoapp.com/">
+  <meta property="og:title" content="EntrenoApp: Tu rutina de hoy, clara desde el primer toque">
+  <meta property="og:description" content="Crea tu plan, registra caminatas/carreras con GPS o controla tu propia rutina de gimnasio. Web, iOS y Android.">
+  <meta property="og:image" content="https://entrenoapp.com/assets/icons/icon-512x512.png">
+  <meta property="al:ios:app_store_id" content="6749792687">
+  <meta property="al:ios:app_name" content="EntrenoApp">
+  <meta property="al:android:package" content="com.lipastudios.entrenoapp">
+  <meta property="al:android:app_name" content="EntrenoApp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="apple-itunes-app" content="app-id=6749792687">
+  <link rel="icon" type="image/png" href="assets/icons/icon-192x192.png">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+  <link rel="manifest" href="manifest.json">
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <script>
+    (function() {
+      var hash = window.location.hash || '';
+      var query = window.location.search || '';
+      var authCallback = /(access_token|confirmation_token|recovery_token|invite_token|email_change_token|error=|error_description=)/i;
+      if ((authCallback.test(hash) || authCallback.test(query)) && !/\/app\.html$/i.test(window.location.pathname)) {
+        window.location.replace('/app.html' + query + hash);
+      }
+    })();
+  </script>
+  <script>
+    (function() {
+      var platform = window.Capacitor && window.Capacitor.getPlatform ? window.Capacitor.getPlatform() : '';
+      var native = !!(window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform()) || platform === 'ios' || platform === 'android';
+      if (native || !/^https?:$/.test(location.protocol)) return;
+
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function(){ dataLayer.push(arguments); };
+      gtag('js', new Date());
+      gtag('config', 'G-633RQLC6T0');
+
+      var ga = document.createElement('script');
+      ga.async = true;
+      ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-633RQLC6T0';
+      document.head.appendChild(ga);
+
+    })();
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "EntrenoApp",
+    "applicationCategory": "HealthApplication",
+    "operatingSystem": "Web, iOS, Android",
+    "description": "App de fitness en español para crear rutinas personalizadas, registrar caminatas y carreras con GPS, controlar tu propia rutina de gimnasio y mejorar hábitos sin registro obligatorio.",
+    "sameAs": [
+      "https://apps.apple.com/es/app/entrenoapp/id6749792687",
+      "https://play.google.com/store/apps/details?id=com.lipastudios.entrenoapp",
+      "https://www.youtube.com/@entrenoapp"
+    ],
+    "downloadUrl": [
+      "https://apps.apple.com/es/app/entrenoapp/id6749792687",
+      "https://play.google.com/store/apps/details?id=com.lipastudios.entrenoapp",
+      "https://entrenoapp.com/app.html"
+    ],
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"},
+    "url": "https://entrenoapp.com/"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type": "Question", "name": "¿EntrenoApp es gratis de verdad?", "acceptedAnswer": {"@type": "Answer", "text": "Puedes crear tu rutina y registrar tus entrenamientos gratis. Plus es opcional; no necesitas contratarlo para empezar."}},
+      {"@type": "Question", "name": "¿Necesito crear una cuenta?", "acceptedAnswer": {"@type": "Answer", "text": "No. Puedes entrenar sin registro obligatorio: tus datos se guardan localmente en tu dispositivo siempre que sea posible."}},
+      {"@type": "Question", "name": "¿En qué dispositivos funciona?", "acceptedAnswer": {"@type": "Answer", "text": "En web desde cualquier navegador, en iPhone desde la App Store y en Android desde Google Play."}},
+      {"@type": "Question", "name": "¿Sirve si nunca he entrenado?", "acceptedAnswer": {"@type": "Answer", "text": "Sí. Hay caminos específicos para empezar desde cero: caminar, fuerza suave y una primera semana fácil, incluyendo rutinas pensadas para personas mayores."}},
+      {"@type": "Question", "name": "¿Puedo usar mi propia rutina de gimnasio?", "acceptedAnswer": {"@type": "Answer", "text": "Sí. Puedes meter tus propios ejercicios y registrar pesos, tiempos y progreso sesión a sesión."}},
+      {"@type": "Question", "name": "¿Necesito Plus para empezar?", "acceptedAnswer": {"@type": "Answer", "text": "No. La rutina y el registro básico son gratis. Plus añade adaptación del entrenamiento, revisión semanal e historial avanzado por 4,99 €/mes o 29,99 €/año, con 7 días de prueba en el plan anual para nuevas suscripciones elegibles. Se contrata desde la app iOS o Android."}}
+    ]
+  }
+  </script>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1d1d1f;
+      --muted: #6e6e73;
+      --blue: #0071e3;
+      --surface: #f5f5f7;
+      --card: #ffffff;
+      --line: rgba(0,0,0,.08);
+      --shadow: 0 28px 80px rgba(0,0,0,.12);
     }
-    </script>
-    <!-- Schema.org Structured Data -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "EntrenoApp",
-        "url": "https://entrenoapp.com",
-        "logo": "https://entrenoapp.com/assets/icons/icon-512x512.png",
-        "description": "App de fitness integral con planes personalizados de running para principiantes, gimnasio y entrenamiento funcional. Aprende a empezar a correr desde cero con rutinas claras, retos diarios y seguimiento de progreso.",
-        "sameAs": [
-            "https://www.youtube.com/@entrenoapp",
-            "https://entrenoapp.com/lipa-studios-network.html"
-        ]
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--surface);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", system-ui, sans-serif;
+      letter-spacing: 0;
     }
-    </script>
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
-        "name": "EntrenoApp",
-        "applicationCategory": "HealthApplication",
-        "operatingSystem": "Web, iOS, Android",
-        "description": "App de fitness en español para crear rutinas personalizadas de musculación, running o entrenamiento híbrido sin registro obligatorio.",
-        "sameAs": [
-            "https://apps.apple.com/es/app/entrenoapp/id6749792687",
-            "https://play.google.com/store/apps/details?id=com.lipastudios.entrenoapp"
-        ],
-        "downloadUrl": [
-            "https://apps.apple.com/es/app/entrenoapp/id6749792687",
-            "https://play.google.com/store/apps/details?id=com.lipastudios.entrenoapp",
-            "https://entrenoapp.com/app.html"
-        ],
-        "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "EUR"
-        },
-        "url": "https://entrenoapp.com/app",
-        "potentialAction": {
-            "@type": "UseAction",
-            "target": "https://entrenoapp.com/app"
-        }
+    a { color: inherit; }
+    .shell {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+      padding: 0 22px;
     }
-    </script>
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-            {
-                "@type": "Question",
-                "name": "¿Cómo empezar a correr desde cero?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Para empezar a correr desde cero, comienza con caminatas rápidas de 20-30 minutos, 3-4 veces por semana. Luego alterna caminar y trotar (ej: 1 minuto corriendo, 2 minutos caminando). Progresivamente aumenta el tiempo corriendo. Nuestro plan de 8 semanas te guía paso a paso."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "¿Cuánto tiempo tarda un principiante en aprender a correr?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "La mayoría de principiantes pueden correr 5K sin parar después de 8-12 semanas de entrenamiento consistente. El tiempo varía según tu condición física inicial, edad y frecuencia de entrenamiento. Lo importante es la constancia, no la velocidad."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "¿Qué necesito para empezar a correr?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Para empezar a correr necesitas: (1) Un buen par de zapatillas de running adaptadas a tu pisada, (2) Ropa cómoda y transpirable, (3) Un plan de entrenamiento progresivo, y (4) Motivación y paciencia. No necesitas equipamiento caro, solo empezar."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "¿Cómo evitar lesiones al empezar a correr?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Para evitar lesiones: (1) Calienta antes de correr (5-10 min caminando), (2) Empieza con distancias cortas, (3) Alterna días de carrera con descanso, (4) Escucha a tu cuerpo y para si sientes dolor, (5) Fortalece músculos con ejercicios complementarios, y (6) Estira después de correr."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "¿Cuántas veces por semana debo correr como principiante?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Como principiante, te recomendamos correr 3 veces por semana con días de descanso entre sesiones. Esto permite que tu cuerpo se recupere y se adapte. A medida que progreses (después de 4-6 semanas), puedes aumentar a 4 veces por semana. Lo importante es la constancia."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "¿Qué ritmo debo llevar al empezar a correr?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "El ritmo ideal es el ritmo conversacional: deberías poder mantener una conversación mientras corres sin jadear excesivamente. Si no puedes hablar, estás yendo demasiado rápido. Como principiante, no te preocupes por la velocidad. Enfócate en completar el tiempo o distancia objetivo a un ritmo cómodo."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "¿Puedo empezar a correr si tengo sobrepeso?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Sí, absolutamente puedes empezar a correr si tienes sobrepeso. De hecho, correr es excelente para perder peso. Sin embargo, es importante empezar de forma muy gradual para proteger tus articulaciones. Comienza con caminatas rápidas, luego alterna caminar y trotar suavemente. Si tienes dudas, consulta con un médico antes de comenzar."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "¿Es mejor correr por la mañana o por la tarde?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "No hay una hora mejor para empezar a correr. Lo más importante es encontrar el momento que mejor se adapte a tu rutina y que puedas mantener de forma consistente. La mejor hora es aquella en la que realmente vas a correr. La constancia es más importante que la hora del día."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "¿Necesito hacer ejercicios de fuerza además de correr?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Aunque no es estrictamente necesario, hacer ejercicios de fuerza 2-3 veces por semana es muy beneficioso. Fortalece los músculos que sostienen tus articulaciones, reduce el riesgo de lesiones y mejora tu rendimiento corriendo. Puedes hacer ejercicios simples en casa: sentadillas, planchas, zancadas."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "¿Qué hago si me duele algo mientras corro?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Si sientes dolor agudo o punzante mientras corres, detente inmediatamente. No ignores el dolor. Descansa 2-3 días y si el dolor persiste, consulta con un médico o fisioterapeuta. Es mejor perder unos días de entrenamiento que lesionarte seriamente."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "¿Cuánto tiempo debo correr en mi primera sesión?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "En tu primera sesión, comienza con 20-30 minutos totales, alternando 1 minuto corriendo suavemente con 2-3 minutos caminando. Repite esto 5-6 veces. El objetivo no es agotarte, sino acostumbrar a tu cuerpo al movimiento. Es mejor terminar sintiendo que podrías hacer más."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "¿Debo comer algo antes de correr?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Si corres por la mañana temprano, puedes correr en ayunas. Si corres más tarde, espera 1-2 horas después de una comida grande, o 30-60 minutos después de un snack ligero. Si corres menos de 30 minutos, probablemente no necesites comer antes. Lo más importante es hidratarte bien."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "¿Cómo mantengo la motivación para seguir corriendo?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Algunos consejos: (1) Establece objetivos pequeños y alcanzables, (2) Lleva un registro de tu progreso, (3) Corre con música o podcasts, (4) Únete a grupos de running o busca un compañero, (5) Recompénsate cuando alcances objetivos, (6) Recuerda por qué empezaste. La disciplina es lo que te mantiene corriendo."
-                }
-            }
-        ]
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: rgba(251,251,253,.82);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(22px);
     }
-    </script>
-    
-    <!-- Iconos -->
-    <link rel="icon" type="image/png" href="assets/icons/icon-192x192.png" alt="EntrenoApp - Icono de la aplicación">
-    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" alt="EntrenoApp - Icono para iOS">
-    <link rel="manifest" href="manifest.json">
-    
-    <!-- Preload de recursos críticos para mejorar Core Web Vitals -->
-    <link rel="preload" href="css/styles.css" as="style">
-    <link rel="preload" href="css/glassmorphism.css" as="style">
-    <link rel="preload" href="js/app.js" as="script">
-    <link rel="prefetch" href="app.html">
-    
-    <!-- Estilos -->
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/glassmorphism.css">
-    <link rel="stylesheet" href="css/content-pages.css">
-    
-    <!-- Preconnect para CWV -->
-    <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
-    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
-    
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-633RQLC6T0"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-633RQLC6T0');
-    </script>
-    
-    <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4837743291717475" crossorigin="anonymous"></script>
-    
+    .nav-inner {
+      min-height: 66px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 900;
+      font-size: 1.08rem;
+    }
+    .brand img {
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      object-fit: cover;
+      box-shadow: 0 8px 18px rgba(0,0,0,.12);
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      color: var(--ink);
+      text-decoration: none;
+      font-size: .94rem;
+      font-weight: 700;
+    }
+    .nav-links .download {
+      min-height: 36px;
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 0 15px;
+      background: var(--blue);
+      color: #fff;
+    }
+    .hero {
+      min-height: min(900px, calc(100svh - 66px));
+      display: grid;
+      align-items: center;
+      padding: 58px 0 54px;
+      background:
+        radial-gradient(circle at 82% 52%, rgba(0,113,227,.2), transparent 30%),
+        radial-gradient(circle at 12% 18%, rgba(71,205,145,.11), transparent 24%),
+        linear-gradient(180deg, #fbfbfd 0%, #f5f5f7 100%);
+    }
+    .hero-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(340px, 440px);
+      align-items: center;
+      gap: clamp(44px, 7vw, 96px);
+    }
+    .hero-message { text-align: left; }
+    .eyebrow {
+      color: var(--muted);
+      font-size: .82rem;
+      font-weight: 850;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    h1 {
+      max-width: 700px;
+      margin: 14px 0 20px;
+      color: var(--ink);
+      font-size: clamp(3.25rem, 6vw, 5.9rem);
+      line-height: .93;
+      letter-spacing: 0;
+    }
+    .hero-copy {
+      max-width: 650px;
+      margin: 0;
+      color: var(--muted);
+      font-size: clamp(1.18rem, 2.2vw, 1.55rem);
+      line-height: 1.45;
+      font-weight: 620;
+    }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 30px 0 22px;
+    }
+    .btn {
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      padding: 0 22px;
+      text-decoration: none;
+      font-weight: 850;
+    }
+    .btn.primary { background: var(--blue); color: #fff; }
+    .btn.secondary { color: var(--blue); border: 1px solid rgba(0,113,227,.34); }
+    .hero .btn.primary {
+      min-height: 56px;
+      padding: 0 28px;
+      font-size: 1.02rem;
+    }
+    .hero-points {
+      display: grid;
+      gap: 10px;
+      margin: 26px 0 0;
+      padding: 0;
+      list-style: none;
+      color: #424245;
+      font-weight: 750;
+    }
+    .hero-points li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .hero-points li::before {
+      width: 22px;
+      height: 22px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      background: #dff7ea;
+      color: #08783f;
+      content: "\2713";
+      font-size: .78rem;
+      font-weight: 950;
+    }
+    .phone-demo { text-align: center; }
+    .phone {
+      position: relative;
+      width: min(400px, 88vw);
+      margin: 0 auto;
+      border-radius: 52px;
+      padding: 11px;
+      background: #090d14;
+      box-shadow: 0 44px 110px rgba(29,29,31,.27), 0 0 0 1px rgba(255,255,255,.5) inset;
+    }
+    .phone::before {
+      position: absolute;
+      z-index: 3;
+      top: 18px;
+      left: 50%;
+      width: 104px;
+      height: 27px;
+      border-radius: 999px;
+      background: #06090e;
+      content: "";
+      transform: translateX(-50%);
+    }
+    .screen {
+      min-height: 610px;
+      overflow: hidden;
+      border-radius: 42px;
+      padding: 48px 20px 20px;
+      color: #fff;
+      text-align: left;
+      background: linear-gradient(180deg, #07111f, #111827);
+      border: 1px solid rgba(255,255,255,.12);
+    }
+    .screen-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+    .screen-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 900;
+      font-size: 1.02rem;
+    }
+    .screen-brand img {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+    .demo-badge {
+      border: 1px solid rgba(96,165,250,.48);
+      color: #93c5fd;
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-size: .74rem;
+      font-weight: 900;
+    }
+    .demo-progress {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+      margin-bottom: 18px;
+    }
+    .demo-progress span {
+      height: 4px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(255,255,255,.14);
+    }
+    .demo-progress span::after {
+      display: block;
+      width: 0;
+      height: 100%;
+      border-radius: inherit;
+      background: #60a5fa;
+      content: "";
+      transition: width .35s ease;
+    }
+    .demo-progress span.done::after,
+    .demo-progress span.active::after { width: 100%; }
+    .demo-stage {
+      position: relative;
+      min-height: 476px;
+    }
+    .demo-panel {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(22px) scale(.985);
+      transition: opacity .38s ease, transform .48s cubic-bezier(.16,1,.3,1);
+    }
+    .demo-panel.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: none;
+    }
+    .demo-panel:not(.active) a { visibility: hidden; }
+    .demo-kicker {
+      display: block;
+      margin-bottom: 7px;
+      color: #60a5fa;
+      font-size: .72rem;
+      font-weight: 900;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .demo-panel h2 {
+      margin: 0 0 7px;
+      color: #fff;
+      font-size: 1.7rem;
+      line-height: 1.08;
+      letter-spacing: -.02em;
+    }
+    .demo-lead {
+      margin: 0 0 18px;
+      color: rgba(255,255,255,.62);
+      font-size: .86rem;
+      line-height: 1.4;
+      font-weight: 650;
+    }
+    .choice-list, .plan-list, .exercise-list {
+      display: grid;
+      gap: 9px;
+    }
+    .choice, .plan-day, .exercise-row {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 15px;
+      padding: 12px 13px;
+      background: rgba(255,255,255,.06);
+    }
+    .choice.selected {
+      border-color: rgba(96,165,250,.78);
+      background: rgba(59,130,246,.2);
+      box-shadow: 0 0 0 1px rgba(96,165,250,.16) inset;
+    }
+    .choice-icon, .exercise-icon {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      border-radius: 11px;
+      background: rgba(255,255,255,.08);
+      font-size: 1.05rem;
+    }
+    .choice strong, .plan-day strong, .exercise-row strong { display: block; font-size: .91rem; }
+    .choice small, .plan-day small, .exercise-row small {
+      display: block;
+      margin-top: 2px;
+      color: rgba(255,255,255,.53);
+      font-weight: 650;
+    }
+    .choice-check {
+      width: 20px;
+      height: 20px;
+      display: grid;
+      place-items: center;
+      margin-left: auto;
+      border-radius: 50%;
+      background: #60a5fa;
+      color: #06101f;
+      font-size: .7rem;
+      font-weight: 950;
+    }
+    .quick-settings {
+      display: block;
+      margin-top: 12px;
+      border-radius: 15px;
+      padding: 13px;
+      background: rgba(255,255,255,.06);
+    }
+    .setting-chips { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 8px; }
+    .setting-chip {
+      border-radius: 999px;
+      padding: 7px 9px;
+      background: rgba(96,165,250,.16);
+      color: #bfdbfe;
+      font-size: .72rem;
+      font-weight: 800;
+    }
+    .plan-day { justify-content: space-between; }
+    .plan-day.today {
+      border-color: rgba(71,205,145,.55);
+      background: rgba(71,205,145,.12);
+    }
+    .day-label { color: #93c5fd; font-size: .72rem; font-weight: 900; text-transform: uppercase; }
+    .plan-time { color: rgba(255,255,255,.56); font-size: .76rem; font-weight: 750; }
+    .exercise-number {
+      width: 28px;
+      color: #93c5fd;
+      font-weight: 950;
+      text-align: center;
+    }
+    .exercise-info { flex: 1; }
+    .exercise-dose { color: #bfdbfe; font-size: .76rem; font-weight: 850; }
+    .active-workout-card {
+      overflow: hidden;
+      border: 1px solid rgba(96,165,250,.32);
+      border-radius: 22px;
+      background: linear-gradient(145deg, rgba(59,130,246,.25), rgba(255,255,255,.06));
+    }
+    .exercise-visual {
+      min-height: 116px;
+      display: grid;
+      place-items: center;
+      background: radial-gradient(circle, rgba(96,165,250,.24), transparent 65%);
+      font-size: 3.3rem;
+    }
+    .active-workout-body { padding: 16px; }
+    .active-workout-body h3 { margin: 0 0 5px; font-size: 1.2rem; }
+    .active-workout-body p { margin: 0; color: rgba(255,255,255,.58); font-size: .82rem; }
+    .set-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 16px; }
+    .set-pill {
+      border-radius: 13px;
+      padding: 11px 6px;
+      background: rgba(255,255,255,.07);
+      color: rgba(255,255,255,.58);
+      text-align: center;
+      font-size: .75rem;
+      font-weight: 850;
+    }
+    .set-pill.complete { background: rgba(71,205,145,.17); color: #86efac; }
+    .set-pill.active { background: #3b82f6; color: #fff; }
+    .rest-timer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 12px;
+      border-radius: 15px;
+      padding: 13px 14px;
+      background: rgba(255,255,255,.06);
+      font-size: .82rem;
+      font-weight: 800;
+    }
+    .rest-timer strong { color: #93c5fd; font-size: 1.15rem; }
+    .complete-ring {
+      width: 94px;
+      height: 94px;
+      display: grid;
+      place-items: center;
+      margin: 12px auto 16px;
+      border: 7px solid rgba(71,205,145,.2);
+      border-top-color: #47cd91;
+      border-right-color: #47cd91;
+      border-bottom-color: #47cd91;
+      border-radius: 50%;
+      background: rgba(71,205,145,.08);
+      color: #86efac;
+      font-size: 2rem;
+      font-weight: 950;
+      transform: rotate(45deg);
+    }
+    .complete-ring span { transform: rotate(-45deg); }
+    .result-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .result-stat {
+      border-radius: 14px;
+      padding: 12px 6px;
+      background: rgba(255,255,255,.06);
+      text-align: center;
+    }
+    .result-stat strong { display: block; color: #fff; font-size: 1rem; }
+    .result-stat span { display: block; margin-top: 3px; color: rgba(255,255,255,.5); font-size: .64rem; font-weight: 750; }
+    .demo-complete-cta {
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 14px;
+      border-radius: 999px;
+      background: #47cd91;
+      color: #062b1c;
+      text-decoration: none;
+      font-size: .82rem;
+      font-weight: 900;
+    }
+    .demo-controls {
+      display: flex;
+      justify-content: center;
+      gap: 9px;
+      margin: 18px 0 8px;
+    }
+    .demo-control {
+      width: 11px;
+      height: 11px;
+      border: 0;
+      border-radius: 50%;
+      padding: 0;
+      background: rgba(29,29,31,.19);
+      cursor: pointer;
+    }
+    .demo-control[aria-selected="true"] { background: var(--blue); transform: scale(1.2); }
+    .demo-toggle {
+      border: 0;
+      padding: 3px 8px;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font: inherit;
+      font-size: .72rem;
+      font-weight: 750;
+    }
+    .demo-toggle:hover { color: var(--blue); }
+    .demo-caption {
+      min-height: 22px;
+      margin: 0;
+      color: #424245;
+      font-size: .85rem;
+      font-weight: 800;
+    }
+    .band { padding: 22px; }
+    .panel {
+      min-height: 620px;
+      display: grid;
+      align-items: center;
+      border-radius: 38px;
+      padding: clamp(34px, 7vw, 76px);
+      background: var(--card);
+      box-shadow: 0 18px 60px rgba(0,0,0,.06);
+    }
+    .panel.dark {
+      background: #05070b;
+      color: #fff;
+    }
+    .panel h2 {
+      max-width: 850px;
+      margin: 0 0 18px;
+      font-size: clamp(2.4rem, 5.8vw, 5.6rem);
+      line-height: .95;
+      letter-spacing: 0;
+    }
+    .panel p {
+      max-width: 730px;
+      margin: 0;
+      color: var(--muted);
+      font-size: clamp(1.08rem, 2vw, 1.35rem);
+      line-height: 1.55;
+      font-weight: 620;
+    }
+    .panel.dark p { color: rgba(255,255,255,.72); }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 34px;
+    }
+    .card {
+      min-height: 250px;
+      border-radius: 28px;
+      padding: 24px;
+      background: #f5f5f7;
+    }
+    .card b {
+      display: block;
+      font-size: 1.45rem;
+      line-height: 1.12;
+      margin-bottom: 10px;
+    }
+    .card span {
+      color: var(--muted);
+      font-weight: 650;
+      line-height: 1.5;
+    }
+    .card.blue { background: #eaf3ff; }
+    .card.green { background: #eaf8f0; }
+    .guides {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 34px;
+    }
+    .guide {
+      min-height: 150px;
+      border-radius: 24px;
+      padding: 20px;
+      text-decoration: none;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      color: #fff;
+    }
+    .guide b {
+      display: block;
+      font-size: 1.12rem;
+      margin-bottom: 8px;
+    }
+    .guide span {
+      color: rgba(255,255,255,.68);
+      line-height: 1.45;
+      font-weight: 650;
+    }
+    .paths {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 34px;
+    }
+    .path {
+      min-height: 310px;
+      border-radius: 30px;
+      padding: 26px;
+      background: #f5f5f7;
+      text-decoration: none;
+      color: var(--ink);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .path small {
+      color: var(--blue);
+      font-weight: 850;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .path b {
+      display: block;
+      max-width: 260px;
+      margin-top: 16px;
+      font-size: clamp(1.75rem, 3vw, 2.55rem);
+      line-height: 1;
+      letter-spacing: 0;
+    }
+    .path span {
+      display: block;
+      color: var(--muted);
+      font-size: 1.02rem;
+      line-height: 1.5;
+      font-weight: 650;
+    }
+    .path.dark {
+      background: #111827;
+      color: #fff;
+    }
+    .path.dark span { color: rgba(255,255,255,.72); }
+    .path.green { background: #eaf8f0; }
+    .path.blue { background: #eaf3ff; }
+    .business-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 34px;
+    }
+    .business-card {
+      min-height: 360px;
+      border-radius: 30px;
+      padding: 26px;
+      background: #f5f5f7;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 22px;
+    }
+    .business-card small {
+      color: var(--blue);
+      font-size: .82rem;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .business-card h3 {
+      margin: 12px 0 10px;
+      font-size: clamp(1.8rem, 3vw, 2.65rem);
+      line-height: .98;
+      letter-spacing: 0;
+    }
+    .business-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.02rem;
+      line-height: 1.5;
+      font-weight: 650;
+    }
+    .business-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 18px 0 0;
+      display: grid;
+      gap: 9px;
+      color: #424245;
+      font-weight: 750;
+      line-height: 1.35;
+    }
+    .business-card li::before {
+      content: "✓";
+      color: #24a865;
+      font-weight: 950;
+      margin-right: 8px;
+    }
+    .business-card.plus {
+      background: #eaf3ff;
+    }
+    .business-card.coach {
+      background: #111827;
+      color: #fff;
+    }
+    .business-card.coach p,
+    .business-card.coach ul {
+      color: rgba(255,255,255,.72);
+    }
+    .business-card.coach li::before {
+      color: #86efac;
+    }
+    .senior-showcase {
+      display: grid;
+      grid-template-columns: 1.04fr .96fr;
+      gap: 28px;
+      align-items: center;
+    }
+    .senior-copy h2 { max-width: 760px; }
+    .senior-steps {
+      display: grid;
+      gap: 12px;
+      margin-top: 30px;
+    }
+    .senior-step {
+      display: grid;
+      grid-template-columns: 46px 1fr;
+      gap: 14px;
+      align-items: start;
+      border-radius: 22px;
+      padding: 16px;
+      background: rgba(255,255,255,.72);
+      border: 1px solid var(--line);
+    }
+    .senior-step i {
+      width: 46px;
+      height: 46px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: #eaf8f0;
+      font-style: normal;
+      font-weight: 950;
+      color: #12825a;
+    }
+    .senior-step b {
+      display: block;
+      font-size: 1.08rem;
+      line-height: 1.2;
+      margin-bottom: 4px;
+    }
+    .senior-step span {
+      color: var(--muted);
+      font-weight: 650;
+      line-height: 1.45;
+    }
+    .senior-card {
+      min-height: 510px;
+      border-radius: 34px;
+      padding: 28px;
+      color: #fff;
+      background:
+        radial-gradient(circle at 82% 16%, rgba(134,239,172,.34), transparent 28%),
+        linear-gradient(145deg, #10231d, #0f172a 68%);
+      box-shadow: 0 30px 90px rgba(15,23,42,.22);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .senior-card small {
+      color: #86efac;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-weight: 950;
+    }
+    .senior-card h3 {
+      font-size: clamp(2.1rem, 4vw, 3.65rem);
+      line-height: .96;
+      margin: 12px 0;
+      letter-spacing: 0;
+    }
+    .senior-card p {
+      color: rgba(255,255,255,.74);
+      font-size: 1.08rem;
+      line-height: 1.55;
+    }
+    .senior-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 26px;
+    }
+    .senior-metric {
+      border-radius: 18px;
+      padding: 14px;
+      background: rgba(255,255,255,.09);
+      border: 1px solid rgba(255,255,255,.12);
+    }
+    .senior-metric b {
+      display: block;
+      color: #86efac;
+      font-size: 1.5rem;
+    }
+    .senior-metric span {
+      display: block;
+      color: rgba(255,255,255,.68);
+      font-weight: 750;
+      font-size: .88rem;
+    }
+    .platforms {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: center;
+    }
+    .final {
+      text-align: center;
+      padding: 86px 22px 96px;
+    }
+    .final h2 {
+      max-width: 900px;
+      margin: 0 auto 18px;
+      font-size: clamp(2.7rem, 7vw, 6.2rem);
+      line-height: .92;
+      letter-spacing: 0;
+    }
+    .final p {
+      max-width: 680px;
+      margin: 0 auto 28px;
+      color: var(--muted);
+      font-size: 1.24rem;
+      line-height: 1.5;
+      font-weight: 620;
+    }
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 34px 22px 42px;
+      background: #fff;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+    .trust {
+      margin: 0;
+      max-width: 720px;
+      color: var(--muted);
+      font-size: .92rem;
+      font-weight: 700;
+      letter-spacing: .01em;
+    }
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 26px;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 9px 16px;
+      background: #eaf3ff;
+      color: #0057ad;
+      font-weight: 800;
+      font-size: .92rem;
+    }
+    .chip.hot {
+      background: #ffece8;
+      color: #c2410c;
+    }
+    .faq-list {
+      margin-top: 34px;
+      display: grid;
+      gap: 12px;
+      max-width: 850px;
+    }
+    .faq-item {
+      border-radius: 22px;
+      background: #f5f5f7;
+      padding: 6px 22px;
+      border: 1px solid transparent;
+    }
+    .faq-item[open] { border-color: rgba(0,113,227,.28); background: #fbfbfd; }
+    .faq-item summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 16px 30px 16px 0;
+      font-weight: 800;
+      font-size: 1.08rem;
+      position: relative;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after {
+      content: "+";
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--blue);
+      font-size: 1.5rem;
+      font-weight: 700;
+      transition: transform .18s ease;
+    }
+    .faq-item[open] summary::after { transform: translateY(-50%) rotate(45deg); }
+    .faq-item p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 1.02rem !important;
+      line-height: 1.55;
+      font-weight: 620;
+    }
+    a:focus-visible, button:focus-visible, summary:focus-visible {
+      outline: 2px solid var(--blue);
+      outline-offset: 3px;
+      border-radius: 6px;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .faq-item summary::after { transition: none; }
+      .hero .eyebrow, .hero h1, .hero .hero-copy, .hero .actions, .hero .trust, .phone {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+      }
+      .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+      .demo-panel { transition: none !important; }
+      .path, .card, .guide, .business-card, .btn { transition: none !important; }
+    }
+    /* --- Efectos de entrada del hero --- */
+    @keyframes riseIn {
+      from { opacity: 0; transform: translateY(26px); }
+      to { opacity: 1; transform: none; }
+    }
+    @keyframes phoneIn {
+      from { opacity: 0; transform: translateY(72px) scale(.94); }
+      to { opacity: 1; transform: none; }
+    }
+    .hero .eyebrow, .hero h1, .hero .hero-copy, .hero .actions, .hero .trust {
+      opacity: 0;
+      animation: riseIn .85s cubic-bezier(.16,1,.3,1) forwards;
+    }
+    .hero h1 { animation-delay: .08s; }
+    .hero .hero-copy { animation-delay: .18s; }
+    .hero .actions { animation-delay: .28s; }
+    .hero .trust { animation-delay: .38s; }
+    .phone {
+      opacity: 0;
+      animation: phoneIn 1.05s cubic-bezier(.16,1,.3,1) .42s forwards;
+    }
+    .screen { will-change: transform; }
+    /* --- Revelado al hacer scroll --- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity .85s cubic-bezier(.16,1,.3,1), transform .85s cubic-bezier(.16,1,.3,1);
+    }
+    .reveal.in { opacity: 1; transform: none; }
+    /* --- Micro-interacciones --- */
+    .path, .card, .guide, .business-card {
+      transition: transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s cubic-bezier(.16,1,.3,1);
+    }
+    .path:hover, .guide:hover { transform: translateY(-6px); box-shadow: 0 24px 54px rgba(0,0,0,.11); }
+    .card:hover, .business-card:hover { transform: translateY(-4px); box-shadow: 0 18px 44px rgba(0,0,0,.08); }
+    .btn { transition: transform .25s ease, box-shadow .25s ease; }
+    .btn.primary:hover { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(0,113,227,.34); }
+    .btn:active { transform: scale(.97); }
+    .footer-inner {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+    .footer a {
+      color: #424245;
+      text-decoration: none;
+      font-weight: 700;
+      margin-right: 14px;
+    }
+    @media (max-width: 900px) {
+      .hero-layout { grid-template-columns: 1fr; }
+      .hero-message { text-align: center; }
+      .hero-message h1, .hero-copy { margin-left: auto; margin-right: auto; }
+      .hero .actions { justify-content: center; }
+      .hero-points { width: fit-content; margin-left: auto; margin-right: auto; text-align: left; }
+      .trust { margin-left: auto; margin-right: auto; }
+      .nav-links a:not(.download):not(:first-child) { display: none; }
+      .cards, .guides, .paths, .business-grid, .platforms, .senior-showcase { grid-template-columns: 1fr; }
+      .panel { min-height: auto; }
+    }
+    @media (max-width: 560px) {
+      .shell { padding: 0 16px; }
+      .hero { padding: 42px 0 38px; }
+      .hero-layout { gap: 42px; }
+      h1 { font-size: clamp(3rem, 14vw, 4.1rem); }
+      .hero-copy { font-size: 1.08rem; }
+      .hero .btn.primary { width: 100%; }
+      .nav-links a:not(.download) { display: none; }
+      .nav-links .download { padding: 0 13px; font-size: .82rem; }
+      .phone { width: min(380px, 94vw); }
+      .screen { min-height: 590px; padding: 48px 17px 17px; }
+      .demo-stage { min-height: 460px; }
+      .band { padding: 14px; }
+      .panel { border-radius: 28px; }
+      .senior-metrics { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
-<body class="site-marketing" data-page="home">
-    <!-- En la app iOS/Android (Capacitor) ir directo a la app de entrenamiento -->
-    <script>
-        (function() {
-            var cap = window.Capacitor;
-            if (cap && cap.getPlatform && cap.getPlatform() !== 'web') {
-                window.location.replace('app.html');
-            }
-        })();
-    </script>
-    <!-- Navigation Bar -->
-    <nav class="main-navigation">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <a href="/" class="brand-link" aria-label="EntrenoApp inicio">
-                    <img src="assets/logo.jpeg" alt="" class="brand-logo" width="44" height="44">
-                    <span>EntrenoApp</span>
-                </a>
-            </div>
-            <div class="nav-links">
-                <a href="/">Inicio</a>
-                <a href='/blog.html#novedades'>Novedades</a>
-                <a href='/workout-guides'>Guías</a>
-                <a href='/fitness-calculators'>Calculadoras</a>
-                <a href='/youtube-gallery' data-growth data-growth-source="nav">📺 Videos</a>
-                <a href='/blog'>Blog</a>
-                <a href='/about'>Nosotros</a>
-                <a href='/contact'>Contacto</a>
-                <a href='/descargar' class="nav-app-link" data-growth data-growth-source="nav">Descargar</a>
-            </div>
-        </div>
-    </nav>
+<body>
+  <script>
+    (function() {
+      var cap = window.Capacitor;
+      if (cap && cap.getPlatform && cap.getPlatform() !== 'web') {
+        window.location.replace('app.html');
+      }
+    })();
+  </script>
 
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="hero-content">
-            <div class="hero-brand">
-                <img src="assets/logo.jpeg" alt="Logo de EntrenoApp" class="hero-brand-logo" width="96" height="96">
-                <div class="hero-brand-name">EntrenoApp</div>
-            </div>
-            <h1 class="hero-title">Tu plan de entreno en 60 segundos</h1>
-            <h2 class="hero-subtitle">Musculación, carrera o híbrido. Sin registro y fácil de seguir.</h2>
-            <p class="hero-description">
-                EntrenoApp crea una rutina semanal flexible según tu objetivo, días disponibles, tiempo y material.
-                Puedes usarla para ganar músculo, empezar a correr, preparar una carrera o combinar fuerza y cardio sin complicarte.
-            </p>
-            <div class="hero-proof">
-                <span>Sin cuenta</span>
-                <span>Datos en tu dispositivo</span>
-                <span>Plan flexible</span>
-                <span>Disponible en iOS y Android</span>
-            </div>
-            <div class="cta-buttons hero-cta-row">
-                <a class="cta-button cta-primary hero-main-cta" href="/app" data-growth data-growth-source="hero">Abrir la app gratis</a>
-                <a class="cta-button cta-secondary hero-secondary-cta" href="https://apps.apple.com/es/app/entrenoapp/id6749792687" rel="noopener" data-growth data-growth-source="hero">App Store</a>
-                <a class="cta-button cta-secondary hero-secondary-cta" href="https://play.google.com/store/apps/details?id=com.lipastudios.entrenoapp" rel="noopener" data-growth data-growth-source="hero">Google Play</a>
-            </div>
+  <nav class="nav" aria-label="Principal">
+    <div class="shell nav-inner">
+      <a aria-label='EntrenoApp inicio' class='brand' href='/'>
+        <img src="assets/logo.jpeg" alt="" width="38" height="38">
+        <span>EntrenoApp</span>
+      </a>
+      <div class="nav-links">
+        <a href='#como-funciona'>Cómo funciona</a>
+        <a href='/descargar' data-growth data-growth-source='nav'>Apps</a>
+        <a class='download' data-growth data-growth-source='nav' href='/app'>Crear mi entrenamiento</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="shell hero-layout">
+        <div class="hero-message">
+          <div class="eyebrow">EntrenoApp · Tu entrenador del día a día</div>
+          <h1>Tu entrenamiento de hoy, listo en un minuto.</h1>
+          <p class="hero-copy">Dinos qué quieres conseguir y cuánto tiempo tienes. EntrenoApp prepara tu rutina, te guía serie a serie y guarda tu progreso.</p>
+          <div class="actions">
+            <a class='btn primary' data-growth data-growth-source='hero_demo' href='/app'>Crear mi entrenamiento gratis</a>
+          </div>
+          <p class="trust">Gratis · Sin registro obligatorio · Web, iPhone y Android</p>
+          <ul class="hero-points" aria-label="Cómo funciona EntrenoApp">
+            <li>Responde unas preguntas sencillas</li>
+            <li>Recibe un plan adaptado a ti</li>
+            <li>Entrena siguiendo cada ejercicio</li>
+          </ul>
         </div>
+
+        <div class="phone-demo" aria-label="Demostración de EntrenoApp">
+          <div class="phone">
+            <div class="screen">
+              <div class="screen-top">
+                <div class="screen-brand"><img src="assets/logo.jpeg" alt="" width="34" height="34">EntrenoApp</div>
+                <div class="demo-badge">DEMO</div>
+              </div>
+              <div class="demo-progress" aria-hidden="true">
+                <span class="active"></span><span></span><span></span><span></span><span></span>
+              </div>
+              <div class="demo-stage" aria-live="polite">
+                <article class="demo-panel active" data-demo-panel="0">
+                  <span class="demo-kicker">Paso 1 de 5 · Tu objetivo</span>
+                  <h2>¿Qué quieres conseguir?</h2>
+                  <p class="demo-lead">Elige tu objetivo. Podrás cambiarlo cuando quieras.</p>
+                  <div class="choice-list">
+                    <div class="choice selected"><span class="choice-icon" aria-hidden="true">💪</span><span><strong>Ganar fuerza</strong><small>Progresar de forma segura</small></span><span class="choice-check">✓</span></div>
+                    <div class="choice"><span class="choice-icon" aria-hidden="true">⚡</span><span><strong>Ponerme en forma</strong><small>Sentirme más activo</small></span></div>
+                    <div class="choice"><span class="choice-icon" aria-hidden="true">🏃</span><span><strong>Empezar a correr</strong><small>Desde cero, paso a paso</small></span></div>
+                  </div>
+                  <div class="quick-settings"><strong>Tu disponibilidad</strong><div class="setting-chips"><span class="setting-chip">3 días</span><span class="setting-chip">35 min</span><span class="setting-chip">Gimnasio</span></div></div>
+                </article>
+
+                <article class="demo-panel" data-demo-panel="1">
+                  <span class="demo-kicker">Paso 2 de 5 · Plan creado</span>
+                  <h2>Tu semana está lista</h2>
+                  <p class="demo-lead">Una rutina realista para tus días, tu nivel y tu tiempo.</p>
+                  <div class="plan-list">
+                    <div class="plan-day today"><span><span class="day-label">Hoy · Lunes</span><strong>Full body A</strong><small>Empuje, tirón y piernas</small></span><span class="plan-time">35 min</span></div>
+                    <div class="plan-day"><span><span class="day-label">Miércoles</span><strong>Full body B</strong><small>Fuerza y estabilidad</small></span><span class="plan-time">32 min</span></div>
+                    <div class="plan-day"><span><span class="day-label">Viernes</span><strong>Full body C</strong><small>Técnica y progreso</small></span><span class="plan-time">34 min</span></div>
+                  </div>
+                  <div class="quick-settings"><strong>La app se adapta</strong><div class="setting-chips"><span class="setting-chip">Cambiar día</span><span class="setting-chip">Cambiar ejercicio</span></div></div>
+                </article>
+
+                <article class="demo-panel" data-demo-panel="2">
+                  <span class="demo-kicker">Paso 3 de 5 · Entreno de hoy</span>
+                  <h2>Sabes exactamente qué toca</h2>
+                  <p class="demo-lead">Ejercicios, series y repeticiones, todo en orden.</p>
+                  <div class="exercise-list">
+                    <div class="exercise-row"><span class="exercise-number">01</span><span class="exercise-info"><strong>Sentadilla goblet</strong><small>Piernas · Mancuerna</small></span><span class="exercise-dose">3 × 10</span></div>
+                    <div class="exercise-row"><span class="exercise-number">02</span><span class="exercise-info"><strong>Press de banca</strong><small>Pecho · Barra</small></span><span class="exercise-dose">3 × 10</span></div>
+                    <div class="exercise-row"><span class="exercise-number">03</span><span class="exercise-info"><strong>Remo sentado</strong><small>Espalda · Polea</small></span><span class="exercise-dose">3 × 12</span></div>
+                    <div class="exercise-row"><span class="exercise-number">04</span><span class="exercise-info"><strong>Plancha</strong><small>Core · Peso corporal</small></span><span class="exercise-dose">3 × 30 s</span></div>
+                  </div>
+                </article>
+
+                <article class="demo-panel" data-demo-panel="3">
+                  <span class="demo-kicker">Paso 4 de 5 · Entrenando</span>
+                  <h2>Solo tienes que seguir</h2>
+                  <p class="demo-lead">Registra cada serie y continúa con la siguiente.</p>
+                  <div class="active-workout-card">
+                    <div class="exercise-visual" aria-hidden="true">🏋️</div>
+                    <div class="active-workout-body">
+                      <h3>Press de banca</h3>
+                      <p>Serie 2 de 3 · 10 repeticiones · 30 kg</p>
+                      <div class="set-row"><span class="set-pill complete">✓ Serie 1</span><span class="set-pill active">Serie 2</span><span class="set-pill">Serie 3</span></div>
+                      <div class="rest-timer"><span>Descanso guiado</span><strong>00:45</strong></div>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="demo-panel" data-demo-panel="4">
+                  <span class="demo-kicker">Paso 5 de 5 · Completado</span>
+                  <h2>Entrenamiento guardado</h2>
+                  <p class="demo-lead">Tu progreso queda registrado automáticamente.</p>
+                  <div class="complete-ring" aria-hidden="true"><span>✓</span></div>
+                  <div class="result-grid">
+                    <div class="result-stat"><strong>34 min</strong><span>Duración</span></div>
+                    <div class="result-stat"><strong>12</strong><span>Series</span></div>
+                    <div class="result-stat"><strong>100%</strong><span>Completado</span></div>
+                  </div>
+                  <a class="demo-complete-cta" data-growth data-growth-source="demo_complete" href="/app">Hacer mi primer entrenamiento</a>
+                </article>
+              </div>
+            </div>
+          </div>
+          <div class="demo-controls" role="tablist" aria-label="Pasos de la demostración">
+            <button class="demo-control" type="button" role="tab" aria-selected="true" aria-label="Ver paso 1: Tu objetivo" data-demo-control="0"></button>
+            <button class="demo-control" type="button" role="tab" aria-selected="false" aria-label="Ver paso 2: Plan creado" data-demo-control="1"></button>
+            <button class="demo-control" type="button" role="tab" aria-selected="false" aria-label="Ver paso 3: Entreno de hoy" data-demo-control="2"></button>
+            <button class="demo-control" type="button" role="tab" aria-selected="false" aria-label="Ver paso 4: Entrenando" data-demo-control="3"></button>
+            <button class="demo-control" type="button" role="tab" aria-selected="false" aria-label="Ver paso 5: Completado" data-demo-control="4"></button>
+          </div>
+          <button class="demo-toggle" type="button" aria-pressed="false" data-demo-toggle>Pausar animación</button>
+          <p class="demo-caption" data-demo-caption>1. Cuéntanos qué buscas</p>
+        </div>
+      </div>
     </section>
 
-    <!-- Estado de lanzamiento: app web, iOS y Android disponibles -->
-    <section class="launch-strip" aria-labelledby="launch-strip-title">
-        <div class="container launch-card">
-            <div class="launch-copy">
-                <span class="launch-kicker">Disponible ahora</span>
-                <h2 id="launch-strip-title">Entrena desde la web, iPhone o Android.</h2>
-                <p>
-                    EntrenoApp ya está publicada en App Store y Google Play. También puedes usar la versión web gratis:
-                    onboarding rápido, rutina flexible, hábitos, progreso e historial guardados en tu dispositivo.
-                </p>
-            </div>
-            <div class="launch-actions" aria-label="Opciones para usar EntrenoApp">
-                <a class="launch-action launch-action-primary" href="/app" data-growth data-growth-source="launch_strip">
-                    <span class="launch-action-icon">↗</span>
-                    <span>
-                        <strong>Abrir app web</strong>
-                        <small>Gratis, sin registro</small>
-                    </span>
-                </a>
-                <a class="launch-action" href="https://apps.apple.com/es/app/entrenoapp/id6749792687" rel="noopener" data-growth data-growth-source="launch_strip">
-                    <span class="launch-action-icon"></span>
-                    <span>
-                        <strong>Descargar en iOS</strong>
-                        <small>App Store</small>
-                    </span>
-                </a>
-                <a class="launch-action" href="https://play.google.com/store/apps/details?id=com.lipastudios.entrenoapp" rel="noopener" data-growth data-growth-source="launch_strip">
-                    <span class="launch-action-icon">▶</span>
-                    <span>
-                        <strong>Descargar en Android</strong>
-                        <small>Google Play</small>
-                    </span>
-                </a>
-            </div>
+    <section class="band" id="como-funciona">
+      <div class="shell panel">
+        <div>
+          <h2>Una app para empezar, volver y no agobiarte.</h2>
+          <p>EntrenoApp te propone el siguiente paso, pero no te castiga si cambias de día, material o ritmo. La rutina acompaña, no exige.</p>
+          <div class="cards">
+            <div class="card blue"><b>Rutina en 60 segundos</b><span>Objetivo, nivel, días, tiempo y material. La app monta una semana usable.</span></div>
+            <div class="card green"><b>Registro rápido</b><span>Guarda sesiones, progreso y hábitos sin formularios interminables.</span></div>
+            <div class="card"><b>Sin cuenta obligatoria</b><span>Tus datos se guardan localmente en tu dispositivo siempre que se pueda.</span></div>
+          </div>
         </div>
+      </div>
     </section>
 
-    <!-- Monetización amable: recomendaciones útiles sin interrumpir la app -->
-    <section class="gear-strip" aria-labelledby="gear-strip-title">
-        <div class="container">
-            <div class="gear-strip-head">
-                <div>
-                    <span class="gear-kicker">Material útil</span>
-                    <h2 id="gear-strip-title">Equípate sin comprar de más</h2>
-                </div>
-                <a href="/productos-recomendados.html" class="gear-all-link">Ver recomendaciones</a>
-            </div>
-            <div class="gear-grid">
-                <a href="/calzado-ideal-empezar-correr-2025.html" class="gear-card">
-                    <span class="gear-icon">👟</span>
-                    <strong>Zapatillas para empezar</strong>
-                    <span>Qué mirar antes de comprar si estás empezando a correr.</span>
-                </a>
-                <a href="/equipamiento-gimnasio-casa-2025.html" class="gear-card">
-                    <span class="gear-icon">🏋️</span>
-                    <strong>Gym en casa básico</strong>
-                    <span>Mancuernas, bandas y material que sí merece la pena.</span>
-                </a>
-                <a href="/fuerza-personas-mayores.html" class="gear-card">
-                    <span class="gear-icon">🌿</span>
-                    <strong>Fuerza para empezar con calma</strong>
-                    <span>Rutina con silla, pared y equilibrio para ganar autonomía sin miedo.</span>
-                </a>
-                <a href="/mejores-suplementos-deportivos-2026.html" class="gear-card">
-                    <span class="gear-icon">🥤</span>
-                    <strong>Suplementos deportivos 2026</strong>
-                    <span>Creatina, proteína, cafeína y básicos útiles sin comprar de más.</span>
-                </a>
-            </div>
+    <section class="band">
+      <div class="shell panel">
+        <div>
+          <div class="eyebrow">Modelo EntrenoApp</div>
+          <h2>Gratis para todos. Plus para ir más lejos. Coach para profesionales.</h2>
+          <p>Empieza gratis con tu rutina y tu registro. Puedes consultar Plus si buscas opciones adicionales, o Coach si eres profesional.</p>
+          <div class="business-grid">
+            <article class="business-card">
+              <div>
+                <small>Gratis</small>
+                <h3>Entrenar sin pensar demasiado.</h3>
+                <p>La app propone qué hacer hoy, permite caminar, correr, registrar gimnasio o usar tu propio plan.</p>
+                <ul>
+                  <li>Sin registro obligatorio</li>
+                  <li>Rutinas, GPS y progreso</li>
+                  <li>Monetizada con anuncios</li>
+                </ul>
+              </div>
+              <a class='btn secondary' data-growth data-growth-source='business_free' href='/app'>Abrir app gratis</a>
+            </article>
+            <article class="business-card plus">
+              <div>
+                <small>Plus</small>
+                <h3>Más guía, menos ruido.</h3>
+                <p>Adapta tu entrenamiento y entiende mejor tu progreso. 4,99 €/mes o 29,99 €/año, con 7 días de prueba en el plan anual para nuevas suscripciones elegibles.</p>
+                <ul>
+                  <li>Adaptación del entrenamiento</li>
+                  <li>Revisión semanal</li>
+                  <li>Historial avanzado</li>
+                </ul>
+              </div>
+              <a class='btn secondary' data-growth data-growth-source='business_plus' href='/plus'>Ver EntrenoApp Plus</a>
+            </article>
+            <article class="business-card coach">
+              <div>
+                <small>Coach</small>
+                <h3>Clientes guiados por profesionales.</h3>
+                <p>Para entrenadores y nutricionistas que quieren crear planes y ver cómo evolucionan sus clientes.</p>
+                <ul>
+                  <li>Rutinas y nutrición por cliente</li>
+                  <li>Registro desde la app del usuario</li>
+                  <li>Panel para revisar y ajustar</li>
+                </ul>
+              </div>
+              <a class='btn primary' data-growth data-growth-source='business_coach' href='/coach'>Ver EntrenoApp Coach</a>
+            </article>
+          </div>
         </div>
+      </div>
     </section>
 
-    <section class="growth-strip" aria-labelledby="growth-strip-title">
-        <div class="container growth-card">
-            <div>
-                <span class="growth-kicker">Ecosistema EntrenoApp</span>
-                <h2 id="growth-strip-title">Entrena, aprende la técnica y vuelve mañana.</h2>
-                <p>Usa la app para generar tu rutina, mira tutoriales en YouTube cuando dudes de un ejercicio y guarda tu progreso sin cuenta obligatoria.</p>
-            </div>
-            <div class="growth-actions">
-                <a href="/app-entreno.html" data-growth data-growth-source="ecosystem_strip">Ver app de entreno</a>
-                <a href="/descargar" data-growth data-growth-source="ecosystem_strip">Descargar app</a>
-                <a href="https://www.youtube.com/@entrenoapp" rel="noopener" data-growth data-growth-source="ecosystem_strip">Ver YouTube</a>
-            </div>
+    <section class="band">
+      <div class="shell panel">
+        <div>
+          <h2>Elige tu camino. La app hace el resto.</h2>
+          <p>Entradas claras para no perderte: entrenar hoy, aprender con calma, empezar desde cero, caminar, correr, trabajar fuerza de forma segura o controlar la rutina que ya tienes.</p>
+          <div class="paths">
+            <a class='path blue' data-growth data-growth-source='paths' href='/app'>
+              <div>
+                <small>Entrenar ahora</small>
+                <b>Abrir la rutina de hoy</b>
+              </div>
+              <span>Onboarding rápido, sesión sugerida y registro sin fricción.</span>
+            </a>
+            <a class='path green' data-growth data-growth-source='paths' href='/hacer-ejercicio-desde-cero'>
+              <div>
+                <small>No sé por dónde empezar</small>
+                <b>Hacer ejercicio desde cero</b>
+              </div>
+              <span>Caminar, fuerza suave y una primera semana fácil.</span>
+            </a>
+            <a class='path blue' data-growth data-growth-source='paths' href='/empezar-a-andar-desde-cero'>
+              <div>
+                <small>Empezar desde cero</small>
+                <b>Plan para andar más</b>
+              </div>
+              <span>Caminar sin presión, registrar progreso y crear hábito.</span>
+            </a>
+            <a class='path dark' data-growth data-growth-source='paths' href='/fuerza-personas-mayores'>
+              <div>
+                <small>Empezar suave</small>
+                <b>Fuerza para mayores saludables</b>
+              </div>
+              <span>Silla, pared, equilibrio y progresión tranquila.</span>
+            </a>
+            <a class='path green' data-growth data-growth-source='paths' href='/controlar-rutina-gimnasio'>
+              <div>
+                <small>Ya tengo rutina</small>
+                <b>Controlar mis entrenamientos</b>
+              </div>
+              <span>Mete tus ejercicios, registra pesos, tiempos y progreso sin libreta.</span>
+            </a>
+            <a class='path blue' data-growth data-growth-source='paths' href='/rutina-gym-principiantes-2026'>
+              <div>
+                <small>Primer gym</small>
+                <b>Rutina de gimnasio para principiantes</b>
+              </div>
+              <span>Plan de 3 días para empezar, registrar pesos y progresar.</span>
+            </a>
+          </div>
         </div>
+      </div>
     </section>
 
-    <!-- Bloque rápido: artículos recientes (acceso sin scroll infinito) -->
-    <section class="content-section" style="padding: 40px 20px 50px; background: #f1f5f9;">
-        <div class="container">
-            <h2 class="section-title" style="font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: 12px;">Artículos y guías nuevas</h2>
-            <p style="text-align: center; max-width: 640px; margin: 0 auto 28px; color: #475569; font-size: 1.05rem;">
-                Lo último publicado: entreno en casa, verano y running. <a href="/blog.html#novedades" style="color: #4338ca; font-weight: 700;">Ver todas las novedades en el blog →</a>
-            </p>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; max-width: 1100px; margin: 0 auto;">
-                <a href="/adelgazar-antes-del-verano-2026.html" style="display: block; background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 18px 20px; text-decoration: none; color: #0f172a; box-shadow: 0 2px 10px rgba(15,23,42,0.06); transition: transform 0.2s;">
-                    <span style="font-size: 0.75rem; font-weight: 800; letter-spacing: 0.06em; color: #0d9488;">VERANO 2026</span>
-                    <div style="font-weight: 700; font-size: 1.05rem; margin-top: 6px;">Adelgazar antes del verano</div>
-                    <div style="color: #64748b; font-size: 0.92rem; margin-top: 8px; line-height: 1.45;">Plan realista, sin crash diet.</div>
-                </a>
-                <a href="/hiit-casa-principiantes-2026.html" style="display: block; background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 18px 20px; text-decoration: none; color: #0f172a; box-shadow: 0 2px 10px rgba(15,23,42,0.06);">
-                    <span style="font-size: 0.75rem; font-weight: 800; letter-spacing: 0.06em; color: #7c3aed;">HIIT · CASA</span>
-                    <div style="font-weight: 700; font-size: 1.05rem; margin-top: 6px;">HIIT para principiantes</div>
-                    <div style="color: #64748b; font-size: 0.92rem; margin-top: 8px; line-height: 1.45;">20 minutos, sin equipo.</div>
-                </a>
-                <a href="/como-perder-barriga-casa-2026.html" style="display: block; background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 18px 20px; text-decoration: none; color: #0f172a; box-shadow: 0 2px 10px rgba(15,23,42,0.06);">
-                    <span style="font-size: 0.75rem; font-weight: 800; letter-spacing: 0.06em; color: #ea580c;">CORE</span>
-                    <div style="font-weight: 700; font-size: 1.05rem; margin-top: 6px;">Perder barriga en casa</div>
-                    <div style="color: #64748b; font-size: 0.92rem; margin-top: 8px; line-height: 1.45;">Ejercicios + plan 4 semanas.</div>
-                </a>
-                <a href="/empezar-correr-2026-guia-paso-paso.html" style="display: block; background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 18px 20px; text-decoration: none; color: #0f172a; box-shadow: 0 2px 10px rgba(15,23,42,0.06);">
-                    <span style="font-size: 0.75rem; font-weight: 800; letter-spacing: 0.06em; color: #2563eb;">RUNNING</span>
-                    <div style="font-weight: 700; font-size: 1.05rem; margin-top: 6px;">Empezar a correr 2026</div>
-                    <div style="color: #64748b; font-size: 0.92rem; margin-top: 8px; line-height: 1.45;">Guía paso a paso actualizada.</div>
-                </a>
-            </div>
+    <section class="band">
+      <div class="shell panel senior-showcase">
+        <div class="senior-copy">
+          <div class="eyebrow">Mayores saludables</div>
+          <h2>Fuerza para empezar tarde, volver con calma o moverse mejor.</h2>
+          <p>EntrenoApp ya tiene un camino específico para personas que no quieren gimnasio complicado: silla, pared, equilibrio, movilidad y paseos suaves.</p>
+          <div class="senior-steps">
+            <div class="senior-step"><i>1</i><div><b>Primero confianza</b><span>Movimientos reconocibles: sentarse, levantarse, apoyar, marchar y caminar.</span></div></div>
+            <div class="senior-step"><i>2</i><div><b>Después constancia</b><span>Sesiones cortas de 20 minutos, con modo suave y descansos tranquilos.</span></div></div>
+            <div class="senior-step"><i>3</i><div><b>Luego progreso real</b><span>La app guarda lo hecho y propone avanzar sin perseguir marcas imposibles.</span></div></div>
+          </div>
+          <div class="actions" style="justify-content:flex-start;margin-bottom:0">
+            <a class='btn primary' data-growth data-growth-source='senior_home' href='/app'>Probar Empezar con calma</a>
+            <a class='btn secondary' data-growth data-growth-source='senior_home' href='/ejercicios-para-mayores-de-70-en-casa'>Guía para mayores de 70</a>
+            <a class='btn secondary' data-growth data-growth-source='senior_home' href='/gimnasia-para-mayores-sentados'>Gimnasia sentados</a>
+          </div>
         </div>
+        <aside class="senior-card" aria-label="Resumen del plan para mayores saludables">
+          <div>
+            <small>Entreno Vital</small>
+            <h3>Sin prisa. Sin vergüenza. Sin perderte.</h3>
+            <p>Una rutina amable para crear fuerza útil en casa y que el primer paso sea posible desde hoy.</p>
+          </div>
+          <div class="senior-metrics">
+            <div class="senior-metric"><b>20</b><span>minutos</span></div>
+            <div class="senior-metric"><b>3</b><span>días</span></div>
+            <div class="senior-metric"><b>0</b><span>material raro</span></div>
+          </div>
+        </aside>
+      </div>
     </section>
 
-    <!-- Running for Beginners Section - SEO Optimized -->
-    <section class="content-section" style="padding: 60px 20px; background: #ffffff;">
-        <div class="container">
-            <h2 class="section-title">🏃 Cómo Empezar a Correr desde Cero: Guía Completa para Principiantes</h2>
-            <p style="text-align: center; font-size: 1.1rem; color: #666; max-width: 800px; margin: 0 auto 40px;">
-                Si quieres <strong>empezar a correr desde cero</strong> pero no sabes cómo, estás en el lugar correcto. Te enseñamos todo lo que necesitas para dar tus primeros pasos de forma segura y efectiva. 
-                Nuestra <a href='/empezar-correr-guia-completa' style='color: #667eea; font-weight: 600;'>guía completa de running</a> se adapta a tu nivel y objetivos, sin importar si eres principiante absoluto o si llevas tiempo sin hacer ejercicio.
-            </p>
-            
-            <!-- Nueva Sección: Cómo Empezar a Correr - Paso a Paso -->
-            <div style="max-width: 1000px; margin: 60px auto 0; background: #ffffff; padding: 40px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);">
-                <h2 style="font-size: 2rem; margin-bottom: 30px; text-align: center; color: #333;">
-                    📝 Cómo Empezar a Correr: Guía Paso a Paso para Principiantes
-                </h2>
-                <p style="text-align: center; font-size: 1.1rem; color: #666; max-width: 800px; margin: 0 auto 40px;">
-                    Si nunca has corrido antes o llevas mucho tiempo sin hacer ejercicio, esta guía paso a paso te enseñará <strong>cómo empezar a correr desde cero</strong> de forma segura y efectiva. También puedes ver nuestro <a href='/empezar-a-correr-2-semanas' style='color: #667eea; font-weight: 600;'>plan rápido de 2 semanas</a> o nuestra <a href='/empezar-correr-guia-completa' style='color: #667eea; font-weight: 600;'>guía completa de 8 semanas</a>.
-                </p>
-                
-                <div style="display: grid; gap: 30px;">
-                    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; border-radius: 16px; color: white;">
-                        <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: white;">Paso 1: Preparación Mental y Física</h3>
-                        <p style="line-height: 1.8; opacity: 0.95; margin-bottom: 15px;">
-                            Antes de empezar a correr, es importante prepararte mental y físicamente. <strong>Para aprender a correr</strong> necesitas paciencia y constancia. 
-                            Establece objetivos realistas: no intentes correr 5K el primer día. Tu objetivo inicial debe ser simplemente salir a caminar/correr 3 veces por semana.
-                        </p>
-                        <ul style="line-height: 1.8; opacity: 0.95; margin: 0;">
-                            <li>Consulta con un médico si tienes más de 40 años o problemas de salud</li>
-                            <li>Establece un horario fijo para tus sesiones (ej: lunes, miércoles, viernes a las 7am)</li>
-                            <li>Prepara tu equipamiento básico: zapatillas de running y ropa cómoda</li>
-                            <li>Mantén una actitud positiva: cada paso cuenta</li>
-                        </ul>
-                    </div>
-                    
-                    <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 30px; border-radius: 16px; color: white;">
-                        <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: white;">Paso 2: Empieza Caminando (Semana 0)</h3>
-                        <p style="line-height: 1.8; opacity: 0.95; margin-bottom: 15px;">
-                            Si eres completamente nuevo en el ejercicio, <strong>para empezar a correr</strong> primero debes acostumbrar a tu cuerpo al movimiento. 
-                            Durante la primera semana (o dos), solo camina a ritmo rápido durante 20-30 minutos, 3-4 veces por semana.
-                        </p>
-                        <ul style="line-height: 1.8; opacity: 0.95; margin: 0;">
-                            <li>Camina a un ritmo que te haga sudar ligeramente pero que puedas mantener</li>
-                            <li>Enfócate en mantener una postura correcta: espalda recta, hombros relajados</li>
-                            <li>Usa este tiempo para acostumbrarte a tus zapatillas y ropa</li>
-                            <li>Cuando puedas caminar 30 minutos cómodamente, estás listo para el siguiente paso</li>
-                        </ul>
-                    </div>
-                    
-                    <div style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); padding: 30px; border-radius: 16px; color: white;">
-                        <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: white;">Paso 3: Alterna Caminar y Correr (Semanas 1-2)</h3>
-                        <p style="line-height: 1.8; opacity: 0.95; margin-bottom: 15px;">
-                            Ahora que tu cuerpo está acostumbrado a caminar, es hora de <strong>aprender a correr</strong> alternando caminar y trotar. 
-                            Este método (conocido como "couch to 5K" o "de sofá a 5K") es la forma más segura y efectiva de empezar.
-                        </p>
-                        <ul style="line-height: 1.8; opacity: 0.95; margin: 0;">
-                            <li><strong>Semana 1:</strong> 1 minuto corriendo suave + 2 minutos caminando. Repite 8 veces (24 minutos total)</li>
-                            <li><strong>Semana 2:</strong> 2 minutos corriendo + 2 minutos caminando. Repite 7 veces (28 minutos total)</li>
-                            <li>Corre a un ritmo conversacional: deberías poder hablar mientras corres</li>
-                            <li>Si te sientes muy cansado, aumenta el tiempo de caminar y reduce el de correr</li>
-                        </ul>
-                    </div>
-                    
-                    <div style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); padding: 30px; border-radius: 16px; color: white;">
-                        <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: white;">Paso 4: Aumenta Progresivamente (Semanas 3-8)</h3>
-                        <p style="line-height: 1.8; opacity: 0.95; margin-bottom: 15px;">
-                            A medida que tu condición física mejora, <strong>para empezar a correr</strong> de forma efectiva debes aumentar gradualmente el tiempo corriendo. 
-                            Nuestro plan de 8 semanas te guía semana a semana hasta que puedas correr 5K sin parar.
-                        </p>
-                        <ul style="line-height: 1.8; opacity: 0.95; margin: 0;">
-                            <li><strong>Semana 3-4:</strong> 3 minutos corriendo + 1 minuto caminando. Repite 5-6 veces</li>
-                            <li><strong>Semana 5-6:</strong> 5 minutos corriendo + 1 minuto caminando. Repite 4-5 veces</li>
-                            <li><strong>Semana 7:</strong> 8-10 minutos corriendo + 1 minuto caminando. Repite 3 veces</li>
-                            <li><strong>Semana 8:</strong> ¡Corre 5K sin parar! (30-40 minutos)</li>
-                        </ul>
-                    </div>
-                    
-                    <div style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); padding: 30px; border-radius: 16px; color: white;">
-                        <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: white;">Paso 5: Mantén la Constancia y Progreso</h3>
-                        <p style="line-height: 1.8; opacity: 0.95; margin-bottom: 15px;">
-                            Una vez que puedas correr 5K, <strong>para seguir aprendiendo a correr</strong> y mejorando, mantén la constancia. 
-                            Establece nuevos objetivos: correr más rápido, más distancia, o simplemente mantener tu rutina.
-                        </p>
-                        <ul style="line-height: 1.8; opacity: 0.95; margin: 0;">
-                            <li>Mantén al menos 3 sesiones de running por semana</li>
-                            <li>Establece nuevos objetivos: 10K, media maratón, o mejorar tu tiempo en 5K</li>
-                            <li>Añade entrenamiento de fuerza 2 veces por semana para prevenir lesiones</li>
-                            <li>Únete a una comunidad de corredores para mantener la motivación</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div style="margin-top: 40px; text-align: center;">
-                    <a href='/empezar-a-correr-2-semanas' style='display: inline-block; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 18px 40px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 1.1rem; box-shadow: 0 4px 15px rgba(102,126,234,0.3);'>
-                        Ver Plan Completo de 2 Semanas →
-                    </a>
-                </div>
-            </div>
-            
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 40px;">
-                <div class="feature-card" style="background: #f8f9fa; padding: 30px; border-radius: 16px;">
-                    <div class="feature-icon" style="font-size: 3rem; margin-bottom: 20px;">📋</div>
-                    <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: #333;">Plan de 8 Semanas</h3>
-                    <p style="color: #666; line-height: 1.6; margin-bottom: 15px;">
-                        Nuestro plan de running para principiantes te lleva de cero a correr 5K en solo 8 semanas. Progresión gradual y segura, sin riesgo de lesiones.
-                    </p>
-                    <a href='/empezar-correr-guia-completa' style='color: #667eea; font-weight: 600; text-decoration: none;'>
-                        Ver plan completo →
-                    </a>
-                </div>
-                
-                <div class="feature-card" style="background: #f8f9fa; padding: 30px; border-radius: 16px;">
-                    <div class="feature-icon" style="font-size: 3rem; margin-bottom: 20px;">👟</div>
-                    <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: #333;">Técnica Correcta</h3>
-                    <p style="color: #666; line-height: 1.6; margin-bottom: 15px;">
-                        Aprende la técnica correcta de carrera desde el primer día. Postura, zancada, respiración y prevención de lesiones comunes en principiantes.
-                    </p>
-                    <a href='/empezar-correr-guia-completa#tecnica' style='color: #667eea; font-weight: 600; text-decoration: none;'>
-                        Aprender técnica →
-                    </a>
-                </div>
-                
-                <div class="feature-card" style="background: #f8f9fa; padding: 30px; border-radius: 16px;">
-                    <div class="feature-icon" style="font-size: 3rem; margin-bottom: 20px;">🎯</div>
-                    <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: #333;">Rutina Personalizada</h3>
-                    <p style="color: #666; line-height: 1.6; margin-bottom: 15px;">
-                        Crea tu rutina para empezar a correr adaptada a tu nivel, objetivos y disponibilidad. Con seguimiento GPS y análisis de progreso.
-                    </p>
-                    <a href='/app' style='color: #667eea; font-weight: 600; text-decoration: none;'>
-                        Crear mi rutina →
-                    </a>
-                </div>
-            </div>
-
-            <!-- Benefits Section -->
-            <div style="max-width: 1000px; margin: 60px auto 0;">
-                <h2 style="font-size: 2rem; margin-bottom: 30px; text-align: center; color: #333;">
-                    💪 Beneficios de Empezar a Correr: Por Qué Deberías Comenzar Hoy
-                </h2>
-                <p style="text-align: center; font-size: 1.1rem; color: #666; max-width: 800px; margin: 0 auto 40px;">
-                    Correr es uno de los ejercicios más accesibles y efectivos que existen. Si estás pensando en <strong>iniciarte en el running</strong>, estos son los beneficios que experimentarás:
-                </p>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-bottom: 40px;">
-                    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; border-radius: 16px; color: white;">
-                        <div style="font-size: 2.5rem; margin-bottom: 15px;">❤️</div>
-                        <h3 style="font-size: 1.4rem; margin-bottom: 15px; color: white;">Salud Cardiovascular</h3>
-                        <p style="line-height: 1.7; opacity: 0.95;">
-                            Correr fortalece tu corazón, reduce la presión arterial y mejora la circulación. Estudios demuestran que correr regularmente reduce el riesgo de enfermedades cardíacas en un 45%.
-                        </p>
-                    </div>
-                    
-                    <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 30px; border-radius: 16px; color: white;">
-                        <div style="font-size: 2.5rem; margin-bottom: 15px;">🔥</div>
-                        <h3 style="font-size: 1.4rem; margin-bottom: 15px; color: white;">Pérdida de Peso</h3>
-                        <p style="line-height: 1.7; opacity: 0.95;">
-                            Correr quema aproximadamente 100 calorías por cada 1.6 km. Una persona que corre 5K tres veces por semana puede quemar hasta 1,500 calorías adicionales semanales.
-                        </p>
-                    </div>
-                    
-                    <div style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); padding: 30px; border-radius: 16px; color: white;">
-                        <div style="font-size: 2.5rem; margin-bottom: 15px;">🧠</div>
-                        <h3 style="font-size: 1.4rem; margin-bottom: 15px; color: white;">Salud Mental</h3>
-                        <p style="line-height: 1.7; opacity: 0.95;">
-                            Correr libera endorfinas, reduce el estrés y la ansiedad, y mejora el estado de ánimo. Muchos corredores reportan mejor calidad de sueño y mayor claridad mental.
-                        </p>
-                    </div>
-                    
-                    <div style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); padding: 30px; border-radius: 16px; color: white;">
-                        <div style="font-size: 2.5rem; margin-bottom: 15px;">💪</div>
-                        <h3 style="font-size: 1.4rem; margin-bottom: 15px; color: white;">Fuerza y Resistencia</h3>
-                        <p style="line-height: 1.7; opacity: 0.95;">
-                            Correr fortalece músculos de piernas, glúteos y core. También mejora la densidad ósea, reduciendo el riesgo de osteoporosis, especialmente importante para mujeres.
-                        </p>
-                    </div>
-                    
-                    <div style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); padding: 30px; border-radius: 16px; color: white;">
-                        <div style="font-size: 2.5rem; margin-bottom: 15px;">⚡</div>
-                        <h3 style="font-size: 1.4rem; margin-bottom: 15px; color: white;">Energía y Vitalidad</h3>
-                        <p style="line-height: 1.7; opacity: 0.95;">
-                            Contrario a lo que muchos piensan, correr aumenta tus niveles de energía durante el día. Te sentirás más activo y productivo en todas tus actividades diarias.
-                        </p>
-                    </div>
-                    
-                    <div style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%); padding: 30px; border-radius: 16px; color: white;">
-                        <div style="font-size: 2.5rem; margin-bottom: 15px;">🎯</div>
-                        <h3 style="font-size: 1.4rem; margin-bottom: 15px; color: white;">Disciplina y Confianza</h3>
-                        <p style="line-height: 1.7; opacity: 0.95;">
-                            Alcanzar objetivos de running (como correr tu primer 5K) aumenta tu autoestima y confianza. La disciplina que desarrollas corriendo se traslada a otras áreas de tu vida.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Plan 8 Semanas Table -->
-            <div style="max-width: 1000px; margin: 60px auto 0; background: #f8f9fa; padding: 40px; border-radius: 20px;">
-                <h2 style="font-size: 2rem; margin-bottom: 20px; text-align: center; color: #333;">
-                    📋 Plan de 8 Semanas para Empezar a Correr desde Cero
-                </h2>
-                <p style="text-align: center; font-size: 1.1rem; color: #666; margin-bottom: 40px;">
-                    Esta tabla muestra la progresión semanal de nuestro plan para <strong>aprender a correr</strong>. Cada semana aumenta gradualmente la intensidad y duración.
-                </p>
-                
-                <div style="overflow-x: auto;">
-                    <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <thead>
-                            <tr style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
-                                <th style="padding: 15px; text-align: left; font-weight: 600;">Semana</th>
-                                <th style="padding: 15px; text-align: left; font-weight: 600;">Sesiones</th>
-                                <th style="padding: 15px; text-align: left; font-weight: 600;">Rutina</th>
-                                <th style="padding: 15px; text-align: left; font-weight: 600;">Duración Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr style="border-bottom: 1px solid #e0e0e0;">
-                                <td style="padding: 15px; font-weight: 600; color: #667eea;">Semana 1-2</td>
-                                <td style="padding: 15px;">3 veces/semana</td>
-                                <td style="padding: 15px;">1 min correr / 2 min caminar (8 rondas)</td>
-                                <td style="padding: 15px;">~30 minutos</td>
-                            </tr>
-                            <tr style="border-bottom: 1px solid #e0e0e0; background: #f8f9fa;">
-                                <td style="padding: 15px; font-weight: 600; color: #667eea;">Semana 3-4</td>
-                                <td style="padding: 15px;">3 veces/semana</td>
-                                <td style="padding: 15px;">2 min correr / 2 min caminar (6 rondas)</td>
-                                <td style="padding: 15px;">~30 minutos</td>
-                            </tr>
-                            <tr style="border-bottom: 1px solid #e0e0e0;">
-                                <td style="padding: 15px; font-weight: 600; color: #667eea;">Semana 5-6</td>
-                                <td style="padding: 15px;">3-4 veces/semana</td>
-                                <td style="padding: 15px;">3 min correr / 1 min caminar (5 rondas)</td>
-                                <td style="padding: 15px;">~25 minutos</td>
-                            </tr>
-                            <tr style="border-bottom: 1px solid #e0e0e0; background: #f8f9fa;">
-                                <td style="padding: 15px; font-weight: 600; color: #667eea;">Semana 7</td>
-                                <td style="padding: 15px;">4 veces/semana</td>
-                                <td style="padding: 15px;">5 min correr / 1 min caminar (4 rondas)</td>
-                                <td style="padding: 15px;">~25 minutos</td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 15px; font-weight: 600; color: #667eea;">Semana 8</td>
-                                <td style="padding: 15px;">4 veces/semana</td>
-                                <td style="padding: 15px;">Correr 5K sin parar</td>
-                                <td style="padding: 15px;">~30-40 minutos</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                
-                <div style="margin-top: 30px; padding: 20px; background: #e3f2fd; border-radius: 12px; border-left: 4px solid #2196f3;">
-                    <p style="margin: 0; color: #1976d2; line-height: 1.7;">
-                        <strong>💡 Consejo:</strong> Este plan es una guía general. Escucha a tu cuerpo y ajusta según tu nivel. Si una semana te resulta muy difícil, repítela antes de avanzar. La clave es la <strong>progresión gradual</strong> y la constancia. 
-                        <a href='/empezar-correr-guia-completa' style='color: #667eea; font-weight: 600;'>Ver plan detallado completo →</a>
-                    </p>
-                </div>
-            </div>
-
-            <!-- Common Mistakes Section -->
-            <div style="max-width: 1000px; margin: 60px auto 0;">
-                <h2 style="font-size: 2rem; margin-bottom: 30px; text-align: center; color: #333;">
-                    ⚠️ Errores Comunes al Empezar a Correr (Y Cómo Evitarlos)
-                </h2>
-                <p style="text-align: center; font-size: 1.1rem; color: #666; max-width: 800px; margin: 0 auto 40px;">
-                    Muchos principiantes cometen estos errores cuando <strong>empiezan a correr desde cero</strong>. Conocerlos te ayudará a evitarlos y progresar más rápido:
-                </p>
-                
-                <div style="display: grid; gap: 25px;">
-                    <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 25px; border-radius: 12px;">
-                        <h3 style="font-size: 1.4rem; margin-bottom: 15px; color: #856404;">
-                            ❌ Error 1: Empezar Demasiado Rápido
-                        </h3>
-                        <p style="color: #856404; line-height: 1.7; margin-bottom: 10px;">
-                            <strong>El problema:</strong> Muchos principiantes quieren correr rápido desde el primer día, lo que lleva a agotamiento, lesiones y desmotivación.
-                        </p>
-                        <p style="color: #856404; line-height: 1.7; margin: 0;">
-                            <strong>✅ La solución:</strong> Empieza a un ritmo conversacional (deberías poder hablar mientras corres). La velocidad vendrá con el tiempo. Enfócate primero en la distancia y la constancia.
-                        </p>
-                    </div>
-                    
-                    <div style="background: #f8d7da; border-left: 4px solid #dc3545; padding: 25px; border-radius: 12px;">
-                        <h3 style="font-size: 1.4rem; margin-bottom: 15px; color: #721c24;">
-                            ❌ Error 2: No Descansar Suficiente
-                        </h3>
-                        <p style="color: #721c24; line-height: 1.7; margin-bottom: 10px;">
-                            <strong>El problema:</strong> Correr todos los días sin descanso no permite que tu cuerpo se recupere, aumentando el riesgo de lesiones y sobreentrenamiento.
-                        </p>
-                        <p style="color: #721c24; line-height: 1.7; margin: 0;">
-                            <strong>✅ La solución:</strong> Como principiante, corre máximo 3-4 veces por semana. Los días de descanso son tan importantes como los días de entrenamiento. Tu cuerpo se fortalece durante el descanso.
-                        </p>
-                    </div>
-                    
-                    <div style="background: #d1ecf1; border-left: 4px solid #0c5460; padding: 25px; border-radius: 12px;">
-                        <h3 style="font-size: 1.4rem; margin-bottom: 15px; color: #0c5460;">
-                            ❌ Error 3: Ignorar el Calentamiento y Estiramiento
-                        </h3>
-                        <p style="color: #0c5460; line-height: 1.7; margin-bottom: 10px;">
-                            <strong>El problema:</strong> Saltarse el calentamiento aumenta el riesgo de lesiones. No estirar después puede causar rigidez y dolor muscular.
-                        </p>
-                        <p style="color: #0c5460; line-height: 1.7; margin: 0;">
-                            <strong>✅ La solución:</strong> Siempre calienta 5-10 minutos caminando antes de correr. Después de correr, estira los músculos principales (cuádriceps, isquiotibiales, gemelos) durante 10-15 minutos.
-                        </p>
-                    </div>
-                    
-                    <div style="background: #d4edda; border-left: 4px solid #28a745; padding: 25px; border-radius: 12px;">
-                        <h3 style="font-size: 1.4rem; margin-bottom: 15px; color: #155724;">
-                            ❌ Error 4: Usar Zapatillas Inadecuadas
-                        </h3>
-                        <p style="color: #155724; line-height: 1.7; margin-bottom: 10px;">
-                            <strong>El problema:</strong> Correr con zapatillas viejas, de otros deportes o que no se adaptan a tu pisada puede causar lesiones en pies, tobillos y rodillas.
-                        </p>
-                        <p style="color: #155724; line-height: 1.7; margin: 0;">
-                            <strong>✅ La solución:</strong> Invierte en un buen par de zapatillas de running. Visita una tienda especializada donde analicen tu pisada (pronadora, supinadora o neutra). Las zapatillas deben reemplazarse cada 500-800 km.
-                        </p>
-                    </div>
-                    
-                    <div style="background: #e2e3e5; border-left: 4px solid #6c757d; padding: 25px; border-radius: 12px;">
-                        <h3 style="font-size: 1.4rem; margin-bottom: 15px; color: #383d41;">
-                            ❌ Error 5: Compararse con Otros
-                        </h3>
-                        <p style="color: #383d41; line-height: 1.7; margin-bottom: 10px;">
-                            <strong>El problema:</strong> Comparar tu progreso con otros corredores (especialmente experimentados) puede desmotivarte y llevarte a entrenar más allá de tus límites.
-                        </p>
-                        <p style="color: #383d41; line-height: 1.7; margin: 0;">
-                            <strong>✅ La solución:</strong> Tu única competencia eres tú mismo. Celebra tus pequeños logros: tu primer kilómetro sin parar, tu primera semana completa, tu primer 5K. Cada persona tiene su propio ritmo.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Equipment Section -->
-            <div style="max-width: 1000px; margin: 60px auto 0; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); padding: 40px; border-radius: 20px;">
-                <h2 style="font-size: 2rem; margin-bottom: 30px; text-align: center; color: #333;">
-                    👟 Equipamiento Necesario para Empezar a Correr
-                </h2>
-                <p style="text-align: center; font-size: 1.1rem; color: #666; max-width: 800px; margin: 0 auto 40px;">
-                    Una de las grandes ventajas del running es que necesitas muy poco equipamiento. Aquí está lo esencial:
-                </p>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px;">
-                    <div style="background: white; padding: 25px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <div style="font-size: 2.5rem; margin-bottom: 15px;">👟</div>
-                        <h3 style="font-size: 1.4rem; margin-bottom: 15px; color: #333;">Zapatillas de Running</h3>
-                        <p style="color: #666; line-height: 1.7; margin-bottom: 15px;">
-                            <strong>Esencial:</strong> El único equipamiento realmente necesario. Busca zapatillas específicas para running, no para otros deportes. Deben tener buena amortiguación y adaptarse a tu tipo de pisada.
-                        </p>
-                        <p style="color: #888; font-size: 0.9rem; margin: 0;">
-                            💰 Inversión: 60-120€ | Duración: 500-800 km
-                        </p>
-                    </div>
-                    
-                    <div style="background: white; padding: 25px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <div style="font-size: 2.5rem; margin-bottom: 15px;">👕</div>
-                        <h3 style="font-size: 1.4rem; margin-bottom: 15px; color: #333;">Ropa Técnica</h3>
-                        <p style="color: #666; line-height: 1.7; margin-bottom: 15px;">
-                            <strong>Recomendado:</strong> Ropa transpirable que evacue el sudor. Evita algodón, que se moja y pesa. En invierno, usa capas (primera capa transpirable, segunda capa aislante, tercera capa cortavientos).
-                        </p>
-                        <p style="color: #888; font-size: 0.9rem; margin: 0;">
-                            💰 Inversión: 30-80€ | Puedes usar ropa deportiva que ya tengas
-                        </p>
-                    </div>
-                    
-                    <div style="background: white; padding: 25px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <div style="font-size: 2.5rem; margin-bottom: 15px;">⌚</div>
-                        <h3 style="font-size: 1.4rem; margin-bottom: 15px; color: #333;">Reloj o App de Running</h3>
-                        <p style="color: #666; line-height: 1.7; margin-bottom: 15px;">
-                            <strong>Opcional pero útil:</strong> Un reloj GPS o una app en tu móvil (como EntrenoApp) te ayuda a medir distancia, tiempo, ritmo y progreso. No es esencial para empezar, pero motiva mucho.
-                        </p>
-                        <p style="color: #888; font-size: 0.9rem; margin: 0;">
-                            💰 Inversión: Gratis (app) o 100-300€ (reloj GPS)
-                        </p>
-                    </div>
-                </div>
-                
-                <div style="margin-top: 30px; padding: 20px; background: white; border-radius: 12px; border: 2px solid #667eea;">
-                    <p style="margin: 0; color: #333; line-height: 1.7; text-align: center;">
-                        <strong>💡 Lo más importante:</strong> No necesitas equipamiento caro para empezar. Con un buen par de zapatillas y ropa cómoda ya puedes dar tus primeros pasos. El resto lo puedes añadir según progreses y veas qué necesitas realmente.
-                    </p>
-                </div>
-            </div>
-
-            <!-- FAQs Section -->
-            <div style="max-width: 900px; margin: 60px auto 0;">
-                <h3 style="font-size: 1.8rem; margin-bottom: 30px; text-align: center; color: #333;">
-                    Preguntas Frecuentes sobre Empezar a Correr
-                </h3>
-                
-                <div style="background: #f8f9fa; padding: 30px; border-radius: 16px; margin-bottom: 20px;">
-                    <h4 style="font-size: 1.3rem; margin-bottom: 10px; color: #333;">
-                        ¿Cómo empezar a correr desde cero?
-                    </h4>
-                    <p style="color: #666; line-height: 1.7;">
-                        Lo ideal es comenzar con caminatas rápidas de 20-30 minutos, 3-4 veces por semana. 
-                        Luego alterna caminar y trotar (ej: 1 minuto corriendo, 2 minutos caminando). 
-                        Progresivamente aumenta el tiempo corriendo. Nuestro <a href='/empezar-correr-guia-completa' style='color: #667eea; font-weight: 600;'>plan de 8 semanas</a> te guía paso a paso desde el primer día hasta correr 5K sin parar.
-                    </p>
-                </div>
-                
-                <div style="background: #f8f9fa; padding: 30px; border-radius: 16px; margin-bottom: 20px;">
-                    <h4 style="font-size: 1.3rem; margin-bottom: 10px; color: #333;">
-                        ¿Cuánto tiempo tarda un principiante en aprender a correr?
-                    </h4>
-                    <p style="color: #666; line-height: 1.7;">
-                        La mayoría de principiantes pueden correr 5K sin parar después de 8-12 semanas de entrenamiento consistente. 
-                        El tiempo varía según tu condición física inicial, edad y frecuencia de entrenamiento. 
-                        Con una rutina adecuada, verás progreso desde la primera semana. 
-                        Lo importante es la constancia, no la velocidad. Nuestro <a href='/empezar-correr-guia-completa' style='color: #667eea; font-weight: 600;'>plan de running para principiantes</a> está diseñado para llevarte de cero a 5K en 8 semanas.
-                    </p>
-                </div>
-                
-                <div style="background: #f8f9fa; padding: 30px; border-radius: 16px; margin-bottom: 20px;">
-                    <h4 style="font-size: 1.3rem; margin-bottom: 10px; color: #333;">
-                        ¿Qué necesito para empezar a correr?
-                    </h4>
-                    <p style="color: #666; line-height: 1.7;">
-                        Lo esencial es: (1) Un buen par de zapatillas de running adaptadas a tu pisada, 
-                        (2) Ropa cómoda y transpirable, (3) Un plan de entrenamiento progresivo, y (4) Motivación y paciencia. 
-                        No necesitas equipamiento caro, solo dar el primer paso. Nuestra app te ayuda con el plan de entrenamiento personalizado. 
-                        También te recomendamos leer nuestra <a href='/empezar-correr-guia-completa' style='color: #667eea; font-weight: 600;'>guía completa de running para principiantes</a>.
-                    </p>
-                </div>
-                
-                <div style="background: #f8f9fa; padding: 30px; border-radius: 16px; margin-bottom: 20px;">
-                    <h4 style="font-size: 1.3rem; margin-bottom: 10px; color: #333;">
-                        ¿Cómo evitar lesiones al empezar a correr?
-                    </h4>
-                    <p style="color: #666; line-height: 1.7;">
-                        Para evitar lesiones cuando empiezas: (1) Calienta antes de correr (5-10 min caminando), (2) Empieza con distancias cortas, 
-                        (3) Alterna días de carrera con descanso, (4) Escucha a tu cuerpo y para si sientes dolor, 
-                        (5) Fortalece músculos con ejercicios complementarios, y (6) Estira después de correr. 
-                        Nuestra <a href='/empezar-correr-guia-completa' style='color: #667eea; font-weight: 600;'>guía completa de running</a> incluye ejercicios de prevención de lesiones y consejos de técnica correcta.
-                    </p>
-                </div>
-                
-                <div style="background: #f8f9fa; padding: 30px; border-radius: 16px; margin-bottom: 20px;">
-                    <h4 style="font-size: 1.3rem; margin-bottom: 10px; color: #333;">
-                        ¿Cuántas veces por semana debo correr como principiante?
-                    </h4>
-                    <p style="color: #666; line-height: 1.7;">
-                        Como principiante, te recomendamos correr <strong>3 veces por semana</strong> con días de descanso entre sesiones. 
-                        Esto permite que tu cuerpo se recupere y se adapte al nuevo ejercicio. A medida que progreses (después de 4-6 semanas), puedes aumentar a 4 veces por semana. 
-                        Lo importante es la constancia, no la frecuencia. Es mejor correr 3 veces por semana de forma constante que 5 veces una semana y luego parar.
-                    </p>
-                </div>
-                
-                <div style="background: #f8f9fa; padding: 30px; border-radius: 16px; margin-bottom: 20px;">
-                    <h4 style="font-size: 1.3rem; margin-bottom: 10px; color: #333;">
-                        ¿Qué ritmo debo llevar al empezar a correr?
-                    </h4>
-                    <p style="color: #666; line-height: 1.7;">
-                        El ritmo ideal es el <strong>ritmo conversacional</strong>: deberías poder mantener una conversación mientras corres sin jadear excesivamente. 
-                        Si no puedes hablar, estás yendo demasiado rápido. Como principiante, no te preocupes por la velocidad. 
-                        Enfócate en completar el tiempo o distancia objetivo a un ritmo cómodo. La velocidad mejorará naturalmente con el tiempo y la práctica.
-                    </p>
-                </div>
-                
-                <div style="background: #f8f9fa; padding: 30px; border-radius: 16px; margin-bottom: 20px;">
-                    <h4 style="font-size: 1.3rem; margin-bottom: 10px; color: #333;">
-                        ¿Puedo empezar a correr si tengo sobrepeso?
-                    </h4>
-                    <p style="color: #666; line-height: 1.7;">
-                        Sí, absolutamente. De hecho, correr es excelente para perder peso. 
-                        Sin embargo, es importante empezar de forma muy gradual para proteger tus articulaciones. Comienza con caminatas rápidas, luego alterna caminar y trotar suavemente. 
-                        Considera también ejercicios de bajo impacto como natación o ciclismo para complementar. 
-                        Si tienes dudas, consulta con un médico antes de comenzar. Tenemos una <a href='/empezar-correr-sobrepeso-2025' style='color: #667eea; font-weight: 600;'>guía específica para empezar a correr con sobrepeso</a>.
-                    </p>
-                </div>
-                
-                <div style="background: #f8f9fa; padding: 30px; border-radius: 16px; margin-bottom: 20px;">
-                    <h4 style="font-size: 1.3rem; margin-bottom: 10px; color: #333;">
-                        ¿Es mejor correr por la mañana o por la tarde?
-                    </h4>
-                    <p style="color: #666; line-height: 1.7;">
-                        No hay una hora "mejor" para correr. Lo más importante es encontrar el momento que mejor se adapte a tu rutina y que puedas mantener de forma consistente. 
-                        Algunas personas prefieren correr por la mañana porque les da energía para el día. Otras prefieren la tarde porque tienen más tiempo y están más despiertos. 
-                        La mejor hora es aquella en la que realmente vas a correr. La constancia es más importante que la hora del día.
-                    </p>
-                </div>
-                
-                <div style="background: #f8f9fa; padding: 30px; border-radius: 16px; margin-bottom: 20px;">
-                    <h4 style="font-size: 1.3rem; margin-bottom: 10px; color: #333;">
-                        ¿Necesito hacer ejercicios de fuerza además de correr?
-                    </h4>
-                    <p style="color: #666; line-height: 1.7;">
-                        Aunque no es estrictamente necesario al principio, hacer ejercicios de fuerza 2-3 veces por semana es muy beneficioso. 
-                        Fortalece los músculos que sostienen tus articulaciones (cuádriceps, glúteos, core), reduce el riesgo de lesiones y mejora tu rendimiento corriendo. 
-                        Puedes hacer ejercicios simples en casa: sentadillas, planchas, zancadas. No necesitas gimnasio ni equipamiento pesado.
-                    </p>
-                </div>
-                
-                <div style="background: #f8f9fa; padding: 30px; border-radius: 16px; margin-bottom: 20px;">
-                    <h4 style="font-size: 1.3rem; margin-bottom: 10px; color: #333;">
-                        ¿Qué hago si me duele algo mientras corro?
-                    </h4>
-                    <p style="color: #666; line-height: 1.7;">
-                        Si sientes dolor agudo o punzante mientras <strong>estás aprendiendo a correr</strong>, <strong>detente inmediatamente</strong>. 
-                        No ignores el dolor pensando que "se pasará". El dolor es la forma en que tu cuerpo te dice que algo no está bien. 
-                        Descansa 2-3 días y si el dolor persiste, consulta con un médico o fisioterapeuta. Es mejor perder unos días de entrenamiento que lesionarte seriamente y tener que parar semanas o meses.
-                    </p>
-                </div>
-                
-                <div style="background: #f8f9fa; padding: 30px; border-radius: 16px; margin-bottom: 20px;">
-                    <h4 style="font-size: 1.3rem; margin-bottom: 10px; color: #333;">
-                        ¿Cuánto tiempo debo correr en mi primera sesión?
-                    </h4>
-                    <p style="color: #666; line-height: 1.7;">
-                        En tu primera sesión, no intentes correr mucho tiempo seguido. 
-                        Comienza con 20-30 minutos totales, alternando 1 minuto corriendo suavemente con 2-3 minutos caminando. 
-                        Repite esto 5-6 veces. El objetivo no es agotarte, sino acostumbrar a tu cuerpo al movimiento. 
-                        Es mejor terminar sintiendo que podrías hacer más, que terminar completamente agotado y sin ganas de volver a correr.
-                    </p>
-                </div>
-                
-                <div style="background: #f8f9fa; padding: 30px; border-radius: 16px; margin-bottom: 20px;">
-                    <h4 style="font-size: 1.3rem; margin-bottom: 10px; color: #333;">
-                        ¿Debo comer algo antes de correr?
-                    </h4>
-                    <p style="color: #666; line-height: 1.7;">
-                        Si corres por la mañana temprano, puedes correr en ayunas (muchos corredores lo hacen). Si corres más tarde, espera 1-2 horas después de una comida grande, o 30-60 minutos después de un snack ligero. 
-                        Si corres menos de 30 minutos, probablemente no necesites comer antes. Para sesiones más largas, un snack ligero (plátano, barrita energética) 30 minutos antes puede ayudar. 
-                        Lo más importante es hidratarte bien antes, durante y después de correr.
-                    </p>
-                </div>
-                
-                <div style="background: #f8f9fa; padding: 30px; border-radius: 16px; margin-bottom: 20px;">
-                    <h4 style="font-size: 1.3rem; margin-bottom: 10px; color: #333;">
-                        ¿Cómo mantengo la motivación para seguir corriendo?
-                    </h4>
-                    <p style="color: #666; line-height: 1.7;">
-                        Mantener la motivación al <strong>empezar a correr</strong> puede ser un desafío. Algunos consejos: (1) Establece objetivos pequeños y alcanzables (ej: "correr 3 veces esta semana"), 
-                        (2) Lleva un registro de tu progreso (usa una app como EntrenoApp), (3) Corre con música o podcasts que te gusten, 
-                        (4) Únete a grupos de running o busca un compañero de entrenamiento, (5) Recompénsate cuando alcances objetivos, 
-                        (6) Recuerda por qué empezaste cuando te falte motivación. La motivación viene y va, pero la disciplina es lo que te mantiene corriendo.
-                    </p>
-                </div>
-                
-                <div style="text-align: center; margin-top: 40px;">
-                    <a class='cta-button cta-primary' href='/empezar-correr-guia-completa' style='display: inline-block; padding: 15px 40px; font-size: 1.1rem;'>
-                        Ver Guía Completa: Plan Running 8 Semanas
-                    </a>
-                </div>
-            </div>
+    <section class="band">
+      <div class="shell panel dark">
+        <div>
+          <h2>Fuerza, running, movilidad y mente en un mismo lugar.</h2>
+          <p>El ecosistema EntrenoApp incluye app web, iOS, Android, guías, blog y canal de YouTube. La web ahora es una puerta de entrada clara, no un laberinto.</p>
+          <div class="guides">
+            <a class='guide' href='/fuerza-personas-mayores'><b>Mayores saludables</b><span>Fuerza con silla, pared y seguridad.</span></a>
+            <a class='guide' href='/gimnasia-para-mayores-sentados'><b>Gimnasia sentados</b><span>Tabla suave en silla para empezar.</span></a>
+            <a class='guide' href='/hacer-ejercicio-desde-cero'><b>Desde cero</b><span>Primeros pasos sin agobio.</span></a>
+            <a class='guide' href='/empezar-a-andar-desde-cero'><b>Caminar desde cero</b><span>Plan suave de 4 semanas.</span></a>
+            <a class='guide' href='/controlar-rutina-gimnasio'><b>Tu propia rutina</b><span>Planifica y registra pesos, tiempos y progreso.</span></a>
+            <a class='guide' href='/rutina-gym-principiantes-2026'><b>Gym principiantes</b><span>Plan de 3 días con registro de progreso.</span></a>
+            <a class='guide' href='/workout-guides'><b>Entrenamiento</b><span>Rutinas en casa, gym y principiantes.</span></a>
+            <a class='guide' href='/empezar-correr-2026-guia-paso-paso'><b>Running</b><span>Empieza a correr paso a paso.</span></a>
+            <a class='guide' href='/guias'><b>Todas las guías</b><span>Contenido ordenado por objetivo.</span></a>
+          </div>
         </div>
+      </div>
     </section>
 
-    <!-- Black Friday & Navidad Section -->
-    <section class="content-section" style="background: linear-gradient(135deg, #ff6b6b, #ee5a6f); padding: 60px 20px; color: white;">
-        <div class="container">
-            <h2 class="section-title" style="color: white; text-align: center; margin-bottom: 30px;">
-                🔥 Black Friday y Navidad 2026: Ofertas y Regalos Fitness
-            </h2>
-            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 40px; opacity: 0.95;">
-                Aprovecha las mejores ofertas de Black Friday y encuentra los regalos perfectos para runners y amantes del fitness esta Navidad.
-            </p>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1000px; margin: 0 auto;">
-                <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 30px; border-radius: 16px; border: 2px solid rgba(255,255,255,0.3);">
-                    <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: white;">🔥 Black Friday Running y Fitness</h3>
-                    <p style="line-height: 1.7; margin-bottom: 20px; opacity: 0.95;">
-                        Descubre las mejores ofertas de Black Friday en zapatillas running, relojes fitness, equipamiento y suplementos. 
-                        Descuentos de hasta el 50%.
-                    </p>
-                    <a href='/black-friday-running-fitness-2025' style='display: inline-block; background: white; color: #ff6b6b; padding: 12px 30px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s;'>
-                        Ver Ofertas Black Friday →
-                    </a>
-                </div>
-                
-                <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 30px; border-radius: 16px; border: 2px solid rgba(255,255,255,0.3);">
-                    <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: white;">🎁 Regalos Fitness Navidad 2026</h3>
-                    <p style="line-height: 1.7; margin-bottom: 20px; opacity: 0.95;">
-                        Ideas perfectas de regalos para runners y amantes del fitness. Desde regalos premium hasta opciones económicas. 
-                        Encuentra el regalo perfecto.
-                    </p>
-                    <a href='/regalos-fitness-navidad-2025' style='display: inline-block; background: white; color: #ff6b6b; padding: 12px 30px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s;'>
-                        Ver Ideas de Regalos →
-                    </a>
-                </div>
-            </div>
+    <section class="band">
+      <div class="shell panel platforms">
+        <div>
+          <h2>Web, iOS y Android. Elige dónde entrenar.</h2>
+          <p>Abre la app web para probar ahora, o instala EntrenoApp desde las stores para llevarla contigo.</p>
         </div>
+        <div class="actions" style="justify-content:flex-start;margin:0">
+          <a class='btn primary' data-growth data-growth-source='platforms' href='/app'>Abrir app web</a>
+          <a class="btn secondary" href="https://apps.apple.com/es/app/entrenoapp/id6749792687" rel="noopener" data-growth data-growth-source="platforms">App Store</a>
+          <a class="btn secondary" href="https://play.google.com/store/apps/details?id=com.lipastudios.entrenoapp" rel="noopener" data-growth data-growth-source="platforms">Google Play</a>
+        </div>
+      </div>
     </section>
 
-    <!-- YouTube Videos Section -->
-    <section id="youtube-videos" style="padding: 60px 20px; background: #f8f9fa;">
-        <div class="container">
-            <h2 class="section-title">📺 Videos de EntrenoApp</h2>
-            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 40px; color: #666;">
-                Aprende fitness con nuestros tutoriales y rutinas
-            </p>
-            <div id="youtube-gallery"></div>
+    <section class="band" id="faq">
+      <div class="shell panel">
+        <div>
+          <div class="eyebrow">Preguntas frecuentes</div>
+          <h2>Lo que la gente pregunta antes de empezar.</h2>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>¿EntrenoApp es gratis de verdad?</summary>
+              <p>Puedes crear tu rutina y registrar tus entrenamientos gratis. Plus es opcional; no necesitas contratarlo para empezar.</p>
+            </details>
+            <details class="faq-item">
+              <summary>¿Necesito crear una cuenta?</summary>
+              <p>No. Puedes entrenar sin registro obligatorio: tus datos se guardan localmente en tu dispositivo siempre que sea posible.</p>
+            </details>
+            <details class="faq-item">
+              <summary>¿En qué dispositivos funciona?</summary>
+              <p>En web desde cualquier navegador, en iPhone desde la App Store y en Android desde Google Play.</p>
+            </details>
+            <details class="faq-item">
+              <summary>¿Sirve si nunca he entrenado?</summary>
+              <p>Sí. Hay caminos específicos para empezar desde cero: caminar, fuerza suave y una primera semana fácil, incluyendo rutinas pensadas para personas mayores con silla, pared y equilibrio.</p>
+            </details>
+            <details class="faq-item">
+              <summary>¿Puedo usar mi propia rutina de gimnasio?</summary>
+              <p>Sí. Puedes meter tus propios ejercicios y registrar pesos, tiempos y progreso sesión a sesión, sin libreta.</p>
+            </details>
+            <details class="faq-item">
+              <summary>¿Necesito Plus para empezar?</summary>
+              <p>No. La rutina y el registro básico son gratis. Plus añade adaptación del entrenamiento, revisión semanal e historial avanzado por 4,99 €/mes o 29,99 €/año, con 7 días de prueba en el plan anual para nuevas suscripciones elegibles. Se contrata desde la app iOS o Android.</p>
+            </details>
+          </div>
         </div>
+      </div>
     </section>
 
-    <!-- Features Section -->
-    <section id="features" class="features-section">
-        <div class="container">
-            <h2 class="section-title">¿Por qué elegir EntrenoApp?</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🏃‍♂️</div>
-                    <h3 class="feature-title">Running con GPS - Empezar a Correr desde Cero</h3>
-                    <p class="feature-description">
-                        Planes de running personalizados para principiantes con seguimiento GPS en tiempo real. 
-                        Aprende a correr desde cero con rutas, distancias, ritmos y análisis detallado de tus carreras. 
-                        <a href='/empezar-correr-guia-completa' style='color: #667eea; font-weight: 600;'>Ver guía completa →</a>
-                    </p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">🏋️‍♂️</div>
-                    <h3 class="feature-title">Gimnasio Completo</h3>
-                    <p class="feature-description">
-                        Rutinas de gimnasio adaptadas a tu nivel. Ejercicios con técnica correcta, 
-                        progresión automática y seguimiento de pesos y repeticiones.
-                    </p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
-                    <h3 class="feature-title">Entrenamiento Funcional</h3>
-                    <p class="feature-description">
-                        WODs funcionales y entrenamientos HIIT. Mejora tu condición física 
-                        con ejercicios que imitan movimientos de la vida diaria.
-                    </p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">📊</div>
-                    <h3 class="feature-title">Seguimiento de Salud</h3>
-                    <p class="feature-description">
-                        Monitorea pasos, frecuencia cardíaca, sueño y actividad. 
-                        Integración con dispositivos de salud para un seguimiento completo.
-                    </p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">🏆</div>
-                    <h3 class="feature-title">Retos Diarios</h3>
-                    <p class="feature-description">
-                        Mantén la motivación con retos diarios personalizados. 
-                        Sistema de gamificación con logros, puntos y niveles.
-                    </p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">📱</div>
-                    <h3 class="feature-title">Web, iOS y Android</h3>
-                    <p class="feature-description">
-                        Usa EntrenoApp en navegador, descárgala en App Store o instálala desde Google Play.
-                        La experiencia es rápida, visual y sin registro obligatorio.
-                    </p>
-                </div>
-            </div>
+    <section class="final">
+      <div class="shell">
+        <h2>Empieza con una sesión sencilla.</h2>
+        <p>No necesitas una semana perfecta. Solo un primer entreno claro, cómodo y posible.</p>
+        <div class="actions">
+          <a class='btn primary' data-growth data-growth-source='final' href='/app'>Abrir EntrenoApp gratis</a>
+          <a class='btn secondary' data-growth data-growth-source='final' href='/guias'>Ver guías</a>
         </div>
+      </div>
     </section>
+  </main>
 
-    <!-- Content Section -->
-    <section class="content-section">
-        <div class="container">
-            <h2 class="section-title">Todo lo que necesitas para tu fitness</h2>
-            <div class="content-grid">
-                <div class="content-card">
-                    <h3 class="content-title">Planes Personalizados para Empezar a Correr</h3>
-                    <p class="content-text">
-                        Nuestro algoritmo crea planes únicos basados en tu nivel, objetivos y disponibilidad. 
-                        Desde principiantes absolutos hasta atletas avanzados.
-                    </p>
-                    <ul class="content-list">
-                        <li>Evaluación inicial completa</li>
-                        <li>Adaptación automática del plan</li>
-                        <li>Progresión gradual y segura - <a href='/empezar-correr-guia-completa' style='color: #667eea;'>Ver plan de 8 semanas</a></li>
-                        <li>Objetivos realistas y medibles</li>
-                    </ul>
-                </div>
-                
-                <div class="content-card">
-                    <h3 class="content-title">Tecnología Avanzada</h3>
-                    <p class="content-text">
-                        Utilizamos las últimas tecnologías para ofrecerte la mejor experiencia de entrenamiento.
-                    </p>
-                    <ul class="content-list">
-                        <li>GPS de alta precisión</li>
-                        <li>Integración con dispositivos de salud</li>
-                        <li>Análisis de datos en tiempo real</li>
-                        <li>Notificaciones inteligentes</li>
-                    </ul>
-                </div>
-                
-                <div class="content-card">
-                    <h3 class="content-title">Comunidad y Motivación</h3>
-                    <p class="content-text">
-                        Únete a una comunidad activa de personas comprometidas con su salud y fitness.
-                    </p>
-                    <ul class="content-list">
-                        <li>Retos comunitarios</li>
-                        <li>Compartir logros</li>
-                        <li>Consejos de expertos</li>
-                        <li>Soporte 24/7</li>
-                    </ul>
-                </div>
-                
-                <div class="content-card">
-                    <h3 class="content-title">Resultados Reales</h3>
-                    <p class="content-text">
-                        Creado por un runner real con años de experiencia en medias maratones y entrenamiento de fuerza. 
-                        Planes probados y basados en la práctica, no en teoría.
-                    </p>
-                    <ul class="content-list">
-                        <li>100% gratuito y sin compromiso</li>
-                        <li>Contenido basado en experiencia real</li>
-                        <li>Progresión visible desde la semana 1</li>
-                        <li>Guías actualizadas constantemente</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>
+        <a href='/guias'>Guías</a>
+        <a href='/blog'>Blog</a>
+        <a href='/plus' data-growth data-growth-source='footer'>Plus</a>
+        <a href='/coach' data-growth data-growth-source='footer'>Coach</a>
+        <a href='/resources'>Recursos</a>
+        <a href='/privacy'>Privacidad</a>
+        <a href='/contact'>Contacto</a>
+      </div>
+      <div>© 2026 EntrenoApp · LIPA Studios</div>
+    </div>
+  </footer>
+  <script defer src="js/growth-tracking.js?v=20261021"></script>
+  <script>
+    (function() {
+      var demo = document.querySelector('.phone-demo');
+      if (!demo) return;
 
-    <!-- Simplified UX sections -->
-    <section class="content-section" style="background: #f5f7ff; padding: 50px 20px;">
-        <div class="container" style="text-align:center;">
-            <div style="opacity:.7; font-size:.95rem; margin-bottom: 20px;">Confiable y fácil de usar</div>
-            <div style="display:flex; gap:24px; justify-content:center; flex-wrap:wrap;">
-                <div style="padding:8px 14px; background:#fff; border-radius:999px; border:1px solid #e8e8f6;">Privacidad primero</div>
-                <div style="padding:8px 14px; background:#fff; border-radius:999px; border:1px solid #e8e8f6;">Publicidad no intrusiva</div>
-                <div style="padding:8px 14px; background:#fff; border-radius:999px; border:1px solid #e8e8f6;">Funciona en móvil y web</div>
-            </div>
-        </div>
-    </section>
+      var panels = Array.prototype.slice.call(demo.querySelectorAll('[data-demo-panel]'));
+      var controls = Array.prototype.slice.call(demo.querySelectorAll('[data-demo-control]'));
+      var progress = Array.prototype.slice.call(demo.querySelectorAll('.demo-progress span'));
+      var caption = demo.querySelector('[data-demo-caption]');
+      var toggle = demo.querySelector('[data-demo-toggle]');
+      var labels = [
+        '1. Cuéntanos qué buscas',
+        '2. Recibe tu plan personalizado',
+        '3. Mira el entrenamiento de hoy',
+        '4. Completa cada serie',
+        '5. Guarda tu progreso'
+      ];
+      var current = 0;
+      var timer = null;
+      var paused = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    <section class="content-section" style="padding: 60px 20px; background: #ffffff;">
-        <div class="container">
-            <h2 class="section-title">Así de fácil funciona</h2>
-            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:24px;">
-                <div class="feature-card">
-                    <div class="feature-icon">📝</div>
-                    <h3 class="feature-title">1) Define tu objetivo</h3>
-                    <p class="feature-description">Peso, salud, rendimiento o estética. Nosotros nos adaptamos a ti.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🤖</div>
-                    <h3 class="feature-title">2) Plan inteligente</h3>
-                    <p class="feature-description">Ajuste automático de cargas, intensidades y descansos.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📈</div>
-                    <h3 class="feature-title">3) Progreso claro</h3>
-                    <p class="feature-description">Gráficos simples, retos semanales y recordatorios amables.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="content-section" style="background: #f8f9fb; padding: 60px 20px;">
-        <div class="container">
-            <h2 class="section-title">Lo que dice nuestra comunidad</h2>
-            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:24px;">
-                <div style="background:#fff; border-radius:16px; padding:24px; box-shadow:0 6px 18px rgba(0,0,0,.06);">
-                    <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
-                        <div style="width:44px; height:44px; border-radius:50%; background:linear-gradient(135deg,#667eea,#764ba2);"></div>
-                        <div>
-                            <div style="font-weight:600;">María G.</div>
-                            <div style="font-size:.9rem; color:#666;">Principiante en running</div>
-                        </div>
-                    </div>
-                    <p style="color:#444; line-height:1.6;">“En dos semanas pasé de cero a correr 20 minutos seguidos. La app es clara y motiva sin agobiar.”</p>
-                </div>
-                <div style="background:#fff; border-radius:16px; padding:24px; box-shadow:0 6px 18px rgba(0,0,0,.06);">
-                    <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
-                        <div style="width:44px; height:44px; border-radius:50%; background:linear-gradient(135deg,#00d4ff,#0099cc);"></div>
-                        <div>
-                            <div style="font-weight:600;">Javier R.</div>
-                            <div style="font-size:.9rem; color:#666;">Fuerza en casa</div>
-                        </div>
-                    </div>
-                    <p style="color:#444; line-height:1.6;">“Rutinas cortas y efectivas. Por fin mantengo constancia sin apps complicadas.”</p>
-                </div>
-                <div style="background:#fff; border-radius:16px; padding:24px; box-shadow:0 6px 18px rgba(0,0,0,.06);">
-                    <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
-                        <div style="width:44px; height:44px; border-radius:50%; background:linear-gradient(135deg,#f093fb,#f5576c);"></div>
-                        <div>
-                            <div style="font-weight:600;">Laura P.</div>
-                            <div style="font-size:.9rem; color:#666;">Funcional & HIIT</div>
-                        </div>
-                    </div>
-                    <p style="color:#444; line-height:1.6;">“Los retos semanales me engancharon. Me siento con más energía todo el día.”</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Related Content Section - SEO Internal Linking -->
-    <!-- Nueva Sección: Artículos Destacados -->
-    <section class="content-section" style="background: linear-gradient(135deg, #f0f4ff 0%, #e5edff 100%); padding: 60px 20px;">
-        <div class="container">
-            <h2 class="section-title" style="color: #667eea;">⭐ Nuevos Artículos: Mejora tu Running</h2>
-            <p style="text-align: center; font-size: 1.1rem; color: #666; max-width: 700px; margin: 0 auto 40px;">
-                Guías nuevas y actualizadas para mejorar tu experiencia corriendo: motivación, nutrición y comparaciones.
-            </p>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;">
-                <div style="background: white; border-radius: 16px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.3s; border: 2px solid #667eea;">
-                    <h3 style="font-size: 1.3rem; margin-bottom: 12px; color: #667eea;">
-                        <a href='/mantener-motivacion-correr-2025' style='color: #667eea; text-decoration: none;'>💪 Mantener la Motivación para Correr</a>
-                    </h3>
-                    <p style="color: #666; line-height: 1.6; margin-bottom: 15px;">
-                        10 estrategias probadas para no abandonar el running. Consejos psicológicos, rutinas y técnicas que realmente funcionan.
-                    </p>
-                    <a href='/mantener-motivacion-correr-2025' style='color: #667eea; font-weight: 700; text-decoration: none;'>
-                        Leer artículo →
-                    </a>
-                </div>
-                <div style="background: white; border-radius: 16px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.3s; border: 2px solid #667eea;">
-                    <h3 style="font-size: 1.3rem; margin-bottom: 12px; color: #667eea;">
-                        <a href='/running-vs-caminar-2025' style='color: #667eea; text-decoration: none;'>🏃 vs 🚶 Running vs Caminar</a>
-                    </h3>
-                    <p style="color: #666; line-height: 1.6; margin-bottom: 15px;">
-                        ¿Cuál es mejor para empezar? Comparación completa: calorías, beneficios, lesiones, tiempo. Guía para principiantes.
-                    </p>
-                    <a href='/running-vs-caminar-2025' style='color: #667eea; font-weight: 700; text-decoration: none;'>
-                        Ver comparación →
-                    </a>
-                </div>
-                <div style="background: white; border-radius: 16px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.3s; border: 2px solid #667eea;">
-                    <h3 style="font-size: 1.3rem; margin-bottom: 12px; color: #667eea;">
-                        <a href='/que-comer-antes-despues-correr-2025' style='color: #667eea; text-decoration: none;'>🍎 Qué Comer Antes y Después</a>
-                    </h3>
-                    <p style="color: #666; line-height: 1.6; margin-bottom: 15px;">
-                        Guía completa de nutrición para runners: timing perfecto, alimentos ideales, hidratación y ejemplos de comidas.
-                    </p>
-                    <a href='/que-comer-antes-despues-correr-2025' style='color: #667eea; font-weight: 700; text-decoration: none;'>
-                        Ver guía →
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="content-section" style="background: #f8f9fa; padding: 60px 20px;">
-        <div class="container">
-            <h2 class="section-title">📚 Guías y Artículos sobre Running y Fitness</h2>
-            <p style="text-align: center; font-size: 1.1rem; color: #666; max-width: 700px; margin: 0 auto 40px;">
-                Descubre nuestras guías completas para empezar a correr, mejorar tu técnica y alcanzar tus objetivos de fitness.
-            </p>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;">
-                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 16px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.3s;">
-                    <h3 style="font-size: 1.3rem; margin-bottom: 12px; color: white;">
-                        <a href='/empezar-a-correr' style='color: white; text-decoration: none;'>🧭 HUB: Empezar a Correr desde Cero</a>
-                    </h3>
-                    <p style="color: rgba(255,255,255,0.9); line-height: 1.6; margin-bottom: 15px;">
-                        Todos los planes y guías en un solo lugar: 2 semanas, 8 semanas, errores comunes, zapatillas y nutrición. Todo lo que necesitas para empezar a correr.
-                    </p>
-                    <a href='/empezar-a-correr' style='color: white; font-weight: 700; text-decoration: underline;'>
-                        Ver HUB completo →
-                    </a>
-                </div>
-                <div style="background: white; border-radius: 16px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.3s;">
-                    <h3 style="font-size: 1.3rem; margin-bottom: 12px; color: #333;">
-                        <a href='/empezar-correr-guia-completa' style='color: #333; text-decoration: none;'>🏃 Plan Running 8 Semanas: De Cero a 5K</a>
-                    </h3>
-                    <p style="color: #666; line-height: 1.6; margin-bottom: 15px;">
-                        Guía completa para empezar a correr desde cero. Plan de entrenamiento de 8 semanas, técnica correcta, prevención de lesiones y consejos expertos.
-                    </p>
-                    <a href='/empezar-correr-guia-completa' style='color: #667eea; font-weight: 600; text-decoration: none;'>
-                        Leer guía completa →
-                    </a>
-                </div>
-                
-                <div style="background: white; border-radius: 16px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.3s;">
-                    <h3 style="font-size: 1.3rem; margin-bottom: 12px; color: #333;">
-                        <a href='/empezar-correr-sobrepeso-2025' style='color: #333; text-decoration: none;'>🏃 Empezar a Correr con Sobrepeso</a>
-                    </h3>
-                    <p style="color: #666; line-height: 1.6; margin-bottom: 15px;">
-                        Guía especializada para empezar a correr si tienes sobrepeso. Consejos de seguridad, progresión adaptada y ejercicios complementarios.
-                    </p>
-                    <a href='/empezar-correr-sobrepeso-2025' style='color: #667eea; font-weight: 600; text-decoration: none;'>
-                        Leer artículo →
-                    </a>
-                </div>
-                
-                <div style="background: white; border-radius: 16px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.3s;">
-                    <h3 style="font-size: 1.3rem; margin-bottom: 12px; color: #333;">
-                        <a href='/rutina-gym-principiantes-2025' style='color: #333; text-decoration: none;'>🏋️ Rutina de Gimnasio para Principiantes</a>
-                    </h3>
-                    <p style="color: #666; line-height: 1.6; margin-bottom: 15px;">
-                        Plan de entrenamiento de gimnasio completo para principiantes. Ejercicios básicos, técnica correcta y progresión segura.
-                    </p>
-                    <a href='/rutina-gym-principiantes-2025' style='color: #667eea; font-weight: 600; text-decoration: none;'>
-                        Ver rutina →
-                    </a>
-                </div>
-                
-                <div style="background: white; border-radius: 16px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.3s;">
-                    <h3 style="font-size: 1.3rem; margin-bottom: 12px; color: #333;">
-                        <a href='/guia-completa-fitness-casa-2025' style='color: #333; text-decoration: none;'>🏠 Fitness en Casa: Guía Completa 2026</a>
-                    </h3>
-                    <p style="color: #666; line-height: 1.6; margin-bottom: 15px;">
-                        Todo lo que necesitas para entrenar en casa. Rutinas sin equipamiento, ejercicios efectivos y consejos para mantener la motivación.
-                    </p>
-                    <a href='/guia-completa-fitness-casa-2025' style='color: #667eea; font-weight: 600; text-decoration: none;'>
-                        Ver guía →
-                    </a>
-                </div>
-                
-                <div style="background: white; border-radius: 16px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.3s;">
-                    <h3 style="font-size: 1.3rem; margin-bottom: 12px; color: #333;">
-                        <a href='/nutricion-deportiva-guia-completa-2025' style='color: #333; text-decoration: none;'>🥗 Nutrición Deportiva: Guía Completa</a>
-                    </h3>
-                    <p style="color: #666; line-height: 1.6; margin-bottom: 15px;">
-                        Aprende a alimentarte correctamente para mejorar tu rendimiento. Guía completa de nutrición para runners y deportistas.
-                    </p>
-                    <a href='/nutricion-deportiva-guia-completa-2025' style='color: #667eea; font-weight: 600; text-decoration: none;'>
-                        Leer guía →
-                    </a>
-                </div>
-                <div style="background: white; border-radius: 16px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.3s;">
-                    <h3 style="font-size: 1.3rem; margin-bottom: 12px; color: #333;">
-                        <a href='/suplementos-esenciales-gimnasio-2025' style='color: #333; text-decoration: none;'>🥛 4 Suplementos Esenciales Gimnasio 2026</a>
-                    </h3>
-                    <p style="color: #666; line-height: 1.6; margin-bottom: 15px;">
-                        Proteína ISO whey, creatina, magnesio y preentreno. Guía con enlaces Amazon para elegir bien.
-                    </p>
-                    <a href='/suplementos-esenciales-gimnasio-2025' style='color: #667eea; font-weight: 600; text-decoration: none;'>
-                        Ver guía →
-                    </a>
-                </div>
-                <div style="background: white; border-radius: 16px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.3s;">
-                    <h3 style="font-size: 1.3rem; margin-bottom: 12px; color: #333;">
-                        <a href='/equipamiento-gimnasio-casa-2025' style='color: #333; text-decoration: none;'>🏋️ Equipamiento Gimnasio Casa 2026</a>
-                    </h3>
-                    <p style="color: #666; line-height: 1.6; margin-bottom: 15px;">
-                        Barras, discos, mancuernas ajustables, bandas, paralelas, barra dominadas, chaleco y más. Enlaces Amazon.
-                    </p>
-                    <a href='/equipamiento-gimnasio-casa-2025' style='color: #667eea; font-weight: 600; text-decoration: none;'>
-                        Ver guía →
-                    </a>
-                </div>
-                <div style="background: #fff; padding: 24px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border: 2px solid transparent; transition: all 0.3s;">
-                    <h3 style="font-size: 1.3rem; margin-bottom: 12px; color: #333;">
-                        <a href='/como-perder-barriga-casa-2026' style='color: #333; text-decoration: none;'>🏠 Cómo Perder Barriga en Casa 2026</a>
-                    </h3>
-                    <p style="color: #666; line-height: 1.6; margin-bottom: 15px;">
-                        8 ejercicios efectivos + plan de 4 semanas. Sin equipamiento caro.
-                    </p>
-                    <a href='/como-perder-barriga-casa-2026' style='color: #667eea; font-weight: 600; text-decoration: none;'>
-                        Ver guía →
-                    </a>
-                </div>
-                <div style="background: #fff; padding: 24px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border: 2px solid transparent; transition: all 0.3s;">
-                    <h3 style="font-size: 1.3rem; margin-bottom: 12px; color: #333;">
-                        <a href='/que-comprar-gimnasio-casa-budget-2026' style='color: #333; text-decoration: none;'>💰 Gym Casa con Poco Dinero 2026</a>
-                    </h3>
-                    <p style="color: #666; line-height: 1.6; margin-bottom: 15px;">
-                        Qué comprar primero: bandas, mancuernas, barras. Lista priorizada por presupuesto.
-                    </p>
-                    <a href='/que-comprar-gimnasio-casa-budget-2026' style='color: #667eea; font-weight: 600; text-decoration: none;'>
-                        Ver guía →
-                    </a>
-                </div>
-                <div style="background: white; border-radius: 16px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.3s;">
-                    <h3 style="font-size: 1.3rem; margin-bottom: 12px; color: #333;">
-                        <a href='/accesorios-medicion-fitness-2025' style='color: #333; text-decoration: none;'>📏 Accesorios y Medición Fitness 2026</a>
-                    </h3>
-                    <p style="color: #666; line-height: 1.6; margin-bottom: 15px;">
-                        Foam roller, muñequeras, cinturón, cinta métrica, adipómetro, báscula y trípode. Guía + enlaces Amazon.
-                    </p>
-                    <a href='/accesorios-medicion-fitness-2025' style='color: #667eea; font-weight: 600; text-decoration: none;'>
-                        Ver guía →
-                    </a>
-                </div>
-                <div style="background: white; border-radius: 16px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.3s;">
-                    <h3 style="font-size: 1.3rem; margin-bottom: 12px; color: #333;">
-                        <a href='/tendencias-fitness-running-2026' style='color: #333; text-decoration: none;'>📈 Tendencias Fitness y Running 2026</a>
-                    </h3>
-                    <p style="color: #666; line-height: 1.6; margin-bottom: 15px;">
-                        Qué cambia este año: híbrido, recuperación, tecnología y suplementación. Guía actualizada.
-                    </p>
-                    <a href='/tendencias-fitness-running-2026' style='color: #667eea; font-weight: 600; text-decoration: none;'>
-                        Leer artículo →
-                    </a>
-                </div>
-                <div style="background: white; border-radius: 16px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.3s;">
-                    <h3 style="font-size: 1.3rem; margin-bottom: 12px; color: #333;">
-                        <a href='/empezar-correr-2026-guia-paso-paso' style='color: #333; text-decoration: none;'>🏃 Empezar a Correr 2026: Guía Paso a Paso</a>
-                    </h3>
-                    <p style="color: #666; line-height: 1.6; margin-bottom: 15px;">
-                        Plan rápido o completo, errores a evitar, zapatillas y nutrición. Todo actualizado para este año.
-                    </p>
-                    <a href='/empezar-correr-2026-guia-paso-paso' style='color: #667eea; font-weight: 600; text-decoration: none;'>
-                        Leer guía →
-                    </a>
-                </div>
-                <div style="background: white; border-radius: 16px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.3s;">
-                    <h3 style="font-size: 1.3rem; margin-bottom: 12px; color: #333;">
-                        <a href='/mejores-suplementos-gym-running-2026' style='color: #333; text-decoration: none;'>💪 Mejores Suplementos Gym y Running 2026</a>
-                    </h3>
-                    <p style="color: #666; line-height: 1.6; margin-bottom: 15px;">
-                        Proteína, creatina, magnesio y preentreno. Guía actualizada + enlaces Amazon.
-                    </p>
-                    <a href='/mejores-suplementos-gym-running-2026' style='color: #667eea; font-weight: 600; text-decoration: none;'>
-                        Ver guía →
-                    </a>
-                </div>
-                <div style="background: white; border-radius: 16px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.3s;">
-                    <h3 style="font-size: 1.3rem; margin-bottom: 12px; color: #333;">
-                        <a href='/errores-comunes-empezar-correr-2025' style='color: #333; text-decoration: none;'>⚠️ Errores Comunes al Empezar a Correr</a>
-                    </h3>
-                    <p style="color: #666; line-height: 1.6; margin-bottom: 15px;">
-                        Evita estos 10 errores comunes que cometen los principiantes al empezar a correr. Aprende qué NO hacer para progresar de forma segura y sin lesiones.
-                    </p>
-                    <a href='/errores-comunes-empezar-correr-2025' style='color: #667eea; font-weight: 600; text-decoration: none;'>
-                        Leer artículo →
-                    </a>
-                </div>
-                
-                <div style="background: white; border-radius: 16px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.3s;">
-                    <h3 style="font-size: 1.3rem; margin-bottom: 12px; color: #333;">
-                        <a href='/calzado-ideal-empezar-correr-2025' style='color: #333; text-decoration: none;'>👟 Calzado Ideal para Empezar a Correr</a>
-                    </h3>
-                    <p style="color: #666; line-height: 1.6; margin-bottom: 15px;">
-                        Guía completa sobre cómo elegir las zapatillas ideales para empezar a correr. Tipos de pisada, características importantes y recomendaciones para principiantes.
-                    </p>
-                    <a href='/calzado-ideal-empezar-correr-2025' style='color: #667eea; font-weight: 600; text-decoration: none;'>
-                        Leer guía →
-                    </a>
-                </div>
-                
-                <div style="background: white; border-radius: 16px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.3s;">
-                    <h3 style="font-size: 1.3rem; margin-bottom: 12px; color: #333;">
-                        <a href='/workout-guides' style='color: #333; text-decoration: none;'>📖 Todas las Guías de Entrenamiento</a>
-                    </h3>
-                    <p style="color: #666; line-height: 1.6; margin-bottom: 15px;">
-                        Accede a todas nuestras guías de entrenamiento: running, gimnasio, funcional, nutrición y más. Todo lo que necesitas en un solo lugar.
-                    </p>
-                    <a href='/workout-guides' style='color: #667eea; font-weight: 600; text-decoration: none;'>
-                        Ver todas las guías →
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="content-section" style="background: #fff; padding: 50px 20px;">
-        <div class="container" style="text-align:center;">
-            <a class='cta-button cta-primary' href='/app' data-growth data-growth-source="bottom_cta" style='display:inline-block; padding:16px 40px; border-radius:50px; font-size:1.2rem;'>Empieza gratis en 60 segundos</a>
-            <div style="margin-top:10px; color:#666; font-size:.95rem;">Sin registro obligatorio. También disponible en App Store y Google Play.</div>
-        </div>
-    </section>
-
-    <!-- Ad Section -->
-    <section class="ad-section">
-        <div class="ad-container">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-4837743291717475"
-                 data-ad-slot="auto"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-        </div>
-    </section>
-
-    <!-- LIPA Studios Network Cross-Promotion -->
-    <section style="background: linear-gradient(135deg, rgba(102,126,234,0.1), rgba(118,75,162,0.1)); padding: 4rem 2rem; margin-top: 4rem;">
-        <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
-            <h3 style="color: #667eea; font-size: 2rem; margin-bottom: 1rem; font-weight: 700;">
-                🌐 Explora Más de LIPA Studios
-            </h3>
-            <p style="color: #555; margin-bottom: 3rem; font-size: 1.1rem;">
-                Descubre todos nuestros proyectos: gaming, fitness y finanzas
-            </p>
-            
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
-                <!-- Fitness -->
-                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 20px; padding: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1); transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'" onmouseout="this.style.transform='translateY(0)'">
-                    <img src="assets/logo.jpeg" alt="EntrenoApp" style="width: 72px; height: 72px; border-radius: 18px; object-fit: cover; margin-bottom: 1rem; box-shadow: 0 12px 30px rgba(0,0,0,0.22); border: 2px solid rgba(255,255,255,0.45);">
-                    <h4 style="color: #fff; font-size: 1.5rem; margin-bottom: 1rem; font-weight: 700;">EntrenoApp</h4>
-                    <p style="color: rgba(255,255,255,0.9); font-size: 1rem; margin-bottom: 1.5rem;">Tu entrenador personal con GPS tracking y planes personalizados</p>
-                    <a href="https://entrenoapp.com" style="display: inline-block; padding: 12px 30px; background: #fff; color: #667eea; text-decoration: none; border-radius: 50px; font-weight: 700; font-size: 1rem;">Ver App →</a>
-                </div>
-                
-                <!-- Gaming -->
-                <div style="background: linear-gradient(135deg, rgba(255,0,255,0.8), rgba(0,255,255,0.8)); border-radius: 20px; padding: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1); transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'" onmouseout="this.style.transform='translateY(0)'">
-                    <div style="font-size: 3.5rem; margin-bottom: 1rem;">🎮</div>
-                    <h4 style="color: #000; font-size: 1.5rem; margin-bottom: 1rem; font-weight: 700;">LIPA Studios Gaming</h4>
-                    <p style="color: rgba(0,0,0,0.8); font-size: 1rem; margin-bottom: 1.5rem;">12 juegos gratis HTML5 con estética cyberpunk</p>
-                    <a href="https://lipastudios.com" style="display: inline-block; padding: 12px 30px; background: #000; color: #00ffff; text-decoration: none; border-radius: 50px; font-weight: 700; font-size: 1rem;">Ver Juegos →</a>
-                </div>
-                
-                <!-- Finanzas -->
-                <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); border-radius: 20px; padding: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1); transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'" onmouseout="this.style.transform='translateY(0)'">
-                    <div style="font-size: 3.5rem; margin-bottom: 1rem;">💰</div>
-                    <h4 style="color: #fff; font-size: 1.5rem; margin-bottom: 1rem; font-weight: 700;">Finanzas Muy Fáciles</h4>
-                    <p style="color: rgba(255,255,255,0.9); font-size: 1rem; margin-bottom: 1.5rem;">Aprende finanzas personales de forma simple y efectiva</p>
-                    <a href="https://finanzasmuyfaciles.netlify.app" style="display: inline-block; padding: 12px 30px; background: #fff; color: #f5576c; text-decoration: none; border-radius: 50px; font-weight: 700; font-size: 1rem;">Ver Guías →</a>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Disclaimer Médico -->
-    <section style="background: #fff3cd; padding: 30px 20px; margin: 40px 0; border-top: 3px solid #ffc107; border-bottom: 3px solid #ffc107;">
-        <div class="container" style="max-width: 900px; margin: 0 auto; text-align: center;">
-            <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: #856404;">
-                <strong>⚠️ Aviso Importante:</strong> EntrenoApp es una herramienta de fitness. Consulta siempre con un profesional de la salud antes de comenzar cualquier programa de ejercicio, especialmente si tienes condiciones médicas preexistentes, lesiones o estás embarazada. Los entrenamientos deben adaptarse a tu condición física individual.
-            </p>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="social-links">
-            <a href="https://www.tiktok.com/@EntrenoApp" target="_blank" rel="noopener">🎵 TikTok</a>
-            <a href="https://www.instagram.com/entrenoappfacil" target="_blank" rel="noopener">📸 Instagram</a>
-            <a href="mailto:lipastudios4@gmail.com">📧 Email</a>
-        </div>
-        
-        <div class="footer-links">
-            <a href='/blog'>Blog</a>
-            <a href='/about'>Sobre Nosotros</a>
-            <a href='/workout-guides'>Guías de Entrenamiento</a>
-            <a href='/fitness-tips'>Consejos de Fitness</a>
-            <a href='/exercises-library'>Biblioteca de Ejercicios</a>
-            <a href='/fitness-calculators'>Calculadoras</a>
-            <a href='/resources'>Recursos</a>
-            <a href='/faq'>FAQ</a>
-            <a href='/privacy'>Privacidad</a>
-            <a href='/terms'>Términos</a>
-            <a href='/contact'>Contacto</a>
-        </div>
-        
-        <p>&copy; 2026 EntrenoApp - LIPA Studios. Todos los derechos reservados.</p>
-        <div class="legal-info" style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #ddd; font-size: 0.875rem; color: #666;">
-            <p style="font-size: 0.8rem; color: #999; margin-bottom: 10px;">Como Asociado de Amazon, obtengo ingresos por las compras adscritas que cumplan los requisitos aplicables.</p>
-
-            <p>© 2026 EntrenoApp | Responsable: Motivado de la Vida | Email: lipastudios4@gmail.com</p>
-        </div>
-        <p style="margin-top: 10px; font-size: 0.9rem; color: #666;">
-            <strong>Contacto:</strong> <a href="mailto:lipastudios4@gmail.com" style="color: #00D4FF;">lipastudios4@gmail.com</a> | 
-            <strong>Empresa:</strong> LIPA Studios | 
-            <strong>Ubicación:</strong> España
-        </p>
-    </footer>
-
-    <!-- YouTube Gallery Component (cache-bust para forzar versión con playlist del canal) -->
-    <script defer src="js/growth-tracking.js"></script>
-    <script defer src="js/components/youtube-gallery.js?v=4"></script>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-        document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(function() {
-                if (typeof YouTubeGallery !== 'undefined') {
-                    new YouTubeGallery({
-                        containerId: 'youtube-gallery',
-                        apiKey: '',
-                        channelId: 'UCzIssceXL14IHgyRARzKKhQ',
-                        channelUrl: 'https://youtube.com/@entrenoapp',
-                        maxVideos: 6,
-                        showThumbnails: true
-                    });
-                }
-            }, 300);
+      function showStep(next) {
+        current = (next + panels.length) % panels.length;
+        panels.forEach(function(panel, index) {
+          panel.classList.toggle('active', index === current);
+          panel.setAttribute('aria-hidden', index === current ? 'false' : 'true');
         });
-    </script>
+        controls.forEach(function(control, index) {
+          control.setAttribute('aria-selected', index === current ? 'true' : 'false');
+          control.tabIndex = index === current ? 0 : -1;
+        });
+        progress.forEach(function(segment, index) {
+          segment.classList.toggle('done', index < current);
+          segment.classList.toggle('active', index === current);
+        });
+        caption.textContent = labels[current];
+      }
+
+      function stop() {
+        if (timer) window.clearInterval(timer);
+        timer = null;
+      }
+
+      function start() {
+        stop();
+        if (paused || document.hidden) return;
+        timer = window.setInterval(function() { showStep(current + 1); }, 3600);
+      }
+
+      controls.forEach(function(control, index) {
+        control.addEventListener('click', function() {
+          showStep(index);
+          start();
+        });
+        control.addEventListener('keydown', function(event) {
+          var next = null;
+          if (event.key === 'ArrowRight') next = current + 1;
+          if (event.key === 'ArrowLeft') next = current - 1;
+          if (event.key === 'Home') next = 0;
+          if (event.key === 'End') next = panels.length - 1;
+          if (next === null) return;
+          event.preventDefault();
+          showStep(next);
+          controls[current].focus();
+          start();
+        });
+      });
+
+      toggle.addEventListener('click', function() {
+        paused = !paused;
+        toggle.setAttribute('aria-pressed', paused ? 'true' : 'false');
+        toggle.textContent = paused ? 'Reanudar animación' : 'Pausar animación';
+        if (paused) stop(); else start();
+      });
+      demo.addEventListener('mouseenter', stop);
+      demo.addEventListener('mouseleave', start);
+      demo.addEventListener('focusin', stop);
+      demo.addEventListener('focusout', function(event) {
+        if (!demo.contains(event.relatedTarget)) start();
+      });
+      document.addEventListener('visibilitychange', start);
+
+      showStep(0);
+      if (paused) {
+        toggle.setAttribute('aria-pressed', 'true');
+        toggle.textContent = 'Reanudar animación';
+      }
+      start();
+    })();
+  </script>
+  <script>
+    (function() {
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce) return;
+
+      // Revelado al hacer scroll
+      var targets = document.querySelectorAll('.panel, .final h2, .final p, .final .actions');
+      if ('IntersectionObserver' in window) {
+        targets.forEach(function(el) { el.classList.add('reveal'); });
+        var io = new IntersectionObserver(function(entries) {
+          entries.forEach(function(e) {
+            if (e.isIntersecting) {
+              e.target.classList.add('in');
+              io.unobserve(e.target);
+            }
+          });
+        }, { threshold: .1, rootMargin: '0px 0px -60px 0px' });
+        targets.forEach(function(el) { io.observe(el); });
+      }
+
+      // Contadores animados (solo números enteros puros)
+      function countUp(el) {
+        var end = parseInt(el.textContent, 10);
+        if (isNaN(end) || String(end) !== el.textContent.trim() || end === 0) return;
+        var start = null, dur = 950;
+        function step(ts) {
+          if (!start) start = ts;
+          var p = Math.min((ts - start) / dur, 1);
+          var eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = Math.round(end * eased);
+          if (p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      }
+      var nums = document.querySelectorAll('.screen-mini strong, .senior-metric b');
+      if ('IntersectionObserver' in window) {
+        var io2 = new IntersectionObserver(function(entries) {
+          entries.forEach(function(e) {
+            if (e.isIntersecting) {
+              countUp(e.target);
+              io2.unobserve(e.target);
+            }
+          });
+        }, { threshold: .6 });
+        nums.forEach(function(el) { io2.observe(el); });
+      }
+
+      // Parallax sutil del mockup del teléfono
+      var screen = document.querySelector('.hero .screen');
+      if (screen) {
+        var ticking = false;
+        window.addEventListener('scroll', function() {
+          if (ticking) return;
+          ticking = true;
+          requestAnimationFrame(function() {
+            var y = window.scrollY || 0;
+            if (y < 900) screen.style.transform = 'translateY(' + (y * -0.05).toFixed(1) + 'px)';
+            ticking = false;
+          });
+        }, { passive: true });
+      }
+    })();
+  </script>
 </body>
 </html>

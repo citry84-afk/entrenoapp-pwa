@@ -1,0 +1,16 @@
+Use case: scientific-educational.
+Asset type: original premium mobile fitness app exercise illustration, not a UI mockup.
+Input image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.
+Composition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.
+Subject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.
+Muscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.
+Lighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.
+Text: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.
+Accuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.
+
+Movement-specific brief:
+Show a person lying prone on the floor, neck neutral and pelvis grounded. Use the variant-specific arm pattern, without invented weights or machinery. Avoid an exaggerated lumbar arch. Show a modest prone upper-back row with chest only gently lifted, arms reaching forward in the first pose and elbows drawing back in the second. Do not depict an extreme lumbar arch or substitute the Y-T-W sequence.
+
+Presentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.
+
+Strict asset correction: Prone SUPERMAN ROW with modest upper-back lift, not a prone push-up. Pelvis, thighs and legs remain on floor. Both views from elevated three-quarter back/side angle. Left arms reach forward with hands hovering just above floor and chest only slightly lifted; right elbows bend and draw back beside the ribs with forearms hovering above floor, hands NOT planted and no pressing against ground. Neck neutral. No machine, no weights, no extreme lumbar arch, no muscle-colored skin. Full body visible twice.

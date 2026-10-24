@@ -1,0 +1,22 @@
+{
+  "key": "positions-raise-dumbbell-free-bilateral-load2",
+  "file": "generated/positions-raise-dumbbell-free-bilateral-load2-v1.webp",
+  "alt": {
+    "es": "Dos vistas orientativas de elevación lateral · mancuernas.",
+    "en": "Two orientation views of lateral raise · dumbbells."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:51:06.656Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/01a16d50-7534-71d1-888b-d0020bbbde49/exec-cc68c1e7-2ca2-4f57-8f07-5e1d1b18bd13.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nStart standing with arms resting by the sides. Finish with arms opened sideways to approximately shoulder height and elbows softly bent; keep shoulders relaxed and wrists aligned. Exactly two matching dumbbells, not a barbell or kettlebell.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.\n\nExact setup: two matching small dumbbells, one in each hand, standing feet shoulder width. First arms down beside thighs, second arms raised laterally to shoulder height with elbows slightly bent; wrists straight, no shrugging or exaggerated thumb-down rotation. Front three-quarter view shows symmetric lateral raise. Omit all muscle-color overlays. Entire lateral arm span, both dumbbells and feet inside generous margins.\n\n",
+  "visualReview": "Revisión visual por IA: dos mancuernas una por mano; brazos bajos y elevación lateral aproximadamente hombros, codos suaves y muñecas alineadas. Tronco y hombros estables, equipo y pies completos, sin overlays. No errores evidentes; no validación profesional.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 40328,
+  "sha256": "0bf2f2052c8ab6d82397111839c6cc0db799f7c40c0d7f97625575862f7a0e0a",
+  "fallbackFile": "generated/positions-raise-dumbbell-free-bilateral-load2-v1.jpg",
+  "fallbackBytes": 106181,
+  "fallbackSha256": "540f242fbc287e327ea8cb18aef80fd4f3eac96ae9cf073179d5451c516d66cb"
+}

@@ -1,0 +1,22 @@
+{
+  "key": "positions-floor-fly-dumbbell-free-bilateral-load2",
+  "file": "generated/positions-floor-fly-dumbbell-free-bilateral-load2-v1.webp",
+  "alt": {
+    "es": "Dos vistas orientativas de aperturas en el suelo · mancuernas.",
+    "en": "Two orientation views of dumbbell floor fly · dumbbells."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:48:53.081Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/01a16d50-7534-71d1-888b-d0020bbbde49/exec-0618ccd3-99f5-4842-b74b-140977c703d6.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nShow a person lying on the back on the floor with knees bent and one dumbbell in each hand. First pose opens arms out to the sides with upper arms supported by the floor and elbows softly bent; second pose brings dumbbells together above the chest. No bench. Exactly two matching dumbbells, not a barbell or kettlebell.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.\n\nExact setup: two dumbbells, ONE in each hand; lying flat on floor, no bench. First both upper arms spread out laterally on floor with elbows softly bent, palms face upward/inward, dumbbells above floor at hands. Second both arms arc toward center above chest at same soft elbow angle, palms face each other. Do not substitute floor press with deeply bent elbows. High three-quarter camera makes both arms and both DBs visible. Omit all muscle-color overlays. Entire bodies, feet and wide arm span with clear margins.\n\n",
+  "visualReview": "Revisión visual por IA: una mancuerna por mano, dos cargas por vista; apertura lateral en suelo con codos suaves y reunión sobre pecho. Cabeza, hombros y pelvis apoyados, pies plantados, sin banco. Manos y equipo completos, sin overlays ni errores evidentes; no validación profesional.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 32866,
+  "sha256": "f4eb6fa601b3c1381d7a21d4dd69add03a6e9ae170060861f8c066841af3aa7c",
+  "fallbackFile": "generated/positions-floor-fly-dumbbell-free-bilateral-load2-v1.jpg",
+  "fallbackBytes": 92743,
+  "fallbackSha256": "bc7cd6364c426b24209d39ede22be1990cbb851b560f60a0ef8d37aced08d2af"
+}

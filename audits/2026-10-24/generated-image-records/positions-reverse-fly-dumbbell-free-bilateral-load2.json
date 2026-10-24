@@ -1,0 +1,22 @@
+{
+  "key": "positions-reverse-fly-dumbbell-free-bilateral-load2",
+  "file": "generated/positions-reverse-fly-dumbbell-free-bilateral-load2-v1.webp",
+  "alt": {
+    "es": "Dos vistas orientativas de pájaros con mancuernas · mancuernas.",
+    "en": "Two orientation views of bent-over reverse fly · dumbbells."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:22:08.595Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/01a16d45-1dbd-7160-9764-9653df629c3d/exec-c1b2400b-9cce-4039-a7ff-6bdf1593fb05.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nFirst pose has the torso hinged forward with one dumbbell hanging below each shoulder and elbows softly bent. Second pose opens the arms out to the sides while maintaining the neutral torso and elbow angle. Do not depict a rear-delt row with deeply bent elbows. Exactly two matching dumbbells, not a barbell or kettlebell.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.\n\nUse a clear rear three-quarter camera for BOTH views, to make the hinged torso and arm opening visible. Two dumbbells per figure, arms retain a softly bent nearly straight elbow angle. Subtle warm emphasis only at posterior deltoids and upper back; no thighs or calves highlighted.\n",
+  "visualReview": "Revisión visual: dos mancuernas en cada vista, torso inclinado estable y brazos casi extendidos que se abren lateralmente, no un remo de codos doblados. Pies completos, espalda neutra y énfasis posterior de hombro/espalda alta sin muslos.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 43162,
+  "sha256": "41207f5dd0074df02f26dd98c7438b0e24dff8389661e9abcc43c0fbb815073f",
+  "fallbackFile": "generated/positions-reverse-fly-dumbbell-free-bilateral-load2-v1.jpg",
+  "fallbackBytes": 112992,
+  "fallbackSha256": "be78d7b56efbb3a277d72667a41cb007dbff606b3973793d294384917d4f02a0"
+}

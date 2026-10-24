@@ -1,0 +1,2355 @@
+{
+  "checkedAt": "2026-10-24T20:24:48.680Z",
+  "baseUrl": "https://entrenoapp.com",
+  "stagedDirectory": "/var/folders/gr/lcm7yq1n7rx_yylcyxwtc0f00000gn/T/entrenoapp-web-release-JYRbbh",
+  "generatedAssets": 164,
+  "verifiedFiles": 335,
+  "totalBytes": 26423155,
+  "files": [
+    {
+      "file": "app.html",
+      "status": 200,
+      "contentType": "text/html",
+      "bytes": 771698,
+      "sha256": "d61e917dff75a61310be960d6e547ba4e0f10ee8ce767b2023a8bd74ca1a6cf6"
+    },
+    {
+      "file": "assets/exercise-media/CREDITS.md",
+      "status": 200,
+      "contentType": "text/markdown",
+      "bytes": 9311,
+      "sha256": "af804da1ea75f5ed08d6cfa1e2e49eaa14a25db04b683cd4a4748e4c0135e88f"
+    },
+    {
+      "file": "assets/exercise-media/generated/overview-band-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 96786,
+      "sha256": "51951c5fc7b730f93841a384fc0afd9ffcea0be51c6f44345440128cc06065c3"
+    },
+    {
+      "file": "assets/exercise-media/generated/overview-band-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 38648,
+      "sha256": "94553d5bffa434b8243866198912cd0f38783288257d5caf34055201a4e56df6"
+    },
+    {
+      "file": "assets/exercise-media/generated/overview-barbell-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 81398,
+      "sha256": "fb585a31da7771dd082431df965f0a4cbd44c867e9117cadc6bfe21b1a701f1e"
+    },
+    {
+      "file": "assets/exercise-media/generated/overview-barbell-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 28834,
+      "sha256": "8adfb648ec106e47e39fcb47476de66d1140e53c3b86b59a69f6665077fbdc7e"
+    },
+    {
+      "file": "assets/exercise-media/generated/overview-bodyweight-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 115366,
+      "sha256": "5aad0090a326dbb197d9182f4bafc0b7bd890053a0fa9fae687b9a4bdebcb258"
+    },
+    {
+      "file": "assets/exercise-media/generated/overview-bodyweight-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 50474,
+      "sha256": "602f7ed302f3c9a98f098f67dec91378848f3711ccbe958b4e23590505aa15e5"
+    },
+    {
+      "file": "assets/exercise-media/generated/overview-circuit-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 93206,
+      "sha256": "a2b3f989e905ab67c387b6d019c1fdd1c1dc373025de50fd2777227706514366"
+    },
+    {
+      "file": "assets/exercise-media/generated/overview-circuit-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 34662,
+      "sha256": "341e0a9cd70997eb86606e3b3013d760b17d8a79aedf1f8d717fddfda5755096"
+    },
+    {
+      "file": "assets/exercise-media/generated/overview-dumbbell-row-options-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 107926,
+      "sha256": "537d10ae1dab78f50dbbdf004e405ea6e7818de18f78ca75910f232cf259063b"
+    },
+    {
+      "file": "assets/exercise-media/generated/overview-dumbbell-row-options-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 40616,
+      "sha256": "97c0d8977e10c0f0b267bbbf46abeca2d81670f18b522d7dad3de6e3408cb860"
+    },
+    {
+      "file": "assets/exercise-media/generated/overview-dumbbell-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 122407,
+      "sha256": "52040e3b9b1b13e23ef17dbe4f052a6c342ebef36ce8a6ab29a10a63083d9d3e"
+    },
+    {
+      "file": "assets/exercise-media/generated/overview-dumbbell-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 54084,
+      "sha256": "42bdb8e278dd8caa4540bd540e88a87a83a5975631b53b154606dee6e3309dc0"
+    },
+    {
+      "file": "assets/exercise-media/generated/overview-kettlebell-push-options-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 104372,
+      "sha256": "1eb5d5c7fa910e524ce0df46df6ab53ac1b40bbcfb9fd82fcadc09a8cf09880b"
+    },
+    {
+      "file": "assets/exercise-media/generated/overview-kettlebell-push-options-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 39028,
+      "sha256": "22e72cc1dff7e2707b76e95d9822375e6c13e6391ba9d4b6ff0a3af9ca66f1c8"
+    },
+    {
+      "file": "assets/exercise-media/generated/overview-kettlebell-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 97821,
+      "sha256": "10f932ac2ab83a816112eb39f708aa7d3ff61210498b7c6d5e30256778709926"
+    },
+    {
+      "file": "assets/exercise-media/generated/overview-kettlebell-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 41556,
+      "sha256": "7a62ccb435fb6e68691a76dd928f7af4cc841d4d7c7f1934ecd2b7fef1d5e04e"
+    },
+    {
+      "file": "assets/exercise-media/generated/overview-machine-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 120381,
+      "sha256": "8511ab768b6157152a5f4ea15e246ceec61c2bf0d477a085c8f3b85e30d939ef"
+    },
+    {
+      "file": "assets/exercise-media/generated/overview-machine-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 42512,
+      "sha256": "edbf8bfe9128a1797ce34420b3f413df7bd3116d33844b0fc11de2862105725a"
+    },
+    {
+      "file": "assets/exercise-media/generated/overview-mobility-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 120715,
+      "sha256": "f5fc58ade801a6fac734faec3597bc95ac5a8400322212e9fb19d48f0a7ce26f"
+    },
+    {
+      "file": "assets/exercise-media/generated/overview-mobility-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 53076,
+      "sha256": "9111e542a3da94537b6e9fc510b9fa356d79af86f23b7b64e89d8f1f8fbad301"
+    },
+    {
+      "file": "assets/exercise-media/generated/overview-none-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 132040,
+      "sha256": "e91e142313821ad5c97c0691a0728e063cad5d4c9cd60496bebe977496907fef"
+    },
+    {
+      "file": "assets/exercise-media/generated/overview-none-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 58782,
+      "sha256": "5e7de9f40f652d84f4e5333596d86c5b5a07eb9938384edccaa8f086d378949a"
+    },
+    {
+      "file": "assets/exercise-media/generated/overview-run-walk-options-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 111203,
+      "sha256": "9fa4c96678c592d873817648d4a659a142bd83515f089c938937c746dec2900b"
+    },
+    {
+      "file": "assets/exercise-media/generated/overview-run-walk-options-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 41652,
+      "sha256": "e156fedfd64254db3a136cbca0b66b3503e8b608cbf6d2d954444b9478f97c66"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-arnold-press-standing-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 95050,
+      "sha256": "e60e8573f51fa2c450b8d66684ac985a868afb06c569b0eddd86bda77e2da2a8"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-arnold-press-standing-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 35258,
+      "sha256": "8ff5f8890e7084d8ef5047423ef43c393c647f2dca8d74c307f247e3ff0b0975"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-assisted-dip-machine-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 142093,
+      "sha256": "cce7fa045d9dfc90385a378361505a74e66cb9c77696888a45cfc78c25e36015"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-assisted-dip-machine-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 52638,
+      "sha256": "bcd4af70aaeb5b8341341ccb47def20ea42090a9c891155740b316f8181036d3"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-assisted-pull-up-machine-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 158048,
+      "sha256": "05c0b8c2c9a4b69b4a9c99bf5cf1affd9bcfdf933863c5870a1f74cab5562ccd"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-assisted-pull-up-machine-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 56300,
+      "sha256": "94fad79ef2c9f68574673d707292367272441b79cccdd3558423f7b51ad3ccad"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-balance-bodyweight-supported-bilateral-no-load-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 117659,
+      "sha256": "69c2e6c47eadb5529a0fdbeff2a684b255a7e315b800be1aa0974044b84f738c"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-balance-bodyweight-supported-bilateral-no-load-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 45604,
+      "sha256": "0a174a74f58afe7571688f37ff63b8171d78a23d0a1b781afb1d3131e5c7596c"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-band-calf-raise-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 105074,
+      "sha256": "f0c2d847f964935d957683c5307d31fd23f378b7718ffb9640db4c4cb48b3f43"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-band-calf-raise-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 38844,
+      "sha256": "6aabd9c9cbd3344914764d940669132eeab39767bb50bc3d9d1ac8a6b62fe929"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-band-hamstring-curl-prone-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 116098,
+      "sha256": "a1e60c1ae5de295c9241a24ff6ea163dc0481b2f308496bb4c9201dc69c1fc1d"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-band-hamstring-curl-prone-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 43418,
+      "sha256": "c49b85df3aa6ea12c7097755d1b8271636ebcabe60ea49e0f44133949f43d1cc"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-band-incline-press-band-free-bilateral-load1-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 109270,
+      "sha256": "a28eb6453d9053c6380742ec596d2d763fae8de0c824893ad6bb4bb7d055a5bb"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-band-incline-press-band-free-bilateral-load1-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 43144,
+      "sha256": "02c2121722c84d7fca46f00650dfc866d70e67d11bbe57a7bf8444894d6df390"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-band-squat-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 103994,
+      "sha256": "453c746a75025a1b12b86b6d8c58998f3a318af8787cbd19d3fa7dc2fca83abf"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-band-squat-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 38938,
+      "sha256": "8f6378f99a39c61b42b9761c669fd3db064de2843c440757ea627a1557b5e391"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-band-standing-row-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 115998,
+      "sha256": "c2c4886f61a9a9bb806aef6fcc4686a4821a145fe159433725c9caea532ded80"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-band-standing-row-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 44036,
+      "sha256": "329d682218c69c05d2e8bfefac657229a0eb37854a6f7d7155eead751761ac63"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-band-triceps-overhead-extension-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 94149,
+      "sha256": "454c2a77526780f4c4d85b5580636f97f8a43d74283814a88573ca67d551b94a"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-band-triceps-overhead-extension-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 34196,
+      "sha256": "2904eb9b1b4ad9d8edf061970397e6b68690426fed02a83351f062261810d219"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-bench-dip-bodyweight-supported-bilateral-no-load-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 106743,
+      "sha256": "75cf81a869d3723600a5061f1ba2cef4b512fbd933f35a043d00ea899d83bb39"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-bench-dip-bodyweight-supported-bilateral-no-load-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 40820,
+      "sha256": "0dee791b1aa6e55975084cb3141c0d523b31bd564deeaa2ef3203f246d6e0e1f"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-bench-press-barbell-supported-bilateral-load1-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 123485,
+      "sha256": "fa96d0409db1c3c7a573de0a5e27980fe626acbffc316f8258fb779aa6a3e423"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-bench-press-barbell-supported-bilateral-load1-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 48924,
+      "sha256": "4e9cc21422510706010caa4c6411fdf96fbcfdd6c0e26bcfd3d4b811844240ef"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-bench-press-dumbbell-supported-bilateral-load2-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 110344,
+      "sha256": "b0e4195cb5ccf09e195abdabb31fe759e2bfb5b774ca3954edb5c528638754e6"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-bench-press-dumbbell-supported-bilateral-load2-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 43282,
+      "sha256": "4a216e2b3512f25b8f1e91633f6829880ae6fe87a0f7346bcfbf6b487b75767b"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-bodyweight-walking-lunge-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 100150,
+      "sha256": "92603fe36e350cbe3b3fc9a03d3284a20372b6fb1e7d548e599820ed329ada6d"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-bodyweight-walking-lunge-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 36856,
+      "sha256": "14abbd1f34e6be9692038404a8d45f438cf98f2a9b99a61a826eb9dcbcd31979"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-box-squat-unloaded-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 109700,
+      "sha256": "ae46aa2564cb14b980110b5251663ea7689419b09d632b373dfcafa56e5ff5e0"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-box-squat-unloaded-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 42774,
+      "sha256": "149f3ad23814364c669b1f1894a6d01c164c0b6e3b78418ec62aa69752565aba"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-bridge-band-free-bilateral-load1-glute-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 91531,
+      "sha256": "6ca4930b0580e10701259b2021c31ec86a6c612d87a9d5cddfdfc0bae38f2517"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-bridge-band-free-bilateral-load1-glute-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 33876,
+      "sha256": "d348502c04c58f5301528f33b96851752f6f16f74379a34f00935c7e3fd79406"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-bridge-bodyweight-free-bilateral-no-load-glute-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 82927,
+      "sha256": "9bab34140056733bfb56ddfea1639f05a97520ae7a6e1144272bed8a96dd656a"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-bridge-bodyweight-free-bilateral-no-load-glute-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 29224,
+      "sha256": "d5fb6b84b619a2a26dcc5afba3c497da6a285c1604ba1d409203cd23526661fe"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-bridge-bodyweight-free-bilateral-no-load-hamstring-bias-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 70151,
+      "sha256": "3051e570095ca4abec06a6fbbbae7cce90742c5d3f9648e9d0e62a9efa127442"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-bridge-bodyweight-free-bilateral-no-load-hamstring-bias-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 24546,
+      "sha256": "64cdf8de11d1c61b8fb9feae9d53661d12af880dac9ba39a6e648da999c495a8"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-bridge-kettlebell-free-bilateral-load1-glute-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 80054,
+      "sha256": "cf4e4081f568f6c9603e90adf6bf776c3cca655416b0fc67624b96c355bf09e5"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-bridge-kettlebell-free-bilateral-load1-glute-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 28674,
+      "sha256": "ad451d226a3c53198ef83a62ac2980ee607a11ace0e7b8e0459c508d8538a574"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-cable-fly-standing-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 153662,
+      "sha256": "d66893b7f9a0bcdc8f2d7b6349125b68fd947bd970d33c632ed5eab87e9642ef"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-cable-fly-standing-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 58226,
+      "sha256": "b22e5e3719aeddae7231fb0463b455acc43ae0b052d921dfdc01fd6826fab49c"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-cable-high-row-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 140891,
+      "sha256": "c8d04f434d2a408f71f5ef12e527f5e305f6251dd16717d7145d97b1ec937a3c"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-cable-high-row-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 52164,
+      "sha256": "325b28e8c6cba59b6076d6e670304f571a63bca8ed1d41f5a6d4a74bd583e5aa"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-cable-pull-through-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 138622,
+      "sha256": "2473387f2b90c3dc41462e7dac21b05afbe7aec2f0bfaa769dd4aaa4c28db12a"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-cable-pull-through-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 46872,
+      "sha256": "2abb3719533afc392e5af9f40771fb5242554abef174d06f87422fcbc61c0e39"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-cable-row-band-supported-bilateral-load1-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 104140,
+      "sha256": "27678cfcb37d63844e9e788aecc2773e5c27cbab79b83f825ebad3ec1327961a"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-cable-row-band-supported-bilateral-load1-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 38476,
+      "sha256": "407d55d6b4d49601a2afa2bef86f7de9d8239a7d563e495998abf1b5a9ebde84"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-cable-row-machine-supported-bilateral-no-load-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 134895,
+      "sha256": "4a607e6f1b6abbf8f5157f65728d18ecf865267e16551a4723228817e6672d02"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-cable-row-machine-supported-bilateral-no-load-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 50978,
+      "sha256": "2416336c963d2f397d8f5add6c27772fa8114a4b87e2ee2db7838f1082573f3d"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-cable-row-towel-supported-bilateral-load1-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 127924,
+      "sha256": "f8d738ce3187f68c9f78d68668707a6dd8cd54174b7cbb78345b97d78aa44d6d"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-cable-row-towel-supported-bilateral-load1-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 50902,
+      "sha256": "0a256ef8554f323e0b1539fa5f9b9e00421874d4f6b9ab9925c168b62d80d158"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-calf-bodyweight-supported-bilateral-no-load-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 114363,
+      "sha256": "14b420346e20d3459a25deb0e410d4fef6e216f68794bbcd119a4e499651f634"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-calf-bodyweight-supported-bilateral-no-load-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 43310,
+      "sha256": "e2bf759c5e98c996aa4f63b9945e90b9e8fe8eb19e83cdf1bc1e33fb94a6d0c8"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-calf-dumbbell-free-bilateral-load2-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 94567,
+      "sha256": "3e3fcad405224228d80d5b2e5e5eba25de788405327d527b23adf1aa4fc8e62c"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-calf-dumbbell-free-bilateral-load2-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 34392,
+      "sha256": "987938e69f473aa8958f5a3cb9c3409f4085672e4c890a08176d17cc4d1368a1"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-calf-kettlebell-free-bilateral-load1-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 97561,
+      "sha256": "9803d62243a55cf03e043a5b49b3add758c1be6534d9ef1b50f0ad18c15e2326"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-calf-kettlebell-free-bilateral-load1-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 36326,
+      "sha256": "05f06c396b1404fb813aed334fed9cf399b02549259bbdc7e8510543a30be110"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-calf-leg-press-machine-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 163863,
+      "sha256": "3b72b989dea7a544659e391c3989df80e2a9c05193f2c2dd4a7dbd1e31e69498"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-calf-leg-press-machine-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 67302,
+      "sha256": "a04029e89466bf5bbb3378d584102831fdf20dbb2361847601b020789b9df561"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-carry-dumbbell-free-bilateral-load2-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 103819,
+      "sha256": "8f84ff8c980e5cfc261ca9b93b55204d5a19a9917f28d0cbb5c9d516c7596514"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-carry-dumbbell-free-bilateral-load2-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 40078,
+      "sha256": "dd6b2aee3cbd4ff101be9cebbadf480d90540ab228e1634a004ee785959d1765"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-carry-kettlebell-free-bilateral-load1-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 108539,
+      "sha256": "f85213043152eb8df461c86aa92ee8e9a585c7025de708a288837dfddbf110b9"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-carry-kettlebell-free-bilateral-load1-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 40574,
+      "sha256": "38c3265bac7a39d8b8799dd00b35fd0b250c365ad93f23346b73918a6e014e95"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-chair-squat-chair-supported-bilateral-no-load-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 111894,
+      "sha256": "4d8e9cf59058f185fa1622a2213e69653f592be04efb398f366bb791629f6bdd"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-chair-squat-chair-supported-bilateral-no-load-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 43908,
+      "sha256": "bdbeb292772735b91a248d6dcf7c375ecc5b35d6c7b49d6c2a69eb13f48214ba"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-chest-row-machine-supported-bilateral-no-load-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 153852,
+      "sha256": "5297236625357b1f9d7b15cce1246ec3250ebc2a6aeaf428d77294bda830d6c4"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-chest-row-machine-supported-bilateral-no-load-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 61944,
+      "sha256": "94c3ab9771b0e29fdb3ba891fdc24c08680ddf0455536925121a5bced1073cbb"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-clean-press-kettlebell-free-bilateral-load1-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 92101,
+      "sha256": "5d6b0b34c4ece80e253fe958ad0c0d8b6d42981664d9e477082867fa48aa9d2f"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-clean-press-kettlebell-free-bilateral-load1-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 33686,
+      "sha256": "3056de55aeb5ee8e60911247f0c490cd69234d833464c019e4b60be708f8c668"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-curl-band-free-bilateral-load1-hammer-grip-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 109714,
+      "sha256": "927c5cec0d29124b892561d4e83301e8f5bde576e416f65bc0f0fd0e68fbbee7"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-curl-band-free-bilateral-load1-hammer-grip-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 43074,
+      "sha256": "46bf6ef87e27ce5c6c488e6152202825927a72d71dd3406d536ad591c50fee26"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-curl-band-free-bilateral-load1-supinated-grip-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 113958,
+      "sha256": "6a4bee44989a945b8a25e8f698c2c4a745733dd050e6b01916be3d23938098f3"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-curl-band-free-bilateral-load1-supinated-grip-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 45818,
+      "sha256": "aa362023806207e23a64477360fcf784bf8f5e16a3eae444c7af0094574e5cb4"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-curl-barbell-free-bilateral-load1-supinated-grip-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 116247,
+      "sha256": "41eb08f6e5636513d85886ac3b5fefdb88b237a8d390cb40d669a5e0b03f4d8f"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-curl-barbell-free-bilateral-load1-supinated-grip-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 44666,
+      "sha256": "e336e8edf7bf7f25060292d0316a877d32f9db000dc4cb259dbe3f8325ce7567"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-curl-dumbbell-free-bilateral-load2-hammer-grip-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 103918,
+      "sha256": "5f68027dbfca399ff730d248259485793a901ed1f5616206e5c4f04324e85f47"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-curl-dumbbell-free-bilateral-load2-hammer-grip-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 39194,
+      "sha256": "7f7ce6532e3f95c804c18ef8b88dbc2fc9eb993f1cf8b12aff598471e129a13c"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-curl-dumbbell-free-bilateral-load2-supinated-grip-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 111850,
+      "sha256": "26d571c255230515ebd5da99a8890c6b8824f25dc2ac55f05412e5296d1e8d0e"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-curl-dumbbell-free-bilateral-load2-supinated-grip-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 43872,
+      "sha256": "468decfdc15d8684244decb3715fa3dd1442173fce9e4adb0e25973c2ddb8013"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-curl-kettlebell-free-bilateral-load1-hammer-grip-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 102357,
+      "sha256": "d96b388da869e3478682d028edf6bc5e1c86c7a98b03d47eaaa19e78c464a0bf"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-curl-kettlebell-free-bilateral-load1-hammer-grip-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 38686,
+      "sha256": "db15875b1a40b929574b9790dd027793a26099f0c0dbcd81d0e952d75ef0685c"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-curl-kettlebell-free-bilateral-load1-supinated-grip-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 105423,
+      "sha256": "01e69b077942651f418b983d4ccb7dcb66f189326377eb43e987f88b7d31da3a"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-curl-kettlebell-free-bilateral-load1-supinated-grip-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 40282,
+      "sha256": "5fde9cbd68ddf9f2192ccdcd998f7e7532232a74bed6f5cd426bceed517c3a69"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-dead-bug-bodyweight-free-bilateral-no-load-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 81486,
+      "sha256": "a650613edbff127510c6f424c3638e555271123961c2c2e4a4883833be5e0cd3"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-dead-bug-bodyweight-free-bilateral-no-load-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 28972,
+      "sha256": "5821b4f7704752b54f1840897b27b8fcce7090b0dec96fc949e70c19b2bb710c"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-deadlift-barbell-free-bilateral-load1-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 116025,
+      "sha256": "01bed12986f418c2accee78915f33eea1eb6c2493f486bbdf7768677a17fcc8d"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-deadlift-barbell-free-bilateral-load1-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 45178,
+      "sha256": "6f64a8c477c57ebc9658aaf251f5cef2b7a972ae76253beb162a71997c854c7b"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-deadlift-kettlebell-free-bilateral-load1-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 101712,
+      "sha256": "1d5df5340d63182c687f4aa4defd81d171c2aebda06861806bee146a4023957b"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-deadlift-kettlebell-free-bilateral-load1-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 38098,
+      "sha256": "7e945af134cf031098bdd248e949d2ba529526ce32d7683125925340c279d2e8"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-decline-push-up-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 112554,
+      "sha256": "1878b30ca5c07e64529d04b244612b1ca54db524fdcf7f65e30efec52d7f36a1"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-decline-push-up-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 40724,
+      "sha256": "1370f49a06b392bb4024173c8126e81d53eb9c422a2ef01979aaffa3a1b3fdfb"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-dumbbell-fly-bench-example-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 94574,
+      "sha256": "5453c26a507b31c19fcf1d0d435dc6b04733cb990a8218f376460e6df1dc78c6"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-dumbbell-fly-bench-example-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 34070,
+      "sha256": "fd895a6f255279126fba06a229a8fdee195b72948c1c819032f1e78954f08fbb"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-erg-row-ergometer-supported-bilateral-no-load-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 122545,
+      "sha256": "69276d80faa001c7b43884126877aec99f0f44f83ec8f415b009544499382723"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-erg-row-ergometer-supported-bilateral-no-load-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 49370,
+      "sha256": "f602b8a5d888a3e81bba4a80fbedfaea2a8cf75487ad60f42c15fa0566eaf3ce"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-face-pull-band-free-bilateral-load1-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 118972,
+      "sha256": "b4101b1dad427b7e6486a4765212ce395d31296944592b75d777bd9028e4b68f"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-face-pull-band-free-bilateral-load1-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 45650,
+      "sha256": "c30810125ad9673c28a84a9cfa3ea7fdf2aae4569e0b4b13c9b7d3a2be3341a9"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-face-pull-machine-free-bilateral-no-load-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 133413,
+      "sha256": "0d728c5e592d5a4f5017e9084e0ab50464eb208a75624a9a98931d5626ac176a"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-face-pull-machine-free-bilateral-no-load-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 49058,
+      "sha256": "1802c888af5495f1af9c70d3bca9aca31b653bfc0e56577942def8e7f3966943"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-floor-fly-dumbbell-free-bilateral-load2-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 92743,
+      "sha256": "bc7cd6364c426b24209d39ede22be1990cbb851b560f60a0ef8d37aced08d2af"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-floor-fly-dumbbell-free-bilateral-load2-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 32866,
+      "sha256": "f4eb6fa601b3c1381d7a21d4dd69add03a6e9ae170060861f8c066841af3aa7c"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-floor-press-dumbbell-free-bilateral-load2-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 91713,
+      "sha256": "ede04f76e0d2caf94e00cab208de4a22e87799fd7754e81f3e0c6c51e4f4a899"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-floor-press-dumbbell-free-bilateral-load2-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 33322,
+      "sha256": "4863665d80103c4ab6b9408ef3e895df993b967d988a453d83c2fb5654843839"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-floor-press-kettlebell-free-bilateral-load1-close-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 85531,
+      "sha256": "a702e3d23c013256f277125843b3e9e9ceef747cb8f358ea9f53cee71c85cfcf"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-floor-press-kettlebell-free-bilateral-load1-close-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 31952,
+      "sha256": "a8e843d54b77d6c7ba30615e28246a9a49787cef5c8f4df7524172155ce4eab6"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-floor-press-kettlebell-free-unilateral-load1-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 88420,
+      "sha256": "45b071bcbc6ba4dcf971715e6f443e9c096f96b4fa856c9f6e7b20362989aae3"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-floor-press-kettlebell-free-unilateral-load1-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 31996,
+      "sha256": "adb5a9fcf08782d061293919e9960bd9b9b45242fbd4e92ce08dc13ec22ddf66"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-floor-pullover-kettlebell-free-bilateral-load1-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 84132,
+      "sha256": "b15622939bb2ee89c09bbc38b290610b68ad878dfc3c04403cce3588586636b9"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-floor-pullover-kettlebell-free-bilateral-load1-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 30348,
+      "sha256": "174ee336591002064d4b2e7fe69a4f41683e599c044bfc03d29dea44e552cff4"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-goblet-dumbbell-free-bilateral-load1-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 99561,
+      "sha256": "f329c4283c863353dc4467e22a5b8e42e4ce5bc02fc9f076d7ca7094697d2816"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-goblet-dumbbell-free-bilateral-load1-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 38116,
+      "sha256": "339486b49629e5c7e92c88c3439bf4016b77bf98c04c06ca0e5bdee9cbf0050c"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-goblet-kettlebell-free-bilateral-load1-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 101929,
+      "sha256": "5799345f49b121e3a054ae31e8f088aeb5a6e748dd03885b27c721e48192f85d"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-goblet-kettlebell-free-bilateral-load1-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 38746,
+      "sha256": "8b342ab84d35c09b07f2398116044299dc296a9f3858deb885859a1c8a02e7c1"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-halo-kettlebell-free-bilateral-load1-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 103161,
+      "sha256": "11e3ebe178b1f9f040db573b0fc83a4f96c38d9602aaae429493cbb8b9fccf00"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-halo-kettlebell-free-bilateral-load1-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 38408,
+      "sha256": "ca8740e7b7124ad855a2a6b251a64d6d893244000da8168b5bb0ce4dd1f50181"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-hamstring-curl-machine-seated-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 142791,
+      "sha256": "49f6696c6151f72429ed3aaf656965fe576d1549dda7ea8c4ea698bb9c9de04a"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-hamstring-curl-machine-seated-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 52676,
+      "sha256": "acb63d9313781795d679622f8841c8db2a9ff8568c4fc2f9231edf45386da83b"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-hinge-band-free-bilateral-load1-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 108996,
+      "sha256": "b009d678ded54d92ba8ecde781b879a5ebf8ccfa68dde8f9570a3f698441c8c8"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-hinge-band-free-bilateral-load1-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 43100,
+      "sha256": "cbbd0bde24df488ae84b40bc3dca677591de85dee0b9bb2850b351d9271579dd"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-hinge-bodyweight-free-bilateral-no-load-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 97566,
+      "sha256": "703985e48c9bf6c973d5b5e31fef5237f624cf6ab7da96d25a5ffb4e4ccf7815"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-hinge-bodyweight-free-bilateral-no-load-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 36716,
+      "sha256": "d9667a5e65ccf7aa4797e3fea806b6c4dc3f461bb0ee8e9f44b3f259c09ff519"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-hinge-bodyweight-supported-bilateral-no-load-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 114206,
+      "sha256": "09dbc1f65d1789add0d1b7bbf01a576463012113cfadc68cf92fe7184f264ea6"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-hinge-bodyweight-supported-bilateral-no-load-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 44068,
+      "sha256": "ad6dd0bb5297a4276b8c09d30e97267fd9ae7861d303e9ee0afa93cd0df313a4"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-hinge-dumbbell-free-bilateral-load2-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 96874,
+      "sha256": "0c576f71bd584cba223ddf6703c328e0eb389fea9dcdacb378cf8befd7740a6b"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-hinge-dumbbell-free-bilateral-load2-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 35786,
+      "sha256": "6f9d886bec1e5c34b2ad2ddfbc074ca8e7b546153e30aa0af5768bab81bb85c2"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-hinge-hands-thighs-bodyweight-free-bilateral-no-load-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 102302,
+      "sha256": "78851d3481288100006d00c77704cbcbe7e881bf9cd655e3b433eedd4c871464"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-hinge-hands-thighs-bodyweight-free-bilateral-no-load-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 38890,
+      "sha256": "9057f609e3e2051847445a45c117ffd4add61eb5bece014f670486e40ea02dbf"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-hip-thrust-barbell-supported-bilateral-load1-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 110175,
+      "sha256": "2554b83a9ca5bb3389731fb5b38eea46095f5e6bc8034777cf5bb7a59fa0f87d"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-hip-thrust-barbell-supported-bilateral-load1-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 42920,
+      "sha256": "349628cf52e51561e07fe8f426bf7062973109194b99b141a77b8a0f7e6e18c0"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-hip-thrust-bodyweight-bench-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 104111,
+      "sha256": "18d297668f872b3df07843c76fb45254ed55ecccb5890945b70b186f2072d0f9"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-hip-thrust-bodyweight-bench-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 37444,
+      "sha256": "f94f8da1ee43a3b98fc1190f0d8f31a127bce080cd39df666b2efb880492031a"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-hip-thrust-dumbbell-supported-bilateral-load1-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 98888,
+      "sha256": "7b835bf8d6441764c30486c602000d03ffd5c494617e31acf24f27122f73c18e"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-hip-thrust-dumbbell-supported-bilateral-load1-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 37106,
+      "sha256": "6f799b517a2a5ba1c010655d3d1d06dc10b7c215fc0b242996c39284c0b3317e"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-incline-press-barbell-supported-bilateral-load1-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 135706,
+      "sha256": "07765db014faee95e57bf92edd4c4a9ca0b9fdef2948188c165d2e9b63cd437e"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-incline-press-barbell-supported-bilateral-load1-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 54070,
+      "sha256": "e28fdd71d77a59deb9c664179dad85324236d6e34de9af5a1d80e5c56e5a18d9"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-incline-press-dumbbell-supported-bilateral-load2-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 124402,
+      "sha256": "f4b7dcd4c7d2979cbcb19b7dc591d2f5cef0c73eb2637c22720db9a726dda733"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-incline-press-dumbbell-supported-bilateral-load2-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 47682,
+      "sha256": "2c84c2ea1c9c3f45291a6fab8237c557cabd2621f11d03a85656989c4c8d0bd5"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-incline-press-machine-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 175310,
+      "sha256": "5c5be36d5846793abd73bc250b379737033348fa5857597010586b673f917b81"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-incline-press-machine-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 69916,
+      "sha256": "5ad3a0824186bf17a900c69b79551fd0abc542808371cd54e935846a82a66302"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-incline-push-bodyweight-supported-bilateral-no-load-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 91494,
+      "sha256": "d777187e4e7769efcd74c1b17400399efc2725decd05f42176dc4d0dc18f7b19"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-incline-push-bodyweight-supported-bilateral-no-load-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 33794,
+      "sha256": "6ac4eaca50d20c7dcf693004b041f71295ffd11d8040bd6f24a4bc30a373d1d7"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-inverted-row-bodyweight-supported-bilateral-no-load-close-grip-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 126958,
+      "sha256": "e91b0f9cee66e294fbe6f6f5b946abfface684fa96e661ac38d2eda8d446ba2b"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-inverted-row-bodyweight-supported-bilateral-no-load-close-grip-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 45474,
+      "sha256": "c59cd65dc1c7f2a024ec4b9983a69e3fe22eb04a2256114886fed9eaa09820dd"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-inverted-row-bodyweight-supported-bilateral-no-load-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 117952,
+      "sha256": "76c7cbf0bbedcde103b9ff7beb04b1615e9cf6c83e10935f9e960037eace2f89"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-inverted-row-bodyweight-supported-bilateral-no-load-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 42230,
+      "sha256": "62c94df6ae729245ff7c1658124f890f154a64fda8cc3e41d5421eadab58916b"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-kneeling-press-kettlebell-free-bilateral-load1-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 102270,
+      "sha256": "6d6b6dbb38bf1cfef03408d7b274efd635cb40df669d937de30c2a5154ace21d"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-kneeling-press-kettlebell-free-bilateral-load1-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 39406,
+      "sha256": "d2050b7293d86b7bf382ba3b7fefe681986c304eb6fa802d6026bc62a8979cde"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-lateral-raise-machine-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 165455,
+      "sha256": "4d3f76693a0b311e5ce8b789f6a0e3f24fb2d148e1a8c94728d7a1f2ab6aa9de"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-lateral-raise-machine-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 65912,
+      "sha256": "31d189d1806762144d9c35f18025f6d459a07a8d4544bb42055bd013537c7daa"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-leg-extension-machine-supported-bilateral-no-load-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 141995,
+      "sha256": "0c6945977cbcbcd25c59f48a794049970858ca7be390eff89bd7838104a5477a"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-leg-extension-machine-supported-bilateral-no-load-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 53752,
+      "sha256": "6e0c75eef745de0123663cc3cb63e47eb0542ad3de51b3e2de1ef5f7ebdcd1c3"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-leg-press-machine-supported-bilateral-no-load-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 155172,
+      "sha256": "f64f1212ec68ff6a06d1d4c8738e416a68397fc2c9b26cb8f2363129bfec7896"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-leg-press-machine-supported-bilateral-no-load-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 61022,
+      "sha256": "48fe4e0ee132ec723b345f16efbd314cef5fff937ae6219a7ca658b6f6117bff"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-lunge-band-free-bilateral-load1-alternating-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 108652,
+      "sha256": "f31650e79ab51172eb56d6a1f5a7d869121daac09763a7535fcb2930e4e0e8ec"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-lunge-band-free-bilateral-load1-alternating-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 42550,
+      "sha256": "c537cfde027a2b0b3f8f35c28482954ba21e7cbc0c7dd62007dc6d9ed9a0d382"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-lunge-bodyweight-free-bilateral-no-load-alternating-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 102011,
+      "sha256": "c69f991eb1d622730fc503b018d890a4d177b54f396c921896efc1d5e1464eb5"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-lunge-bodyweight-free-bilateral-no-load-alternating-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 38720,
+      "sha256": "56c7b814ee3e95926fe572c506006016f59fe38d33f40a3c53f4e4f20fb803c0"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-lunge-dumbbell-free-bilateral-load2-alternating-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 98617,
+      "sha256": "7326c0c93de24ce673dab2c3437db07293ad5944ff35e04c556ab0ae3ca38435"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-lunge-dumbbell-free-bilateral-load2-alternating-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 36494,
+      "sha256": "5a25ed1085234bd75ab26b0f4cb3257cd744814108d0a8623497ee3b19800441"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-lunge-dumbbell-free-bilateral-load2-walking-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 100013,
+      "sha256": "a8969f4c4370d259d2a830ee391ed848c7417281eadff7afd443a47f489a1166"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-lunge-dumbbell-free-bilateral-load2-walking-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 37536,
+      "sha256": "7fa501d2b9f27f20f76d274ce3aa39495dab7efa49589ee7ee32dc106d49feb5"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-lunge-kettlebell-free-bilateral-load1-alternating-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 100499,
+      "sha256": "b4e1a73c6756b9c30ad9a49a2896a1ee93d7ea5b18a5626b4e839c37288c1cec"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-lunge-kettlebell-free-bilateral-load1-alternating-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 38036,
+      "sha256": "da8140828eca041902cd98d5def78817fbba8712a785fb219ab3147f6c8e9b75"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-march-bodyweight-free-bilateral-no-load-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 100156,
+      "sha256": "a2264887b7aa194e0f09c02b1046e7a34a163fe52e364e33836c04081773d5f5"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-march-bodyweight-free-bilateral-no-load-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 37580,
+      "sha256": "baef233202177907ffcc838b9bd5c4f90f3e183ecd3c7f03eecda7e904caf178"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-neutral-chest-press-machine-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 160034,
+      "sha256": "7a8c1fa337e2de53ee84bc50fdf7d9571867b568ca3bf1774d57e7082ae6ce56"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-neutral-chest-press-machine-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 63620,
+      "sha256": "c4c29e7f7b7a0f857a31620fa0acf44e3e212568b12b853f5be7cef2136b5cfa"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-overhead-press-band-free-bilateral-load1-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 107159,
+      "sha256": "a64c4bf4127a24c6299f85d0c743e9f7c7a54252a063a12cc031f955a59141e5"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-overhead-press-band-free-bilateral-load1-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 40546,
+      "sha256": "1f16200417ac5cfb883935acff75b4ea3d1a0d328f7017676233da988bf200b9"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-overhead-press-barbell-free-bilateral-load1-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 110260,
+      "sha256": "92cf4990e25f813123b9edb78a6e94232462cbc2a814e258dad63c5aabdacb79"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-overhead-press-barbell-free-bilateral-load1-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 43330,
+      "sha256": "8e5f0f024f7b92335e080a5e30a1d238da379c74a22e4653b9b888f2eb10b530"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-overhead-press-dumbbell-free-bilateral-load2-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 97190,
+      "sha256": "375666a8212965d2bc1e8956672cfca06ade4c26626e8108353f2b57da541d6e"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-overhead-press-dumbbell-free-bilateral-load2-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 36382,
+      "sha256": "4836b977932a12618c341b3647ef334aa2a9b18053c67a0a1fb2b6417d5d8a65"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-overhead-press-kettlebell-free-unilateral-load1-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 92670,
+      "sha256": "deed69d92eed5172c4f7d1c9f355388d814d806e7a4dc77ca560bd2fa80398fe"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-overhead-press-kettlebell-free-unilateral-load1-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 34144,
+      "sha256": "c1c64474817ec57436acab43df43a3d94b9a4a61cebe36db0d45ba48e90782bf"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-parallel-bar-dip-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 110302,
+      "sha256": "beec5d6685766c9cbf0da504d2f5dbee94a3a4d52490491a66cde83b14d494cf"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-parallel-bar-dip-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 40930,
+      "sha256": "c8553528ccb10ce0d5a834e6df65ba5011d95924b4221d8a58b0f5f987b77b0b"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-pec-deck-machine-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 171144,
+      "sha256": "4956f2bce925d17970a7113015eee40a093b78f12d5335861bb763d380f1aaa7"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-pec-deck-machine-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 68262,
+      "sha256": "3a1a902618ae08ac6c38ee3699c5d3a44b5e11dddcd467fddda636645afb3543"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-pike-push-bodyweight-free-bilateral-no-load-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 104302,
+      "sha256": "06da79cc40a6569954195c7789242abb86d06b952daa588d27781a95edb1d912"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-pike-push-bodyweight-free-bilateral-no-load-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 37924,
+      "sha256": "729e3fe6dd3d637595aefa54585e5d117295afd4d194c0f51cf6aecc85b5c339"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-prone-row-bodyweight-free-bilateral-no-load-prone-elbow-row-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 77189,
+      "sha256": "8b4457dae81638d069050256a46677765ec41a4c5915e3ddff1398001795013d"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-prone-row-bodyweight-free-bilateral-no-load-prone-elbow-row-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 26872,
+      "sha256": "8e3753d97da21a7e99949a9cbc73da53d47a36ee5f77ec5af647272029043956"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-prone-row-bodyweight-free-bilateral-no-load-superman-row-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 111824,
+      "sha256": "3281ca10ed2d2b97b4572f3d21bb832179d53a7c13c2369934e767885825502a"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-prone-row-bodyweight-free-bilateral-no-load-superman-row-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 43364,
+      "sha256": "d597151fb8b85858e3e49cd3909eabd6baa89ed2f37fa67dbba2d3cc891a28b1"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-prone-row-bodyweight-free-bilateral-no-load-y-t-w-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 94293,
+      "sha256": "96c983f5d2e95031f94f576b48154ba790fb32682d30e8d20ded30f21ebdfdca"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-prone-row-bodyweight-free-bilateral-no-load-y-t-w-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 35590,
+      "sha256": "6ce4f3aaeb03196fe6046ef2a029e9570bb72a4d3df55a2a916afd7b4223ba5b"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-pull-up-bodyweight-free-bilateral-no-load-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 130641,
+      "sha256": "1d72f3f61de8dc88bec471c42d12945e0eb012adab56612df7554bc31767e3c5"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-pull-up-bodyweight-free-bilateral-no-load-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 49990,
+      "sha256": "1e5d57ad4634d5205aec2f5e8e51396c501bfd675bd0bc5a8e18dea47813e704"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-pulldown-band-free-bilateral-load1-front-grip-unspecified-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 118967,
+      "sha256": "83a1de6b0f5591f4761946021ecf2a4490412dc1b9f2c958085bb32a9f306c25"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-pulldown-band-free-bilateral-load1-front-grip-unspecified-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 44734,
+      "sha256": "069616760bcf69985628d377081c94d3bad8acf3e5db5eda30b3f90b611502cc"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-pulldown-machine-supported-bilateral-no-load-close-grip-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 140207,
+      "sha256": "879aadf4a72cc9b8903cdfe3b0dbd0dfcb5c1d120a645643859b5cba188eb4ad"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-pulldown-machine-supported-bilateral-no-load-close-grip-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 53386,
+      "sha256": "7fd467d84a6b141e06d587ff5b3a719dcb41826bd5167d3c078f0f64e820e80f"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-pulldown-machine-supported-bilateral-no-load-front-grip-unspecified-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 146673,
+      "sha256": "42196efcfd9dd592b236d5b891c2b83c04e378e732b6f9bc9f45d4fbc4b0d11d"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-pulldown-machine-supported-bilateral-no-load-front-grip-unspecified-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 53046,
+      "sha256": "22900522b50f74fec8b6c9c313fdfbbc3aad9af82103e8d5eb1b007d37511d09"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-pulldown-machine-supported-bilateral-no-load-neutral-grip-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 130539,
+      "sha256": "bf7b3517494ee9b50de84566214e3f16dbba792ab946ffe5be0d30523e4e3b06"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-pulldown-machine-supported-bilateral-no-load-neutral-grip-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 47724,
+      "sha256": "adae3817417a9bf5c8dfacbdc1a56f0c18a814aaa4dc004e704d88a30ff1b21a"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-pulldown-machine-supported-bilateral-no-load-wide-grip-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 150071,
+      "sha256": "26b47c0923cb45a578ab272eb3fb770e7a89e5c9872ee08c12e15ad72382371b"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-pulldown-machine-supported-bilateral-no-load-wide-grip-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 55766,
+      "sha256": "88c7681dd6a6743f51b838b4bc9db07d5ea0aa45afe47ed981354b31d26c4e2b"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-pullover-dumbbell-supported-bilateral-load1-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 86454,
+      "sha256": "0636ccc5818c07a2af796e9ea91d74d6747235a0341c4973c84427d12873556b"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-pullover-dumbbell-supported-bilateral-load1-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 31244,
+      "sha256": "289480ef74b7ca758007593fab04a8f252857fa8c4c76ab2196bf88295c94293"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-push-up-band-free-bilateral-load1-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 91631,
+      "sha256": "f7846aa7e62c789dbaef7f2c7a47f92688bde0f9fb767fca58c99b7ed8d5febf"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-push-up-band-free-bilateral-load1-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 34128,
+      "sha256": "c3a8ced0022427c03beed0f7e804e2d7c349c2833211b38810066c4d6e258c68"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-push-up-bodyweight-free-bilateral-no-load-deficit-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 97471,
+      "sha256": "da5b86cff0189d4c123dd07ef0668b085cabfd74858cd916e42e24831848e21e"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-push-up-bodyweight-free-bilateral-no-load-deficit-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 36744,
+      "sha256": "9cf4e4fa713cb2609222ffc856a077ae023333aa299b32efcbe3d0eb1eb43ed0"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-push-up-bodyweight-free-bilateral-no-load-diamond-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 96942,
+      "sha256": "e1551968157f95de824a1b103a001eb148355ff2fcac135ca82c36f9df7b6fe3"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-push-up-bodyweight-free-bilateral-no-load-diamond-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 35692,
+      "sha256": "e5dea3e9099669a263e99123a1786c5117206d41806ff1f905e681131e15f5c5"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-push-up-bodyweight-free-bilateral-no-load-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 85312,
+      "sha256": "36bc2824033e87954ccdf3ed16b9ba4858e6c4dc8ef1bffd2441381e67e74e67"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-push-up-bodyweight-free-bilateral-no-load-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 31302,
+      "sha256": "7ae3048659129ed54f479d2da7064fe8f32e059d7de1b37e9e62702681225474"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-push-up-bodyweight-free-bilateral-no-load-wide-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 89266,
+      "sha256": "42b349a48daa1c55bf21d1ee63bac4ce5814238e5f4c66c500c3d106f2688086"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-push-up-bodyweight-free-bilateral-no-load-wide-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 32882,
+      "sha256": "8fa050157d6815f9dd5305fe419c0a564fbb2d7f3deb283d1c93c22d5358ebd8"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-raise-band-free-bilateral-load1-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 115095,
+      "sha256": "b74ed711d04b58ab626f701db2a8c42290e353cc2d49959f603a7aa47c34a474"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-raise-band-free-bilateral-load1-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 45132,
+      "sha256": "e822f72eac2a966ddcf5cddaa87de1d8b65ec5018b54d8478c77d58246d77911"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-raise-dumbbell-free-bilateral-load2-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 106181,
+      "sha256": "540f242fbc287e327ea8cb18aef80fd4f3eac96ae9cf073179d5451c516d66cb"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-raise-dumbbell-free-bilateral-load2-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 40328,
+      "sha256": "0bf2f2052c8ab6d82397111839c6cc0db799f7c40c0d7f97625575862f7a0e0a"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-raise-machine-free-bilateral-no-load-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 173543,
+      "sha256": "de11232438836ddb1d2b3920ddc4847cdef6a970932a39aab6cdca1fb2245b9a"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-raise-machine-free-bilateral-no-load-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 66196,
+      "sha256": "96912a955053631756654b2c53cb88a5b120cba57b83f6172a77f0e4850a3379"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-rdl-barbell-free-bilateral-load1-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 113429,
+      "sha256": "8cd4eba8136b508e4e7c978ea5d31599fdd15765352756a3f28a189977cd6568"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-rdl-barbell-free-bilateral-load1-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 43880,
+      "sha256": "6a77edb9c1acd3db1137f355475a38cbd7dbf23e42b17a8a112641ffabb110c9"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-rdl-dumbbell-free-bilateral-load2-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 100952,
+      "sha256": "e61c51079d132bb166e074ff2e81e631cf1b54336c803e633a398642af67defd"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-rdl-dumbbell-free-bilateral-load2-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 37554,
+      "sha256": "71d8d9c5f33697e230bcfede817c90f433f43aa499fe8899b9a445c92912f8e2"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-rdl-kettlebell-free-bilateral-load1-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 101289,
+      "sha256": "c04d532113024f48573a3ea12d69c3cfa09059e40abc60d773884068f82f4790"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-rdl-kettlebell-free-bilateral-load1-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 37358,
+      "sha256": "b64992e5fcdb46c75ef217c23edd4a2365f1b9af78e90f49f88cb144ca9b94b7"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-reverse-fly-dumbbell-free-bilateral-load2-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 112992,
+      "sha256": "be78d7b56efbb3a277d72667a41cb007dbff606b3973793d294384917d4f02a0"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-reverse-fly-dumbbell-free-bilateral-load2-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 43162,
+      "sha256": "41207f5dd0074df02f26dd98c7438b0e24dff8389661e9abcc43c0fbb815073f"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-reverse-lunge-unloaded-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 95768,
+      "sha256": "da6ce90a079be384070d63d4b6527968e58fd5c37e996e17659b15312c0977ab"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-reverse-lunge-unloaded-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 36018,
+      "sha256": "ec5629870147a9654b226d1adb6206d2f65d3d4a119c9ddcf559b3a3508e7fef"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-row-barbell-free-bilateral-load1-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 117265,
+      "sha256": "4a436ffce6e9d730171ce4347c5f990548245e8caee05d43e9d9f25f38bb8089"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-row-barbell-free-bilateral-load1-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 44776,
+      "sha256": "a9b6cfe74f8777edc04a5e7f32cf2c86e48b0db9c79403dbd3c3c3c96249d5a8"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-row-dumbbell-free-bilateral-load2-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 107755,
+      "sha256": "a148033bfcf380eb1c25191687e08931552f120a026e327fb08109694d3bbbe4"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-row-dumbbell-free-bilateral-load2-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 40490,
+      "sha256": "2ec8b4d60e4938cd3c68d3652e48268feffb7b155140344d781a6e82a3bfbfd4"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-row-dumbbell-free-unilateral-load1-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 110687,
+      "sha256": "210f6dd42e7f746eee8d9123d066ad7e995e5f0f03a1d1355bddca0499b2e847"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-row-dumbbell-free-unilateral-load1-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 42020,
+      "sha256": "d8ec1cb797fa328643acc8d1990331bc5368928005ea70df8483ca3e5f4b4f3f"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-row-dumbbell-supported-unilateral-load1-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 121125,
+      "sha256": "7815fd9170ab7dc44680882a632e1ad4fba3d07f000eb94ed2f425649dc6f328"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-row-dumbbell-supported-unilateral-load1-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 46724,
+      "sha256": "942645b41eb0a9ffbd2891a5c3eaadf0a29194b12085945db7eea93a452a8784"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-row-kettlebell-free-unilateral-load1-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 108921,
+      "sha256": "2330fae01f6e89c3553a2d3f55290f8786b70417f93d238fe2b0443582834ebc"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-row-kettlebell-free-unilateral-load1-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 40690,
+      "sha256": "b10946f29085fe44de4f4e97f18b03d3335bb8a34f1c7214138a00e29ce4e8b6"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-row-kettlebell-supported-unilateral-load1-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 117979,
+      "sha256": "c6d4d2eb7bffc9ab78ab604254bdf79061fd92cc9fab94643a4659f0d1302333"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-row-kettlebell-supported-unilateral-load1-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 44364,
+      "sha256": "8b56620a18ab219136d6fbf0a6e672e0f0be97ef03a61e30cd37906285f5dbe1"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-run-bodyweight-free-bilateral-no-load-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 111330,
+      "sha256": "67e3dca9848b4ce80a0637d06d3eb5b0479f612f306316e5bc0e3cc77c72118b"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-run-bodyweight-free-bilateral-no-load-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 41352,
+      "sha256": "544128d0eade4eded614d4e5c7d087b1c02667b2f9026abbc5851482988e881b"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-scaled-burpee-broad-jump-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 99523,
+      "sha256": "3919e2ea92f1e0af2f65b279a312291b58392e14670ed3e7c2378df8be74d5e8"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-scaled-burpee-broad-jump-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 37418,
+      "sha256": "1228dafab8d9a86907c466807b834bcf5af055da87212e017c6b865b576c6c0d"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-shoulder-press-machine-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 168485,
+      "sha256": "8868b994cddee97d09e23cb3c6fa27afd25df67bab0884d6019e3213fbe1fbb6"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-shoulder-press-machine-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 66984,
+      "sha256": "bd7d527dee751b36e166159d72d2a528df246cbd979d8ce56db5251c31a3c879"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-single-bridge-bodyweight-free-bilateral-no-load-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 90123,
+      "sha256": "52bca85e2f25a2671c3d132f61dcb4ff311be8b27c8a3cd7d30708a271102699"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-single-bridge-bodyweight-free-bilateral-no-load-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 33384,
+      "sha256": "147a238cb58945247482daf5a38422830442d738f9d3b682333232d4ab84d039"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-single-calf-bodyweight-free-bilateral-no-load-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 103556,
+      "sha256": "56fdad6fd6ea844cac7b39e964c29a50b29cb8ac9486bf176ce85dc66e18b05b"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-single-calf-bodyweight-free-bilateral-no-load-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 38886,
+      "sha256": "823f57efc0116da50dec7b1306fa45f6d638a4cc2ac817d176bd5c6cfe3f0405"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-single-rdl-dumbbell-free-bilateral-load2-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 98516,
+      "sha256": "00c085455534dc4877351510194eb3dc95a1bd2445028c7c9ed742e29c3a6a94"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-single-rdl-dumbbell-free-bilateral-load2-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 37320,
+      "sha256": "a8aaced59f8b8dcbf93921365b4d7dd8a02f90cdde63973e021bec6cd858e9bf"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-ski-ergometer-free-bilateral-no-load-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 139822,
+      "sha256": "22a81e0669f1a3017959c9e717cb8aace85c21ccd139229c6b421f934d05f6eb"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-ski-ergometer-free-bilateral-no-load-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 58372,
+      "sha256": "ae9fa7ba3a9c4e1a997116786cde13fb767b0172168d9036db6b5d07b584b3b7"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-sled-pull-sled-free-bilateral-no-load-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 113431,
+      "sha256": "90d800796dcf4344bb9c6ad93a5ee4b5faf7eeca90f76a513a450d8b93d85d58"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-sled-pull-sled-free-bilateral-no-load-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 43770,
+      "sha256": "f50b4fbe9f6ca1b5c7163538de35b104b2700ecdacec4bcbfa580d534eac9f01"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-sled-push-sled-free-bilateral-no-load-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 112801,
+      "sha256": "f36a32883f4d5d920bc07dce54acb73baf24ca8bab5e0551e2087d182b598e53"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-sled-push-sled-free-bilateral-no-load-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 42212,
+      "sha256": "28d124a23f0f28d60a408eb12a20d5983da8da01a8ee034861d090b2967fcd03"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-sliding-curl-slider-free-bilateral-load1-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 75525,
+      "sha256": "9749dd661e300f5da411a26a1fa1dd4e35385d7f1d20feb44f98accee042d910"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-sliding-curl-slider-free-bilateral-load1-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 27524,
+      "sha256": "ccd78697e325175a281ef89446195889e966c14617398d8226139391f0941c67"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-split-squat-bodyweight-supported-bilateral-no-load-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 107749,
+      "sha256": "ed25ad9a6a32905d2551795b04ec1d8d7ae9110a60a0187151056809231d6d27"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-split-squat-bodyweight-supported-bilateral-no-load-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 41232,
+      "sha256": "812b995af3b06bce7d50803d05e420b32ee5c1ef2f122eb121e2e210262e973c"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-split-squat-dumbbell-supported-bilateral-load2-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 101477,
+      "sha256": "d239813dd7cf192787851a482860d99e59fe158770b9421ca82d5d7bfdb9cae4"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-split-squat-dumbbell-supported-bilateral-load2-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 37868,
+      "sha256": "7d30cf865bb6506d2eda43b4acd78ec15d16ed9f0458b5a17ac913f29b2a4d24"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-squat-barbell-free-bilateral-load1-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 131299,
+      "sha256": "ad9654a6e5fc4a41b3810cab73a0802f5c6d9485f874ffac62adc1e6798ca6d3"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-squat-barbell-free-bilateral-load1-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 52396,
+      "sha256": "4384a341a62c0a1add1b74e2090c4b6d757495ff1ec79edd0c6a6d223b76a96e"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-squat-bodyweight-free-bilateral-no-load-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 97633,
+      "sha256": "337c53bf1b69fa27a1ff133ae55fa95a292ce132a702756e58e9fbce00c6f94e"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-squat-bodyweight-free-bilateral-no-load-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 36814,
+      "sha256": "aafb0cf76bd1c2585f21705f6944a529507c7b5b115a21f62c7535554b2cff67"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-standing-fly-band-free-bilateral-load1-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 130292,
+      "sha256": "89254cb7ef26d34597707eb4dab30f15ededec59e1e568433668136c26b97e22"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-standing-fly-band-free-bilateral-load1-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 50794,
+      "sha256": "9bd51cc13c227a3e8125027bb1be65319ff0a73ad103f4d09d2b1c35454afa35"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-standing-press-band-free-bilateral-load1-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 104517,
+      "sha256": "3d209ff19a01491691c659460687efbeec066951b6c186d7ea87420145263193"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-standing-press-band-free-bilateral-load1-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 39752,
+      "sha256": "5dce241fea47000a314af3600fae9e1df4fb05a6828071141afc6082a01ef580"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-step-up-bodyweight-supported-bilateral-no-load-low-step-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 100314,
+      "sha256": "eb1f2a64ff6129442d9d94f439a0a39cf40fbd660708e087fd172df39a09e9d9"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-step-up-bodyweight-supported-bilateral-no-load-low-step-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 38722,
+      "sha256": "5f6e9fea9157e40cc202a38163caf93d9437d2aab06b66f792330d339d47177d"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-step-up-chair-supported-bilateral-no-load-stable-chair-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 103277,
+      "sha256": "4d00aee59e498a8bf9debba74df1ea5ea26ef5b5a14d9698dba47816ab667de5"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-step-up-chair-supported-bilateral-no-load-stable-chair-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 36816,
+      "sha256": "612155b39b9a77107a94c27579d1b58cef19d93c1e97093edee09082f3d11322"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-step-up-dumbbell-supported-bilateral-load2-step-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 96865,
+      "sha256": "42daaaf23b671e458aeae8e5700a8bb9e8b5e1e71a5a9af8263215302b0a1722"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-step-up-dumbbell-supported-bilateral-load2-step-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 36526,
+      "sha256": "8e0be80fa6728168e699e860b56de02e9413aa4a53e0fd8c010b7a2178a2f651"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-step-up-kettlebell-supported-bilateral-load1-step-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 100361,
+      "sha256": "9d4e938419db480754929e575308ab07a6b649604dee3e69c8ec60cb7dacba3a"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-step-up-kettlebell-supported-bilateral-load1-step-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 38124,
+      "sha256": "dab2dd934ed8717c6433412c65c5e889b78b0c55cca4f3a7db242db090ada686"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-supported-sissy-squat-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 108172,
+      "sha256": "7a7de12b50333eb8cf885afd9ee0d134b554479285169a2b8fe0aaab53728ac6"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-supported-sissy-squat-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 38712,
+      "sha256": "71c90baeece5d8ea611b2c3b0f5e2d45f9c7474719c597ac02b188c961891308"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-table-inverted-row-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 153891,
+      "sha256": "4e37ef5eea9620c500db195669853f8b94be6eb97b6324d5219eabe689f8cbed"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-table-inverted-row-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 58850,
+      "sha256": "a88ac607d62489fd612b2031b460acb62b4f136fbb740751ae3d5c95f78fb4c3"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-towel-curl-towel-free-bilateral-load1-bilateral-isometric-v2.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 123771,
+      "sha256": "7bf24227968a68e3f4ae8361ba1ff2be61da5b0fcfde85d0b5ebde4154f08f5c"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-towel-curl-towel-free-bilateral-load1-bilateral-isometric-v2.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 50842,
+      "sha256": "a4cafa21fe63854adc4e8e49e62b9f90f063f3656324188eb38b3ded4dfbbbba"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-towel-curl-towel-free-unilateral-load1-unilateral-isometric-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 110823,
+      "sha256": "d8e773608d6831a73d635bd5010a26785d6a4c7e5262767b382b224e67e89979"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-towel-curl-towel-free-unilateral-load1-unilateral-isometric-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 43794,
+      "sha256": "b056933beccfdd4e392b14b91c3afbda8fe325d0587ed1038601001a791139d7"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-trap-bar-deadlift-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 124133,
+      "sha256": "29f756dcc660cfd96f0f936ec526cc970f7b205fb4849aff9c3400dadd0e8c1e"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-trap-bar-deadlift-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 49474,
+      "sha256": "7695d36687e0fea48e7da9ab51ce393a2c1070650bd20df4adf401c0f557d3de"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-triceps-extension-dumbbell-free-bilateral-load1-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 96976,
+      "sha256": "75719a8fc8fb4b32df67572a04bdf3c69102ba34d1e384f187084f0042fb231e"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-triceps-extension-dumbbell-free-bilateral-load1-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 35924,
+      "sha256": "f257af64bd074df68684ef065ef0405d1474b2e90e59c5973bdb9196dfd04cae"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-triceps-pushdown-machine-free-bilateral-no-load-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 132485,
+      "sha256": "d17d2e460064b6d7b314462720abacc38c1971561d0c736b5b2d3de5c40b6080"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-triceps-pushdown-machine-free-bilateral-no-load-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 47004,
+      "sha256": "6f66ace982ea4882623ad0bd353e5cc69d09ad45fcbea6b2582f1d9d767eca28"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-vital-seated-row-unloaded-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 126924,
+      "sha256": "0647e70120ec48b45eac5e145922ef6e3f558d1df78d9a5bcba89d11c5fca57b"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-vital-seated-row-unloaded-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 50222,
+      "sha256": "0138701c2c10db53192c7193369edf117bb96629305fa385e19f3537b7970204"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-walk-bodyweight-free-bilateral-no-load-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 113378,
+      "sha256": "75df35b78aaab4ea7e87adb690aafb7a9a662b7ce92f90928e7e6f8df4f31417"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-walk-bodyweight-free-bilateral-no-load-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 43304,
+      "sha256": "a74cb4e2ad6612bbd3402c5fbc541c5a3abefa84794f272c548ce76ca04514de"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-wall-push-bodyweight-supported-bilateral-no-load-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 98530,
+      "sha256": "a7a4e245046114b913227a5fbb691dcaff297ff6721253d03a055fc495f2d1a1"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-wall-push-bodyweight-supported-bilateral-no-load-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 34398,
+      "sha256": "e9e30e362e3f8a4695acc5bd802b55a8bf532dc72a36893ae18eadead4f86809"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-wall-sit-bodyweight-supported-bilateral-no-load-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 109792,
+      "sha256": "8e8474dc4959bf3234c1b6ca256d8bfc39ef2cf3e4f87cce801bc7bda848e1c8"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-wall-sit-bodyweight-supported-bilateral-no-load-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 39510,
+      "sha256": "cdeff6cfee03b420652a713c0417185a9253833ab815ab79a1cf5a038671a2b0"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-weighted-dip-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 117030,
+      "sha256": "d20e86bb574cc8c51b97cbb329c3690fbe8531fd78f42b1008641086866134de"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-weighted-dip-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 44430,
+      "sha256": "05170dc2cd428bf1dae6eae7823654570c62bf44e6214ba07e45850fcde3da97"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-weighted-pull-up-v1.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 135464,
+      "sha256": "e55c782c3d26fb7b16a4c232ce7193fe0671321279eabe72801b4be8170fd9dd"
+    },
+    {
+      "file": "assets/exercise-media/generated/positions-weighted-pull-up-v1.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 50928,
+      "sha256": "3bd073480321c098c5b6e7958515c0c9d42e865f96647b0d0cf65f3ff5f98f48"
+    },
+    {
+      "file": "assets/js/exercise-generated-media.js",
+      "status": 200,
+      "contentType": "application/javascript",
+      "bytes": 80748,
+      "sha256": "37d7adebfe6c3cec5641d013abbe18b7e5adcfeb904bde3fbf334a60c4f68a34"
+    },
+    {
+      "file": "assets/js/exercise-media.js",
+      "status": 200,
+      "contentType": "application/javascript",
+      "bytes": 6700,
+      "sha256": "03f8b5b7f0bc7c7075c2cbb4685c8622b3762e46450170bb029b40f68175854c"
+    },
+    {
+      "file": "assets/js/exercise-muscles.js",
+      "status": 200,
+      "contentType": "application/javascript",
+      "bytes": 19341,
+      "sha256": "6fd9a19841f7fa1f79f0969aedbdc0eca0a4ba4e4262d58e4a6701ac40ee8c15"
+    },
+    {
+      "file": "assets/js/exercise-visual-catalogue.js",
+      "status": 200,
+      "contentType": "application/javascript",
+      "bytes": 71606,
+      "sha256": "1edf38a505dd2c32f2e73dfa9bdbcb4871d73b22a645591b625a020aca4289b2"
+    },
+    {
+      "file": "assets/js/exercise-visuals.js",
+      "status": 200,
+      "contentType": "application/javascript",
+      "bytes": 20911,
+      "sha256": "0528b4ad3a6dc4e1c627559b5e1befeb84d3b1f7f4a80405fedef94bb19bb261"
+    }
+  ]
+}

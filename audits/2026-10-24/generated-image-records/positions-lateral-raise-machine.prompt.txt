@@ -1,0 +1,17 @@
+Use case: scientific-educational.
+Asset type: original premium mobile fitness app exercise illustration, not a UI mockup.
+Input image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.
+Composition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.
+Subject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.
+Muscle emphasis: NONE. Natural skin/clothing only, no coral or colored anatomical regions.
+Lighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.
+Text: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.
+Accuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.
+
+Movement-specific brief:
+Show a recognizable seated lateral-raise machine with back support and padded contacts OUTSIDE the upper arms/elbows. First arms lowered near torso; second upper arms open laterally to about shoulder height against pads. Elbows softly bent, neck relaxed, wrists neutral. No dumbbells, no cable handles; full machine, feet and head visible. Omit overlays.
+
+Presentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.
+
+Exact lateral-raise machine: seated upright against back pad, fixed seat and weight stack behind. Two movable cushioned pads contact OUTSIDE/lower part of upper arms just above elbows. First upper arms angled DOWN beside ribs; second both upper arms lift OUT SIDEWAYS to shoulder height with pads maintaining contact. Hands may hold the machine's small fixed lever handles in front, never dumbbells/cable D-handles. Neck relaxed, wrists straight, feet planted. Pads travel laterally UP, not pec-deck forearm pads closing together. Complete two identical machines max80percent canvas height with clear top/base/shoe margins, three-quarter front view.
+

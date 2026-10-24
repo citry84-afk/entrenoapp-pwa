@@ -1,0 +1,22 @@
+{
+  "key": "positions-carry-dumbbell-free-bilateral-load2",
+  "file": "generated/positions-carry-dumbbell-free-bilateral-load2-v1.webp",
+  "alt": {
+    "es": "Dos vistas orientativas de paseo con carga · mancuernas.",
+    "en": "Two orientation views of loaded carry · dumbbells."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:25:27.830Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/01a16d45-1dbd-7160-9764-9653df629c3d/exec-3048d32d-808a-4834-8bb1-03c50f728d9d.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nShow a feet-parallel standing start and then one natural walking position with the torso upright, shoulders level and arms carrying the specified load beside the body. One kettlebell means a suitcase carry on one side; two dumbbells means one in each hand. Do not add a second kettlebell. Exactly two matching dumbbells, not a barbell or kettlebell.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.\n\nThis is a gentle Vital carry: approachable older adult around 65 wearing a graphite t-shirt and shorts, two modest light dumbbells, one per hand. LEFT FIGURE: stands still, both feet flat next to each other, ankles on one horizontal line. RIGHT FIGURE: one short forward walking step with the trailing heel lifted. These must be visibly DIFFERENT: start standing and then walk, not two copies of one walking pose. Omit muscle-color overlays. No running, bench, exposed torso or heavy loads.\n",
+  "visualReview": "Revisión visual: adulto mayor vestido con camiseta y pantalón, dos mancuernas moderadas a los lados. Inicio de pie y luego paso corto claramente diferentes, apoyos íntegros y sin overlays. No pretende mostrar una secuencia alternante completa.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 40078,
+  "sha256": "dd6b2aee3cbd4ff101be9cebbadf480d90540ab228e1634a004ee785959d1765",
+  "fallbackFile": "generated/positions-carry-dumbbell-free-bilateral-load2-v1.jpg",
+  "fallbackBytes": 103819,
+  "fallbackSha256": "8f84ff8c980e5cfc261ca9b93b55204d5a19a9917f28d0cbb5c9d516c7596514"
+}

@@ -1,0 +1,22 @@
+{
+  "key": "positions-goblet-dumbbell-free-bilateral-load1",
+  "file": "generated/positions-goblet-dumbbell-free-bilateral-load1-v1.webp",
+  "alt": {
+    "es": "Dos vistas orientativas de sentadilla goblet · mancuernas.",
+    "en": "Two orientation views of goblet squat · dumbbells."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:13:03.374Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/019f5b89-f0eb-7533-a20b-f1e8b4011a4a/exec-6929a4af-fac3-4b68-8429-121e8c2a1596.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: premium mobile fitness app exercise illustration; a style proof, not a UI mockup.\nPrimary request: Create an original beautifully rendered 3D fitness instruction image showing a goblet squat with one single dumbbell, in two clearly separated side-by-side positions: standing start and controlled bottom of squat.\nScene/backdrop: clean deep midnight navy studio background, with a subtle ground contact shadow and ample breathing room. No gym scene or distracting scenery.\nSubject: the exact same athletic but approachable adult human model in both positions, plausible everyday trained proportions, short dark hair, neutral face, wearing fitted graphite shorts and neutral training shoes. Smooth anatomically believable gray skin with understated sculpted muscle definition, like a polished high-end fitness educational 3D render, not a stick figure, not a comic, not an exposed bloody anatomical specimen.\nComposition/framing: wide landscape, two equal panels, full bodies entirely visible including heads and both shoes, consistent three-quarter side camera, same scale, same model, same equipment. The feet stay planted on the same ground plane. A single vertically held black hex dumbbell is cupped securely in both hands against the upper chest in both positions; the dumbbell must remain the same size and shape.\nMovement constraints: standing position tall and relaxed, not leaning backward. Bottom position with hips lowered between the knees, hips back naturally, thighs approximately parallel to the ground, both heels flat, knees tracking with toes, stable neutral spine, chest upright and elbows near the knees. Hands naturally support the upper end of the dumbbell; five fingers where visible, no fused objects or extra limbs.\nMuscle emphasis: subtle warm coral accents only on the visible front thigh/quadriceps and small visible outer glute region, integrated into the gray model, to suggest relevant muscle groups without implying a quantified activation map.\nStyle/medium: exceptional premium 3D medical-fitness illustration, lifelike anatomical volume, carefully modeled hands and joints, clear silhouette and readable body mechanics, soft studio key light and subtle cool rim light, black rubber dumbbell with real material detail, clean elegant polished rendering.\nText: none. No labels, no captions, no letters, no numbers, no arrows, no logo, no watermark, no UI controls. Do not crop any body part. Avoid bodybuilder exaggeration and aggressive facial expression.\n",
+  "visualReview": "Muestra de estilo aprobada por el usuario. Revisada visualmente: una sola mancuerna vertical en ambas manos, cuerpo completo, pies apoyados, dos posiciones reconocibles y agarre coherente. No es validación profesional de técnica.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 38116,
+  "sha256": "339486b49629e5c7e92c88c3439bf4016b77bf98c04c06ca0e5bdee9cbf0050c",
+  "fallbackFile": "generated/positions-goblet-dumbbell-free-bilateral-load1-v1.jpg",
+  "fallbackBytes": 99561,
+  "fallbackSha256": "f329c4283c863353dc4467e22a5b8e42e4ce5bc02fc9f076d7ca7094697d2816"
+}

@@ -1,0 +1,17 @@
+Use case: scientific-educational.
+Asset type: original premium mobile fitness app exercise illustration, not a UI mockup.
+Input image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.
+Composition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.
+Subject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.
+Muscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.
+Lighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.
+Text: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.
+Accuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.
+
+Movement-specific brief:
+Start standing with upper arms by the torso and elbows nearly extended. Finish with elbows flexed while upper arms stay by the torso; keep wrists aligned with forearms. Use the grip specified for this variant. Use a neutral hammer grip, with thumbs upward throughout; never rotate into a supinated biceps curl. Exactly one kettlebell is used. The one-arm or two-hand grip must be reviewed explicitly before enabling; do not silently add a second kettlebell. Exactly one kettlebell, not a dumbbell or a second kettlebell.
+
+Presentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.
+
+Chosen explicit bilateral hammer grip: one hand on EACH vertical horn of ONE kettlebell with bowl hanging below handle. Palms face inward toward each other, thumbs upright in BOTH positions; never grasp horizontal top handle underhand. Start bell by front thighs at low elbow angle, finish near lower chest by bending elbows while upper arms stay by torso. Omit all muscle-color overlays. Exactly two arms/two hands and full body with margins.
+

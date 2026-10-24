@@ -1,0 +1,17 @@
+Use case: scientific-educational.
+Asset type: original premium mobile fitness app exercise illustration, not a UI mockup.
+Input image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.
+Composition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.
+Subject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.
+Muscle emphasis: NONE. Natural skin/clothing only, no coral or colored anatomical regions.
+Lighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.
+Text: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.
+Accuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.
+
+Movement-specific brief:
+Show two identical cable stations framing each adult with handles connected at roughly chest/shoulder height. First arms open to sides with soft elbows; second hands meet in front of chest maintaining elbow bend. Stable split stance. Cables connect physically from EACH hand to its matching station, not across the face. Whole bodies and bases visible. No dumbbells or seated pec-deck pads. Omit overlays.
+
+Presentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.
+
+Exact setup: TWO people total in two separate key-position panels, EACH centered one small step in front of a COMPLETE dual adjustable cable station. Each hand holds one D-handle connected by continuous cable to its OWN SIDE pulley at chest height slightly behind shoulder. First arms out at chest height with soft elbows, second hands meet in FRONT of sternum at same soft elbow angle; cables remain to side pulleys, never across face. Stable split stance, no lean. Four tower columns total (two per scene), all station tops, bases, hands and shoes fit fully inside broad margins. Wide camera, complete setup max80percent canvas height; no cropped equipment. No overlays.
+

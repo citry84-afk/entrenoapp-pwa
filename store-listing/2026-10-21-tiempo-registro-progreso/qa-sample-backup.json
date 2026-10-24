@@ -1,0 +1,136 @@
+{
+  "_fixture": {
+    "label": "DATOS FICTICIOS DE DEMOSTRACIÓN",
+    "warning": "Solo para un perfil de pruebas vacío. NO importar en un perfil real: la importación reemplaza la rutina y el historial de ese perfil. Las cargas no son recomendaciones de entrenamiento.",
+    "purpose": "Pruebas y capturas reales de la interfaz; no representan usuarios, resultados ni actividad real."
+  },
+  "backupVersion": 2,
+  "exportedAt": "2026-10-21T10:00:00.000Z",
+  "lang": "es",
+  "profile": {
+    "manualRoutine": true,
+    "mode": "musculacion",
+    "priority": "musculo",
+    "goal": "musculo",
+    "experience": "intermedio",
+    "equipment": "gym",
+    "time": "40",
+    "days": "2"
+  },
+  "routine": [
+    {
+      "name": "Día A",
+      "desc": "Rutina creada por ti",
+      "estimatedMin": 24,
+      "budgetMin": 40,
+      "timingNote": "Estimación con preparación, series, descansos y transiciones",
+      "exercises": [
+        { "id": "pb", "name": "Press de banca", "type": "strength", "equipment": "gym", "sets": 3, "rr": "8-12", "rest": 75, "hint": "Registra kg y repeticiones." },
+        { "id": "rm", "name": "Remo máquina pecho", "type": "strength", "equipment": "gym", "sets": 3, "rr": "8-12", "rest": 75, "hint": "Registra kg y repeticiones." },
+        { "id": "sq", "name": "Sentadilla con barra", "type": "strength", "equipment": "gym", "sets": 3, "rr": "8-12", "rest": 75, "hint": "Registra kg y repeticiones." }
+      ]
+    },
+    {
+      "name": "Día B",
+      "desc": "Rutina creada por ti",
+      "estimatedMin": 24,
+      "budgetMin": 40,
+      "timingNote": "Estimación con preparación, series, descansos y transiciones",
+      "exercises": [
+        { "id": "pmr", "name": "Peso muerto rumano", "type": "strength", "equipment": "gym", "sets": 3, "rr": "8-12", "rest": 75, "hint": "Registra kg y repeticiones." },
+        { "id": "dm", "name": "Dominadas lastradas", "type": "strength", "equipment": "gym", "sets": 3, "rr": "8-12", "rest": 75, "hint": "Registra la carga añadida y las repeticiones." },
+        { "id": "jl", "name": "Jalón al pecho", "type": "strength", "equipment": "gym", "sets": 3, "rr": "8-12", "rest": 75, "hint": "Registra kg y repeticiones." }
+      ]
+    }
+  ],
+  "sessions": [
+    {
+      "id": "qa-demo-20261014-a",
+      "date": "2026-10-14T17:00:00.000Z",
+      "dayName": "Día A",
+      "routineDayIndex": 0,
+      "dayKind": "strength",
+      "mode": "normal",
+      "durationMin": 24,
+      "feel": "normal",
+      "bodyWeight": "",
+      "notes": "Datos ficticios de demostración.",
+      "prs": [],
+      "exercises": [
+        { "id": "pb", "name": "Press de banca", "type": "strength", "equipment": "gym", "sets": [{ "kg": 40, "reps": 10, "done": true }, { "kg": 40, "reps": 10, "done": true }, { "kg": 40, "reps": 8, "done": true }] },
+        { "id": "rm", "name": "Remo máquina pecho", "type": "strength", "equipment": "gym", "sets": [{ "kg": 35, "reps": 10, "done": true }, { "kg": 35, "reps": 10, "done": true }, { "kg": 35, "reps": 8, "done": true }] },
+        { "id": "sq", "name": "Sentadilla con barra", "type": "strength", "equipment": "gym", "sets": [{ "kg": 50, "reps": 10, "done": true }, { "kg": 50, "reps": 10, "done": true }, { "kg": 50, "reps": 8, "done": true }] }
+      ]
+    },
+    {
+      "id": "qa-demo-20261016-b",
+      "date": "2026-10-16T17:00:00.000Z",
+      "dayName": "Día B",
+      "routineDayIndex": 1,
+      "dayKind": "strength",
+      "mode": "normal",
+      "durationMin": 24,
+      "feel": "normal",
+      "bodyWeight": "",
+      "notes": "Datos ficticios de demostración.",
+      "prs": [],
+      "exercises": [
+        { "id": "pmr", "name": "Peso muerto rumano", "type": "strength", "equipment": "gym", "sets": [{ "kg": 45, "reps": 10, "done": true }, { "kg": 45, "reps": 10, "done": true }, { "kg": 45, "reps": 8, "done": true }] },
+        { "id": "dm", "name": "Dominadas lastradas", "type": "strength", "equipment": "gym", "sets": [{ "kg": 5, "reps": 10, "done": true }, { "kg": 5, "reps": 10, "done": true }, { "kg": 5, "reps": 8, "done": true }] },
+        { "id": "jl", "name": "Jalón al pecho", "type": "strength", "equipment": "gym", "sets": [{ "kg": 35, "reps": 10, "done": true }, { "kg": 35, "reps": 10, "done": true }, { "kg": 35, "reps": 8, "done": true }] }
+      ]
+    },
+    {
+      "id": "qa-demo-20261018-a",
+      "date": "2026-10-18T17:00:00.000Z",
+      "dayName": "Día A",
+      "routineDayIndex": 0,
+      "dayKind": "strength",
+      "mode": "normal",
+      "durationMin": 24,
+      "feel": "normal",
+      "bodyWeight": "",
+      "notes": "Datos ficticios de demostración.",
+      "prs": [],
+      "exercises": [
+        { "id": "pb", "name": "Press de banca", "type": "strength", "equipment": "gym", "sets": [{ "kg": 42.5, "reps": 10, "done": true }, { "kg": 42.5, "reps": 9, "done": true }, { "kg": 42.5, "reps": 8, "done": true }] },
+        { "id": "rm", "name": "Remo máquina pecho", "type": "strength", "equipment": "gym", "sets": [{ "kg": 35, "reps": 10, "done": true }, { "kg": 35, "reps": 10, "done": true }, { "kg": 35, "reps": 10, "done": true }] },
+        { "id": "sq", "name": "Sentadilla con barra", "type": "strength", "equipment": "gym", "sets": [{ "kg": 47.5, "reps": 10, "done": true }, { "kg": 47.5, "reps": 10, "done": true }, { "kg": 47.5, "reps": 10, "done": true }] }
+      ]
+    },
+    {
+      "id": "qa-demo-20261020-b",
+      "date": "2026-10-20T17:00:00.000Z",
+      "dayName": "Día B",
+      "routineDayIndex": 1,
+      "dayKind": "strength",
+      "mode": "normal",
+      "durationMin": 24,
+      "feel": "normal",
+      "bodyWeight": "",
+      "notes": "Datos ficticios de demostración.",
+      "prs": [],
+      "exercises": [
+        { "id": "pmr", "name": "Peso muerto rumano", "type": "strength", "equipment": "gym", "sets": [{ "kg": 47.5, "reps": 10, "done": true }, { "kg": 47.5, "reps": 9, "done": true }, { "kg": 47.5, "reps": 8, "done": true }] },
+        { "id": "dm", "name": "Dominadas lastradas", "type": "strength", "equipment": "gym", "sets": [{ "kg": 5, "reps": 10, "done": true }, { "kg": 5, "reps": 10, "done": true }, { "kg": 5, "reps": 10, "done": true }] },
+        { "id": "jl", "name": "Jalón al pecho", "type": "strength", "equipment": "gym", "sets": [{ "kg": 32.5, "reps": 10, "done": true }, { "kg": 32.5, "reps": 10, "done": true }, { "kg": 32.5, "reps": 10, "done": true }] }
+      ]
+    }
+  ],
+  "bodyWeights": [],
+  "mental": [],
+  "windDown": [],
+  "dailyCheckins": [],
+  "achievements": [],
+  "restPrefs": {},
+  "curDay": 0,
+  "manualToday": false,
+  "nutrition": null,
+  "reminder": null,
+  "nudges": null,
+  "health": null,
+  "sound": { "enabled": false, "countdown": false, "vibration": false },
+  "helpDismissed": true,
+  "tourSeen": true,
+  "workoutDraft": null
+}

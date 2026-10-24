@@ -1,0 +1,22 @@
+{
+  "key": "positions-band-incline-press-band-free-bilateral-load1",
+  "file": "generated/positions-band-incline-press-band-free-bilateral-load1-v1.webp",
+  "alt": {
+    "es": "Dos vistas orientativas de press inclinado con banda · banda.",
+    "en": "Two orientation views of upward diagonal band chest press · resistance band."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:34:17.903Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/019f5b89-f0eb-7533-a20b-f1e8b4011a4a/exec-26438842-b279-4633-a838-7fa7144fcb7a.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nShow a standing upward diagonal chest press with the resistance band securely behind the torso. First pose has hands near the lower chest; second pose presses hands diagonally upward and forward. Do not invent a bench or show a vertical shoulder press.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.\n\nMake the band mounting explicit: single flat band passes around the mid/upper back below the armpits, with an end held in each hand. NO bench and no external rack. Stable staggered standing stance. First view hands at mid-chest; second view hands BOTH diagonally FORWARD AND UP, about a 45-degree press, clearly NOT straight overhead. Band stays away from throat and face. Omit all colored muscle overlays. Natural neutral wrists and a small bend rather than hyperextended elbows.\n",
+  "visualReview": "Press de pie con banda detrás del tronco y salida de manos diagonal hacia delante y arriba, diferenciado del press vertical. Ambos pies y manos completos, sin banco ni anclaje inventado y sin superposición muscular confusa.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 43144,
+  "sha256": "02c2121722c84d7fca46f00650dfc866d70e67d11bbe57a7bf8444894d6df390",
+  "fallbackFile": "generated/positions-band-incline-press-band-free-bilateral-load1-v1.jpg",
+  "fallbackBytes": 109270,
+  "fallbackSha256": "a28eb6453d9053c6380742ec596d2d763fae8de0c824893ad6bb4bb7d055a5bb"
+}

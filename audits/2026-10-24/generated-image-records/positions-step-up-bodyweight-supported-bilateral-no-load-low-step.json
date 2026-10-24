@@ -1,0 +1,22 @@
+{
+  "key": "positions-step-up-bodyweight-supported-bilateral-no-load-low-step",
+  "file": "generated/positions-step-up-bodyweight-supported-bilateral-no-load-low-step-v1.webp",
+  "alt": {
+    "es": "Dos vistas orientativas de subir al escalón.",
+    "en": "Two orientation views of step-up."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:27:07.526Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/01a16d4c-2c93-7672-b9c7-5fc639f6c4b0/exec-b3709c8d-ec39-4ed4-9f5b-aeaaf8f11f7d.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nShow a stable flat step or specified chair support. First pose has one full foot on the support and the other foot on the floor. Second pose stands tall on the leading leg atop the support with the trailing leg lifted naturally. Keep the entire leading foot supported.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.\n\nStrict asset correction: Gentle Vital LOW STEP version. Approachable older adult around 65 years, realistic average proportions, graphite loose t-shirt and shorts, neutral shoes. Exactly one broad stable non-slip step ONLY 10-15 cm tall per view, not a chair or high box. Left complete leading foot on the low step and other foot on floor; right standing on that same leading leg on step with trailing foot modestly lifted next to it. Upright relaxed torso, small range, no jumping, no weights, no muscles highlighted anywhere. Full bodies, all feet and step contacts visible, two separated views.\n",
+  "visualReview": "Revisión visual: adulto mayor con ropa, escalón bajo ancho, pie delantero entero sobre la plataforma y elevación moderada de pierna libre. Sin silla alta, carga, salto ni resaltados anatómicos. Apoyos legibles; revisión visual no clínica.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 38722,
+  "sha256": "5f6e9fea9157e40cc202a38163caf93d9437d2aab06b66f792330d339d47177d",
+  "fallbackFile": "generated/positions-step-up-bodyweight-supported-bilateral-no-load-low-step-v1.jpg",
+  "fallbackBytes": 100314,
+  "fallbackSha256": "eb1f2a64ff6129442d9d94f439a0a39cf40fbd660708e087fd172df39a09e9d9"
+}

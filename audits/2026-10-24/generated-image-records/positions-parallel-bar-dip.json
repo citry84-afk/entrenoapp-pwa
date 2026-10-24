@@ -1,0 +1,22 @@
+{
+  "key": "positions-parallel-bar-dip",
+  "file": "generated/positions-parallel-bar-dip-v1.webp",
+  "fallbackFile": "generated/positions-parallel-bar-dip-v1.jpg",
+  "alt": {
+    "es": "Fondos, ejemplo en barras paralelas: dos posiciones de una variante de ejemplo; respeta el material mostrado.",
+    "en": "Bodyweight dip, parallel-bar example: two positions of an example variant; use the equipment shown."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T19:37:14.002Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/01a16d45-1dbd-7160-9764-9653df629c3d/exec-b2f902a3-a4a9-4c4f-8209-808e269c7df6.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nShow stable parallel dip bars, adult supporting body with one hand on each side. First elbows nearly extended and shoulders down; second elbows bend to a moderate comfortable depth, upper arms approximately parallel to floor, no extreme shoulder extension. Legs quietly bent behind, no swinging. Whole body/shoes/bar supports. No bench or added load. Omit overlays.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.\n\nThis is BODYWEIGHT ONLY: no belt, plate, dumbbell or band. Each hand grasps one of two separate horizontal parallel bars at the sides, with shoulders kept down and feet suspended clear of floor. The LOWER pose uses moderate elbow bend near 90 degrees, not excessively deep shoulder extension. Identical apparatus and stable support in both views; show all bar legs and shoes. No muscle-color overlays.\n",
+  "visualReview": "Revisión visual: fondos sin lastre en dos barras paralelas estables, cada mano en su barra y zapatos fuera del suelo. Arriba codos casi extendidos, abajo flexión moderada sin profundidad extrema; piernas quietas y aparato/cuerpo completos, sin banco o overlays.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 40930,
+  "sha256": "c8553528ccb10ce0d5a834e6df65ba5011d95924b4221d8a58b0f5f987b77b0b",
+  "fallbackBytes": 110302,
+  "fallbackSha256": "beec5d6685766c9cbf0da504d2f5dbee94a3a4d52490491a66cde83b14d494cf"
+}

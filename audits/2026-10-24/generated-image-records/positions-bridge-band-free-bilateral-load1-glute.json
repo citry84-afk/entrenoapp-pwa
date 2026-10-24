@@ -1,0 +1,22 @@
+{
+  "key": "positions-bridge-band-free-bilateral-load1-glute",
+  "file": "generated/positions-bridge-band-free-bilateral-load1-glute-v1.webp",
+  "alt": {
+    "es": "Dos vistas orientativas de puente de glúteos · banda.",
+    "en": "Two orientation views of supine bridge · resistance band."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:36:16.206Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/019f5b89-f0eb-7533-a20b-f1e8b4011a4a/exec-c6820df3-776a-4ba0-b1e3-247abd0c4c63.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nShow a person lying on the back with feet flat and knees bent. First pose has the pelvis resting on the floor; second pose lifts the pelvis into a straight shoulder-to-hip-to-knee line without arching the lower back. Keep the shoulders on the floor. Use a small closed-loop band around the thighs just above the knees, not held in the hands or pulled across the pelvis.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.\n\nBand must be a small closed mini-loop ONLY around both thighs immediately ABOVE the knees. Hands relaxed on floor, NOT holding a band. Both shoulders and both soles grounded in BOTH views. First hips low near mat; second hips lifted only to shoulder–hip–knee line, no lumbar hyperextension. Both knees remain roughly hip width, not tightly squeezed. Low three-quarter side camera. No external weights, no bench. Omit colored muscle overlays.\n",
+  "visualReview": "Mini-banda visible por encima de rodillas, sin cargas ni sujeción manual. Hombros y pies apoyados, pelvis baja y elevada hasta alineación aproximada de tronco y muslos, sin arqueo lumbar evidente. Dos vistas completas.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 33876,
+  "sha256": "d348502c04c58f5301528f33b96851752f6f16f74379a34f00935c7e3fd79406",
+  "fallbackFile": "generated/positions-bridge-band-free-bilateral-load1-glute-v1.jpg",
+  "fallbackBytes": 91531,
+  "fallbackSha256": "6ca4930b0580e10701259b2021c31ec86a6c612d87a9d5cddfdfc0bae38f2517"
+}

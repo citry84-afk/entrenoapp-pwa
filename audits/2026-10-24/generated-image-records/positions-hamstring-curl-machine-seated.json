@@ -1,0 +1,22 @@
+{
+  "key": "positions-hamstring-curl-machine-seated",
+  "file": "generated/positions-hamstring-curl-machine-seated-v1.webp",
+  "fallbackFile": "generated/positions-hamstring-curl-machine-seated-v1.jpg",
+  "alt": {
+    "es": "Curl femoral, ejemplo en máquina sentada: dos posiciones de una variante de ejemplo; respeta el material mostrado.",
+    "en": "Hamstring curl, seated-machine example: two positions of an example variant; use the equipment shown."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T19:48:15.784Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/01a16d50-7534-71d1-888b-d0020bbbde49/exec-14dff160-8f39-4f83-9e7b-507045275a07.png",
+  "prompt": "Use case: precise-object-edit.\nInput image: image 1 is the EDIT TARGET, an existing EntrenoApp seated leg-curl illustration. Preserve its people, skin, clothes, poses, proportions, two-panel composition, navy background, lighting, machine frame, camera, seat/back/thigh pads, all feet and margins.\nChange ONLY the incorrect lower-leg roller contact and its connected lever in BOTH panels. This must be seated HAMSTRING CURL, not leg extension.\nCRITICAL: both people face RIGHT. Remove the roller from the FRONT/RIGHT of shins. In left panel with extended legs, place padded roller BELOW the heels/Achilles so backs of ankles rest ON TOP of it. In right panel with bent knees, place padded roller BEHIND the lower calves/Achilles, on their LEFT/posterior side in this side view; front RIGHT surfaces of both shins and shoes remain unobstructed. Show the cushion touching posterior lower calves, never anterior shins. Connect this roller mechanically to the knee-level pivot by a believable lever on far side; do not leave floating pads or add new body parts.\nKeep knees bending down and back, back/pelvis on seat, thigh restraint above thighs. No muscle highlights, no text, no watermark, no labels, no logos. Preserve the entire machine and all hands/feet in frame.\n\n",
+  "visualReview": "Revisión visual por IA: descartadas dos variantes con rodillo anterior. Edición seleccionada sitúa rodillo bajo Aquiles/pantorrilla posterior, frente de espinilla libre, pad de muslos y espalda apoyada. Rango parcial de flexión sentado: no muestra final profundo debajo del asiento ni valida ajustes de una máquina real. Contactos posteriores coherentes, aparato/pies completos y sin overlays. No validación profesional.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 52676,
+  "sha256": "acb63d9313781795d679622f8841c8db2a9ff8568c4fc2f9231edf45386da83b",
+  "fallbackBytes": 142791,
+  "fallbackSha256": "49f6696c6151f72429ed3aaf656965fe576d1549dda7ea8c4ea698bb9c9de04a"
+}

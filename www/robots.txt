@@ -1,0 +1,21 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://entrenoapp.com/sitemap.xml
+
+# Allow all bots to crawl
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Mediapartners-Google
+Allow: /
+
+User-agent: AdsBot-Google
+Allow: /
+
+# Disallow only service worker (allow manifest.json for PWA)
+Disallow: /sw.js

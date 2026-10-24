@@ -1,0 +1,22 @@
+{
+  "key": "positions-neutral-chest-press-machine",
+  "file": "generated/positions-neutral-chest-press-machine-v1.webp",
+  "fallbackFile": "generated/positions-neutral-chest-press-machine-v1.jpg",
+  "alt": {
+    "es": "Press en máquina, ejemplo de agarre neutro: dos posiciones de una variante de ejemplo; respeta el material mostrado.",
+    "en": "Machine chest press, neutral-grip example: two positions of an example variant; use the equipment shown."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T19:30:17.742Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/01a16d45-1dbd-7160-9764-9653df629c3d/exec-3dbfb5fd-e007-4f26-9518-c9ac840fa0dc.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nShow a seated horizontal chest-press machine, back supported and both feet flat. TWO vertical handles permit palms facing each other throughout. First handles beside chest and elbows bent; second press straight forward at chest height, not overhead. Same machine and neutral grip, wrists straight, no extreme shoulder depth. Entire feet/head/apparatus visible. Omit overlays.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.\n\nThe two hand grips are visibly VERTICAL black cylinders, held with neutral wrists and palms facing each other, thumbs upward in both views. Press horizontally forward at mid-chest height, never overhead. Keep every shoe and the machine base away from canvas edges. Override reference accents: no muscle-color overlays or exposed anatomy under clothing.\n",
+  "visualReview": "Revisión visual: press horizontal sentado con respaldo, dos asas verticales y agarre neutro mantenido, muñecas coherentes. Palancas conectadas a máquina, inicio al pecho y final adelante, pies/cuerpo/aparato íntegros; sin carga suelta ni overlays.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 63620,
+  "sha256": "c4c29e7f7b7a0f857a31620fa0acf44e3e212568b12b853f5be7cef2136b5cfa",
+  "fallbackBytes": 160034,
+  "fallbackSha256": "7a8c1fa337e2de53ee84bc50fdf7d9571867b568ca3bf1774d57e7082ae6ce56"
+}

@@ -1,0 +1,22 @@
+{
+  "key": "positions-rdl-dumbbell-free-bilateral-load2",
+  "file": "generated/positions-rdl-dumbbell-free-bilateral-load2-v1.webp",
+  "alt": {
+    "es": "Dos vistas orientativas de peso muerto rumano · mancuernas.",
+    "en": "Two orientation views of romanian deadlift · dumbbells."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:27:13.398Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/01a16d45-1dbd-7160-9764-9653df629c3d/exec-0a3d1a8b-80fd-42ad-b40d-c27e338c5e85.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nFirst pose stands tall with the load close to the front of the thighs. Second pose hinges the hips backwards with soft, nearly fixed knees and a neutral back while the load travels close to the legs to just below the knees or mid-shin. Do not place the load on the floor. Exactly two matching dumbbells, not a barbell or kettlebell.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.\n\nBoth feet remain fully planted in BOTH views; exactly one dumbbell per hand. At the hinge keep knees softly bent rather than squatting and keep the dumbbells close to the shins, off the floor. Omit all colored muscle overlays to avoid copying the reference thigh accents.\n",
+  "visualReview": "Revisión visual: ambos pies en suelo, dos mancuernas próximas a las piernas y sin tocar suelo, inicio erguido y bisagra de cadera con rodillas suaves. Profundidad moderada, sin redondeo manifiesto y sin énfasis muscular incorrecto.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 37554,
+  "sha256": "71d8d9c5f33697e230bcfede817c90f433f43aa499fe8899b9a445c92912f8e2",
+  "fallbackFile": "generated/positions-rdl-dumbbell-free-bilateral-load2-v1.jpg",
+  "fallbackBytes": 100952,
+  "fallbackSha256": "e61c51079d132bb166e074ff2e81e631cf1b54336c803e633a398642af67defd"
+}

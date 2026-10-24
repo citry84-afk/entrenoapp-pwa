@@ -1,0 +1,22 @@
+{
+  "key": "overview-machine",
+  "file": "generated/overview-machine-v1.webp",
+  "alt": {
+    "es": "Ilustración orientativa: preparación en máquina o polea; no demuestra una variante concreta.",
+    "en": "Orientation artwork: machine and cable preparation; not a demonstration of a specific variation."
+  },
+  "kind": "overview",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:41:21.018Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/019f5b89-f0eb-7533-a20b-f1e8b4011a4a/exec-35d6b9e5-8bea-4cad-a206-6f3a81d7819a.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nA premium 3D still-life of a compact generic gym cable-stack station, a neatly organized handle and a neutral studio floor. No person and no exercise posture. Do not depict one specific press, fly or leg-curl mechanism as if it covered every machine exercise.\n\nPresentation: This is an indicative overview of the stated block/options, NOT two phases of a single exercise. Do not silently select one unspecified load or technique.",
+  "visualReview": "Vista de equipo sin usuario: estación de poleas, asas y accesorios reconocibles con base apoyada. Se presenta como preparación, no como una técnica intercambiable de máquina específica; no contiene marcas comerciales.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 42512,
+  "sha256": "edbf8bfe9128a1797ce34420b3f413df7bd3116d33844b0fc11de2862105725a",
+  "fallbackFile": "generated/overview-machine-v1.jpg",
+  "fallbackBytes": 120381,
+  "fallbackSha256": "8511ab768b6157152a5f4ea15e246ceec61c2bf0d477a085c8f3b85e30d939ef"
+}

@@ -1,0 +1,22 @@
+{
+  "key": "positions-curl-dumbbell-free-bilateral-load2-hammer-grip",
+  "file": "generated/positions-curl-dumbbell-free-bilateral-load2-hammer-grip-v1.webp",
+  "alt": {
+    "es": "Dos vistas orientativas de curl de bíceps · mancuernas.",
+    "en": "Two orientation views of biceps curl · dumbbells."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:17:30.740Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/01a16d45-1dbd-7160-9764-9653df629c3d/exec-e97ddf43-320e-4e7a-85bd-a710fe84ce38.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nStart standing with upper arms by the torso and elbows nearly extended. Finish with elbows flexed while upper arms stay by the torso; keep wrists aligned with forearms. Use the grip specified for this variant. Use a neutral hammer grip, with thumbs upward throughout; never rotate into a supinated biceps curl. Exactly two matching dumbbells, not a barbell or kettlebell.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.",
+  "visualReview": "Revisión visual: dos cargas iguales, agarre neutro martillo con pulgares arriba en la flexión, brazos junto al tronco, pies y manos completos. Rango moderado y anatomía sin anomalías evidentes; revisión orientativa.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 39194,
+  "sha256": "7f7ce6532e3f95c804c18ef8b88dbc2fc9eb993f1cf8b12aff598471e129a13c",
+  "fallbackFile": "generated/positions-curl-dumbbell-free-bilateral-load2-hammer-grip-v1.jpg",
+  "fallbackBytes": 103918,
+  "fallbackSha256": "5f68027dbfca399ff730d248259485793a901ed1f5616206e5c4f04324e85f47"
+}

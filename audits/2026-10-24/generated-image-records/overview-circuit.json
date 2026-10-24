@@ -1,0 +1,22 @@
+{
+  "key": "overview-circuit",
+  "file": "generated/overview-circuit-v1.webp",
+  "alt": {
+    "es": "Ilustración orientativa: bloque de ejercicios; no demuestra una variante concreta.",
+    "en": "Orientation artwork: exercise circuit; not a demonstration of a specific variation."
+  },
+  "kind": "overview",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:32:44.096Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/01a16d4c-2c93-7672-b9c7-5fc639f6c4b0/exec-4d82feeb-9015-49ca-882e-1c1c3ddc61be.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nA premium 3D circuit overview with a small neutral timer and three softly glowing sequential markers on a clean studio floor. No people, no selected exercise, no numbers, no text and no weights. This is a block overview, not a demonstration of any constituent movement.\n\nPresentation: This is an indicative overview of the stated block/options, NOT two phases of a single exercise. Do not silently select one unspecified load or technique.\n\nStrict asset correction: SINGLE premium still life, not two human poses. Dark navy studio. One compact graphite interval timer with blank unlit glass face, and three minimal cyan/mint sequential floor markers arranged in a gentle arc. No people, no weights, no labels or digits anywhere, no UI screenshot. Abstract orientation for a mixed exercise block, intentionally not a demonstration of its movements. Spacious landscape 3:2 composition, polished realistic 3D materials.\n",
+  "visualReview": "Revisión visual: temporizador neutro sin cifras y tres marcadores de secuencia; sin personas, cargas ni técnica seleccionada. Lámina de bloque mixto claramente indicativa, no una demostración de los ejercicios del circuito.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 34662,
+  "sha256": "341e0a9cd70997eb86606e3b3013d760b17d8a79aedf1f8d717fddfda5755096",
+  "fallbackFile": "generated/overview-circuit-v1.jpg",
+  "fallbackBytes": 93206,
+  "fallbackSha256": "a2b3f989e905ab67c387b6d019c1fdd1c1dc373025de50fd2777227706514366"
+}

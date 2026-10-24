@@ -1,0 +1,22 @@
+{
+  "key": "positions-calf-kettlebell-free-bilateral-load1",
+  "file": "generated/positions-calf-kettlebell-free-bilateral-load1-v1.webp",
+  "alt": {
+    "es": "Dos vistas orientativas de elevación de talones · kettlebell.",
+    "en": "Two orientation views of calf raise · kettlebell."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:27:07.442Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/01a16d50-7534-71d1-888b-d0020bbbde49/exec-21f867d6-3f82-443d-b88b-2dd6a722bf70.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nStart standing tall with heels on the level floor. Finish raised onto the forefeet with heels lifted, ankles aligned and knees soft. Do not show an elevated step unless explicitly specified. Exactly one kettlebell is used. The one-arm or two-hand grip must be reviewed explicitly before enabling; do not silently add a second kettlebell. Exactly one kettlebell, not a dumbbell or a second kettlebell.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.\n\nChosen explicit setup: exactly one small kettlebell hangs from one hand beside the hip in suitcase grip; opposite arm relaxed. Both legs perform the calf raise together on the level floor, no external support or step. Use three-quarter side view that clearly reveals heel-to-floor gap in second position and grounded forefeet. Omit all muscle-color overlays. Entire shoes and equipment visible.\n\n",
+  "visualReview": "Revisión visual por IA: se eligió una kettlebell a un lado en agarre maleta; ambos talones pasan de suelo nivelado a elevados con antepiés apoyados. Sin step ni segunda carga; pies y manos completos. No validación profesional.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 36326,
+  "sha256": "05f06c396b1404fb813aed334fed9cf399b02549259bbdc7e8510543a30be110",
+  "fallbackFile": "generated/positions-calf-kettlebell-free-bilateral-load1-v1.jpg",
+  "fallbackBytes": 97561,
+  "fallbackSha256": "9803d62243a55cf03e043a5b49b3add758c1be6534d9ef1b50f0ad18c15e2326"
+}

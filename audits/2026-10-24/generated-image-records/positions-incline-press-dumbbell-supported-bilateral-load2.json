@@ -1,0 +1,22 @@
+{
+  "key": "positions-incline-press-dumbbell-supported-bilateral-load2",
+  "file": "generated/positions-incline-press-dumbbell-supported-bilateral-load2-v1.webp",
+  "alt": {
+    "es": "Dos vistas orientativas de press inclinado · mancuernas.",
+    "en": "Two orientation views of incline bench press · dumbbells."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:16:45.335Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/01a16d50-7534-71d1-888b-d0020bbbde49/exec-424f0efc-6b43-41f0-9a09-e443996b9ba1.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nShow a stable padded bench inclined approximately 30 degrees, supporting head, back and pelvis. First pose has the load beside or above the upper chest; second pose presses vertically upward. Both feet remain on the floor and the exact equipment must match. Exactly two matching dumbbells, not a barbell or kettlebell.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.\n\nFraming correction: leave at least 8 percent clear margin at every outer edge. Both complete shoes including toes and the entire bench structure must sit fully inside the frame. Use a slightly wider camera without changing the requested exercise or equipment.\n\n",
+  "visualReview": "Revisión visual por IA: regenerada por margen del pie; versión seleccionada tiene pies, banco y dos mancuernas completos por vista, apoyos y agarres legibles. Sin errores anatómicos evidentes; no validación profesional.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 47682,
+  "sha256": "2c84c2ea1c9c3f45291a6fab8237c557cabd2621f11d03a85656989c4c8d0bd5",
+  "fallbackFile": "generated/positions-incline-press-dumbbell-supported-bilateral-load2-v1.jpg",
+  "fallbackBytes": 124402,
+  "fallbackSha256": "f4b7dcd4c7d2979cbcb19b7dc591d2f5cef0c73eb2637c22720db9a726dda733"
+}

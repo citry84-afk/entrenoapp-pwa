@@ -1,0 +1,17 @@
+Use case: scientific-educational.
+Asset type: original premium mobile fitness app exercise illustration, not a UI mockup.
+Input image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.
+Composition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.
+Subject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.
+Muscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.
+Lighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.
+Text: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.
+Accuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.
+
+Movement-specific brief:
+Show a standing bilateral calf raise with a long band pinned under both forefeet, ends held at shoulders. First heels on floor, second both heels lifted slightly while forefeet remain firmly planted. Knees softly straight, upright balanced torso, no neck loading, same band and hands in both views. Moderate heel lift, no box or step. Omit muscle overlays.
+
+Presentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.
+
+Setup clarity: one long U-shaped resistance tube pinned under BOTH forefeet, each upper end terminates in a small black grip handle held in EACH hand beside shoulders with fists at shoulder height. Tube segments run visibly from forefeet directly to hand handles; TERMINATE at those handles, do NOT continue above fists, do NOT pass over shoulder/back/neck or across throat. No red/coral shoulder accents. First heels flat; second BOTH heels visibly raised a modest amount while balls of feet stay planted. No band around ankles, no step. Keep torso and knees stable; side-three-quarter camera reveals heel gap. No overlays. Full feet, hand grips and band path within wide margins.
+

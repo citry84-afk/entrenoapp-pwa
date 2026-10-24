@@ -1,0 +1,22 @@
+{
+  "key": "positions-cable-high-row",
+  "file": "generated/positions-cable-high-row-v1.webp",
+  "fallbackFile": "generated/positions-cable-high-row-v1.jpg",
+  "alt": {
+    "es": "Remo alto en polea, ejemplo frontal: dos posiciones de una variante de ejemplo; respeta el material mostrado.",
+    "en": "High cable row, front-anchor example: two positions of an example variant; use the equipment shown."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T19:33:43.280Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/01a16d45-1dbd-7160-9764-9653df629c3d/exec-83bbb788-ad28-4f53-992d-754124c63a17.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nShow a standing high cable row with stable split stance, cable at upper-chest/shoulder height IN FRONT. Start both arms reaching forward/up slightly; finish elbows pull back and hands reach upper ribs with no trunk swing. Two handles or one rope consistently connected to same high anterior cable. Not a face pull toward temples or upright row from floor. Whole body and machine contact visible. Omit overlays.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.\n\nUse one rope attachment held in both hands, the cable anchored IN FRONT at upper-chest height. Finish with the hands at upper ribs BELOW the neck, elbows pulling back just below shoulder height; do not pull rope toward nose/temples as in a face pull. Maintain the same upright split stance without leaning back or changing torso angle. Show the cable clearly connected and both feet complete. No muscle-color overlays.\n",
+  "visualReview": "Revisión visual: anclaje de polea frontal alto y una cuerda de dos extremos, postura escalonada estable. Inicio alcanza delante/arriba y final lleva manos a costillas por debajo del cuello, no hacia sienes. Codos hacia atrás sin balanceo; pies completos, base visible y sin overlays.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 52164,
+  "sha256": "325b28e8c6cba59b6076d6e670304f571a63bca8ed1d41f5a6d4a74bd583e5aa",
+  "fallbackBytes": 140891,
+  "fallbackSha256": "c8d04f434d2a408f71f5ef12e527f5e305f6251dd16717d7145d97b1ec937a3c"
+}

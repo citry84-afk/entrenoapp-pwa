@@ -1,0 +1,22 @@
+{
+  "key": "positions-assisted-dip-machine",
+  "file": "generated/positions-assisted-dip-machine-v1.webp",
+  "fallbackFile": "generated/positions-assisted-dip-machine-v1.jpg",
+  "alt": {
+    "es": "Fondos asistidos, ejemplo en máquina: dos posiciones de una variante de ejemplo; respeta el material mostrado.",
+    "en": "Assisted dip, machine example: two positions of an example variant; use the equipment shown."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T19:30:01.473Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/019f5b89-f0eb-7533-a20b-f1e8b4011a4a/exec-0e62357c-5599-473d-8d9c-8a71942add3c.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nShow assisted dip machine with a counterweighted padded knee support, two parallel handles at torso sides and stable base. Adult knees stay on pad in both top and moderate lower dip positions. Hands maintain same bars, shoulders controlled, no extreme depth. Entire machine and body visible, no resistance band or hanging plate. Omit overlays.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.",
+  "visualReview": "Máquina asistida reconocible con soporte de rodillas conectado al mecanismo, manos sobre dos barras y flexión moderada de codos en la segunda posición. Apoyos y equipo coherentes; sin lastre, banda o profundidad extrema. Pies y base completos.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 52638,
+  "sha256": "bcd4af70aaeb5b8341341ccb47def20ea42090a9c891155740b316f8181036d3",
+  "fallbackBytes": 142093,
+  "fallbackSha256": "cce7fa045d9dfc90385a378361505a74e66cb9c77696888a45cfc78c25e36015"
+}

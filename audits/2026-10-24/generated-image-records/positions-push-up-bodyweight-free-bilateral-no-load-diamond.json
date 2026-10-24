@@ -1,0 +1,22 @@
+{
+  "key": "positions-push-up-bodyweight-free-bilateral-no-load-diamond",
+  "file": "generated/positions-push-up-bodyweight-free-bilateral-no-load-diamond-v1.webp",
+  "alt": {
+    "es": "Dos vistas orientativas de flexión.",
+    "en": "Two orientation views of push-up."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:58:17.802Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/01a16d45-1dbd-7160-9764-9653df629c3d/exec-a4792e39-c76c-4343-a1b2-63a1c78e5a7b.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nFirst pose is a high plank with hands close together beneath the breastbone, straight trunk and feet on the floor. Second pose lowers the chest toward the floor by bending the elbows while preserving the same straight body line. Respect this variant's hand spacing and support. Use close hands beneath the chest with thumbs and index fingers approximating a diamond; do not substitute wide hand placement.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.\n\nDiamond / close-hand push-up: use an elevated FRONT three-quarter angle so hand placement is visible in both views. The two hands are close together directly under the sternum, thumbs and index fingers approximating a small diamond opening, not interlocked fingers and not shoulder-width hands. Elbows track close to ribs, trunk straight, palms and forefeet grounded. Full bodies and both hands fully in frame; no equipment. Omit colored muscle overlays.\n",
+  "visualReview": "Revisión visual: manos juntas bajo esternón, pulgares/índices aproximan abertura pequeña sin dedos entrelazados, codos cerca del torso. Ambas fases mantienen palmas/antepiés en suelo y cuerpo largo; sin material, overlays ni recortes evidentes.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 35692,
+  "sha256": "e5dea3e9099669a263e99123a1786c5117206d41806ff1f905e681131e15f5c5",
+  "fallbackFile": "generated/positions-push-up-bodyweight-free-bilateral-no-load-diamond-v1.jpg",
+  "fallbackBytes": 96942,
+  "fallbackSha256": "e1551968157f95de824a1b103a001eb148355ff2fcac135ca82c36f9df7b6fe3"
+}

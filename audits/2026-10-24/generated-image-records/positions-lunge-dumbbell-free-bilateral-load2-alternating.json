@@ -1,0 +1,22 @@
+{
+  "key": "positions-lunge-dumbbell-free-bilateral-load2-alternating",
+  "file": "generated/positions-lunge-dumbbell-free-bilateral-load2-alternating-v1.webp",
+  "alt": {
+    "es": "Dos vistas orientativas de zancada · mancuernas.",
+    "en": "Two orientation views of lunge · dumbbells."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:38:03.875Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/01a16d45-1dbd-7160-9764-9653df629c3d/exec-b1b84c24-4cd7-4fd1-9a7a-623e6b73dc0e.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nFirst pose stands upright with feet hip-width apart. Second pose is a stable split stance with both knees bent and the rear knee approaching the floor, front knee tracking the front foot. Match the specified alternating or walking version; never depict both feet on one narrow line. Exactly two matching dumbbells, not a barbell or kettlebell.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.\n\nThis panel shows the standing start and one controlled forward-lunge example from alternating lunges; it is not a complete left-right sequence. Exactly two dumbbells at the sides per figure, no bench. In lunge pose front heel grounded, rear heel lifted and knees in their respective foot planes. Omit all muscle-color overlays.\n",
+  "visualReview": "Revisión visual: inicio de pie y una zancada frontal controlada, dos mancuernas a los lados, talón delantero plantado y posterior levantado. Carga posterior parcialmente oculta por perspectiva, no ausente; sin banco ni overlays. No muestra alternancia completa.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 36494,
+  "sha256": "5a25ed1085234bd75ab26b0f4cb3257cd744814108d0a8623497ee3b19800441",
+  "fallbackFile": "generated/positions-lunge-dumbbell-free-bilateral-load2-alternating-v1.jpg",
+  "fallbackBytes": 98617,
+  "fallbackSha256": "7326c0c93de24ce673dab2c3437db07293ad5944ff35e04c556ab0ae3ca38435"
+}

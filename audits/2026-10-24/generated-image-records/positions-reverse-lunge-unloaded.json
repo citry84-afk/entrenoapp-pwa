@@ -1,0 +1,22 @@
+{
+  "key": "positions-reverse-lunge-unloaded",
+  "file": "generated/positions-reverse-lunge-unloaded-v1.webp",
+  "fallbackFile": "generated/positions-reverse-lunge-unloaded-v1.jpg",
+  "alt": {
+    "es": "Zancada atrás, ejemplo sin carga: dos posiciones de una variante de ejemplo; respeta el material mostrado.",
+    "en": "Reverse lunge, unloaded example: two positions of an example variant; use the equipment shown."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T19:35:55.572Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/019f5b89-f0eb-7533-a20b-f1e8b4011a4a/exec-c475a287-f3a3-4ff0-ae2f-351977446e63.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nShow an unloaded reverse lunge: first stands upright feet hip-width; second same adult steps one leg BACK into stable split stance, front knee bends naturally and rear knee lowers moderately toward floor. Front heel stays grounded, hands by hips or relaxed in front, torso stable. No walking-forward implication, no load. Full bodies and both feet visible with clear separation. Omit overlays.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.",
+  "visualReview": "Postura erguida y zancada atrás sin carga, con talón delantero apoyado, rodilla posterior separada del suelo y manos relajadas. Cuerpos y pies completos, sin error evidente. Dos posiciones estáticas; no representan el paso completo ni una secuencia animada. Acentos musculares orientativos no cuantificados.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 36018,
+  "sha256": "ec5629870147a9654b226d1adb6206d2f65d3d4a119c9ddcf559b3a3508e7fef",
+  "fallbackBytes": 95768,
+  "fallbackSha256": "da6ce90a079be384070d63d4b6527968e58fd5c37e996e17659b15312c0977ab"
+}

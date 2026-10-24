@@ -1,0 +1,15 @@
+EntrenoApp Plus
+
+Ya casi estás dentro.
+
+Confirma tu email para activar tu cuenta y guardar tu acceso Plus de forma segura:
+
+{{ .ConfirmationURL }}
+
+Qué desbloquea Plus:
+- Entreno sin anuncios y con una experiencia más limpia.
+- Ajustes de entrenamiento con IA según tu tiempo y energía.
+- Nutrición Plus con ideas de menú guiadas.
+- Mente Plus para respirar, enfocarte o desconectar mejor.
+
+Si no has creado esta cuenta, puedes ignorar este email.

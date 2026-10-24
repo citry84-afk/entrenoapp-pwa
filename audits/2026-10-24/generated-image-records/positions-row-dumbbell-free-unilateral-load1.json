@@ -1,0 +1,22 @@
+{
+  "key": "positions-row-dumbbell-free-unilateral-load1",
+  "file": "generated/positions-row-dumbbell-free-unilateral-load1-v1.webp",
+  "alt": {
+    "es": "Dos vistas orientativas de remo · mancuernas unilateral.",
+    "en": "Two orientation views of bent-over row · dumbbells · unilateral."
+  },
+  "kind": "positions",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:36:03.891Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/01a16d45-1dbd-7160-9764-9653df629c3d/exec-98082683-a3da-4e5b-9640-39ce67b77b22.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nFirst pose has the torso hinged forward with the weight hanging beneath the shoulder and spine neutral. Second pose draws the elbow backwards toward the hip with the weight near the lower ribs. Keep the torso stable and use the specified support and unilateral setup. Exactly one dumbbell, not a barbell or kettlebell. Show a stable staggered stance with no bench or external support and one working arm holding one weight.\n\nPresentation: Two separate side-by-side key positions of this exact exercise; these are static instructional illustrations, not frames of a continuous animation.\n\nExactly one dumbbell in the right hand per view; the empty left hand rests lightly at the hip, not on any bench, wall or furniture. Two feet on the floor in a staggered stance, torso hinged and stable throughout. Right elbow moves back toward hip, not outward. Omit muscle-color overlays.\n",
+  "visualReview": "Revisión visual: una mancuerna en mano de trabajo, mano libre a cadera, pies escalonados y ningún apoyo externo. Torso inclinado y codo hacia la cadera coherentes en descenso/tirón; material y cuerpo completos, sin overlays.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 42020,
+  "sha256": "d8ec1cb797fa328643acc8d1990331bc5368928005ea70df8483ca3e5f4b4f3f",
+  "fallbackFile": "generated/positions-row-dumbbell-free-unilateral-load1-v1.jpg",
+  "fallbackBytes": 110687,
+  "fallbackSha256": "210f6dd42e7f746eee8d9123d066ad7e995e5f0f03a1d1355bddca0499b2e847"
+}

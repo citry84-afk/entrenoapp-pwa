@@ -1,0 +1,22 @@
+{
+  "key": "overview-mobility",
+  "file": "generated/overview-mobility-v1.webp",
+  "alt": {
+    "es": "Ilustración orientativa: bloque de movilidad; no demuestra una variante concreta.",
+    "en": "Orientation artwork: mobility block; not a demonstration of a specific variation."
+  },
+  "kind": "overview",
+  "source": "generated",
+  "status": "reviewed",
+  "createdAt": "2026-10-24T14:33:19.947Z",
+  "tool": "built-in image_gen",
+  "original": "/Users/papi/.codex/generated_images/01a16d4c-2c93-7672-b9c7-5fc639f6c4b0/exec-36a1ced1-ac83-4f07-8470-a4b8f9da177b.png",
+  "prompt": "Use case: scientific-educational.\nAsset type: original premium mobile fitness app exercise illustration, not a UI mockup.\nInput image: approved goblet-squat image is a STYLE REFERENCE ONLY. Match its premium polished lifelike 3D rendering, midnight-navy studio, realistic human proportions, graphite training clothes, neutral training shoes, black rubber equipment, soft light and subtle cool rim light. Do not copy its squat pose or dumbbell into unrelated movements.\nComposition: landscape 3:2 canvas, full bodies and all required equipment entirely in frame, including both feet, hands and floor contacts. Clear separate views with generous spacing, consistent scale/camera/person/equipment between positions. Avoid overlapping people or equipment across views.\nSubject: approachable adult model with realistic trained proportions, neutral calm expression, not an exaggerated bodybuilder. Natural anatomy and hands; no extra limbs, no merged objects. Training clothes appropriate to the movement; never nudity. For gentle Vital movements use an approachable older adult, relaxed graphite t-shirt and shorts, stable modest range of motion and the specified support.\nMuscle emphasis: only subtle warm coral illustrative accents on the genuinely relevant visible muscle regions, not a quantified activation/medical map; omit these accents for mixed circuits, warmups or movements where they would be misleading. Do not expose skin through opaque clothes.\nLighting and materials: high-end clear 3D educational fitness render with modeled anatomical volume, readable joints, subtle ground shadows, convincing equipment construction and grip.\nText: none. No letters, numbers, labels, logo, watermark, UI controls, arrows or decorative scenery. Preserve generous clean margins. Never crop required joints, hands, feet or apparatus.\nAccuracy: follow the movement-specific brief exactly, especially the number/type of implements, hand grip, bench versus floor, anchor position, support and unilateral versus bilateral action. Prefer a clear moderate range over exaggerated or contorted depth. Never imply a static illustration is a video or a professionally validated technique assessment.\n\nMovement-specific brief:\nA premium 3D mobility-space overview with a softly folded mat and a pair of curved abstract motion arcs. No person, no specific stretch and no weights. Do not claim a demonstrated mobility routine; the exact movement has not been chosen.\n\nPresentation: This is an indicative overview of the stated block/options, NOT two phases of a single exercise. Do not silently select one unspecified load or technique.\n\nStrict asset correction: SINGLE premium still-life overview, no people and no anatomical overlays. Show a graphite softly folded exercise mat with readable fine rubber texture on the midnight navy studio floor, beside two simple smooth abstract curved mint arcs resting on floor. Arcs are NOT arrows, no arrowheads. No equipment weights, no foam-roller instruction, no specific stretch, no text or timer digits. Spacious landscape 3:2, warm approachable premium materials. This is a mobility-block overview, not a movement demonstration.\n",
+  "visualReview": "Revisión visual: esterilla y dos arcos abstractos sin personas, posturas, flechas ni texto. Es un bloque de movilidad indicativo y no atribuye una secuencia o estiramiento específico. Material coherente con el estilo aprobado.",
+  "reviewType": "AI visual inspection, not clinical or certified-coach validation",
+  "bytes": 53076,
+  "sha256": "9111e542a3da94537b6e9fc510b9fa356d79af86f23b7b64e89d8f1f8fbad301",
+  "fallbackFile": "generated/overview-mobility-v1.jpg",
+  "fallbackBytes": 120715,
+  "fallbackSha256": "f5fc58ade801a6fac734faec3597bc95ac5a8400322212e9fb19d48f0a7ce26f"
+}
