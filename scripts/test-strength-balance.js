@@ -9,7 +9,7 @@ let checked=0;
 for(const goal of ['musculo','fuerza','adelgazar','fitness'])for(const time of [40,60]){
   ctx.profile={goal,time:String(time),days:'4',equipment:'gym',experience:'intermedio'};
   const days=vm.runInContext('genStrengthRoutine(profile)',ctx);
-  for(const day of days.filter(d=>/Upper/.test(d.name))){
+  for(const day of days.filter(d=>/Torso/.test(d.name))){
     const names=day.exercises.map(e=>e.name);
     assert(names.some(n=>PULL.test(n)),`${goal} ${time} ${day.name} sin tirón: ${names}`);
     assert(names.some(n=>PUSH.test(n)),`${goal} ${time} ${day.name} sin empuje: ${names}`);
@@ -17,7 +17,7 @@ for(const goal of ['musculo','fuerza','adelgazar','fitness'])for(const time of [
     const pulls=names.filter(n=>PULL.test(n)).length;assert(pulls>=2,`${goal} ${time} ${day.name} solo ${pulls} tirón: ${names}`);
     checked++;
   }
-  const lowerB=days.find(d=>/Lower B/.test(d.name));
+  const lowerB=days.find(d=>/Pierna B/.test(d.name));
   assert(lowerB.exercises.some(e=>/peso muerto/i.test(e.name)),`${goal} ${time} Lower B sin peso muerto: ${lowerB.exercises.map(e=>e.name)}`);
   assert.equal(lowerB.exercises.filter(e=>/peso muerto/i.test(e.name)).length,1);
 }

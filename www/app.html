@@ -1532,6 +1532,7 @@
   .daily-guided-primary{display:block;width:100%;min-height:56px;border:0;border-radius:15px;background:var(--accent);color:white;font:inherit;font-size:16px;font-weight:800;padding:12px}
   .daily-guided-secondary{min-height:44px;border:1px solid var(--border);border-radius:12px;background:transparent;color:var(--text);font:inherit;font-size:13px;padding:10px 13px}
   .daily-guided-tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.workout-view-link{display:block;width:100%;text-align:left;background:var(--surface);border:1px solid var(--border);border-radius:16px;color:var(--text);font:inherit;font-size:14px;font-weight:700;padding:14px 16px;margin-bottom:10px;cursor:pointer}
 .daily-guided-visual{margin-top:16px;border-top:1px solid var(--border);padding-top:12px}.daily-guided-visual>summary{cursor:pointer;list-style:none;font-size:13px;font-weight:700;color:var(--text2);padding:6px 0;min-height:32px}.daily-guided-visual>summary::-webkit-details-marker{display:none}.daily-guided-visual>summary::before{content:'▸ ';}.daily-guided-visual[open]>summary::before{content:'▾ ';}.daily-guided-visual[open]>summary{margin-bottom:8px}
   .daily-guided-remaining{border-top:1px solid var(--border);padding-top:16px;margin-top:20px}
   .daily-guided-remaining summary{cursor:pointer;min-height:40px;font-size:13px;color:var(--text2)}
@@ -1749,12 +1750,11 @@
   <div class="header">
     <div class="brand-head"><div class="app-mark" aria-hidden="true"><img src="assets/logo.jpeg" alt="" onerror="this.parentElement.classList.add('logo-failed');this.remove()"><span>EA</span></div><div class="header-title" id="hdr-title">EntrenoApp</div><div class="premium-badge" id="hdr-plus">★ PLUS</div></div>
     <div class="header-streak" id="hdr-streak">🔥 0</div>
-    <button class="header-menu" type="button" onclick="nav('menu')" aria-label="Abrir menú">☰</button>
   </div>
   <div class="content" id="content"></div>
   <nav class="bottom-nav">
-    <button class="nav-btn active" id="nb-home" onclick="nav('home')"><span class="nav-icon">🏠</span><span>Hoy</span></button>
-    <button class="nav-btn" id="nb-menu" onclick="nav('menu')"><span class="nav-icon">☰</span><span>Menú</span></button>
+    <button class="nav-btn active" id="nb-home" onclick="nav('home')"><span class="nav-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M10 21v-6h4v6"/></svg></span><span>Hoy</span></button>
+    <button class="nav-btn" id="nb-menu" onclick="nav('menu')"><span class="nav-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></span><span>Menú</span></button>
   </nav>
 </div>
 
@@ -2013,7 +2013,7 @@ const EN={
   'Datos de salud y reloj':'Health and watch data','Próximamente':'Coming soon'
 };
 Object.assign(EN,{
-  'Día 1 · Push':'Day 1 · Push','Día 2 · Pull':'Day 2 · Pull','Día 3 · Piernas':'Day 3 · Legs','Día A · Full Body':'Day A · Full Body','Día B · Full Body':'Day B · Full Body','Día C · Full Body':'Day C · Full Body',
+  'Día 1 · Push':'Day 1 · Push','Día 2 · Pull':'Day 2 · Pull','Día 3 · Piernas':'Day 3 · Legs','Día A · Full Body':'Day A · Full Body','Día A · Cuerpo completo':'Day A · Full body','Día B · Cuerpo completo':'Day B · Full body','Día C · Cuerpo completo':'Day C · Full body','Día 1 · Torso A':'Day 1 · Upper A','Día 2 · Pierna A':'Day 2 · Lower A','Día 3 · Torso B':'Day 3 · Upper B','Día 4 · Pierna B':'Day 4 · Lower B','Día 1 · Upper A':'Day 1 · Upper A','Día 2 · Lower A':'Day 2 · Lower A','Día 3 · Upper B':'Day 3 · Upper B','Día 4 · Lower B':'Day 4 · Lower B','Día 1 · Empuje':'Day 1 · Push','Día 2 · Tirón':'Day 2 · Pull','Día 3 · Pierna':'Day 3 · Legs','Día 4 · Empuje B':'Day 4 · Push B','Día 5 · Tirón B':'Day 5 · Pull B','Día B · Full Body':'Day B · Full Body','Día C · Full Body':'Day C · Full Body',
   'Pecho, hombros y tríceps':'Chest, shoulders and triceps','Espalda y bíceps':'Back and biceps','Piernas completas':'Full leg workout','Empuje + Tirón + Piernas':'Push + Pull + Legs',
   'Press de banca':'Bench press','Press inclinado barra':'Incline barbell press','Press inclinado mancuernas':'Incline dumbbell press','Press hombros barra':'Barbell shoulder press','Press hombros máquina':'Machine shoulder press','Fondos lastrados':'Weighted dips','Fondos asistidos':'Assisted dips','Tríceps polea':'Cable triceps extension',
   'Peso muerto':'Deadlift','Peso muerto rumano':'Romanian deadlift','Remo con barra':'Barbell row','Remo máquina pecho':'Chest-supported machine row','Dominadas lastradas':'Weighted pull-ups','Dominadas asistidas':'Assisted pull-ups','Jalón agarre ancho':'Wide-grip lat pulldown','Jalón agarre cerrado':'Close-grip lat pulldown','Curl bíceps barra':'Barbell curl','Curl martillo':'Hammer curl',
@@ -2327,19 +2327,19 @@ function genStrengthRoutine(p){
   const src=DB.gym[p.goal]||DB.gym.fitness,n=parseInt(p.days),budget=parseInt(p.time)||40;
   const prep=arr=>fitToBudget(arr.map(e=>adaptExercise(e,p)),budget);
   let days;
-  if(n<=3)days=Array.from({length:n},(_,i)=>({name:['Día A · Full Body','Día B · Full Body','Día C · Full Body'][i],desc:['Empuje + Tirón + Piernas','Variante principal','Accesorios y técnica'][i],exercises:prep([src.legs[i%src.legs.length],src.push[i%src.push.length],src.pull[i%src.pull.length],src.push[(i+2)%src.push.length],src.pull[(i+2)%src.pull.length],src.legs[(i+2)%src.legs.length]])}));
+  if(n<=3)days=Array.from({length:n},(_,i)=>({name:['Día A · Cuerpo completo','Día B · Cuerpo completo','Día C · Cuerpo completo'][i],desc:['Empuje + Tirón + Piernas','Variante principal','Accesorios y técnica'][i],exercises:prep([src.legs[i%src.legs.length],src.push[i%src.push.length],src.pull[i%src.pull.length],src.push[(i+2)%src.push.length],src.pull[(i+2)%src.pull.length],src.legs[(i+2)%src.legs.length]])}));
   else if(n===4)days=[
-    {name:'Día 1 · Upper A',desc:'Press + Remo',exercises:prep(alternatePushPull(src.push.slice(0,4),upperPullExercises(src).slice(0,4)))},
-    {name:'Día 2 · Lower A',desc:'Sentadilla + accesorios',exercises:prep(src.legs)},
-    {name:'Día 3 · Upper B',desc:'Variante press + tracción',exercises:prep((up=>alternatePushPull([up[1],up[0],...up.slice(2)].filter(Boolean),upperBPushExercises(src)))(upperPullExercises(src)))},
-    {name:'Día 4 · Lower B',desc:'Peso muerto + accesorios',exercises:prep(lowerBExercises(src))}
+    {name:'Día 1 · Torso A',desc:'Press + Remo',exercises:prep(alternatePushPull(src.push.slice(0,4),upperPullExercises(src).slice(0,4)))},
+    {name:'Día 2 · Pierna A',desc:'Sentadilla + accesorios',exercises:prep(src.legs)},
+    {name:'Día 3 · Torso B',desc:'Variante press + tracción',exercises:prep((up=>alternatePushPull([up[1],up[0],...up.slice(2)].filter(Boolean),upperBPushExercises(src)))(upperPullExercises(src)))},
+    {name:'Día 4 · Pierna B',desc:'Peso muerto + accesorios',exercises:prep(lowerBExercises(src))}
   ];
   else days=[
-    {name:'Día 1 · Push',desc:'Pecho, hombros y tríceps',exercises:prep(src.push)},
-    {name:'Día 2 · Pull',desc:'Espalda y bíceps',exercises:prep(src.pull)},
-    {name:'Día 3 · Legs',desc:'Piernas y glúteos',exercises:prep(src.legs)},
-    {name:'Día 4 · Push B',desc:'Variante de empuje',exercises:prep([...src.push.slice(1),src.push[0]])},
-    {name:'Día 5 · Pull B',desc:'Variante de tracción',exercises:prep([...src.pull.slice(1),src.pull[0]])}
+    {name:'Día 1 · Empuje',desc:'Pecho, hombros y tríceps',exercises:prep(src.push)},
+    {name:'Día 2 · Tirón',desc:'Espalda y bíceps',exercises:prep(src.pull)},
+    {name:'Día 3 · Pierna',desc:'Piernas y glúteos',exercises:prep(src.legs)},
+    {name:'Día 4 · Empuje B',desc:'Variante de empuje',exercises:prep([...src.push.slice(1),src.push[0]])},
+    {name:'Día 5 · Tirón B',desc:'Variante de tracción',exercises:prep([...src.pull.slice(1),src.pull[0]])}
   ];
   return days.map(d=>addTiming(d,budget));
 }
@@ -5015,8 +5015,9 @@ function renderHome(c){
   const progress=W.active?completion():null;
   const nextName=W.active?dailyHomeNextExerciseName(day):'';
   const savedToday=!W.active&&!workoutDraft&&dailyHomeHasSavedToday();
+  const weekLine=en?'Tap start and the app guides you set by set.':'Pulsa empezar y la app te guía serie a serie.';
   const readyCopy=isWalk?(en?'Your walk is ready':'Tu paseo está preparado'):isVital?(en?'Your movement session is ready':'Tu sesión de movimiento está preparada'):(en?'Your session is ready':'Tu sesión está preparada');
-  const subtitle=W.active?(en?'Your draft is kept. Pick up where you left off.':'Tu borrador se mantiene. Sigue por donde lo dejaste.'):savedToday?(en?'Your next session is ready. Come back whenever it works for you.':'Tu próxima sesión está preparada. Vuelve cuando te venga bien.'):(en?'Start here. You can choose step-by-step help or a direct view inside.':'Empieza aquí. Dentro puedes elegir ayuda paso a paso o vista directa.');
+  const subtitle=W.active?(en?'Your draft is kept. Pick up where you left off.':'Tu borrador se mantiene. Sigue por donde lo dejaste.'):savedToday?(en?'Your next session is ready. Come back whenever it works for you.':'Tu próxima sesión está preparada. Vuelve cuando te venga bien.'):weekLine;
   const exerciseCountLabel=isWod
     ? (en?'1 guided block':'1 bloque guiado')
     : isWalk
@@ -5025,7 +5026,6 @@ function renderHome(c){
   c.innerHTML=`
     <section class="daily-home" aria-labelledby="daily-home-title">
       <header class="daily-home-header">
-        <div class="daily-home-kicker">${en?'Today':'Hoy'}</div>
         <h1 class="daily-home-title" id="daily-home-title">${W.active?(en?'Your session is still here':'Tu sesión sigue aquí'):savedToday?(en?'Today’s activity is saved':'Lo de hoy ya está guardado'):day?readyCopy:(en?'Your next session':'Tu próxima sesión')}</h1>
         <p class="daily-home-subtitle">${day?subtitle:(en?'Create a plan to prepare your first session.':'Crea un plan para preparar tu primera sesión.')}</p>
       </header>
@@ -5044,7 +5044,7 @@ function renderHome(c){
         ${!W.active&&!S.sessions.length?`<div class="daily-home-welcome"><button type="button" class="daily-home-link" onclick="openWelcomeWorkout()">${en?'First time? Try a short session':'¿Primera vez? Prueba una sesión corta'}</button></div>`:''}
       </article>`:`<div class="daily-home-empty"><b>${en?'No workout ready yet':'Todavía no hay un entrenamiento preparado'}</b><button type="button" class="daily-home-link" onclick="openMenuPanel('plan')">${en?'View my plan':'Ver mi plan'}</button></div>`}
       <div id="next-workout-home-slot">${renderNextWorkoutCard(S.sessions[S.sessions.length-1],'home')}</div>
-      <p class="daily-home-week">${done} ${en?(done===1?'saved session in the last 7 days':'saved sessions in the last 7 days'):(done===1?'sesión guardada en los últimos 7 días':'sesiones guardadas en los últimos 7 días')}</p>
+      ${done?`<p class="daily-home-week">${done} ${en?(done===1?'saved session in the last 7 days':'saved sessions in the last 7 days'):(done===1?'sesión guardada en los últimos 7 días':'sesiones guardadas en los últimos 7 días')}</p>`:''}
     </section>
   `;
   localizeTree(c);
@@ -5054,24 +5054,23 @@ function renderMenu(c){
   c=c||document.getElementById('content');
   const en=currentLang()==='en',habits=getHabitState(),habitCount=['sleep','move','fuel'].filter(k=>habits[k]).length;
   c.innerHTML=`<div class="menu-shell">
-    <div class="menu-intro"><h1>${en?'Everything else':'Todo lo demás'}</h1><p>${en?'Your workout stays in Today. Open these tools only when you need them.':'Tu entrenamiento se queda en Hoy. Abre estas herramientas solo cuando las necesites.'}</p></div>
-    <section class="menu-group"><div class="menu-group-title">${en?'Training':'Entrenamiento'}</div><div class="menu-list">
+    <div class="menu-intro"><h1>${en?'Everything else':'Todo lo demás'}</h1><p>${en?'Training is on Today. The rest is here, for when you want it.':'Para entrenar, Hoy. Aquí está el resto, para cuando lo quieras.'}</p></div>
+    <section class="menu-group"><div class="menu-group-title">${en?'Your training':'Tu entrenamiento'}</div><div class="menu-list">
       ${menuItem('📅',en?'Plan and week':'Plan y semana',en?'Choose another day or review your routine':'Elige otro día o revisa tu rutina',"openMenuPanel('plan')")}
-      ${menuItem('↔️',en?'Adapt today':'Adaptar el entrenamiento',en?'Shorter, gentler, or another session':'Más corto, más suave u otra sesión',`openWorkoutPreview(${S.curDay})`)}
+      ${S.profile?.manualRoutine?'':menuItem('✍️',en?'Use my own routine':'Usar mi propia rutina',en?'Add the plan you already follow':'Añade el plan que ya sigues',"openRoutineBuilder(false)")}
     </div></section>
-    <section class="menu-group"><div class="menu-group-title">${en?'Your activity':'Tu actividad'}</div><div class="menu-list">
+    <section class="menu-group"><div class="menu-group-title">${en?'Your progress':'Tu progreso'}</div><div class="menu-list">
       ${menuItem('📈',en?'Progress':'Progreso',en?'Useful summaries and trends':'Resúmenes útiles y evolución',"nav('progress')")}
       ${menuItem('📋',en?'History':'Historial',en?'Your saved workouts':'Tus entrenamientos guardados',"nav('history')")}
     </div></section>
-    <section class="menu-group"><div class="menu-group-title">${en?'Optional':'Opcional'}</div><div class="menu-list">
+    <section class="menu-group"><div class="menu-group-title">${en?'Extras':'Extras'}</div><div class="menu-list">
       ${menuItem('🥗',en?'Nutrition':'Alimentación',en?'Menus and simple guidance':'Menús y orientación sencilla',"nav('nutrition')")}
       ${menuItem('🧠',en?'Mind':'Mente',en?'Breathing and a quick reset':'Respiración y reset rápido',"openMenuPanel('mind')")}
       ${menuItem('✓',en?'Habits':'Hábitos',en?`${habitCount}/3 marked today`:`${habitCount}/3 marcados hoy`,"openMenuPanel('habits')")}
       ${menuItem('🎯',en?'Daily challenge':'Reto diario',en?'A small optional extra':'Un extra pequeño y opcional',"openMenuPanel('challenge')")}
     </div></section>
-    <section class="menu-group"><div class="menu-group-title">${en?'App':'Aplicación'}</div><div class="menu-list">
+    <section class="menu-group"><div class="menu-list">
       ${menuItem('⚙️',en?'Settings and account':'Ajustes y cuenta',en?'Plan, reminders, Plus and your data':'Plan, avisos, Plus y tus datos',"nav('settings')")}
-      ${S.profile?.manualRoutine?'':menuItem('✍️',en?'Use my own routine':'Usar mi propia rutina',en?'Add the plan you already follow':'Añade el plan que ya sigues',"openRoutineBuilder(false)")}
     </div></section>
   </div>`;
   localizeTree(c);
@@ -5484,11 +5483,12 @@ function renderWorkout(c){
     ${renderWorkoutSessionBar(day)}
     ${renderWorkoutWodArena(day)}
     ${W.plusAdapt?`<div class="plus-ai-result"><b>✨ ${escHtml(W.plusAdapt.title||(en?'Adapted workout':'Entreno adaptado'))}</b><span>${escHtml(W.plusAdapt.plan||'')}</span></div>`:''}
-    ${guidedAvailable?`<div class="daily-workout-view" role="group" aria-label="${en?'Workout view':'Vista de entrenamiento'}"><button type="button" aria-pressed="${guided}" onclick="setWorkoutPresentation('guided')">${en?'Step by step':'Paso a paso'}</button><button type="button" aria-pressed="${!guided}" onclick="setWorkoutPresentation('direct')">${en?'Direct view':'Vista directa'}</button></div>`:`<p class="daily-workout-note">${en?'This session keeps its specific activity, mobility or superset controls.':'Esta sesión mantiene sus controles adaptados de actividad, movilidad o superseries.'}</p>`}
+    ${guidedAvailable?(guided?'':`<div class="daily-workout-view" role="group" aria-label="${en?'Workout view':'Vista de entrenamiento'}"><button type="button" aria-pressed="false" onclick="setWorkoutPresentation('guided')">${en?'Step by step':'Paso a paso'}</button><button type="button" aria-pressed="true" onclick="setWorkoutPresentation('direct')">${en?'Full list':'Lista completa'}</button></div>`):`<p class="daily-workout-note">${en?'This session keeps its specific activity, mobility or superset controls.':'Esta sesión mantiene sus controles adaptados de actividad, movilidad o superseries.'}</p>`}
     ${guidedAvailable&&!guided?`<div id="daily-direct-rest" class="daily-direct-rest" hidden><div id="daily-guided-rest" class="daily-guided-rest" hidden><div id="daily-guided-rest-title" class="daily-guided-rest-title" tabindex="-1">${en?'Take a breather':'Tómate un respiro'}</div><div id="daily-guided-clock" class="daily-guided-clock" role="timer" aria-live="off" aria-label="${en?'Rest remaining':'Descanso restante'}">00:00</div><div class="daily-guided-rest-controls"><button type="button" class="daily-guided-secondary" onclick="toggleTimerPause()" id="daily-guided-pause">${en?'Pause':'Pausar'}</button><button type="button" class="daily-guided-secondary" onclick="addTimerSeconds(15)">+15 s</button><button type="button" class="daily-guided-secondary" onclick="stopTimer()">${en?'Skip':'Omitir'}</button></div></div></div>`:''}
     ${guided?renderDailyGuidedWorkout(day):`<div class="workout-next-focus">${workoutNextHeadline(day)}</div>${quickReference}<div class="workout-exercise-head"><div class="workout-exercise-title">${en?'Your exercises':'Haz estos ejercicios'}</div><div class="workout-exercise-sub">${prog.done}/${prog.total} ${en?'done':'hecho'}</div></div>${day.exercises.map((ex,i)=>exCard(ex,i)).join('')}`}
-    ${guided&&prog.done===prog.total&&!W.saveError?'':savePanel}
+    ${guided&&!W.saveError?'':savePanel}
     ${W.welcome?'':`<div class="workout-secondary-title">${en?'Optional':'Opcional'}</div>
+      ${guided?`<button type="button" class="workout-view-link" onclick="setWorkoutPresentation('direct')">${en?'See the full exercise list':'Ver la lista completa de ejercicios'} ›</button>`:''}
       ${workoutFold('mode',en?'Adjust difficulty':'Ajustar dificultad',en?'Normal, short or gentle. Keep it as it is if you prefer.':'Normal, corto o suave. Si no quieres pensar, déjalo como está.',modePanel)}
       ${workoutFold('days',en?'Change workout day':'Cambiar de día',en?'Only if a different workout suits you better today.':'Solo si hoy te encaja mejor otra sesión.',`<div class="day-scroll">${S.routine.map((d,i)=>`<button type="button" class="day-tab ${i===S.curDay?'act':''}" aria-pressed="${i===S.curDay}" onclick="swDay(${i})">${escHtml(d.name.split('·')[0].trim())}</button>`).join('')}</div>`)}
       ${workoutFold('setup',en?'Music, screen and watch':'Música, pantalla y reloj',en?'Prepare your phone or watch before starting.':'Preparar el móvil o el reloj antes de empezar.',sessionSetupCard(true))}

@@ -198,7 +198,7 @@ test('English Home copy covers ready, continuity and secondary actions', f => {
   assert.match(html,/About 32 min/);
   assert.match(html,/4 exercises in order · \+1 more/);
   assert.match(html,/Adapt session|View my plan/);
-  assert.match(html,/step-by-step help or a direct view/);
+  assert.match(html,/guides you set by set/);
   f.run('activate();');
   html=f.run('render()');
   assert.match(html,/Your session is still here/);
