@@ -1662,7 +1662,7 @@
         <div class="ob-card" data-v="carrera"><div class="ob-icon">🏃</div><div><div class="ob-ct">Carrera</div><div class="ob-cd">Correr mejor, con sesiones claras y progresivas</div></div></div>
         <div class="ob-card" data-v="hibrido"><div class="ob-icon">⚡</div><div><div class="ob-ct">Híbrido</div><div class="ob-cd">Combinar fuerza y carrera sin liarte</div></div></div>
         <div class="ob-card" data-v="hyrox"><div class="ob-icon">🏁</div><div><div class="ob-ct">HYROX</div><div class="ob-cd">Carrera + estaciones funcionales, escalado a tu nivel</div></div></div>
-        <div class="ob-card" data-v="cross"><div class="ob-icon">🔥</div><div><div class="ob-ct">Cross training</div><div class="ob-cd">WODs de unos 20 min, fuerza y resistencia</div></div></div>
+        <div class="ob-card" data-v="cross"><div class="ob-icon">🔥</div><div><div class="ob-ct">Cross training</div><div class="ob-cd">WODs de 15-20 min, fuerza y resistencia</div></div></div>
       </div>
     </div>
     <div class="ob-step" id="ob1"><div class="ob-title">¿Cuál es tu prioridad?</div>
@@ -1685,6 +1685,7 @@
         <div class="ob-card priority-opt" data-mode="hyrox" data-v="hyrox_start"><div class="ob-icon">🌱</div><div><div class="ob-ct">Preparar HYROX desde cero</div><div class="ob-cd">Correr, empujar, tirar y cargar con progresión</div></div></div>
         <div class="ob-card priority-opt" data-mode="hyrox" data-v="hyrox_race"><div class="ob-icon">🏁</div><div><div class="ob-ct">Simular carrera HYROX</div><div class="ob-cd">Bloques tipo prueba, escalados para entrenar con cabeza</div></div></div>
         <div class="ob-card priority-opt" data-mode="cross" data-v="cross_beginner"><div class="ob-icon">🧭</div><div><div class="ob-ct">WODs guiados</div><div class="ob-cd">Circuitos sencillos, claros y medibles</div></div></div>
+        <div class="ob-card priority-opt" data-mode="cross" data-v="cross_program"><div class="ob-icon">📆</div><div><div class="ob-ct">Programa de 10 semanas</div><div class="ob-cd">50 WODs de 15 minutos: AMRAP, EMOM y For Time</div></div></div>
         <div class="ob-card priority-opt" data-mode="cross" data-v="cross_wod"><div class="ob-icon">⏱️</div><div><div class="ob-ct">WOD del día</div><div class="ob-cd">Un bloque de unos 20 minutos para registrar marca</div></div></div>
       </div>
     </div>
@@ -1985,7 +1986,7 @@ const EQ_LABELS={gym:'Gym completo',mancuernas:'Mancuernas',kettlebell:'Kettlebe
 const KB_ID={pb:'kb_floor_press',pi:'kb_floor_press',pim:'kb_floor_press',ph:'kb_press',phm:'kb_press_half',pa:'kb_clean_press',fd:'kb_push_floor',ap:'kb_halo',el:'kb_halo',tp:'kb_close_press',pm:'kb_dead',pmr:'kb_rdl',rb:'kb_row',dm:'kb_row',jl:'kb_pullover',jc:'kb_row',cb:'kb_curl',cm:'kb_curl',rm:'kb_row',fp:'kb_halo',rc:'kb_row',sq:'kb_goblet',pr:'kb_goblet_tempo',ec:'kb_goblet_pause',cf:'kb_dead',ht:'kb_glute_bridge',za:'kb_lunge',su:'kb_stepup',et:'kb_calf'};
 const GOAL_LABELS={fuerza:'Fuerza',musculo:'Ganar músculo',adelgazar:'Perder grasa',correr:'Resistencia',fitness:'Fitness general',vital:'Fuerza vital',hyrox:'HYROX',cross:'Cross training',manual:'Mi rutina'};
 const MODE_LABELS={musculacion:'Musculación',caminar:'Caminar',carrera:'Carrera',hibrido:'Híbrido',hyrox:'HYROX',cross:'Cross training',manual:'Mi rutina'};
-const PRIORITY_LABELS={musculo:'Ganar músculo',fuerza:'Ganar fuerza',vital:'Fuerza y movilidad',adelgazar:'Perder grasa',manual:'Rutina propia',walk_start:'Empezar andando',walk_progress:'Andar más cada semana',run_start:'Empezar a correr',run_pace:'Mejorar ritmo',run_race:'Preparar 5K/10K',run_half:'Preparar media maratón',run_marathon:'Preparar maratón',hybrid_muscle:'Correr sin perder músculo',hybrid_balanced:'Músculo y resistencia',hybrid_event:'Funcional / Hyrox',hyrox_start:'Preparar HYROX desde cero',hyrox_race:'Simular carrera HYROX',cross_beginner:'WODs guiados',cross_wod:'WOD del día'};
+const PRIORITY_LABELS={musculo:'Ganar músculo',fuerza:'Ganar fuerza',vital:'Fuerza y movilidad',adelgazar:'Perder grasa',manual:'Rutina propia',walk_start:'Empezar andando',walk_progress:'Andar más cada semana',run_start:'Empezar a correr',run_pace:'Mejorar ritmo',run_race:'Preparar 5K/10K',run_half:'Preparar media maratón',run_marathon:'Preparar maratón',hybrid_muscle:'Correr sin perder músculo',hybrid_balanced:'Músculo y resistencia',hybrid_event:'Funcional / Hyrox',hyrox_start:'Preparar HYROX desde cero',hyrox_race:'Simular carrera HYROX',cross_beginner:'WODs guiados',cross_program:'Programa 10 semanas',cross_wod:'WOD del día'};
 const EN={
   'Hoy':'Today','Menú':'Menu','Abrir menú':'Open menu','Entreno':'Workout','Progreso':'Progress','Historial':'History','Ajustes':'Settings','Mi Perfil':'My profile','Entrenamiento':'Workout',
   'Descansando':'Resting','Siguiente serie preparada':'Next set ready','Cerrar descanso':'Close rest timer','Pausar':'Pause','Continuar':'Resume','Omitir':'Skip','En pausa':'Paused','¡Listo!':'Ready!','A por la siguiente':'Next set',
@@ -2214,7 +2215,7 @@ function genRoutine(p){
 function normalizeProfile(p={}){
   const priority=p.priority||p.goal||'musculo';
   const mode=p.mode||(priority.startsWith('walk_')?'caminar':priority.startsWith('run_')?'carrera':priority.startsWith('hyrox_')?'hyrox':priority.startsWith('cross_')?'cross':priority.startsWith('hybrid_')?'hibrido':'musculacion');
-  const goal={vital:'vital',walk_start:'caminar',walk_progress:'caminar',run_start:'correr',run_pace:'correr',run_race:'correr',run_half:'correr',run_marathon:'correr',hybrid_muscle:'musculo',hybrid_balanced:'fitness',hybrid_event:'fitness',hyrox_start:'hyrox',hyrox_race:'hyrox',cross_beginner:'cross',cross_wod:'cross'}[priority]||priority||'musculo';
+  const goal={vital:'vital',walk_start:'caminar',walk_progress:'caminar',run_start:'correr',run_pace:'correr',run_race:'correr',run_half:'correr',run_marathon:'correr',hybrid_muscle:'musculo',hybrid_balanced:'fitness',hybrid_event:'fitness',hyrox_start:'hyrox',hyrox_race:'hyrox',cross_beginner:'cross',cross_program:'cross',cross_wod:'cross'}[priority]||priority||'musculo';
   return {experience:'intermedio',equipment:'gym',time:'40',days:'3',...p,mode,priority,goal};
 }
 function vitalEx(id,name,hint,sets=2,rr='8-10',rest=60){return{id,name,hint,sets,rr,rest,type:'vital'};}
@@ -2401,7 +2402,107 @@ function wodDay(seed=new Date()){
   const wod={...templates[n%templates.length],dailyWod:true,wodId:`wod-${key}`,timingNote:'WOD 20 min · reloj grande · apunta tu marca al final'};
   return addTiming(wod,20);
 }
+const CROSS_PROGRAM_WEEKS=['Volvemos a la intensidad','Potencia y resistencia','Más CrossFit','Resistencia muscular','Potencia explosiva','CrossFit avanzado','Fuerza funcional','Alta intensidad','CrossFit intenso','Semana final'];
+const CROSS_PROGRAM=[
+  ['Full Body Engine','AMRAP',['10 Deadlifts (60 kg)','12 Box Jumps','10 Push-ups','150 m SkiErg'],'Objetivo: 4-5 rondas.'],
+  ['Kettlebell Madness','FOR TIME',['12 KB Swings rusos','10 Goblet Squats','8 Burpees','30 Double Unders'],'Objetivo: terminar antes de 15 minutos.',5],
+  ['Barbell Power','EMOM',['8 Power Cleans','12 Box Step-ups','12/10 cal Assault Bike'],'Objetivo: mantener intensidad constante.'],
+  ['Cardio Killer','AMRAP',['200 m Run','15 Wall Balls','12 Sit-ups','10 Burpees'],'Objetivo: 4 rondas.'],
+  ['Dumbbell Challenge','AMRAP',['10 DB Hang Power Cleans','12 DB Reverse Lunges','10 Push-ups','40 Double Unders'],'Objetivo: 4-5 rondas.'],
+  ['Deadlift & Engine','EMOM',['10 Deadlifts','12/10 cal Row','12 Burpees']],
+  ['Leg Destroyer','AMRAP',['15 Goblet Squats','12 Box Jumps','20 Walking Lunges','200 m Run']],
+  ['Power Snatch','FOR TIME',['8 Hang Power Snatches','12 Sit-ups','10 Burpees','30 Double Unders'],'Utiliza una barra ligera y técnica controlada.',5],
+  ['Bike & Strength','EMOM',['12/10 cal Bike','12 KB Swings','10 Push-ups + 5 Air Squats']],
+  ['Full Body Burner','AMRAP',['10 DB Deadlifts','10 DB Hang Cleans','15 Air Squats','200 m Run']],
+  ['Mini DT','AMRAP',['12 Deadlifts','9 Hang Power Cleans','6 Front Rack Reverse Lunges'],'Carga sugerida: 30-40 kg. Si la posición front rack molesta al codo, sustituye por zancadas con mancuernas a los lados.'],
+  ['Burpee Engine','AMRAP',['10 Burpees','15 Wall Balls','20 Sit-ups','40 Double Unders']],
+  ['Strength & Conditioning','EMOM',['8 Deadlifts pesados','12 Box Jumps','12/10 cal SkiErg']],
+  ['Dumbbell Complex','AMRAP',['8 DB Hang Power Cleans','10 DB Reverse Lunges','12 DB Deadlifts','30 Double Unders']],
+  ['Running WOD','FOR TIME',['200 m Run','10 Burpees','15 Air Squats'],'',5],
+  ['Barbell Cycling','EMOM',['8 Power Cleans','10 Deadlifts','12/10 cal Bike']],
+  ['Kettlebell Hell','AMRAP',['15 KB Swings','12 Goblet Squats','10 Box Jumps','8 Burpees']],
+  ['Cardio & Core','AMRAP',['200 m Run','20 Sit-ups','15 Wall Balls','10 Push-ups']],
+  ['Snatch Conditioning','EMOM',['8 Hang Power Snatches','12 Box Step-ups','40 Double Unders']],
+  ['Full Body Challenge','AMRAP',['10 Deadlifts','10 Burpees','15 Goblet Squats','200 m Run']],
+  ['Clean & Jump','AMRAP',['8 Power Cleans','12 Box Jumps','15 Sit-ups','40 Double Unders']],
+  ['Dumbbell Engine','EMOM',['12 DB Hang Cleans','12 DB Reverse Lunges','12/10 cal Row']],
+  ['Deadlift Madness','FOR TIME',['10 Deadlifts','12 Burpees','15 Air Squats'],'',5],
+  ['Metabolic Conditioning','AMRAP',['200 m Run','12 KB Swings','10 Push-ups','15 Sit-ups']],
+  ['Legs & Lungs','AMRAP',['15 Wall Balls','12 Box Jumps','20 Walking Lunges','40 Double Unders']],
+  ['Mini Chief','CICLOS',['3 Power Cleans','6 Push-ups','9 Air Squats'],'5 ciclos de 3 minutos, AMRAP en cada uno. Intenta mantener las mismas rondas en cada ciclo.'],
+  ['Barbell & Cardio','AMRAP',['8 Hang Power Snatches','10 Burpees','200 m Run']],
+  ['Kettlebell Power','EMOM',['15 KB Swings','12 Goblet Squats','12/10 cal Bike']],
+  ['Full Body Grinder','AMRAP',['10 DB Deadlifts','10 DB Hang Cleans','12 Box Step-ups','15 Sit-ups']],
+  ['Engine Builder','FOR TIME',['200 m Run','10 Burpees','30 Double Unders'],'',5],
+  ['Deadlift & Burpee','EMOM',['8 Deadlifts','10 Burpees','12 Box Jumps']],
+  ['Dumbbell Complex','AMRAP',['10 DB Hang Cleans','12 DB Reverse Lunges','15 Air Squats','200 m Run']],
+  ['Power Snatch Engine','AMRAP',['8 Power Snatches','12 Sit-ups','10 Burpees','40 Double Unders']],
+  ['Cardio Mix','EMOM',['12/10 cal Row','12 KB Swings','15 Wall Balls']],
+  ['Functional Fitness','AMRAP',['10 Deadlifts','12 Box Jumps','10 Push-ups','200 m Run']],
+  ['Barbell Burner','AMRAP',['10 Hang Power Cleans','12 Burpees','15 Air Squats']],
+  ['Legs on Fire','FOR TIME',['15 Goblet Squats','12 Box Jumps','20 Walking Lunges'],'',5],
+  ['Conditioning Beast','EMOM',['40 Double Unders','12 KB Swings','12/10 cal SkiErg']],
+  ['Dumbbell & Core','AMRAP',['10 DB Hang Cleans','12 DB Reverse Lunges','20 Sit-ups','10 Push-ups']],
+  ['Running Challenge','AMRAP',['300 m Run','10 Burpees','15 Wall Balls']],
+  ['Power & Speed','EMOM',['8 Power Cleans','12 Box Jumps','12 Burpees']],
+  ['Deadlift Engine','AMRAP',['10 Deadlifts','15 Air Squats','10 Push-ups','200 m Run']],
+  ['Kettlebell Madness II','AMRAP',['15 KB Swings','12 Goblet Squats','10 Burpees','40 Double Unders']],
+  ['Snatch & Cardio','FOR TIME',['8 Hang Power Snatches','12 Sit-ups','200 m Run'],'',5],
+  ['Full Body EMOM','EMOM',['10 DB Hang Cleans','12 Box Step-ups','12/10 cal Bike']],
+  ['Mini CrossFit Games','AMRAP',['10 Deadlifts','10 Burpees','15 Wall Balls','40 Double Unders']],
+  ['Dumbbell Power','EMOM',['12 DB Hang Cleans','12 DB Reverse Lunges','12/10 cal Row']],
+  ['Power Snatch Challenge','AMRAP',['8 Power Snatches','12 Box Jumps','15 Sit-ups','200 m Run']],
+  ['Endurance Test','AMRAP',['300 m Run','15 KB Swings','10 Burpees','20 Air Squats']],
+  ['THE FINAL WOD','AMRAP',['10 Deadlifts (60 kg)','10 Hang Power Cleans (30 kg)','15 Box Jumps','10 Burpees','40 Double Unders'],'Objetivo: conseguir el máximo número de rondas manteniendo buena técnica.']
+];
+
+const CROSS_SCALE=[
+  [/double unders/i,'Saltos simples: el doble de repeticiones'],
+  [/box jumps/i,'Step-ups al cajón'],
+  [/box step-ups/i,'Cajón más bajo'],
+  [/push-ups/i,'Flexiones con rodillas o manos en banco'],
+  [/burpees/i,'Burpees sin salto o con manos en banco'],
+  [/snatch/i,'Snatch con mancuerna a una mano, alternando'],
+  [/^\d+ DB /i,'Mancuernas más ligeras'],
+  [/front rack/i,'Zancadas con mancuernas a los lados'],
+  [/clean/i,'Barra ligera o cleans con mancuernas'],
+  [/deadlift/i,'Baja la carga hasta mover cada serie con la espalda neutra'],
+  [/wall ball/i,'Balón más ligero o thrusters con mancuernas'],
+  [/cal (assault bike|bike|row|skierg)|m skierg/i,'Cualquier máquina de cardio; sin máquina, 30 jumping jacks'],
+  [/m run/i,'Sin sitio para correr: 250 m de remo o 1 min de bici'],
+  [/kb swing/i,'Kettlebell o mancuerna más ligera'],
+  [/goblet/i,'Kettlebell más ligera o sentadilla sin peso'],
+  [/walking lunges/i,'Zancadas alternas en el sitio'],
+  [/sit-ups/i,'Crunch o dead bug'],
+  [/air squats/i,'Sentadilla a un banco']
+];
+function crossScaleFor(item){const hit=CROSS_SCALE.find(([re])=>re.test(item));return hit?hit[1]:'';}
+function crossProgramFormat(type,rounds){return type==='AMRAP'?"AMRAP 15'":type==='EMOM'?"EMOM 15'":type==='CICLOS'?"5 ciclos de 3'":`${rounds||5} rondas · For Time (cap 15')`;}
+function crossProgramDay(index){
+  const i=Math.max(0,Math.min(CROSS_PROGRAM.length-1,index)),[title,type,items,note='',rounds]=CROSS_PROGRAM[i],n=i+1,week=Math.floor(i/5)+1,fmt=crossProgramFormat(type,rounds);
+  const score=type==='EMOM'?'Minutos completos':type==='FOR TIME'?'Tiempo':'Rondas + reps';
+  const goal=note||(type==='EMOM'?'Cada minuto, haz el trabajo y descansa lo que sobre. Si no llegas, baja repeticiones.':type==='AMRAP'?'Máximas rondas en 15 minutos con buena técnica.':'Termínalo lo antes posible. Si llegas al minuto 15, apunta hasta dónde llegaste.');
+  return {name:`WOD ${n} · ${title}`,desc:`Semana ${week} · ${fmt}`,wodType:type==='CICLOS'?'AMRAP':type,wodFormat:type,wodRounds:rounds||null,score,wodGoal:goal,
+    structure:items.map((item,k)=>[type==='EMOM'?`Min ${k+1}: ${item}`:item,crossScaleFor(item)?`Escalar: ${crossScaleFor(item)}`:'Técnica antes que velocidad.']),
+    programWod:n,programWeek:week,wodId:`program-wod-${n}`,
+    exercises:[timeBlock(`time_wod_program_${n}`,`WOD ${n} · ${title}`,`${fmt}: ${items.join(' · ')}`,15,fmt)]};
+}
+function crossProgramWeek(week){
+  const w=Math.min(CROSS_PROGRAM_WEEKS.length,Math.max(1,parseInt(week)||1));
+  return Array.from({length:5},(_,k)=>crossProgramDay((w-1)*5+k));
+}
+function advanceCrossProgram(day){
+  if(!day?.programWod||S.profile?.priority!=='cross_program'||day.programWod%5!==0)return false;
+  const next=day.programWeek>=CROSS_PROGRAM_WEEKS.length?1:day.programWeek+1;
+  S.profile={...S.profile,wodWeek:next};
+  S.routine=genCrossRoutine(S.profile);S.curDay=0;S.manualToday=false;
+  return true;
+}
 function genCrossRoutine(p){
+  if(p.priority==='cross_program'){
+    const week=Math.min(CROSS_PROGRAM_WEEKS.length,Math.max(1,parseInt(p.wodWeek)||1));
+    return crossProgramWeek(week).map(d=>addTiming({...d,timingNote:`Semana ${week} · ${CROSS_PROGRAM_WEEKS[week-1]} · WOD de 15 minutos`},Math.max(20,parseInt(p.time)||20)));
+  }
   const n=parseInt(p.days)||3,budget=parseInt(p.time)||20;
   const wod=wodDay();
   const days=[
@@ -4981,6 +5082,7 @@ function dailyHomeExerciseName(day,ex){
   return String(lt((activeDay?selectedAlt(ex)?.name:ex?.name)||'')).trim();
 }
 function dailyHomeExerciseNames(day){
+  if(day?.programWod&&Array.isArray(day.structure))return day.structure.map(step=>String(step[0]||step)).slice(0,5);
   return (Array.isArray(day?.exercises)?day.exercises:[]).map(ex=>dailyHomeExerciseName(day,ex)).filter(Boolean).slice(0,3);
 }
 function dailyHomeDuration(day,profile={}){
@@ -5015,10 +5117,12 @@ function renderHome(c){
   const progress=W.active?completion():null;
   const nextName=W.active?dailyHomeNextExerciseName(day):'';
   const savedToday=!W.active&&!workoutDraft&&dailyHomeHasSavedToday();
-  const weekLine=en?'Tap start and the app guides you set by set.':'Pulsa empezar y la app te guía serie a serie.';
+  const weekLine=isWod?(en?'Tap start: clock, movements and your score on one screen.':'Pulsa empezar: reloj, movimientos y tu marca en una sola pantalla.'):(en?'Tap start and the app guides you set by set.':'Pulsa empezar y la app te guía serie a serie.');
   const readyCopy=isWalk?(en?'Your walk is ready':'Tu paseo está preparado'):isVital?(en?'Your movement session is ready':'Tu sesión de movimiento está preparada'):(en?'Your session is ready':'Tu sesión está preparada');
   const subtitle=W.active?(en?'Your draft is kept. Pick up where you left off.':'Tu borrador se mantiene. Sigue por donde lo dejaste.'):savedToday?(en?'Your next session is ready. Come back whenever it works for you.':'Tu próxima sesión está preparada. Vuelve cuando te venga bien.'):weekLine;
-  const exerciseCountLabel=isWod
+  const exerciseCountLabel=day?.programWod
+    ? escHtml(day.desc||'')
+    : isWod
     ? (en?'1 guided block':'1 bloque guiado')
     : isWalk
     ? `${exerciseCount} ${en?(exerciseCount===1?'block':'blocks'):(exerciseCount===1?'bloque':'bloques')} ${en?'in order':'en orden'}`
@@ -5122,7 +5226,8 @@ function finishWelcomeWorkout(){closeSummary();nav('home');}
 function goDay(i){if(!prepareWorkout(i))return;trackWorkoutStart('direct','normal',i);nav('workout');}
 function beginWorkoutDay(i,mode='normal'){
   if(!prepareWorkout(i,{mode}))return;closeSummary();track('workout_preview_start',{mode,day:i});trackWorkoutStart('preview',mode,i);nav('workout');
-  setTimeout(()=>coachPush(currentLang()==='en'?'I will guide you step by step. Start with the first exercise.':'Te voy guiando paso a paso. Empieza por el primer ejercicio.'),350);
+  const wodDayStarted=!!(S.routine[i]?.wodType||S.routine[i]?.dailyWod);
+  setTimeout(()=>coachPush(wodDayStarted?(currentLang()==='en'?'Start the clock when you are ready. Movements and scaling are just below.':'Inicia el reloj cuando estés listo. Debajo tienes los movimientos y cómo escalar.'):(currentLang()==='en'?'I will guide you step by step. Start with the first exercise.':'Te voy guiando paso a paso. Empieza por el primer ejercicio.')),350);
 }
 function coachModeCopy(mode){
   if(mode==='express')return{title:'Versión corta',text:'Solo lo esencial para mantener continuidad cuando vas justo de tiempo.'};
@@ -5483,9 +5588,9 @@ function renderWorkout(c){
     ${renderWorkoutSessionBar(day)}
     ${renderWorkoutWodArena(day)}
     ${W.plusAdapt?`<div class="plus-ai-result"><b>✨ ${escHtml(W.plusAdapt.title||(en?'Adapted workout':'Entreno adaptado'))}</b><span>${escHtml(W.plusAdapt.plan||'')}</span></div>`:''}
-    ${guidedAvailable?(guided?'':`<div class="daily-workout-view" role="group" aria-label="${en?'Workout view':'Vista de entrenamiento'}"><button type="button" aria-pressed="false" onclick="setWorkoutPresentation('guided')">${en?'Step by step':'Paso a paso'}</button><button type="button" aria-pressed="true" onclick="setWorkoutPresentation('direct')">${en?'Full list':'Lista completa'}</button></div>`):`<p class="daily-workout-note">${en?'This session keeps its specific activity, mobility or superset controls.':'Esta sesión mantiene sus controles adaptados de actividad, movilidad o superseries.'}</p>`}
+    ${guidedAvailable?(guided?'':`<div class="daily-workout-view" role="group" aria-label="${en?'Workout view':'Vista de entrenamiento'}"><button type="button" aria-pressed="false" onclick="setWorkoutPresentation('guided')">${en?'Step by step':'Paso a paso'}</button><button type="button" aria-pressed="true" onclick="setWorkoutPresentation('direct')">${en?'Full list':'Lista completa'}</button></div>`):(day.wodType||day.dailyWod?'':`<p class="daily-workout-note">${en?'This session keeps its specific activity, mobility or superset controls.':'Esta sesión mantiene sus controles adaptados de actividad, movilidad o superseries.'}</p>`)}
     ${guidedAvailable&&!guided?`<div id="daily-direct-rest" class="daily-direct-rest" hidden><div id="daily-guided-rest" class="daily-guided-rest" hidden><div id="daily-guided-rest-title" class="daily-guided-rest-title" tabindex="-1">${en?'Take a breather':'Tómate un respiro'}</div><div id="daily-guided-clock" class="daily-guided-clock" role="timer" aria-live="off" aria-label="${en?'Rest remaining':'Descanso restante'}">00:00</div><div class="daily-guided-rest-controls"><button type="button" class="daily-guided-secondary" onclick="toggleTimerPause()" id="daily-guided-pause">${en?'Pause':'Pausar'}</button><button type="button" class="daily-guided-secondary" onclick="addTimerSeconds(15)">+15 s</button><button type="button" class="daily-guided-secondary" onclick="stopTimer()">${en?'Skip':'Omitir'}</button></div></div></div>`:''}
-    ${guided?renderDailyGuidedWorkout(day):`<div class="workout-next-focus">${workoutNextHeadline(day)}</div>${quickReference}<div class="workout-exercise-head"><div class="workout-exercise-title">${en?'Your exercises':'Haz estos ejercicios'}</div><div class="workout-exercise-sub">${prog.done}/${prog.total} ${en?'done':'hecho'}</div></div>${day.exercises.map((ex,i)=>exCard(ex,i)).join('')}`}
+    ${guided?renderDailyGuidedWorkout(day):`${day.wodType||day.dailyWod?'':`<div class="workout-next-focus">${workoutNextHeadline(day)}</div>`}${quickReference}<div class="workout-exercise-head"><div class="workout-exercise-title">${en?'Your exercises':'Haz estos ejercicios'}</div><div class="workout-exercise-sub">${prog.done}/${prog.total} ${en?'done':'hecho'}</div></div>${day.exercises.map((ex,i)=>exCard(ex,i)).join('')}`}
     ${guided&&!W.saveError?'':savePanel}
     ${W.welcome?'':`<div class="workout-secondary-title">${en?'Optional':'Opcional'}</div>
       ${guided?`<button type="button" class="workout-view-link" onclick="setWorkoutPresentation('direct')">${en?'See the full exercise list':'Ver la lista completa de ejercicios'} ›</button>`:''}
@@ -5503,9 +5608,9 @@ function renderWorkoutWodArena(day){
   if(!(day?.dailyWod||day?.wodType))return '';
   return `<div class="wod-arena">
     <div class="wod-kicker">🔥 WOD estilo CrossFit</div>
-    <div class="wod-title">${day.wodType||'WOD'} · ${day.estimatedMin||20}</div>
+    <div class="wod-title">${day.wodFormat?crossProgramFormat(day.wodFormat,day.wodRounds):`${day.wodType||'WOD'} · ${day.estimatedMin||20}`}</div>
     <div class="wod-sub">${day.wodGoal||day.desc||'Un bloque intenso, medible y escalable.'}</div>
-    <div class="wod-badges"><span class="wod-badge">${day.score||'Marca'}</span><span class="wod-badge">${day.estimatedMin||20} min</span><span class="wod-badge">Técnica primero</span></div>
+    <div class="wod-badges"><span class="wod-badge">${day.score||'Marca'}</span><span class="wod-badge">${day.wodFormat?15:day.estimatedMin||20} min</span>${day.programWeek?`<span class="wod-badge">Semana ${day.programWeek} de 10</span>`:'<span class="wod-badge">Técnica primero</span>'}</div>
     ${day.rx||day.scale?`<div class="wod-panel">
       ${day.rx?`<div class="wod-step"><div class="wod-step-num">RX</div><div><div class="wod-step-main">${day.rx}</div><div class="wod-step-sub">Versión completa.</div></div></div>`:''}
       ${day.scale?`<div class="wod-step"><div class="wod-step-num">S</div><div><div class="wod-step-main">${day.scale}</div><div class="wod-step-sub">Escalado recomendado si quieres mantener calidad.</div></div></div>`:''}
@@ -6012,7 +6117,30 @@ function updateWodTimerDom(){
   if(clock){clock.classList.toggle('ready',t.left<=0);clock.textContent=t.left<=0?'¡Tiempo!':wodTimeText(t.left);}
   if(fill)fill.style.width=(t.total?Math.max(0,t.left/t.total*100):0)+'%';
   if(btn)btn.textContent=t.paused?'Continuar':'Pausar';
-  if(label)label.textContent=t.left<=0?'Guarda tu marca':'Cronómetro del WOD';
+  if(label)label.textContent=t.left<=0?'Guarda tu marca':wodIntervalLabel(t);
+}
+function wodIntervalLabel(t){
+  const meta=dayWodMeta()||{},fmt=meta.wodFormat,elapsed=Math.max(0,(t.total||0)-(t.left||0));
+  if(fmt==='EMOM'){
+    const steps=meta.structure||[],minute=Math.min(Math.floor((t.total||0)/60),Math.floor(elapsed/60)+1),step=steps.length?steps[(minute-1)%steps.length]:null;
+    return `Minuto ${minute} de ${Math.floor((t.total||0)/60)}${step?' · '+String(step[0]||step).replace(/^Min \d+: /,''):''}`;
+  }
+  if(fmt==='CICLOS')return `Ciclo ${Math.min(5,Math.floor(elapsed/180)+1)} de 5`;
+  if(fmt==='FOR TIME')return `Llevas ${wodTimeText(elapsed)} · cap 15:00`;
+  return 'Cronómetro del WOD';
+}
+function wodIntervalCue(t){
+  const fmt=(dayWodMeta()||{}).wodFormat,period=fmt==='EMOM'?60:fmt==='CICLOS'?180:0;
+  if(!period||t.left<=3)return;
+  const toNext=t.left%period;
+  if(toNext>0&&toNext<=3)restCue('countdown');
+  else if(toNext===0){restCue('done');if(soundState().vibration&&navigator.vibrate)navigator.vibrate(120);}
+}
+function wodFinishForTime(key){
+  const t=currentWodTimer(key);if(!t)return;
+  setWodMark(key,'time',wodTimeText(Math.max(0,t.total-t.left)));
+  stopWodTimer();
+  toast('Tiempo apuntado. Guarda tu marca.');
 }
 function startWodTimer(key,min=20){
   stopWodTimer(false);
@@ -6024,6 +6152,7 @@ function startWodTimer(key,min=20){
     if(t.paused)return;
     t.left=Math.max(0,t.left-1);
     if(t.left>0&&t.left<=3)restCue('countdown');
+    else wodIntervalCue(t);
     updateWodTimerDom();
     if(t.left<=0&&!t.finished){
       t.finished=true;
@@ -6049,7 +6178,15 @@ function wodExercisePanel(ex,key){
   const day=dayWodMeta()||{},steps=day.structure||ex.structure||[],mark=wodMark(key),scale=W.wodScale?.[key]||'normal',timer=currentWodTimer(key),left=timer?timer.left:(ex.durationMin||20)*60,total=timer?timer.total:(ex.durationMin||20)*60;
   const running=!!timer&&timer.left>0,paused=!!timer?.paused,done=WD[key]?.[0]?.done;
   const leader=wodLocalLeaderboard(day.wodId||'');
-  return `<div class="wod-panel">
+  return `<div class="wod-timer">
+    <div class="wod-clock-label" id="wod-label-${key}">${timer?.left<=0?'Guarda tu marca':timer?wodIntervalLabel(timer):day.wodFormat==='EMOM'?'Minuto 1 · '+escHtml(String(steps[0]?.[0]||'').replace(/^Min \d+: /,'')):'Cronómetro del WOD'}</div>
+    <div class="wod-clock ${timer?.left<=0?'ready':''}" id="wod-clock-${key}">${timer?.left<=0?'¡Tiempo!':wodTimeText(left)}</div>
+    <div class="wod-timer-bar"><div class="wod-timer-fill" id="wod-fill-${key}" style="width:${total?Math.max(0,left/total*100):0}%"></div></div>
+    <div class="wod-timer-actions">
+      ${running?`${day.wodFormat==='FOR TIME'?`<button class="wod-btn primary" onclick="wodFinishForTime('${key}')">Terminé</button>`:''}<button class="wod-btn" id="wod-pause-${key}" onclick="toggleWodTimer('${key}')">${paused?'Continuar':'Pausar'}</button><button class="wod-btn" onclick="stopWodTimer()">Detener</button>`:`<button class="wod-btn primary" onclick="startWodTimer('${key}',${ex.durationMin||20})">Iniciar reloj</button><button class="wod-btn" onclick="finishWodExercise('${key}')">${done?'Hecho':'Marcar hecho'}</button>`}
+    </div>
+  </div>
+  <div class="wod-panel">
     <div class="wod-panel-title">Tu misión</div>
     ${day.rx||day.scale?`<div class="wod-steps" style="margin-bottom:10px">
       ${day.rx?`<div class="wod-step"><div class="wod-step-num">RX</div><div><div class="wod-step-main">${escHtml(day.rx)}</div><div class="wod-step-sub">Versión completa si ya conoces bien los movimientos.</div></div></div>`:''}
@@ -6062,25 +6199,18 @@ function wodExercisePanel(ex,key){
     </div>
     <div class="wod-step-sub" style="margin-top:8px">${scale==='easy'?(day.scale||'Baja reps, usa pared/banco y conserva respiración.'):'Mantén el objetivo propuesto. Técnica antes que velocidad.'}</div>
   </div>
-  <div class="wod-timer">
-    <div class="wod-clock-label" id="wod-label-${key}">${timer?.left<=0?'Guarda tu marca':'Cronómetro del WOD'}</div>
-    <div class="wod-clock ${timer?.left<=0?'ready':''}" id="wod-clock-${key}">${timer?.left<=0?'¡Tiempo!':wodTimeText(left)}</div>
-    <div class="wod-timer-bar"><div class="wod-timer-fill" id="wod-fill-${key}" style="width:${total?Math.max(0,left/total*100):0}%"></div></div>
-    <div class="wod-timer-actions">
-      ${running?`<button class="wod-btn" id="wod-pause-${key}" onclick="toggleWodTimer('${key}')">${paused?'Continuar':'Pausar'}</button><button class="wod-btn" onclick="stopWodTimer()">Detener</button>`:`<button class="wod-btn primary" onclick="startWodTimer('${key}',${ex.durationMin||20})">Iniciar reloj</button><button class="wod-btn" onclick="finishWodExercise('${key}')">${done?'Hecho':'Marcar hecho'}</button>`}
-    </div>
-  </div>
   <div class="wod-panel">
     <div class="wod-panel-title">Tu marca</div>
     <div class="wod-steps" style="margin-bottom:10px">
       <div class="wod-step"><div class="wod-step-num">🏆</div><div><div class="wod-step-main">Mejor local: ${escHtml(leader.best||'sin marca')}</div><div class="wod-step-sub">${leader.count?`${leader.count} intento${leader.count>1?'s':''} guardado${leader.count>1?'s':''}.`: 'Cuando guardes tu primer WOD aparecerá aquí.'}</div></div></div>
-      <div class="wod-step"><div class="wod-step-num">＋</div><div><div class="wod-step-main">Liga Plus preparada</div><div class="wod-step-sub">Después podremos activar ranking diario, semanal y mensual para usuarios registrados.</div></div></div>
+${day.programWod?'':`<div class="wod-step"><div class="wod-step-num">＋</div><div><div class="wod-step-main">Liga Plus preparada</div><div class="wod-step-sub">Después podremos activar ranking diario, semanal y mensual para usuarios registrados.</div></div></div>`}
     </div>
+    ${day.wodFormat==='FOR TIME'?`<label class="wod-field" style="margin-bottom:8px"><span>Tu tiempo</span><input class="wod-input" value="${escHtml(mark.time)}" oninput="setWodMark('${key}','time',this.value)" placeholder="13:40"></label>`:''}
     <div class="wod-mark-grid">
-      <label class="wod-field"><span>Rondas</span><input class="wod-input" type="number" min="0" step="1" value="${escHtml(mark.rounds)}" oninput="setWodMark('${key}','rounds',this.value)" placeholder="4"></label>
+      <label class="wod-field"><span>${day.wodFormat==='EMOM'?'Minutos completos':day.wodFormat==='FOR TIME'?'Rondas (si no acabaste)':'Rondas'}</span><input class="wod-input" type="number" min="0" step="1" value="${escHtml(mark.rounds)}" oninput="setWodMark('${key}','rounds',this.value)" placeholder="4"></label>
       <label class="wod-field"><span>Reps extra</span><input class="wod-input" type="number" min="0" step="1" value="${escHtml(mark.reps)}" oninput="setWodMark('${key}','reps',this.value)" placeholder="12"></label>
     </div>
-    <label class="wod-field" style="margin-top:8px"><span>Tiempo si acabaste antes</span><input class="wod-input" value="${escHtml(mark.time)}" oninput="setWodMark('${key}','time',this.value)" placeholder="18:42"></label>
+    ${day.wodFormat?'':`<label class="wod-field" style="margin-top:8px"><span>Tiempo si acabaste antes</span><input class="wod-input" value="${escHtml(mark.time)}" oninput="setWodMark('${key}','time',this.value)" placeholder="18:42"></label>`}
     <label class="wod-field" style="margin-top:8px"><span>Notas rápidas</span><input class="wod-input" value="${escHtml(mark.notes)}" oninput="setWodMark('${key}','notes',this.value)" placeholder="Escalado a banco, buen ritmo"></label>
     <button class="complete-btn" onclick="finishWodExercise('${key}')" style="margin-top:10px">${done?'Marca guardada':'Guardar marca y completar'}</button>
   </div>`;
@@ -6491,7 +6621,7 @@ function exCard(ex,idx=0){
   if(timed){
     const action=`<button class="complete-btn" onclick="tDone('${key}',0)">${sets[0]?.done?'Bloque completado':ex.type==='walk'?'Marcar paseo completado':'Marcar bloque completado'}</button>`;
     if(isWodExercise(ex)){
-      return`<div class="ex-card ${open?'open':''} ${done?'done':''}" data-ex-key="${key}">${head}<div class="ex-body">${visual()}${live}${wodExercisePanel(ex,key)}${exerciseMoreButton(key,idx)}</div></div>`;
+      return`<div class="ex-card ${open?'open':''} ${done?'done':''}" data-ex-key="${key}">${head}<div class="ex-body">${live}${wodExercisePanel(ex,key)}${exerciseMoreButton(key,idx)}</div></div>`;
     }
     return`<div class="ex-card ${open?'open':''} ${done?'done':''}" data-ex-key="${key}">${head}<div class="ex-body">${visual()}${simple?'':live}<div class="run-box"><div class="run-min">${ex.durationMin} min</div><div class="run-desc">${ex.rr}</div></div>${simple?'':renderGpsPanel(ex,key)}${action}${exerciseMoreButton(key,idx)}</div></div>`;
   }
@@ -6774,6 +6904,7 @@ function saveSession(){
     S.sessions.pop();S.bodyWeights.length=previous.bodyWeightsLength;S.manualToday=previous.manualToday;S.nextWorkout=previous.nextWorkout;S.achievements=previous.achievements;
     W.autoSaving=false;W.saveError=true;saveWorkoutDraft();if(wasWelcome)renderWorkout();toast(currentLang()==='en'?'The session could not be saved. Keep the app open and free some device storage before retrying.':'No se pudo guardar la sesión. Mantén la app abierta y libera espacio en el dispositivo antes de reintentarlo.');return;
   }
+  if(!wasWelcome&&typeof advanceCrossProgram==='function'&&advanceCrossProgram(day))persist();
   if(wasWelcome){try{localStorage.setItem('ea_welcome_workout_complete',new Date().toISOString());}catch(error){console.warn('No se pudo guardar el indicador de bienvenida',error);}}
   document.getElementById('hdr-streak').textContent='🔥 '+streak();track('session_saved',{day:day.name,completion:stats.pct,durationMin,session_number:S.sessions.length,entry:wasWelcome?'welcome':'workout'});
   trackOnce('first_workout_saved',{day:day.name,completion:stats.pct,durationMin},'first_workout_saved');

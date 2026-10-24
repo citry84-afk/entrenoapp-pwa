@@ -12,7 +12,7 @@
     "build": "node scripts/copy-www.js",
     "verify": "node scripts/verify-pre-deploy.js",
     "test": "npm run test:workouts && npm run test:app",
-    "test:workouts": "node scripts/test-workout-history.js && node scripts/test-logging-safety.js && node scripts/test-rest-timer.js && node scripts/test-daily-workout.js && node scripts/test-workout-budget.js && node scripts/test-workout-metrics.js && node scripts/test-workout-draft.js && node scripts/test-growth-tracking.js && node scripts/test-analytics-retry.js && node scripts/test-strength-balance.js",
+    "test:workouts": "node scripts/test-workout-history.js && node scripts/test-logging-safety.js && node scripts/test-rest-timer.js && node scripts/test-daily-workout.js && node scripts/test-workout-budget.js && node scripts/test-workout-metrics.js && node scripts/test-workout-draft.js && node scripts/test-growth-tracking.js && node scripts/test-analytics-retry.js && node scripts/test-strength-balance.js && node scripts/test-cross-program.js",
     "test:app": "node scripts/test-settings-navigation.js && node scripts/test-settings-ui.js && node scripts/test-welcome-workout.js && node scripts/test-next-workout.js && node scripts/test-daily-home.js && node scripts/test-exercise-muscles.js && node scripts/test-exercise-illustrations.js && node scripts/test-exercise-visuals.js && node scripts/test-generated-exercise-media.js && node scripts/test-session-summary-i18n.js && node scripts/test-history-progress-ui.js && node scripts/test-notification-opt-in.js && node scripts/test-backup.js && node scripts/test-store-listing.js",
     "stage:web": "node scripts/stage-web-release.js",
     "hooks:install": "git config core.hooksPath githooks",
