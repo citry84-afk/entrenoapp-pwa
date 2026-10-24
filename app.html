@@ -1532,6 +1532,7 @@
   .daily-guided-primary{display:block;width:100%;min-height:56px;border:0;border-radius:15px;background:var(--accent);color:white;font:inherit;font-size:16px;font-weight:800;padding:12px}
   .daily-guided-secondary{min-height:44px;border:1px solid var(--border);border-radius:12px;background:transparent;color:var(--text);font:inherit;font-size:13px;padding:10px 13px}
   .daily-guided-tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.daily-guided-visual{margin-top:16px;border-top:1px solid var(--border);padding-top:12px}.daily-guided-visual>summary{cursor:pointer;list-style:none;font-size:13px;font-weight:700;color:var(--text2);padding:6px 0;min-height:32px}.daily-guided-visual>summary::-webkit-details-marker{display:none}.daily-guided-visual>summary::before{content:'▸ ';}.daily-guided-visual[open]>summary::before{content:'▾ ';}.daily-guided-visual[open]>summary{margin-bottom:8px}
   .daily-guided-remaining{border-top:1px solid var(--border);padding-top:16px;margin-top:20px}
   .daily-guided-remaining summary{cursor:pointer;min-height:40px;font-size:13px;color:var(--text2)}
   .daily-guided-list{display:grid;gap:6px}
@@ -2307,16 +2308,31 @@ function genStarterRoutine(p){
   ].slice(0,n);
   return days.map(d=>addTiming({...d,exercises:fitToBudget(d.exercises,budget),timingNote:'Empieza con calma · movimiento controlado · descansar también cuenta'},budget));
 }
+function alternatePushPull(first,second){const out=[];for(let i=0;i<Math.max(first.length,second.length);i++){if(first[i])out.push(first[i]);if(second[i])out.push(second[i]);}return out;}
+function isHingeExercise(e){return /peso muerto/i.test(e?.name||'');}
+function upperBPushExercises(src){
+  const rotated=[...src.push.slice(3),...src.push.slice(0,3)];
+  const lead=rotated.find(e=>/hombro|arnold|militar/i.test(e.name))||rotated.find(e=>/press|fondos/i.test(e.name));
+  return lead?[lead,...rotated.filter(e=>e!==lead)]:rotated;
+}
+function upperPullExercises(src){const pull=src.pull.filter(e=>!isHingeExercise(e));return pull.length>=2?pull:src.pull;}
+function lowerBExercises(src){
+  const isHinge=isHingeExercise;
+  let hinge=src.pull.find(isHinge)||src.legs.find(isHinge);
+  if(!hinge){const rdl=DB.gym.fuerza.legs.find(e=>e.id==='pmr');hinge=rdl&&{...rdl,hint:'Cadera atrás, espalda neutra y bajada controlada.',rest:90,rr:'8-10',sets:3};}
+  const main=src.legs[0];
+  return [hinge,...src.legs.filter(e=>e!==main&&e!==hinge&&!isHinge(e)),main].filter(Boolean);
+}
 function genStrengthRoutine(p){
   const src=DB.gym[p.goal]||DB.gym.fitness,n=parseInt(p.days),budget=parseInt(p.time)||40;
   const prep=arr=>fitToBudget(arr.map(e=>adaptExercise(e,p)),budget);
   let days;
   if(n<=3)days=Array.from({length:n},(_,i)=>({name:['Día A · Full Body','Día B · Full Body','Día C · Full Body'][i],desc:['Empuje + Tirón + Piernas','Variante principal','Accesorios y técnica'][i],exercises:prep([src.legs[i%src.legs.length],src.push[i%src.push.length],src.pull[i%src.pull.length],src.push[(i+2)%src.push.length],src.pull[(i+2)%src.pull.length],src.legs[(i+2)%src.legs.length]])}));
   else if(n===4)days=[
-    {name:'Día 1 · Upper A',desc:'Press + Remo',exercises:prep([...src.push.slice(0,4),...src.pull.slice(0,4)])},
+    {name:'Día 1 · Upper A',desc:'Press + Remo',exercises:prep(alternatePushPull(src.push.slice(0,4),upperPullExercises(src).slice(0,4)))},
     {name:'Día 2 · Lower A',desc:'Sentadilla + accesorios',exercises:prep(src.legs)},
-    {name:'Día 3 · Upper B',desc:'Variante press + tracción',exercises:prep([...src.pull.slice(1),...src.push.slice(1),src.pull[0],src.push[0]])},
-    {name:'Día 4 · Lower B',desc:'Peso muerto + accesorios',exercises:prep([...src.legs.slice(1),src.legs[0]])}
+    {name:'Día 3 · Upper B',desc:'Variante press + tracción',exercises:prep((up=>alternatePushPull([up[1],up[0],...up.slice(2)].filter(Boolean),upperBPushExercises(src)))(upperPullExercises(src)))},
+    {name:'Día 4 · Lower B',desc:'Peso muerto + accesorios',exercises:prep(lowerBExercises(src))}
   ];
   else days=[
     {name:'Día 1 · Push',desc:'Pecho, hombros y tríceps',exercises:prep(src.push)},
@@ -3546,7 +3562,7 @@ function renderPlanCard(p){
     <div>
       <div style="font-weight:900">${lt('Tu plan personalizado')}</div>
       <div class="tsm t2">${MODE_LABELS[p.mode]||GOAL_LABELS[p.goal]||'Plan'} · ${PRIORITY_LABELS[p.priority]||GOAL_LABELS[p.goal]||'Objetivo'} · ${p.days||'-'} días · ${p.time||'-'} min</div>
-      <div class="tsm t2 mt2">${calm?'Pensado para empezar desde cero: apoyo estable, ritmo cómodo, equilibrio y paseos cortos.':'Cálculo: series 60s · descanso 90-120s · transición 120s'}</div>
+      <div class="tsm t2 mt2">${calm?'Pensado para empezar desde cero: apoyo estable, ritmo cómodo, equilibrio y paseos cortos.':'Duración estimada con ~1 min por serie, 90-120 s de descanso y 2 min entre ejercicios'}</div>
     </div>
   </div>`;
 }
@@ -5129,8 +5145,8 @@ function coachExerciseMeta(ex){
     const timedSets=Array.isArray(ex.sets)?ex.sets:[];
     return `${ex.durationMin||Math.max(...timedSets.map(x=>parseFloat(x.reps)||0),0)} min`;
   }
-  if(isBandExercise(ex))return `${ex.sets||0} series · banda`;
-  return `${ex.sets||0} series · ${ex.rr||'8-12'} reps`;
+  if(isBandExercise(ex))return `${ex.sets||0} ${Number(ex.sets)===1?'serie':'series'} · banda`;
+  return `${ex.sets||0} ${Number(ex.sets)===1?'serie':'series'} · ${ex.rr||'8-12'} reps`;
 }
 function coachMaterialLabel(value){
   return {casa:'Casa',gym:'Gimnasio',mancuernas:'Mancuernas',peso_corporal:'Peso corporal',bandas:'Bandas',kettlebell:'Kettlebell',nada:'Sin material',custom:'Propio'}[value]||value||'Sin complicarte';
@@ -5383,7 +5399,10 @@ function dailyChooseExercise(index){
 }
 function dailyCompleteSet(key,index){
   if(!WD[key]?.[index]||WD[key][index].done||!validatePendingWorkoutSets(key,[index]))return;
-  stopTimer();tDone(key,index);
+  stopTimer();
+  const nextRow=WD[key][index+1],doneKg=parseFloat(WD[key][index].kg)||0;
+  if(nextRow&&!nextRow.done&&doneKg>0&&!(parseFloat(nextRow.kg)>0))nextRow.kg=doneKg;
+  tDone(key,index);
   const day=todayDay(W.active?W.baseDay:S.routine[S.curDay]),next=dailyGuidedCurrent(day);
   if(next&&!tmrLeft){const ex=exerciseForKey(key);if(ex)startTimer(exerciseRest(ex),`${currentLang()==='en'?'Next':'Siguiente'}: ${next.ex.name}`);}
   syncDailyWorkoutRest();
@@ -5422,16 +5441,16 @@ function renderDailyGuidedWorkout(day){
   const reference=lastExerciseRecord(ex)?.exercise?.sets?.[setIndex];
   const name=escHtml(lt(displayExerciseName(actual))),field=(field,label,step)=>`<label class="daily-guided-field"><span>${label}</span>${compactSetInput(key,setIndex,field,set[field],label,step)}</label>`;
   return `<section id="daily-guided" class="daily-guided" data-ex-key="${escHtml(key)}">
-    <div class="daily-guided-kicker">${en?'Exercise':'Ejercicio'} ${index+1}/${items.length} · ${progress.done}/${progress.total} ${en?'sets done':'series hechas'}</div>
+    <div class="daily-guided-kicker">${en?'Exercise':'Ejercicio'} ${index+1}/${items.length} · ${en?'session':'sesión'} ${progress.done}/${progress.total} ${en?'sets':'series'}</div>
     <h2 id="daily-guided-title" tabindex="-1">${name}</h2><div class="daily-guided-target">${en?'Set':'Serie'} ${setIndex+1} ${en?'of':'de'} ${sets.length} · ${escHtml(ex.rr||'')} ${en?'planned':'previstas'}</div>
     <div class="daily-guided-chips" aria-label="${en?'Set progress':'Progreso de series'}">${sets.map((row,i)=>`<span class="daily-guided-chip ${row.done?'done':i===setIndex?'current':''}" aria-label="${en?'Set':'Serie'} ${i+1}: ${row.done?(en?'done':'hecha'):en?'pending':'pendiente'}" ${i===setIndex?'aria-current="step"':''}>${row.done?'✓':i+1}</span>`).join('')}</div>
     ${renderDailyRestScene(en,name,setIndex,progress)}
     <div id="daily-guided-form" class="daily-guided-form">
-      ${typeof renderExerciseVisual==='function'?renderExerciseVisual(actual,{context:'guided'}):''}
-      <div class="daily-guided-reference">${recordedReferenceSet(reference)?`${en?'Last time, this set':'Última vez, esta serie'}: ${compactPreviousLabel(reference,kind).replace(/<br>/g,' ')}`:en?'No previous completed reference for this set.':'Sin referencia realizada anterior para esta serie.'}</div>
+      <div class="daily-guided-reference">${recordedReferenceSet(reference)?`${en?'Last time, this set':'Última vez, esta serie'}: ${compactPreviousLabel(reference,kind).replace(/<br>/g,' ')}`:en?'First time with this set: pick a weight you can control.':'Primera vez con esta serie: elige un peso que controles.'}</div>
       <div class="daily-guided-fields ${kind==='body'?'single':''}">${kind==='band'?`<label class="daily-guided-field"><span>${en?'Band':'Banda'}</span><select aria-label="${en?'Band set':'Banda serie'} ${setIndex+1}" onchange="updSet(${keyArg},${setIndex},'band',this.value)">${bandOptions(set.band)}</select></label>`:kind==='weight'?field('kg','Kg','0.5'):''}${field('reps',seconds?(en?'Seconds':'Segundos'):(en?'Repetitions':'Repeticiones'),'1')}</div>
       <button type="button" class="daily-guided-primary" onclick="dailyCompleteSet(${keyArg},${setIndex})">${en?'Set done':'Serie hecha'} ✓</button>
       <div class="daily-guided-tools"><button type="button" class="daily-guided-secondary" onclick="openExerciseActions(${keyArg},${index})">${en?'How to / change exercise':'Cómo hacerlo / cambiar'}</button><button type="button" class="daily-guided-secondary" onclick="startTimer(${exerciseRest(ex)},nextSetLabel(${keyArg}))">${en?'Rest':'Descansar'} · ${exerciseRest(ex)} s</button></div>
+      ${typeof renderExerciseVisual==='function'?`<details class="daily-guided-visual" ${sets.some(row=>row.done)?'':'open'} ontoggle="if(this.open&&typeof initExerciseVisuals==='function')initExerciseVisuals('guided')"><summary>${en?'How it looks':'Cómo se hace'}</summary>${renderExerciseVisual(actual,{context:'guided'})}</details>`:''}
     </div>
     <details class="daily-guided-remaining"><summary>${en?'Choose exercise or review sets':'Cambiar de ejercicio o revisar series'}</summary><div class="daily-guided-list">${items.map(item=>`<button type="button" onclick="dailyChooseExercise(${item.index})" ${!(WD[item.key]||[]).some(row=>!row.done)?'disabled':''}><span>${escHtml(lt(displayExerciseName(workoutExerciseReference(item.ex))))}</span><span>${(WD[item.key]||[]).filter(row=>row.done).length}/${(WD[item.key]||[]).length}</span></button>`).join('')}<button type="button" onclick="setWorkoutPresentation('direct')">${en?'Review / edit every set →':'Revisar / corregir todas las series →'}</button></div></details>
   </section>`;

@@ -322,7 +322,7 @@ test('The selected alternative supplies both the name and compatible historical 
 
 test('Historical references keep series positions and omit unperformed source rows', f => {
   f.run('S.sessions=[{exercises:[{...press,sets:[{kg:150,reps:12,done:false},{kg:42,reps:9,done:true}]}]}];');
-  assert.match(f.run('renderDailyGuidedWorkout(W.sessionDay)'),/Sin referencia realizada anterior/);
+  assert.match(f.run('renderDailyGuidedWorkout(W.sessionDay)'),/Primera vez con esta serie/);
   f.run('WD.pb_0[0].done=true;');
   const html=f.run('renderDailyGuidedWorkout(W.sessionDay)');
   assert.match(html,/Última vez, esta serie: 42 kg(?:<br>|\s)× 9/);
@@ -331,12 +331,12 @@ test('Historical references keep series positions and omit unperformed source ro
 
 test('Spanish and English guided copy includes set progress, tools and review', f => {
   const es=f.run('renderDailyGuidedWorkout(W.sessionDay)');
-  assert.match(es,/Ejercicio 1\/3 · 0\/5 series hechas/);
+  assert.match(es,/Ejercicio 1\/3 · sesión 0\/5 series/);
   assert.match(es,/Serie 1 de 2/);
   assert.match(es,/Cómo hacerlo \/ cambiar|Revisar \/ corregir todas las series/);
   f.run("S.lang='en';");
   const en=f.run('renderDailyGuidedWorkout(W.sessionDay)');
-  assert.match(en,/Exercise 1\/3 · 0\/5 sets done/);
+  assert.match(en,/Exercise 1\/3 · session 0\/5 sets/);
   assert.match(en,/Set 1 of 2/);
   assert.match(en,/Repetitions|Set done|How to \/ change exercise|Review \/ edit every set/);
   assert.doesNotMatch(en,/Última vez|Repeticiones|Serie hecha|Después:/);
@@ -392,6 +392,13 @@ test('Repeated completion never unmarks or restarts an already recorded set', f 
   assert.equal(f.run('WD.pb_0[0].done'),true);
   assert.equal(f.run('tmrGeneration'),generation);
   assert.equal(f.run('events.length'),eventCount);
+});
+
+test('The weight of a completed set carries to an empty next set but never overwrites one', f => {
+  f.run("WD.pb_0[0].kg=62.5;WD.pb_0[1].kg='';dailyCompleteSet('pb_0',0);");
+  assert.equal(f.run('WD.pb_0[1].kg'),62.5);
+  f.run("stopTimer();WD.pb_0[0].done=false;WD.pb_0[1].kg=80;dailyCompleteSet('pb_0',0);");
+  assert.equal(f.run('WD.pb_0[1].kg'),80);
 });
 
 test('Completing a set starts one rest and focuses the next pending set', f => {
