@@ -1,5 +1,28 @@
 # Registro de versiones de EntrenoApp
 
+## 2.3 — iOS (122) / Android (120) — 25 de octubre de 2026
+
+Estado: iOS 2.3 (build 122) firmada y procesada en TestFlight; Android 2.3 (versionCode 120) firmada, aceptada por Play y en borrador interno. QA iOS parcial completada; QA Android bloqueada por espacio del emulador. Sin envío a revisión ni publicación; falta corregir controles EMOM y completar avisos/pantalla activa.
+
+### Novedades que se incluirán
+
+- Registro de kg, repeticiones y series más rápido, con el peso conservado para la siguiente serie.
+- Ilustraciones premium de ejercicios.
+- Rutinas Torso/Pierna más equilibradas.
+- Navegación y menús más sencillos.
+- Programa Cross training de 10 semanas y 50 WOD de 15 minutos, con temporizadores EMOM y For Time.
+
+Notas para las tiendas en español e inglés: `store-listing/release-2.3-122.md`. El envío a revisión y el lanzamiento requieren autorización previa.
+
+### Preparación nativa
+
+- Capacitor actualizado al parche 6.2.2, sin migración mayor ni cambios al HTML publicado.
+- Compatibilidad mínima aprobada: iOS 15 y Android 7 (API 24), manteniendo la protección automática de Play.
+- Backport del arreglo oficial de RevenueCat para Xcode 27, aplicado tras cada instalación de Pods y cubierto por pruebas.
+- Los paquetes contienen los mismos 432 archivos web e imágenes que `www/`; SHA256 de `app.html` idéntico a producción.
+- Registro de compilación, verificaciones y limitaciones en `audits/2026-10-25/native-release-2.3.md`.
+- QA iOS confirma copia de kg y avance del EMOM, pero descubre controles del reloj sin actualizar al iniciarlo. Pendiente de corregir y volver a empaquetar antes de revisión; HTML conservado idéntico a la web.
+
 ## Tanda web en curso - 10 de julio de 2026
 
 Estado: publicada en `https://entrenoapp.com`. Los cambios están sincronizados en `www/` para incluirlos en la siguiente compilación de iOS y Android.
