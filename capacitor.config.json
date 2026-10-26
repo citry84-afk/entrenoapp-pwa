@@ -2,6 +2,7 @@
   "appId": "com.lipastudios.entrenoapp",
   "appName": "EntrenoApp",
   "webDir": "www",
+  "backgroundColor": "#080b12",
   "server": {
     "androidScheme": "https"
   },
@@ -9,6 +10,11 @@
     "contentInset": "automatic"
   },
   "plugins": {
+    "SystemBars": {
+      "insetsHandling": "native",
+      "style": "DARK",
+      "hidden": false
+    },
     "SplashScreen": {
       "launchShowDuration": 0,
       "launchAutoHide": true

@@ -11,17 +11,17 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    namespace "com.lipastudios.entrenoapp"
-    compileSdk rootProject.ext.compileSdkVersion
+    namespace = "com.lipastudios.entrenoapp"
+    compileSdk = rootProject.ext.compileSdkVersion
     defaultConfig {
         applicationId "com.lipastudios.entrenoapp"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 120
+        versionCode 121
         versionName "2.3"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
-            ignoreAssetsPattern '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
+            ignoreAssetsPattern = '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
         }
     }
 

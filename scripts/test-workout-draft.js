@@ -47,6 +47,7 @@ vm.runInContext(`
   function clearGpsWatcher(){}
   function stopWodTimer(){}
   function stopTimer(){}
+  function disableWakeLock(){}
   function closeSummary(){}
   function stopWorkoutCoachLoop(){}
   function stopWorkoutUiTicker(){}
@@ -96,6 +97,17 @@ function test(name, callback) {
     console.error(`✗ ${name}\n  ${error.message}`);
   }
 }
+
+test('Vital seconds prescriptions initialize as valid numeric results', () => {
+  run("S.routine=[{name:'Vital',exercises:[{id:'vital_mob',name:'Movilidad',type:'vital',sets:1,rr:'30s'}]}];prepareWorkout(0);");
+  assert.equal(run('WD.vital_mob_0[0].reps'),30);
+  assert.equal(run('validWorkoutSet(WD.vital_mob_0[0])'),true);
+});
+
+test('Legacy untouched vital seconds migrate without rewriting entered or completed rows', () => {
+  run("S.routine=[{name:'Vital',exercises:[{id:'vital_mob',name:'Movilidad',type:'vital',sets:3,rr:'30s'}]}];prepareWorkout(0);WD.vital_mob_0=[{kg:0,reps:'30s',done:false},{kg:0,reps:22,done:false},{kg:0,reps:'30s',done:true}];saveWorkoutDraft();restartRuntime();restoreWorkoutDraft();");
+  assert.deepEqual(plain('WD.vital_mob_0.map(row=>row.reps)'),[30,22,'30s']);
+});
 
 test('Navigating away and resuming preserves entered work and session metadata', () => {
   run("prepareWorkout(0);fillDraft();nav('menu');nav('home');prepareWorkout(0);");

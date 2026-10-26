@@ -25,6 +25,7 @@ vm.runInContext(`
   let S,W,WD,UI,content,platform,document,window,frames,focusCalls,scrollCalls,localizeCalls;
   function currentLang(){return S.lang;}
   function nativePlatform(){return platform;}
+  function syncAdPrivacyOptionsButtons(){}
   function requestAnimationFrame(callback){frames.push(callback);}
   function flushFrames(){while(frames.length)frames.shift()();}
   function localizeTree(root){

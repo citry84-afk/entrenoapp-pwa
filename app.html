@@ -2110,7 +2110,7 @@ const ADMOB={
   }
 };
 const ADSENSE={client:'ca-pub-4837743291717475',slot:'auto'};
-const Ads={ready:false,initing:false,banner:false,consent:false,listeners:false,last:'Pendiente',lastError:'',lastAt:''};
+const Ads={ready:false,initing:false,banner:false,consent:false,privacyRequired:false,listeners:false,last:'Pendiente',lastError:'',lastAt:''};
 const TIMING={setSec:60,transitionSec:120,prepSec:180,restNormal:90,restHeavy:120};
 const HEAVY_IDS=new Set(['pb','pi','pim','ph','phm','pm','pmr','rb','dm','jl','jc','rm','sq','pr','ht']);
 const TECH={
@@ -2170,6 +2170,14 @@ function restoreWorkoutDraft(){
     }))return false;
     if(S.sessions.some(session=>session.draftId===draft.id)){clearWorkoutDraft();return false;}
     workoutDraft=draft;W={...draft.state,active:true,autoSaving:false,savedSessionId:null};WD=draft.sets;
+    // Older vital drafts stored prescribed seconds ("30s") instead of a number.
+    // Migrate only untouched, pending prescription values, never entered results.
+    W.sessionDay.exercises.forEach((ex,i)=>{
+      const target=String(ex.rr||'').split('-')[0];
+      if(ex.type==='vital'&&/^\d+(?:[.,]\d+)?\s*s$/i.test(target)){
+        (WD[exKey(ex,i)]||[]).forEach(row=>{if(!row.done&&row.reps===target)row.reps=Number(target.replace(/\s*s$/i,'').replace(',','.'));});
+      }
+    });
     Object.values(W.gps||{}).forEach(gps=>{if(gps.status==='recording'){gps.endedAt=draft.updatedAt;gps.status='stopped';}});
     if(W.wodTimer)W.wodTimer.paused=true;
     return true;
@@ -2185,7 +2193,7 @@ function resumeWorkout(){
 }
 function discardWorkoutDraft(ask=true){
   if(ask&&!confirm(currentLang()==='en'?'Discard the workout in progress? Its unsaved sets will be removed.':'¿Descartar el entrenamiento en curso? Se perderán sus series sin guardar.'))return false;
-  clearGpsWatcher();stopWodTimer(false);stopTimer();clearWorkoutDraft();WD={};W={bw:'',feel:'normal',notes:'',mode:'normal'};
+  clearGpsWatcher();stopWodTimer(false);stopTimer();disableWakeLock(true);clearWorkoutDraft();WD={};W={bw:'',feel:'normal',notes:'',mode:'normal'};
   return true;
 }
 function prepareWorkout(di,options={}){
@@ -3442,7 +3450,7 @@ function initWD(di,options={}){
   const day=JSON.parse(JSON.stringify(adapted));
   clearGpsWatcher();stopWodTimer(false);WD={};
   day.exercises=day.exercises.map((ex,i)=>({...ex,key:exKey(ex,i)}));
-  day.exercises.forEach((ex,i)=>{const key=exKey(ex,i),isTimed=isTimedExercise(ex),isBand=isBandExercise(ex),kg=defaultSetKg(ex,isTimed,isBand);WD[key]=Array.from({length:ex.sets},()=>({kg,reps:isTimed?ex.durationMin:(ex.rr||'8-12').split('-')[0],band:isBand?'Media':'',done:false}));});
+  day.exercises.forEach((ex,i)=>{const key=exKey(ex,i),isTimed=isTimedExercise(ex),isBand=isBandExercise(ex),kg=defaultSetKg(ex,isTimed,isBand),target=(ex.rr||'8-12').split('-')[0],reps=isTimed?ex.durationMin:ex.type==='vital'?parseFloat(target.replace(',','.'))||0:target;WD[key]=Array.from({length:ex.sets},()=>({kg,reps,band:isBand?'Media':'',done:false}));});
   const first=(day.exercises||[]).map((ex,i)=>({ex,key:exKey(ex,i)}))[0];
   W={bw:'',feel:'normal',notes:'',mode,welcome:!!options.welcome,active:!!options.start,draftId:`workout_${Date.now()}_${Math.random().toString(36).slice(2,8)}`,dayIndex:di,baseDay:JSON.parse(JSON.stringify(baseDay)),sessionDay:JSON.parse(JSON.stringify(day)),autoSaving:false,openEx:first?first.key:null,openPanel:{},alt:{},altReason:{},gps:{},gpsTarget:{},wodMarks:{},wodScale:{},wodTimer:null,startedAt:Date.now()};
 }
@@ -4930,6 +4938,25 @@ async function ensureNativeTrackingAuthorization(){
   });
   return TrackingAuthorization.promise;
 }
+function syncAdPrivacyOptionsButtons(){
+  document.querySelectorAll('[data-ad-privacy]').forEach(button=>{button.hidden=nativePlatform()==='web'||!Ads.privacyRequired;});
+}
+async function showAdPrivacyOptions(){
+  const AdMob=getAdMob(),en=currentLang()==='en';
+  if(!Ads.privacyRequired||!AdMob?.showPrivacyOptionsForm)return false;
+  Ads.ready=false;Ads.consent=false;
+  await hideQuietBanner();
+  try{
+    await AdMob.showPrivacyOptionsForm();
+    await initAdMob();
+    syncAdMobBanner(S.screen);
+    return true;
+  }catch(error){
+    console.warn('Opciones de privacidad no disponibles',error);
+    toast(en?'Privacy options are unavailable right now. Please try again.':'Las opciones de privacidad no están disponibles ahora. Inténtalo de nuevo.');
+    return false;
+  }
+}
 async function initAdMob(){
   if(Ads.ready||Ads.initing||!canUseAdMob())return Ads.ready;
   Ads.initing=true;
@@ -4939,15 +4966,17 @@ async function initAdMob(){
     if(nativePlatform()==='ios'&&['unavailable','error'].includes(tracking?.status)){
       throw new Error('No se inicializa AdMob sin resolver ATT');
     }
+    // UMP must permit requests before the advertising SDK starts.
+    let info=await AdMob.requestConsentInfo();
+    markAdMob(`Consentimiento ${info?.status||'revisado'}`);
+    if(info?.isConsentFormAvailable&&info?.status==='REQUIRED')info=await AdMob.showConsentForm();
+    Ads.privacyRequired=info?.privacyOptionsRequirementStatus==='REQUIRED';
+    syncAdPrivacyOptionsButtons();
+    Ads.consent=info?.canRequestAds===true;
+    if(!Ads.consent){markAdMob('Anuncios desactivados: consentimiento no disponible');return false;}
     markAdMob('Inicializando AdMob');
     setupAdMobListeners(AdMob);
     await AdMob.initialize({initializeForTesting:false});
-    try{
-      const info=await AdMob.requestConsentInfo();
-      markAdMob(`Consentimiento ${info?.status||'revisado'}`);
-      if(info?.isConsentFormAvailable&&info?.status==='REQUIRED')await AdMob.showConsentForm();
-      Ads.consent=true;
-    }catch(e){console.warn('AdMob consent no disponible',e);}
     Ads.ready=true;
     markAdMob('AdMob listo');
     return true;
@@ -5260,72 +5289,104 @@ function exerciseDisplayHint(ex){
   const hint=String(ex?.hint||'');
   return isTimedExercise(ex)?hint:hint.replace(/\b\d+\s*[x×]\s*\d+(?:-\d+)?\s*\.?\s*/gi,'').replace(/Descanso\s+\d+\s*s\.?\s*/gi,'').trim();
 }
+let wakeGeneration=0,wakePending=false,wakeFailed=false,wakeTask=Promise.resolve(),wakeRequest=null,wakeRetryTimeout=null;
+function wakeIsActive(){return !!(nativeWakeActive||(wakeLock&&!wakeLock.released));}
 function wakeButtonHtml(){
-  const on=!!(nativeWakeActive||wakeLock||wakeWanted);
-  return `${on?'✅':'🔆'} ${on?'Pantalla activa':'Mantener pantalla encendida'}<span>${on?'Se intentará mantener durante el entreno.':'Útil en gym, andando o corriendo.'}</span>`;
+  const en=currentLang()==='en',on=wakeIsActive();
+  const label=on?(en?'Screen awake':'Pantalla activa'):wakePending?(en?'Activating…':'Activando…'):wakeFailed?(en?'Screen awake unavailable':'Pantalla activa no disponible'):(en?'Keep screen awake':'Mantener pantalla encendida');
+  const hint=on?(en?'Active while this workout is open.':'Activa mientras este entrenamiento esté abierto.'):wakePending?(en?'Checking device support. Tap to cancel.':'Comprobando el dispositivo. Toca para cancelar.'):wakeFailed?(en?'Tap to retry. Check device settings.':'Toca para reintentar. Revisa los ajustes del dispositivo.'):(en?'Useful for gym, walking or running.':'Útil en gym, andando o corriendo.');
+  return `${on?'✅':'🔆'} ${label}<span>${hint}</span>`;
 }
 function renderWakeButtons(){
   document.querySelectorAll('[data-wake-state]').forEach(btn=>{
-    btn.classList.toggle('on',!!(nativeWakeActive||wakeLock||wakeWanted));
+    btn.classList.toggle('on',wakeIsActive());
+    btn.setAttribute('aria-pressed',String(wakeIsActive()));
+    btn.setAttribute('aria-busy',String(wakePending));
     btn.innerHTML=wakeButtonHtml();
   });
 }
-function getKeepAwake(){return window.Capacitor?.Plugins?.KeepAwake||null;}
-async function tryNativeWakeLock(){
+function getKeepAwake(){return nativePlatform()==='web'?null:window.Capacitor?.Plugins?.KeepAwake||null;}
+function queueWakeTask(callback){
+  const task=wakeTask.then(callback,callback);
+  wakeTask=task.catch(()=>{});
+  return task;
+}
+async function tryNativeWakeLock(generation){
   const KeepAwake=getKeepAwake();
   if(!KeepAwake?.keepAwake)return false;
+  nativeWakeActive=false;
   try{
     const supported=KeepAwake.isSupported?await KeepAwake.isSupported():{isSupported:true};
-    if(supported&&supported.isSupported===false)return false;
+    if(supported?.isSupported===false||generation!==wakeGeneration||!wakeWanted||document.visibilityState!=='visible')return false;
     await KeepAwake.keepAwake();
+    const status=KeepAwake.isKeptAwake?await KeepAwake.isKeptAwake():{isKeptAwake:true};
+    if(generation!==wakeGeneration||!wakeWanted||document.visibilityState!=='visible'||status?.isKeptAwake!==true){
+      await KeepAwake.allowSleep?.();
+      return false;
+    }
     nativeWakeActive=true;
     return true;
   }catch(e){
     console.warn('KeepAwake nativo no disponible',e);
+    try{await KeepAwake.allowSleep?.();}catch(error){}
     nativeWakeActive=false;
     return false;
   }
 }
-async function enableWakeLock(){
+function enableWakeLock(silent=false,refresh=false){
+  if(wakeWanted&&wakePending)return wakeRequest;
+  if(wakeWanted&&wakeIsActive()&&!refresh)return Promise.resolve(true);
   wakeWanted=true;
-  if(await tryNativeWakeLock()){
-    renderWakeButtons();
-    toast('Pantalla activa durante el entreno.');
-    return true;
-  }
-  if(!(typeof navigator!=='undefined'&&'wakeLock' in navigator)){
-    renderWakeButtons();
-    toast('Este dispositivo no permite mantener la pantalla encendida aquí.');
-    return false;
-  }
-  try{
-    wakeLock=await navigator.wakeLock.request('screen');
-    wakeLock.addEventListener('release',()=>{
-      wakeLock=null;
-      renderWakeButtons();
-      if(wakeWanted&&document.visibilityState==='visible')setTimeout(enableWakeLock,350);
-    });
-    renderWakeButtons();
-    toast('Pantalla activa durante el entreno.');
-    return true;
-  }catch(e){
-    wakeLock=null;
-    renderWakeButtons();
-    toast('No he podido mantener la pantalla encendida aquí.');
-    return false;
-  }
-}
-async function disableWakeLock(silent=false){
-  wakeWanted=false;
-  nativeWakeActive=false;
-  try{await getKeepAwake()?.allowSleep?.();}catch(e){}
-  try{if(wakeLock)await wakeLock.release();}catch(e){}
-  wakeLock=null;
+  wakePending=true;wakeFailed=false;
+  clearTimeout(wakeRetryTimeout);wakeRetryTimeout=null;
+  const generation=++wakeGeneration;
   renderWakeButtons();
-  if(!silent)toast('Pantalla normal.');
+  wakeRequest=queueWakeTask(async()=>{
+    if(generation!==wakeGeneration||!wakeWanted)return false;
+    let active=false;
+    if(document.visibilityState==='visible'){
+      active=wakeIsActive()&&!getKeepAwake()?true:await tryNativeWakeLock(generation);
+      if(!active&&generation===wakeGeneration&&wakeWanted&&document.visibilityState==='visible'&&typeof navigator!=='undefined'&&navigator.wakeLock?.request){
+        try{
+          const lock=await navigator.wakeLock.request('screen');
+          if(generation!==wakeGeneration||!wakeWanted||document.visibilityState!=='visible'||lock.released){await lock.release();}
+          else{
+            wakeLock=lock;active=true;
+            lock.addEventListener('release',()=>{
+              if(wakeLock!==lock)return;
+              wakeLock=null;renderWakeButtons();
+              if(wakeWanted&&document.visibilityState==='visible'){
+                const releasedGeneration=wakeGeneration;
+                wakeRetryTimeout=setTimeout(()=>{wakeRetryTimeout=null;if(wakeWanted&&releasedGeneration===wakeGeneration)enableWakeLock(true);},350);
+              }
+            });
+          }
+        }catch(e){console.warn('Screen Wake Lock no disponible',e);}
+      }
+    }
+    if(generation!==wakeGeneration)return false;
+    wakePending=false;
+    if(!active&&document.visibilityState==='visible'){wakeWanted=false;wakeFailed=true;}
+    renderWakeButtons();
+    if(!silent)toast(active?(currentLang()==='en'?'Screen awake during your workout.':'Pantalla activa durante el entreno.'):(currentLang()==='en'?'Could not keep the screen awake here.':'No he podido mantener la pantalla encendida aquí.'));
+    return active;
+  });
+  return wakeRequest;
 }
-function toggleWakeLock(){return (nativeWakeActive||wakeLock||wakeWanted)?disableWakeLock():enableWakeLock();}
-document.addEventListener('visibilitychange',()=>{if(wakeWanted&&document.visibilityState==='visible'&&!wakeLock)enableWakeLock();});
+function disableWakeLock(silent=false){
+  wakeWanted=false;nativeWakeActive=false;wakePending=false;wakeFailed=false;++wakeGeneration;
+  clearTimeout(wakeRetryTimeout);wakeRetryTimeout=null;
+  const lock=wakeLock;wakeLock=null;
+  renderWakeButtons();
+  return queueWakeTask(async()=>{
+    try{await getKeepAwake()?.allowSleep?.();}catch(e){}
+    try{await lock?.release();}catch(e){}
+    if(!silent)toast(currentLang()==='en'?'Normal screen timeout.':'Pantalla normal.');
+  });
+}
+function toggleWakeLock(){return (wakeWanted||wakeIsActive())?disableWakeLock():enableWakeLock();}
+function resumeWakeLock(){if(wakeWanted&&document.visibilityState==='visible')enableWakeLock(true,true);}
+document.addEventListener('visibilitychange',resumeWakeLock);
 function musicUrl(app){
   const q='workout%20motivation';
   return {
@@ -5352,7 +5413,7 @@ function sessionSetupCard(compact=false){
       </div>
     </div>
     <div class="session-setup-grid">
-      <button class="setup-btn ${wakeWanted?'on':''}" data-wake-state onclick="toggleWakeLock()">${wakeButtonHtml()}</button>
+      <button class="setup-btn ${wakeIsActive()?'on':''}" data-wake-state aria-pressed="${wakeIsActive()}" aria-busy="${wakePending}" onclick="toggleWakeLock()">${wakeButtonHtml()}</button>
       <button class="setup-btn" onclick="openWristMode()">⌚ Modo muñeca<span>Vista grande para controlar el entreno.</span></button>
     </div>
     <div class="music-row">
@@ -6110,61 +6171,143 @@ function wodMark(key){W.wodMarks=W.wodMarks||{};return W.wodMarks[key]||{rounds:
 function setWodMark(key,field,value){W.wodMarks=W.wodMarks||{};W.wodMarks[key]={...wodMark(key),[field]:value};}
 function setWodScale(key,value){W.wodScale=W.wodScale||{};W.wodScale[key]=value;renderWorkout();}
 function wodTimeText(sec){sec=Math.max(0,Math.floor(sec||0));const m=Math.floor(sec/60),s=sec%60;return `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;}
+let wodGeneration=0,wodCueTimeout=null;
+document.addEventListener('visibilitychange',resumeWodTimer);
+window.addEventListener('pageshow',resumeWodTimer);
+window.addEventListener('pagehide',resumeWodTimer);
 function currentWodTimer(key){const t=W.wodTimer;return t&&t.key===key?t:null;}
+function normalizeWodTimer(t){
+  if(!t||!Number.isFinite(Number(t.total))||Number(t.total)<=0)return false;
+  t.total=Math.min(86400,Math.ceil(Number(t.total)));
+  const saved=Number(t.remainingMs),legacy=Number(t.left)*1000;
+  t.remainingMs=Math.max(0,Math.min(t.total*1000,Number.isFinite(saved)?saved:Number.isFinite(legacy)?legacy:t.total*1000));
+  if(t.finished&&t.finishReason!=='forTime')t.remainingMs=0;
+  t.left=Math.ceil(t.remainingMs/1000);
+  if(t.finished&&typeof t.finishNotified!=='boolean')t.finishNotified=true;
+  if(!Number.isFinite(t.lastTickAt))t.lastTickAt=Date.now();
+  if(!Number.isFinite(t.deadline)||t.deadline<=0)t.deadline=t.paused||t.finished?0:Date.now()+t.remainingMs;
+  return true;
+}
+function wodElapsedSeconds(t){return Math.max(0,Math.min(t.total||0,Math.floor(((t.total||0)*1000-(Number.isFinite(t.remainingMs)?t.remainingMs:(t.left||0)*1000))/1000)));}
+function wodTimerClock(t){return t.finished&&t.finishReason==='forTime'?wodTimeText(wodElapsedSeconds(t)):t.left<=0?'¡Tiempo!':wodTimeText(t.left);}
+function wodTimerLabel(t){return t.finished?(t.finishReason==='forTime'?'Tiempo apuntado. Guarda tu marca.':'Guarda tu marca'):`${t.paused?'En pausa · ':''}${wodIntervalLabel(t)}`;}
+function wodTimerActionState(key){const t=currentWodTimer(key);return WD[key]?.[0]?.done?'done':t?.finished?'finished':t?(t.paused?'paused':'running'):'idle';}
+function wodTimerActions(key,min=20){
+  const state=wodTimerActionState(key),t=currentWodTimer(key),keyArg=jsAttrArg(key),fmt=t?.format||(dayWodMeta()||{}).wodFormat;
+  if(state==='done')return '<button class="wod-btn primary" disabled>Hecho</button>';
+  if(state==='running'||state==='paused')return `${fmt==='FOR TIME'?`<button class="wod-btn primary" onclick="wodFinishForTime(${keyArg})">Terminé</button>`:''}<button class="wod-btn" id="wod-pause-${escHtml(key)}" onclick="toggleWodTimer(${keyArg})">${state==='paused'?'Continuar':'Pausar'}</button><button class="wod-btn" onclick="stopWodTimer()">Detener</button>`;
+  if(state==='finished')return `<button class="wod-btn primary" onclick="finishWodExercise(${keyArg})">Marcar hecho</button>`;
+  return `<button class="wod-btn primary" onclick="startWodTimer(${keyArg},${Number(min)||20})">Iniciar reloj</button><button class="wod-btn" onclick="finishWodExercise(${keyArg})">Marcar hecho</button>`;
+}
 function updateWodTimerDom(){
   const t=W.wodTimer;if(!t)return;
-  const clock=document.getElementById(`wod-clock-${t.key}`),fill=document.getElementById(`wod-fill-${t.key}`),btn=document.getElementById(`wod-pause-${t.key}`),label=document.getElementById(`wod-label-${t.key}`);
-  if(clock){clock.classList.toggle('ready',t.left<=0);clock.textContent=t.left<=0?'¡Tiempo!':wodTimeText(t.left);}
-  if(fill)fill.style.width=(t.total?Math.max(0,t.left/t.total*100):0)+'%';
-  if(btn)btn.textContent=t.paused?'Continuar':'Pausar';
-  if(label)label.textContent=t.left<=0?'Guarda tu marca':wodIntervalLabel(t);
+  const clock=document.getElementById(`wod-clock-${t.key}`),fill=document.getElementById(`wod-fill-${t.key}`),label=document.getElementById(`wod-label-${t.key}`),actions=document.getElementById(`wod-actions-${t.key}`);
+  if(clock){clock.classList.toggle('ready',!!t.finished);clock.textContent=wodTimerClock(t);}
+  if(fill)fill.style.width=(!t.finished&&t.total?Math.max(0,Math.min(100,t.left/t.total*100)):0)+'%';
+  if(label)label.textContent=wodTimerLabel(t);
+  const state=wodTimerActionState(t.key);
+  if(actions&&actions.getAttribute('data-wod-action-state')!==state){
+    const hadFocus=actions.contains?.(document.activeElement);
+    actions.innerHTML=wodTimerActions(t.key,t.total/60);actions.setAttribute('data-wod-action-state',state);
+    if(typeof localizeTree==='function')localizeTree(actions);
+    if(hadFocus)(document.getElementById(`wod-pause-${t.key}`)||actions.querySelector?.('button'))?.focus({preventScroll:true});
+  }
 }
 function wodIntervalLabel(t){
-  const meta=dayWodMeta()||{},fmt=meta.wodFormat,elapsed=Math.max(0,(t.total||0)-(t.left||0));
+  const meta=dayWodMeta()||{},fmt=t.format||meta.wodFormat,elapsed=wodElapsedSeconds(t);
   if(fmt==='EMOM'){
-    const steps=meta.structure||[],minute=Math.min(Math.floor((t.total||0)/60),Math.floor(elapsed/60)+1),step=steps.length?steps[(minute-1)%steps.length]:null;
-    return `Minuto ${minute} de ${Math.floor((t.total||0)/60)}${step?' · '+String(step[0]||step).replace(/^Min \d+: /,''):''}`;
+    const steps=t.structure||meta.structure||[],minutes=Math.max(1,Math.ceil((t.total||0)/60)),minute=Math.min(minutes,Math.floor(elapsed/60)+1),step=steps.length?steps[(minute-1)%steps.length]:null;
+    return `Minuto ${minute} de ${minutes}${step?' · '+String(step[0]||step).replace(/^Min \d+: /,''):''}`;
   }
   if(fmt==='CICLOS')return `Ciclo ${Math.min(5,Math.floor(elapsed/180)+1)} de 5`;
-  if(fmt==='FOR TIME')return `Llevas ${wodTimeText(elapsed)} · cap 15:00`;
+  if(fmt==='FOR TIME')return `Llevas ${wodTimeText(elapsed)} · cap ${wodTimeText(t.total)}`;
   return 'Cronómetro del WOD';
 }
+function invalidateWodCallbacks(){
+  if(wodInt)clearInterval(wodInt);if(wodCueTimeout)clearTimeout(wodCueTimeout);
+  wodInt=null;wodCueTimeout=null;wodGeneration++;
+}
+function wodTimerCue(t,type='done'){
+  const snd=soundState();if(!snd.enabled||(type==='countdown'&&!snd.countdown))return;
+  if(wodCueTimeout)clearTimeout(wodCueTimeout);wodCueTimeout=null;
+  if(type==='countdown'){tone(660,.11,.10,'sine');return;}
+  const generation=wodGeneration,queuedAt=Date.now();
+  tone(880,.16,.14,'sine');
+  const pending=setTimeout(()=>{
+    if(wodCueTimeout!==pending)return;
+    wodCueTimeout=null;
+    const age=Date.now()-queuedAt;
+    if(generation===wodGeneration&&W.wodTimer===t&&!document.hidden&&soundState().enabled&&age>=0&&age<=500)tone(1175,.2,.12,'sine');
+  },130);
+  wodCueTimeout=pending;
+}
 function wodIntervalCue(t){
-  const fmt=(dayWodMeta()||{}).wodFormat,period=fmt==='EMOM'?60:fmt==='CICLOS'?180:0;
-  if(!period||t.left<=3)return;
-  const toNext=t.left%period;
-  if(toNext>0&&toNext<=3)restCue('countdown');
-  else if(toNext===0){restCue('done');if(soundState().vibration&&navigator.vibrate)navigator.vibrate(120);}
+  const fmt=t.format||(dayWodMeta()||{}).wodFormat,period=fmt==='EMOM'?60:fmt==='CICLOS'?180:0,elapsed=wodElapsedSeconds(t);
+  if(period&&elapsed>0&&elapsed%period===0&&t.left>0){
+    wodTimerCue(t,'done');if(soundState().vibration&&navigator.vibrate)navigator.vibrate(120);return;
+  }
+  const toNext=period?period-elapsed%period:0;
+  if(t.left>0&&(t.left<=3||(toNext>0&&toNext<=3)))wodTimerCue(t,'countdown');
+}
+function announceWodFinish(t){
+  if(t.finishReason==='forTime'||t.finishNotified||document.hidden)return false;
+  t.finishNotified=true;
+  wodTimerCue(t,'done');if(soundState().vibration&&navigator.vibrate)navigator.vibrate([180,80,180,80,260]);
+  toast('WOD terminado. Guarda tu marca.');return true;
+}
+function finishWodTimer(t,reason='cap'){
+  if(W.wodTimer!==t||t.finished)return false;
+  invalidateWodCallbacks();t.finished=true;t.finishReason=reason;t.paused=false;t.deadline=0;
+  if(reason==='cap'){t.remainingMs=0;t.left=0;}
+  updateWodTimerDom();announceWodFinish(t);
+  if(typeof saveWorkoutDraft==='function')saveWorkoutDraft();return true;
+}
+function resumeWodTimer(){syncWodTimer(false);}
+function syncWodTimer(allowCues=true){
+  const t=W.wodTimer;if(!t)return false;
+  if(!W.active||W.savedSessionId||!normalizeWodTimer(t)){stopWodTimer(false);return false;}
+  if(t.finished){updateWodTimerDom();if(announceWodFinish(t)&&typeof saveWorkoutDraft==='function')saveWorkoutDraft();return false;}
+  if(t.paused){updateWodTimerDom();return false;}
+  const now=Date.now(),previous=t.left,timely=now>=t.lastTickAt&&now-t.lastTickAt<=1500;
+  // Rebase a backwards wall-clock adjustment without adding time to the workout.
+  if(now<t.lastTickAt)t.deadline=now+t.remainingMs;
+  t.remainingMs=Math.max(0,Math.min(t.remainingMs,t.total*1000,t.deadline-now));t.left=Math.ceil(t.remainingMs/1000);t.lastTickAt=now;
+  if(!t.left)return finishWodTimer(t);
+  if(allowCues&&!document.hidden&&timely&&previous-t.left===1)wodIntervalCue(t);
+  updateWodTimerDom();return true;
+}
+function runWodTicker(t){
+  const generation=wodGeneration;
+  wodInt=setInterval(()=>{if(generation===wodGeneration&&W.wodTimer===t)syncWodTimer();},250);
 }
 function wodFinishForTime(key){
-  const t=currentWodTimer(key);if(!t)return;
-  setWodMark(key,'time',wodTimeText(Math.max(0,t.total-t.left)));
-  stopWodTimer();
-  toast('Tiempo apuntado. Guarda tu marca.');
+  const t=currentWodTimer(key);if(!t||t.finished||(t.format||(dayWodMeta()||{}).wodFormat)!=='FOR TIME')return false;
+  syncWodTimer(false);if(W.wodTimer!==t||t.finished)return false;
+  setWodMark(key,'time',wodTimeText(wodElapsedSeconds(t)));
+  finishWodTimer(t,'forTime');toast('Tiempo apuntado. Guarda tu marca.');return true;
 }
 function startWodTimer(key,min=20){
+  const existing=currentWodTimer(key);
+  // A repeated tap (including an old DOM callback) never resets an existing WOD.
+  if(existing){syncWodTimer(false);return false;}
+  const minutes=Number(min);if(!W.active||typeof key!=='string'||!key||!WD[key]?.[0]||WD[key][0].done||!Number.isFinite(minutes)||minutes<=0)return false;
   stopWodTimer(false);
-  unlockAudio();
-  W.wodTimer={key,total:min*60,left:min*60,paused:false,startedAt:Date.now(),finished:false};
-  updateWodTimerDom();
-  wodInt=setInterval(()=>{
-    const t=W.wodTimer;if(!t||t.key!==key)return stopWodTimer(false);
-    if(t.paused)return;
-    t.left=Math.max(0,t.left-1);
-    if(t.left>0&&t.left<=3)restCue('countdown');
-    else wodIntervalCue(t);
-    updateWodTimerDom();
-    if(t.left<=0&&!t.finished){
-      t.finished=true;
-      if(soundState().vibration&&navigator.vibrate)navigator.vibrate([180,80,180,80,260]);
-      restCue('done');
-      toast('WOD terminado. Guarda tu marca.');
-      clearInterval(wodInt);wodInt=null;
-    }
-  },1000);
+  unlockAudio();const now=Date.now(),total=Math.min(86400,Math.max(1,Math.ceil(minutes*60))),meta=dayWodMeta()||{};
+  const t=W.wodTimer={key,total,left:total,remainingMs:total*1000,deadline:now+total*1000,lastTickAt:now,paused:false,startedAt:now,finished:false,finishNotified:false,format:meta.wodFormat||'',structure:(meta.structure||[]).map(step=>Array.isArray(step)?[...step]:step)};
+  runWodTicker(t);updateWodTimerDom();
+  if(typeof saveWorkoutDraft==='function')saveWorkoutDraft();return true;
 }
-function toggleWodTimer(key){const t=currentWodTimer(key);if(!t)return; t.paused=!t.paused;updateWodTimerDom();}
-function stopWodTimer(render=true){if(wodInt){clearInterval(wodInt);wodInt=null;}if(W?.wodTimer)W.wodTimer=null;if(render)renderWorkout();}
+function toggleWodTimer(key){
+  const t=currentWodTimer(key);if(!t||t.finished)return false;
+  syncWodTimer(false);if(W.wodTimer!==t||t.finished)return false;
+  invalidateWodCallbacks();t.paused=!t.paused;t.lastTickAt=Date.now();t.deadline=t.paused?0:t.lastTickAt+t.remainingMs;
+  if(!t.paused){unlockAudio();runWodTicker(t);}
+  updateWodTimerDom();if(typeof saveWorkoutDraft==='function')saveWorkoutDraft();return true;
+}
+function stopWodTimer(render=true){
+  invalidateWodCallbacks();if(W?.wodTimer)W.wodTimer=null;
+  if(render)renderWorkout();
+}
 function finishWodExercise(key){
   if(!WD[key]?.[0])return;
   const hadPending=!WD[key][0].done;
@@ -6175,15 +6318,16 @@ function finishWodExercise(key){
   if(hadPending)handleExerciseCompleted(key);
 }
 function wodExercisePanel(ex,key){
+  syncWodTimer(false);
   const day=dayWodMeta()||{},steps=day.structure||ex.structure||[],mark=wodMark(key),scale=W.wodScale?.[key]||'normal',timer=currentWodTimer(key),left=timer?timer.left:(ex.durationMin||20)*60,total=timer?timer.total:(ex.durationMin||20)*60;
-  const running=!!timer&&timer.left>0,paused=!!timer?.paused,done=WD[key]?.[0]?.done;
+  const done=WD[key]?.[0]?.done;
   const leader=wodLocalLeaderboard(day.wodId||'');
   return `<div class="wod-timer">
-    <div class="wod-clock-label" id="wod-label-${key}">${timer?.left<=0?'Guarda tu marca':timer?wodIntervalLabel(timer):day.wodFormat==='EMOM'?'Minuto 1 · '+escHtml(String(steps[0]?.[0]||'').replace(/^Min \d+: /,'')):'Cronómetro del WOD'}</div>
-    <div class="wod-clock ${timer?.left<=0?'ready':''}" id="wod-clock-${key}">${timer?.left<=0?'¡Tiempo!':wodTimeText(left)}</div>
-    <div class="wod-timer-bar"><div class="wod-timer-fill" id="wod-fill-${key}" style="width:${total?Math.max(0,left/total*100):0}%"></div></div>
-    <div class="wod-timer-actions">
-      ${running?`${day.wodFormat==='FOR TIME'?`<button class="wod-btn primary" onclick="wodFinishForTime('${key}')">Terminé</button>`:''}<button class="wod-btn" id="wod-pause-${key}" onclick="toggleWodTimer('${key}')">${paused?'Continuar':'Pausar'}</button><button class="wod-btn" onclick="stopWodTimer()">Detener</button>`:`<button class="wod-btn primary" onclick="startWodTimer('${key}',${ex.durationMin||20})">Iniciar reloj</button><button class="wod-btn" onclick="finishWodExercise('${key}')">${done?'Hecho':'Marcar hecho'}</button>`}
+    <div class="wod-clock-label" id="wod-label-${key}">${timer?escHtml(wodTimerLabel(timer)):day.wodFormat==='EMOM'?'Minuto 1 · '+escHtml(String(steps[0]?.[0]||'').replace(/^Min \d+: /,'')):'Cronómetro del WOD'}</div>
+    <div class="wod-clock ${timer?.finished?'ready':''}" id="wod-clock-${key}">${timer?wodTimerClock(timer):wodTimeText(left)}</div>
+    <div class="wod-timer-bar"><div class="wod-timer-fill" id="wod-fill-${key}" style="width:${!timer?.finished&&total?Math.max(0,left/total*100):0}%"></div></div>
+    <div class="wod-timer-actions" id="wod-actions-${key}" data-wod-action-state="${wodTimerActionState(key)}">
+      ${wodTimerActions(key,ex.durationMin||20)}
     </div>
   </div>
   <div class="wod-panel">
@@ -7790,13 +7934,13 @@ function renderSettings(c){
     ${W.active?`<button type="button" class="settings-resume" onclick="resumeWorkout()"><span aria-hidden="true">▶</span><span><b>${en?'Resume your workout':'Reanudar tu entrenamiento'}</b><small>${completion().done}/${completion().total} ${en?'sets recorded. Your session is kept while you change settings.':'series registradas. Tu sesión se mantiene mientras cambias ajustes.'}</small></span></button>`:''}
     ${settingsGroup('plan','📅',en?'My plan':'Mi plan',planSummary,planSettings)}
     ${settingsGroup('notifications','🔔',en?'Reminders and sound':'Avisos y sonido',en?'You choose whether and when to be notified':'Tú eliges si quieres avisos y cuándo',renderReminderSettings()+renderDailyNudgeSettings()+renderSoundSettings())}
-    ${settingsGroup('data','💾',en?'My data and backups':'Mis datos y copias',en?'Export, import and keep your progress safe':'Exporta, importa y conserva tu progreso',dataBody)}
+    ${settingsGroup('data','💾',en?'My data and backups':'Mis datos y copias',en?'Export, import and keep your progress safe':'Exporta, importa y conserva tu progreso',dataBody+`<button type="button" class="btn-ghost" data-ad-privacy hidden onclick="showAdPrivacyOptions()">${en?'Ad privacy options':'Privacidad de los anuncios'}</button>`)}
     ${settingsGroup('language','🌐',en?'Language':'Idioma',currentLang()==='en'?'English':'Español',languageBody)}
     ${settingsGroup('help','💡',en?'Help':'Ayuda',en?'A quick guide to logging your workouts':'Guía rápida para registrar tus entrenamientos',renderHowItWorks(false))}
     ${settingsGroup('plus','✨',en?'Account and Plus · optional':'Cuenta y Plus · opcional',plusActive()?(en?'Your Plus access is active':'Tu acceso Plus está activo'):(en?'Extra guidance, without changing the free plan':'Más guía, sin cambiar tu plan gratuito'),renderPlusValuePanel('settings')+(plusActive()?plusAccountPanel('settings'):plusAccessPanel('settings'))+renderPlusHub())}
     ${settingsGroup('health','⌚',en?'Health and watches · coming later':'Salud y relojes · próximamente',en?'Native integration is not available yet':'La integración nativa aún no está disponible',healthBody)}
   </div>`;
-  localizeTree(c);restoreSettingsView(c,view);
+  localizeTree(c);syncAdPrivacyOptionsButtons();restoreSettingsView(c,view);
 }
 function setPref(f,v){
   if(!S.profile||S.profile.manualRoutine)return;

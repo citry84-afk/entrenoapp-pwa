@@ -32,6 +32,4 @@ post_install do |installer|
       end
     end
   end
-  patch = File.expand_path('../../scripts/patch-revenuecat-ios.js', __dir__)
-  raise 'RevenueCat Xcode compatibility patch failed' unless system('node', patch)
 end

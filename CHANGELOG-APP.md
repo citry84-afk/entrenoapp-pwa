@@ -1,5 +1,19 @@
 # Registro de versiones de EntrenoApp
 
+## 2.3 — iOS (123) / Android (121) — 25 de octubre de 2026
+
+Estado actualizado el 26 de octubre: web publicada; Android 2.3 (121) activo en producción al 100 %; iOS 2.3 (123) enviado y pendiente de revisión, con publicación automática tras aprobación. Las pruebas principales y sus límites están documentados en `audits/2026-10-25/native-release-capacitor8.md`.
+
+- Reloj WOD basado en una fecha límite real; controles actualizados al iniciar, pausar, continuar y terminar, sin reinicios por doble pulsación.
+- Avisos EMOM y cuenta atrás independientes del descanso; callbacks antiguos y sonidos tardíos cancelados.
+- Pantalla activa solo cuando el sistema confirma la activación; recuperación al volver a la app y liberación al guardar o descartar.
+- Corrección de prescripciones de segundos en Fuerza Vital y migración limitada de sus borradores antiguos sin cambiar resultados introducidos.
+- Compatibilidad con Android API 36 y ciclo de escenas de iOS; fondos nativos oscuros coherentes.
+- Anuncios condicionados al permiso UMP y acceso a sus opciones de privacidad cuando es necesario.
+- Se mantienen identificadores, firma, datos locales, iOS 15 y Android 7 como mínimos aprobados.
+
+Notas ES/EN: `store-listing/release-2.3-123.md`.
+
 ## 2.3 — iOS (122) / Android (120) — 25 de octubre de 2026
 
 Estado: iOS 2.3 (build 122) firmada y procesada en TestFlight; Android 2.3 (versionCode 120) firmada, aceptada por Play y en borrador interno. QA iOS parcial completada; QA Android bloqueada por espacio del emulador. Sin envío a revisión ni publicación; falta corregir controles EMOM y completar avisos/pantalla activa.
